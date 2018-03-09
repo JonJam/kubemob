@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:KubeMob"
              x:Class="KubeMob.MainPage">
+    <!--
+        Turn on layout compression on layouts
+        See: https://developer.xamarin.com/guides/xamarin-forms/user-interface/layouts/layout-compression/-->
 
-	<Label Text="Welcome to Xamarin.Forms!" 
+    <Label Text="Welcome to Xamarin.Forms!" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
 

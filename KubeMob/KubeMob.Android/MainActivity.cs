@@ -6,9 +6,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
 
 namespace KubeMob.Droid
 {
+    // Material design Xamarin Forms: https://developer.xamarin.com/guides/xamarin-forms/platform-features/android/
     [Activity(Label = "KubeMob", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -18,6 +20,9 @@ namespace KubeMob.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+
+            // Enable fast renderers: https://developer.xamarin.com/guides/xamarin-forms/under-the-hood/fast-renderers/
+            Forms.SetFlags("FastRenderers_Experimental");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());

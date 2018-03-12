@@ -15,7 +15,7 @@ namespace KubeMob
 		{
 			InitializeComponent();
 
-			MainPage = new KubeMob.MainPage();
+			MainPage = new KubeMob.Pages.MainPage();
 		}
 
 		protected override void OnStart ()

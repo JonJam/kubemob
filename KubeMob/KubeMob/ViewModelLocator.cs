@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Reflection;
+using KubeMob.Services;
 using KubeMob.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Xamarin.Forms;
@@ -43,6 +44,7 @@ namespace KubeMob
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<INavigationService, NavigationService>();
         }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

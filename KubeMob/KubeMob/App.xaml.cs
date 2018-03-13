@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using KubeMob.Common.Services.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
-namespace KubeMob
+namespace KubeMob.Common
 {
-	public partial class App : Application
+    public partial class App : Application
 	{
-		public App ()
-		{
-			InitializeComponent();
+        public App() => this.InitializeComponent();
 
-			MainPage = new KubeMob.Pages.MainPage();
-		}
-
-		protected override void OnStart ()
+        protected override async void OnStart ()
 		{
-			// Handle when your app starts
-		}
+		    INavigationService navigationService = ViewModelLocator.Resolve<INavigationService>();
+
+		    await navigationService.Initialize();
+        }
 
 		protected override void OnSleep ()
 		{

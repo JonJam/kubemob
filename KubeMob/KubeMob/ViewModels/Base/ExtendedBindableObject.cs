@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-namespace KubeMob.ViewModels
+namespace KubeMob.Common.ViewModels.Base
 {
     // Based off <see cref="https://developer.xamarin.com/guides/xamarin-forms/enterprise-application-patterns/mvvm/#Updating_Views_in_Response_to_Changes_in_the_Underlying_View_Model_or_Model">
     public abstract class ExtendedBindableObject : BindableObject

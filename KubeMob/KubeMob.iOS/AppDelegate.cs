@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 using Foundation;
+using KubeMob.Common;
 using UIKit;
 
 namespace KubeMob.iOS

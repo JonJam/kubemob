@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using System.Reflection;
-using KubeMob.Services;
-using KubeMob.ViewModels;
+using KubeMob.Common.Services.Navigation;
+using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Xamarin.Forms;
 
-namespace KubeMob
+namespace KubeMob.Common
 {
     /// <summary>
     /// Based off <see cref="https://developer.xamarin.com/guides/xamarin-forms/enterprise-application-patterns/mvvm/#Automatically_Creating_a_View_Model_with_a_View_Model_Locator"/>
@@ -36,10 +36,13 @@ namespace KubeMob
 
         public static void SetAutoWireViewModel(BindableObject bindable, bool value) => bindable.SetValue(ViewModelLocator.AutoWireViewModelProperty, value);
 
+        public static T Resolve<T>() where T : class => ViewModelLocator.serviceProvider.GetService<T>();
+
         private static void ConfigureViewModels(
             IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<MainViewModel>();
+            serviceCollection.AddTransient<OtherViewModel>();
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)

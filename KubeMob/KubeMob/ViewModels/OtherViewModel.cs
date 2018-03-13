@@ -7,14 +7,14 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class MainViewModel : ViewModelBase
+    public class OtherViewModel : ViewModelBase
     {
-        public MainViewModel(
+        public OtherViewModel(
             INavigationService navigationService)
         {
-            this.NavigateToOtherCommand = new Command(() => navigationService.NavigateToOtherPage());
+            this.GoBackCommand = new Command(() => navigationService.GoBack());
         }
 
-        public ICommand NavigateToOtherCommand { get; }
+        public ICommand GoBackCommand { get; }
     }
 }

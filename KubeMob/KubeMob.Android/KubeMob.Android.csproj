@@ -81,9 +81,9 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KubeMob\KubeMob.csproj">
-      <Project>{3CB0098E-9242-496F-9226-0E61B6F3A4BA}</Project>
-      <Name>KubeMob</Name>
+    <ProjectReference Include="..\KubeMob\KubeMob.Common.csproj">
+      <Project>{B709CAA6-B588-420C-9949-7B0FBE850488}</Project>
+      <Name>KubeMob.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

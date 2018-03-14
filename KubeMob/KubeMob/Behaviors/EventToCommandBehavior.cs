@@ -4,9 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
+using KubeMob.Common.Behaviors.Base;
 using Xamarin.Forms;
 
-namespace KubeMob.Common.Behaviours.Base
+namespace KubeMob.Common.Behaviors
 {
     /// <summary>
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/event-to-command-behavior"/>
@@ -42,11 +43,11 @@ namespace KubeMob.Common.Behaviours.Base
             typeof(object),
             typeof(EventToCommandBehavior),
             null);
-
-        protected Delegate handler;
-
+        
         private EventInfo eventInfo;
 
+        protected Delegate Handler;
+        
         public string EventName
         {
             get => (string)this.GetValue(EventToCommandBehavior.EventNameProperty);
@@ -100,9 +101,9 @@ namespace KubeMob.Common.Behaviours.Base
 
         protected override void OnDetachingFrom(View view)
         {
-            if (this.handler != null)
+            if (this.Handler != null)
             {
-                this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.handler);
+                this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.Handler);
             }
 
             base.OnDetachingFrom(view);
@@ -119,14 +120,14 @@ namespace KubeMob.Common.Behaviours.Base
             MethodInfo actionInvoke = action.GetType()
                 .GetRuntimeMethods().First(m => m.Name == "Invoke");
 
-            this.handler = Expression.Lambda(
+            this.Handler = Expression.Lambda(
                 info.EventHandlerType,
                 Expression.Call(Expression.Constant(action), actionInvoke, eventParameters[0], eventParameters[1]),
                 eventParameters
             )
             .Compile();
 
-            info.AddEventHandler(item, this.handler);
+            info.AddEventHandler(item, this.Handler);
         }
 
         private void OnFired(object sender, EventArgs eventArgs)

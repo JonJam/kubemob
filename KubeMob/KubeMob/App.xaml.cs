@@ -14,11 +14,12 @@ namespace KubeMob.Common
             this.InitializeComponent();
 
             // Setting language display in following: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization?tabs=vswin#displaying-the-correct-language
-            CultureInfo ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+            ILocalize localize = DependencyService.Get<ILocalize>();
+            CultureInfo ci = localize.GetCurrentCultureInfo();
             // Set the RESX for resource localization
             Resx.AppResources.Culture = ci;
             // Set the Thread for locale-aware methods
-            DependencyService.Get<ILocalize>().SetLocale(ci); 
+            localize.SetLocale(ci); 
         }
 
         protected override async void OnStart()

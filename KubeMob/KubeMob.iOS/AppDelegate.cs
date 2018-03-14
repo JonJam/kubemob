@@ -23,6 +23,11 @@ namespace KubeMob.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+#if ENABLE_TEST_CLOUD
+            // Requires Xamarin Test Cloud Agent per: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/deploy-test/uitest-and-test-cloud?tabs=vswin#ios-application-project
+            Xamarin.Calabash.Start();
+#endif
+
             return base.FinishedLaunching(app, options);
         }
     }

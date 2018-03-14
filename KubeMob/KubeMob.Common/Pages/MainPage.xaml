@@ -14,6 +14,7 @@
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
         <Button 
+            AutomationId="GoToOtherButton"
             Text="Go to Other"
             Command="{Binding NavigateToOtherCommand}"/>
     </StackLayout>

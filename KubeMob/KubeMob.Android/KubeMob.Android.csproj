@@ -83,8 +83,8 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KubeMob\KubeMob.Common.csproj">
-      <Project>{B709CAA6-B588-420C-9949-7B0FBE850488}</Project>
+    <ProjectReference Include="..\KubeMob.Common\KubeMob.Common.csproj">
+      <Project>{ba929cc1-951d-46ef-ba0c-108a234251a2}</Project>
       <Name>KubeMob.Common</Name>
     </ProjectReference>
   </ItemGroup>

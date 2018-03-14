@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Reflection;
+using System.Resources;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,10 +27,10 @@ namespace KubeMob.Common
         }
 
         public static readonly BindableProperty AutoWireViewModelProperty = BindableProperty.CreateAttached(
-            "AutoWireViewModel", 
-            typeof(bool), 
-            typeof(ViewModelLocator), 
-            default(bool), 
+            "AutoWireViewModel",
+            typeof(bool),
+            typeof(ViewModelLocator),
+            default(bool),
             propertyChanged: ViewModelLocator.OnAutoWireViewModelChanged);
 
         public static bool GetAutoWireViewModel(BindableObject bindable) => (bool)bindable.GetValue(ViewModelLocator.AutoWireViewModelProperty);
@@ -48,6 +49,8 @@ namespace KubeMob.Common
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
+
+            serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));
         }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

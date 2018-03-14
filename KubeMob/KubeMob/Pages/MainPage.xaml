@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:KubeMob.Common"
+             xmlns:extensions="clr-namespace:KubeMob.Common.MarkupExtensions"
              x:Class="KubeMob.Common.Pages.MainPage"
              local:ViewModelLocator.AutoWireViewModel="true">
     <!--
@@ -9,7 +10,7 @@
         See: https://developer.xamarin.com/guides/xamarin-forms/user-interface/layouts/layout-compression/-->
     <StackLayout
         CompressedLayout.IsHeadless="true">
-        <Label Text="Main page" 
+        <Label Text="{extensions:Translate MainPage_Text}" 
            VerticalOptions="Center" 
            HorizontalOptions="Center" />
         <Button 

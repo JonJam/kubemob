@@ -22,7 +22,7 @@ namespace KubeMob.Droid
             Forms.SetFlags("FastRenderers_Experimental");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+            this.LoadApplication(new App());
         }
     }
 }

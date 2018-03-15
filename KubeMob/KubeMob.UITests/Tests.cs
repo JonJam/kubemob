@@ -8,7 +8,7 @@ namespace KubeMob.UITests
     public class Tests
     {
         IApp app;
-        Platform platform;
+        private readonly Platform platform;
 
         public Tests(Platform platform)
         {

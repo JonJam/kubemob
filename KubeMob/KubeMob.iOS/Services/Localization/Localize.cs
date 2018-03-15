@@ -86,7 +86,7 @@ namespace KubeMob.iOS.Services.Localization
 
         private static string ToDotNetFallbackLanguage(PlatformCulture platCulture)
         {
-            // Use the first part of the identifier (two chars, usually);
+            // Use the first part of the identifier (two chars, usually)
             string netLanguage = platCulture.LanguageCode;
 
             switch (platCulture.LanguageCode)

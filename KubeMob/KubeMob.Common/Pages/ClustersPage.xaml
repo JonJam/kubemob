@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             x:Class="KubeMob.Common.Pages.ClustersPage"
+             common:ViewModelLocator.AutoWireViewModel="true">
+
+    <StackLayout
+        CompressedLayout.IsHeadless="true">
+        <Label Text="Clusters page" 
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+        <Button 
+            Text="Add Cluster"
+            Command="{Binding AddClusterCommand}">
+        </Button>
+
+        <Button 
+            Text="Select Cluster"
+            Command="{Binding SelectClusterCommand}">
+        </Button>
+    </StackLayout>
+
+</ContentPage>

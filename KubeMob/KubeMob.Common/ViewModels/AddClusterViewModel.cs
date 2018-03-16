@@ -7,14 +7,14 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class OtherViewModel : ViewModelBase
+    public class AddClusterViewModel : ViewModelBase
     {
-        public OtherViewModel(
+        public AddClusterViewModel(
             INavigationService navigationService)
         {
-            this.GoBackCommand = new Command(() => navigationService.GoBack());
+            this.AddClusterCommand = new Command(() => navigationService.GoBack());
         }
 
-        public ICommand GoBackCommand { get; }
+        public ICommand AddClusterCommand { get; }
     }
 }

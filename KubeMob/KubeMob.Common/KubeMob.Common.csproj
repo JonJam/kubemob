@@ -16,8 +16,23 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Pages\MainPage.xaml.cs">
-      <DependentUpon>*.xaml</DependentUpon>
+    <Compile Update="Pages\AddClusterPage.xaml.cs">
+      <DependentUpon>AddClusterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\PodsPage.xaml.cs">
+      <DependentUpon>PodsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\WorkloadsPage.xaml.cs">
+      <DependentUpon>WorkloadsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ClusterOverviewPage.xaml.cs">
+      <DependentUpon>ClusterOverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ClusterMasterPage.xaml.cs">
+      <DependentUpon>ClusterMasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ClusterMasterDetailPage.xaml.cs">
+      <DependentUpon>ClusterMasterDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Resx\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -27,10 +42,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\ExtendedNavigationPage.xaml">
+    <EmbeddedResource Update="Pages\AddClusterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\OtherPage.xaml">
+    <EmbeddedResource Update="Pages\ClusterMasterDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ClusterOverviewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ClusterMasterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ClustersPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ExtendedNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ResourceDictionaries\Styles.xaml">

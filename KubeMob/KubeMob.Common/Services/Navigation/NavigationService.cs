@@ -17,9 +17,17 @@ namespace KubeMob.Common.Services.Navigation
         {
         }
 
-        public Task Initialize() => NavigationService.InternalNavigate(typeof(MainPage));
-        
-        public Task NavigateToOtherPage() => NavigationService.InternalNavigate(typeof(OtherPage));
+        public Task Initialize()
+        {
+            // TODO Check if selected cluster previously, then navigate to cluster page.
+            NavigationService.InternalNavigate(typeof(ClustersPage));
+
+            return Task.CompletedTask;
+        }
+
+        public Task NavigateToAddClusterPage() => NavigationService.InternalNavigate(typeof(AddClusterPage));
+
+        public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
 
         public Task RemoveLastFromBackStack()
         {
@@ -61,10 +69,21 @@ namespace KubeMob.Common.Services.Navigation
             // TODO Performance improvement by caching pages.
             // See https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/navigation#handling-navigation-requests for more information.
             Page page = Activator.CreateInstance(pageType) as Page;
-            
-            if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
+
+            if (Application.Current.MainPage is ClusterMasterDetailPage masterDetailPage)
             {
-                await navigationPage.PushAsync(page);
+                await (masterDetailPage.Detail as NavigationPage).PushAsync(page);
+            }
+            else if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
+            {
+                if (page is ClusterMasterDetailPage)
+                {
+                    Application.Current.MainPage = page;
+                }
+                else
+                {
+                    await navigationPage.PushAsync(page);
+                }
             }
             else
             {

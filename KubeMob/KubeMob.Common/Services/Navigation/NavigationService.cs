@@ -29,6 +29,10 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
 
+        public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
+
+        public Task NavigateToPodDetailPage() => NavigationService.InternalNavigate(typeof(PodDetailsPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
@@ -76,8 +80,12 @@ namespace KubeMob.Common.Services.Navigation
             }
             else if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
             {
-                if (page is ClusterMasterDetailPage)
+                if (page is ClusterMasterDetailPage clusterPage)
                 {
+                    // Initialising the detail and master page here in order to use DI.
+                    clusterPage.Master = Activator.CreateInstance(typeof(ClusterMasterPage)) as Page;
+                    clusterPage.Detail = new ExtendedNavigationPage(Activator.CreateInstance(typeof(ClusterOverviewPage)) as Page);
+
                     Application.Current.MainPage = page;
                 }
                 else
@@ -90,7 +98,10 @@ namespace KubeMob.Common.Services.Navigation
                 Application.Current.MainPage = new ExtendedNavigationPage(page);
             }
 
-            await (page.BindingContext as ViewModelBase).Initialize(parameter);
+            if (page.BindingContext is ViewModelBase viewModel)
+            {
+                await viewModel.Initialize(parameter);
+            }
         }
     }
 }

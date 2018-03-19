@@ -42,8 +42,12 @@ namespace KubeMob.Common
         private static void ConfigureViewModels(
             IServiceCollection serviceCollection)
         {
-            serviceCollection.AddTransient<MainViewModel>();
-            serviceCollection.AddTransient<OtherViewModel>();
+            serviceCollection.AddTransient<ClustersViewModel>();
+            serviceCollection.AddTransient<AddClusterViewModel>();
+            serviceCollection.AddTransient<ClusterOverviewViewModel>();
+            serviceCollection.AddTransient<ClusterMasterViewModel>();
+            serviceCollection.AddTransient<PodsViewModel>();
+            serviceCollection.AddTransient<PodDetailsViewModel>();
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)

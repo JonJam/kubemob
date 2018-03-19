@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-             x:Class="KubeMob.Common.Pages.ClusterOverviewPage"
-             Title="Cluster Overview"
+             x:Class="KubeMob.Common.Pages.PodDetailsPage"
+             Title="Pod Detail"
              common:ViewModelLocator.AutoWireViewModel="true">
 
-    <Label Text="Cluster overview"/>
+    <Label Text="Pod Detail"/>
 
 </ContentPage>

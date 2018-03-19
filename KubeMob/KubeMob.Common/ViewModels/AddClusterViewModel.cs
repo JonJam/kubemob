@@ -10,10 +10,7 @@ namespace KubeMob.Common.ViewModels
     public class AddClusterViewModel : ViewModelBase
     {
         public AddClusterViewModel(
-            INavigationService navigationService)
-        {
-            this.AddClusterCommand = new Command(() => navigationService.GoBack());
-        }
+            INavigationService navigationService) => this.AddClusterCommand = new Command(async () => await navigationService.GoBack());
 
         public ICommand AddClusterCommand { get; }
     }

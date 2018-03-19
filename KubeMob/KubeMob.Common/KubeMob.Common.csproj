@@ -22,8 +22,8 @@
     <Compile Update="Pages\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\WorkloadsPage.xaml.cs">
-      <DependentUpon>WorkloadsPage.xaml</DependentUpon>
+    <Compile Update="Pages\PodDetailsPage.xaml.cs">
+      <DependentUpon>PodDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ClusterOverviewPage.xaml.cs">
       <DependentUpon>ClusterOverviewPage.xaml</DependentUpon>

@@ -12,8 +12,8 @@ namespace KubeMob.Common.ViewModels
             this.Command = command;
         }
 
-        public string Title { get; set; }
+        public string Title { get; }
 
-        public ICommand Command { get; set; }
+        public ICommand Command { get; }
     }
 }

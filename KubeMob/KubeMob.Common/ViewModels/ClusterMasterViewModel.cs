@@ -10,6 +10,8 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class ClusterMasterViewModel : ViewModelBase
     {
+        private ObservableCollection<MenuItemViewModel> menuItems;
+
         public ClusterMasterViewModel(
             INavigationService navigationService)
         {
@@ -17,7 +19,8 @@ namespace KubeMob.Common.ViewModels
 
             this.MenuItems = new ObservableCollection<MenuItemViewModel>(new[]
             {
-                new MenuItemViewModel("ClusterMaster_Pods", new Command(async () => await navigationService.NavigateToPodsPage()))
+                //AppResources.ClusterMaster_Pods
+                new MenuItemViewModel("Test", new Command(async () => await navigationService.NavigateToPodsPage()))
             });
         }
 
@@ -25,8 +28,8 @@ namespace KubeMob.Common.ViewModels
 
         public ObservableCollection<MenuItemViewModel> MenuItems
         {
-            get;
-            set;
+            get => this.menuItems;
+            private set => this.SetProperty(ref this.menuItems, value);
         }
 
         private void OnMenuItemSelected(object obj)

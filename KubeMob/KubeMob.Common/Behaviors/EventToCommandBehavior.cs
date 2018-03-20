@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
 using KubeMob.Common.Behaviors.Base;
+using KubeMob.Common.Converters;
 using Xamarin.Forms;
 
 namespace KubeMob.Common.Behaviors
@@ -14,40 +15,39 @@ namespace KubeMob.Common.Behaviors
     /// </summary>
     public class EventToCommandBehavior : BindableBehavior<View>
     {
-        public static BindableProperty EventNameProperty = BindableProperty.CreateAttached(
-            "EventName",
+        public static readonly BindableProperty EventNameProperty = BindableProperty.CreateAttached(
+            nameof(EventToCommandBehavior.EventName),
             typeof(string),
             typeof(EventToCommandBehavior),
             null);
 
-        public static BindableProperty CommandProperty = BindableProperty.CreateAttached(
-            "Command",
+        public static readonly BindableProperty CommandProperty = BindableProperty.CreateAttached(
+            nameof(EventToCommandBehavior.Command),
             typeof(ICommand),
             typeof(EventToCommandBehavior),
             null);
 
-        public static BindableProperty CommandParameterProperty = BindableProperty.CreateAttached(
-            "CommandParameter",
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.CreateAttached(
+            nameof(EventToCommandBehavior.CommandParameter),
             typeof(object),
             typeof(EventToCommandBehavior),
             null);
 
-        public static BindableProperty EventArgsConverterProperty = BindableProperty.CreateAttached(
-            "EventArgsConverter",
+        public static readonly BindableProperty EventArgsConverterProperty = BindableProperty.CreateAttached(
+            nameof(EventToCommandBehavior.EventArgsConverter),
             typeof(IValueConverter),
             typeof(EventToCommandBehavior),
-            null);
+            new ItemTappedEventArgsConverter());
 
-        public static BindableProperty EventArgsConverterParameterProperty = BindableProperty.CreateAttached(
-            "EventArgsConverterParameter",
+        public static readonly BindableProperty EventArgsConverterParameterProperty = BindableProperty.CreateAttached(
+            nameof(EventToCommandBehavior.EventArgsConverterParameter),
             typeof(object),
             typeof(EventToCommandBehavior),
             null);
-        
+
+        private Delegate handler;
         private EventInfo eventInfo;
 
-        protected Delegate Handler;
-        
         public string EventName
         {
             get => (string)this.GetValue(EventToCommandBehavior.EventNameProperty);
@@ -101,9 +101,9 @@ namespace KubeMob.Common.Behaviors
 
         protected override void OnDetachingFrom(View view)
         {
-            if (this.Handler != null)
+            if (this.handler != null)
             {
-                this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.Handler);
+                this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.handler);
             }
 
             base.OnDetachingFrom(view);
@@ -120,14 +120,14 @@ namespace KubeMob.Common.Behaviors
             MethodInfo actionInvoke = action.GetType()
                 .GetRuntimeMethods().First(m => m.Name == "Invoke");
 
-            this.Handler = Expression.Lambda(
+            this.handler = Expression.Lambda(
                 info.EventHandlerType,
                 Expression.Call(Expression.Constant(action), actionInvoke, eventParameters[0], eventParameters[1]),
                 eventParameters
             )
             .Compile();
 
-            info.AddEventHandler(item, this.Handler);
+            info.AddEventHandler(item, this.handler);
         }
 
         private void OnFired(object sender, EventArgs eventArgs)
@@ -139,7 +139,7 @@ namespace KubeMob.Common.Behaviors
 
             object parameter = this.CommandParameter;
 
-            if (eventArgs != null && 
+            if (eventArgs != null &&
                 eventArgs != EventArgs.Empty)
             {
                 parameter = eventArgs;

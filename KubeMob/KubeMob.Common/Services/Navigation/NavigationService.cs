@@ -12,7 +12,7 @@ namespace KubeMob.Common.Services.Navigation
     /// </summary>
     public class NavigationService : INavigationService
     {
-        [Preserve()]
+        [Preserve]
         public NavigationService()
         {
         }
@@ -20,9 +20,7 @@ namespace KubeMob.Common.Services.Navigation
         public Task Initialize()
         {
             // TODO Check if selected cluster previously, then navigate to cluster page.
-            NavigationService.InternalNavigate(typeof(ClustersPage));
-
-            return Task.CompletedTask;
+            return NavigationService.InternalNavigate(typeof(ClustersPage));
         }
 
         public Task NavigateToAddClusterPage() => NavigationService.InternalNavigate(typeof(AddClusterPage));
@@ -70,6 +68,13 @@ namespace KubeMob.Common.Services.Navigation
 
         private static async Task InternalNavigate(Type pageType, object parameter = null)
         {
+            if (Application.Current.MainPage != null &&
+                Application.Current.MainPage.GetType() == pageType)
+            {
+                // Ensuring not re-navigating to same page already on.
+                return;
+            }
+
             // TODO Performance improvement by caching pages.
             // See https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/navigation#handling-navigation-requests for more information.
             Page page = Activator.CreateInstance(pageType) as Page;

@@ -1,37 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
-             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+             xmlns:converters="clr-namespace:KubeMob.Common.Converters;assembly=KubeMob.Common"
+             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             xmlns:extensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClusterMasterPage"
              common:ViewModelLocator.AutoWireViewModel="true"
-             Title="Master">
-    <!--CompressedLayout.IsHeadless="true"-->
-    <StackLayout
-        >
-        <ListView
-            ItemsSource="{Binding MenuItems}">
-            <!--TODO something not right about below-->
-            <ListView.Behaviors>
-                <behaviors:EventToCommandBehavior
-                    EventName="ItemTapped"
-                    Command="{Binding MenuItemSelected}"
-                    EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"></behaviors:EventToCommandBehavior>
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout
-                            HorizontalOptions="FillAndExpand">
-                            <!--{markupExtensions:Translate ClusterMaster_Pods}-->
-                            <Label 
-                                VerticalOptions="FillAndExpand" 
-                                Text="Test" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+             Title="Cluster Master">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ListView
+        ItemsSource="{Binding MenuItems}"
+        SeparatorVisibility="None"
+        HasUnevenRows="true">
+        <ListView.Behaviors>
+            <behaviors:EventToCommandBehavior
+                EventName="ItemTapped"
+                Command="{Binding MenuItemSelected}"
+                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+        </ListView.Behaviors>
+        <!--<ListView.Header>
+            <Grid BackgroundColor="#03A9F4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    Text="{extensions:Translate AppName}"
+                    Style="{DynamicResource SubtitleStyle}"/>
+            </Grid>
+        </ListView.Header>-->
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <!--CompressedLayout.IsHeadless="true"-->
+                    <!---->
+                    <StackLayout
+                        Padding="15,10"
+                        HorizontalOptions="FillAndExpand">
+                        <Label VerticalOptions="FillAndExpand" 
+                               VerticalTextAlignment="Center" 
+                               Text="{Binding Title}" 
+                               FontSize="24"
+                               TextColor="Red"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

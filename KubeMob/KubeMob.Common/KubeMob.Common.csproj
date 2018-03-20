@@ -34,6 +34,9 @@
     <Compile Update="Pages\ClusterMasterDetailPage.xaml.cs">
       <DependentUpon>ClusterMasterDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Test\MasterDetailPage1MenuItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Resx\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -58,6 +61,15 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ExtendedNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Test\MasterDetailPage1.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Test\MasterDetailPage1Detail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Test\MasterDetailPage1Master.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ResourceDictionaries\Styles.xaml">

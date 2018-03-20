@@ -8,7 +8,7 @@ using Xamarin.Forms;
 namespace KubeMob.Droid
 {
     // Material design Xamarin Forms: https://developer.xamarin.com/guides/xamarin-forms/platform-features/android/
-    [Activity(Label = "KubeMob", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "kubemob", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)

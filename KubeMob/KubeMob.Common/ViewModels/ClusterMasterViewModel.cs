@@ -32,6 +32,17 @@ namespace KubeMob.Common.ViewModels
             private set => this.SetProperty(ref this.menuItems, value);
         }
 
+        private MenuItemViewModel selectedMenuItem;
+        public MenuItemViewModel SelectedMenuItem
+        {
+            get => this.selectedMenuItem;
+            private set
+            {
+                this.SetProperty(ref this.selectedMenuItem, value);
+                this.SetProperty(ref this.selectedMenuItem, null);
+            }
+        }
+
         private void OnMenuItemSelected(object obj)
         {
             if (obj is MenuItemViewModel menuItem)

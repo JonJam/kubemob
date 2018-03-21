@@ -10,5 +10,9 @@ namespace KubeMob.Common.Pages
         {
             InitializeComponent();
         }
+
+        //IsPresented = false;
+
+        //MasterPage.ListView.SelectedItem = null;
     }
 }

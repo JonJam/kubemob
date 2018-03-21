@@ -18,7 +18,8 @@
     <ListView
         ItemsSource="{Binding MenuItems}"
         SeparatorVisibility="None"
-        HasUnevenRows="true">
+        HasUnevenRows="true"
+        SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}">
         <ListView.Behaviors>
             <behaviors:EventToCommandBehavior
                 EventName="ItemTapped"

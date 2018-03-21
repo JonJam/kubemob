@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
              xmlns:converters="clr-namespace:KubeMob.Common.Converters;assembly=KubeMob.Common"
-             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              xmlns:extensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClusterMasterPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="Cluster Master">
@@ -25,8 +25,10 @@
                 Command="{Binding MenuItemSelected}"
                 EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
         </ListView.Behaviors>
-        <!--<ListView.Header>
-            <Grid BackgroundColor="#03A9F4">
+        <ListView.Header>
+            <Grid 
+                BackgroundColor="#03A9F4"
+                CompressedLayout.IsHeadless="true">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="*"/>
@@ -44,20 +46,19 @@
                     Text="{extensions:Translate AppName}"
                     Style="{DynamicResource SubtitleStyle}"/>
             </Grid>
-        </ListView.Header>-->
+        </ListView.Header>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <!--CompressedLayout.IsHeadless="true"-->
-                    <!---->
                     <StackLayout
+                        CompressedLayout.IsHeadless="true"
                         Padding="15,10"
                         HorizontalOptions="FillAndExpand">
-                        <Label VerticalOptions="FillAndExpand" 
-                               VerticalTextAlignment="Center" 
-                               Text="{Binding Title}" 
-                               FontSize="24"
-                               TextColor="Red"/>
+                        <Label 
+                            Text="{Binding Title}"
+                            VerticalOptions="FillAndExpand" 
+                            VerticalTextAlignment="Center"
+                            FontSize="24"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

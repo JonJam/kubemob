@@ -3,13 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.AddClusterPage"
-             common:ViewModelLocator.AutoWireViewModel="true">
+             common:ViewModelLocator.AutoWireViewModel="true"
+             Title="Add cluster">
 
     <StackLayout
         CompressedLayout.IsHeadless="true">
-        <Label Text="Add cluster page" 
-               VerticalOptions="Center" 
-               HorizontalOptions="Center" />
         <Button 
             Text="Add"
             Command="{Binding AddClusterCommand}">

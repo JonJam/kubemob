@@ -5,7 +5,4 @@
              x:Class="KubeMob.Common.Pages.ClusterOverviewPage"
              Title="Cluster Overview"
              common:ViewModelLocator.AutoWireViewModel="true">
-
-    <Label Text="Cluster overview"/>
-
 </ContentPage>

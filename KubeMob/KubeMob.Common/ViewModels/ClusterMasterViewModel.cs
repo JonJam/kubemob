@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -19,8 +20,7 @@ namespace KubeMob.Common.ViewModels
 
             this.MenuItems = new ObservableCollection<MenuItemViewModel>(new[]
             {
-                //AppResources.ClusterMaster_Pods
-                new MenuItemViewModel("Test", new Command(async () => await navigationService.NavigateToPodsPage()))
+                new MenuItemViewModel(AppResources.ClusterMaster_Pods, new Command(async () => await navigationService.NavigateToPodsPage()))
             });
         }
 

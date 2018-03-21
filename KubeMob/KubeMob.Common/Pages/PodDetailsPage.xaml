@@ -5,7 +5,4 @@
              x:Class="KubeMob.Common.Pages.PodDetailsPage"
              Title="Pod Detail"
              common:ViewModelLocator.AutoWireViewModel="true">
-
-    <Label Text="Pod Detail"/>
-
 </ContentPage>

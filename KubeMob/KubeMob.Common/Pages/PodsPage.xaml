@@ -6,6 +6,9 @@
              Title="Pods"
              common:ViewModelLocator.AutoWireViewModel="true">
 
-    <Label Text="Pods"/>
+    <Button 
+        Text="View pod details"
+        Command="{Binding ViewPodDetailsCommand}">
+    </Button>
 
 </ContentPage>

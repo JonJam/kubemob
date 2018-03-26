@@ -8,11 +8,16 @@ namespace KubeMob.Common.Pages
         [Preserve]
         public ClusterMasterDetailPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
+            this.MasterPage.MenuListView.ItemSelected += this.OnMenuItemSelected;
         }
 
-        //IsPresented = false;
+        private void OnMenuItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            this.IsPresented = false;
 
-        //MasterPage.ListView.SelectedItem = null;
+            this.MasterPage.MenuListView.SelectedItem = null;
+        }
     }
 }

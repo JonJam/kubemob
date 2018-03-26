@@ -9,7 +9,11 @@ namespace KubeMob.Common.Pages
         [Preserve]
         public ClusterMasterPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+
+            this.MenuListView = this.MenuItems;
         }
+
+        public ListView MenuListView { get; }
     }
 }

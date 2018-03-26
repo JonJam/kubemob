@@ -11,12 +11,10 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class ClusterMasterViewModel : ViewModelBase
     {
-        private ObservableCollection<MenuItemViewModel> menuItems;
-
         public ClusterMasterViewModel(
             INavigationService navigationService)
         {
-            this.MenuItemSelected = new Command(this.OnMenuItemSelected);
+            this.MenuItemSelected = new Command(ClusterMasterViewModel.OnMenuItemSelected);
 
             this.MenuItems = new ObservableCollection<MenuItemViewModel>(new[]
             {
@@ -26,24 +24,9 @@ namespace KubeMob.Common.ViewModels
 
         public ICommand MenuItemSelected { get; }
 
-        public ObservableCollection<MenuItemViewModel> MenuItems
-        {
-            get => this.menuItems;
-            private set => this.SetProperty(ref this.menuItems, value);
-        }
+        public ObservableCollection<MenuItemViewModel> MenuItems { get; }
 
-        private MenuItemViewModel selectedMenuItem;
-        public MenuItemViewModel SelectedMenuItem
-        {
-            get => this.selectedMenuItem;
-            private set
-            {
-                this.SetProperty(ref this.selectedMenuItem, value);
-                this.SetProperty(ref this.selectedMenuItem, null);
-            }
-        }
-
-        private void OnMenuItemSelected(object obj)
+        private static void OnMenuItemSelected(object obj)
         {
             if (obj is MenuItemViewModel menuItem)
             {

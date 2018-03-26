@@ -85,10 +85,6 @@ namespace KubeMob.Common.Services.Navigation
             {
                 if (page is ClusterMasterDetailPage clusterPage)
                 {
-                    // Initialising the detail and master page here in order to use DI.
-                    clusterPage.Master = Activator.CreateInstance(typeof(ClusterMasterPage)) as Page;
-                    clusterPage.Detail = new ExtendedNavigationPage(Activator.CreateInstance(typeof(ClusterOverviewPage)) as Page);
-
                     Application.Current.MainPage = page;
                 }
                 else

@@ -1,5 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:KubeMob.Common.Pages;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClusterMasterDetailPage">
+
+    <MasterDetailPage.Master>
+        <pages:ClusterMasterPage 
+            x:Name="MasterPage"/>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <pages:ExtendedNavigationPage>
+            <x:Arguments>
+                <pages:ClusterOverviewPage />
+            </x:Arguments>
+        </pages:ExtendedNavigationPage>
+    </MasterDetailPage.Detail>
 </MasterDetailPage>

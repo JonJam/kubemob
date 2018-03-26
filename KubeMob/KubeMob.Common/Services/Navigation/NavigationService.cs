@@ -68,10 +68,8 @@ namespace KubeMob.Common.Services.Navigation
 
         private static async Task InternalNavigate(Type pageType, object parameter = null)
         {
-            if (Application.Current.MainPage != null &&
-                Application.Current.MainPage.GetType() == pageType)
+            if (NavigationService.IsCurrentlyOnPage(pageType))
             {
-                // Ensuring not re-navigating to same page already on.
                 return;
             }
 
@@ -107,6 +105,31 @@ namespace KubeMob.Common.Services.Navigation
             {
                 await viewModel.Initialize(parameter);
             }
+        }
+
+        private static bool IsCurrentlyOnPage(Type pageType)
+        {
+            Page mainPage = Application.Current.MainPage;
+
+            if (mainPage == null)
+            {
+                return false;
+            }
+
+            if (mainPage is ClusterMasterDetailPage masterDetailPage &&
+                masterDetailPage.Detail is ExtendedNavigationPage detailPage &&
+                detailPage.CurrentPage.GetType() == pageType)
+            {
+                return true;
+            }
+
+            if (mainPage is ExtendedNavigationPage navigationPage &&
+                navigationPage.CurrentPage.GetType() == pageType)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -79,7 +79,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Azure account.
+        ///   Looks up a localized string similar to Add account.
         /// </summary>
         internal static string ClustersPage_AddAccount_ToolbarItem {
             get {

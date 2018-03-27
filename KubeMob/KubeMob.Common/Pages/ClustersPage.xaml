@@ -8,9 +8,9 @@
              Title="{markupExtensions:Translate ClustersPage_Title}">
 
     <ContentPage.ToolbarItems>
-        <!--TODO Icon-->
         <ToolbarItem 
             x:Name="AddAccount"
+            Icon="add_white.png"
             Text="{markupExtensions:Translate ClustersPage_AddAccount_ToolbarItem}"
             Command="{Binding AddAccountCommand}" />
     </ContentPage.ToolbarItems>

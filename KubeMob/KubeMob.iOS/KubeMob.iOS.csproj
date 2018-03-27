@@ -153,5 +153,14 @@
       <Name>KubeMob.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add_white%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add_white%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -9,10 +9,12 @@ namespace KubeMob.Common.Services.Navigation
     {
         Task Initialize();
 
-        Task NavigateToAddClusterPage();
+        Task NavigateToAddAccountPage();
+
+        Task NavigateToAddAzureAccountPage();
 
         Task NavigateToClusterPage();
-        
+
         Task NavigateToPodsPage();
 
         Task NavigateToPodDetailPage();

@@ -77,5 +77,23 @@ namespace KubeMob.Common.Resx {
                 return ResourceManager.GetString("ClusterMaster_Pods", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Azure account.
+        /// </summary>
+        internal static string ClustersPage_AddAccount_ToolbarItem {
+            get {
+                return ResourceManager.GetString("ClustersPage_AddAccount_ToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clusters.
+        /// </summary>
+        internal static string ClustersPage_Title {
+            get {
+                return ResourceManager.GetString("ClustersPage_Title", resourceCulture);
+            }
+        }
     }
 }

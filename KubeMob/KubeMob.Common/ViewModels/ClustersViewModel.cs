@@ -12,12 +12,9 @@ namespace KubeMob.Common.ViewModels
         public ClustersViewModel(
             INavigationService navigationService)
         {
-            this.AddClusterCommand = new Command(async () => await navigationService.NavigateToAddClusterPage());
-            this.SelectClusterCommand = new Command(async () => await navigationService.NavigateToClusterPage());
+            this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
         }
 
-        public ICommand AddClusterCommand { get; }
-
-        public ICommand SelectClusterCommand { get; }
+        public ICommand AddAccountCommand { get; }
     }
 }

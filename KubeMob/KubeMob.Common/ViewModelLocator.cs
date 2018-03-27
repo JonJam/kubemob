@@ -14,6 +14,13 @@ namespace KubeMob.Common
     /// </summary>
     public static class ViewModelLocator
     {
+        public static readonly BindableProperty AutoWireViewModelProperty = BindableProperty.CreateAttached(
+            "AutoWireViewModel",
+            typeof(bool),
+            typeof(ViewModelLocator),
+            default(bool),
+            propertyChanged: ViewModelLocator.OnAutoWireViewModelChanged);
+
         private static ServiceProvider serviceProvider;
 
         static ViewModelLocator()
@@ -26,13 +33,6 @@ namespace KubeMob.Common
             ViewModelLocator.serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public static readonly BindableProperty AutoWireViewModelProperty = BindableProperty.CreateAttached(
-            "AutoWireViewModel",
-            typeof(bool),
-            typeof(ViewModelLocator),
-            default(bool),
-            propertyChanged: ViewModelLocator.OnAutoWireViewModelChanged);
-
         public static bool GetAutoWireViewModel(BindableObject bindable) => (bool)bindable.GetValue(ViewModelLocator.AutoWireViewModelProperty);
 
         public static void SetAutoWireViewModel(BindableObject bindable, bool value) => bindable.SetValue(ViewModelLocator.AutoWireViewModelProperty, value);
@@ -43,7 +43,9 @@ namespace KubeMob.Common
             IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient<ClustersViewModel>();
-            serviceCollection.AddTransient<AddClusterViewModel>();
+            serviceCollection.AddTransient<AddAccountViewModel>();
+            serviceCollection.AddTransient<AddAzureAccountViewModel>();
+
             serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
@@ -67,7 +69,7 @@ namespace KubeMob.Common
             Type viewType = view.GetType();
             string viewName = viewType.FullName.Replace(".Pages.", ".ViewModels.");
 
-            viewName = viewName.Replace("Page", "");
+            viewName = viewName.Replace("Page", string.Empty);
 
             string viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
             string viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);

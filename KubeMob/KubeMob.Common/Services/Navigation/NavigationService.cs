@@ -23,7 +23,9 @@ namespace KubeMob.Common.Services.Navigation
             return NavigationService.InternalNavigate(typeof(ClustersPage));
         }
 
-        public Task NavigateToAddClusterPage() => NavigationService.InternalNavigate(typeof(AddClusterPage));
+        public Task NavigateToAddAccountPage() => NavigationService.InternalNavigate(typeof(AddAccountPage));
+
+        public Task NavigateToAddAzureAccountPage() => NavigationService.InternalNavigate(typeof(AddAzureAccountPage));
 
         public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
 

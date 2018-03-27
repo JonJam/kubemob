@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Management.ContainerService.Fluent" Version="1.8.0" />
+    <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.8.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="6.8.2.4717" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
@@ -16,8 +18,11 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\AddClusterPage.xaml.cs">
-      <DependentUpon>AddClusterPage.xaml</DependentUpon>
+    <Compile Update="Pages\AddAzureAccountPage.xaml.cs">
+      <DependentUpon>AddAzureAccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\AddAccountPage.xaml.cs">
+      <DependentUpon>AddAccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>
@@ -42,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\AddClusterPage.xaml">
+    <EmbeddedResource Update="Pages\AddAccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ClusterMasterDetailPage.xaml">

@@ -6,9 +6,6 @@ namespace KubeMob.Common.Pages
     public partial class ClustersPage : ContentPage
     {
         [Preserve]
-        public ClustersPage()
-        {
-            InitializeComponent();
-        }
+        public ClustersPage() => this.InitializeComponent();
     }
 }

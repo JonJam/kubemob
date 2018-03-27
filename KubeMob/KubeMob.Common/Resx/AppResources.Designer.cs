@@ -61,29 +61,20 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Main page.
+        ///   Looks up a localized string similar to kubemob.
         /// </summary>
-        internal static string MainPage_Text {
+        internal static string AppName {
             get {
-                return ResourceManager.GetString("MainPage_Text", resourceCulture);
+                return ResourceManager.GetString("AppName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go back.
+        ///   Looks up a localized string similar to Pods.
         /// </summary>
-        internal static string OtherPage_GoBack {
+        internal static string ClusterMaster_Pods {
             get {
-                return ResourceManager.GetString("OtherPage_GoBack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Other page.
-        /// </summary>
-        internal static string OtherPage_Text {
-            get {
-                return ResourceManager.GetString("OtherPage_Text", resourceCulture);
+                return ResourceManager.GetString("ClusterMaster_Pods", resourceCulture);
             }
         }
     }

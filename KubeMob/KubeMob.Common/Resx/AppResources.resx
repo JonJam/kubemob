@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainPage_Text" xml:space="preserve">
-    <value>Main page</value>
+  <data name="AppName" xml:space="preserve">
+    <value>kubemob</value>
   </data>
-  <data name="OtherPage_GoBack" xml:space="preserve">
-    <value>Go back</value>
-  </data>
-  <data name="OtherPage_Text" xml:space="preserve">
-    <value>Other page</value>
+  <data name="ClusterMaster_Pods" xml:space="preserve">
+    <value>Pods</value>
   </data>
 </root>

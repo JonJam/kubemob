@@ -23,9 +23,9 @@
 	<key>MinimumOSVersion</key>
 	<string>11.2</string>
 	<key>CFBundleDisplayName</key>
-	<string>KubeMob</string>
+	<string>kubemob</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.KubeMob</string>
+	<string>com.jonjam.kubemob</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleIconFiles</key>

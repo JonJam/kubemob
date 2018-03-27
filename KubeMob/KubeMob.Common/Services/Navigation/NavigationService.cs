@@ -12,14 +12,24 @@ namespace KubeMob.Common.Services.Navigation
     /// </summary>
     public class NavigationService : INavigationService
     {
-        [Preserve()]
+        [Preserve]
         public NavigationService()
         {
         }
 
-        public Task Initialize() => NavigationService.InternalNavigate(typeof(MainPage));
-        
-        public Task NavigateToOtherPage() => NavigationService.InternalNavigate(typeof(OtherPage));
+        public Task Initialize()
+        {
+            // TODO Check if selected cluster previously, then navigate to cluster page.
+            return NavigationService.InternalNavigate(typeof(ClustersPage));
+        }
+
+        public Task NavigateToAddClusterPage() => NavigationService.InternalNavigate(typeof(AddClusterPage));
+
+        public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+
+        public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
+
+        public Task NavigateToPodDetailPage() => NavigationService.InternalNavigate(typeof(PodDetailsPage));
 
         public Task RemoveLastFromBackStack()
         {
@@ -58,20 +68,64 @@ namespace KubeMob.Common.Services.Navigation
 
         private static async Task InternalNavigate(Type pageType, object parameter = null)
         {
+            if (NavigationService.IsCurrentlyOnPage(pageType))
+            {
+                return;
+            }
+
             // TODO Performance improvement by caching pages.
             // See https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/navigation#handling-navigation-requests for more information.
             Page page = Activator.CreateInstance(pageType) as Page;
-            
-            if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
+
+            if (Application.Current.MainPage is ClusterMasterDetailPage masterDetailPage)
             {
-                await navigationPage.PushAsync(page);
+                await (masterDetailPage.Detail as NavigationPage).PushAsync(page);
+            }
+            else if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
+            {
+                if (page is ClusterMasterDetailPage clusterPage)
+                {
+                    Application.Current.MainPage = page;
+                }
+                else
+                {
+                    await navigationPage.PushAsync(page);
+                }
             }
             else
             {
                 Application.Current.MainPage = new ExtendedNavigationPage(page);
             }
 
-            await (page.BindingContext as ViewModelBase).Initialize(parameter);
+            if (page.BindingContext is ViewModelBase viewModel)
+            {
+                await viewModel.Initialize(parameter);
+            }
+        }
+
+        private static bool IsCurrentlyOnPage(Type pageType)
+        {
+            Page mainPage = Application.Current.MainPage;
+
+            if (mainPage == null)
+            {
+                return false;
+            }
+
+            if (mainPage is ClusterMasterDetailPage masterDetailPage &&
+                masterDetailPage.Detail is ExtendedNavigationPage detailPage &&
+                detailPage.CurrentPage.GetType() == pageType)
+            {
+                return true;
+            }
+
+            if (mainPage is ExtendedNavigationPage navigationPage &&
+                navigationPage.CurrentPage.GetType() == pageType)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -4,10 +4,10 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages
 {
-    public partial class OtherPage : ContentPage
+    public partial class AddClusterPage : ContentPage
 	{
-	    [Preserve()]
-        public OtherPage ()
+        [Preserve]
+		public AddClusterPage ()
 		{
 			InitializeComponent ();
 		}

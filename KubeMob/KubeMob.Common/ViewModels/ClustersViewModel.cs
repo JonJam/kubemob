@@ -10,10 +10,7 @@ namespace KubeMob.Common.ViewModels
     public class ClustersViewModel : ViewModelBase
     {
         public ClustersViewModel(
-            INavigationService navigationService)
-        {
-            this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
-        }
+            INavigationService navigationService) => this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
 
         public ICommand AddAccountCommand { get; }
     }

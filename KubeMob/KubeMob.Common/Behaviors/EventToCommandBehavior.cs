@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Windows.Input;
 using KubeMob.Common.Behaviors.Base;
-using KubeMob.Common.Converters;
 using Xamarin.Forms;
 
 namespace KubeMob.Common.Behaviors
@@ -37,7 +36,7 @@ namespace KubeMob.Common.Behaviors
             nameof(EventToCommandBehavior.EventArgsConverter),
             typeof(IValueConverter),
             typeof(EventToCommandBehavior),
-            new ItemTappedEventArgsConverter());
+            null);
 
         public static readonly BindableProperty EventArgsConverterParameterProperty = BindableProperty.CreateAttached(
             nameof(EventToCommandBehavior.EventArgsConverterParameter),

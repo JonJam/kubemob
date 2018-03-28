@@ -61,6 +61,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microsoft Azure.
+        /// </summary>
+        internal static string AddAccountPage_AddAzureAccount_Btn {
+            get {
+                return ResourceManager.GetString("AddAccountPage_AddAzureAccount_Btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add account.
+        /// </summary>
+        internal static string AddAccountPage_Title {
+            get {
+                return ResourceManager.GetString("AddAccountPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kubemob.
         /// </summary>
         internal static string AppName {

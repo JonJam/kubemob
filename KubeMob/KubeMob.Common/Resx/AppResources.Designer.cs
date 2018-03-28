@@ -187,6 +187,42 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to China.
+        /// </summary>
+        internal static string AzureEnvironment_China {
+            get {
+                return ResourceManager.GetString("AzureEnvironment_China", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to German.
+        /// </summary>
+        internal static string AzureEnvironment_German {
+            get {
+                return ResourceManager.GetString("AzureEnvironment_German", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global.
+        /// </summary>
+        internal static string AzureEnvironment_Global {
+            get {
+                return ResourceManager.GetString("AzureEnvironment_Global", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to US Government.
+        /// </summary>
+        internal static string AzureEnvironment_USGovernment {
+            get {
+                return ResourceManager.GetString("AzureEnvironment_USGovernment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
         internal static string ClusterMaster_Pods {

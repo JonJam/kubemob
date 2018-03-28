@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -11,27 +13,26 @@ namespace KubeMob.Common.ViewModels
     {
         private readonly IAccountManager accountManager;
 
+        private CloudEnvironment selectedEnvironment;
+
         public AddAzureAccountViewModel(IAccountManager accountManager)
         {
             this.accountManager = accountManager;
 
-            ////Using Azure client to get context.
-            // var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-            //    "",
-            //    "",
-            //    "e",
-            //    AzureEnvironment.);
+            this.Environments = accountManager.Environments;
+            this.SelectedEnvironment = accountManager.Environments.FirstOrDefault(e => e.IsDefault);
 
-            // string aksId = "";
-
-            // IAzure a = Azure.Authenticate(credentials).WithDefaultSubscription();
-
-            // IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("", aksId);
-            // var b = kubernetesCluster.UserKubeConfigContent;
-            
             this.ViewInformationCommand = new Command(() => this.accountManager.LaunchHelp());
         }
 
         public ICommand ViewInformationCommand { get; }
+
+        public IList<CloudEnvironment> Environments { get; }
+
+        public CloudEnvironment SelectedEnvironment
+        {
+            get => this.selectedEnvironment;
+            set => this.SetProperty(ref this.selectedEnvironment, value);
+        }
     }
 }

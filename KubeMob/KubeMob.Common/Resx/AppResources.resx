@@ -159,6 +159,18 @@
   <data name="AppName" xml:space="preserve">
     <value>kubemob</value>
   </data>
+  <data name="AzureEnvironment_China" xml:space="preserve">
+    <value>China</value>
+  </data>
+  <data name="AzureEnvironment_German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="AzureEnvironment_Global" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="AzureEnvironment_USGovernment" xml:space="preserve">
+    <value>US Government</value>
+  </data>
   <data name="ClusterMaster_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>

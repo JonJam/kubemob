@@ -27,16 +27,10 @@
             Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
         <Picker
             x:Name="Environment"
-            Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>China</x:String>
-                    <x:String>German</x:String>
-                    <x:String>Global</x:String>
-                    <x:String>US Government</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+            Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
+            Items="{Binding Environments}"
+            ItemDisplayBinding="Name"
+            SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
 
         <!--TODO Binding-->
         <Label

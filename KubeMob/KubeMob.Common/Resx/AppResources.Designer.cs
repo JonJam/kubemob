@@ -79,11 +79,92 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client ID.
+        /// </summary>
+        internal static string AddAzureAccountPage_ClientId_Label {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_ClientId_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the client ID.
+        /// </summary>
+        internal static string AddAzureAccountPage_ClientId_Placeholder {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_ClientId_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client secret.
+        /// </summary>
+        internal static string AddAzureAccountPage_ClientSecret_Label {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_ClientSecret_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the client secret.
+        /// </summary>
+        internal static string AddAzureAccountPage_ClientSecret_Placeholder {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_ClientSecret_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environment.
+        /// </summary>
+        internal static string AddAzureAccountPage_Environment_Label {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_Environment_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the environment.
+        /// </summary>
+        internal static string AddAzureAccountPage_Environment_Title {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_Environment_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the details for a service principal that has access to resources in your Microsoft Azure account. You can find out more about Service Princpial by tapping on the info button..
+        /// </summary>
+        internal static string AddAzureAccountPage_Help {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         internal static string AddAzureAccountPage_Information_ToolbarItem {
             get {
                 return ResourceManager.GetString("AddAzureAccountPage_Information_ToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tenant ID.
+        /// </summary>
+        internal static string AddAzureAccountPage_TenantId_Label {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_TenantId_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the tenant ID.
+        /// </summary>
+        internal static string AddAzureAccountPage_TenantId_Placeholder {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_TenantId_Placeholder", resourceCulture);
             }
         }
         

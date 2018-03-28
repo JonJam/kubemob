@@ -123,8 +123,35 @@
   <data name="AddAccountPage_Title" xml:space="preserve">
     <value>Add account</value>
   </data>
+  <data name="AddAzureAccountPage_ClientId_Label" xml:space="preserve">
+    <value>Client ID</value>
+  </data>
+  <data name="AddAzureAccountPage_ClientId_Placeholder" xml:space="preserve">
+    <value>Enter the client ID</value>
+  </data>
+  <data name="AddAzureAccountPage_ClientSecret_Label" xml:space="preserve">
+    <value>Client secret</value>
+  </data>
+  <data name="AddAzureAccountPage_ClientSecret_Placeholder" xml:space="preserve">
+    <value>Enter the client secret</value>
+  </data>
+  <data name="AddAzureAccountPage_Environment_Label" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="AddAzureAccountPage_Environment_Title" xml:space="preserve">
+    <value>Select the environment</value>
+  </data>
+  <data name="AddAzureAccountPage_Help" xml:space="preserve">
+    <value>Please enter the details for a service principal that has access to resources in your Microsoft Azure account. You can find out more about Service Princpial by tapping on the info button.</value>
+  </data>
   <data name="AddAzureAccountPage_Information_ToolbarItem" xml:space="preserve">
     <value>Information</value>
+  </data>
+  <data name="AddAzureAccountPage_TenantId_Label" xml:space="preserve">
+    <value>Tenant ID</value>
+  </data>
+  <data name="AddAzureAccountPage_TenantId_Placeholder" xml:space="preserve">
+    <value>Enter the tenant ID</value>
   </data>
   <data name="AddAzureAccountPage_Title" xml:space="preserve">
     <value>Add Microsoft Azure</value>

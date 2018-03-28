@@ -18,19 +18,16 @@
     <StackLayout
         CompressedLayout.IsHeadless="true">
         
-        <!--TODO Blurb about service principial and link to docs-->
         <Label 
-            Text="Please enter the details for a service principal that has access to resources in your Microsoft Azure account. You can find out more about Service Princpial by tapping on the info button."
-            />
+            Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
 
         <!--TODO Binding-->
-        <!--TODO Strings-->
         <!--TODO Default to global-->
         <Label
-            Text="Environment"/>
+            Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
         <Picker
             x:Name="Environment"
-            Title="Select an environment">
+            Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>China</x:String>
@@ -42,31 +39,28 @@
         </Picker>
 
         <!--TODO Binding-->
-        <!--TODO Strings-->
         <Label
-            Text="Tenant ID"/>
+            Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
         <Entry
             x:Name="TenantId"
-            Text=""
-            Placeholder="Enter tenant ID"/>
+            Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
+            Text=""/>
 
         <!--TODO Binding-->
-        <!--TODO Strings-->
         <Label
-            Text="Client ID"/>
+            Text="{markupExtensions:Translate AddAzureAccountPage_ClientId_Label}"/>
         <Entry
             x:Name="ClientId"
-            Text=""
-            Placeholder="Enter client ID"/>
+            Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientId_Placeholder}"
+            Text=""/>
 
         <!--TODO Binding-->
-        <!--TODO Strings-->
         <Label
-            Text="Client Secret"/>
+            Text="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Label}"/>
         <Entry
             x:Name="ClientSecret"
-            Text=""
-            Placeholder="Enter client secret"/>
+            Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Placeholder}"
+            Text=""/>
 
     </StackLayout>
 

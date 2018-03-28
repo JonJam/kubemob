@@ -1,6 +1,5 @@
-﻿using System;
-using System.Windows.Input;
-using KubeMob.Common.Services.Settings;
+﻿using System.Windows.Input;
+using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -10,11 +9,11 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class AddAzureAccountViewModel : ViewModelBase
     {
-        private readonly IAppSettings appSettings;
+        private readonly IAccountManager accountManager;
 
-        public AddAzureAccountViewModel(IAppSettings appSettings)
+        public AddAzureAccountViewModel(IAccountManager accountManager)
         {
-            this.appSettings = appSettings;
+            this.accountManager = accountManager;
 
             ////Using Azure client to get context.
             // var credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
@@ -29,9 +28,8 @@ namespace KubeMob.Common.ViewModels
 
             // IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("", aksId);
             // var b = kubernetesCluster.UserKubeConfigContent;
-
-            // TODO move to service
-            this.ViewInformationCommand = new Command(() => Device.OpenUri(this.appSettings.AzureHelpLink));
+            
+            this.ViewInformationCommand = new Command(() => this.accountManager.LaunchHelp());
         }
 
         public ICommand ViewInformationCommand { get; }

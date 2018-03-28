@@ -2,12 +2,12 @@
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
-using Plugin.Settings.Abstractions;
 using Xamarin.Forms;
 
 namespace KubeMob.Common
@@ -58,11 +58,12 @@ namespace KubeMob.Common
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ISettings>(CrossSettings.Current);
+            serviceCollection.AddSingleton(CrossSettings.Current);
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
 

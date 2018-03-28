@@ -7,11 +7,11 @@ namespace KubeMob.Common.Services.Settings
     /// <summary>
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/configuration-management"/>
     /// </summary>
-    [Preserve(AllMembers = true)]
     public class AppSettings : IAppSettings
     {
         private readonly ISettings settings;
 
+        [Preserve]
         public AppSettings(ISettings settings)
         {
             this.settings = settings;

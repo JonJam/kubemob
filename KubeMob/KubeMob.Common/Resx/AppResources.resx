@@ -123,6 +123,12 @@
   <data name="AddAccountPage_Title" xml:space="preserve">
     <value>Add account</value>
   </data>
+  <data name="AddAzureAccountPage_Information_ToolbarItem" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="AddAzureAccountPage_Title" xml:space="preserve">
+    <value>Add Microsoft Azure</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>kubemob</value>
   </data>

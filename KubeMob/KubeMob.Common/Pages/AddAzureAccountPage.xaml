@@ -2,8 +2,72 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.AddAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
-             Title="Add Azure account">
-    <!--TODO replace with strings-->
+             Title="{markupExtensions:Translate AddAzureAccountPage_Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            x:Name="Information"
+            Icon="info_white.png"
+            Text="{markupExtensions:Translate AddAzureAccountPage_Information_ToolbarItem}"
+            Command="{Binding ViewInformationCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout
+        CompressedLayout.IsHeadless="true">
+        
+        <!--TODO Blurb about service principial and link to docs-->
+        <Label 
+            Text="Please enter the details for a service principal that has access to resources in your Microsoft Azure account. You can find out more about Service Princpial by tapping on the info button."
+            />
+
+        <!--TODO Binding-->
+        <!--TODO Strings-->
+        <!--TODO Default to global-->
+        <Label
+            Text="Environment"/>
+        <Picker
+            x:Name="Environment"
+            Title="Select an environment">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>China</x:String>
+                    <x:String>German</x:String>
+                    <x:String>Global</x:String>
+                    <x:String>US Government</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <!--TODO Binding-->
+        <!--TODO Strings-->
+        <Label
+            Text="Tenant ID"/>
+        <Entry
+            x:Name="TenantId"
+            Text=""
+            Placeholder="Enter tenant ID"/>
+
+        <!--TODO Binding-->
+        <!--TODO Strings-->
+        <Label
+            Text="Client ID"/>
+        <Entry
+            x:Name="ClientId"
+            Text=""
+            Placeholder="Enter client ID"/>
+
+        <!--TODO Binding-->
+        <!--TODO Strings-->
+        <Label
+            Text="Client Secret"/>
+        <Entry
+            x:Name="ClientSecret"
+            Text=""
+            Placeholder="Enter client secret"/>
+
+    </StackLayout>
+
 </ContentPage>

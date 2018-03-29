@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Input;
 using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Validation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -14,6 +15,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IAccountManager accountManager;
 
         private CloudEnvironment selectedEnvironment;
+        private ValidatableObject<string> tenantId;
 
         public AddAzureAccountViewModel(IAccountManager accountManager)
         {
@@ -22,10 +24,19 @@ namespace KubeMob.Common.ViewModels
             this.Environments = accountManager.Environments;
             this.SelectedEnvironment = accountManager.Environments.FirstOrDefault(e => e.IsDefault);
 
-            this.ViewInformationCommand = new Command(() => this.accountManager.LaunchHelp());
+            this.TenantId = new ValidatableObject<string>(
+                new List<IValidationRule<string>>()
+                {
+                    new IsNotNullOrEmptyRule<string>
+                    {
+                        ValidationMessage = "Test"
+                    }
+                });
         }
 
-        public ICommand ViewInformationCommand { get; }
+        public ICommand ViewInformationCommand => new Command(() => this.accountManager.LaunchHelp());
+
+        public ICommand ValidateTenantIdCommand => new Command(() => this.TenantId.Validate());
 
         public IList<CloudEnvironment> Environments { get; }
 
@@ -33,6 +44,14 @@ namespace KubeMob.Common.ViewModels
         {
             get => this.selectedEnvironment;
             set => this.SetProperty(ref this.selectedEnvironment, value);
+        }
+
+        public ValidatableObject<string> TenantId { get; }
+
+        // TODO Wire up calling this from a save button
+        private bool Validate()
+        {
+            return this.TenantId.Validate();
         }
     }
 }

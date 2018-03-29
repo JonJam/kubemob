@@ -1,9 +1,12 @@
-﻿namespace KubeMob.Common.Services.AccountManagement
+﻿using Xamarin.Forms.Internals;
+
+namespace KubeMob.Common.Services.AccountManagement
 {
+    [Preserve(AllMembers = true)]
     public class CloudEnvironment
     {
         public CloudEnvironment(
-            string id, 
+            string id,
             string name,
             bool isDefault = false)
         {

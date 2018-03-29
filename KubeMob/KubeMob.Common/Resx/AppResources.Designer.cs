@@ -88,7 +88,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the client ID.
+        ///   Looks up a localized string similar to Enter a client ID.
         /// </summary>
         internal static string AddAzureAccountPage_ClientId_Placeholder {
             get {
@@ -106,7 +106,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the client secret.
+        ///   Looks up a localized string similar to Enter a client secret.
         /// </summary>
         internal static string AddAzureAccountPage_ClientSecret_Placeholder {
             get {
@@ -124,7 +124,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select the environment.
+        ///   Looks up a localized string similar to Select a environment.
         /// </summary>
         internal static string AddAzureAccountPage_Environment_Title {
             get {
@@ -160,7 +160,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the tenant ID.
+        ///   Looks up a localized string similar to Enter a tenant ID.
         /// </summary>
         internal static string AddAzureAccountPage_TenantId_Placeholder {
             get {

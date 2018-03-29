@@ -21,15 +21,13 @@
         <Label 
             Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
 
-        <!--TODO Binding-->
-        <!--TODO Default to global-->
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
         <Picker
             x:Name="Environment"
             Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
-            Items="{Binding Environments}"
-            ItemDisplayBinding="Name"
+            ItemsSource="{Binding Environments}"
+            ItemDisplayBinding="{Binding Name}"
             SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
 
         <!--TODO Binding-->

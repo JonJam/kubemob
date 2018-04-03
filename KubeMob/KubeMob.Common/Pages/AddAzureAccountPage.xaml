@@ -42,13 +42,13 @@
             Text="{Binding TenantId.Value}">
 
             <!--Style="{StaticResource EntryStyle}"-->
-            <Label.Behaviors>
+            <Entry.Behaviors>
                 <behaviors:EffectBehavior ApplyEffect="True">
                     <behaviors:EffectBehavior.Effect>
                         <effects:EntryLineColorEffect Color="Red"/>
                     </behaviors:EffectBehavior.Effect>
                 </behaviors:EffectBehavior>
-            </Label.Behaviors>
+            </Entry.Behaviors>
             <!--<Entry.Behaviors>
                 <behaviors:EventToCommandBehavior  
                     EventName="TextChanged"  

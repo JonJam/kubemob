@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Android.Graphics;
 using Android.Widget;
-using KubeMob.Common.Effects;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
 
 // TODO tidy this up
 [assembly: ResolutionGroupName("KubeMob")]
-[assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]
+[assembly: ExportEffect(typeof(KubeMob.Droid.Effects.EntryLineColorEffect), "EntryLineColorEffect")]
 namespace KubeMob.Droid.Effects
 {
     [Preserve(AllMembers = true)]

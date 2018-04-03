@@ -1,10 +1,7 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
-using KubeMob.Common.Behaviors;
-using KubeMob.iOS.Effects;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,7 +9,7 @@ using Xamarin.Forms.Platform.iOS;
 
 // TODO tidy this up
 [assembly: ResolutionGroupName("KubeMob")]
-[assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]
+[assembly: ExportEffect(typeof(KubeMob.iOS.Effects.EntryLineColorEffect), "EntryLineColorEffect")]
 namespace KubeMob.iOS.Effects
 {
     [Preserve(AllMembers = true)]

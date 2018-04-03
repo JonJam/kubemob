@@ -7,6 +7,7 @@ using KubeMob.Common.Behaviors;
 using KubeMob.iOS.Effects;
 using UIKit;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.iOS;
 
 // TODO tidy this up
@@ -14,6 +15,7 @@ using Xamarin.Forms.Platform.iOS;
 [assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]
 namespace KubeMob.iOS.Effects
 {
+    [Preserve(AllMembers = true)]
     public class EntryLineColorEffect : PlatformEffect
     {
         UITextField control;
@@ -22,8 +24,11 @@ namespace KubeMob.iOS.Effects
         {
             try
             {
+                Common.Effects.EntryLineColorEffect effect = (Common.Effects.EntryLineColorEffect)this.Element.Effects.FirstOrDefault(e => e is Common.Effects.EntryLineColorEffect);
+
                 control = Control as UITextField;
-                UpdateLineColor();
+
+                UpdateLineColor(effect.Color);
             }
             catch (Exception ex)
             {
@@ -36,31 +41,30 @@ namespace KubeMob.iOS.Effects
             control = null;
         }
 
-        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
-        {
-            base.OnElementPropertyChanged(args);
+        //protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        //{
+        //    base.OnElementPropertyChanged(args);
 
-            if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName ||
-            args.PropertyName == "Height")
-            {
-                Initialize();
-                UpdateLineColor();
-            }
-        }
+        //    if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName ||
+        //    args.PropertyName == "Height")
+        //    {
+        //        Initialize();
+        //        UpdateLineColor();
+        //    }
+        //}
 
-        private void Initialize()
-        {
-            var entry = Element as Entry;
-            if (entry != null)
-            {
-                Control.Bounds = new CGRect(0, 0, entry.Width, entry.Height);
-            }
-        }
+        //private void Initialize()
+        //{
+        //    var entry = Element as Entry;
+        //    if (entry != null)
+        //    {
+        //        Control.Bounds = new CGRect(0, 0, entry.Width, entry.Height);
+        //    }
+        //}
 
-        private void UpdateLineColor()
+        private void UpdateLineColor(Xamarin.Forms.Color color)
         {
-            BorderLineLayer lineLayer = control.Layer.Sublayers.OfType<BorderLineLayer>()
-            .FirstOrDefault();
+            BorderLineLayer lineLayer = control.Layer.Sublayers.OfType<BorderLineLayer>().FirstOrDefault();
 
             if (lineLayer == null)
             {
@@ -72,7 +76,7 @@ namespace KubeMob.iOS.Effects
             }
 
             lineLayer.Frame = new CGRect(0f, Control.Frame.Height - 1f, Control.Bounds.Width, 1f);
-            lineLayer.BorderColor = LineColorBehavior.GetLineColor(Element).ToCGColor();
+            lineLayer.BorderColor = color.ToCGColor();
             control.TintColor = control.TextColor;
         }
 

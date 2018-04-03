@@ -4,7 +4,8 @@
                     xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
                     x:Class="KubeMob.Common.ResourceDictionaries.Styles">
 
-    <Style x:Key="EntryStyle"
+    <!-- TODO Remove ? -->
+    <!-- <Style x:Key="EntryStyle"
            TargetType="{x:Type Entry}">
         <Setter Property="FontFamily"
                 Value="{StaticResource MontserratRegular}" />
@@ -33,7 +34,7 @@
                 <Setter Property="Opacity" Value="1" />
             </Trigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
 
     <!--TODO move to own resource dictionary-->
     <Color x:Key="ErrorColor">#ff5252</Color>

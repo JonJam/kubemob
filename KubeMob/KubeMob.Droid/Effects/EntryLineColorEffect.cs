@@ -1,11 +1,10 @@
-﻿using Android.Widget;
-using eShopOnContainers.Core.Behaviors;
-using eShopOnContainers.Droid.Effects;
-using System;
-using System.ComponentModel;
-using KubeMob.Common.Behaviors;
+﻿using System;
+using System.Linq;
+using Android.Graphics;
+using Android.Widget;
 using KubeMob.Common.Effects;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
 
 // TODO tidy this up
@@ -13,16 +12,24 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportEffect(typeof(EntryLineColorEffect), "EntryLineColorEffect")]
 namespace KubeMob.Droid.Effects
 {
+    [Preserve(AllMembers = true)]
     public class EntryLineColorEffect : PlatformEffect
     {
         EditText control;
+        //private ColorFilter originalBackground;
+
 
         protected override void OnAttached()
         {
             try
             {
-                control = Control as EditText;
-                UpdateLineColor();
+                Common.Effects.EntryLineColorEffect effect = (Common.Effects.EntryLineColorEffect)this.Element.Effects.FirstOrDefault(e => e is Common.Effects.EntryLineColorEffect);
+
+                // TODO Null checks
+                this.control = this.Control as EditText;
+                //this.originalBackground = this.control.Background.ColorFilter;
+
+                this.UpdateLineColor(effect.Color);
             }
             catch (Exception ex)
             {
@@ -32,24 +39,25 @@ namespace KubeMob.Droid.Effects
 
         protected override void OnDetached()
         {
+            //control.Background.SetColorFilter(this.originalBackground);
             control = null;
         }
 
-        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName)
-            {
-                UpdateLineColor();
-            }
-        }
+        //protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        //{
+        //    if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName)
+        //    {
+        //        UpdateLineColor();
+        //    }
+        //}
 
-        private void UpdateLineColor()
+        private void UpdateLineColor(Xamarin.Forms.Color color)
         {
             try
             {
                 if (control != null)
                 {
-                    control.Background.SetColorFilter(LineColorBehavior.GetLineColor(Element).ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
+                    control.Background.SetColorFilter(color.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
                 }
             }
             catch (Exception ex)

@@ -15,7 +15,6 @@ namespace KubeMob.Common.ViewModels
         private readonly IAccountManager accountManager;
 
         private CloudEnvironment selectedEnvironment;
-        private ValidatableObject<string> tenantId;
 
         public AddAzureAccountViewModel(IAccountManager accountManager)
         {
@@ -27,6 +26,7 @@ namespace KubeMob.Common.ViewModels
             this.TenantId = new ValidatableObject<string>(
                 new List<IValidationRule<string>>()
                 {
+                    // TODO Replace with strings.
                     new IsNotNullOrEmptyRule<string>
                     {
                         ValidationMessage = "Test"

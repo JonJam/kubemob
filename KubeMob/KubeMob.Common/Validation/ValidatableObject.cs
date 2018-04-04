@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using KubeMob.Common.ViewModels.Base;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Validation
 {
     // TODO what can be made private, get only etc
+    [Preserve(AllMembers = true)]
     public class ValidatableObject<T> : ExtendedBindableObject, IValidity
     {
         private readonly IList<IValidationRule<T>> validationRules;
@@ -36,8 +38,16 @@ namespace KubeMob.Common.Validation
         public bool IsValid
         {
             get => this.isValid;
-            private set => this.SetProperty(ref this.isValid, value);
+            private set
+            {
+                if (this.SetProperty(ref this.isValid, value))
+                {
+                    this.NotifyPropertyChanged(() => this.IsInvalid);
+                }
+            }
         }
+
+        public bool IsInvalid => !this.isValid;
 
         public bool Validate()
         {

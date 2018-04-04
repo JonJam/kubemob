@@ -40,19 +40,18 @@
         <Entry
             x:Name="TenantId"
             Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
-            Text="{Binding TenantId.Value}">
+            Text="{Binding TenantId.Value, Mode=TwoWay}">
             <Entry.Behaviors>
-                <behaviors:EffectBehavior ApplyEffect="True">
+                <behaviors:EventToCommandBehavior  
+                    EventName="TextChanged"  
+                    Command="{Binding ValidateTenantIdCommand}" />
+                <behaviors:EffectBehavior ApplyEffect="{Binding TenantId.IsInvalid}">
                     <behaviors:EffectBehavior.Effect>
                         <effects:EntryLineColorEffect Color="Red"/>
                     </behaviors:EffectBehavior.Effect>
                 </behaviors:EffectBehavior>
             </Entry.Behaviors>
-            <!--<Entry.Behaviors>
-                <behaviors:EventToCommandBehavior  
-                    EventName="TextChanged"  
-                    Command="{Binding ValidateTenantIdCommand}" />
-            </Entry.Behaviors>-->
+
             <!--<Entry.Triggers>
                 <DataTrigger   
                     TargetType="Entry"  

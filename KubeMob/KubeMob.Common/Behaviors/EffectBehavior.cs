@@ -2,11 +2,11 @@
 
 namespace KubeMob.Common.Behaviors
 {
-    using System;
     using Xamarin.Forms;
 
-    // TODO maybe need to change this to entry.
-    // TODO Can change this to https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/effect-behavior
+    /// <summary>
+    /// Based on https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/effect-behavior
+    /// </summary>
     [Preserve(AllMembers = true)]
     public class EffectBehavior : Behavior<View>
     {
@@ -97,7 +97,7 @@ namespace KubeMob.Common.Behaviors
         {
             Effect effectToApply = this.Effect;
 
-            if (this.view != null && 
+            if (this.view != null &&
                 effectToApply != null &&
                 applyEffect)
             {

@@ -6,7 +6,8 @@ namespace KubeMob.Common.Effects
     [Preserve(AllMembers = true)]
     public class EntryLineColorEffect : RoutingEffect
     {
-        public EntryLineColorEffect() : base("KubeMob.EntryLineColorEffect")
+        public EntryLineColorEffect()
+            : base("KubeMob.EntryLineColorEffect")
         {
         }
 

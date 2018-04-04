@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
              xmlns:effects="clr-namespace:KubeMob.Common.Effects;assembly=KubeMob.Common"
+             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.AddAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate AddAzureAccountPage_Title}">
@@ -17,15 +17,14 @@
             Command="{Binding ViewInformationCommand}" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout
-        CompressedLayout.IsHeadless="true">
+    <StackLayout>
 
         <Label 
             Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
 
+        <!--TODO Validation-->
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
-        <!--TODO Validation-->
         <Picker
             x:Name="Environment"
             Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
@@ -34,14 +33,14 @@
             SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
 
         <!--TODO sort out line color validation effects and behaviors-->
+        <!--TODO Display errors for validation-->
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
+
         <Entry
             x:Name="TenantId"
             Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
             Text="{Binding TenantId.Value}">
-
-            <!--Style="{StaticResource EntryStyle}"-->
             <Entry.Behaviors>
                 <behaviors:EffectBehavior ApplyEffect="True">
                     <behaviors:EffectBehavior.Effect>
@@ -62,8 +61,8 @@
                     <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
                 </DataTrigger>
             </Entry.Triggers>-->
+
         </Entry>
-        <!--TODO Display errors for validation-->
 
         <!--TODO Binding-->
         <!--TODO Validation-->

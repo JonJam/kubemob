@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
+using Android.Content.Res;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
 
-// TODO tidy this up
 [assembly: ResolutionGroupName("KubeMob")]
 [assembly: ExportEffect(typeof(KubeMob.Droid.Effects.EntryLineColorEffect), "EntryLineColorEffect")]
 namespace KubeMob.Droid.Effects
@@ -13,7 +13,7 @@ namespace KubeMob.Droid.Effects
     [Preserve(AllMembers = true)]
     public class EntryLineColorEffect : PlatformEffect
     {
-        EditText control;
+        private EditText control;
         //private ColorFilter originalBackground;
 
 
@@ -53,9 +53,9 @@ namespace KubeMob.Droid.Effects
         {
             try
             {
-                if (control != null)
+                if (this.control != null)
                 {
-                    control.Background.SetColorFilter(color.ToAndroid(), Android.Graphics.PorterDuff.Mode.SrcAtop);
+                    this.control.BackgroundTintList = ColorStateList.ValueOf(color.ToAndroid());
                 }
             }
             catch (Exception ex)

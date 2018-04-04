@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
@@ -38,26 +39,27 @@ namespace KubeMob.iOS.Effects
             control = null;
         }
 
-        //protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
-        //{
-        //    base.OnElementPropertyChanged(args);
+        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnElementPropertyChanged(args);
 
-        //    if (args.PropertyName == LineColorBehavior.LineColorProperty.PropertyName ||
-        //    args.PropertyName == "Height")
-        //    {
-        //        Initialize();
-        //        UpdateLineColor();
-        //    }
-        //}
+            if (args.PropertyName == "Height")
+            {
+                Initialize();
 
-        //private void Initialize()
-        //{
-        //    var entry = Element as Entry;
-        //    if (entry != null)
-        //    {
-        //        Control.Bounds = new CGRect(0, 0, entry.Width, entry.Height);
-        //    }
-        //}
+                Common.Effects.EntryLineColorEffect effect = (Common.Effects.EntryLineColorEffect)this.Element.Effects.FirstOrDefault(e => e is Common.Effects.EntryLineColorEffect);
+                UpdateLineColor(effect.Color);
+            }
+        }
+
+        private void Initialize()
+        {
+            var entry = Element as Entry;
+            if (entry != null)
+            {
+                Control.Bounds = new CGRect(0, 0, entry.Width, entry.Height);
+            }
+        }
 
         private void UpdateLineColor(Xamarin.Forms.Color color)
         {

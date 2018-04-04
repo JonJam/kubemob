@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Internals;
+﻿using KubeMob.Common.Behaviors.Base;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Behaviors
 {
@@ -8,7 +9,7 @@ namespace KubeMob.Common.Behaviors
     /// Based on https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/effect-behavior
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class EffectBehavior : Behavior<View>
+    public class EffectBehavior : BindableBehavior<View>
     {
         public static readonly BindableProperty ApplyEffectProperty = BindableProperty.CreateAttached(
             nameof(EffectBehavior.ApplyEffect),

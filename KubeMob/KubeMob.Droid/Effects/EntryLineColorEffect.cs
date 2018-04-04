@@ -37,6 +37,7 @@ namespace KubeMob.Droid.Effects
 
         protected override void OnDetached()
         {
+            // TODO Clear down this effect
             //control.Background.SetColorFilter(this.originalBackground);
             control = null;
         }

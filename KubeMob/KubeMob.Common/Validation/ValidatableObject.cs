@@ -19,8 +19,8 @@ namespace KubeMob.Common.Validation
         {
             this.validationRules = validationRules;
 
-            this.errors = new List<string>();
-            this.isValid = true;
+            this.Errors = new List<string>();
+            this.IsValid = true;
         }
 
         public IList<string> Errors

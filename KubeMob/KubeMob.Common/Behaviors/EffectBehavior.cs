@@ -16,14 +16,14 @@ namespace KubeMob.Common.Behaviors
             typeof(bool),
             typeof(EffectBehavior),
             false,
-            propertyChanged: EffectBehavior.OnApplyEffectChanged);
+            propertyChanged: EffectBehavior.OnPropertyChanged);
 
         public static readonly BindableProperty EffectProperty = BindableProperty.CreateAttached(
             nameof(EffectBehavior.Effect),
             typeof(Effect),
             typeof(EffectBehavior),
             null,
-            propertyChanged: EffectBehavior.OnEffectChanged);
+            propertyChanged: EffectBehavior.OnPropertyChanged);
 
         private View view;
 
@@ -45,74 +45,43 @@ namespace KubeMob.Common.Behaviors
 
             this.view = (View)bindable;
 
-            this.AddEffect(this.ApplyEffect);
+            this.AddOrRemoveEffect(this.ApplyEffect);
         }
 
         protected override void OnDetachingFrom(BindableObject bindable)
         {
-            this.RemoveEffect();
+            this.AddOrRemoveEffect(false);
 
             this.view = null;
 
             base.OnDetachingFrom(bindable);
         }
 
-        private static void OnApplyEffectChanged(
+        private static void OnPropertyChanged(
             BindableObject bindable,
             object oldValue,
             object newValue)
         {
             EffectBehavior behavior = (EffectBehavior)bindable;
-            bool applyEffect = (bool)newValue;
 
-            if (applyEffect)
-            {
-                behavior.AddEffect(applyEffect);
-            }
-            else
-            {
-                behavior.RemoveEffect();
-            }
+            behavior.AddOrRemoveEffect(behavior.ApplyEffect);
         }
 
-        private static void OnEffectChanged(
-            BindableObject bindable,
-            object oldValue,
-            object newValue)
-        {
-            EffectBehavior behavior = (EffectBehavior)bindable;
-            bool applyEffect = behavior.ApplyEffect;
-
-            if (applyEffect)
-            {
-                behavior.AddEffect(applyEffect);
-            }
-            else
-            {
-                behavior.RemoveEffect();
-            }
-        }
-
-        private void AddEffect(
+        private void AddOrRemoveEffect(
             bool applyEffect)
         {
-            Effect effectToApply = this.Effect;
-
-            if (this.view != null &&
-                effectToApply != null &&
-                applyEffect)
+            if (this.view == null || this.Effect == null)
             {
-                this.view.Effects.Add(effectToApply);
+                return;
             }
-        }
 
-        private void RemoveEffect()
-        {
-            Effect effectToApply = this.Effect;
-
-            if (this.view != null && effectToApply != null)
+            if (applyEffect)
             {
-                this.view.Effects.Remove(effectToApply);
+                this.view.Effects.Add(this.Effect);
+            }
+            else
+            {
+                this.view.Effects.Remove(this.Effect);
             }
         }
     }

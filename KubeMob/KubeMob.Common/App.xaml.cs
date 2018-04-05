@@ -2,11 +2,13 @@
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace KubeMob.Common
 {
+    [Preserve(AllMembers = true)]
     public partial class App : Application
     {
         public App()
@@ -16,10 +18,12 @@ namespace KubeMob.Common
             // Setting language display in following: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization?tabs=vswin#displaying-the-correct-language
             ILocalize localize = DependencyService.Get<ILocalize>();
             CultureInfo ci = localize.GetCurrentCultureInfo();
+
             // Set the RESX for resource localization
             Resx.AppResources.Culture = ci;
+
             // Set the Thread for locale-aware methods
-            localize.SetLocale(ci); 
+            localize.SetLocale(ci);
         }
 
         protected override async void OnStart()

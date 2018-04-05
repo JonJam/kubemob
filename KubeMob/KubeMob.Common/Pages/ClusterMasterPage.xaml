@@ -9,12 +9,6 @@
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="Cluster Master">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
     <ListView
         x:Name="MenuItems"
         ItemsSource="{Binding MenuItems}"

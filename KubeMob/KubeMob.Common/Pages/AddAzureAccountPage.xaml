@@ -26,19 +26,17 @@
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
         <Picker
-            x:Name="Environment"
+            x:Name="EnvironmentEntry"
             Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
             ItemsSource="{Binding Environments}"
             ItemDisplayBinding="{Binding Name}"
             SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
 
-        <!--TODO sort out line color validation effects and behaviors-->
         <!--TODO Display errors for validation-->
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
-
         <Entry
-            x:Name="TenantId"
+            x:Name="TenantIdEntry"
             Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
             Text="{Binding TenantId.Value, Mode=TwoWay}">
             <Entry.Behaviors>
@@ -47,28 +45,25 @@
                     Command="{Binding ValidateTenantIdCommand}" />
                 <behaviors:EffectBehavior ApplyEffect="{Binding TenantId.IsInvalid}">
                     <behaviors:EffectBehavior.Effect>
-                        <effects:EntryLineColorEffect Color="Red"/>
+                        <effects:EntryLineColorEffect Color="{StaticResource ErrorColor}"/>
                     </behaviors:EffectBehavior.Effect>
                 </behaviors:EffectBehavior>
             </Entry.Behaviors>
-
-            <!--<Entry.Triggers>
-                <DataTrigger   
-                    TargetType="Entry"  
-                    Binding="{Binding TenantId.IsValid}"  
-                    Value="False">
-                    <Setter Property="behaviors:LineColorBehavior.LineColor" Value="{StaticResource ErrorColor}" />
-                </DataTrigger>
-            </Entry.Triggers>-->
-
         </Entry>
+
+        <!--Text="{Binding TenantId.FirstError}"-->
+
+        <!---->
+        <Label
+            Text="Test"
+            Style="{StaticResource ValidationErrorLabelStyle}"/>
 
         <!--TODO Binding-->
         <!--TODO Validation-->
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_ClientId_Label}"/>
         <Entry
-            x:Name="ClientId"
+            x:Name="ClientIdEntry"
             Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientId_Placeholder}"
             Text=""/>
 
@@ -77,7 +72,7 @@
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Label}"/>
         <Entry
-            x:Name="ClientSecret"
+            x:Name="ClientSecretEntry"
             Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Placeholder}"
             Text=""/>
 

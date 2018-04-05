@@ -5,9 +5,8 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Validation
 {
-    // TODO what can be made private, get only etc
     [Preserve(AllMembers = true)]
-    public class ValidatableObject<T> : ExtendedBindableObject, IValidity
+    public class ValidatableObject<T> : ExtendedBindableObject
     {
         private readonly IList<IValidationRule<T>> validationRules;
 
@@ -26,8 +25,16 @@ namespace KubeMob.Common.Validation
         public IList<string> Errors
         {
             get => this.errors;
-            private set => this.SetProperty(ref this.errors, value);
+            private set
+            {
+                if (this.SetProperty(ref this.errors, value))
+                {
+                    this.NotifyPropertyChanged(() => this.FirstError);
+                }
+            }
         }
+
+        public string FirstError => this.Errors.FirstOrDefault();
 
         public T Value
         {

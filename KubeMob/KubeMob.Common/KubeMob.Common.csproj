@@ -40,6 +40,15 @@
     <Compile Update="Pages\ClusterMasterDetailPage.xaml.cs">
       <DependentUpon>ClusterMasterDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ResourceDictionaries\Colors.xaml.cs">
+      <DependentUpon>Colors.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ResourceDictionaries\Converters.xaml.cs">
+      <DependentUpon>Converters.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ResourceDictionaries\Styles.xaml.cs">
+      <DependentUpon>Styles.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resx\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -64,6 +73,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ExtendedNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ResourceDictionaries\Colors.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ResourceDictionaries\Styles.xaml">

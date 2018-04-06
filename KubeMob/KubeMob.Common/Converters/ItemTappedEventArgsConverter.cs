@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Converters
 {
+    [Preserve(AllMembers =  true)]
     public class ItemTappedEventArgsConverter : IValueConverter
     {
         public object Convert(

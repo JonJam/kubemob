@@ -147,6 +147,9 @@
   <data name="AddAzureAccountPage_Information_ToolbarItem" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message" xml:space="preserve">
+    <value>Tenant ID is required.</value>
+  </data>
   <data name="AddAzureAccountPage_TenantId_Label" xml:space="preserve">
     <value>Tenant ID</value>
   </data>

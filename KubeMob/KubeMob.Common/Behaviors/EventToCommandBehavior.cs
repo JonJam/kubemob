@@ -6,12 +6,14 @@ using System.Reflection;
 using System.Windows.Input;
 using KubeMob.Common.Behaviors.Base;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Behaviors
 {
     /// <summary>
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/event-to-command-behavior"/>
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class EventToCommandBehavior : BindableBehavior<View>
     {
         public static readonly BindableProperty EventNameProperty = BindableProperty.CreateAttached(

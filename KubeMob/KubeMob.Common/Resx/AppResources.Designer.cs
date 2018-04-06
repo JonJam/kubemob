@@ -151,6 +151,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tenant ID is required..
+        /// </summary>
+        internal static string AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tenant ID.
         /// </summary>
         internal static string AddAzureAccountPage_TenantId_Label {

@@ -18,7 +18,6 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-
         <Label 
             Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
 
@@ -32,7 +31,6 @@
             ItemDisplayBinding="{Binding Name}"
             SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
 
-        <!--TODO Display errors for validation-->
         <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
         <Entry
@@ -50,13 +48,10 @@
                 </behaviors:EffectBehavior>
             </Entry.Behaviors>
         </Entry>
-
-        <!--Text="{Binding TenantId.FirstError}"-->
-
-        <!---->
         <Label
-            Text="Test"
-            Style="{StaticResource ValidationErrorLabelStyle}"/>
+            Text="{Binding TenantId.FirstError}"
+            Style="{StaticResource ValidationErrorLabelStyle}"
+            IsVisible="{Binding TenantId.IsInvalid}"></Label>
 
         <!--TODO Binding-->
         <!--TODO Validation-->

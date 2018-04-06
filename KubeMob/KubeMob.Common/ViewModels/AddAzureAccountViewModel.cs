@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using KubeMob.Common.Resx;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Validation;
 using KubeMob.Common.ViewModels.Base;
@@ -26,10 +27,9 @@ namespace KubeMob.Common.ViewModels
             this.TenantId = new ValidatableObject<string>(
                 new List<IValidationRule<string>>()
                 {
-                    // TODO Replace with strings.
                     new IsNotNullOrEmptyRule<string>
                     {
-                        ValidationMessage = "Test"
+                        ValidationMessage = AppResources.AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message
                     }
                 });
         }

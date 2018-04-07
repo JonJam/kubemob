@@ -79,6 +79,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string AddAzureAccountPage_AddButton {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_AddButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client ID is required..
+        /// </summary>
+        internal static string AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client ID.
         /// </summary>
         internal static string AddAzureAccountPage_ClientId_Label {
@@ -93,6 +111,15 @@ namespace KubeMob.Common.Resx {
         internal static string AddAzureAccountPage_ClientId_Placeholder {
             get {
                 return ResourceManager.GetString("AddAzureAccountPage_ClientId_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client secret is required..
+        /// </summary>
+        internal static string AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message {
+            get {
+                return ResourceManager.GetString("AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message", resourceCulture);
             }
         }
         

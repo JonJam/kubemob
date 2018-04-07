@@ -32,11 +32,35 @@ namespace KubeMob.Common.ViewModels
                         ValidationMessage = AppResources.AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message
                     }
                 });
+
+            this.ClientId = new ValidatableObject<string>(
+                new List<IValidationRule<string>>()
+                {
+                    new IsNotNullOrEmptyRule<string>
+                    {
+                        ValidationMessage = AppResources.AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message
+                    }
+                });
+
+            this.ClientSecret = new ValidatableObject<string>(
+                new List<IValidationRule<string>>()
+                {
+                    new IsNotNullOrEmptyRule<string>
+                    {
+                        ValidationMessage = AppResources.AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message
+                    }
+                });
         }
 
         public ICommand ViewInformationCommand => new Command(() => this.accountManager.LaunchHelp());
 
         public ICommand ValidateTenantIdCommand => new Command(() => this.TenantId.Validate());
+
+        public ICommand ValidateClientIdCommand => new Command(() => this.ClientId.Validate());
+
+        public ICommand ValidateClientSecretCommand => new Command(() => this.ClientSecret.Validate());
+
+        public ICommand AddCommand => new Command(this.AddAccount);
 
         public IList<CloudEnvironment> Environments { get; }
 
@@ -48,10 +72,26 @@ namespace KubeMob.Common.ViewModels
 
         public ValidatableObject<string> TenantId { get; }
 
-        // TODO Wire up calling this from a save button
+        public ValidatableObject<string> ClientId { get; }
+
+        public ValidatableObject<string> ClientSecret { get; }
+
+        private void AddAccount()
+        {
+            if (this.Validate())
+            {
+                // TODO loading
+                // TODO attempt to login into azure
+                // - if fail, display overall error,
+                // - if success, save creds and navigate
+            }
+        }
+
         private bool Validate()
         {
-            return this.TenantId.Validate();
+            return this.ClientId.Validate() &&
+                   this.ClientSecret.Validate() &&
+                   this.TenantId.Validate();
         }
     }
 }

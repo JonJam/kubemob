@@ -123,11 +123,20 @@
   <data name="AddAccountPage_Title" xml:space="preserve">
     <value>Add account</value>
   </data>
+  <data name="AddAzureAccountPage_AddButton" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message" xml:space="preserve">
+    <value>Client ID is required.</value>
+  </data>
   <data name="AddAzureAccountPage_ClientId_Label" xml:space="preserve">
     <value>Client ID</value>
   </data>
   <data name="AddAzureAccountPage_ClientId_Placeholder" xml:space="preserve">
     <value>Enter a client ID</value>
+  </data>
+  <data name="AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message" xml:space="preserve">
+    <value>Client secret is required.</value>
   </data>
   <data name="AddAzureAccountPage_ClientSecret_Label" xml:space="preserve">
     <value>Client secret</value>

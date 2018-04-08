@@ -1,4 +1,6 @@
 ﻿using System;
+using KubeMob.Common.Services.AccountManagement.Azure;
+using Newtonsoft.Json;
 using Plugin.Settings.Abstractions;
 using Xamarin.Forms.Internals;
 
@@ -20,5 +22,12 @@ namespace KubeMob.Common.Services.Settings
         }
 
         public Uri AzureHelpLink { get; }
+
+        // TODO Support more than one account ??
+        public AzureAccount AzureAccount
+        {
+            get => JsonConvert.DeserializeObject<AzureAccount>(this.settings.GetValueOrDefault(nameof(this.AzureAccount), null));
+            set => this.settings.AddOrUpdateValue(nameof(this.AzureAccount), JsonConvert.SerializeObject(value));
+        }
     }
 }

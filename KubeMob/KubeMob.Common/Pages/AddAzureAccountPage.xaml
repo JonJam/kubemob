@@ -22,6 +22,11 @@
             Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
 
         <Label
+            Text="{Binding TopLevelErrorMessage}"
+            Style="{StaticResource ValidationErrorLabelStyle}"
+            IsVisible="{Binding HasTopLevelErrorMessage}"></Label>
+
+        <Label
             Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
         <Picker
             x:Name="EnvironmentEntry"

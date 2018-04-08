@@ -171,6 +171,15 @@
   <data name="AppName" xml:space="preserve">
     <value>kubemob</value>
   </data>
+  <data name="AzureAccountManager_IsValidCredentials_InvalidClientId" xml:space="preserve">
+    <value>Client specified cannot be found.</value>
+  </data>
+  <data name="AzureAccountManager_IsValidCredentials_InvalidTenantId" xml:space="preserve">
+    <value>Tenant specified cannot be found.</value>
+  </data>
+  <data name="AzureAccountManager_IsValidCredentials_NoInternet" xml:space="preserve">
+    <value>Oh snap! We are having issues connecting to Azure. Please try again.</value>
+  </data>
   <data name="AzureEnvironment_China" xml:space="preserve">
     <value>China</value>
   </data>
@@ -191,5 +200,8 @@
   </data>
   <data name="ClustersPage_Title" xml:space="preserve">
     <value>Clusters</value>
+  </data>
+  <data name="String1AzureAccountManager_IsValidCredentials_InvalidClientSecret" xml:space="preserve">
+    <value>Client secret is invalid.</value>
   </data>
 </root>

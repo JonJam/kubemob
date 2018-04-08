@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Validation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -13,16 +16,22 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class AddAzureAccountViewModel : ViewModelBase
     {
-        private readonly IAccountManager accountManager;
+        private readonly INavigationService navigationService;
+        private readonly IAzureAccountManager azureAccountManager;
+
+        private string topLevelErrorMessage;
 
         private CloudEnvironment selectedEnvironment;
 
-        public AddAzureAccountViewModel(IAccountManager accountManager)
+        public AddAzureAccountViewModel(
+            INavigationService navigationService,
+            IAzureAccountManager azureAccountManager)
         {
-            this.accountManager = accountManager;
+            this.navigationService = navigationService;
+            this.azureAccountManager = azureAccountManager;
 
-            this.Environments = accountManager.Environments;
-            this.SelectedEnvironment = accountManager.Environments.FirstOrDefault(e => e.IsDefault);
+            this.Environments = azureAccountManager.Environments;
+            this.SelectedEnvironment = azureAccountManager.Environments.FirstOrDefault(e => e.IsDefault);
 
             this.TenantId = new ValidatableObject<string>(
                 new List<IValidationRule<string>>()
@@ -52,7 +61,7 @@ namespace KubeMob.Common.ViewModels
                 });
         }
 
-        public ICommand ViewInformationCommand => new Command(() => this.accountManager.LaunchHelp());
+        public ICommand ViewInformationCommand => new Command(() => this.azureAccountManager.LaunchHelp());
 
         public ICommand ValidateTenantIdCommand => new Command(() => this.TenantId.Validate());
 
@@ -61,6 +70,20 @@ namespace KubeMob.Common.ViewModels
         public ICommand ValidateClientSecretCommand => new Command(() => this.ClientSecret.Validate());
 
         public ICommand AddCommand => new Command(this.AddAccount);
+
+        public string TopLevelErrorMessage
+        {
+            get => this.topLevelErrorMessage;
+            private set
+            {
+                if (this.SetProperty(ref this.topLevelErrorMessage, value))
+                {
+                    this.NotifyPropertyChanged(() => this.HasTopLevelErrorMessage);
+                }
+            }
+        }
+
+        public bool HasTopLevelErrorMessage => !string.IsNullOrWhiteSpace(this.topLevelErrorMessage);
 
         public IList<CloudEnvironment> Environments { get; }
 
@@ -78,12 +101,38 @@ namespace KubeMob.Common.ViewModels
 
         private void AddAccount()
         {
-            if (this.Validate())
+            // TODO loading / disable button?
+            this.TopLevelErrorMessage = null;
+
+            CloudEnvironment env = this.SelectedEnvironment;
+            string tenant = this.TenantId.Value;
+            string client = this.ClientId.Value;
+            string secret = this.ClientSecret.Value;
+
+            if (!this.Validate())
             {
-                // TODO loading
-                // TODO attempt to login into azure
-                // - if fail, display overall error,
-                // - if success, save creds and navigate
+                return;
+            }
+
+            (bool isValid, string message) = this.azureAccountManager.IsValidCredentials(
+                env,
+                tenant,
+                client,
+                secret);
+
+            if (isValid)
+            {
+                this.azureAccountManager.AddCredentials(
+                    env,
+                    tenant,
+                    client,
+                    secret);
+
+                this.navigationService.GoBack(2);
+            }
+            else
+            {
+                this.TopLevelErrorMessage = message;
             }
         }
 

@@ -58,11 +58,14 @@ namespace KubeMob.Common.Services.Navigation
             return Task.CompletedTask;
         }
 
-        public Task GoBack()
+        public Task GoBack(int numberOfTimes = 1)
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
             {
-                mainPage.PopAsync();
+                for (int i = 0; i < numberOfTimes; i++)
+                {
+                    mainPage.PopAsync();
+                }
             }
 
             return Task.CompletedTask;

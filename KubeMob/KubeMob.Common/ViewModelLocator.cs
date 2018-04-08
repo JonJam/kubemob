@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
@@ -41,7 +41,9 @@ namespace KubeMob.Common
 
         public static void SetAutoWireViewModel(BindableObject bindable, bool value) => bindable.SetValue(ViewModelLocator.AutoWireViewModelProperty, value);
 
-        public static T Resolve<T>() where T : class => ViewModelLocator.serviceProvider.GetService<T>();
+        public static T Resolve<T>()
+            where T : class
+            => ViewModelLocator.serviceProvider.GetService<T>();
 
         private static void ConfigureViewModels(
             IServiceCollection serviceCollection)
@@ -63,7 +65,7 @@ namespace KubeMob.Common
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
+            serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
 

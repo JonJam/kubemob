@@ -23,6 +23,6 @@ namespace KubeMob.Common.Services.Navigation
 
         Task RemoveBackStack();
 
-        Task GoBack();
+        Task GoBack(int numberOfTimes = 1);
     }
 }

@@ -76,7 +76,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70002"))
             {
                 // AADSTS70002 - Invalid client secret.
-                return (false, AppResources.String1AzureAccountManager_IsValidCredentials_InvalidClientSecret);
+                return (false, AppResources.AzureAccountManager_IsValidCredentials_InvalidClientSecret);
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("90002"))
             {
@@ -92,7 +92,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
             return (true, string.Empty);
         }
-        
+
         public void AddCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,

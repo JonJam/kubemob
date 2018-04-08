@@ -232,6 +232,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client secret is invalid..
+        /// </summary>
+        internal static string AzureAccountManager_IsValidCredentials_InvalidClientSecret {
+            get {
+                return ResourceManager.GetString("AzureAccountManager_IsValidCredentials_InvalidClientSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tenant specified cannot be found..
         /// </summary>
         internal static string AzureAccountManager_IsValidCredentials_InvalidTenantId {
@@ -309,15 +318,6 @@ namespace KubeMob.Common.Resx {
         internal static string ClustersPage_Title {
             get {
                 return ResourceManager.GetString("ClustersPage_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Client secret is invalid..
-        /// </summary>
-        internal static string String1AzureAccountManager_IsValidCredentials_InvalidClientSecret {
-            get {
-                return ResourceManager.GetString("String1AzureAccountManager_IsValidCredentials_InvalidClientSecret", resourceCulture);
             }
         }
     }

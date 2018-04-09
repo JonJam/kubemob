@@ -65,7 +65,13 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             {
                 // TODO Add support for specifying subscription ID ??
                 // TODO Check permissions to AKS ??
-                // Includes built in retry logic.
+                // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
+                // - Microsoft.Azure.Management.Fluent
+                // - Microsoft.Azure.Management.ResourceManager.Fluent
+                // - Microsoft.Rest.ClientRuntime.Azure
+                // - Microsoft.Rest.ClientRuntime.Azure.Authentication
+                // - Microsoft.IdentityModel.Clients.ActiveDirectory
+                // - Microsoft.Rest.ClientRuntime;Newtonsoft.Json
                 Microsoft.Azure.Management.Fluent.Azure.Authenticate(credentials).WithDefaultSubscription();
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
@@ -108,5 +114,18 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                 TenantId = tenantId
             };
         }
+
+        //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);
+        //var b = kubernetesCluster.UserKubeConfigContent;
+        ////var c = kubernetesCluster.AdminKubeConfigContent;
+
+        //var config = new KubernetesClientConfiguration();
+
+        //    using (Stream stream = new MemoryStream(b))
+        //{
+        //    config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
+        //}
+
+        //IKubernetes client = new Kubernetes(config);
     }
 }

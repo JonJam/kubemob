@@ -114,6 +114,7 @@ namespace KubeMob.Common.ViewModels
                 return;
             }
 
+            // TODO Do on background thread?
             (bool isValid, string message) = this.azureAccountManager.IsValidCredentials(
                 env,
                 tenant,

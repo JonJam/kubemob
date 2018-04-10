@@ -34,7 +34,7 @@
     <AndroidSupportedAbis />
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;</AndroidLinkSkip>
+    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper</AndroidLinkSkip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,7 +50,7 @@
     <AndroidSupportedAbis />
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;</AndroidLinkSkip>
+    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper</AndroidLinkSkip>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

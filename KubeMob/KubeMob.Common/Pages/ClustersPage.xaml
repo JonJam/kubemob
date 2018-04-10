@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate ClustersPage_Title}">
@@ -15,7 +15,30 @@
             Command="{Binding AddAccountCommand}" />
     </ContentPage.ToolbarItems>
 
-    <!--TODO Display list of clusters-->
-    <!--TODO Empty list-->
+    <!--TODO Handle selection -->
+    <!--TODO Group template -->
+    <!--TODO Item template -->
+    <!--TODO Context menu -->
+    <ListView
+        x:Name="Clusters"
+        ItemsSource="{Binding ClusterGroups}"
+        GroupDisplayBinding="{Binding Title}"
+        GroupShortNameBinding="{Binding ShortName}"
+        IsGroupingEnabled="true"
+        SeparatorVisibility="None">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell 
+                    Text="{Binding Name}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Title}"/>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+    </ListView>
+
+    <!--TODO Empty list message-->
 
 </ContentPage>

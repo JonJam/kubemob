@@ -26,7 +26,12 @@ namespace KubeMob.Common.Services.Settings
         // TODO Support more than one account ??
         public AzureAccount AzureAccount
         {
-            get => JsonConvert.DeserializeObject<AzureAccount>(this.settings.GetValueOrDefault(nameof(this.AzureAccount), null));
+            get
+            {
+                string settingValue = this.settings.GetValueOrDefault(nameof(this.AzureAccount), null);
+
+                return settingValue != null ? JsonConvert.DeserializeObject<AzureAccount>(settingValue) : null;
+            }
             set => this.settings.AddOrUpdateValue(nameof(this.AzureAccount), JsonConvert.SerializeObject(value));
         }
     }

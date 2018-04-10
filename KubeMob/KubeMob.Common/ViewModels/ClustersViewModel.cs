@@ -1,4 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -9,9 +13,33 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class ClustersViewModel : ViewModelBase
     {
+        // TODO refactor to use account manager interface and get list of them e.g. when if add GCE, AWS
+        private readonly IAzureAccountManager accountManager;
+
+        private IEnumerable<ClusterSummaryGroup> clusterGroups;
+
         public ClustersViewModel(
-            INavigationService navigationService) => this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
+            IAzureAccountManager accountManager,
+            INavigationService navigationService)
+        {
+            this.accountManager = accountManager;
+
+            this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
+        }
 
         public ICommand AddAccountCommand { get; }
+
+        public IEnumerable<ClusterSummaryGroup> ClusterGroups
+        {
+            get => this.clusterGroups;
+            private set => this.SetProperty(ref this.clusterGroups, value);
+        }
+
+        // TODO Need to refresh this page on appearing, e.g. being navigated back from addazureaccount.
+        public override async Task Initialize(object navigationData)
+        {
+            // TODO Do on background thread?
+            this.ClusterGroups = await this.accountManager.GetClusters();
+        }
     }
 }

@@ -2,10 +2,16 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using AutoMapper;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Settings;
+using Microsoft.Azure.Management.ContainerService.Fluent;
+using Microsoft.Azure.Management.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
+using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -52,27 +58,9 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             string clientId,
             string clientSecret)
         {
-            AzureEnvironment environment =
-                AzureEnvironment.KnownEnvironments.First(a => a.ToString() == cloudEnvironment.Id);
-            
-            AzureCredentials credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
-                clientId,
-                clientSecret,
-                tenantId,
-                environment);
-
             try
             {
-                // TODO Add support for specifying subscription ID ??
-                // TODO Check permissions to AKS ??
-                // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
-                // - Microsoft.Azure.Management.Fluent
-                // - Microsoft.Azure.Management.ResourceManager.Fluent
-                // - Microsoft.Rest.ClientRuntime.Azure
-                // - Microsoft.Rest.ClientRuntime.Azure.Authentication
-                // - Microsoft.IdentityModel.Clients.ActiveDirectory
-                // - Microsoft.Rest.ClientRuntime;Newtonsoft.Json
-                Microsoft.Azure.Management.Fluent.Azure.Authenticate(credentials).WithDefaultSubscription();
+                AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
             {
@@ -99,6 +87,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             return (true, string.Empty);
         }
 
+
         public void AddCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
@@ -115,6 +104,41 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             };
         }
 
+        public async Task<IEnumerable<ClusterSummaryGroup>> GetClusters()
+        {
+            // TODO Support more than one account
+            AzureAccount account = this.appSettings.AzureAccount;
+
+            if (account == null)
+            {
+                return new List<ClusterSummaryGroup>();
+            }
+
+            // TODO Error handling
+            IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
+                account.EnvironmentId,
+                account.TenantId,
+                account.ClientId,
+                account.ClientSecret);
+
+            string subscriptionName = azure.GetCurrentSubscription().DisplayName;
+
+            // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
+            // - Microsoft.Azure.Management.ContainerService.Fluent
+            // TODO Handle paging ??
+            IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
+
+            ClusterSummaryGroup group = new ClusterSummaryGroup(subscriptionName);
+
+            // TODO add locaiton, resource group as secondary text ??
+            group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
+
+            return new List<ClusterSummaryGroup>()
+            {
+                group
+            };
+        }
+
         //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);
         //var b = kubernetesCluster.UserKubeConfigContent;
         ////var c = kubernetesCluster.AdminKubeConfigContent;
@@ -127,5 +151,33 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
         //}
 
         //IKubernetes client = new Kubernetes(config);
+
+        private static IAzure CreateAuthenticatedClient(
+            string environmentId,
+            string tenantId,
+            string clientId,
+            string clientSecret)
+        {
+            AzureEnvironment environment =
+                AzureEnvironment.KnownEnvironments.First(a => a.ToString() == environmentId);
+
+            AzureCredentials credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
+                clientId,
+                clientSecret,
+                tenantId,
+                environment);
+
+            // TODO Add support for specifying subscription ID ??
+            // TODO Check permissions to AKS ??
+            // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
+            // - Microsoft.Azure.Management.Fluent
+            // - Microsoft.Azure.Management.ResourceManager.Fluent
+            // - Microsoft.Rest.ClientRuntime.Azure
+            // - Microsoft.Rest.ClientRuntime.Azure.Authentication
+            // - Microsoft.IdentityModel.Clients.ActiveDirectory
+            // - Microsoft.Rest.ClientRuntime
+            // - Newtonsoft.Json
+            return Microsoft.Azure.Management.Fluent.Azure.Authenticate(credentials).WithDefaultSubscription();
+        }
     }
 }

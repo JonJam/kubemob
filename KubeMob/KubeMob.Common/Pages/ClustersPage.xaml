@@ -7,6 +7,11 @@
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate ClustersPage_Title}">
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior  
+            EventName="Appearing"
+            Command="{Binding OnAppearingCommand}" />
+    </ContentPage.Behaviors>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem 

@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
@@ -66,6 +67,8 @@ namespace KubeMob.Common
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
+            serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
+
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
 

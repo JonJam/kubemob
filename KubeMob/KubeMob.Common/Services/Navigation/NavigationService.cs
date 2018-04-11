@@ -84,11 +84,11 @@ namespace KubeMob.Common.Services.Navigation
 
             if (Application.Current.MainPage is ClusterMasterDetailPage masterDetailPage)
             {
-                await (masterDetailPage.Detail as NavigationPage).PushAsync(page);
+                await (masterDetailPage.Detail as ExtendedNavigationPage).PushAsync(page);
             }
             else if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
             {
-                if (page is ClusterMasterDetailPage clusterPage)
+                if (page is ClusterMasterDetailPage)
                 {
                     Application.Current.MainPage = page;
                 }

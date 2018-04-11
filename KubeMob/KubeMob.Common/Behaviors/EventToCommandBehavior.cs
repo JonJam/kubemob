@@ -14,7 +14,7 @@ namespace KubeMob.Common.Behaviors
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/event-to-command-behavior"/>
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class EventToCommandBehavior : BindableBehavior<View>
+    public class EventToCommandBehavior : BindableBehavior<VisualElement>
     {
         public static readonly BindableProperty EventNameProperty = BindableProperty.CreateAttached(
             nameof(EventToCommandBehavior.EventName),
@@ -79,9 +79,9 @@ namespace KubeMob.Common.Behaviors
             set => this.SetValue(EventToCommandBehavior.EventArgsConverterParameterProperty, value);
         }
 
-        protected override void OnAttachedTo(View visualElement)
+        protected override void OnAttachedTo(VisualElement bindable)
         {
-            base.OnAttachedTo(visualElement);
+            base.OnAttachedTo(bindable);
 
             EventInfo[] events = this.AssociatedObject.GetType().GetRuntimeEvents().ToArray();
 
@@ -100,14 +100,14 @@ namespace KubeMob.Common.Behaviors
             this.AddEventHandler(this.eventInfo, this.AssociatedObject, this.OnFired);
         }
 
-        protected override void OnDetachingFrom(View view)
+        protected override void OnDetachingFrom(VisualElement bindable)
         {
             if (this.handler != null)
             {
                 this.eventInfo.RemoveEventHandler(this.AssociatedObject, this.handler);
             }
 
-            base.OnDetachingFrom(view);
+            base.OnDetachingFrom(bindable);
         }
 
         private void AddEventHandler(EventInfo info, object item, Action<object, EventArgs> action)

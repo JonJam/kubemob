@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels.Base;
@@ -13,36 +15,42 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class ClustersViewModel : ViewModelBase
     {
-        // TODO refactor to use account manager interface and get list of them e.g. when if add GCE, AWS
-        private readonly IAzureAccountManager accountManager;
+        private readonly IEnumerable<IAccountManager> accountManagers;
 
-        private IEnumerable<ClusterSummaryGroup> clusterGroups;
+        private ObservableCollection<ClusterSummaryGroup> clusterGroups;
+
+        private bool isInitialized;
 
         public ClustersViewModel(
-            IAzureAccountManager accountManager,
+            IEnumerable<IAccountManager> accountManagers,
             INavigationService navigationService)
         {
-            this.accountManager = accountManager;
+            this.accountManagers = accountManagers;
 
+            this.ClusterGroups = new ObservableCollection<ClusterSummaryGroup>();
+
+            this.OnAppearingCommand = new Command(async () => await this.OnAppearing());
             this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
             this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
         }
+
+        public ICommand OnAppearingCommand { get; }
 
         public ICommand AddAccountCommand { get; }
 
         public ICommand ClusterSelectedCommand { get; }
 
-        public IEnumerable<ClusterSummaryGroup> ClusterGroups
+        public ObservableCollection<ClusterSummaryGroup> ClusterGroups
         {
             get => this.clusterGroups;
             private set => this.SetProperty(ref this.clusterGroups, value);
         }
 
-        // TODO Need to refresh this page on appearing, e.g. being navigated back from addazureaccount.
         public override async Task Initialize(object navigationData)
         {
-            // TODO Do on background thread?
-            this.ClusterGroups = await this.accountManager.GetClusters();
+            await this.Refresh();
+
+            this.isInitialized = true;
         }
 
         private static void OnClusterSelected(object obj)
@@ -52,6 +60,25 @@ namespace KubeMob.Common.ViewModels
                 // TODO Save selected cluster information.
                 // TODO Navigate to Cluster overview page, with clean backstack.
             }
+        }
+
+        private async Task Refresh()
+        {
+            // TODO Do on background thread?
+            // TODO error handling.
+            // TODO Show loading
+            IEnumerable<Task> gettingClusters = this.accountManagers.Select(this.PopulateClusterGroups);
+
+            await Task.WhenAny(gettingClusters);
+        }
+
+        private Task OnAppearing() => this.isInitialized ? this.Refresh() : Task.CompletedTask;
+
+        private async Task PopulateClusterGroups(IAccountManager accountManager)
+        {
+            IEnumerable<ClusterSummaryGroup> clusterSummaryGroups = await accountManager.GetClusters();
+
+            clusterSummaryGroups.ForEach(c => this.ClusterGroups.Add(c));
         }
     }
 }

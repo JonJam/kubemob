@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate ClustersPage_Title}">
@@ -15,7 +16,6 @@
             Command="{Binding AddAccountCommand}" />
     </ContentPage.ToolbarItems>
 
-    <!--TODO Handle selection -->
     <!--TODO Group template -->
     <!--TODO Item template -->
     <!--TODO Context menu -->
@@ -24,8 +24,14 @@
         ItemsSource="{Binding ClusterGroups}"
         GroupDisplayBinding="{Binding Title}"
         GroupShortNameBinding="{Binding ShortName}"
-        IsGroupingEnabled="true"
+        IsGroupingEnabled="True"
         SeparatorVisibility="None">
+        <ListView.Behaviors>
+            <behaviors:EventToCommandBehavior
+                EventName="ItemTapped"
+                Command="{Binding ClusterSelectedCommand}"
+                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+        </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <TextCell 
@@ -39,6 +45,6 @@
         </ListView.GroupHeaderTemplate>
     </ListView>
 
-    <!--TODO Empty list message-->
+    <!--TODO No clusters message per group / No cluster groups -->
 
 </ContentPage>

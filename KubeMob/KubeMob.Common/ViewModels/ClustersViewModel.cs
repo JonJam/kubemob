@@ -25,9 +25,12 @@ namespace KubeMob.Common.ViewModels
             this.accountManager = accountManager;
 
             this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
+            this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
         }
 
         public ICommand AddAccountCommand { get; }
+
+        public ICommand ClusterSelectedCommand { get; }
 
         public IEnumerable<ClusterSummaryGroup> ClusterGroups
         {
@@ -40,6 +43,15 @@ namespace KubeMob.Common.ViewModels
         {
             // TODO Do on background thread?
             this.ClusterGroups = await this.accountManager.GetClusters();
+        }
+
+        private static void OnClusterSelected(object obj)
+        {
+            if (obj is ClusterSummary cluster)
+            {
+                // TODO Save selected cluster information.
+                // TODO Navigate to Cluster overview page, with clean backstack.
+            }
         }
     }
 }

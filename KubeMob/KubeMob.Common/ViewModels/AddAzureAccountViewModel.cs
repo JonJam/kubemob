@@ -114,8 +114,7 @@ namespace KubeMob.Common.ViewModels
 
             this.IsBusy = true;
 
-            // TODO Do on background thread?
-            (bool isValid, string message) = this.azureAccountManager.IsValidCredentials(
+            (bool isValid, string message) = this.azureAccountManager.TryAddCredentials(
                 env,
                 tenant,
                 client,
@@ -123,12 +122,6 @@ namespace KubeMob.Common.ViewModels
 
             if (isValid)
             {
-                this.azureAccountManager.AddCredentials(
-                    env,
-                    tenant,
-                    client,
-                    secret);
-
                 this.navigationService.GoBack(2);
             }
             else

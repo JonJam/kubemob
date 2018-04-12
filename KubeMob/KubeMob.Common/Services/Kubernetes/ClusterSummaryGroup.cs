@@ -13,5 +13,11 @@ namespace KubeMob.Common.Services.Kubernetes
         public string Title { get; }
 
         public char ShortName => this.Title.First();
+
+        public string ErrorMessage { get; set; }
+
+        public bool HasErrorMessage => !string.IsNullOrWhiteSpace(this.ErrorMessage);
+
+        public bool IsEmpty => !this.HasErrorMessage && this.Count > 0;
     }
 }

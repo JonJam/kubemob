@@ -2,14 +2,8 @@
 {
     public interface IAzureAccountManager : IAccountManager
     {
-        (bool isValid, string message) IsValidCredentials(
-            CloudEnvironment cloudEnvironment,
-            string tenantId,
-            string clientId,
-            string clientSecret);
-
-        void AddCredentials(
-            CloudEnvironment cloudEnvironment,
+        (bool isValid, string message) TryAddCredentials(
+                    CloudEnvironment cloudEnvironment,
             string tenantId,
             string clientId,
             string clientSecret);

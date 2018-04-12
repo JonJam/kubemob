@@ -223,38 +223,56 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There seems to be a problem with this account.  Please update..
+        /// </summary>
+        internal static string AzureAccountManager_GetClusters_AuthenticationErrorMessage {
+            get {
+                return ResourceManager.GetString("AzureAccountManager_GetClusters_AuthenticationErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are having issues connecting to this account right now. Please try again..
+        /// </summary>
+        internal static string AzureAccountManager_GetClusters_NoInternetErrorMessage {
+            get {
+                return ResourceManager.GetString("AzureAccountManager_GetClusters_NoInternetErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client specified cannot be found..
         /// </summary>
-        internal static string AzureAccountManager_IsValidCredentials_InvalidClientId {
+        internal static string AzureAccountManager_TryAddCredentials_InvalidClientId {
             get {
-                return ResourceManager.GetString("AzureAccountManager_IsValidCredentials_InvalidClientId", resourceCulture);
+                return ResourceManager.GetString("AzureAccountManager_TryAddCredentials_InvalidClientId", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Client secret is invalid..
         /// </summary>
-        internal static string AzureAccountManager_IsValidCredentials_InvalidClientSecret {
+        internal static string AzureAccountManager_TryAddCredentials_InvalidClientSecret {
             get {
-                return ResourceManager.GetString("AzureAccountManager_IsValidCredentials_InvalidClientSecret", resourceCulture);
+                return ResourceManager.GetString("AzureAccountManager_TryAddCredentials_InvalidClientSecret", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tenant specified cannot be found..
         /// </summary>
-        internal static string AzureAccountManager_IsValidCredentials_InvalidTenantId {
+        internal static string AzureAccountManager_TryAddCredentials_InvalidTenantId {
             get {
-                return ResourceManager.GetString("AzureAccountManager_IsValidCredentials_InvalidTenantId", resourceCulture);
+                return ResourceManager.GetString("AzureAccountManager_TryAddCredentials_InvalidTenantId", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Oh snap! We are having issues connecting to Azure. Please try again..
         /// </summary>
-        internal static string AzureAccountManager_IsValidCredentials_NoInternet {
+        internal static string AzureAccountManager_TryAddCredentials_NoInternet {
             get {
-                return ResourceManager.GetString("AzureAccountManager_IsValidCredentials_NoInternet", resourceCulture);
+                return ResourceManager.GetString("AzureAccountManager_TryAddCredentials_NoInternet", resourceCulture);
             }
         }
         
@@ -309,6 +327,15 @@ namespace KubeMob.Common.Resx {
         internal static string ClustersPage_AddAccount_ToolbarItem {
             get {
                 return ResourceManager.GetString("ClustersPage_AddAccount_ToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This account contains no clusters..
+        /// </summary>
+        internal static string ClustersPage_Clusters_EmptyGroupMessage {
+            get {
+                return ResourceManager.GetString("ClustersPage_Clusters_EmptyGroupMessage", resourceCulture);
             }
         }
         

@@ -68,8 +68,6 @@ namespace KubeMob.Common.ViewModels
 
             this.ClusterGroups.Clear();
 
-            // TODO Do on background thread?
-            // TODO error handling.
             IEnumerable<Task> gettingClusters = this.accountManagers.Select(this.PopulateClusterGroups);
 
             await Task.WhenAny(gettingClusters);

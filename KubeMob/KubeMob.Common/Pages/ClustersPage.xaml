@@ -25,7 +25,7 @@
         <!--TODO Group template -->
         <!--TODO Item template -->
         <!--TODO Context menu -->
-        <!--TODO No clusters message per group / No cluster groups -->
+        <!--TODO No cluster groups message-->
         <ListView
             x:Name="Clusters"
             ItemsSource="{Binding ClusterGroups}"
@@ -42,8 +42,20 @@
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell 
-                    Text="{Binding Name}" />
+                    <ViewCell>
+                        <StackLayout>
+                            <Label 
+                                Text="{Binding Name}" />
+                            <!--TODO Test these display-->
+                            <Label
+                                Text="{Binding ErrorMessage}"
+                                TextColor="{StaticResource ErrorColor}"
+                                IsVisible="{Binding HasErrorMessage}"/>
+                            <Label
+                                Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
+                                IsVisible="{Binding IsEmpty}"/>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.GroupHeaderTemplate>

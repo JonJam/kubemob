@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -52,7 +53,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
-        public (bool isValid, string message) IsValidCredentials(
+        public (bool isValid, string message) TryAddCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
             string clientId,
@@ -60,83 +61,92 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
         {
             try
             {
-                AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
+                IAzure azure = AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
+
+                string subscriptionName = azure.GetCurrentSubscription().DisplayName;
+
+                // TODO Support more than one account?? Need to validate don't add dupes.
+                this.appSettings.AzureAccount = new AzureAccount()
+                {
+                    Name = subscriptionName,
+                    ClientId = clientId,
+                    ClientSecret = clientSecret,
+                    EnvironmentId = cloudEnvironment.Id,
+                    TenantId = tenantId
+                };
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
             {
                 // AADSTS70001 - Invalid client ID.
-                return (false, AppResources.AzureAccountManager_IsValidCredentials_InvalidClientId);
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidClientId);
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70002"))
             {
                 // AADSTS70002 - Invalid client secret.
-                return (false, AppResources.AzureAccountManager_IsValidCredentials_InvalidClientSecret);
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidClientSecret);
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("90002"))
             {
                 // AADSTS90002 - Tenant doesn't exist.
-                return (false, AppResources.AzureAccountManager_IsValidCredentials_InvalidTenantId);
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidTenantId);
             }
             catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
             {
                 // No internet
-                return (false, AppResources.AzureAccountManager_IsValidCredentials_NoInternet);
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_NoInternet);
             }
 
             return (true, string.Empty);
         }
 
 
-        public void AddCredentials(
-            CloudEnvironment cloudEnvironment,
-            string tenantId,
-            string clientId,
-            string clientSecret)
-        {
-            // TODO Support more than one account?? Need to validate don't add dupes.
-            this.appSettings.AzureAccount = new AzureAccount()
-            {
-                ClientId = clientId,
-                ClientSecret = clientSecret,
-                EnvironmentId = cloudEnvironment.Id,
-                TenantId = tenantId
-            };
-        }
-
         public async Task<IEnumerable<ClusterSummaryGroup>> GetClusters()
         {
             // TODO Support more than one account
             AzureAccount account = this.appSettings.AzureAccount;
+            List<ClusterSummaryGroup> groups = new List<ClusterSummaryGroup>();
 
             if (account == null)
             {
-                return new List<ClusterSummaryGroup>();
+                return groups;
             }
 
-            // TODO Error handling
-            IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
-                account.EnvironmentId,
-                account.TenantId,
-                account.ClientId,
-                account.ClientSecret);
-
-            string subscriptionName = azure.GetCurrentSubscription().DisplayName;
-
-            // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
-            // - Microsoft.Azure.Management.ContainerService.Fluent
-            // TODO Handle paging ??
-            IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
-
-            ClusterSummaryGroup group = new ClusterSummaryGroup(subscriptionName);
-
-            // TODO add locaiton, resource group as secondary text ??
-            group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
-
-            return new List<ClusterSummaryGroup>()
+            // TODO Refactor below to iterate throught accoun
+            ClusterSummaryGroup group = new ClusterSummaryGroup(account.Name);
+            try
             {
-                group
-            };
+                // TODO Renable below.
+                //IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
+                //    account.EnvironmentId,
+                //    account.TenantId,
+                //    account.ClientId,
+                //    account.ClientSecret);
+
+                //// Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
+                //// - Microsoft.Azure.Management.ContainerService.Fluent
+                //// TODO Handle paging ??
+                //IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
+
+                //// TODO add locaiton, resource group as secondary text ??
+                //group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
+                throw new AdalServiceException("Test", "Test");
+            }
+            catch (AdalServiceException)
+            {
+                // Authentication issue
+                group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_AuthenticationErrorMessage;
+            }
+            catch (HttpRequestException e) when (e.InnerException is WebException web &&
+                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
+            {
+                // No internet
+                group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_NoInternetErrorMessage;
+            }
+
+            groups.Add(group);
+
+            return groups;
         }
 
         //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.AccountManagement;
@@ -101,7 +100,6 @@ namespace KubeMob.Common.ViewModels
 
         private void AddAccount()
         {
-            // TODO loading / disable button?
             this.TopLevelErrorMessage = null;
 
             CloudEnvironment env = this.SelectedEnvironment;
@@ -113,6 +111,8 @@ namespace KubeMob.Common.ViewModels
             {
                 return;
             }
+
+            this.IsBusy = true;
 
             // TODO Do on background thread?
             (bool isValid, string message) = this.azureAccountManager.IsValidCredentials(
@@ -135,13 +135,12 @@ namespace KubeMob.Common.ViewModels
             {
                 this.TopLevelErrorMessage = message;
             }
+
+            this.IsBusy = false;
         }
 
-        private bool Validate()
-        {
-            return this.ClientId.Validate() &&
-                   this.ClientSecret.Validate() &&
-                   this.TenantId.Validate();
-        }
+        private bool Validate() => this.ClientId.Validate() &&
+                                   this.ClientSecret.Validate() &&
+                                   this.TenantId.Validate();
     }
 }

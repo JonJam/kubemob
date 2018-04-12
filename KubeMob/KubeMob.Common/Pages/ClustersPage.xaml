@@ -21,35 +21,42 @@
             Command="{Binding AddAccountCommand}" />
     </ContentPage.ToolbarItems>
 
-    <!--TODO Group template -->
-    <!--TODO Item template -->
-    <!--TODO Context menu -->
-    <ListView
-        x:Name="Clusters"
-        ItemsSource="{Binding ClusterGroups}"
-        GroupDisplayBinding="{Binding Title}"
-        GroupShortNameBinding="{Binding ShortName}"
-        IsGroupingEnabled="True"
-        SeparatorVisibility="None">
-        <ListView.Behaviors>
-            <behaviors:EventToCommandBehavior
+    <Grid>
+        <!--TODO Group template -->
+        <!--TODO Item template -->
+        <!--TODO Context menu -->
+        <!--TODO No clusters message per group / No cluster groups -->
+        <ListView
+            x:Name="Clusters"
+            ItemsSource="{Binding ClusterGroups}"
+            GroupDisplayBinding="{Binding Title}"
+            GroupShortNameBinding="{Binding ShortName}"
+            IsGroupingEnabled="True"
+            SeparatorVisibility="None"
+            IsVisible="{Binding IsNotBusy}">
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior
                 EventName="ItemTapped"
                 Command="{Binding ClusterSelectedCommand}"
                 EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-        </ListView.Behaviors>
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <TextCell 
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell 
                     Text="{Binding Name}" />
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        <ListView.GroupHeaderTemplate>
-            <DataTemplate>
-                <TextCell Text="{Binding Title}"/>
-            </DataTemplate>
-        </ListView.GroupHeaderTemplate>
-    </ListView>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Title}"/>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+        </ListView>
 
-    <!--TODO No clusters message per group / No cluster groups -->
-
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
 </ContentPage>

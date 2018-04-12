@@ -64,12 +64,17 @@ namespace KubeMob.Common.ViewModels
 
         private async Task Refresh()
         {
+            this.IsBusy = true;
+
+            this.ClusterGroups.Clear();
+
             // TODO Do on background thread?
             // TODO error handling.
-            // TODO Show loading
             IEnumerable<Task> gettingClusters = this.accountManagers.Select(this.PopulateClusterGroups);
 
             await Task.WhenAny(gettingClusters);
+
+            this.IsBusy = false;
         }
 
         private Task OnAppearing() => this.isInitialized ? this.Refresh() : Task.CompletedTask;

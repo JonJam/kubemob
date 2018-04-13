@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,8 +19,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IEnumerable<IAccountManager> accountManagers;
 
         private ObservableCollection<ClusterSummaryGroup> clusterGroups;
-
-        private bool isInitialized;
+        private bool hasClusterGroups;
 
         public ClustersViewModel(
             IEnumerable<IAccountManager> accountManagers,
@@ -28,8 +28,9 @@ namespace KubeMob.Common.ViewModels
             this.accountManagers = accountManagers;
 
             this.ClusterGroups = new ObservableCollection<ClusterSummaryGroup>();
+            this.clusterGroups.CollectionChanged += this.OnClusterGroupsCollectionChanged;
 
-            this.OnAppearingCommand = new Command(async () => await this.OnAppearing());
+            this.OnAppearingCommand = new Command(async () => await this.Refresh());
             this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
             this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
         }
@@ -46,12 +47,19 @@ namespace KubeMob.Common.ViewModels
             private set => this.SetProperty(ref this.clusterGroups, value);
         }
 
-        public override async Task Initialize(object navigationData)
+        public bool HasClusterGroups
         {
-            await this.Refresh();
-
-            this.isInitialized = true;
+            get => this.hasClusterGroups;
+            set
+            {
+                if (this.SetProperty(ref this.hasClusterGroups, value))
+                {
+                    this.NotifyPropertyChanged(() => this.IsClusterGroupsEmpty);
+                }
+            }
         }
+
+        public bool IsClusterGroupsEmpty => !this.hasClusterGroups;
 
         private static void OnClusterSelected(object obj)
         {
@@ -61,6 +69,8 @@ namespace KubeMob.Common.ViewModels
                 // TODO Navigate to Cluster overview page, with clean backstack.
             }
         }
+
+        private void OnClusterGroupsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => this.HasClusterGroups = this.ClusterGroups.Count > 0;
 
         private async Task Refresh()
         {
@@ -74,8 +84,6 @@ namespace KubeMob.Common.ViewModels
 
             this.IsBusy = false;
         }
-
-        private Task OnAppearing() => this.isInitialized ? this.Refresh() : Task.CompletedTask;
 
         private async Task PopulateClusterGroups(IAccountManager accountManager)
         {

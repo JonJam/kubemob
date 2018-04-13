@@ -210,6 +210,9 @@
   <data name="ClustersPage_Clusters_EmptyGroupMessage" xml:space="preserve">
     <value>This account contains no clusters.</value>
   </data>
+  <data name="ClustersPage_Clusters_NoAccountsMessage" xml:space="preserve">
+    <value>Nothing here right now. Add an account.</value>
+  </data>
   <data name="ClustersPage_Title" xml:space="preserve">
     <value>Clusters</value>
   </data>

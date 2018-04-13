@@ -25,53 +25,52 @@
         <!--TODO Group template -->
         <!--TODO Item template -->
         <!--TODO Context menu -->
-        <!--TODO No cluster groups -->
-        <ListView
-            x:Name="Clusters"
-            ItemsSource="{Binding ClusterGroups}"
-            GroupDisplayBinding="{Binding Title}"
-            GroupShortNameBinding="{Binding ShortName}"
-            IsGroupingEnabled="True"
-            SeparatorVisibility="None"
-            IsVisible="{Binding IsNotBusy}"
-            HasUnevenRows="True">
-            <ListView.Behaviors>
-                <behaviors:EventToCommandBehavior
-                EventName="ItemTapped"
-                Command="{Binding ClusterSelectedCommand}"
-                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell 
-                        Text="{Binding Name}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Label 
-                                Grid.Row="0"
-                                Text="{Binding Title}"/>
-                            <Label
-                                Grid.Row="1"
-                                Text="{Binding ErrorMessage}"
-                                TextColor="{StaticResource ErrorColor}"
-                                IsVisible="{Binding HasErrorMessage}" />
-                            <Label
-                                Grid.Row="1"
-                                Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
-                                IsVisible="{Binding IsEmpty}" />
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-        </ListView>
+        <StackLayout
+            IsVisible="{Binding IsNotBusy}">
+            <ListView
+                x:Name="Clusters"
+                ItemsSource="{Binding ClusterGroups}"
+                GroupDisplayBinding="{Binding Title}"
+                GroupShortNameBinding="{Binding ShortName}"
+                IsVisible="{Binding HasClusterGroups}"
+                IsGroupingEnabled="True"
+                SeparatorVisibility="None"
+                HasUnevenRows="True">
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="ItemTapped"
+                        Command="{Binding ClusterSelectedCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell 
+                            Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label 
+                                    Text="{Binding Title}"/>
+                                <Label
+                                    Text="{Binding ErrorMessage}"
+                                    TextColor="{StaticResource ErrorColor}"
+                                    IsVisible="{Binding HasErrorMessage}" />
+                                <Label
+                                    Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
+                                    IsVisible="{Binding IsEmpty}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+            </ListView>
+
+            <Label
+                Text="{markupExtensions:Translate ClustersPage_Clusters_NoAccountsMessage}"
+                IsVisible="{Binding IsClusterGroupsEmpty}"/>
+        </StackLayout>
 
         <ActivityIndicator
             IsRunning="{Binding IsBusy}"  

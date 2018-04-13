@@ -340,6 +340,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nothing here right now. Add an account..
+        /// </summary>
+        internal static string ClustersPage_Clusters_NoAccountsMessage {
+            get {
+                return ResourceManager.GetString("ClustersPage_Clusters_NoAccountsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clusters.
         /// </summary>
         internal static string ClustersPage_Title {

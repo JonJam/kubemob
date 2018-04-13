@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -127,7 +126,6 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                 // TODO Handle paging ??
                 IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
 
-                // TODO add locaiton, resource group as secondary text ??
                 group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
             }
             catch (AdalServiceException)

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
              xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-             xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate ClustersPage_Title}">
@@ -33,7 +33,8 @@
             GroupShortNameBinding="{Binding ShortName}"
             IsGroupingEnabled="True"
             SeparatorVisibility="None"
-            IsVisible="{Binding IsNotBusy}">
+            IsVisible="{Binding IsNotBusy}"
+            HasUnevenRows="True">
             <ListView.Behaviors>
                 <behaviors:EventToCommandBehavior
                 EventName="ItemTapped"
@@ -49,18 +50,24 @@
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <!--TODO Sort out this template-->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
                             <Label 
-                                Text="{Binding Name}" />
+                                Grid.Row="0"
+                                Text="{Binding Title}"/>
                             <Label
+                                Grid.Row="1"
                                 Text="{Binding ErrorMessage}"
                                 TextColor="{StaticResource ErrorColor}"
-                                IsVisible="{Binding HasErrorMessage}"/>
+                                IsVisible="{Binding HasErrorMessage}" />
                             <Label
+                                Grid.Row="1"
                                 Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
-                                IsVisible="{Binding IsEmpty}"/>
-                        </StackLayout>
+                                IsVisible="{Binding IsEmpty}" />
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>

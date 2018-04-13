@@ -116,21 +116,19 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             ClusterSummaryGroup group = new ClusterSummaryGroup(account.Name);
             try
             {
-                // TODO Renable below.
-                //IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
-                //    account.EnvironmentId,
-                //    account.TenantId,
-                //    account.ClientId,
-                //    account.ClientSecret);
+                IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
+                    account.EnvironmentId,
+                    account.TenantId,
+                    account.ClientId,
+                    account.ClientSecret);
 
-                //// Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
-                //// - Microsoft.Azure.Management.ContainerService.Fluent
-                //// TODO Handle paging ??
-                //IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
+                // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
+                // - Microsoft.Azure.Management.ContainerService.Fluent
+                // TODO Handle paging ??
+                IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
 
-                //// TODO add locaiton, resource group as secondary text ??
-                //group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
-                throw new AdalServiceException("Test", "Test");
+                // TODO add locaiton, resource group as secondary text ??
+                group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
             }
             catch (AdalServiceException)
             {

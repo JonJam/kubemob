@@ -18,6 +18,6 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public bool HasErrorMessage => !string.IsNullOrWhiteSpace(this.ErrorMessage);
 
-        public bool IsEmpty => !this.HasErrorMessage && this.Count > 0;
+        public bool IsEmpty => !this.HasErrorMessage && this.Count == 0;
     }
 }

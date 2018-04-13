@@ -331,6 +331,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string ClustersPage_Accounts_Delete_MenuItemText {
+            get {
+                return ResourceManager.GetString("ClustersPage_Accounts_Delete_MenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string ClustersPage_Accounts_Edit_MenuItemText {
+            get {
+                return ResourceManager.GetString("ClustersPage_Accounts_Edit_MenuItemText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add account.
         /// </summary>
         internal static string ClustersPage_AddAccount_ToolbarItem {
@@ -363,6 +381,15 @@ namespace KubeMob.Common.Resx {
         internal static string ClustersPage_Title {
             get {
                 return ResourceManager.GetString("ClustersPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle view.
+        /// </summary>
+        internal static string ClustersPage_ViewToggle_ToolbarItem {
+            get {
+                return ResourceManager.GetString("ClustersPage_ViewToggle_ToolbarItem", resourceCulture);
             }
         }
     }

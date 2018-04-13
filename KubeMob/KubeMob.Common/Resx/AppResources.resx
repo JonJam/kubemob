@@ -207,6 +207,12 @@
   <data name="ClusterMaster_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
+  <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ClustersPage_Accounts_Edit_MenuItemText" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="ClustersPage_AddAccount_ToolbarItem" xml:space="preserve">
     <value>Add account</value>
   </data>
@@ -218,5 +224,8 @@
   </data>
   <data name="ClustersPage_Title" xml:space="preserve">
     <value>Clusters</value>
+  </data>
+  <data name="ClustersPage_ViewToggle_ToolbarItem" xml:space="preserve">
+    <value>Toggle view</value>
   </data>
 </root>

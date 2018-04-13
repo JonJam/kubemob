@@ -9,17 +9,9 @@ namespace KubeMob.Common.ViewModels.Base
         public bool IsBusy
         {
             get => this.isBusy;
-            set
-            {
-                if (this.SetProperty(ref this.isBusy, value))
-                {
-                    this.NotifyPropertyChanged(() => this.IsNotBusy);
-                }
-            }
+            set => this.SetProperty(ref this.isBusy, value);
         }
-
-        public bool IsNotBusy => !this.IsBusy;
-
+        
         public virtual Task Initialize(object navigationData) => Task.CompletedTask;
     }
 }

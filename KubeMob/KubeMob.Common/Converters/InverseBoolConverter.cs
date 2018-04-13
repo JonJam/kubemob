@@ -6,7 +6,7 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.Converters
 {
     [Preserve(AllMembers = true)]
-    public class ItemTappedEventArgsConverter : IValueConverter
+    public class InverseBoolConverter : IValueConverter
     {
         public object Convert(
             object value,
@@ -14,12 +14,12 @@ namespace KubeMob.Common.Converters
             object parameter,
             CultureInfo culture)
         {
-            if (!(value is ItemTappedEventArgs eventArgs))
+            if (value is bool val)
             {
-                throw new ArgumentException("Expected TappedEventArgs as value", nameof(value));
+                return !val;
             }
 
-            return eventArgs.Item;
+            return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();

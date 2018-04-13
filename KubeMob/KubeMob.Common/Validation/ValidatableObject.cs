@@ -45,16 +45,8 @@ namespace KubeMob.Common.Validation
         public bool IsValid
         {
             get => this.isValid;
-            private set
-            {
-                if (this.SetProperty(ref this.isValid, value))
-                {
-                    this.NotifyPropertyChanged(() => this.IsInvalid);
-                }
-            }
+            private set => this.SetProperty(ref this.isValid, value);
         }
-
-        public bool IsInvalid => !this.isValid;
 
         public bool Validate()
         {

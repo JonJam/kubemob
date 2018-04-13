@@ -18,6 +18,7 @@ namespace KubeMob.Common.ViewModels
     {
         private readonly IEnumerable<IAccountManager> accountManagers;
 
+        private bool viewAccounts;
         private ObservableCollection<ClusterSummaryGroup> clusterGroups;
         private bool hasClusterGroups;
 
@@ -32,14 +33,32 @@ namespace KubeMob.Common.ViewModels
 
             this.OnAppearingCommand = new Command(async () => await this.Refresh());
             this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
+            this.ViewToggleCommand = new Command(() => this.ViewAccounts = !this.ViewAccounts);
             this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
+            this.AccountSelectedCommand = new Command(ClustersViewModel.OnAccountSelected);
+            this.EditAccountCommand = new Command(ClustersViewModel.OnAccountSelected);
+            this.DeleteAccountCommand = new Command(ClustersViewModel.OnDeleteAccount);
         }
 
         public ICommand OnAppearingCommand { get; }
 
         public ICommand AddAccountCommand { get; }
 
+        public ICommand ViewToggleCommand { get; }
+
         public ICommand ClusterSelectedCommand { get; }
+
+        public ICommand AccountSelectedCommand { get; }
+
+        public ICommand EditAccountCommand { get; }
+
+        public ICommand DeleteAccountCommand { get; }
+
+        public bool ViewAccounts
+        {
+            get => this.viewAccounts;
+            private set => this.SetProperty(ref this.viewAccounts, value);
+        }
 
         public ObservableCollection<ClusterSummaryGroup> ClusterGroups
         {
@@ -50,16 +69,8 @@ namespace KubeMob.Common.ViewModels
         public bool HasClusterGroups
         {
             get => this.hasClusterGroups;
-            set
-            {
-                if (this.SetProperty(ref this.hasClusterGroups, value))
-                {
-                    this.NotifyPropertyChanged(() => this.IsClusterGroupsEmpty);
-                }
-            }
+            set => this.SetProperty(ref this.hasClusterGroups, value);
         }
-
-        public bool IsClusterGroupsEmpty => !this.hasClusterGroups;
 
         private static void OnClusterSelected(object obj)
         {
@@ -67,6 +78,23 @@ namespace KubeMob.Common.ViewModels
             {
                 // TODO Save selected cluster information.
                 // TODO Navigate to Cluster overview page, with clean backstack.
+            }
+        }
+
+        private static void OnAccountSelected(object obj)
+        {
+            if (obj is ClusterSummary cluster)
+            {
+                // TODO Navigate to appropiate add cluster page with existing cluster.
+            }
+        }
+
+        private static void OnDeleteAccount(object obj)
+        {
+            if (obj is ClusterSummary cluster)
+            {
+                // TODO Delete account
+                // TODO Update list.
             }
         }
 

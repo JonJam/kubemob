@@ -19,35 +19,35 @@
 
     <Grid>
         <StackLayout
-            IsVisible="{Binding IsNotBusy}">
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
             <Label 
             Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
 
             <Label
-            Text="{Binding TopLevelErrorMessage}"
-            Style="{StaticResource ValidationErrorLabelStyle}"
-            IsVisible="{Binding HasTopLevelErrorMessage}"></Label>
+                Text="{Binding TopLevelErrorMessage}"
+                Style="{StaticResource ValidationErrorLabelStyle}"
+                IsVisible="{Binding HasTopLevelErrorMessage}"></Label>
 
             <Label
-            Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
+                Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
             <Picker
-            x:Name="EnvironmentEntry"
-            Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
-            ItemsSource="{Binding Environments}"
-            ItemDisplayBinding="{Binding Name}"
-            SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
+                x:Name="EnvironmentEntry"
+                Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
+                ItemsSource="{Binding Environments}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
 
             <Label
-            Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
+                Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
             <Entry
-            x:Name="TenantIdEntry"
-            Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
-            Text="{Binding TenantId.Value, Mode=TwoWay}">
+                x:Name="TenantIdEntry"
+                Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
+                Text="{Binding TenantId.Value, Mode=TwoWay}">
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
-                    EventName="TextChanged"  
-                    Command="{Binding ValidateTenantIdCommand}" />
-                    <behaviors:EffectBehavior ApplyEffect="{Binding TenantId.IsInvalid}">
+                        EventName="TextChanged"  
+                        Command="{Binding ValidateTenantIdCommand}" />
+                    <behaviors:EffectBehavior ApplyEffect="{Binding TenantId.IsValid, Converter={StaticResource InverseBoolConverter}}">
                         <behaviors:EffectBehavior.Effect>
                             <effects:EntryLineColorEffect Color="{StaticResource ErrorColor}"/>
                         </behaviors:EffectBehavior.Effect>
@@ -55,21 +55,21 @@
                 </Entry.Behaviors>
             </Entry>
             <Label
-            Text="{Binding TenantId.FirstError}"
-            Style="{StaticResource ValidationErrorLabelStyle}"
-            IsVisible="{Binding TenantId.IsInvalid}"></Label>
+                Text="{Binding TenantId.FirstError}"
+                Style="{StaticResource ValidationErrorLabelStyle}"
+                IsVisible="{Binding TenantId.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
 
             <Label
-            Text="{markupExtensions:Translate AddAzureAccountPage_ClientId_Label}"/>
+                Text="{markupExtensions:Translate AddAzureAccountPage_ClientId_Label}"/>
             <Entry
-            x:Name="ClientIdEntry"
-            Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientId_Placeholder}"
-            Text="{Binding ClientId.Value, Mode=TwoWay}">
+                x:Name="ClientIdEntry"
+                Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientId_Placeholder}"
+                Text="{Binding ClientId.Value, Mode=TwoWay}">
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
-                    EventName="TextChanged"  
-                    Command="{Binding ValidateClientIdCommand}" />
-                    <behaviors:EffectBehavior ApplyEffect="{Binding ClientId.IsInvalid}">
+                        EventName="TextChanged"  
+                        Command="{Binding ValidateClientIdCommand}" />
+                    <behaviors:EffectBehavior ApplyEffect="{Binding ClientId.IsValid, Converter={StaticResource InverseBoolConverter}}">
                         <behaviors:EffectBehavior.Effect>
                             <effects:EntryLineColorEffect Color="{StaticResource ErrorColor}"/>
                         </behaviors:EffectBehavior.Effect>
@@ -77,22 +77,22 @@
                 </Entry.Behaviors>
             </Entry>
             <Label
-            Text="{Binding ClientId.FirstError}"
-            Style="{StaticResource ValidationErrorLabelStyle}"
-            IsVisible="{Binding ClientId.IsInvalid}"></Label>
+                Text="{Binding ClientId.FirstError}"
+                Style="{StaticResource ValidationErrorLabelStyle}"
+                IsVisible="{Binding ClientId.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
 
             <Label
-            Text="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Label}"/>
+                Text="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Label}"/>
             <Entry
-            x:Name="ClientSecretEntry"
-            Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Placeholder}"
-            Text="{Binding ClientSecret.Value, Mode=TwoWay}"
-            IsPassword="True">
+                x:Name="ClientSecretEntry"
+                Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Placeholder}"
+                Text="{Binding ClientSecret.Value, Mode=TwoWay}"
+                IsPassword="True">
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
                     EventName="TextChanged"  
                     Command="{Binding ValidateClientSecretCommand}" />
-                    <behaviors:EffectBehavior ApplyEffect="{Binding ClientSecret.IsInvalid}">
+                    <behaviors:EffectBehavior ApplyEffect="{Binding ClientSecret.IsValid, Converter={StaticResource InverseBoolConverter}}">
                         <behaviors:EffectBehavior.Effect>
                             <effects:EntryLineColorEffect Color="{StaticResource ErrorColor}"/>
                         </behaviors:EffectBehavior.Effect>
@@ -100,14 +100,14 @@
                 </Entry.Behaviors>
             </Entry>
             <Label
-            Text="{Binding ClientSecret.FirstError}"
-            Style="{StaticResource ValidationErrorLabelStyle}"
-            IsVisible="{Binding ClientSecret.IsInvalid}"></Label>
+                Text="{Binding ClientSecret.FirstError}"
+                Style="{StaticResource ValidationErrorLabelStyle}"
+                IsVisible="{Binding ClientSecret.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
 
             <Button
-            x:Name="Add"
-            Text="{markupExtensions:Translate AddAzureAccountPage_AddButton}"
-            Command="{Binding AddCommand}"></Button>
+                x:Name="Add"
+                Text="{markupExtensions:Translate AddAzureAccountPage_AddButton}"
+                Command="{Binding AddCommand}"></Button>
         </StackLayout>
 
         <ActivityIndicator

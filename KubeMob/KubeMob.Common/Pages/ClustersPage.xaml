@@ -19,57 +19,101 @@
             Icon="add_white.png"
             Text="{markupExtensions:Translate ClustersPage_AddAccount_ToolbarItem}"
             Command="{Binding AddAccountCommand}" />
+
+        <!--TODO Bind icon - expand / compact-->
+        <ToolbarItem 
+            x:Name="ViewToggle"
+            Icon=""
+            Text="{markupExtensions:Translate ClustersPage_ViewToggle_ToolbarItem}"
+            Command="{Binding ViewToggleCommand}" />
     </ContentPage.ToolbarItems>
 
     <Grid>
-        <!--TODO Group template -->
-        <!--TODO Item template -->
-        <!--TODO Context menu -->
         <StackLayout
-            IsVisible="{Binding IsNotBusy}">
-            <ListView
-                x:Name="Clusters"
-                ItemsSource="{Binding ClusterGroups}"
-                GroupDisplayBinding="{Binding Title}"
-                GroupShortNameBinding="{Binding ShortName}"
-                IsVisible="{Binding HasClusterGroups}"
-                IsGroupingEnabled="True"
-                SeparatorVisibility="None"
-                HasUnevenRows="True">
-                <ListView.Behaviors>
-                    <behaviors:EventToCommandBehavior
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+
+            <StackLayout
+                IsVisible="{Binding HasClusterGroups}">
+                
+                <ListView
+                    x:Name="Clusters"
+                    ItemsSource="{Binding ClusterGroups}"
+                    GroupDisplayBinding="{Binding Title}"
+                    GroupShortNameBinding="{Binding ShortName}"
+                    IsVisible="{Binding ViewAccounts, Converter={StaticResource InverseBoolConverter}}"
+                    IsGroupingEnabled="True"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior
                         EventName="ItemTapped"
                         Command="{Binding ClusterSelectedCommand}"
                         EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell 
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
                             Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label 
+                                        Text="{Binding Title}"/>
+                                    <Label
+                                        Text="{Binding ErrorMessage}"
+                                        TextColor="{StaticResource ErrorColor}"
+                                        IsVisible="{Binding HasErrorMessage}" />
+                                    <Label
+                                        Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
+                                        IsVisible="{Binding IsEmpty}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                </ListView>
+
+                <ListView
+                    x:Name="Accounts"
+                    ItemsSource="{Binding ClusterGroups}"
+                    IsVisible="{Binding ViewAccounts}"
+                    SeparatorVisibility="None">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="ItemTapped"
+                            Command="{Binding AccountSelectedCommand}"
+                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <!-- TODO icons-->
+                                    <MenuItem
+                                        Command="{Binding EditAccountCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Icon=""
+                                        Text="{markupExtensions:Translate ClustersPage_Accounts_Edit_MenuItemText}"/>
+                                    <MenuItem 
+                                        Command="{Binding DeleteAccountCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Icon=""
+                                        Text="{markupExtensions:Translate ClustersPage_Accounts_Delete_MenuItemText}"
+                                        IsDestructive="True" />
+                                </ViewCell.ContextActions>
                                 <Label 
                                     Text="{Binding Title}"/>
-                                <Label
-                                    Text="{Binding ErrorMessage}"
-                                    TextColor="{StaticResource ErrorColor}"
-                                    IsVisible="{Binding HasErrorMessage}" />
-                                <Label
-                                    Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
-                                    IsVisible="{Binding IsEmpty}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.GroupHeaderTemplate>
-            </ListView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
 
             <Label
                 Text="{markupExtensions:Translate ClustersPage_Clusters_NoAccountsMessage}"
-                IsVisible="{Binding IsClusterGroupsEmpty}"/>
+                IsVisible="{Binding HasClusterGroups, Converter={StaticResource InverseBoolConverter}}"/>
         </StackLayout>
 
         <ActivityIndicator

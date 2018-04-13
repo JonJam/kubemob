@@ -58,21 +58,29 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             string clientId,
             string clientSecret)
         {
+            List<AzureAccount> accounts = this.appSettings.GetAzureAccounts();
+
+            if (accounts.Any(a => a.TenantId == tenantId))
+            {
+                // Ensuring not adding duplicate accounts, based upon TenantId.
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_DuplicateTenantId);
+            }
+
             try
             {
                 IAzure azure = AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
 
                 string subscriptionName = azure.GetCurrentSubscription().DisplayName;
 
-                // TODO Support more than one account?? Need to validate don't add dupes.
-                this.appSettings.AzureAccount = new AzureAccount()
+                accounts.Add(new AzureAccount()
                 {
                     Name = subscriptionName,
                     ClientId = clientId,
                     ClientSecret = clientSecret,
                     EnvironmentId = cloudEnvironment.Id,
                     TenantId = tenantId
-                };
+                });
+                this.appSettings.SetAzureAccounts(accounts);
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
             {
@@ -99,48 +107,42 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             return (true, string.Empty);
         }
 
-
         public async Task<IEnumerable<ClusterSummaryGroup>> GetClusters()
         {
-            // TODO Support more than one account
-            AzureAccount account = this.appSettings.AzureAccount;
             List<ClusterSummaryGroup> groups = new List<ClusterSummaryGroup>();
 
-            if (account == null)
+            foreach (AzureAccount account in this.appSettings.GetAzureAccounts())
             {
-                return groups;
-            }
+                ClusterSummaryGroup group = new ClusterSummaryGroup(account.Name);
+                try
+                {
+                    IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
+                        account.EnvironmentId,
+                        account.TenantId,
+                        account.ClientId,
+                        account.ClientSecret);
 
-            // TODO Refactor below to iterate throught accoun
-            ClusterSummaryGroup group = new ClusterSummaryGroup(account.Name);
-            try
-            {
-                IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
-                    account.EnvironmentId,
-                    account.TenantId,
-                    account.ClientId,
-                    account.ClientSecret);
+                    // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
+                    // - Microsoft.Azure.Management.ContainerService.Fluent
+                    // TODO Handle paging ??
+                    IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
 
-                // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
-                // - Microsoft.Azure.Management.ContainerService.Fluent
-                // TODO Handle paging ??
-                IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
+                    group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
+                }
+                catch (AdalServiceException)
+                {
+                    // Authentication issue
+                    group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_AuthenticationErrorMessage;
+                }
+                catch (HttpRequestException e) when (e.InnerException is WebException web &&
+                                                     web.Status == WebExceptionStatus.NameResolutionFailure)
+                {
+                    // No internet
+                    group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_NoInternetErrorMessage;
+                }
 
-                group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
+                groups.Add(group);
             }
-            catch (AdalServiceException)
-            {
-                // Authentication issue
-                group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_AuthenticationErrorMessage;
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // No internet
-                group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_NoInternetErrorMessage;
-            }
-
-            groups.Add(group);
 
             return groups;
         }

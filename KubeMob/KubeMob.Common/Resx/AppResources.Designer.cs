@@ -241,6 +241,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An existing account already exists for this tenant..
+        /// </summary>
+        internal static string AzureAccountManager_TryAddCredentials_DuplicateTenantId {
+            get {
+                return ResourceManager.GetString("AzureAccountManager_TryAddCredentials_DuplicateTenantId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client specified cannot be found..
         /// </summary>
         internal static string AzureAccountManager_TryAddCredentials_InvalidClientId {

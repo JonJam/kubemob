@@ -177,6 +177,9 @@
   <data name="AzureAccountManager_GetClusters_NoInternetErrorMessage" xml:space="preserve">
     <value>We are having issues connecting to this account right now. Please try again.</value>
   </data>
+  <data name="AzureAccountManager_TryAddCredentials_DuplicateTenantId" xml:space="preserve">
+    <value>An existing account already exists for this tenant.</value>
+  </data>
   <data name="AzureAccountManager_TryAddCredentials_InvalidClientId" xml:space="preserve">
     <value>Client specified cannot be found.</value>
   </data>

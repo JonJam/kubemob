@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.AccountManagement;
@@ -68,7 +69,7 @@ namespace KubeMob.Common.ViewModels
 
         public ICommand ValidateClientSecretCommand => new Command(() => this.ClientSecret.Validate());
 
-        public ICommand AddCommand => new Command(this.AddAccount);
+        public ICommand AddCommand => new Command(async () => await this.AddAccount());
 
         public string TopLevelErrorMessage
         {
@@ -98,35 +99,36 @@ namespace KubeMob.Common.ViewModels
 
         public ValidatableObject<string> ClientSecret { get; }
 
-        private void AddAccount()
+        private async Task AddAccount()
         {
+            this.IsBusy = true;
             this.TopLevelErrorMessage = null;
 
-            CloudEnvironment env = this.SelectedEnvironment;
-            string tenant = this.TenantId.Value;
-            string client = this.ClientId.Value;
-            string secret = this.ClientSecret.Value;
+            // Since TryAddCredentials is not async due to Azure SDK, adding delay to give time for
+            // progress indicator to be displayed.
+            await Task.Delay(100);
 
-            if (!this.Validate())
+            if (this.Validate())
             {
-                return;
-            }
+                CloudEnvironment env = this.SelectedEnvironment;
+                string tenant = this.TenantId.Value;
+                string client = this.ClientId.Value;
+                string secret = this.ClientSecret.Value;
 
-            this.IsBusy = true;
+                (bool isValid, string message) = this.azureAccountManager.TryAddCredentials(
+                    env,
+                    tenant,
+                    client,
+                    secret);
 
-            (bool isValid, string message) = this.azureAccountManager.TryAddCredentials(
-                env,
-                tenant,
-                client,
-                secret);
-
-            if (isValid)
-            {
-                this.navigationService.GoBack(2);
-            }
-            else
-            {
-                this.TopLevelErrorMessage = message;
+                if (isValid)
+                {
+                    await this.navigationService.GoBack(2);
+                }
+                else
+                {
+                    this.TopLevelErrorMessage = message;
+                }
             }
 
             this.IsBusy = false;

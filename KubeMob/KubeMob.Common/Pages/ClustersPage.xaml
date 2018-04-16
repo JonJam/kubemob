@@ -4,6 +4,7 @@
              xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
              xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate ClustersPage_Title}">
@@ -18,14 +19,21 @@
             x:Name="AddAccount"
             Icon="add_white.png"
             Text="{markupExtensions:Translate ClustersPage_AddAccount_ToolbarItem}"
-            Command="{Binding AddAccountCommand}" />
+            Command="{Binding AddAccountCommand}"/>
 
-        <!--TODO Bind icon - expand / compact-->
-        <ToolbarItem 
-            x:Name="ViewToggle"
-            Icon=""
+        <views:BindableToolbarItem 
+            x:Name="ViewAccounts"
+            Icon="view_module_white.png"
             Text="{markupExtensions:Translate ClustersPage_ViewToggle_ToolbarItem}"
-            Command="{Binding ViewToggleCommand}" />
+            Command="{Binding ViewToggleCommand}" 
+            IsVisible="{Binding ViewAccounts, Converter={StaticResource InverseBoolConverter}}"/>
+
+        <views:BindableToolbarItem
+            x:Name="ViewClusters"
+            Icon="view_list_white.png"
+            Text="{markupExtensions:Translate ClustersPage_ViewToggle_ToolbarItem}"
+            Command="{Binding ViewToggleCommand}"
+            IsVisible="{Binding ViewAccounts}"/>
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -34,7 +42,7 @@
 
             <StackLayout
                 IsVisible="{Binding HasClusterGroups}">
-                
+
                 <ListView
                     x:Name="Clusters"
                     ItemsSource="{Binding ClusterGroups}"
@@ -90,16 +98,15 @@
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.ContextActions>
-                                    <!-- TODO icons-->
                                     <MenuItem
                                         Command="{Binding EditAccountCommand}"
                                         CommandParameter="{Binding .}"
-                                        Icon=""
+                                        Icon="edit_white.png"
                                         Text="{markupExtensions:Translate ClustersPage_Accounts_Edit_MenuItemText}"/>
                                     <MenuItem 
                                         Command="{Binding DeleteAccountCommand}"
                                         CommandParameter="{Binding .}"
-                                        Icon=""
+                                        Icon="delete_white.png"
                                         Text="{markupExtensions:Translate ClustersPage_Accounts_Delete_MenuItemText}"
                                         IsDestructive="True" />
                                 </ViewCell.ContextActions>

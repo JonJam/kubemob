@@ -193,5 +193,41 @@
   <ItemGroup>
     <BundleResource Include="Resources\info_white%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\delete_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\delete_white%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\delete_white%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\edit_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\edit_white%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\edit_white%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\view_list_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\view_list_white%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\view_list_white%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\view_module_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\view_module_white%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\view_module_white%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -14,7 +14,7 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class AddAzureAccountViewModel : ViewModelBase
+    public class AddEditAzureAccountViewModel : ViewModelBase
     {
         private readonly INavigationService navigationService;
         private readonly IAzureAccountManager azureAccountManager;
@@ -23,7 +23,7 @@ namespace KubeMob.Common.ViewModels
 
         private CloudEnvironment selectedEnvironment;
 
-        public AddAzureAccountViewModel(
+        public AddEditAzureAccountViewModel(
             INavigationService navigationService,
             IAzureAccountManager azureAccountManager)
         {
@@ -98,6 +98,13 @@ namespace KubeMob.Common.ViewModels
         public ValidatableObject<string> ClientId { get; }
 
         public ValidatableObject<string> ClientSecret { get; }
+
+        public override Task Initialize(object navigationData)
+        {
+            // TODO Handle id and look up account
+
+            return base.Initialize(navigationData);
+        }
 
         private async Task AddAccount()
         {

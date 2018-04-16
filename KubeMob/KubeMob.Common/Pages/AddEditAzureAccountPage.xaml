@@ -5,7 +5,7 @@
              xmlns:effects="clr-namespace:KubeMob.Common.Effects;assembly=KubeMob.Common"
              xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-             x:Class="KubeMob.Common.Pages.AddAzureAccountPage"
+             x:Class="KubeMob.Common.Pages.AddEditAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate AddAzureAccountPage_Title}">
 

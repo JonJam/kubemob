@@ -19,8 +19,8 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\AddAzureAccountPage.xaml.cs">
-      <DependentUpon>AddAzureAccountPage.xaml</DependentUpon>
+    <Compile Update="Pages\AddEditAzureAccountPage.xaml.cs">
+      <DependentUpon>AddEditAzureAccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\AddAccountPage.xaml.cs">
       <DependentUpon>AddAccountPage.xaml</DependentUpon>

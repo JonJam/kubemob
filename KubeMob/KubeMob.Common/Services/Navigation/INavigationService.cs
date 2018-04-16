@@ -11,7 +11,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToAddAccountPage();
 
-        Task NavigateToAddAzureAccountPage();
+        Task NavigateToAddEditAzureAccountPage(string id = null);
 
         Task NavigateToClusterPage();
 

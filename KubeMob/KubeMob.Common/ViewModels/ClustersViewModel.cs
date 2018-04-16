@@ -17,6 +17,7 @@ namespace KubeMob.Common.ViewModels
     public class ClustersViewModel : ViewModelBase
     {
         private readonly IEnumerable<IAccountManager> accountManagers;
+        private readonly INavigationService navigationService;
 
         private bool viewAccounts;
         private ObservableCollection<ClusterSummaryGroup> clusterGroups;
@@ -27,6 +28,7 @@ namespace KubeMob.Common.ViewModels
             INavigationService navigationService)
         {
             this.accountManagers = accountManagers;
+            this.navigationService = navigationService;
 
             this.ClusterGroups = new ObservableCollection<ClusterSummaryGroup>();
             this.clusterGroups.CollectionChanged += this.OnClusterGroupsCollectionChanged;
@@ -81,20 +83,17 @@ namespace KubeMob.Common.ViewModels
             }
         }
 
-        private static void OnAccountSelected(object obj)
+        private async Task OnAccountSelected(object obj)
         {
-            if (obj is ClusterSummary cluster)
-            {
-                // TODO Navigate to appropiate add cluster page with existing cluster.
-            }
+            ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
+
+            // TODO create method to work out which page to go to.
+            await this.navigationService.NavigateToAddEditAzureAccountPage(clusterGroup.AccountId);
         }
 
         private void OnDeleteAccount(object obj)
         {
-            if (!(obj is ClusterSummaryGroup clusterGroup))
-            {
-                return;
-            }
+            ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
 
             IAccountManager accountManager = this.accountManagers.First(am => am.GetType() == clusterGroup.AccountManagerType);
 

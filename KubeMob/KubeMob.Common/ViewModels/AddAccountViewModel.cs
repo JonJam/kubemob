@@ -10,7 +10,7 @@ namespace KubeMob.Common.ViewModels
     public class AddAccountViewModel : ViewModelBase
     {
         public AddAccountViewModel(
-            INavigationService navigationService) => this.AddAzureAccountCommand = new Command(async () => await navigationService.NavigateToAddAzureAccountPage());
+            INavigationService navigationService) => this.AddAzureAccountCommand = new Command(async () => await navigationService.NavigateToAddEditAzureAccountPage());
 
         public ICommand AddAzureAccountCommand { get; }
     }

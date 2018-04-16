@@ -37,7 +37,7 @@ namespace KubeMob.Common.ViewModels
             this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
             this.AccountSelectedCommand = new Command(ClustersViewModel.OnAccountSelected);
             this.EditAccountCommand = new Command(ClustersViewModel.OnAccountSelected);
-            this.DeleteAccountCommand = new Command(ClustersViewModel.OnDeleteAccount);
+            this.DeleteAccountCommand = new Command(this.OnDeleteAccount);
         }
 
         public ICommand OnAppearingCommand { get; }
@@ -89,13 +89,18 @@ namespace KubeMob.Common.ViewModels
             }
         }
 
-        private static void OnDeleteAccount(object obj)
+        private void OnDeleteAccount(object obj)
         {
-            if (obj is ClusterSummary cluster)
+            if (!(obj is ClusterSummaryGroup clusterGroup))
             {
-                // TODO Delete account
-                // TODO Update list.
+                return;
             }
+
+            IAccountManager accountManager = this.accountManagers.First(am => am.GetType() == clusterGroup.AccountManagerType);
+
+            accountManager.RemoveAccount(clusterGroup.AccountId);
+
+            this.ClusterGroups.Remove(clusterGroup);
         }
 
         private void OnClusterGroupsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => this.HasClusterGroups = this.ClusterGroups.Count > 0;

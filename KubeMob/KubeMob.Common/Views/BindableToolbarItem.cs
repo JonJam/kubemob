@@ -3,7 +3,6 @@ using Xamarin.Forms;
 
 namespace KubeMob.Common.Views
 {
-    // TODO Test
     public class BindableToolbarItem : ToolbarItem
     {
         public static readonly BindableProperty IsVisibleProperty = BindableProperty.CreateAttached(

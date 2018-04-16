@@ -11,5 +11,7 @@ namespace KubeMob.Common.Services.AccountManagement
         void LaunchHelp();
 
         Task<IEnumerable<ClusterSummaryGroup>> GetClusters();
+
+        void RemoveAccount(string id);
     }
 }

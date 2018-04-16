@@ -99,12 +99,12 @@
                             <ViewCell>
                                 <ViewCell.ContextActions>
                                     <MenuItem
-                                        Command="{Binding EditAccountCommand}"
+                                        Command="{Binding BindingContext.EditAccountCommand, Source={x:Reference Accounts}}"
                                         CommandParameter="{Binding .}"
                                         Icon="edit_white.png"
                                         Text="{markupExtensions:Translate ClustersPage_Accounts_Edit_MenuItemText}"/>
                                     <MenuItem 
-                                        Command="{Binding DeleteAccountCommand}"
+                                        Command="{Binding BindingContext.DeleteAccountCommand, Source={x:Reference Accounts}}"
                                         CommandParameter="{Binding .}"
                                         Icon="delete_white.png"
                                         Text="{markupExtensions:Translate ClustersPage_Accounts_Delete_MenuItemText}"

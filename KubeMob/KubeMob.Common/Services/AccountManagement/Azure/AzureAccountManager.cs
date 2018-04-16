@@ -113,7 +113,11 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
             foreach (AzureAccount account in this.appSettings.GetAzureAccounts())
             {
-                ClusterSummaryGroup group = new ClusterSummaryGroup(account.Name);
+                ClusterSummaryGroup group = new ClusterSummaryGroup(
+                    account.ClientId,
+                    account.Name,
+                    this.GetType());
+
                 try
                 {
                     IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
@@ -145,6 +149,17 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             }
 
             return groups;
+        }
+
+        public void RemoveAccount(string id)
+        {
+            List<AzureAccount> accounts = this.appSettings.GetAzureAccounts();
+
+            AzureAccount accountToRemove = accounts.Find((a) => a.TenantId == id);
+
+            accounts.Remove(accountToRemove);
+
+            this.appSettings.SetAzureAccounts(accounts);
         }
 
         //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);

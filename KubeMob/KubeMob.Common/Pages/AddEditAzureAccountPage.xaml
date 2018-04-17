@@ -7,13 +7,13 @@
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.AddEditAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
-             Title="{markupExtensions:Translate AddAzureAccountPage_Title}">
+             Title="{markupExtensions:Translate AddEditAzureAccountPage_Title}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             x:Name="Information"
             Icon="info_white.png"
-            Text="{markupExtensions:Translate AddAzureAccountPage_Information_ToolbarItem}"
+            Text="{markupExtensions:Translate AddEditAzureAccountPage_Information_ToolbarItem}"
             Command="{Binding ViewInformationCommand}" />
     </ContentPage.ToolbarItems>
 
@@ -21,7 +21,7 @@
         <StackLayout
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
             <Label 
-            Text="{markupExtensions:Translate AddAzureAccountPage_Help}"/>
+            Text="{markupExtensions:Translate AddEditAzureAccountPage_Help}"/>
 
             <Label
                 Text="{Binding TopLevelErrorMessage}"
@@ -29,20 +29,22 @@
                 IsVisible="{Binding HasTopLevelErrorMessage}"></Label>
 
             <Label
-                Text="{markupExtensions:Translate AddAzureAccountPage_Environment_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Label}"/>
             <Picker
                 x:Name="EnvironmentEntry"
-                Title="{markupExtensions:Translate AddAzureAccountPage_Environment_Title}"
+                Title="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Title}"
                 ItemsSource="{Binding Environments}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"/>
+                SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"
+                IsEnabled="{Binding IsEditing, Converter={StaticResource InverseBoolConverter}}"/>
 
             <Label
-                Text="{markupExtensions:Translate AddAzureAccountPage_TenantId_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Label}"/>
             <Entry
                 x:Name="TenantIdEntry"
-                Placeholder="{markupExtensions:Translate AddAzureAccountPage_TenantId_Placeholder}"
-                Text="{Binding TenantId.Value, Mode=TwoWay}">
+                Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Placeholder}"
+                Text="{Binding TenantId.Value, Mode=TwoWay}"
+                IsEnabled="{Binding IsEditing, Converter={StaticResource InverseBoolConverter}}">
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
                         EventName="TextChanged"  
@@ -60,10 +62,10 @@
                 IsVisible="{Binding TenantId.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
 
             <Label
-                Text="{markupExtensions:Translate AddAzureAccountPage_ClientId_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Label}"/>
             <Entry
                 x:Name="ClientIdEntry"
-                Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientId_Placeholder}"
+                Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Placeholder}"
                 Text="{Binding ClientId.Value, Mode=TwoWay}">
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
@@ -82,10 +84,10 @@
                 IsVisible="{Binding ClientId.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
 
             <Label
-                Text="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Label}"/>
             <Entry
                 x:Name="ClientSecretEntry"
-                Placeholder="{markupExtensions:Translate AddAzureAccountPage_ClientSecret_Placeholder}"
+                Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Placeholder}"
                 Text="{Binding ClientSecret.Value, Mode=TwoWay}"
                 IsPassword="True">
                 <Entry.Behaviors>
@@ -105,9 +107,9 @@
                 IsVisible="{Binding ClientSecret.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
 
             <Button
-                x:Name="Add"
-                Text="{markupExtensions:Translate AddAzureAccountPage_AddButton}"
-                Command="{Binding AddCommand}"></Button>
+                x:Name="Save"
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_SaveButton}"
+                Command="{Binding SaveCommand}"></Button>
         </StackLayout>
 
         <ActivityIndicator

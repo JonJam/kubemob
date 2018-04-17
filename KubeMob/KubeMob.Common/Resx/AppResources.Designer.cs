@@ -79,137 +79,137 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
-        /// </summary>
-        internal static string AddAzureAccountPage_AddButton {
-            get {
-                return ResourceManager.GetString("AddAzureAccountPage_AddButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Client ID is required..
         /// </summary>
-        internal static string AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message {
+        internal static string AddEditAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Client ID.
         /// </summary>
-        internal static string AddAzureAccountPage_ClientId_Label {
+        internal static string AddEditAzureAccountPage_ClientId_Label {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_ClientId_Label", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_ClientId_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter a client ID.
         /// </summary>
-        internal static string AddAzureAccountPage_ClientId_Placeholder {
+        internal static string AddEditAzureAccountPage_ClientId_Placeholder {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_ClientId_Placeholder", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_ClientId_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Client secret is required..
         /// </summary>
-        internal static string AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message {
+        internal static string AddEditAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Client secret.
         /// </summary>
-        internal static string AddAzureAccountPage_ClientSecret_Label {
+        internal static string AddEditAzureAccountPage_ClientSecret_Label {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_ClientSecret_Label", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_ClientSecret_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter a client secret.
         /// </summary>
-        internal static string AddAzureAccountPage_ClientSecret_Placeholder {
+        internal static string AddEditAzureAccountPage_ClientSecret_Placeholder {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_ClientSecret_Placeholder", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_ClientSecret_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Environment.
         /// </summary>
-        internal static string AddAzureAccountPage_Environment_Label {
+        internal static string AddEditAzureAccountPage_Environment_Label {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_Environment_Label", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_Environment_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select a environment.
         /// </summary>
-        internal static string AddAzureAccountPage_Environment_Title {
+        internal static string AddEditAzureAccountPage_Environment_Title {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_Environment_Title", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_Environment_Title", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Please enter the details for a service principal that has access to resources in your Microsoft Azure account. You can find out more about Service Princpial by tapping on the info button..
         /// </summary>
-        internal static string AddAzureAccountPage_Help {
+        internal static string AddEditAzureAccountPage_Help {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_Help", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_Help", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
-        internal static string AddAzureAccountPage_Information_ToolbarItem {
+        internal static string AddEditAzureAccountPage_Information_ToolbarItem {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_Information_ToolbarItem", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_Information_ToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string AddEditAzureAccountPage_SaveButton {
+            get {
+                return ResourceManager.GetString("AddEditAzureAccountPage_SaveButton", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tenant ID is required..
         /// </summary>
-        internal static string AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message {
+        internal static string AddEditAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Tenant ID.
         /// </summary>
-        internal static string AddAzureAccountPage_TenantId_Label {
+        internal static string AddEditAzureAccountPage_TenantId_Label {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_TenantId_Label", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_TenantId_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Enter a tenant ID.
         /// </summary>
-        internal static string AddAzureAccountPage_TenantId_Placeholder {
+        internal static string AddEditAzureAccountPage_TenantId_Placeholder {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_TenantId_Placeholder", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_TenantId_Placeholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Microsoft Azure.
+        ///   Looks up a localized string similar to Microsoft Azure account.
         /// </summary>
-        internal static string AddAzureAccountPage_Title {
+        internal static string AddEditAzureAccountPage_Title {
             get {
-                return ResourceManager.GetString("AddAzureAccountPage_Title", resourceCulture);
+                return ResourceManager.GetString("AddEditAzureAccountPage_Title", resourceCulture);
             }
         }
         

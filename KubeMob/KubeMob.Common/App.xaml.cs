@@ -24,8 +24,6 @@ namespace KubeMob.Common
 
             // Set the Thread for locale-aware methods
             localize.SetLocale(ci);
-
-            MapperBootstrapper.Configure();
         }
 
         protected override async void OnStart()

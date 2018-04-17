@@ -37,8 +37,8 @@ namespace KubeMob.Common.ViewModels
             this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
             this.ViewToggleCommand = new Command(() => this.ViewAccounts = !this.ViewAccounts);
             this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
-            this.AccountSelectedCommand = new Command(ClustersViewModel.OnAccountSelected);
-            this.EditAccountCommand = new Command(ClustersViewModel.OnAccountSelected);
+            this.AccountSelectedCommand = new Command(async (o) => await this.OnAccountSelected(o));
+            this.EditAccountCommand = new Command(async (o) => await this.OnAccountSelected(o));
             this.DeleteAccountCommand = new Command(this.OnDeleteAccount);
         }
 
@@ -87,7 +87,7 @@ namespace KubeMob.Common.ViewModels
         {
             ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
 
-            // TODO create method to work out which page to go to.
+            // TODO Handle different account types.
             await this.navigationService.NavigateToAddEditAzureAccountPage(clusterGroup.AccountId);
         }
 
@@ -107,6 +107,9 @@ namespace KubeMob.Common.ViewModels
         private async Task Refresh()
         {
             this.IsBusy = true;
+
+            // Resetting to false so displays individial clusters, after an add/edit to accounts.
+            this.ViewAccounts = false;
 
             this.ClusterGroups.Clear();
 

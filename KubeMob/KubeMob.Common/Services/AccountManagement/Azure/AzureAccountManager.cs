@@ -30,20 +30,20 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             this.Environments = new List<CloudEnvironment>()
             {
                 new CloudEnvironment(
-                    AzureEnvironment.AzureChinaCloud.ToString(),
+                    AzureEnvironment.AzureChinaCloud.AuthenticationEndpoint,
                     AppResources.AzureEnvironment_China),
 
                 new CloudEnvironment(
-                    AzureEnvironment.AzureGermanCloud.ToString(),
+                    AzureEnvironment.AzureGermanCloud.AuthenticationEndpoint,
                     AppResources.AzureEnvironment_German),
 
                 new CloudEnvironment(
-                    AzureEnvironment.AzureGlobalCloud.ToString(),
+                    AzureEnvironment.AzureGlobalCloud.AuthenticationEndpoint,
                     AppResources.AzureEnvironment_Global,
                     true),
 
                 new CloudEnvironment(
-                    AzureEnvironment.AzureUSGovernment.ToString(),
+                    AzureEnvironment.AzureUSGovernment.AuthenticationEndpoint,
                     AppResources.AzureEnvironment_USGovernment)
             };
         }
@@ -52,15 +52,17 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
-        public (bool isValid, string message) TryAddCredentials(
+        public (bool isValid, string message) TrySaveCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
             string clientId,
-            string clientSecret)
+            string clientSecret,
+            bool isEditing)
         {
             List<AzureAccount> accounts = this.appSettings.GetAzureAccounts();
 
-            if (accounts.Any(a => a.TenantId == tenantId))
+            if (!isEditing &&
+                accounts.Any(a => a.TenantId == tenantId))
             {
                 // Ensuring not adding duplicate accounts, based upon TenantId.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_DuplicateTenantId);
@@ -72,6 +74,12 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
                 string subscriptionName = azure.GetCurrentSubscription().DisplayName;
 
+                if (isEditing)
+                {
+                    // If editing, remove the existing stored value before adding
+                    accounts.Remove(accounts.Find(a => a.TenantId == tenantId));
+                }
+
                 accounts.Add(new AzureAccount()
                 {
                     Name = subscriptionName,
@@ -80,6 +88,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     EnvironmentId = cloudEnvironment.Id,
                     TenantId = tenantId
                 });
+
                 this.appSettings.SetAzureAccounts(accounts);
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
@@ -106,6 +115,8 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
             return (true, string.Empty);
         }
+
+        public AzureAccount GetAccount(string id) => this.appSettings.GetAzureAccounts().Find((a) => a.TenantId == id);
 
         public async Task<IEnumerable<ClusterSummaryGroup>> GetClusters()
         {
@@ -182,7 +193,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             string clientSecret)
         {
             AzureEnvironment environment =
-                AzureEnvironment.KnownEnvironments.First(a => a.ToString() == environmentId);
+                AzureEnvironment.KnownEnvironments.First(a => a.AuthenticationEndpoint == environmentId);
 
             AzureCredentials credentials = SdkContext.AzureCredentialsFactory.FromServicePrincipal(
                 clientId,

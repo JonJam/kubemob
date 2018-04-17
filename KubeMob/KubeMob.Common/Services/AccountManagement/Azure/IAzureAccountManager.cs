@@ -2,10 +2,13 @@
 {
     public interface IAzureAccountManager : IAccountManager
     {
-        (bool isValid, string message) TryAddCredentials(
-                    CloudEnvironment cloudEnvironment,
+        (bool isValid, string message) TrySaveCredentials(
+            CloudEnvironment cloudEnvironment,
             string tenantId,
             string clientId,
-            string clientSecret);
+            string clientSecret,
+            bool isEditing);
+
+        AzureAccount GetAccount(string id);
     }
 }

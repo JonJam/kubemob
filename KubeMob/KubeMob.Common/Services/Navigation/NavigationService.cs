@@ -25,9 +25,21 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToAddAccountPage() => NavigationService.InternalNavigate(typeof(AddAccountPage));
 
-        public Task NavigateToAddEditAzureAccountPage(string id = null) => NavigationService.InternalNavigate(typeof(AddAzureAccountPage), id);
+        public Task NavigateToAddEditAzureAccountPage(string id = null) => NavigationService.InternalNavigate(typeof(AddEditAzureAccountPage), id);
 
         public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+
+        public async Task GoBackToClusterPage()
+        {
+            if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
+            {
+                do
+                {
+                    await mainPage.PopAsync();
+                }
+                while (mainPage.CurrentPage.GetType() != typeof(ClustersPage));
+            }
+        }
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 
@@ -52,19 +64,6 @@ namespace KubeMob.Common.Services.Navigation
                 {
                     Page page = mainPage.Navigation.NavigationStack[i];
                     mainPage.Navigation.RemovePage(page);
-                }
-            }
-
-            return Task.CompletedTask;
-        }
-
-        public Task GoBack(int numberOfTimes = 1)
-        {
-            if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
-            {
-                for (int i = 0; i < numberOfTimes; i++)
-                {
-                    mainPage.PopAsync();
                 }
             }
 

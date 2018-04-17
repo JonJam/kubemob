@@ -2,11 +2,14 @@
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
+using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using Microsoft.Azure.Management.ContainerService.Fluent;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -34,6 +37,7 @@ namespace KubeMob.Common
             ViewModelLocator.ConfigureViewModels(serviceCollection);
             ViewModelLocator.ConfigureXamPlugins(serviceCollection);
             ViewModelLocator.ConfigureServices(serviceCollection);
+            ViewModelLocator.ConfigureMaps();
 
             ViewModelLocator.serviceProvider = serviceCollection.BuildServiceProvider();
         }
@@ -73,6 +77,17 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
 
             serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));
+        }
+
+        private static void ConfigureMaps()
+        {
+            // IConfigured linker to skip the following otherwise causes this to fail:
+            // - AutoMapper
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<IKubernetesCluster, ClusterSummary>()
+                    .ConstructUsing((kc) => new ClusterSummary(kc.Id, kc.Name));
+            });
         }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

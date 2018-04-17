@@ -20,6 +20,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IAzureAccountManager azureAccountManager;
 
         private string topLevelErrorMessage;
+        private bool isEditing;
 
         private CloudEnvironment selectedEnvironment;
 
@@ -38,7 +39,7 @@ namespace KubeMob.Common.ViewModels
                 {
                     new IsNotNullOrEmptyRule<string>
                     {
-                        ValidationMessage = AppResources.AddAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message
+                        ValidationMessage = AppResources.AddEditAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message
                     }
                 });
 
@@ -47,7 +48,7 @@ namespace KubeMob.Common.ViewModels
                 {
                     new IsNotNullOrEmptyRule<string>
                     {
-                        ValidationMessage = AppResources.AddAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message
+                        ValidationMessage = AppResources.AddEditAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message
                     }
                 });
 
@@ -56,7 +57,7 @@ namespace KubeMob.Common.ViewModels
                 {
                     new IsNotNullOrEmptyRule<string>
                     {
-                        ValidationMessage = AppResources.AddAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message
+                        ValidationMessage = AppResources.AddEditAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message
                     }
                 });
         }
@@ -69,7 +70,7 @@ namespace KubeMob.Common.ViewModels
 
         public ICommand ValidateClientSecretCommand => new Command(() => this.ClientSecret.Validate());
 
-        public ICommand AddCommand => new Command(async () => await this.AddAccount());
+        public ICommand SaveCommand => new Command(async () => await this.SaveAccount());
 
         public string TopLevelErrorMessage
         {
@@ -84,6 +85,12 @@ namespace KubeMob.Common.ViewModels
         }
 
         public bool HasTopLevelErrorMessage => !string.IsNullOrWhiteSpace(this.topLevelErrorMessage);
+
+        public bool IsEditing
+        {
+            get => this.isEditing;
+            private set => this.SetProperty(ref this.isEditing, value);
+        }
 
         public IList<CloudEnvironment> Environments { get; }
 
@@ -101,17 +108,28 @@ namespace KubeMob.Common.ViewModels
 
         public override Task Initialize(object navigationData)
         {
-            // TODO Handle id and look up account
+            if (navigationData is string accountId)
+            {
+                // Existing account to edit, populate fields and make tenant read-only.
+                this.IsEditing = true;
+
+                AzureAccount azureAccount = this.azureAccountManager.GetAccount(accountId);
+
+                this.SelectedEnvironment = this.Environments.First(e => e.Id == azureAccount.EnvironmentId);
+                this.TenantId.Value = azureAccount.TenantId;
+                this.ClientId.Value = azureAccount.ClientId;
+                this.ClientSecret.Value = azureAccount.ClientSecret;
+            }
 
             return base.Initialize(navigationData);
         }
 
-        private async Task AddAccount()
+        private async Task SaveAccount()
         {
             this.IsBusy = true;
             this.TopLevelErrorMessage = null;
 
-            // Since TryAddCredentials is not async due to Azure SDK, adding delay to give time for
+            // Since TrySaveCredentials is not async due to Azure SDK, adding delay to give time for
             // progress indicator to be displayed.
             await Task.Delay(100);
 
@@ -122,15 +140,16 @@ namespace KubeMob.Common.ViewModels
                 string client = this.ClientId.Value;
                 string secret = this.ClientSecret.Value;
 
-                (bool isValid, string message) = this.azureAccountManager.TryAddCredentials(
+                (bool isValid, string message) = this.azureAccountManager.TrySaveCredentials(
                     env,
                     tenant,
                     client,
-                    secret);
+                    secret,
+                    this.IsEditing);
 
                 if (isValid)
                 {
-                    await this.navigationService.GoBack(2);
+                    await this.navigationService.GoBackToClusterPage();
                 }
                 else
                 {

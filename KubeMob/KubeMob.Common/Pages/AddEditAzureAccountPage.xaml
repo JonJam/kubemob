@@ -17,8 +17,11 @@
             Command="{Binding ViewInformationCommand}" />
     </ContentPage.ToolbarItems>
 
-    <Grid>
+    <Grid
+        CompressedLayout.IsHeadless="true">
+
         <StackLayout
+            CompressedLayout.IsHeadless="true"
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
             <Label 
             Text="{markupExtensions:Translate AddEditAzureAccountPage_Help}"/>

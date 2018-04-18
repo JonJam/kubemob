@@ -81,7 +81,8 @@ namespace KubeMob.Common
 
         private static void ConfigureMaps()
         {
-            // IConfigured linker to skip the following otherwise causes this to fail:
+            // Using AutoMapper 6.1.1 rather than latest due to build error which is detailled here: https://github.com/AutoMapper/AutoMapper/issues/2455
+            // Linker configured to skip the following otherwise causes this to fail:
             // - AutoMapper
             Mapper.Initialize(cfg =>
             {

@@ -12,6 +12,8 @@ namespace KubeMob.Common.Services.AccountManagement
 
         Task<IEnumerable<ClusterSummaryGroup>> GetClusters();
 
+        bool HandlesAccountType(AccountType accountType);
+
         void RemoveAccount(string id);
     }
 }

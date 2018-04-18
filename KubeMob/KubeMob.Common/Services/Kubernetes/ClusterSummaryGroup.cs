@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms.Internals;
 
@@ -10,17 +9,17 @@ namespace KubeMob.Common.Services.Kubernetes
     {
         public ClusterSummaryGroup(
             string accountId,
-            string title,
-            Type accountManagerType)
+            AccountType accountType,
+            string title)
         {
             this.AccountId = accountId;
+            this.AccountType = accountType;
             this.Title = title;
-            this.AccountManagerType = accountManagerType;
         }
 
-        public Type AccountManagerType { get; }
-
         public string AccountId { get; }
+
+        public AccountType AccountType { get; }
 
         public string Title { get; }
 

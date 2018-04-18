@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -87,15 +88,21 @@ namespace KubeMob.Common.ViewModels
         {
             ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
 
-            // TODO Handle different account types.
-            await this.navigationService.NavigateToAddEditAzureAccountPage(clusterGroup.AccountId);
+            switch (clusterGroup.AccountType)
+            {
+                case AccountType.Azure:
+                    await this.navigationService.NavigateToAddEditAzureAccountPage(clusterGroup.AccountId);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         private void OnDeleteAccount(object obj)
         {
             ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
 
-            IAccountManager accountManager = this.accountManagers.First(am => am.GetType() == clusterGroup.AccountManagerType);
+            IAccountManager accountManager = this.accountManagers.First(am => am.HandlesAccountType(clusterGroup.AccountType));
 
             accountManager.RemoveAccount(clusterGroup.AccountId);
 

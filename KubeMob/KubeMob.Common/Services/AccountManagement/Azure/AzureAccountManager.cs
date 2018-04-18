@@ -52,6 +52,8 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
+        public bool HandlesAccountType(AccountType accountType) => accountType == AccountType.Azure;
+
         public (bool isValid, string message) TrySaveCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
@@ -125,9 +127,9 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             foreach (AzureAccount account in this.appSettings.GetAzureAccounts())
             {
                 ClusterSummaryGroup group = new ClusterSummaryGroup(
-                    account.ClientId,
-                    account.Name,
-                    this.GetType());
+                    account.TenantId,
+                    AccountType.Azure,
+                    account.Name);
 
                 try
                 {

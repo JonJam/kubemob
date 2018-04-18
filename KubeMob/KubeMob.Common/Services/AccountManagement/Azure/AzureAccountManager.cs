@@ -3,9 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using AutoMapper;
 using KubeMob.Common.Resx;
-using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Settings;
 using Microsoft.Azure.Management.ContainerService.Fluent;
 using Microsoft.Azure.Management.Fluent;
@@ -47,13 +45,15 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     AppResources.AzureEnvironment_USGovernment)
             };
         }
+        
+        public AccountType Key { get; } = AccountType.Azure;
 
         public IList<CloudEnvironment> Environments { get; }
 
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
-        public bool HandlesAccountType(AccountType accountType) => accountType == AccountType.Azure;
-
+        public void SetSelectedCluster(Cluster cluster) => this.appSettings.SelectedCluster = cluster;
+        
         public (bool isValid, string message) TrySaveCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
@@ -120,13 +120,13 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public AzureAccount GetAccount(string id) => this.appSettings.GetAzureAccounts().Find((a) => a.TenantId == id);
 
-        public async Task<IEnumerable<ClusterSummaryGroup>> GetClusters()
+        public async Task<IEnumerable<ClusterGroup>> GetClusters()
         {
-            List<ClusterSummaryGroup> groups = new List<ClusterSummaryGroup>();
+            List<ClusterGroup> groups = new List<ClusterGroup>();
 
             foreach (AzureAccount account in this.appSettings.GetAzureAccounts())
             {
-                ClusterSummaryGroup group = new ClusterSummaryGroup(
+                ClusterGroup group = new ClusterGroup(
                     account.TenantId,
                     AccountType.Azure,
                     account.Name);
@@ -144,7 +144,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     // TODO Handle paging ??
                     IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
 
-                    group.AddRange(clusters.Select(Mapper.Map<ClusterSummary>));
+                    group.AddRange(clusters.Select(c => new Cluster(c.Id, c.Name, account.TenantId, AccountType.Azure)));
                 }
                 catch (AdalServiceException)
                 {

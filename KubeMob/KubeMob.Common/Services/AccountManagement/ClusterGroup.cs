@@ -2,12 +2,12 @@
 using System.Linq;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.AccountManagement
 {
     [Preserve(AllMembers = true)]
-    public class ClusterSummaryGroup : List<ClusterSummary>
+    public class ClusterGroup : List<Cluster>
     {
-        public ClusterSummaryGroup(
+        public ClusterGroup(
             string accountId,
             AccountType accountType,
             string title)

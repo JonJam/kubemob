@@ -5,11 +5,9 @@ using System.Resources;
 using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
-using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
-using Microsoft.Azure.Management.ContainerService.Fluent;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -86,8 +84,6 @@ namespace KubeMob.Common
             // - AutoMapper
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<IKubernetesCluster, ClusterSummary>()
-                    .ConstructUsing((kc) => new ClusterSummary(kc.Id, kc.Name));
             });
         }
 

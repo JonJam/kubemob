@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using Newtonsoft.Json;
 using Plugin.Settings.Abstractions;
@@ -27,6 +28,21 @@ namespace KubeMob.Common.Services.Settings
         }
 
         public Uri AzureHelpLink { get; }
+
+        public Cluster SelectedCluster
+        {
+            get
+            {
+                string settingValue = this.settings.GetValueOrDefault(nameof(this.SelectedCluster), null);
+
+                return settingValue != null
+                    ? JsonConvert.DeserializeObject<Cluster>(settingValue)
+                    : null;
+            }
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.SelectedCluster),
+                JsonConvert.SerializeObject(value));
+        }
 
         public List<AzureAccount> GetAzureAccounts()
         {

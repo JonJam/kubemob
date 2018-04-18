@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using KubeMob.Common.Services.Kubernetes;
 
 namespace KubeMob.Common.Services.AccountManagement
 {
     public interface IAccountManager
     {
+        AccountType Key { get; }
+
         IList<CloudEnvironment> Environments { get; }
 
         void LaunchHelp();
 
-        Task<IEnumerable<ClusterSummaryGroup>> GetClusters();
+        Task<IEnumerable<ClusterGroup>> GetClusters();
 
-        bool HandlesAccountType(AccountType accountType);
-
+        void SetSelectedCluster(Cluster cluster);
+        
         void RemoveAccount(string id);
     }
 }

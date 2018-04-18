@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Services.AccountManagement;
-using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -21,7 +20,7 @@ namespace KubeMob.Common.ViewModels
         private readonly INavigationService navigationService;
 
         private bool viewAccounts;
-        private ObservableCollection<ClusterSummaryGroup> clusterGroups;
+        private ObservableCollection<ClusterGroup> clusterGroups;
         private bool hasClusterGroups;
 
         public ClustersViewModel(
@@ -31,13 +30,13 @@ namespace KubeMob.Common.ViewModels
             this.accountManagers = accountManagers;
             this.navigationService = navigationService;
 
-            this.ClusterGroups = new ObservableCollection<ClusterSummaryGroup>();
+            this.ClusterGroups = new ObservableCollection<ClusterGroup>();
             this.clusterGroups.CollectionChanged += this.OnClusterGroupsCollectionChanged;
 
             this.OnAppearingCommand = new Command(async () => await this.Refresh());
             this.AddAccountCommand = new Command(async () => await navigationService.NavigateToAddAccountPage());
             this.ViewToggleCommand = new Command(() => this.ViewAccounts = !this.ViewAccounts);
-            this.ClusterSelectedCommand = new Command(ClustersViewModel.OnClusterSelected);
+            this.ClusterSelectedCommand = new Command(async (o) => await this.OnClusterSelected(o));
             this.AccountSelectedCommand = new Command(async (o) => await this.OnAccountSelected(o));
             this.EditAccountCommand = new Command(async (o) => await this.OnAccountSelected(o));
             this.DeleteAccountCommand = new Command(this.OnDeleteAccount);
@@ -63,7 +62,7 @@ namespace KubeMob.Common.ViewModels
             private set => this.SetProperty(ref this.viewAccounts, value);
         }
 
-        public ObservableCollection<ClusterSummaryGroup> ClusterGroups
+        public ObservableCollection<ClusterGroup> ClusterGroups
         {
             get => this.clusterGroups;
             private set => this.SetProperty(ref this.clusterGroups, value);
@@ -75,18 +74,22 @@ namespace KubeMob.Common.ViewModels
             set => this.SetProperty(ref this.hasClusterGroups, value);
         }
 
-        private static void OnClusterSelected(object obj)
+        private async Task OnClusterSelected(object obj)
         {
-            if (obj is ClusterSummary cluster)
-            {
-                // TODO Save selected cluster information.
-                // TODO Navigate to Cluster overview page, with clean backstack.
-            }
+            // TODO Test this and the methods called.
+            Cluster cluster = (Cluster)obj;
+
+            IAccountManager accountManager = this.accountManagers
+                .First(am => am.Key == cluster.AccountType);
+
+            accountManager.SetSelectedCluster(cluster);
+
+            await this.navigationService.NavigateToClusterPage();
         }
 
         private async Task OnAccountSelected(object obj)
         {
-            ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
+            ClusterGroup clusterGroup = (ClusterGroup)obj;
 
             switch (clusterGroup.AccountType)
             {
@@ -100,9 +103,9 @@ namespace KubeMob.Common.ViewModels
 
         private void OnDeleteAccount(object obj)
         {
-            ClusterSummaryGroup clusterGroup = (ClusterSummaryGroup)obj;
+            ClusterGroup clusterGroup = (ClusterGroup)obj;
 
-            IAccountManager accountManager = this.accountManagers.First(am => am.HandlesAccountType(clusterGroup.AccountType));
+            IAccountManager accountManager = this.accountManagers.First(am => am.Key == clusterGroup.AccountType);
 
             accountManager.RemoveAccount(clusterGroup.AccountId);
 
@@ -129,7 +132,7 @@ namespace KubeMob.Common.ViewModels
 
         private async Task PopulateClusterGroups(IAccountManager accountManager)
         {
-            IEnumerable<ClusterSummaryGroup> clusterSummaryGroups = await accountManager.GetClusters();
+            IEnumerable<ClusterGroup> clusterSummaryGroups = await accountManager.GetClusters();
 
             clusterSummaryGroups.ForEach(c => this.ClusterGroups.Add(c));
         }

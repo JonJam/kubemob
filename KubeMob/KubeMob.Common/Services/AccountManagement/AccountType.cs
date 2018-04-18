@@ -1,4 +1,4 @@
-﻿namespace KubeMob.Common.Services.Kubernetes
+﻿namespace KubeMob.Common.Services.AccountManagement
 {
     public enum AccountType
     {

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using KubeMob.Common.Pages;
+using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,22 +14,41 @@ namespace KubeMob.Common.Services.Navigation
     /// </summary>
     public class NavigationService : INavigationService
     {
+        private readonly IAppSettings appSettings;
+
         [Preserve]
-        public NavigationService()
-        {
-        }
+        public NavigationService(
+            IAppSettings appSettings) => this.appSettings = appSettings;
 
         public Task Initialize()
         {
-            // TODO Check if selected cluster previously, then navigate to cluster page.
-            return NavigationService.InternalNavigate(typeof(ClustersPage));
+            // TODO Test
+            Type pageType = typeof(ClustersPage);
+
+            if (!this.appSettings.GetAzureAccounts().Any())
+            {
+                // No accounts.
+                pageType = typeof(AddAccountPage);
+            }
+            else if (this.appSettings.SelectedCluster != null)
+            {
+                // Selected cluster.
+                pageType = typeof(ClustersPage);
+            }
+
+            return NavigationService.InternalNavigate(pageType);
         }
 
         public Task NavigateToAddAccountPage() => NavigationService.InternalNavigate(typeof(AddAccountPage));
 
         public Task NavigateToAddEditAzureAccountPage(string id = null) => NavigationService.InternalNavigate(typeof(AddEditAzureAccountPage), id);
 
-        public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+        public async Task NavigateToClusterPage()
+        {
+            await NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+
+            await this.RemoveBackStack();
+        }
 
         public async Task GoBackToClusterPage()
         {

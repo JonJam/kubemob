@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 
 namespace KubeMob.Common.Services.Settings
@@ -8,6 +9,8 @@ namespace KubeMob.Common.Services.Settings
     {
         Uri AzureHelpLink { get; }
 
+        Cluster SelectedCluster { get; set; }
+        
         List<AzureAccount> GetAzureAccounts();
 
         void SetAzureAccounts(List<AzureAccount> accounts);

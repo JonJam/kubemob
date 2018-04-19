@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
-             xmlns:extensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
-             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-             x:Class="KubeMob.Common.Pages.ClusterMasterPage"
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
+                          xmlns:extensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.ClusterMasterPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="☰">
 
@@ -60,4 +61,4 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-</ContentPage>
+</base:ExtendedContentPage>

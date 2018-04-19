@@ -1,14 +1,11 @@
-﻿using Xamarin.Forms;
+﻿using KubeMob.Common.Pages.Base;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages
 {
-    public partial class PodDetailsPage : ContentPage
+    public partial class PodDetailsPage : ExtendedContentPage
     {
         [Preserve]
-        public PodDetailsPage()
-        {
-            InitializeComponent();
-        }
+        public PodDetailsPage() => InitializeComponent();
     }
 }

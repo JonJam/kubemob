@@ -25,6 +25,9 @@
     <Compile Update="Pages\AddAccountPage.xaml.cs">
       <DependentUpon>AddAccountPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Base\ExtendedContentPage.xaml.cs">
+      <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>
     </Compile>
@@ -60,6 +63,9 @@
     <EmbeddedResource Update="Pages\AddAccountPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Base\ExtendedContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\ClusterMasterDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -72,7 +78,7 @@
     <EmbeddedResource Update="Pages\ClustersPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ExtendedNavigationPage.xaml">
+    <EmbeddedResource Update="Pages\Base\ExtendedNavigationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="ResourceDictionaries\Colors.xaml">

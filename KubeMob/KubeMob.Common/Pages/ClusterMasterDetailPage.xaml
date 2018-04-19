@@ -2,7 +2,11 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:pages="clr-namespace:KubeMob.Common.Pages;assembly=KubeMob.Common"
-                  x:Class="KubeMob.Common.Pages.ClusterMasterDetailPage">
+                  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                  xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                  x:Class="KubeMob.Common.Pages.ClusterMasterDetailPage"
+                  ios:Page.UseSafeArea="true" >
+    <!-- Ensuring support for iPhone X: https://blog.xamarin.com/making-ios-11-even-easier-xamarin-forms/-->
 
     <MasterDetailPage.Master>
         <pages:ClusterMasterPage 
@@ -10,10 +14,10 @@
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <pages:ExtendedNavigationPage>
+        <base:ExtendedNavigationPage>
             <x:Arguments>
                 <pages:ClusterOverviewPage />
             </x:Arguments>
-        </pages:ExtendedNavigationPage>
+        </base:ExtendedNavigationPage>
     </MasterDetailPage.Detail>
 </MasterDetailPage>

@@ -9,10 +9,12 @@ namespace KubeMob.Common.Services.Navigation
     {
         Task Initialize();
 
-        Task NavigateToAddClusterPage();
+        Task NavigateToAddAccountPage();
+
+        Task NavigateToAddEditAzureAccountPage(string id = null);
 
         Task NavigateToClusterPage();
-        
+
         Task NavigateToPodsPage();
 
         Task NavigateToPodDetailPage();
@@ -21,6 +23,6 @@ namespace KubeMob.Common.Services.Navigation
 
         Task RemoveBackStack();
 
-        Task GoBack();
+        Task GoBackToClusterPage();
     }
 }

@@ -1,22 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
+             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
-             Title="Clusters">
+             Title="{markupExtensions:Translate ClustersPage_Title}">
+    <ContentPage.Behaviors>
+        <behaviors:EventToCommandBehavior  
+            EventName="Appearing"
+            Command="{Binding OnAppearingCommand}" />
+    </ContentPage.Behaviors>
 
-    <StackLayout
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            x:Name="AddAccount"
+            Icon="add_white.png"
+            Text="{markupExtensions:Translate ClustersPage_AddAccount_ToolbarItem}"
+            Command="{Binding AddAccountCommand}"/>
+
+        <views:BindableToolbarItem 
+            x:Name="ViewAccounts"
+            Icon="view_module_white.png"
+            Text="{markupExtensions:Translate ClustersPage_ViewToggle_ToolbarItem}"
+            Command="{Binding ViewToggleCommand}" 
+            IsVisible="{Binding ViewAccounts, Converter={StaticResource InverseBoolConverter}}"/>
+
+        <views:BindableToolbarItem
+            x:Name="ViewClusters"
+            Icon="view_list_white.png"
+            Text="{markupExtensions:Translate ClustersPage_ViewToggle_ToolbarItem}"
+            Command="{Binding ViewToggleCommand}"
+            IsVisible="{Binding ViewAccounts}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid
         CompressedLayout.IsHeadless="true">
-        <Button 
-            Text="Add Cluster"
-            Command="{Binding AddClusterCommand}">
-        </Button>
 
-        <Button 
-            Text="Select Cluster"
-            Command="{Binding SelectClusterCommand}">
-        </Button>
-    </StackLayout>
+        <StackLayout
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            CompressedLayout.IsHeadless="true">
 
+            <StackLayout
+                IsVisible="{Binding HasClusterGroups}"
+                CompressedLayout.IsHeadless="true">
+
+                <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->
+                <ListView
+                    x:Name="Clusters"
+                    ItemsSource="{Binding ClusterGroups}"
+                    GroupDisplayBinding="{Binding Title}"
+                    GroupShortNameBinding="{Binding ShortName}"
+                    IsVisible="{Binding ViewAccounts, Converter={StaticResource InverseBoolConverter}}"
+                    IsGroupingEnabled="True"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True"
+                    CachingStrategy="RecycleElement">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="ItemTapped"
+                            Command="{Binding ClusterSelectedCommand}"
+                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
+                                Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout
+                                    CompressedLayout.IsHeadless="true">
+                                    <Label 
+                                        Text="{Binding Title}"/>
+                                    <Label
+                                        Text="{Binding ErrorMessage}"
+                                        TextColor="{StaticResource ErrorColor}"
+                                        IsVisible="{Binding HasErrorMessage}" />
+                                    <Label
+                                        Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
+                                        IsVisible="{Binding IsEmpty}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                </ListView>
+
+                <ListView
+                    x:Name="Accounts"
+                    ItemsSource="{Binding ClusterGroups}"
+                    IsVisible="{Binding ViewAccounts}"
+                    SeparatorVisibility="None"
+                    CachingStrategy="RecycleElement">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="ItemTapped"
+                            Command="{Binding AccountSelectedCommand}"
+                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem
+                                        Command="{Binding BindingContext.EditAccountCommand, Source={x:Reference Accounts}}"
+                                        CommandParameter="{Binding .}"
+                                        Icon="edit_white.png"
+                                        Text="{markupExtensions:Translate ClustersPage_Accounts_Edit_MenuItemText}"/>
+                                    <MenuItem 
+                                        Command="{Binding BindingContext.DeleteAccountCommand, Source={x:Reference Accounts}}"
+                                        CommandParameter="{Binding .}"
+                                        Icon="delete_white.png"
+                                        Text="{markupExtensions:Translate ClustersPage_Accounts_Delete_MenuItemText}"
+                                        IsDestructive="True" />
+                                </ViewCell.ContextActions>
+                                <Label 
+                                    Text="{Binding Title}"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Label
+                Text="{markupExtensions:Translate ClustersPage_Clusters_NoAccountsMessage}"
+                IsVisible="{Binding HasClusterGroups, Converter={StaticResource InverseBoolConverter}}"/>
+        </StackLayout>
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
 </ContentPage>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using KubeMob.Common.Pages;
+using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,20 +13,47 @@ namespace KubeMob.Common.Services.Navigation
     /// </summary>
     public class NavigationService : INavigationService
     {
+        private readonly IAppSettings appSettings;
+
         [Preserve]
-        public NavigationService()
-        {
-        }
+        public NavigationService(
+            IAppSettings appSettings) => this.appSettings = appSettings;
 
         public Task Initialize()
         {
-            // TODO Check if selected cluster previously, then navigate to cluster page.
-            return NavigationService.InternalNavigate(typeof(ClustersPage));
+            Type pageType = typeof(ClustersPage);
+
+            if (this.appSettings.SelectedCluster != null)
+            {
+                // Selected cluster.
+                pageType = typeof(ClusterMasterDetailPage);
+            }
+
+            return NavigationService.InternalNavigate(pageType);
         }
 
-        public Task NavigateToAddClusterPage() => NavigationService.InternalNavigate(typeof(AddClusterPage));
+        public Task NavigateToAddAccountPage() => NavigationService.InternalNavigate(typeof(AddAccountPage));
 
-        public Task NavigateToClusterPage() => NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+        public Task NavigateToAddEditAzureAccountPage(string id = null) => NavigationService.InternalNavigate(typeof(AddEditAzureAccountPage), id);
+
+        public async Task NavigateToClusterPage()
+        {
+            await NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+
+            await this.RemoveBackStack();
+        }
+
+        public async Task GoBackToClusterPage()
+        {
+            if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
+            {
+                do
+                {
+                    await mainPage.PopAsync();
+                }
+                while (mainPage.CurrentPage.GetType() != typeof(ClustersPage));
+            }
+        }
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 
@@ -56,16 +84,6 @@ namespace KubeMob.Common.Services.Navigation
             return Task.CompletedTask;
         }
 
-        public Task GoBack()
-        {
-            if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
-            {
-                mainPage.PopAsync();
-            }
-
-            return Task.CompletedTask;
-        }
-
         private static async Task InternalNavigate(Type pageType, object parameter = null)
         {
             if (NavigationService.IsCurrentlyOnPage(pageType))
@@ -73,28 +91,28 @@ namespace KubeMob.Common.Services.Navigation
                 return;
             }
 
-            // TODO Performance improvement by caching pages.
+            // TODO Performance improvement by caching pages ??
             // See https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/navigation#handling-navigation-requests for more information.
             Page page = Activator.CreateInstance(pageType) as Page;
 
-            if (Application.Current.MainPage is ClusterMasterDetailPage masterDetailPage)
+            switch (Application.Current.MainPage)
             {
-                await (masterDetailPage.Detail as NavigationPage).PushAsync(page);
-            }
-            else if (Application.Current.MainPage is ExtendedNavigationPage navigationPage)
-            {
-                if (page is ClusterMasterDetailPage clusterPage)
-                {
-                    Application.Current.MainPage = page;
-                }
-                else
-                {
-                    await navigationPage.PushAsync(page);
-                }
-            }
-            else
-            {
-                Application.Current.MainPage = new ExtendedNavigationPage(page);
+                case ClusterMasterDetailPage masterDetailPage:
+                    await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
+                    break;
+                case ExtendedNavigationPage navigationPage:
+                    if (page is ClusterMasterDetailPage)
+                    {
+                        Application.Current.MainPage = page;
+                    }
+                    else
+                    {
+                        await navigationPage.PushAsync(page);
+                    }
+                    break;
+                default:
+                    Application.Current.MainPage = page is ClusterMasterDetailPage ? page : new ExtendedNavigationPage(page);
+                    break;
             }
 
             if (page.BindingContext is ViewModelBase viewModel)

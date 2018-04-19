@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Resources;
 using KubeMob.Common.Services.Localization;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace KubeMob.Common.MarkupExtensions
@@ -11,6 +12,7 @@ namespace KubeMob.Common.MarkupExtensions
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization?tabs=vswin#localizing-xaml"/>
     /// </summary>
     [ContentProperty("Text")]
+    [Preserve(AllMembers = true)]
     public class TranslateExtension : IMarkupExtension
     {
         private readonly CultureInfo ci;

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+             x:Class="KubeMob.Common.Pages.AddAccountPage"
+             common:ViewModelLocator.AutoWireViewModel="true"
+             Title="{markupExtensions:Translate AddAccountPage_Title}">
+
+    <StackLayout
+        CompressedLayout.IsHeadless="true">
+        <Button 
+            x:Name="AddAzureAccount"
+            Text="{markupExtensions:Translate AddAccountPage_AddAzureAccount_Btn}"
+            Image="azure_logo.png"
+            Command="{Binding AddAzureAccountCommand}">
+        </Button>
+    </StackLayout>
+</ContentPage>

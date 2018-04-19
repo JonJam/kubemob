@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:resourceDictionaries="clr-namespace:KubeMob.Common.ResourceDictionaries;assembly=KubeMob.Common"
                     x:Class="KubeMob.Common.ResourceDictionaries.Styles">
+
+    <ResourceDictionary.MergedDictionaries>
+        <resourceDictionaries:Colors />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ValidationErrorLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
+    </Style>
 
 </ResourceDictionary>

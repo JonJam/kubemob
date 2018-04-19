@@ -10,7 +10,7 @@ namespace KubeMob.Common.Pages
         {
             this.InitializeComponent();
 
-            // TODO Try refactor this into ViewModel.
+            // TODO Try refactor this into ViewModel.??
             this.MasterPage.MenuListView.ItemSelected += this.OnMenuItemSelected;
         }
 

@@ -117,10 +117,115 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddAccountPage_AddAzureAccount_Btn" xml:space="preserve">
+    <value>Microsoft Azure</value>
+  </data>
+  <data name="AddAccountPage_Title" xml:space="preserve">
+    <value>Add account</value>
+  </data>
+  <data name="AddEditAzureAccountPage_ClientId_IsNotNullOrEmptyRule_Message" xml:space="preserve">
+    <value>Client ID is required.</value>
+  </data>
+  <data name="AddEditAzureAccountPage_ClientId_Label" xml:space="preserve">
+    <value>Client ID</value>
+  </data>
+  <data name="AddEditAzureAccountPage_ClientId_Placeholder" xml:space="preserve">
+    <value>Enter a client ID</value>
+  </data>
+  <data name="AddEditAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message" xml:space="preserve">
+    <value>Client secret is required.</value>
+  </data>
+  <data name="AddEditAzureAccountPage_ClientSecret_Label" xml:space="preserve">
+    <value>Client secret</value>
+  </data>
+  <data name="AddEditAzureAccountPage_ClientSecret_Placeholder" xml:space="preserve">
+    <value>Enter a client secret</value>
+  </data>
+  <data name="AddEditAzureAccountPage_Environment_Label" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="AddEditAzureAccountPage_Environment_Title" xml:space="preserve">
+    <value>Select a environment</value>
+  </data>
+  <data name="AddEditAzureAccountPage_Help" xml:space="preserve">
+    <value>Please enter the details for a service principal that has access to resources in your Microsoft Azure account. You can find out more about Service Princpial by tapping on the info button.</value>
+  </data>
+  <data name="AddEditAzureAccountPage_Information_ToolbarItem" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="AddEditAzureAccountPage_SaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="AddEditAzureAccountPage_TenantId_IsNotNullOrEmptyRule_Message" xml:space="preserve">
+    <value>Tenant ID is required.</value>
+  </data>
+  <data name="AddEditAzureAccountPage_TenantId_Label" xml:space="preserve">
+    <value>Tenant ID</value>
+  </data>
+  <data name="AddEditAzureAccountPage_TenantId_Placeholder" xml:space="preserve">
+    <value>Enter a tenant ID</value>
+  </data>
+  <data name="AddEditAzureAccountPage_Title" xml:space="preserve">
+    <value>Microsoft Azure account</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>kubemob</value>
   </data>
+  <data name="AzureAccountManager_GetClusters_AuthenticationErrorMessage" xml:space="preserve">
+    <value>There seems to be a problem with this account.  Please update.</value>
+  </data>
+  <data name="AzureAccountManager_GetClusters_NoInternetErrorMessage" xml:space="preserve">
+    <value>We are having issues connecting to this account right now. Please try again.</value>
+  </data>
+  <data name="AzureAccountManager_TryAddCredentials_DuplicateTenantId" xml:space="preserve">
+    <value>An existing account already exists for this tenant.</value>
+  </data>
+  <data name="AzureAccountManager_TryAddCredentials_InvalidClientId" xml:space="preserve">
+    <value>Client specified cannot be found.</value>
+  </data>
+  <data name="AzureAccountManager_TryAddCredentials_InvalidClientSecret" xml:space="preserve">
+    <value>Client secret is invalid.</value>
+  </data>
+  <data name="AzureAccountManager_TryAddCredentials_InvalidTenantId" xml:space="preserve">
+    <value>Tenant specified cannot be found.</value>
+  </data>
+  <data name="AzureAccountManager_TryAddCredentials_NoInternet" xml:space="preserve">
+    <value>Oh snap! We are having issues connecting to Azure. Please try again.</value>
+  </data>
+  <data name="AzureEnvironment_China" xml:space="preserve">
+    <value>China</value>
+  </data>
+  <data name="AzureEnvironment_German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="AzureEnvironment_Global" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="AzureEnvironment_USGovernment" xml:space="preserve">
+    <value>US Government</value>
+  </data>
   <data name="ClusterMaster_Pods" xml:space="preserve">
     <value>Pods</value>
+  </data>
+  <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ClustersPage_Accounts_Edit_MenuItemText" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ClustersPage_AddAccount_ToolbarItem" xml:space="preserve">
+    <value>Add account</value>
+  </data>
+  <data name="ClustersPage_Clusters_EmptyGroupMessage" xml:space="preserve">
+    <value>This account contains no clusters.</value>
+  </data>
+  <data name="ClustersPage_Clusters_NoAccountsMessage" xml:space="preserve">
+    <value>Nothing here right now. Add an account.</value>
+  </data>
+  <data name="ClustersPage_Title" xml:space="preserve">
+    <value>Clusters</value>
+  </data>
+  <data name="ClustersPage_ViewToggle_ToolbarItem" xml:space="preserve">
+    <value>Toggle view</value>
   </data>
 </root>

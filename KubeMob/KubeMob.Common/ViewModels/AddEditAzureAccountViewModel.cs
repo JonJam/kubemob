@@ -57,7 +57,8 @@ namespace KubeMob.Common.ViewModels
                 {
                     new IsNotNullOrEmptyRule<string>
                     {
-                        ValidationMessage = AppResources.AddEditAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message
+                        ValidationMessage =
+                            AppResources.AddEditAzureAccountPage_ClientSecret_IsNotNullOrEmptyRule_Message
                     }
                 });
         }

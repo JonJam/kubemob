@@ -16,6 +16,21 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.AccountManagement.Azure
 {
+    // <summary>
+    // Had to install Microsoft.IdentityModel.Clients.ActiveDirectory Nuget directly in iOS, as without it a TypeInitializationException is thrown.
+    // 
+    // Microsoft.Azure.Management includes built in retry logic.
+    //
+    // Configured linker to skip the following otherwise causes methods in this class to fail:
+    // - Microsoft.Azure.Management.Fluent
+    // - Microsoft.Azure.Management.ResourceManager.Fluent
+    // - Microsoft.Azure.Management.ContainerService.Fluent
+    // - Microsoft.Rest.ClientRuntime.Azure
+    // - Microsoft.Rest.ClientRuntime.Azure.Authentication
+    // - Microsoft.IdentityModel.Clients.ActiveDirectory
+    // - Microsoft.Rest.ClientRuntime
+    // - Newtonsoft.Json
+    // </summary>
     public class AzureAccountManager : IAzureAccountManager
     {
         private readonly IAppSettings appSettings;
@@ -45,7 +60,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     AppResources.AzureEnvironment_USGovernment)
             };
         }
-        
+
         public AccountType Key { get; } = AccountType.Azure;
 
         public IList<CloudEnvironment> Environments { get; }
@@ -53,7 +68,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
         public void SetSelectedCluster(Cluster cluster) => this.appSettings.SelectedCluster = cluster;
-        
+
         public (bool isValid, string message) TrySaveCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
@@ -139,8 +154,6 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                         account.ClientId,
                         account.ClientSecret);
 
-                    // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
-                    // - Microsoft.Azure.Management.ContainerService.Fluent
                     // TODO Handle paging ??
                     IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
 
@@ -205,14 +218,6 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
             // TODO Add support for specifying subscription ID ??
             // TODO Check permissions to AKS ??
-            // Includes built in retry logic. Configured linker to skip the following otherwise causes this to fail:
-            // - Microsoft.Azure.Management.Fluent
-            // - Microsoft.Azure.Management.ResourceManager.Fluent
-            // - Microsoft.Rest.ClientRuntime.Azure
-            // - Microsoft.Rest.ClientRuntime.Azure.Authentication
-            // - Microsoft.IdentityModel.Clients.ActiveDirectory
-            // - Microsoft.Rest.ClientRuntime
-            // - Newtonsoft.Json
             return Microsoft.Azure.Management.Fluent.Azure.Authenticate(credentials).WithDefaultSubscription();
         }
     }

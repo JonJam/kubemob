@@ -76,7 +76,6 @@ namespace KubeMob.Common.ViewModels
 
         private async Task OnClusterSelected(object obj)
         {
-            // TODO Test this and the methods called.
             Cluster cluster = (Cluster)obj;
 
             IAccountManager accountManager = this.accountManagers

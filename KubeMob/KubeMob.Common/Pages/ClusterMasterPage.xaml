@@ -6,7 +6,7 @@
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClusterMasterPage"
              common:ViewModelLocator.AutoWireViewModel="true"
-             Title="Cluster Master">
+             Title="☰">
 
     <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->
     <ListView

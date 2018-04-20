@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
-             xmlns:effects="clr-namespace:KubeMob.Common.Effects;assembly=KubeMob.Common"
-             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
-             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-             xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
-             x:Class="KubeMob.Common.Pages.AddEditAzureAccountPage"
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
+                          xmlns:effects="clr-namespace:KubeMob.Common.Effects;assembly=KubeMob.Common"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.AddEditAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate AddEditAzureAccountPage_Title}">
 
@@ -125,4 +126,4 @@
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
     </Grid>
-</ContentPage>
+</base:ExtendedContentPage>

@@ -1,10 +1,11 @@
 ﻿
+using KubeMob.Common.Pages.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages
 {
-    public partial class ClusterMasterPage : ContentPage
+    public partial class ClusterMasterPage : ExtendedContentPage
     {
         [Preserve]
         public ClusterMasterPage()

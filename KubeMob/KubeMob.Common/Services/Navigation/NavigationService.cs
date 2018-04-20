@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using KubeMob.Common.Pages;
+using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;

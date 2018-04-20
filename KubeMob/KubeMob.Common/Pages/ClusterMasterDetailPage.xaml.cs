@@ -9,7 +9,7 @@ namespace KubeMob.Common.Pages
         public ClusterMasterDetailPage()
         {
             this.InitializeComponent();
-
+            
             // TODO Try refactor this into ViewModel.??
             this.MasterPage.MenuListView.ItemSelected += this.OnMenuItemSelected;
         }

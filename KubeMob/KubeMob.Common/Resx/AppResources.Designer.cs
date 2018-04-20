@@ -322,11 +322,20 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Workloads.
+        /// </summary>
+        internal static string ClusterMasterVIewModel_Workloads {
+            get {
+                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
-        internal static string ClusterMaster_Pods {
+        internal static string ClusterMasterVIewModel_Workloads_Pods {
             get {
-                return ResourceManager.GetString("ClusterMaster_Pods", resourceCulture);
+                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads_Pods", resourceCulture);
             }
         }
         

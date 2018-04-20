@@ -13,6 +13,9 @@
     <ListView
         x:Name="MenuItems"
         ItemsSource="{Binding MenuItems}"
+        GroupDisplayBinding="{Binding Title}"
+        GroupShortNameBinding="{Binding ShortName}"
+        IsGroupingEnabled="True"
         SeparatorVisibility="None"
         HasUnevenRows="true"
         CachingStrategy="RecycleElement">
@@ -44,6 +47,12 @@
                     Style="{DynamicResource SubtitleStyle}"/>
             </Grid>
         </ListView.Header>
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <TextCell 
+                    Text="{Binding Title}" />
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

@@ -204,7 +204,10 @@
   <data name="AzureEnvironment_USGovernment" xml:space="preserve">
     <value>US Government</value>
   </data>
-  <data name="ClusterMaster_Pods" xml:space="preserve">
+  <data name="ClusterMasterVIewModel_Workloads" xml:space="preserve">
+    <value>Workloads</value>
+  </data>
+  <data name="ClusterMasterVIewModel_Workloads_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">

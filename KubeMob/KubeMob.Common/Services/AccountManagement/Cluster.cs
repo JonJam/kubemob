@@ -10,7 +10,7 @@ namespace KubeMob.Common.Services.AccountManagement
             string id,
             string name,
             string accountId,
-            AccountType accountType)
+            CloudAccountType accountType)
         {
             this.Id = id;
             this.Name = name;
@@ -28,6 +28,6 @@ namespace KubeMob.Common.Services.AccountManagement
         public string AccountId { get; }
 
         [JsonProperty("accountType")]
-        public AccountType AccountType { get; }
+        public CloudAccountType AccountType { get; }
     }
 }

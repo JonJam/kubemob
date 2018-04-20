@@ -10,6 +10,7 @@ using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
+using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace KubeMob.Common
@@ -64,6 +65,7 @@ namespace KubeMob.Common
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton(CrossSettings.Current);
+            serviceCollection.AddSingleton(AccountStore.Create());
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
@@ -84,6 +86,11 @@ namespace KubeMob.Common
             // - AutoMapper
             Mapper.Initialize(cfg =>
             {
+                cfg.CreateMap<CloudAccount, Account>()
+                    .ConstructUsing((ca) => new Account(ca.Id, ca.Properties));
+
+                cfg.CreateMap<Account, AzureAccount>()
+                    .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
             });
         }
 

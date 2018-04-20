@@ -2,8 +2,5 @@
 <NavigationPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    x:Class="KubeMob.Common.Pages.Base.ExtendedNavigationPage"
-    ios:Page.UseSafeArea="true" >
-    <!-- Ensuring support for iPhone X: https://blog.xamarin.com/making-ios-11-even-easier-xamarin-forms/-->
+    x:Class="KubeMob.Common.Pages.Base.ExtendedNavigationPage">
 </NavigationPage>

@@ -1,13 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                  xmlns:pages="clr-namespace:KubeMob.Common.Pages;assembly=KubeMob.Common"
-                  xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
                   xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
-                  x:Class="KubeMob.Common.Pages.ClusterMasterDetailPage"
-                  ios:Page.UseSafeArea="true" >
-    <!-- Ensuring support for iPhone X: https://blog.xamarin.com/making-ios-11-even-easier-xamarin-forms/-->
-
+                  xmlns:pages="clr-namespace:KubeMob.Common.Pages;assembly=KubeMob.Common"
+                  x:Class="KubeMob.Common.Pages.ClusterMasterDetailPage">
     <MasterDetailPage.Master>
         <pages:ClusterMasterPage 
             x:Name="MasterPage"/>

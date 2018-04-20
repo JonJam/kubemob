@@ -92,7 +92,7 @@ namespace KubeMob.Common.ViewModels
 
             switch (clusterGroup.AccountType)
             {
-                case AccountType.Azure:
+                case CloudAccountType.Azure:
                     await this.navigationService.NavigateToAddEditAzureAccountPage(clusterGroup.AccountId);
                     break;
                 default:

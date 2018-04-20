@@ -1,6 +1,6 @@
 ﻿namespace KubeMob.Common.Services.AccountManagement
 {
-    public enum AccountType
+    public enum CloudAccountType
     {
         Azure
     }

@@ -5,7 +5,7 @@ namespace KubeMob.Common.Services.AccountManagement
 {
     public interface IAccountManager
     {
-        AccountType Key { get; }
+        CloudAccountType Key { get; }
 
         IList<CloudEnvironment> Environments { get; }
 
@@ -14,7 +14,7 @@ namespace KubeMob.Common.Services.AccountManagement
         Task<IEnumerable<ClusterGroup>> GetClusters();
 
         void SetSelectedCluster(Cluster cluster);
-        
-        void RemoveAccount(string id);
+
+        Task RemoveAccount(string id);
     }
 }

@@ -9,7 +9,7 @@ namespace KubeMob.Common.Services.AccountManagement
     {
         public ClusterGroup(
             string accountId,
-            AccountType accountType,
+            CloudAccountType accountType,
             string title)
         {
             this.AccountId = accountId;
@@ -19,7 +19,7 @@ namespace KubeMob.Common.Services.AccountManagement
 
         public string AccountId { get; }
 
-        public AccountType AccountType { get; }
+        public CloudAccountType AccountType { get; }
 
         public string Title { get; }
 

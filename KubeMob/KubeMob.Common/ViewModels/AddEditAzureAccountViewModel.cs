@@ -107,31 +107,28 @@ namespace KubeMob.Common.ViewModels
 
         public ValidatableObject<string> ClientSecret { get; }
 
-        public override Task Initialize(object navigationData)
+        public override async Task Initialize(object navigationData)
         {
             if (navigationData is string accountId)
             {
                 // Existing account to edit, populate fields and make tenant read-only.
                 this.IsEditing = true;
 
-                AzureAccount azureAccount = this.azureAccountManager.GetAccount(accountId);
+                AzureAccount azureAccount = await this.azureAccountManager.GetAccount(accountId);
 
                 this.SelectedEnvironment = this.Environments.First(e => e.Id == azureAccount.EnvironmentId);
                 this.TenantId.Value = azureAccount.TenantId;
                 this.ClientId.Value = azureAccount.ClientId;
                 this.ClientSecret.Value = azureAccount.ClientSecret;
             }
-
-            return base.Initialize(navigationData);
         }
 
         private async Task SaveAccount()
         {
             this.IsBusy = true;
             this.TopLevelErrorMessage = null;
-
-            // Since TrySaveCredentials is not async due to Azure SDK, adding delay to give time for
-            // progress indicator to be displayed.
+            
+            // Adding delay to give time for progress indicator to be displayed.
             await Task.Delay(100);
 
             if (this.Validate())
@@ -141,7 +138,7 @@ namespace KubeMob.Common.ViewModels
                 string client = this.ClientId.Value;
                 string secret = this.ClientSecret.Value;
 
-                (bool isValid, string message) = this.azureAccountManager.TrySaveCredentials(
+                (bool isValid, string message) = await this.azureAccountManager.TrySaveCredentials(
                     env,
                     tenant,
                     client,

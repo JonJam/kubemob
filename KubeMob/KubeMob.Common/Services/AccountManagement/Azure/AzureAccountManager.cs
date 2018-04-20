@@ -61,7 +61,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             };
         }
 
-        public AccountType Key { get; } = AccountType.Azure;
+        public CloudAccountType Key { get; } = CloudAccountType.Azure;
 
         public IList<CloudEnvironment> Environments { get; }
 
@@ -69,14 +69,15 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public void SetSelectedCluster(Cluster cluster) => this.appSettings.SelectedCluster = cluster;
 
-        public (bool isValid, string message) TrySaveCredentials(
+        public async Task<(bool isValid, string message)> TrySaveCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,
             string clientId,
             string clientSecret,
             bool isEditing)
         {
-            List<AzureAccount> accounts = this.appSettings.GetAzureAccounts();
+            IEnumerable<AzureAccount> accounts = await this.appSettings
+                .GetCloudAccounts<AzureAccount>(CloudAccountType.Azure);
 
             if (!isEditing &&
                 accounts.Any(a => a.TenantId == tenantId))
@@ -90,23 +91,13 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                 IAzure azure = AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
 
                 string subscriptionName = azure.GetCurrentSubscription().DisplayName;
-
-                if (isEditing)
-                {
-                    // If editing, remove the existing stored value before adding
-                    accounts.Remove(accounts.Find(a => a.TenantId == tenantId));
-                }
-
-                accounts.Add(new AzureAccount()
-                {
-                    Name = subscriptionName,
-                    ClientId = clientId,
-                    ClientSecret = clientSecret,
-                    EnvironmentId = cloudEnvironment.Id,
-                    TenantId = tenantId
-                });
-
-                this.appSettings.SetAzureAccounts(accounts);
+                
+                await this.appSettings.AddOrUpdateCloudAccount(new AzureAccount(
+                    subscriptionName,
+                    cloudEnvironment.Id,
+                    tenantId,
+                    clientId,
+                    clientSecret));
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
             {
@@ -133,17 +124,24 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             return (true, string.Empty);
         }
 
-        public AzureAccount GetAccount(string id) => this.appSettings.GetAzureAccounts().Find((a) => a.TenantId == id);
+        public async Task<AzureAccount> GetAccount(string id)
+        {
+            IEnumerable<AzureAccount> azureAccounts = await this.appSettings
+                .GetCloudAccounts<AzureAccount>(CloudAccountType.Azure);
+
+            return azureAccounts.First((a) => a.TenantId == id);
+        }
 
         public async Task<IEnumerable<ClusterGroup>> GetClusters()
         {
             List<ClusterGroup> groups = new List<ClusterGroup>();
 
-            foreach (AzureAccount account in this.appSettings.GetAzureAccounts())
+            foreach (AzureAccount account in await this.appSettings
+                .GetCloudAccounts<AzureAccount>(CloudAccountType.Azure))
             {
                 ClusterGroup group = new ClusterGroup(
                     account.TenantId,
-                    AccountType.Azure,
+                    CloudAccountType.Azure,
                     account.Name);
 
                 try
@@ -157,7 +155,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     // TODO Handle paging ??
                     IPagedCollection<IKubernetesCluster> clusters = await azure.KubernetesClusters.ListAsync();
 
-                    group.AddRange(clusters.Select(c => new Cluster(c.Id, c.Name, account.TenantId, AccountType.Azure)));
+                    group.AddRange(clusters.Select(c => new Cluster(c.Id, c.Name, account.TenantId, CloudAccountType.Azure)));
                 }
                 catch (AdalServiceException)
                 {
@@ -177,16 +175,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             return groups;
         }
 
-        public void RemoveAccount(string id)
-        {
-            List<AzureAccount> accounts = this.appSettings.GetAzureAccounts();
-
-            AzureAccount accountToRemove = accounts.Find((a) => a.TenantId == id);
-
-            accounts.Remove(accountToRemove);
-
-            this.appSettings.SetAzureAccounts(accounts);
-        }
+        public Task RemoveAccount(string id) => this.appSettings.RemoveCloudAccount(id);
 
         //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);
         //var b = kubernetesCluster.UserKubeConfigContent;

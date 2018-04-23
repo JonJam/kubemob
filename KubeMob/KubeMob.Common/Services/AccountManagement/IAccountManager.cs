@@ -11,10 +11,12 @@ namespace KubeMob.Common.Services.AccountManagement
 
         void LaunchHelp();
 
+        Task RemoveAccount(string id);
+
         Task<IEnumerable<ClusterGroup>> GetClusters();
 
         void SetSelectedCluster(Cluster cluster);
 
-        Task RemoveAccount(string id);
+        Task<byte[]> GetSelectedClusterKubeConfigContent();
     }
 }

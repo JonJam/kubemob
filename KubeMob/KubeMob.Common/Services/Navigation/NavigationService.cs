@@ -57,9 +57,7 @@ namespace KubeMob.Common.Services.Navigation
         }
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
-
-        public Task NavigateToPodDetailPage() => NavigationService.InternalNavigate(typeof(PodDetailsPage));
-
+        
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

@@ -34,7 +34,7 @@
     <AndroidSupportedAbis />
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper</AndroidLinkSkip>
+    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper;KubernetesClient</AndroidLinkSkip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,7 +50,7 @@
     <AndroidSupportedAbis />
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper</AndroidLinkSkip>
+    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper;KubernetesClient</AndroidLinkSkip>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="KubernetesClient">
+      <Version>0.7.0-beta</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Azure.Management.Fluent">
       <Version>1.8.0</Version>
     </PackageReference>

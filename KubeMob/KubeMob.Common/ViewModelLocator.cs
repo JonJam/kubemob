@@ -5,6 +5,7 @@ using System.Resources;
 using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
@@ -59,7 +60,6 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
-            serviceCollection.AddTransient<PodDetailsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -72,6 +72,8 @@ namespace KubeMob.Common
         {
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
+
+            serviceCollection.AddSingleton<IKubernetesService, KubernetesService>();
 
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();

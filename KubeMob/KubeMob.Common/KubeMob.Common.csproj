@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.1.1" />
+    <PackageReference Include="KubernetesClient" Version="0.7.0-beta" />
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.8.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="6.8.2.4717" />
@@ -31,9 +32,6 @@
     </Compile>
     <Compile Update="Pages\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\PodDetailsPage.xaml.cs">
-      <DependentUpon>PodDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ClusterOverviewPage.xaml.cs">
       <DependentUpon>ClusterOverviewPage.xaml</DependentUpon>

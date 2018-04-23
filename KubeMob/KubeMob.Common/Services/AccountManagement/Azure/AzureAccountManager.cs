@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -91,7 +92,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                 IAzure azure = AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
 
                 string subscriptionName = azure.GetCurrentSubscription().DisplayName;
-                
+
                 await this.appSettings.AddOrUpdateCloudAccount(new AzureAccount(
                     subscriptionName,
                     cloudEnvironment.Id,
@@ -177,18 +178,48 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public Task RemoveAccount(string id) => this.appSettings.RemoveCloudAccount(id);
 
-        //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);
-        //var b = kubernetesCluster.UserKubeConfigContent;
-        ////var c = kubernetesCluster.AdminKubeConfigContent;
+        public async Task<byte[]> GetSelectedClusterKubeConfigContent()
+        {
+            Cluster selectedCluster = this.appSettings.SelectedCluster;
+            IEnumerable<AzureAccount> accounts = await this.appSettings.GetCloudAccounts<AzureAccount>(CloudAccountType.Azure);
 
-        //var config = new KubernetesClientConfiguration();
+            AzureAccount account = accounts.First(a => a.Id == selectedCluster.AccountId);
 
-        //    using (Stream stream = new MemoryStream(b))
-        //{
-        //    config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
-        //}
+            // TODO how to handle errors
+            try
+            {
+                IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
+                    account.EnvironmentId,
+                    account.TenantId,
+                    account.ClientId,
+                    account.ClientSecret);
 
-        //IKubernetes client = new Kubernetes(config);
+                IKubernetesCluster kubernetesCluster = await azure.KubernetesClusters.GetByIdAsync(selectedCluster.Id);
+
+                return kubernetesCluster.UserKubeConfigContent;
+            }
+            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
+            {
+                // AADSTS70001 - Invalid client ID.
+                throw;
+            }
+            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70002"))
+            {
+                // AADSTS70002 - Invalid client secret.
+                throw;
+            }
+            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("90002"))
+            {
+                // AADSTS90002 - Tenant doesn't exist.
+                throw;
+            }
+            catch (HttpRequestException e) when (e.InnerException is WebException web &&
+                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
+            {
+                // No internet
+                throw;
+            }
+        }
 
         private static IAzure CreateAuthenticatedClient(
             string environmentId,

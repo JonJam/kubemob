@@ -28,7 +28,7 @@
     <MtouchLink>Full</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper --linkskip=KubernetesClient</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -41,7 +41,7 @@
     <ConsolePause>false</ConsolePause>
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper --linkskip=KubernetesClient</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,7 +58,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>Full</MtouchLink>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper --linkskip=KubernetesClient</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -73,7 +73,7 @@
     <MtouchLink>Full</MtouchLink>
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper --linkskip=KubernetesClient</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -89,7 +89,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>Full</MtouchLink>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper --linkskip=KubernetesClient</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -104,7 +104,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>Full</MtouchLink>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper</MtouchExtraArgs>
+    <MtouchExtraArgs>--linkskip=Microsoft.Azure.Management.Fluent --linkskip=Microsoft.Azure.Management.ResourceManager.Fluent --linkskip=Microsoft.Rest.ClientRuntime.Azure --linkskip=Microsoft.Rest.ClientRuntime.Azure.Authentication --linkskip=Microsoft.IdentityModel.Clients.ActiveDirectory --linkskip=Microsoft.Rest.ClientRuntime --linkskip=Newtonsoft.Json --linkskip=Microsoft.Azure.Management.ContainerService.Fluent --linkskip=AutoMapper --linkskip=KubernetesClient</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />

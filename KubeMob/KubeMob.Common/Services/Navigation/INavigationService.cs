@@ -16,9 +16,7 @@ namespace KubeMob.Common.Services.Navigation
         Task NavigateToClusterPage();
 
         Task NavigateToPodsPage();
-
-        Task NavigateToPodDetailPage();
-
+        
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

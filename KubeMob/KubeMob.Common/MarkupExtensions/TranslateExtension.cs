@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Resources;
 using KubeMob.Common.Services.Localization;
@@ -17,7 +17,7 @@ namespace KubeMob.Common.MarkupExtensions
     {
         private readonly CultureInfo ci;
 
-        public TranslateExtension() => this.ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+        public TranslateExtension() => this.ci = ViewModelLocator.Resolve<ILocalize>().GetCurrentCultureInfo();
 
         public string Text
         {

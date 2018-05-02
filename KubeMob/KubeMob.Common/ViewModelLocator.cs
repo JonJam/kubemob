@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
@@ -6,6 +6,7 @@ using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
@@ -70,6 +71,9 @@ namespace KubeMob.Common
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<ILocalize>());
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesClientFactory>());
+
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
 
@@ -81,8 +85,7 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));
         }
 
-        private static void ConfigureMaps()
-        {
+        private static void ConfigureMaps() =>
             // Using AutoMapper 6.1.1 rather than latest due to build error which is detailled here: https://github.com/AutoMapper/AutoMapper/issues/2455
             // Linker configured to skip the following otherwise causes this to fail:
             // - AutoMapper
@@ -94,7 +97,6 @@ namespace KubeMob.Common
                 cfg.CreateMap<Account, AzureAccount>()
                     .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
             });
-        }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
         {

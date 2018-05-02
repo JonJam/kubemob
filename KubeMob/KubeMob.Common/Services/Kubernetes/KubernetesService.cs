@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,15 +13,18 @@ namespace KubeMob.Common.Services.Kubernetes
     {
         private readonly IAppSettings appSettings;
         private readonly IEnumerable<IAccountManager> accountManagers;
+        private readonly IKubernetesClientFactory kubernetesClientFactory;
 
         // TODO Re-arch how get kube context and setup client.
         [Preserve]
         public KubernetesService(
             IAppSettings appSettings,
-            IEnumerable<IAccountManager> accountManagers)
+            IEnumerable<IAccountManager> accountManagers,
+            IKubernetesClientFactory kubeFactory)
         {
             this.appSettings = appSettings;
             this.accountManagers = accountManagers;
+            this.kubernetesClientFactory = kubeFactory;
         }
         
         public async Task GetPodsSummary()
@@ -36,8 +39,8 @@ namespace KubeMob.Common.Services.Kubernetes
                 config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
             }
 
-            IKubernetes client = new k8s.Kubernetes(config);
-            
+            IKubernetes client = this.kubernetesClientFactory.CreateClient(config);
+
             // TODO Add filter support - ListNamespacedPodAsync
             var list = await client.ListPodForAllNamespacesAsync();
             foreach (var item in list.Items)

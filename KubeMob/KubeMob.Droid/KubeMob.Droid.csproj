@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Services\Kubernetes\KubernetesClientFactory.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +114,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\k8s\src\KubernetesClient\KubernetesClient.csproj">
+      <Project>{5094f681-c0b9-4f0a-91d1-5a1f57a92799}</Project>
+      <Name>KubernetesClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KubeMob.Common\KubeMob.Common.csproj">
       <Project>{ba929cc1-951d-46ef-ba0c-108a234251a2}</Project>
       <Name>KubeMob.Common</Name>

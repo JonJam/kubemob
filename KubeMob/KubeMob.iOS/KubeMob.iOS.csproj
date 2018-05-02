@@ -115,6 +115,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\NoHelpEntryRenderer.cs" />
     <Compile Include="Services\Localization\Localize.cs" />
+    <Compile Include="Services\Kubernetes\KubernetesClientFactory.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -168,6 +169,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\k8s\src\KubernetesClient\KubernetesClient.csproj">
+      <Project>{5094f681-c0b9-4f0a-91d1-5a1f57a92799}</Project>
+      <Name>KubernetesClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KubeMob.Common\KubeMob.Common.csproj">
       <Project>{ba929cc1-951d-46ef-ba0c-108a234251a2}</Project>
       <Name>KubeMob.Common</Name>

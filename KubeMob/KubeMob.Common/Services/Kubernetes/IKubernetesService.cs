@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace KubeMob.Common.Services.Kubernetes
 {
     public interface IKubernetesService
     {
-        Task GetPodsSummary();
+        Task<IList<PodSummary>> GetPodSummaries();
     }
 }

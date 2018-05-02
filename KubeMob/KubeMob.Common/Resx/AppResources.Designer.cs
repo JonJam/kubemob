@@ -401,5 +401,23 @@ namespace KubeMob.Common.Resx {
                 return ResourceManager.GetString("ClustersPage_ViewToggle_ToolbarItem", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no pods..
+        /// </summary>
+        internal static string PodsPage_NoPodsMessage {
+            get {
+                return ResourceManager.GetString("PodsPage_NoPodsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pods.
+        /// </summary>
+        internal static string PodsPage_Title {
+            get {
+                return ResourceManager.GetString("PodsPage_Title", resourceCulture);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using k8s;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.Settings;
@@ -26,8 +27,8 @@ namespace KubeMob.Common.Services.Kubernetes
             this.accountManagers = accountManagers;
             this.kubernetesClientFactory = kubeFactory;
         }
-        
-        public async Task GetPodsSummary()
+
+        public async Task<IList<PodSummary>> GetPodSummaries()
         {
             // TODO Handle errors from this.
             byte[] configContent = await this.GetKubeConfigContent();
@@ -39,23 +40,20 @@ namespace KubeMob.Common.Services.Kubernetes
                 config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
             }
 
+            // TODO Handler errors from this
             IKubernetes client = this.kubernetesClientFactory.CreateClient(config);
 
             // TODO Add filter support - ListNamespacedPodAsync
-            var list = await client.ListPodForAllNamespacesAsync();
-            foreach (var item in list.Items)
-            {
-                string name = item.Metadata.Name;
-                string phase = item.Status.Phase;
-                string nodeName = item.Spec.NodeName;
-            }
+            k8s.Models.V1PodList podList = await client.ListPodForAllNamespacesAsync();
+
+            return Mapper.Map<IList<PodSummary>>(podList.Items);
         }
 
         private Task<byte[]> GetKubeConfigContent()
         {
-            var selectedCluster = this.appSettings.SelectedCluster;
-            
-            var accountManager = this.accountManagers.First(a => a.Key == selectedCluster.AccountType);
+            Cluster selectedCluster = this.appSettings.SelectedCluster;
+
+            IAccountManager accountManager = this.accountManagers.First(a => a.Key == selectedCluster.AccountType);
 
             return accountManager.GetSelectedClusterKubeConfigContent();
         }

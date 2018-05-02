@@ -9,10 +9,11 @@ charset                  = utf-8
 trim_trailing_whitespace = true
 insert_final_newline     = false
 
-[*.cs]
+[*.{cs,xaml}]
 indent_size                                                        = 4
 end_of_line                                                        = crlf
 
+[*.cs]
 # "This." and "Me." qualifiers: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#this_and_me
 dotnet_style_qualification_for_field                               = true : warning
 dotnet_style_qualification_for_property                            = true : warning

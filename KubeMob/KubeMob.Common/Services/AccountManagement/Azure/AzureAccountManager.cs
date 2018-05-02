@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Settings;
 using Microsoft.Azure.Management.ContainerService.Fluent;
@@ -217,7 +217,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                                                  web.Status == WebExceptionStatus.NameResolutionFailure)
             {
                 // No internet
-                throw;
+                throw new NoNetworkException(e.Message, e);
             }
         }
 

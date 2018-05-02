@@ -96,6 +96,9 @@ namespace KubeMob.Common
 
                 cfg.CreateMap<Account, AzureAccount>()
                     .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
+
+                cfg.CreateMap<k8s.Models.V1Pod, PodSummary>()
+                    .ConstructUsing((p) => new PodSummary(p.Metadata.Name, p.Status.Phase));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

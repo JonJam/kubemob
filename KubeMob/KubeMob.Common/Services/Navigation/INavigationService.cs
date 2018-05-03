@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace KubeMob.Common.Services.Navigation
 {
@@ -21,6 +21,6 @@ namespace KubeMob.Common.Services.Navigation
 
         Task RemoveBackStack();
 
-        Task GoBackToClusterPage();
+        Task GoBackToClustersPage();
     }
 }

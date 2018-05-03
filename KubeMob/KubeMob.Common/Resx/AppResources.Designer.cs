@@ -232,15 +232,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are having issues connecting to this account right now. Please try again..
-        /// </summary>
-        internal static string AzureAccountManager_GetClusters_NoInternetErrorMessage {
-            get {
-                return ResourceManager.GetString("AzureAccountManager_GetClusters_NoInternetErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to An existing account already exists for this tenant..
         /// </summary>
         internal static string AzureAccountManager_TryAddCredentials_DuplicateTenantId {
@@ -403,6 +394,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We are having connectivity issues doing that right now. Please try again..
+        /// </summary>
+        internal static string NoInternetErrorMessage {
+            get {
+                return ResourceManager.GetString("NoInternetErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string OkAlertText {
+            get {
+                return ResourceManager.GetString("OkAlertText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no pods..
         /// </summary>
         internal static string PodsPage_NoPodsMessage {
@@ -417,6 +426,24 @@ namespace KubeMob.Common.Resx {
         internal static string PodsPage_Title {
             get {
                 return ResourceManager.GetString("PodsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It appears there is something wrong with the account we are using to connect to this cluster. Please check the account details.
+        /// </summary>
+        internal static string PodsViewModel_AccountInvalid_Message {
+            get {
+                return ResourceManager.GetString("PodsViewModel_AccountInvalid_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account issue.
+        /// </summary>
+        internal static string PodsViewModel_AccountInvalid_Title {
+            get {
+                return ResourceManager.GetString("PodsViewModel_AccountInvalid_Title", resourceCulture);
             }
         }
     }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+             x:Class="KubeMob.Common.Views.NoNetworkIndicator">
+    <Label        
+        BackgroundColor="{StaticResource ErrorColor}"
+        TextColor="White"
+        Text="{markupExtensions:Translate NoInternetErrorMessage}"/>
+</ContentView>

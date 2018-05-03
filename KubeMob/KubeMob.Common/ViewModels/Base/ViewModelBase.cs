@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Base

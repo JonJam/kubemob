@@ -34,6 +34,11 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
     // </summary>
     public class AzureAccountManager : IAzureAccountManager
     {
+        private const string AdalInvalidClientIdServiceErrorCode = "7001";
+        private const string AdalInvalidClientSecretServiceErrorCode = "70002";
+        private const string AdalTenantDoesntExistServiceErrorCode = "90002";
+        private const int AdalRequestTimeoutStatusCode = 408;
+
         private readonly IAppSettings appSettings;
 
         [Preserve]
@@ -64,7 +69,10 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public CloudAccountType Key { get; } = CloudAccountType.Azure;
 
-        public IList<CloudEnvironment> Environments { get; }
+        public IList<CloudEnvironment> Environments
+        {
+            get;
+        }
 
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
@@ -100,20 +108,28 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     clientId,
                     clientSecret));
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientIdServiceErrorCode))
             {
                 // AADSTS70001 - Invalid client ID.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidClientId);
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70002"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientSecretServiceErrorCode))
             {
                 // AADSTS70002 - Invalid client secret.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidClientSecret);
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("90002"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                e.ServiceErrorCodes.Contains(AzureAccountManager.AdalTenantDoesntExistServiceErrorCode))
             {
                 // AADSTS90002 - Tenant doesn't exist.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidTenantId);
+            }
+            catch (AdalServiceException e) when (e.StatusCode == AzureAccountManager.AdalRequestTimeoutStatusCode)
+            {
+                // No internet
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_NoInternet);
             }
             catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
@@ -158,16 +174,24 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
                     group.AddRange(clusters.Select(c => new Cluster(c.Id, c.Name, account.TenantId, CloudAccountType.Azure)));
                 }
-                catch (AdalServiceException)
+                catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                                                    (e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientIdServiceErrorCode) ||
+                                                    e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientSecretServiceErrorCode) ||
+                                                    e.ServiceErrorCodes.Contains(AzureAccountManager.AdalTenantDoesntExistServiceErrorCode)))
                 {
                     // Authentication issue
                     group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_AuthenticationErrorMessage;
+                }
+                catch (AdalServiceException e) when (e.StatusCode == AzureAccountManager.AdalRequestTimeoutStatusCode)
+                {
+                    // No internet
+                    throw new NoNetworkException(e.Message, e);
                 }
                 catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                      web.Status == WebExceptionStatus.NameResolutionFailure)
                 {
                     // No internet
-                    group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_NoInternetErrorMessage;
+                    group.ErrorMessage = AppResources.NoInternetErrorMessage;
                 }
 
                 groups.Add(group);
@@ -185,7 +209,6 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
             AzureAccount account = accounts.First(a => a.Id == selectedCluster.AccountId);
 
-            // TODO how to handle errors
             try
             {
                 IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
@@ -198,20 +221,18 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
                 return kubernetesCluster.UserKubeConfigContent;
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                                                 (e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientIdServiceErrorCode) ||
+                                                 e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientSecretServiceErrorCode) ||
+                                                 e.ServiceErrorCodes.Contains(AzureAccountManager.AdalTenantDoesntExistServiceErrorCode)))
             {
-                // AADSTS70001 - Invalid client ID.
-                throw;
+                // Something is wrong with the Account's credentials.
+                throw new AccountInvalidException(e.Message, e);
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70002"))
+            catch (AdalServiceException e) when (e.StatusCode == AzureAccountManager.AdalRequestTimeoutStatusCode)
             {
-                // AADSTS70002 - Invalid client secret.
-                throw;
-            }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("90002"))
-            {
-                // AADSTS90002 - Tenant doesn't exist.
-                throw;
+                // No internet
+                throw new NoNetworkException(e.Message, e);
             }
             catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                  web.Status == WebExceptionStatus.NameResolutionFailure)

@@ -8,6 +8,7 @@ using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
+using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -71,16 +72,16 @@ namespace KubeMob.Common
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton((sp) => DependencyService.Get<ILocalize>());
-            serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesClientFactory>());
-
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
 
             serviceCollection.AddSingleton<IKubernetesService, KubernetesService>();
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesClientFactory>());
 
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
+            serviceCollection.AddSingleton<IPopupService, PopupService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<ILocalize>());
 
             serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));
         }

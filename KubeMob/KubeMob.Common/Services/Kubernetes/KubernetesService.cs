@@ -30,7 +30,6 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<PodSummary>> GetPodSummaries()
         {
-            // TODO Handle errors from this.
             byte[] configContent = await this.GetKubeConfigContent();
 
             KubernetesClientConfiguration config = null;
@@ -43,6 +42,8 @@ namespace KubeMob.Common.Services.Kubernetes
             // TODO Handler errors from this
             IKubernetes client = this.kubernetesClientFactory.CreateClient(config);
 
+            // TODO retry logic
+            // TODO exceptions form no internet ?
             // TODO Add filter support - ListNamespacedPodAsync
             k8s.Models.V1PodList podList = await client.ListPodForAllNamespacesAsync();
 

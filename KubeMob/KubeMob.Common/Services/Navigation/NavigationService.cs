@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
@@ -44,7 +44,7 @@ namespace KubeMob.Common.Services.Navigation
             await this.RemoveBackStack();
         }
 
-        public async Task GoBackToClusterPage()
+        public async Task GoBackToClustersPage()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
             {

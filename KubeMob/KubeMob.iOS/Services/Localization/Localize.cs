@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Threading;
 using Foundation;
 using KubeMob.Common.Services.Localization;
@@ -11,7 +11,7 @@ namespace KubeMob.iOS.Services.Localization
     /// </summary>
     public class Localize : ILocalize
     {
-        [Preserve()]
+        [Preserve]
         public Localize()
         {
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,25 +11,42 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes
 {
-    public class KubernetesService : IKubernetesService
+    public abstract class KubernetesServiceBase : IKubernetesService
     {
         private readonly IAppSettings appSettings;
         private readonly IEnumerable<IAccountManager> accountManagers;
-        private readonly IKubernetesClientFactory kubernetesClientFactory;
 
-        // TODO Re-arch how get kube context and setup client.
         [Preserve]
-        public KubernetesService(
+        protected KubernetesServiceBase(
             IAppSettings appSettings,
-            IEnumerable<IAccountManager> accountManagers,
-            IKubernetesClientFactory kubeFactory)
+            IEnumerable<IAccountManager> accountManagers)
         {
             this.appSettings = appSettings;
             this.accountManagers = accountManagers;
-            this.kubernetesClientFactory = kubeFactory;
+
+            this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
+
+            //this.client = await this.CreateClient();
+        }
+
+        protected Lazy<Task<IKubernetes>> Client
+        {
+            get;
         }
 
         public async Task<IList<PodSummary>> GetPodSummaries()
+        {
+            // TODO retry logic
+            // TODO Handle exceptions
+            // TODO Add filter support - ListNamespacedPodAsync
+            k8s.Models.V1PodList podList = await this.GetPods();
+
+            return Mapper.Map<IList<PodSummary>>(podList.Items);
+        }
+
+        protected abstract Task<k8s.Models.V1PodList> GetPods();
+
+        private async Task<IKubernetes> CreateClient()
         {
             byte[] configContent = await this.GetKubeConfigContent();
 
@@ -38,16 +56,10 @@ namespace KubeMob.Common.Services.Kubernetes
             {
                 config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
             }
-
-            // TODO Handler errors from this
-            IKubernetes client = this.kubernetesClientFactory.CreateClient(config);
-
-            // TODO retry logic
-            // TODO exceptions form no internet ?
-            // TODO Add filter support - ListNamespacedPodAsync
-            k8s.Models.V1PodList podList = await client.ListPodForAllNamespacesAsync();
-
-            return Mapper.Map<IList<PodSummary>>(podList.Items);
+            
+            // TODO Check this calls the Android parts.
+            return new k8s.Kubernetes(config);
+            //return this.kubernetesClientFactory.CreateClient(config);
         }
 
         private Task<byte[]> GetKubeConfigContent()

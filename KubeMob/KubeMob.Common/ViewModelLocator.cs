@@ -75,13 +75,12 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
 
-            serviceCollection.AddSingleton<IKubernetesService, KubernetesService>();
-            serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesClientFactory>());
-
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IPopupService, PopupService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
             serviceCollection.AddSingleton((sp) => DependencyService.Get<ILocalize>());
+            
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesService>());
 
             serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));
         }

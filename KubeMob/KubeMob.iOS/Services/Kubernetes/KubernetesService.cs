@@ -1,5 +1,6 @@
-using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using k8s;
 using k8s.Models;
@@ -15,6 +16,8 @@ namespace KubeMob.iOS.Services.Kubernetes
 {
     /// <summary>
     /// Created platform specific implementation as <see cref="k8s.Kubernetes"/> needs to perform platform specific exception handling.
+    ///
+    /// Microsoft.Rest.ServiceClient which <see cref="k8s.Kubernetes"/> uses has built in retry logic: https://github.com/Azure/autorest/blob/master/docs/client/retry.md.
     /// </summary>
     public class KubernetesService : KubernetesServiceBase
     {
@@ -46,8 +49,10 @@ namespace KubeMob.iOS.Services.Kubernetes
 
                 return await client.ListPodForAllNamespacesAsync();
             }
-            catch (Exception e)
+            catch (HttpRequestException e) when (e.InnerException is WebException web &&
+                                                web.Status == WebExceptionStatus.NameResolutionFailure)
             {
+                // TODO Verify this is correct exception type on device.
                 // No internet.
                 throw new NoNetworkException(e.Message, e);
             }

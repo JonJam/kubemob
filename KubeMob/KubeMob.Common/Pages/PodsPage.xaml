@@ -12,14 +12,14 @@
     <Grid
       CompressedLayout.IsHeadless="true">
 
-        <StackLayout
+        <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
             CompressedLayout.IsHeadless="true">
 
             <views:NoNetworkIndicator
                 IsVisible="{Binding HasNoNetwork}"/>
 
-            <StackLayout
+            <Grid
                 IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
                 CompressedLayout.IsHeadless="true">
                 
@@ -43,8 +43,8 @@
                 <Label
                     Text="{markupExtensions:Translate PodsPage_NoPodsMessage}"
                     IsVisible="{Binding HasPods, Converter={StaticResource InverseBoolConverter}}"/>
-            </StackLayout>
-        </StackLayout>
+            </Grid>
+        </Grid>
 
         <ActivityIndicator
             IsRunning="{Binding IsBusy}"  

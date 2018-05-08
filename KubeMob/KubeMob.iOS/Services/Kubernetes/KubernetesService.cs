@@ -41,6 +41,8 @@ namespace KubeMob.iOS.Services.Kubernetes
         {
         }
 
+        protected override IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client) => client;
+
         protected override async Task<V1PodList> GetPods()
         {
             try

@@ -35,7 +35,6 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<PodSummary>> GetPodSummaries()
         {
-            // TODO retry logic
             // TODO Add filter support - ListNamespacedPodAsync
             k8s.Models.V1PodList podList = await this.GetPods();
 
@@ -43,6 +42,8 @@ namespace KubeMob.Common.Services.Kubernetes
         }
 
         protected abstract Task<k8s.Models.V1PodList> GetPods();
+
+        protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
         private async Task<IKubernetes> CreateClient()
         {
@@ -55,7 +56,9 @@ namespace KubeMob.Common.Services.Kubernetes
                 config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
             }
 
-            return new k8s.Kubernetes(config);
+            k8s.Kubernetes client = new k8s.Kubernetes(config);
+
+            return this.ConfigureClientForPlatform(client);
         }
 
         private Task<byte[]> GetKubeConfigContent()

@@ -24,9 +24,8 @@ namespace KubeMob.Common.Services.Kubernetes
             this.appSettings = appSettings;
             this.accountManagers = accountManagers;
 
+            // TODO This will need to be re-created when the user changes their selected cluster.
             this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
-
-            //this.client = await this.CreateClient();
         }
 
         protected Lazy<Task<IKubernetes>> Client
@@ -37,7 +36,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<PodSummary>> GetPodSummaries()
         {
             // TODO retry logic
-            // TODO Handle exceptions
             // TODO Add filter support - ListNamespacedPodAsync
             k8s.Models.V1PodList podList = await this.GetPods();
 
@@ -56,10 +54,8 @@ namespace KubeMob.Common.Services.Kubernetes
             {
                 config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
             }
-            
-            // TODO Check this calls the Android parts.
+
             return new k8s.Kubernetes(config);
-            //return this.kubernetesClientFactory.CreateClient(config);
         }
 
         private Task<byte[]> GetKubeConfigContent()

@@ -79,7 +79,7 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton<IPopupService, PopupService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
             serviceCollection.AddSingleton((sp) => DependencyService.Get<ILocalize>());
-            
+
             serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesService>());
 
             serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));

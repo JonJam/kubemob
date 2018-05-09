@@ -34,7 +34,7 @@
     <AndroidSupportedAbis />
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper</AndroidLinkSkip>
+    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper;KubernetesClient</AndroidLinkSkip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,7 +50,7 @@
     <AndroidSupportedAbis />
     <AndroidTlsProvider>btls</AndroidTlsProvider>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper</AndroidLinkSkip>
+    <AndroidLinkSkip>Microsoft.Azure.Management.Fluent;Microsoft.Azure.Management.ResourceManager.Fluent;Microsoft.Rest.ClientRuntime.Azure;Microsoft.Rest.ClientRuntime.Azure.Authentication;Microsoft.IdentityModel.Clients.ActiveDirectory;Microsoft.Rest.ClientRuntime;Newtonsoft.Json;Microsoft.Azure.Management.ContainerService.Fluent;AutoMapper;KubernetesClient</AndroidLinkSkip>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -87,9 +87,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Effects\EntryLineColorEffect.cs" />
+    <Compile Include="Services\Kubernetes\KubernetesService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Kubernetes\KubernetesTransientErrorDetectionStrategy.cs" />
     <Compile Include="Services\Localization\Localize.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,10 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\k8s\src\KubernetesClient\KubernetesClient.csproj">
+      <Project>{5094f681-c0b9-4f0a-91d1-5a1f57a92799}</Project>
+      <Name>KubernetesClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KubeMob.Common\KubeMob.Common.csproj">
       <Project>{ba929cc1-951d-46ef-ba0c-108a234251a2}</Project>
       <Name>KubeMob.Common</Name>

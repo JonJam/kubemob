@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -127,7 +127,7 @@ namespace KubeMob.Common.ViewModels
         {
             this.IsBusy = true;
             this.TopLevelErrorMessage = null;
-            
+
             // Adding delay to give time for progress indicator to be displayed.
             await Task.Delay(100);
 
@@ -147,7 +147,7 @@ namespace KubeMob.Common.ViewModels
 
                 if (isValid)
                 {
-                    await this.navigationService.GoBackToClusterPage();
+                    await this.navigationService.GoBackToClustersPage();
                 }
                 else
                 {

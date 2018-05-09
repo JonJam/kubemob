@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Settings;
 using Microsoft.Azure.Management.ContainerService.Fluent;
@@ -33,6 +34,11 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
     // </summary>
     public class AzureAccountManager : IAzureAccountManager
     {
+        private const string AdalInvalidClientIdServiceErrorCode = "7001";
+        private const string AdalInvalidClientSecretServiceErrorCode = "70002";
+        private const string AdalTenantDoesntExistServiceErrorCode = "90002";
+        private const int AdalRequestTimeoutStatusCode = 408;
+
         private readonly IAppSettings appSettings;
 
         [Preserve]
@@ -63,7 +69,10 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public CloudAccountType Key { get; } = CloudAccountType.Azure;
 
-        public IList<CloudEnvironment> Environments { get; }
+        public IList<CloudEnvironment> Environments
+        {
+            get;
+        }
 
         public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
 
@@ -91,7 +100,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                 IAzure azure = AzureAccountManager.CreateAuthenticatedClient(cloudEnvironment.Id, tenantId, clientId, clientSecret);
 
                 string subscriptionName = azure.GetCurrentSubscription().DisplayName;
-                
+
                 await this.appSettings.AddOrUpdateCloudAccount(new AzureAccount(
                     subscriptionName,
                     cloudEnvironment.Id,
@@ -99,20 +108,28 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                     clientId,
                     clientSecret));
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70001"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientIdServiceErrorCode))
             {
                 // AADSTS70001 - Invalid client ID.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidClientId);
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("70002"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientSecretServiceErrorCode))
             {
                 // AADSTS70002 - Invalid client secret.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidClientSecret);
             }
-            catch (AdalServiceException e) when (e.ServiceErrorCodes.Contains("90002"))
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                e.ServiceErrorCodes.Contains(AzureAccountManager.AdalTenantDoesntExistServiceErrorCode))
             {
                 // AADSTS90002 - Tenant doesn't exist.
                 return (false, AppResources.AzureAccountManager_TryAddCredentials_InvalidTenantId);
+            }
+            catch (AdalServiceException e) when (e.StatusCode == AzureAccountManager.AdalRequestTimeoutStatusCode)
+            {
+                // No internet
+                return (false, AppResources.AzureAccountManager_TryAddCredentials_NoInternet);
             }
             catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
@@ -157,16 +174,24 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
                     group.AddRange(clusters.Select(c => new Cluster(c.Id, c.Name, account.TenantId, CloudAccountType.Azure)));
                 }
-                catch (AdalServiceException)
+                catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                                                    (e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientIdServiceErrorCode) ||
+                                                    e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientSecretServiceErrorCode) ||
+                                                    e.ServiceErrorCodes.Contains(AzureAccountManager.AdalTenantDoesntExistServiceErrorCode)))
                 {
                     // Authentication issue
                     group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_AuthenticationErrorMessage;
+                }
+                catch (AdalServiceException e) when (e.StatusCode == AzureAccountManager.AdalRequestTimeoutStatusCode)
+                {
+                    // No internet
+                    throw new NoNetworkException(e.Message, e);
                 }
                 catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                      web.Status == WebExceptionStatus.NameResolutionFailure)
                 {
                     // No internet
-                    group.ErrorMessage = AppResources.AzureAccountManager_GetClusters_NoInternetErrorMessage;
+                    group.ErrorMessage = AppResources.NoInternetErrorMessage;
                 }
 
                 groups.Add(group);
@@ -177,18 +202,45 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public Task RemoveAccount(string id) => this.appSettings.RemoveCloudAccount(id);
 
-        //IKubernetesCluster kubernetesCluster = a.KubernetesClusters.GetByResourceGroup("tpb", aksId);
-        //var b = kubernetesCluster.UserKubeConfigContent;
-        ////var c = kubernetesCluster.AdminKubeConfigContent;
+        public async Task<byte[]> GetSelectedClusterKubeConfigContent()
+        {
+            Cluster selectedCluster = this.appSettings.SelectedCluster;
+            IEnumerable<AzureAccount> accounts = await this.appSettings.GetCloudAccounts<AzureAccount>(CloudAccountType.Azure);
 
-        //var config = new KubernetesClientConfiguration();
+            AzureAccount account = accounts.First(a => a.Id == selectedCluster.AccountId);
 
-        //    using (Stream stream = new MemoryStream(b))
-        //{
-        //    config = KubernetesClientConfiguration.BuildConfigFromConfigFile(stream);
-        //}
+            try
+            {
+                IAzure azure = AzureAccountManager.CreateAuthenticatedClient(
+                    account.EnvironmentId,
+                    account.TenantId,
+                    account.ClientId,
+                    account.ClientSecret);
 
-        //IKubernetes client = new Kubernetes(config);
+                IKubernetesCluster kubernetesCluster = await azure.KubernetesClusters.GetByIdAsync(selectedCluster.Id);
+
+                return kubernetesCluster.UserKubeConfigContent;
+            }
+            catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&
+                                                 (e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientIdServiceErrorCode) ||
+                                                 e.ServiceErrorCodes.Contains(AzureAccountManager.AdalInvalidClientSecretServiceErrorCode) ||
+                                                 e.ServiceErrorCodes.Contains(AzureAccountManager.AdalTenantDoesntExistServiceErrorCode)))
+            {
+                // Something is wrong with the Account's credentials.
+                throw new AccountInvalidException(e.Message, e);
+            }
+            catch (AdalServiceException e) when (e.StatusCode == AzureAccountManager.AdalRequestTimeoutStatusCode)
+            {
+                // No internet
+                throw new NoNetworkException(e.Message, e);
+            }
+            catch (HttpRequestException e) when (e.InnerException is WebException web &&
+                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
+            {
+                // No internet
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
 
         private static IAzure CreateAuthenticatedClient(
             string environmentId,

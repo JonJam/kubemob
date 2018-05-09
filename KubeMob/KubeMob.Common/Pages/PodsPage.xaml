@@ -1,15 +1,55 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.PodsPage"
-             Title="Pods"
+             Title="{markupExtensions:Translate PodsPage_Title}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
-    <Button 
-        Text="View pod details"
-        Command="{Binding ViewPodDetailsCommand}">
-    </Button>
+    <Grid
+      CompressedLayout.IsHeadless="true">
 
+        <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            CompressedLayout.IsHeadless="true">
+
+            <views:NoNetworkIndicator
+                IsVisible="{Binding HasNoNetwork}"/>
+
+            <Grid
+                IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
+                CompressedLayout.IsHeadless="true">
+                
+                <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->
+                <ListView
+                    x:Name="Pods"
+                    ItemsSource="{Binding Pods}"
+                    IsVisible="{Binding HasPods}"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="False"
+                    CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
+                            Text="{Binding Name}"
+                            Detail="{Binding Phase}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label
+                    Text="{markupExtensions:Translate PodsPage_NoPodsMessage}"
+                    IsVisible="{Binding HasPods, Converter={StaticResource InverseBoolConverter}}"/>
+            </Grid>
+        </Grid>
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
 </base:ExtendedContentPage>

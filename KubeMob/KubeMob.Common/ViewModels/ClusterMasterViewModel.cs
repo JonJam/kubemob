@@ -16,15 +16,20 @@ namespace KubeMob.Common.ViewModels
         {
             this.MenuItemSelected = new Command(ClusterMasterViewModel.OnMenuItemSelected);
 
-            this.MenuItems = new ObservableCollection<MenuItemViewModel>(new[]
+            this.MenuItems = new ObservableCollection<MenuItemGroup>(new[]
             {
-                new MenuItemViewModel(AppResources.ClusterMaster_Pods, new Command(async () => await navigationService.NavigateToPodsPage()))
+                new MenuItemGroup(AppResources.ClusterMasterVIewModel_Workloads)
+                {
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterVIewModel_Workloads_Pods,
+                        new Command(async () => await navigationService.NavigateToPodsPage()))
+                }
             });
         }
 
         public ICommand MenuItemSelected { get; }
 
-        public ObservableCollection<MenuItemViewModel> MenuItems { get; }
+        public ObservableCollection<MenuItemGroup> MenuItems { get; }
 
         private static void OnMenuItemSelected(object obj)
         {

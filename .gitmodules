@@ -1,0 +1,4 @@
+[submodule "k8s"]
+	path = k8s
+	url = https://github.com/JonJam/csharp.git
+	branch = xamarin_support

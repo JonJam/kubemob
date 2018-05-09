@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\k8s\src\KubernetesClient\KubernetesClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
@@ -31,9 +35,6 @@
     </Compile>
     <Compile Update="Pages\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\PodDetailsPage.xaml.cs">
-      <DependentUpon>PodDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ClusterOverviewPage.xaml.cs">
       <DependentUpon>ClusterOverviewPage.xaml</DependentUpon>
@@ -91,6 +92,9 @@
     <EmbeddedResource Update="Resx\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NoNetworkIndicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

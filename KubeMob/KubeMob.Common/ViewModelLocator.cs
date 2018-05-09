@@ -1,11 +1,14 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
+using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,7 +62,6 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
-            serviceCollection.AddTransient<PodDetailsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -74,13 +76,16 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
 
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
+            serviceCollection.AddSingleton<IPopupService, PopupService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<ILocalize>());
+
+            serviceCollection.AddSingleton((sp) => DependencyService.Get<IKubernetesService>());
 
             serviceCollection.AddSingleton((sp) => new ResourceManager("KubeMob.Common.Resx.AppResources", typeof(ViewModelLocator).GetTypeInfo().Assembly));
         }
 
-        private static void ConfigureMaps()
-        {
+        private static void ConfigureMaps() =>
             // Using AutoMapper 6.1.1 rather than latest due to build error which is detailled here: https://github.com/AutoMapper/AutoMapper/issues/2455
             // Linker configured to skip the following otherwise causes this to fail:
             // - AutoMapper
@@ -91,8 +96,10 @@ namespace KubeMob.Common
 
                 cfg.CreateMap<Account, AzureAccount>()
                     .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
+
+                cfg.CreateMap<k8s.Models.V1Pod, PodSummary>()
+                    .ConstructUsing((p) => new PodSummary(p.Metadata.Name, p.Status.Phase));
             });
-        }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)
         {

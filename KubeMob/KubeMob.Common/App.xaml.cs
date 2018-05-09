@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using Xamarin.Forms;
@@ -16,7 +16,7 @@ namespace KubeMob.Common
             this.InitializeComponent();
 
             // Setting language display in following: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization?tabs=vswin#displaying-the-correct-language
-            ILocalize localize = DependencyService.Get<ILocalize>();
+            ILocalize localize = ViewModelLocator.Resolve<ILocalize>();
             CultureInfo ci = localize.GetCurrentCultureInfo();
 
             // Set the RESX for resource localization

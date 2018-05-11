@@ -322,6 +322,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deployments.
+        /// </summary>
+        internal static string ClusterMasterVIewModel_Workloads_Deployments {
+            get {
+                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads_Deployments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
         internal static string ClusterMasterVIewModel_Workloads_Pods {
@@ -390,6 +399,15 @@ namespace KubeMob.Common.Resx {
         internal static string ClustersPage_ViewToggle_ToolbarItem {
             get {
                 return ResourceManager.GetString("ClustersPage_ViewToggle_ToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deployments.
+        /// </summary>
+        internal static string DeploymentsPage_Title {
+            get {
+                return ResourceManager.GetString("DeploymentsPage_Title", resourceCulture);
             }
         }
         

@@ -62,6 +62,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
+            serviceCollection.AddTransient<DeploymentsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)

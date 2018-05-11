@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Navigation;
@@ -18,8 +18,14 @@ namespace KubeMob.Common.ViewModels
 
             this.MenuItems = new ObservableCollection<MenuItemGroup>(new[]
             {
+                // TODO Add Overview link
+
                 new MenuItemGroup(AppResources.ClusterMasterVIewModel_Workloads)
                 {
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterVIewModel_Workloads_Deployments,
+                        new Command(async () => await navigationService.NavigateToDeploymentsPage())),
+
                     new MenuItemViewModel(
                         AppResources.ClusterMasterVIewModel_Workloads_Pods,
                         new Command(async () => await navigationService.NavigateToPodsPage()))

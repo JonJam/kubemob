@@ -204,6 +204,9 @@
   <data name="ClusterMasterVIewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
   </data>
+  <data name="ClusterMasterVIewModel_Workloads_Deployments" xml:space="preserve">
+    <value>Deployments</value>
+  </data>
   <data name="ClusterMasterVIewModel_Workloads_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
@@ -227,6 +230,9 @@
   </data>
   <data name="ClustersPage_ViewToggle_ToolbarItem" xml:space="preserve">
     <value>Toggle view</value>
+  </data>
+  <data name="DeploymentsPage_Title" xml:space="preserve">
+    <value>Deployments</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>We are having connectivity issues doing that right now. Please try again.</value>

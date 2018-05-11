@@ -2,7 +2,7 @@
 [![Build status](https://build.appcenter.ms/v0.1/apps/f33d86fd-e112-4153-b348-75dd4a3da78d/branches/master/badge)](https://appcenter.ms)
 [![Build status](https://build.appcenter.ms/v0.1/apps/b1cd9a80-419e-4515-af66-647c75796e4e/branches/master/badge)](https://appcenter.ms)
 
-Below are a number of resources detailling guidance and best practises related to C# and Xamarin that have been used to initially setup this project.
+Below are a number of resources detailing guidance and best practises related to C# and Xamarin that have been used to initially setup this project.
 
 ## Xamarin Forms
 ### General

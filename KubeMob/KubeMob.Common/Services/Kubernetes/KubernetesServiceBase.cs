@@ -55,9 +55,22 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<ReplicaSetSummary>> GetReplicaSetSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1ReplicaSetList replicaSetList = await this.GetReplicaSets();
+
+            return Mapper.Map<IList<ReplicaSetSummary>>(replicaSetList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
 
         protected abstract Task<k8s.Models.V1PodList> GetPods();
+
+        protected abstract Task<k8s.Models.V1ReplicaSetList> GetReplicaSets();
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 

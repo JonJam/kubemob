@@ -63,6 +63,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ClusterMasterViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
             serviceCollection.AddTransient<DeploymentsViewModel>();
+            serviceCollection.AddTransient<ReplicaSetsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -98,13 +99,18 @@ namespace KubeMob.Common
                 cfg.CreateMap<Account, AzureAccount>()
                     .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
 
+                cfg.CreateMap<k8s.Models.V1Deployment, DeploymentSummary>()
+                    .ConstructUsing((d) => new DeploymentSummary(
+                        d.Metadata.Name,
+                        $"{d.Status.AvailableReplicas}/{d.Status.Replicas}"));
+
                 cfg.CreateMap<k8s.Models.V1Pod, PodSummary>()
                     .ConstructUsing((p) => new PodSummary(p.Metadata.Name, p.Status.Phase));
 
-                cfg.CreateMap<k8s.Models.V1Deployment, DeploymentSummary>()
-                    .ConstructUsing((p) => new DeploymentSummary(
-                        p.Metadata.Name,
-                        $"{p.Status.AvailableReplicas}/{p.Status.Replicas}"));
+                cfg.CreateMap<k8s.Models.V1ReplicaSet, ReplicaSetSummary>()
+                    .ConstructUsing((r) => new ReplicaSetSummary(
+                        r.Metadata.Name,
+                        $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

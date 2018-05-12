@@ -207,14 +207,17 @@
   <data name="AzureEnvironment_USGovernment" xml:space="preserve">
     <value>US Government</value>
   </data>
-  <data name="ClusterMasterVIewModel_Workloads" xml:space="preserve">
+  <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
   </data>
-  <data name="ClusterMasterVIewModel_Workloads_Deployments" xml:space="preserve">
+  <data name="ClusterMasterViewModel_Workloads_Deployments" xml:space="preserve">
     <value>Deployments</value>
   </data>
-  <data name="ClusterMasterVIewModel_Workloads_Pods" xml:space="preserve">
+  <data name="ClusterMasterViewModel_Workloads_Pods" xml:space="preserve">
     <value>Pods</value>
+  </data>
+  <data name="ClusterMasterViewModel_Workloads_ReplicaSets" xml:space="preserve">
+    <value>Replica sets</value>
   </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
     <value>Delete</value>
@@ -254,5 +257,11 @@
   </data>
   <data name="PodsPage_Title" xml:space="preserve">
     <value>Pods</value>
+  </data>
+  <data name="ReplicaSetsPage_Title" xml:space="preserve">
+    <value>Replica sets</value>
+  </data>
+  <data name="ReplicaSets_NoReplicaSetsMessage" xml:space="preserve">
+    <value>There are no replica sets.</value>
   </data>
 </root>

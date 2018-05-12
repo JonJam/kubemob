@@ -61,6 +61,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It appears there is something wrong with the account we are using to connect to this cluster. Please check the account details.
+        /// </summary>
+        internal static string AccountInvalid_Message {
+            get {
+                return ResourceManager.GetString("AccountInvalid_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account issue.
+        /// </summary>
+        internal static string AccountInvalid_Title {
+            get {
+                return ResourceManager.GetString("AccountInvalid_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft Azure.
         /// </summary>
         internal static string AddAccountPage_AddAzureAccount_Btn {
@@ -322,6 +340,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deployments.
+        /// </summary>
+        internal static string ClusterMasterVIewModel_Workloads_Deployments {
+            get {
+                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads_Deployments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
         internal static string ClusterMasterVIewModel_Workloads_Pods {
@@ -394,6 +421,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no deployments..
+        /// </summary>
+        internal static string Deployments_NoDeploymentsMessage {
+            get {
+                return ResourceManager.GetString("Deployments_NoDeploymentsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deployments.
+        /// </summary>
+        internal static string DeploymentsPage_Title {
+            get {
+                return ResourceManager.GetString("DeploymentsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We are having connectivity issues doing that right now. Please try again..
         /// </summary>
         internal static string NoInternetErrorMessage {
@@ -426,24 +471,6 @@ namespace KubeMob.Common.Resx {
         internal static string PodsPage_Title {
             get {
                 return ResourceManager.GetString("PodsPage_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to It appears there is something wrong with the account we are using to connect to this cluster. Please check the account details.
-        /// </summary>
-        internal static string PodsViewModel_AccountInvalid_Message {
-            get {
-                return ResourceManager.GetString("PodsViewModel_AccountInvalid_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Account issue.
-        /// </summary>
-        internal static string PodsViewModel_AccountInvalid_Title {
-            get {
-                return ResourceManager.GetString("PodsViewModel_AccountInvalid_Title", resourceCulture);
             }
         }
     }

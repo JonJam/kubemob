@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountInvalid_Message" xml:space="preserve">
+    <value>It appears there is something wrong with the account we are using to connect to this cluster. Please check the account details</value>
+  </data>
+  <data name="AccountInvalid_Title" xml:space="preserve">
+    <value>Account issue</value>
+  </data>
   <data name="AddAccountPage_AddAzureAccount_Btn" xml:space="preserve">
     <value>Microsoft Azure</value>
   </data>
@@ -204,6 +210,9 @@
   <data name="ClusterMasterVIewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
   </data>
+  <data name="ClusterMasterVIewModel_Workloads_Deployments" xml:space="preserve">
+    <value>Deployments</value>
+  </data>
   <data name="ClusterMasterVIewModel_Workloads_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
@@ -228,6 +237,12 @@
   <data name="ClustersPage_ViewToggle_ToolbarItem" xml:space="preserve">
     <value>Toggle view</value>
   </data>
+  <data name="DeploymentsPage_Title" xml:space="preserve">
+    <value>Deployments</value>
+  </data>
+  <data name="Deployments_NoDeploymentsMessage" xml:space="preserve">
+    <value>There are no deployments.</value>
+  </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>We are having connectivity issues doing that right now. Please try again.</value>
   </data>
@@ -239,11 +254,5 @@
   </data>
   <data name="PodsPage_Title" xml:space="preserve">
     <value>Pods</value>
-  </data>
-  <data name="PodsViewModel_AccountInvalid_Message" xml:space="preserve">
-    <value>It appears there is something wrong with the account we are using to connect to this cluster. Please check the account details</value>
-  </data>
-  <data name="PodsViewModel_AccountInvalid_Title" xml:space="preserve">
-    <value>Account issue</value>
   </data>
 </root>

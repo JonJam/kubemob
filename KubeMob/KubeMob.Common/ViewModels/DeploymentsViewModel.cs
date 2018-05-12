@@ -10,15 +10,15 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels
 {
     [Preserve(AllMembers = true)]
-    public class PodsViewModel : ViewModelBase
+    public class DeploymentsViewModel : ViewModelBase
     {
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<PodSummary> pods = new List<PodSummary>();
+        private IList<DeploymentSummary> deployments = new List<DeploymentSummary>();
         private bool hasNoNetwork;
 
-        public PodsViewModel(
+        public DeploymentsViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService)
         {
@@ -30,14 +30,14 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<PodSummary> Pods
+        public IList<DeploymentSummary> Deployments
         {
-            get => this.pods;
+            get => this.deployments;
             private set
             {
-                if (this.SetProperty(ref this.pods, value))
+                if (this.SetProperty(ref this.deployments, value))
                 {
-                    this.NotifyPropertyChanged(() => this.HasPods);
+                    this.NotifyPropertyChanged(() => this.HasDeployments);
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace KubeMob.Common.ViewModels
             set => this.SetProperty(ref this.hasNoNetwork, value);
         }
 
-        public bool HasPods => this.Pods.Count > 0;
+        public bool HasDeployments => this.Deployments.Count > 0;
 
         public override async Task Initialize(object navigationData)
         {
@@ -58,7 +58,7 @@ namespace KubeMob.Common.ViewModels
 
             try
             {
-                this.Pods = await this.kubernetesService.GetPodSummaries();
+                this.Deployments = await this.kubernetesService.GetDeploymentSummaries();
             }
             catch (NoNetworkException)
             {

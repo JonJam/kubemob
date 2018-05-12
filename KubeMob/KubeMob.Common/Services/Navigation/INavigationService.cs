@@ -21,6 +21,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToReplicaSetsPage();
 
+        Task NavigateToServicesPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

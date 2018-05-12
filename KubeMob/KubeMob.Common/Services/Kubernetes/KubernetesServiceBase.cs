@@ -65,12 +65,25 @@ namespace KubeMob.Common.Services.Kubernetes
                 .OrderBy(p => p.Name)
                 .ToList();
         }
+        
+        public async Task<IList<ServiceSummary>> GetServiceSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1ServiceList serviceList = await this.GetServices();
+
+            return Mapper.Map<IList<ServiceSummary>>(serviceList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
 
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
 
         protected abstract Task<k8s.Models.V1PodList> GetPods();
 
         protected abstract Task<k8s.Models.V1ReplicaSetList> GetReplicaSets();
+
+        protected abstract Task<k8s.Models.V1ServiceList> GetServices();
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 

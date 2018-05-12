@@ -33,6 +33,9 @@
     <Compile Update="Pages\Base\ExtendedContentPage.xaml.cs">
       <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ServicesPage.xaml.cs">
+      <DependentUpon>ServicesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ReplicaSetsPage.xaml.cs">
       <DependentUpon>ReplicaSetsPage.xaml</DependentUpon>
     </Compile>

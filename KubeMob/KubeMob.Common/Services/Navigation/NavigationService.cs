@@ -62,6 +62,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToReplicaSetsPage() => NavigationService.InternalNavigate(typeof(ReplicaSetsPage));
 
+        public Task NavigateToServicesPage() => NavigationService.InternalNavigate(typeof(ServicesPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

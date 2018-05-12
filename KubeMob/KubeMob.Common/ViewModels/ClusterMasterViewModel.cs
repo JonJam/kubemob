@@ -20,15 +20,19 @@ namespace KubeMob.Common.ViewModels
             {
                 // TODO Add Overview link
 
-                new MenuItemGroup(AppResources.ClusterMasterVIewModel_Workloads)
+                new MenuItemGroup(AppResources.ClusterMasterViewModel_Workloads)
                 {
                     new MenuItemViewModel(
-                        AppResources.ClusterMasterVIewModel_Workloads_Deployments,
+                        AppResources.ClusterMasterViewModel_Workloads_Deployments,
                         new Command(async () => await navigationService.NavigateToDeploymentsPage())),
 
                     new MenuItemViewModel(
-                        AppResources.ClusterMasterVIewModel_Workloads_Pods,
-                        new Command(async () => await navigationService.NavigateToPodsPage()))
+                        AppResources.ClusterMasterViewModel_Workloads_Pods,
+                        new Command(async () => await navigationService.NavigateToPodsPage())),
+                        
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_Workloads_ReplicaSets,
+                        new Command(async () => await navigationService.NavigateToReplicaSetsPage()))
                 }
             });
         }

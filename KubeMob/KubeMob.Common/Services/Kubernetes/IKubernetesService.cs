@@ -8,5 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<IList<DeploymentSummary>> GetDeploymentSummaries();
 
         Task<IList<PodSummary>> GetPodSummaries();
+
+        Task<IList<ReplicaSetSummary>> GetReplicaSetSummaries();
     }
 }

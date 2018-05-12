@@ -333,27 +333,36 @@ namespace KubeMob.Common.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Workloads.
         /// </summary>
-        internal static string ClusterMasterVIewModel_Workloads {
+        internal static string ClusterMasterViewModel_Workloads {
             get {
-                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads", resourceCulture);
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Deployments.
         /// </summary>
-        internal static string ClusterMasterVIewModel_Workloads_Deployments {
+        internal static string ClusterMasterViewModel_Workloads_Deployments {
             get {
-                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads_Deployments", resourceCulture);
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Deployments", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
-        internal static string ClusterMasterVIewModel_Workloads_Pods {
+        internal static string ClusterMasterViewModel_Workloads_Pods {
             get {
-                return ResourceManager.GetString("ClusterMasterVIewModel_Workloads_Pods", resourceCulture);
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Pods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replica sets.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_ReplicaSets {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_ReplicaSets", resourceCulture);
             }
         }
         
@@ -471,6 +480,24 @@ namespace KubeMob.Common.Resx {
         internal static string PodsPage_Title {
             get {
                 return ResourceManager.GetString("PodsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no replica sets..
+        /// </summary>
+        internal static string ReplicaSets_NoReplicaSetsMessage {
+            get {
+                return ResourceManager.GetString("ReplicaSets_NoReplicaSetsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replica sets.
+        /// </summary>
+        internal static string ReplicaSetsPage_Title {
+            get {
+                return ResourceManager.GetString("ReplicaSetsPage_Title", resourceCulture);
             }
         }
     }

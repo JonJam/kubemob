@@ -367,6 +367,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Services.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_Services {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Services", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string ClustersPage_Accounts_Delete_MenuItemText {
@@ -498,6 +507,24 @@ namespace KubeMob.Common.Resx {
         internal static string ReplicaSetsPage_Title {
             get {
                 return ResourceManager.GetString("ReplicaSetsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no services..
+        /// </summary>
+        internal static string ServicesPage_NoServicesMessage {
+            get {
+                return ResourceManager.GetString("ServicesPage_NoServicesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Services.
+        /// </summary>
+        internal static string ServicesPage_Title {
+            get {
+                return ResourceManager.GetString("ServicesPage_Title", resourceCulture);
             }
         }
     }

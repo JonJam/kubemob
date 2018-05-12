@@ -219,6 +219,9 @@
   <data name="ClusterMasterViewModel_Workloads_ReplicaSets" xml:space="preserve">
     <value>Replica sets</value>
   </data>
+  <data name="ClusterMasterViewModel_Workloads_Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -263,5 +266,11 @@
   </data>
   <data name="ReplicaSets_NoReplicaSetsMessage" xml:space="preserve">
     <value>There are no replica sets.</value>
+  </data>
+  <data name="ServicesPage_NoServicesMessage" xml:space="preserve">
+    <value>There are no services.</value>
+  </data>
+  <data name="ServicesPage_Title" xml:space="preserve">
+    <value>Services</value>
   </data>
 </root>

@@ -67,8 +67,8 @@ namespace KubeMob.Common.ViewModels
             catch (AccountInvalidException)
             {
                 await this.popupService.DisplayAlert(
-                    AppResources.PodsViewModel_AccountInvalid_Title,
-                    AppResources.PodsViewModel_AccountInvalid_Message,
+                    AppResources.AccountInvalid_Title,
+                    AppResources.AccountInvalid_Message,
                     AppResources.OkAlertText);
             }
 

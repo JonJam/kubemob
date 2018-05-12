@@ -33,13 +33,29 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
         }
 
+        public async Task<IList<DeploymentSummary>> GetDeploymentSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1DeploymentList deployments = await this.GetDeployments();
+
+            return Mapper.Map<IList<DeploymentSummary>>(deployments.Items)
+                .OrderBy(d => d.Name)
+                .ToList();
+        }
+
         public async Task<IList<PodSummary>> GetPodSummaries()
         {
             // TODO Add filter support - ListNamespacedPodAsync
+            // TODO Handle API not being supported by cluster
             k8s.Models.V1PodList podList = await this.GetPods();
 
-            return Mapper.Map<IList<PodSummary>>(podList.Items);
+            return Mapper.Map<IList<PodSummary>>(podList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
         }
+
+        protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
 
         protected abstract Task<k8s.Models.V1PodList> GetPods();
 

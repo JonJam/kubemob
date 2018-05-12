@@ -9,7 +9,7 @@
              Title="{markupExtensions:Translate DeploymentsPage_Title}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
-    <!--<Grid
+    <Grid
       CompressedLayout.IsHeadless="true">
 
         <Grid
@@ -23,11 +23,11 @@
                 IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
                 CompressedLayout.IsHeadless="true">
                 
-                --><!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance --><!--
+                <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
                 <ListView
-                    x:Name="Pods"
-                    ItemsSource="{Binding Pods}"
-                    IsVisible="{Binding HasPods}"
+                    x:Name="Deployments"
+                    ItemsSource="{Binding Deployments}"
+                    IsVisible="{Binding HasDeployments}"
                     SeparatorVisibility="None"
                     HasUnevenRows="False"
                     CachingStrategy="RecycleElement">
@@ -35,14 +35,14 @@
                         <DataTemplate>
                             <TextCell 
                             Text="{Binding Name}"
-                            Detail="{Binding Phase}"/>
+                            Detail="{Binding ReplicaRatio}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
                 <Label
-                    Text="{markupExtensions:Translate PodsPage_NoPodsMessage}"
-                    IsVisible="{Binding HasPods, Converter={StaticResource InverseBoolConverter}}"/>
+                    Text="{markupExtensions:Translate Deployments_NoDeploymentsMessage}"
+                    IsVisible="{Binding HasDeployments, Converter={StaticResource InverseBoolConverter}}"/>
             </Grid>
         </Grid>
 
@@ -51,5 +51,5 @@
             IsVisible="{Binding IsBusy}"
             VerticalOptions="Center"
             HorizontalOptions="Center"/>
-    </Grid>-->
+    </Grid>
 </base:ExtendedContentPage>

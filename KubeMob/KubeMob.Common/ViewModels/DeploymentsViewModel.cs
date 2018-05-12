@@ -15,7 +15,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        //private IList<PodSummary> pods = new List<PodSummary>();
+        private IList<DeploymentSummary> deployments = new List<DeploymentSummary>();
         private bool hasNoNetwork;
 
         public DeploymentsViewModel(
@@ -30,17 +30,17 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        //public IList<PodSummary> Pods
-        //{
-        //    get => this.pods;
-        //    private set
-        //    {
-        //        if (this.SetProperty(ref this.pods, value))
-        //        {
-        //            this.NotifyPropertyChanged(() => this.HasPods);
-        //        }
-        //    }
-        //}
+        public IList<DeploymentSummary> Deployments
+        {
+            get => this.deployments;
+            private set
+            {
+                if (this.SetProperty(ref this.deployments, value))
+                {
+                    this.NotifyPropertyChanged(() => this.HasDeployments);
+                }
+            }
+        }
 
         public bool HasNoNetwork
         {
@@ -48,7 +48,7 @@ namespace KubeMob.Common.ViewModels
             set => this.SetProperty(ref this.hasNoNetwork, value);
         }
 
-        //public bool HasPods => this.Pods.Count > 0;
+        public bool HasDeployments => this.Deployments.Count > 0;
 
         public override async Task Initialize(object navigationData)
         {
@@ -58,7 +58,7 @@ namespace KubeMob.Common.ViewModels
 
             try
             {
-                //this.Pods = await this.kubernetesService.GetPodSummaries();
+                this.Deployments = await this.kubernetesService.GetDeploymentSummaries();
             }
             catch (NoNetworkException)
             {
@@ -67,8 +67,8 @@ namespace KubeMob.Common.ViewModels
             catch (AccountInvalidException)
             {
                 await this.popupService.DisplayAlert(
-                    AppResources.PodsViewModel_AccountInvalid_Title,
-                    AppResources.PodsViewModel_AccountInvalid_Message,
+                    AppResources.AccountInvalid_Title,
+                    AppResources.AccountInvalid_Message,
                     AppResources.OkAlertText);
             }
 

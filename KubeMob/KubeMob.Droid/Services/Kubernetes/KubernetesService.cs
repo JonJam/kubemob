@@ -49,6 +49,21 @@ namespace KubeMob.Droid.Services.Kubernetes
             return client;
         }
 
+        protected override async Task<V1DeploymentList> GetDeployments()
+        {
+            try
+            {
+                IKubernetes client = await this.Client.Value;
+
+                return await client.ListDeploymentForAllNamespacesAsync();
+            }
+            catch (Java.Net.UnknownHostException e)
+            {
+                // No internet.
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
+
         protected override async Task<V1PodList> GetPods()
         {
             try

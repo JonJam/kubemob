@@ -100,6 +100,11 @@ namespace KubeMob.Common
 
                 cfg.CreateMap<k8s.Models.V1Pod, PodSummary>()
                     .ConstructUsing((p) => new PodSummary(p.Metadata.Name, p.Status.Phase));
+
+                cfg.CreateMap<k8s.Models.V1Deployment, DeploymentSummary>()
+                    .ConstructUsing((p) => new DeploymentSummary(
+                        p.Metadata.Name,
+                        $"{p.Status.AvailableReplicas}/{p.Status.Replicas}"));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

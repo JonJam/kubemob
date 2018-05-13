@@ -207,6 +207,12 @@
   <data name="AzureEnvironment_USGovernment" xml:space="preserve">
     <value>US Government</value>
   </data>
+  <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing" xml:space="preserve">
+    <value>Discovery and Load Balancing</value>
+  </data>
+  <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services" xml:space="preserve">
+    <value>Services</value>
+  </data>
   <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
   </data>
@@ -218,9 +224,6 @@
   </data>
   <data name="ClusterMasterViewModel_Workloads_ReplicaSets" xml:space="preserve">
     <value>Replica sets</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_Services" xml:space="preserve">
-    <value>Services</value>
   </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
     <value>Delete</value>

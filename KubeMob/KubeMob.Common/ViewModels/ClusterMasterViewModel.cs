@@ -32,10 +32,13 @@ namespace KubeMob.Common.ViewModels
                         
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_ReplicaSets,
-                        new Command(async () => await navigationService.NavigateToReplicaSetsPage())),
-                    
+                        new Command(async () => await navigationService.NavigateToReplicaSetsPage()))
+                },
+
+                new MenuItemGroup(AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing)
+                {
                     new MenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_Services,
+                        AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services,
                         new Command(async () => await navigationService.NavigateToServicesPage()))
                 }
             });

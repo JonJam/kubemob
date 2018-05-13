@@ -331,6 +331,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discovery and Load Balancing.
+        /// </summary>
+        internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Services.
+        /// </summary>
+        internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workloads.
         /// </summary>
         internal static string ClusterMasterViewModel_Workloads {
@@ -363,15 +381,6 @@ namespace KubeMob.Common.Resx {
         internal static string ClusterMasterViewModel_Workloads_ReplicaSets {
             get {
                 return ResourceManager.GetString("ClusterMasterViewModel_Workloads_ReplicaSets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Services.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_Services {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Services", resourceCulture);
             }
         }
         

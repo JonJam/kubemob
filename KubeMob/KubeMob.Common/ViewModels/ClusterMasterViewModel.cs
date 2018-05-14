@@ -43,6 +43,13 @@ namespace KubeMob.Common.ViewModels
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services,
                         new Command(async () => await navigationService.NavigateToServicesPage()))
+                },
+
+                new MenuItemGroup(AppResources.ClusterMasterViewModel_ConfigAndStorage)
+                {
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_ConfigAndStorage_ConfigMaps,
+                        new Command(async () => await navigationService.NavigateToConfigMaps()))
                 }
             });
         }

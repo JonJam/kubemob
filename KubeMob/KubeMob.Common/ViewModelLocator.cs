@@ -66,6 +66,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
             serviceCollection.AddTransient<ServicesViewModel>();
             serviceCollection.AddTransient<IngressesViewModel>();
+            serviceCollection.AddTransient<ConfigMapsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -121,6 +122,10 @@ namespace KubeMob.Common
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, IngressSummary>()
                     .ConstructUsing((r) => new IngressSummary(
+                        r.Metadata.Name));
+
+                cfg.CreateMap<k8s.Models.V1ConfigMap, ConfigMapSummary>()
+                    .ConstructUsing((r) => new ConfigMapSummary(
                         r.Metadata.Name));
             });
 

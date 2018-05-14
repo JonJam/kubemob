@@ -66,6 +66,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToIngressesPage() => NavigationService.InternalNavigate(typeof(IngressesPage));
 
+        public Task NavigateToConfigMaps() => NavigationService.InternalNavigate(typeof(ConfigMapsPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

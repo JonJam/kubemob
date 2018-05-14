@@ -36,6 +36,9 @@
     <Compile Update="Pages\IngressesPage.xaml.cs">
       <DependentUpon>IngressesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ConfigMapsPage.xaml.cs">
+      <DependentUpon>ConfigMapsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ServicesPage.xaml.cs">
       <DependentUpon>ServicesPage.xaml</DependentUpon>
     </Compile>

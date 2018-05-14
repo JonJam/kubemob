@@ -331,6 +331,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config and Storage.
+        /// </summary>
+        internal static string ClusterMasterViewModel_ConfigAndStorage {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config Maps.
+        /// </summary>
+        internal static string ClusterMasterViewModel_ConfigAndStorage_ConfigMaps {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage_ConfigMaps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discovery and Load Balancing.
         /// </summary>
         internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing {
@@ -453,6 +471,24 @@ namespace KubeMob.Common.Resx {
         internal static string ClustersPage_ViewToggle_ToolbarItem {
             get {
                 return ResourceManager.GetString("ClustersPage_ViewToggle_ToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no config maps..
+        /// </summary>
+        internal static string ConfigMapsPage_NoConfigMapsMessage {
+            get {
+                return ResourceManager.GetString("ConfigMapsPage_NoConfigMapsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config Maps.
+        /// </summary>
+        internal static string ConfigMapsPage_Title {
+            get {
+                return ResourceManager.GetString("ConfigMapsPage_Title", resourceCulture);
             }
         }
         

@@ -213,6 +213,9 @@
   <data name="ClusterMasterViewModel_ConfigAndStorage_ConfigMaps" xml:space="preserve">
     <value>Config Maps</value>
   </data>
+  <data name="ClusterMasterViewModel_ConfigAndStorage_Secrets" xml:space="preserve">
+    <value>Secrets</value>
+  </data>
   <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing" xml:space="preserve">
     <value>Discovery and Load Balancing</value>
   </data>
@@ -290,6 +293,12 @@
   </data>
   <data name="ReplicaSets_NoReplicaSetsMessage" xml:space="preserve">
     <value>There are no replica sets.</value>
+  </data>
+  <data name="SecretsPage_NoSecretsMessage" xml:space="preserve">
+    <value>There are no secrets.</value>
+  </data>
+  <data name="SecretsPage_Title" xml:space="preserve">
+    <value>Secrets</value>
   </data>
   <data name="ServicesPage_NoServicesMessage" xml:space="preserve">
     <value>There are no services.</value>

@@ -65,7 +65,7 @@ namespace KubeMob.Common.Services.Kubernetes
                 .OrderBy(p => p.Name)
                 .ToList();
         }
-        
+
         public async Task<IList<ServiceSummary>> GetServiceSummaries()
         {
             // TODO Add filter support
@@ -99,6 +99,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<SecretSummary>> GetSecretSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1SecretList secretList = await this.GetSecrets();
+
+            return Mapper.Map<IList<SecretSummary>>(secretList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
@@ -112,6 +123,8 @@ namespace KubeMob.Common.Services.Kubernetes
         protected abstract Task<k8s.Models.V1beta1IngressList> GetIngresses();
 
         protected abstract Task<k8s.Models.V1ConfigMapList> GetConfigMaps();
+
+        protected abstract Task<k8s.Models.V1SecretList> GetSecrets();
 
         private async Task<IKubernetes> CreateClient()
         {

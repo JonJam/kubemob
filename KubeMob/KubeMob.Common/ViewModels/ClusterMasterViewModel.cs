@@ -49,7 +49,11 @@ namespace KubeMob.Common.ViewModels
                 {
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_ConfigAndStorage_ConfigMaps,
-                        new Command(async () => await navigationService.NavigateToConfigMaps()))
+                        new Command(async () => await navigationService.NavigateToConfigMapsPage())),
+
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_ConfigAndStorage_Secrets,
+                        new Command(async () => await navigationService.NavigateToSecretsPage()))
                 }
             });
         }

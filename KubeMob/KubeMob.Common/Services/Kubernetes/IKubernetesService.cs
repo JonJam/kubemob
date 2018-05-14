@@ -16,5 +16,7 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<IList<IngressSummary>> GetIngressSummaries();
 
         Task<IList<ConfigMapSummary>> GetConfigMapSummaries();
+
+        Task<IList<SecretSummary>> GetSecretSummaries();
     }
 }

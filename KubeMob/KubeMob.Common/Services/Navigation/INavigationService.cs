@@ -24,8 +24,10 @@ namespace KubeMob.Common.Services.Navigation
         Task NavigateToServicesPage();
 
         Task NavigateToIngressesPage();
-        
-        Task NavigateToConfigMaps();
+
+        Task NavigateToConfigMapsPage();
+
+        Task NavigateToSecretsPage();
 
         Task RemoveLastFromBackStack();
 

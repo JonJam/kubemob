@@ -340,6 +340,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ingresses.
+        /// </summary>
+        internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Services.
         /// </summary>
         internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services {
@@ -462,6 +471,24 @@ namespace KubeMob.Common.Resx {
         internal static string DeploymentsPage_Title {
             get {
                 return ResourceManager.GetString("DeploymentsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no ingresses..
+        /// </summary>
+        internal static string IngressesPage_NoIngressesMessage {
+            get {
+                return ResourceManager.GetString("IngressesPage_NoIngressesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingresses.
+        /// </summary>
+        internal static string IngressesPage_Title {
+            get {
+                return ResourceManager.GetString("IngressesPage_Title", resourceCulture);
             }
         }
         

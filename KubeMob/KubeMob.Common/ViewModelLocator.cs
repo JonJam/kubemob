@@ -65,6 +65,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<DeploymentsViewModel>();
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
             serviceCollection.AddTransient<ServicesViewModel>();
+            serviceCollection.AddTransient<IngressesViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -112,11 +113,15 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new ReplicaSetSummary(
                         r.Metadata.Name,
                         $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
-                
+
                 cfg.CreateMap<k8s.Models.V1Service, ServiceSummary>()
                     .ConstructUsing((r) => new ServiceSummary(
                         r.Metadata.Name,
                         r.Spec.ClusterIP));
+
+                cfg.CreateMap<k8s.Models.V1beta1Ingress, IngressSummary>()
+                    .ConstructUsing((r) => new IngressSummary(
+                        r.Metadata.Name));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

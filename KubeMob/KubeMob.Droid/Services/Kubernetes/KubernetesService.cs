@@ -108,5 +108,20 @@ namespace KubeMob.Droid.Services.Kubernetes
                 throw new NoNetworkException(e.Message, e);
             }
         }
+
+        protected override async Task<V1beta1IngressList> GetIngresses()
+        {
+            try
+            {
+                IKubernetes client = await this.Client.Value;
+
+                return await client.ListIngressForAllNamespacesAsync();
+            }
+            catch (Java.Net.UnknownHostException e)
+            {
+                // No internet.
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
     }
 }

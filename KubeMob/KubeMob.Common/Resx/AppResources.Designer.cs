@@ -349,6 +349,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Secrets.
+        /// </summary>
+        internal static string ClusterMasterViewModel_ConfigAndStorage_Secrets {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage_Secrets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discovery and Load Balancing.
         /// </summary>
         internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing {
@@ -579,6 +588,24 @@ namespace KubeMob.Common.Resx {
         internal static string ReplicaSetsPage_Title {
             get {
                 return ResourceManager.GetString("ReplicaSetsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no secrets..
+        /// </summary>
+        internal static string SecretsPage_NoSecretsMessage {
+            get {
+                return ResourceManager.GetString("SecretsPage_NoSecretsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Secrets.
+        /// </summary>
+        internal static string SecretsPage_Title {
+            get {
+                return ResourceManager.GetString("SecretsPage_Title", resourceCulture);
             }
         }
         

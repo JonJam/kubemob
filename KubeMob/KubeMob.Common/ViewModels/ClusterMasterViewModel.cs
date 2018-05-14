@@ -19,7 +19,6 @@ namespace KubeMob.Common.ViewModels
             this.MenuItems = new ObservableCollection<MenuItemGroup>(new[]
             {
                 // TODO Add Overview link
-
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_Workloads)
                 {
                     new MenuItemViewModel(
@@ -29,7 +28,7 @@ namespace KubeMob.Common.ViewModels
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_Pods,
                         new Command(async () => await navigationService.NavigateToPodsPage())),
-                        
+
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_ReplicaSets,
                         new Command(async () => await navigationService.NavigateToReplicaSetsPage()))
@@ -37,6 +36,10 @@ namespace KubeMob.Common.ViewModels
 
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing)
                 {
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses,
+                        new Command(async () => await navigationService.NavigateToIngressesPage())),
+
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services,
                         new Command(async () => await navigationService.NavigateToServicesPage()))

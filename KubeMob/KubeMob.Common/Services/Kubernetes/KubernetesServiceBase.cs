@@ -77,6 +77,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<IngressSummary>> GetIngressSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1beta1IngressList ingressList = await this.GetIngresses();
+
+            return Mapper.Map<IList<IngressSummary>>(ingressList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
 
         protected abstract Task<k8s.Models.V1PodList> GetPods();
@@ -84,6 +95,8 @@ namespace KubeMob.Common.Services.Kubernetes
         protected abstract Task<k8s.Models.V1ReplicaSetList> GetReplicaSets();
 
         protected abstract Task<k8s.Models.V1ServiceList> GetServices();
+
+        protected abstract Task<k8s.Models.V1beta1IngressList> GetIngresses();
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 

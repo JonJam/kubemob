@@ -210,6 +210,9 @@
   <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing" xml:space="preserve">
     <value>Discovery and Load Balancing</value>
   </data>
+  <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses" xml:space="preserve">
+    <value>Ingresses</value>
+  </data>
   <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services" xml:space="preserve">
     <value>Services</value>
   </data>
@@ -251,6 +254,12 @@
   </data>
   <data name="Deployments_NoDeploymentsMessage" xml:space="preserve">
     <value>There are no deployments.</value>
+  </data>
+  <data name="IngressesPage_NoIngressesMessage" xml:space="preserve">
+    <value>There are no ingresses.</value>
+  </data>
+  <data name="IngressesPage_Title" xml:space="preserve">
+    <value>Ingresses</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>We are having connectivity issues doing that right now. Please try again.</value>

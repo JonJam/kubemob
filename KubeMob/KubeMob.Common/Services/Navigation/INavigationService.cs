@@ -33,6 +33,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToDaemonSetsPage();
 
+        Task NavigateToJobsPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

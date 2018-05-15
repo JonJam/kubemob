@@ -70,6 +70,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<SecretsViewModel>();
             serviceCollection.AddTransient<CronJobsViewModel>();
             serviceCollection.AddTransient<DaemonSetsViewModel>();
+            serviceCollection.AddTransient<JobsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -145,6 +146,11 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new DaemonSetSummary(
                         r.Metadata.Name,
                         $"{r.Status.CurrentNumberScheduled}/{r.Status.DesiredNumberScheduled}"));
+
+                cfg.CreateMap<k8s.Models.V1Job, JobSummary>()
+                    .ConstructUsing((r) => new JobSummary(
+                        r.Metadata.Name,
+                        $"{r.Status.Active.GetValueOrDefault(0)}/{r.Spec.Parallelism}"));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

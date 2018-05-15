@@ -237,6 +237,9 @@
   <data name="ClusterMasterViewModel_Workloads_Deployments" xml:space="preserve">
     <value>Deployments</value>
   </data>
+  <data name="ClusterMasterViewModel_Workloads_Jobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
   <data name="ClusterMasterViewModel_Workloads_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
@@ -293,6 +296,12 @@
   </data>
   <data name="IngressesPage_Title" xml:space="preserve">
     <value>Ingresses</value>
+  </data>
+  <data name="JobsPage_NoJobsMessage" xml:space="preserve">
+    <value>There are no jobs.</value>
+  </data>
+  <data name="JobsPage_Title" xml:space="preserve">
+    <value>Jobs</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>We are having connectivity issues doing that right now. Please try again.</value>

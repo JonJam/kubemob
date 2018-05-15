@@ -20,5 +20,7 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<IList<SecretSummary>> GetSecretSummaries();
 
         Task<IList<CronJobSummary>> GetCronJobSummaries();
+
+        Task<IList<DaemonSetSummary>> GetDaemonSetSummaries();
     }
 }

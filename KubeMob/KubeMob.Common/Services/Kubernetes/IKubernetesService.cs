@@ -24,5 +24,7 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<IList<DaemonSetSummary>> GetDaemonSetSummaries();
 
         Task<IList<JobSummary>> GetJobSummaries();
+
+        Task<IList<ReplicationControllerSummary>> GetReplicationControllerSummaries();
     }
 }

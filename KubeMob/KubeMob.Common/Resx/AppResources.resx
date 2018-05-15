@@ -246,6 +246,9 @@
   <data name="ClusterMasterViewModel_Workloads_ReplicaSets" xml:space="preserve">
     <value>Replica sets</value>
   </data>
+  <data name="ClusterMasterViewModel_Workloads_ReplicationControllers" xml:space="preserve">
+    <value>Replication Controllers</value>
+  </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -320,6 +323,12 @@
   </data>
   <data name="ReplicaSets_NoReplicaSetsMessage" xml:space="preserve">
     <value>There are no replica sets.</value>
+  </data>
+  <data name="ReplicationControllersPage_NoReplicationControllersMessage" xml:space="preserve">
+    <value>There are no replication controllers.</value>
+  </data>
+  <data name="ReplicationControllersPage_Title" xml:space="preserve">
+    <value>Replication Controllers</value>
   </data>
   <data name="SecretsPage_NoSecretsMessage" xml:space="preserve">
     <value>There are no secrets.</value>

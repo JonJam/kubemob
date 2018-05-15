@@ -448,6 +448,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replication Controllers.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_ReplicationControllers {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_ReplicationControllers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string ClustersPage_Accounts_Delete_MenuItemText {
@@ -669,6 +678,24 @@ namespace KubeMob.Common.Resx {
         internal static string ReplicaSetsPage_Title {
             get {
                 return ResourceManager.GetString("ReplicaSetsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no replication controllers..
+        /// </summary>
+        internal static string ReplicationControllersPage_NoReplicationControllersMessage {
+            get {
+                return ResourceManager.GetString("ReplicationControllersPage_NoReplicationControllersMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replication Controllers.
+        /// </summary>
+        internal static string ReplicationControllersPage_Title {
+            get {
+                return ResourceManager.GetString("ReplicationControllersPage_Title", resourceCulture);
             }
         }
         

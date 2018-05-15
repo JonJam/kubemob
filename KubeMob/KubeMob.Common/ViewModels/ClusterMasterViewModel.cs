@@ -43,7 +43,11 @@ namespace KubeMob.Common.ViewModels
 
                     new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_ReplicaSets,
-                        new Command(async () => await navigationService.NavigateToReplicaSetsPage()))
+                        new Command(async () => await navigationService.NavigateToReplicaSetsPage())),
+
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_Workloads_ReplicationControllers,
+                        new Command(async () => await navigationService.NavigateToReplicationControllersPage()))
                 },
 
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing)

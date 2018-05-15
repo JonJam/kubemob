@@ -132,6 +132,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<JobSummary>> GetJobSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1JobList jobList = await this.GetJobs();
+
+            return Mapper.Map<IList<JobSummary>>(jobList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
@@ -151,6 +162,8 @@ namespace KubeMob.Common.Services.Kubernetes
         protected abstract Task<k8s.Models.V1beta1CronJobList> GetCronJobs();
 
         protected abstract Task<k8s.Models.V1DaemonSetList> GetDaemonSets();
+
+        protected abstract Task<k8s.Models.V1JobList> GetJobs();
 
         private async Task<IKubernetes> CreateClient()
         {

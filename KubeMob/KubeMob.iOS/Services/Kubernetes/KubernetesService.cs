@@ -197,5 +197,22 @@ namespace KubeMob.iOS.Services.Kubernetes
                 throw new NoNetworkException(e.Message, e);
             }
         }
+
+        protected override async Task<V1JobList> GetJobs()
+        {
+            try
+            {
+                IKubernetes client = await this.Client.Value;
+
+                return await client.ListJobForAllNamespacesAsync();
+            }
+            catch (HttpRequestException e) when (e.InnerException is WebException web &&
+                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
+            {
+                // TODO Verify this is correct exception type on device.
+                // No internet.
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
     }
 }

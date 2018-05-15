@@ -34,6 +34,10 @@ namespace KubeMob.Common.ViewModels
                         new Command(async () => await navigationService.NavigateToDeploymentsPage())),
 
                     new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_Workloads_Jobs,
+                        new Command(async () => await navigationService.NavigateToJobsPage())),
+
+                    new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_Pods,
                         new Command(async () => await navigationService.NavigateToPodsPage())),
 

@@ -184,5 +184,20 @@ namespace KubeMob.Droid.Services.Kubernetes
                 throw new NoNetworkException(e.Message, e);
             }
         }
+
+        protected override async Task<V1JobList> GetJobs()
+        {
+            try
+            {
+                IKubernetes client = await this.Client.Value;
+
+                return await client.ListJobForAllNamespacesAsync();
+            }
+            catch (Java.Net.UnknownHostException e)
+            {
+                // No internet.
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
     }
 }

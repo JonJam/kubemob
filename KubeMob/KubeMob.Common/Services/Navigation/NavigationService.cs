@@ -74,6 +74,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToDaemonSetsPage() => NavigationService.InternalNavigate(typeof(DaemonSetsPage));
 
+        public Task NavigateToJobsPage() => NavigationService.InternalNavigate(typeof(JobsPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

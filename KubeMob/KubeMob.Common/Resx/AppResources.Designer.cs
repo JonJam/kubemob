@@ -421,6 +421,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Jobs.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_Jobs {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Jobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
         internal static string ClusterMasterViewModel_Workloads_Pods {
@@ -588,6 +597,24 @@ namespace KubeMob.Common.Resx {
         internal static string IngressesPage_Title {
             get {
                 return ResourceManager.GetString("IngressesPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no jobs..
+        /// </summary>
+        internal static string JobsPage_NoJobsMessage {
+            get {
+                return ResourceManager.GetString("JobsPage_NoJobsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jobs.
+        /// </summary>
+        internal static string JobsPage_Title {
+            get {
+                return ResourceManager.GetString("JobsPage_Title", resourceCulture);
             }
         }
         

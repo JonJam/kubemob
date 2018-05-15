@@ -26,6 +26,10 @@ namespace KubeMob.Common.ViewModels
                         new Command(async () => await navigationService.NavigateToCronJobsPage())),
 
                     new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_Workloads_DaemonSets,
+                        new Command(async () => await navigationService.NavigateToDaemonSetsPage())),
+
+                    new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_Deployments,
                         new Command(async () => await navigationService.NavigateToDeploymentsPage())),
 

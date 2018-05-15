@@ -121,6 +121,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<DaemonSetSummary>> GetDaemonSetSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1DaemonSetList daemonSetsList = await this.GetDaemonSets();
+
+            return Mapper.Map<IList<DaemonSetSummary>>(daemonSetsList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
@@ -138,6 +149,8 @@ namespace KubeMob.Common.Services.Kubernetes
         protected abstract Task<k8s.Models.V1SecretList> GetSecrets();
 
         protected abstract Task<k8s.Models.V1beta1CronJobList> GetCronJobs();
+
+        protected abstract Task<k8s.Models.V1DaemonSetList> GetDaemonSets();
 
         private async Task<IKubernetes> CreateClient()
         {

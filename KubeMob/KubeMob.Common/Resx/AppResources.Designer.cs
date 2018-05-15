@@ -403,6 +403,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daemon Sets.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_DaemonSets {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_DaemonSets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deployments.
         /// </summary>
         internal static string ClusterMasterViewModel_Workloads_Deployments {
@@ -525,6 +534,24 @@ namespace KubeMob.Common.Resx {
         internal static string CronJobsPage_Title {
             get {
                 return ResourceManager.GetString("CronJobsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no daemon sets..
+        /// </summary>
+        internal static string DaemonSetsPage_NoDaemonSetsMessage {
+            get {
+                return ResourceManager.GetString("DaemonSetsPage_NoDaemonSetsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daemon Sets.
+        /// </summary>
+        internal static string DaemonSetsPage_Title {
+            get {
+                return ResourceManager.GetString("DaemonSetsPage_Title", resourceCulture);
             }
         }
         

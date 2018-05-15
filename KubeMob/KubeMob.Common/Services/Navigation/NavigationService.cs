@@ -70,6 +70,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToSecretsPage() => NavigationService.InternalNavigate(typeof(SecretsPage));
 
+        public Task NavigateToCronJobsPage() => NavigationService.InternalNavigate(typeof(CronJobsPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

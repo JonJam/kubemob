@@ -394,6 +394,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cron Jobs.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_CronJobs {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_CronJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deployments.
         /// </summary>
         internal static string ClusterMasterViewModel_Workloads_Deployments {
@@ -498,6 +507,24 @@ namespace KubeMob.Common.Resx {
         internal static string ConfigMapsPage_Title {
             get {
                 return ResourceManager.GetString("ConfigMapsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no cron jobs..
+        /// </summary>
+        internal static string CronJobsPage_NoCronJobsMessage {
+            get {
+                return ResourceManager.GetString("CronJobsPage_NoCronJobsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cron Jobs.
+        /// </summary>
+        internal static string CronJobsPage_Title {
+            get {
+                return ResourceManager.GetString("CronJobsPage_Title", resourceCulture);
             }
         }
         

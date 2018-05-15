@@ -18,5 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<IList<ConfigMapSummary>> GetConfigMapSummaries();
 
         Task<IList<SecretSummary>> GetSecretSummaries();
+
+        Task<IList<CronJobSummary>> GetCronJobSummaries();
     }
 }

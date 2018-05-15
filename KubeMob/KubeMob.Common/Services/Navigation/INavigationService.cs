@@ -29,6 +29,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToSecretsPage();
 
+        Task NavigateToCronJobsPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

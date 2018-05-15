@@ -49,6 +49,7 @@ namespace KubeMob.Droid.Services.Kubernetes
             return client;
         }
 
+        // TODO Refactor below
         protected override async Task<V1DeploymentList> GetDeployments()
         {
             try
@@ -146,6 +147,21 @@ namespace KubeMob.Droid.Services.Kubernetes
                 IKubernetes client = await this.Client.Value;
 
                 return await client.ListSecretForAllNamespacesAsync();
+            }
+            catch (Java.Net.UnknownHostException e)
+            {
+                // No internet.
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
+
+        protected override async Task<V1beta1CronJobList> GetCronJobs()
+        {
+            try
+            {
+                IKubernetes client = await this.Client.Value;
+
+                return await client.ListCronJobForAllNamespacesAsync();
             }
             catch (Java.Net.UnknownHostException e)
             {

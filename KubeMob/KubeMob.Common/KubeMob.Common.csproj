@@ -42,6 +42,9 @@
     <Compile Update="Pages\SecretsPage.xaml.cs">
       <DependentUpon>SecretsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\CronJobsPage.xaml.cs">
+      <DependentUpon>CronJobsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ServicesPage.xaml.cs">
       <DependentUpon>ServicesPage.xaml</DependentUpon>
     </Compile>

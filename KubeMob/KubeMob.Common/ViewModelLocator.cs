@@ -68,6 +68,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<IngressesViewModel>();
             serviceCollection.AddTransient<ConfigMapsViewModel>();
             serviceCollection.AddTransient<SecretsViewModel>();
+            serviceCollection.AddTransient<CronJobsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -133,6 +134,11 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new SecretSummary(
                         r.Metadata.Name,
                         r.Type));
+
+                cfg.CreateMap<k8s.Models.V1beta1CronJob, CronJobSummary>()
+                    .ConstructUsing((r) => new CronJobSummary(
+                        r.Metadata.Name,
+                        r.Spec.Schedule));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

@@ -228,6 +228,9 @@
   <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
   </data>
+  <data name="ClusterMasterViewModel_Workloads_CronJobs" xml:space="preserve">
+    <value>Cron Jobs</value>
+  </data>
   <data name="ClusterMasterViewModel_Workloads_Deployments" xml:space="preserve">
     <value>Deployments</value>
   </data>
@@ -263,6 +266,12 @@
   </data>
   <data name="ConfigMapsPage_Title" xml:space="preserve">
     <value>Config Maps</value>
+  </data>
+  <data name="CronJobsPage_NoCronJobsMessage" xml:space="preserve">
+    <value>There are no cron jobs.</value>
+  </data>
+  <data name="CronJobsPage_Title" xml:space="preserve">
+    <value>Cron Jobs</value>
   </data>
   <data name="DeploymentsPage_Title" xml:space="preserve">
     <value>Deployments</value>

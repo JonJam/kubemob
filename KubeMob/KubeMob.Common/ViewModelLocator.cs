@@ -71,6 +71,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<CronJobsViewModel>();
             serviceCollection.AddTransient<DaemonSetsViewModel>();
             serviceCollection.AddTransient<JobsViewModel>();
+            serviceCollection.AddTransient<ReplicationControllersViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -151,6 +152,11 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new JobSummary(
                         r.Metadata.Name,
                         $"{r.Status.Active.GetValueOrDefault(0)}/{r.Spec.Parallelism}"));
+
+                cfg.CreateMap<k8s.Models.V1ReplicationController, ReplicationControllerSummary>()
+                    .ConstructUsing((r) => new ReplicationControllerSummary(
+                        r.Metadata.Name,
+                        $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Spec.Replicas}"));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

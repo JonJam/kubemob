@@ -35,6 +35,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToJobsPage();
 
+        Task NavigateToReplicationControllersPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

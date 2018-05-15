@@ -143,6 +143,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<ReplicationControllerSummary>> GetReplicationControllerSummaries()
+        {
+            // TODO Add filter support
+            // TODO Handle API not being supported by cluster
+            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.GetReplicationControllers();
+
+            return Mapper.Map<IList<ReplicationControllerSummary>>(replicationControllerList.Items)
+                .OrderBy(p => p.Name)
+                .ToList();
+        }
+
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
         protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
@@ -164,6 +175,8 @@ namespace KubeMob.Common.Services.Kubernetes
         protected abstract Task<k8s.Models.V1DaemonSetList> GetDaemonSets();
 
         protected abstract Task<k8s.Models.V1JobList> GetJobs();
+
+        protected abstract Task<k8s.Models.V1ReplicationControllerList> GetReplicationControllers();
 
         private async Task<IKubernetes> CreateClient()
         {

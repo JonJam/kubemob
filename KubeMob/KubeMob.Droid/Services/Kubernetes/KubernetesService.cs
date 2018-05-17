@@ -200,6 +200,21 @@ namespace KubeMob.Droid.Services.Kubernetes
             }
         }
 
+        protected override async Task<V1StatefulSetList> GetStatefulSets()
+        {
+            try
+            {
+                IKubernetes client = await this.Client.Value;
+
+                return await client.ListStatefulSetForAllNamespacesAsync();
+            }
+            catch (Java.Net.UnknownHostException e)
+            {
+                // No internet.
+                throw new NoNetworkException(e.Message, e);
+            }
+        }
+
         protected override async Task<V1ReplicationControllerList> GetReplicationControllers()
         {
             try

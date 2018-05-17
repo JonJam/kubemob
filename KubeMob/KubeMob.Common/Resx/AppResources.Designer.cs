@@ -457,6 +457,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stateful Sets.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Workloads_StatefulSets {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_StatefulSets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string ClustersPage_Accounts_Delete_MenuItemText {
@@ -732,6 +741,24 @@ namespace KubeMob.Common.Resx {
         internal static string ServicesPage_Title {
             get {
                 return ResourceManager.GetString("ServicesPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no stateful sets..
+        /// </summary>
+        internal static string StatefulSetsPage_NoServicesMessage {
+            get {
+                return ResourceManager.GetString("StatefulSetsPage_NoServicesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stateful Sets.
+        /// </summary>
+        internal static string StatefulSetsPage_Title {
+            get {
+                return ResourceManager.GetString("StatefulSetsPage_Title", resourceCulture);
             }
         }
     }

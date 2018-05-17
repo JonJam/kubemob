@@ -249,6 +249,9 @@
   <data name="ClusterMasterViewModel_Workloads_ReplicationControllers" xml:space="preserve">
     <value>Replication Controllers</value>
   </data>
+  <data name="ClusterMasterViewModel_Workloads_StatefulSets" xml:space="preserve">
+    <value>Stateful Sets</value>
+  </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -341,5 +344,11 @@
   </data>
   <data name="ServicesPage_Title" xml:space="preserve">
     <value>Services</value>
+  </data>
+  <data name="StatefulSetsPage_NoServicesMessage" xml:space="preserve">
+    <value>There are no stateful sets.</value>
+  </data>
+  <data name="StatefulSetsPage_Title" xml:space="preserve">
+    <value>Stateful Sets</value>
   </data>
 </root>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views"
+                          x:Class="KubeMob.Common.Pages.StatefulSetsPage"
+             Title="{markupExtensions:Translate StatefulSetsPage_Title}"
+             common:ViewModelLocator.AutoWireViewModel="true">
+
+    <Grid
+      CompressedLayout.IsHeadless="true">
+
+        <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            CompressedLayout.IsHeadless="true">
+
+            <views:NoNetworkIndicator
+                IsVisible="{Binding HasNoNetwork}"/>
+
+            <Grid
+                IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
+                CompressedLayout.IsHeadless="true">
+                
+                <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
+                <ListView
+                    x:Name="StatefulSets"
+                    ItemsSource="{Binding StatefulSets}"
+                    IsVisible="{Binding HasStatefulSets}"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="False"
+                    CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell 
+                            Text="{Binding Name}"
+                            Detail="{Binding ReplicaRatio}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label
+                    Text="{markupExtensions:Translate StatefulSetsPage_NoServicesMessage}"
+                    IsVisible="{Binding HasStatefulSets, Converter={StaticResource InverseBoolConverter}}"/>
+            </Grid>
+        </Grid>
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+    </Grid>
+</base:ExtendedContentPage>

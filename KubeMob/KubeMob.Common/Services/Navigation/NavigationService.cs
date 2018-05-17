@@ -80,6 +80,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToPersistentVolumeClaimsPage() => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimsPage));
 
+        public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

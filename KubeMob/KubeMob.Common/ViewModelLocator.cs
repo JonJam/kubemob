@@ -73,6 +73,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<JobsViewModel>();
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
+            serviceCollection.AddTransient<StatefulSetsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
@@ -158,6 +159,11 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new ReplicationControllerSummary(
                         r.Metadata.Name,
                         $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Spec.Replicas}"));
+
+                cfg.CreateMap<k8s.Models.V1StatefulSet, StatefulSetSummary>()
+                    .ConstructUsing((r) => new StatefulSetSummary(
+                        r.Metadata.Name,
+                        $"{r.Status.CurrentReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
 
                 cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, PersistentVolumeClaimsSummary>()
                     .ConstructUsing((r) => new PersistentVolumeClaimsSummary(

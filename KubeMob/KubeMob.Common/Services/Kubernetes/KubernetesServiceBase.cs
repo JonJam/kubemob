@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using k8s;
+using k8s.Models;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Model;
@@ -37,146 +38,146 @@ namespace KubeMob.Common.Services.Kubernetes
 
         // TODO Refactor summary methods to use common method
 
-        public async Task<IList<DeploymentSummary>> GetDeploymentSummaries()
+        public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListDeploymentForAllNamespacesAsync());
 
-            return Mapper.Map<IList<DeploymentSummary>>(deployments.Items)
+            return Mapper.Map<IList<ObjectSummary>>(deployments.Items)
                 .OrderBy(d => d.Name)
                 .ToList();
         }
 
-        public async Task<IList<PodSummary>> GetPodSummaries()
+        public async Task<IList<ObjectSummary>> GetPodSummaries()
         {
             // TODO Add filter support - ListNamespacedPodAsync
             // TODO Handle API not being supported by cluster
             k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListPodForAllNamespacesAsync());
 
-            return Mapper.Map<IList<PodSummary>>(podList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<ReplicaSetSummary>> GetReplicaSetSummaries()
+        public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListReplicaSetForAllNamespacesAsync());
 
-            return Mapper.Map<IList<ReplicaSetSummary>>(replicaSetList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(replicaSetList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<ServiceSummary>> GetServiceSummaries()
+        public async Task<IList<ObjectSummary>> GetServiceSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1ServiceList serviceList =
                 await this.PerformClientOperation((c) => c.ListServiceForAllNamespacesAsync());
 
-            return Mapper.Map<IList<ServiceSummary>>(serviceList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(serviceList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<IngressSummary>> GetIngressSummaries()
+        public async Task<IList<ObjectSummary>> GetIngressSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListIngressForAllNamespacesAsync());
 
-            return Mapper.Map<IList<IngressSummary>>(ingressList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(ingressList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<ConfigMapSummary>> GetConfigMapSummaries()
+        public async Task<IList<ObjectSummary>> GetConfigMapSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListConfigMapForAllNamespacesAsync());
 
-            return Mapper.Map<IList<ConfigMapSummary>>(configMapList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(configMapList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<SecretSummary>> GetSecretSummaries()
+        public async Task<IList<ObjectSummary>> GetSecretSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListSecretForAllNamespacesAsync());
 
-            return Mapper.Map<IList<SecretSummary>>(secretList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(secretList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<CronJobSummary>> GetCronJobSummaries()
+        public async Task<IList<ObjectSummary>> GetCronJobSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListCronJobForAllNamespacesAsync());
 
-            return Mapper.Map<IList<CronJobSummary>>(cronJobList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(cronJobList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<DaemonSetSummary>> GetDaemonSetSummaries()
+        public async Task<IList<ObjectSummary>> GetDaemonSetSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListDaemonSetForAllNamespacesAsync());
 
-            return Mapper.Map<IList<DaemonSetSummary>>(daemonSetsList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(daemonSetsList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<JobSummary>> GetJobSummaries()
+        public async Task<IList<ObjectSummary>> GetJobSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListJobForAllNamespacesAsync());
 
-            return Mapper.Map<IList<JobSummary>>(jobList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<ReplicationControllerSummary>> GetReplicationControllerSummaries()
+        public async Task<IList<ObjectSummary>> GetReplicationControllerSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListReplicationControllerForAllNamespacesAsync());
 
-            return Mapper.Map<IList<ReplicationControllerSummary>>(replicationControllerList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(replicationControllerList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<StatefulSetSummary>> GetStatefulSetSummaries()
+        public async Task<IList<ObjectSummary>> GetStatefulSetSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListStatefulSetForAllNamespacesAsync());
 
-            return Mapper.Map<IList<StatefulSetSummary>>(statefulSetList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(statefulSetList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
 
-        public async Task<IList<PersistentVolumeClaimsSummary>> GetPersistentVolumeClaimSummaries()
+        public async Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
             k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => c.ListPersistentVolumeClaimForAllNamespacesAsync());
 
-            return Mapper.Map<IList<PersistentVolumeClaimsSummary>>(persistentVolumeClaimsList.Items)
+            return Mapper.Map<IList<ObjectSummary>>(persistentVolumeClaimsList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }

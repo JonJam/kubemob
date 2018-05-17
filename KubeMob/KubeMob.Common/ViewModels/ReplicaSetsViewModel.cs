@@ -16,7 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<ReplicaSetSummary> replicaSets = new List<ReplicaSetSummary>();
+        private IList<ObjectSummary> replicaSets = new List<ObjectSummary>();
         private bool hasNoNetwork;
 
         public ReplicaSetsViewModel(
@@ -31,7 +31,7 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<ReplicaSetSummary> ReplicaSets
+        public IList<ObjectSummary> ReplicaSets
         {
             get => this.replicaSets;
             private set

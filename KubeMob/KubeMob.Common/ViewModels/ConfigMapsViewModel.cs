@@ -16,7 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<ConfigMapSummary> configMaps = new List<ConfigMapSummary>();
+        private IList<ObjectSummary> configMaps = new List<ObjectSummary>();
         private bool hasNoNetwork;
 
         public ConfigMapsViewModel(
@@ -31,7 +31,7 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<ConfigMapSummary> ConfigMaps
+        public IList<ObjectSummary> ConfigMaps
         {
             get => this.configMaps;
             private set

@@ -3,14 +3,20 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class ReplicationControllerSummary
+    public class ObjectSummary
     {
-        public ReplicationControllerSummary(
+        public ObjectSummary(
+            string name)
+            : this(name, string.Empty)
+        {
+        }
+
+        public ObjectSummary(
             string name,
-            string podRatio)
+            string description)
         {
             this.Name = name;
-            this.PodRatio = podRatio;
+            this.Description = description;
         }
 
         public string Name
@@ -18,7 +24,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string PodRatio
+        public string Description
         {
             get;
         }

@@ -16,7 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<PersistentVolumeClaimsSummary> persistentVolumeClaims = new List<PersistentVolumeClaimsSummary>();
+        private IList<ObjectSummary> persistentVolumeClaims = new List<ObjectSummary>();
         private bool hasNoNetwork;
 
         public PersistentVolumeClaimsViewModel(
@@ -31,7 +31,7 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<PersistentVolumeClaimsSummary> PersistentVolumeClaims
+        public IList<ObjectSummary> PersistentVolumeClaims
         {
             get => this.persistentVolumeClaims;
             private set

@@ -35,7 +35,7 @@
                         <DataTemplate>
                             <TextCell 
                             Text="{Binding Name}"
-                            Detail="{Binding ClusterIp}"/>
+                            Detail="{Binding Description}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

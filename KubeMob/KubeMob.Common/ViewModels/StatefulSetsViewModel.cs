@@ -16,7 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<StatefulSetSummary> statefulSets = new List<StatefulSetSummary>();
+        private IList<ObjectSummary> statefulSets = new List<ObjectSummary>();
         private bool hasNoNetwork;
 
         public StatefulSetsViewModel(
@@ -31,7 +31,7 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<StatefulSetSummary> StatefulSets
+        public IList<ObjectSummary> StatefulSets
         {
             get => this.statefulSets;
             private set

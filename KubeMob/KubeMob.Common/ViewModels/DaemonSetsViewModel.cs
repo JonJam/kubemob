@@ -16,7 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<DaemonSetSummary> daemonSets = new List<DaemonSetSummary>();
+        private IList<ObjectSummary> daemonSets = new List<ObjectSummary>();
         private bool hasNoNetwork;
 
         public DaemonSetsViewModel(
@@ -31,7 +31,7 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<DaemonSetSummary> DaemonSets
+        public IList<ObjectSummary> DaemonSets
         {
             get => this.daemonSets;
             private set

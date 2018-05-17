@@ -112,64 +112,64 @@ namespace KubeMob.Common
                 cfg.CreateMap<Account, AzureAccount>()
                     .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
 
-                cfg.CreateMap<k8s.Models.V1Deployment, DeploymentSummary>()
-                    .ConstructUsing((d) => new DeploymentSummary(
+                cfg.CreateMap<k8s.Models.V1Deployment, ObjectSummary>()
+                    .ConstructUsing((d) => new ObjectSummary(
                         d.Metadata.Name,
                         $"{d.Status.AvailableReplicas}/{d.Status.Replicas}"));
 
-                cfg.CreateMap<k8s.Models.V1Pod, PodSummary>()
-                    .ConstructUsing((p) => new PodSummary(p.Metadata.Name, p.Status.Phase));
+                cfg.CreateMap<k8s.Models.V1Pod, ObjectSummary>()
+                    .ConstructUsing((p) => new ObjectSummary(p.Metadata.Name, p.Status.Phase));
 
-                cfg.CreateMap<k8s.Models.V1ReplicaSet, ReplicaSetSummary>()
-                    .ConstructUsing((r) => new ReplicaSetSummary(
+                cfg.CreateMap<k8s.Models.V1ReplicaSet, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
 
-                cfg.CreateMap<k8s.Models.V1Service, ServiceSummary>()
-                    .ConstructUsing((r) => new ServiceSummary(
+                cfg.CreateMap<k8s.Models.V1Service, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Spec.ClusterIP));
 
-                cfg.CreateMap<k8s.Models.V1beta1Ingress, IngressSummary>()
-                    .ConstructUsing((r) => new IngressSummary(
+                cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name));
 
-                cfg.CreateMap<k8s.Models.V1ConfigMap, ConfigMapSummary>()
-                    .ConstructUsing((r) => new ConfigMapSummary(
+                cfg.CreateMap<k8s.Models.V1ConfigMap, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name));
 
-                cfg.CreateMap<k8s.Models.V1Secret, SecretSummary>()
-                    .ConstructUsing((r) => new SecretSummary(
+                cfg.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Type));
 
-                cfg.CreateMap<k8s.Models.V1beta1CronJob, CronJobSummary>()
-                    .ConstructUsing((r) => new CronJobSummary(
+                cfg.CreateMap<k8s.Models.V1beta1CronJob, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Spec.Schedule));
 
-                cfg.CreateMap<k8s.Models.V1DaemonSet, DaemonSetSummary>()
-                    .ConstructUsing((r) => new DaemonSetSummary(
+                cfg.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         $"{r.Status.CurrentNumberScheduled}/{r.Status.DesiredNumberScheduled}"));
 
-                cfg.CreateMap<k8s.Models.V1Job, JobSummary>()
-                    .ConstructUsing((r) => new JobSummary(
+                cfg.CreateMap<k8s.Models.V1Job, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         $"{r.Status.Active.GetValueOrDefault(0)}/{r.Spec.Parallelism}"));
 
-                cfg.CreateMap<k8s.Models.V1ReplicationController, ReplicationControllerSummary>()
-                    .ConstructUsing((r) => new ReplicationControllerSummary(
+                cfg.CreateMap<k8s.Models.V1ReplicationController, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Spec.Replicas}"));
 
-                cfg.CreateMap<k8s.Models.V1StatefulSet, StatefulSetSummary>()
-                    .ConstructUsing((r) => new StatefulSetSummary(
+                cfg.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         $"{r.Status.CurrentReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
 
-                cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, PersistentVolumeClaimsSummary>()
-                    .ConstructUsing((r) => new PersistentVolumeClaimsSummary(
+                cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, ObjectSummary>()
+                    .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Status.Phase));
             });

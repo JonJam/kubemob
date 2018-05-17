@@ -16,7 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
-        private IList<CronJobSummary> cronJobs = new List<CronJobSummary>();
+        private IList<ObjectSummary> cronJobs = new List<ObjectSummary>();
         private bool hasNoNetwork;
 
         public CronJobsViewModel(
@@ -31,7 +31,7 @@ namespace KubeMob.Common.ViewModels
             this.IsBusy = true;
         }
 
-        public IList<CronJobSummary> CronJobs
+        public IList<ObjectSummary> CronJobs
         {
             get => this.cronJobs;
             private set

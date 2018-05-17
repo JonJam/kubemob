@@ -35,7 +35,7 @@
                         <DataTemplate>
                             <TextCell 
                             Text="{Binding Name}"
-                            Detail="{Binding NodeRatio}"/>
+                            Detail="{Binding Description}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

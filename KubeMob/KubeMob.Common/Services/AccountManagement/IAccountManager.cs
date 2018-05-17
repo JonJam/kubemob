@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using KubeMob.Common.Services.AccountManagement.Model;
 
 namespace KubeMob.Common.Services.AccountManagement
 {

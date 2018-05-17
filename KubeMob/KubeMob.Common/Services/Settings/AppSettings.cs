@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.AccountManagement.Model;
 using Newtonsoft.Json;
 using Plugin.Settings.Abstractions;
 using Xamarin.Auth;

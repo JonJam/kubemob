@@ -1,6 +1,6 @@
-﻿using Xamarin.Forms.Internals;
+using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.AccountManagement
+namespace KubeMob.Common.Services.AccountManagement.Model
 {
     [Preserve(AllMembers = true)]
     public class CloudEnvironment

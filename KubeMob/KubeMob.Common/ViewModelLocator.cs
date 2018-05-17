@@ -5,6 +5,8 @@ using System.Resources;
 using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.AccountManagement.Azure.Model;
+using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Localization;

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using KubeMob.Common.Services.AccountManagement.Model;
 
-namespace KubeMob.Common.Services.AccountManagement.Azure
+namespace KubeMob.Common.Services.AccountManagement.Azure.Model
 {
     public class AzureAccount : CloudAccount
     {

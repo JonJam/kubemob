@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.AccountManagement.Azure.Model;
+using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Settings;
 using Microsoft.Azure.Management.ContainerService.Fluent;
 using Microsoft.Azure.Management.Fluent;

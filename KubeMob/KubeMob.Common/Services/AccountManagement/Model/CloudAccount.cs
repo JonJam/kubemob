@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
-namespace KubeMob.Common.Services.AccountManagement
+namespace KubeMob.Common.Services.AccountManagement.Model
 {
     public class CloudAccount
     {

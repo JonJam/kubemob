@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;

@@ -349,6 +349,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Persistent Volume Claims.
+        /// </summary>
+        internal static string ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secrets.
         /// </summary>
         internal static string ClusterMasterViewModel_ConfigAndStorage_Secrets {
@@ -642,6 +651,24 @@ namespace KubeMob.Common.Resx {
         internal static string OkAlertText {
             get {
                 return ResourceManager.GetString("OkAlertText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no persistent volume claims..
+        /// </summary>
+        internal static string PersistentVolumeClaimsPage_NoServicesMessage {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimsPage_NoServicesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Persistent Volume Claims.
+        /// </summary>
+        internal static string PersistentVolumeClaimsPage_Title {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimsPage_Title", resourceCulture);
             }
         }
         

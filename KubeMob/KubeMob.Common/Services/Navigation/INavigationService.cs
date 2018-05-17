@@ -37,6 +37,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToReplicationControllersPage();
 
+        Task NavigateToPersistentVolumeClaimsPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

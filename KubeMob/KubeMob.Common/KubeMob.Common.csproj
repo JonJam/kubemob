@@ -54,6 +54,9 @@
     <Compile Update="Pages\ReplicationControllersPage.xaml.cs">
       <DependentUpon>ReplicationControllersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\PersistentVolumeClaimsPage.xaml.cs">
+      <DependentUpon>PersistentVolumeClaimsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ServicesPage.xaml.cs">
       <DependentUpon>ServicesPage.xaml</DependentUpon>
     </Compile>

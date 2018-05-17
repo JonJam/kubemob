@@ -68,6 +68,10 @@ namespace KubeMob.Common.ViewModels
                         new Command(async () => await navigationService.NavigateToConfigMapsPage())),
 
                     new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims,
+                        new Command(async () => await navigationService.NavigateToPersistentVolumeClaimsPage())),
+
+                    new MenuItemViewModel(
                         AppResources.ClusterMasterViewModel_ConfigAndStorage_Secrets,
                         new Command(async () => await navigationService.NavigateToSecretsPage()))
                 }

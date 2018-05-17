@@ -213,6 +213,9 @@
   <data name="ClusterMasterViewModel_ConfigAndStorage_ConfigMaps" xml:space="preserve">
     <value>Config Maps</value>
   </data>
+  <data name="ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims" xml:space="preserve">
+    <value>Persistent Volume Claims</value>
+  </data>
   <data name="ClusterMasterViewModel_ConfigAndStorage_Secrets" xml:space="preserve">
     <value>Secrets</value>
   </data>
@@ -311,6 +314,12 @@
   </data>
   <data name="OkAlertText" xml:space="preserve">
     <value />
+  </data>
+  <data name="PersistentVolumeClaimsPage_NoServicesMessage" xml:space="preserve">
+    <value>There are no persistent volume claims.</value>
+  </data>
+  <data name="PersistentVolumeClaimsPage_Title" xml:space="preserve">
+    <value>Persistent Volume Claims</value>
   </data>
   <data name="PodsPage_NoPodsMessage" xml:space="preserve">
     <value>There are no pods.</value>

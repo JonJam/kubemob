@@ -72,6 +72,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<DaemonSetsViewModel>();
             serviceCollection.AddTransient<JobsViewModel>();
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
+            serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
             serviceCollection.AddTransient<StatefulSetsViewModel>();
         }
 
@@ -163,6 +164,11 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new StatefulSetSummary(
                         r.Metadata.Name,
                         $"{r.Status.CurrentReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
+
+                cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, PersistentVolumeClaimsSummary>()
+                    .ConstructUsing((r) => new PersistentVolumeClaimsSummary(
+                        r.Metadata.Name,
+                        r.Status.Phase));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

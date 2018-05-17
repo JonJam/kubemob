@@ -78,6 +78,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToReplicationControllersPage() => NavigationService.InternalNavigate(typeof(ReplicationControllersPage));
 
+        public Task NavigateToPersistentVolumeClaimsPage() => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimsPage));
+
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
 
         public Task RemoveLastFromBackStack()

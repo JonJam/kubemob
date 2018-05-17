@@ -57,6 +57,9 @@
     <Compile Update="Pages\StatefulSetsPage.xaml.cs">
       <DependentUpon>StatefulSetsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\PersistentVolumeClaimsPage.xaml.cs">
+      <DependentUpon>PersistentVolumeClaimsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ServicesPage.xaml.cs">
       <DependentUpon>ServicesPage.xaml</DependentUpon>
     </Compile>

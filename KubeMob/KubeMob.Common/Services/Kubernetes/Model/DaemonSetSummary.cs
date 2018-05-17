@@ -1,16 +1,16 @@
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class DeploymentSummary
+    public class DaemonSetSummary
     {
-        public DeploymentSummary(
+        public DaemonSetSummary(
             string name,
-            string replicaRatio)
+            string nodeRatio)
         {
             this.Name = name;
-            this.ReplicaRatio = replicaRatio;
+            this.NodeRatio = nodeRatio;
         }
 
         public string Name
@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
         }
 
-        public string ReplicaRatio
+        public string NodeRatio
         {
             get;
         }

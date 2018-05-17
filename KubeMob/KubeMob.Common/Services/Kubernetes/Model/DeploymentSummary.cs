@@ -1,11 +1,11 @@
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class ReplicaSetSummary
+    public class DeploymentSummary
     {
-        public ReplicaSetSummary(
+        public DeploymentSummary(
             string name,
             string replicaRatio)
         {

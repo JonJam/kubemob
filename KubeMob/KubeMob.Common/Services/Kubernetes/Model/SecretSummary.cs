@@ -1,16 +1,16 @@
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class StatefulSetSummary
+    public class SecretSummary
     {
-        public StatefulSetSummary(
+        public SecretSummary(
             string name,
-            string replicaRatio)
+            string type)
         {
             this.Name = name;
-            this.ReplicaRatio = replicaRatio;
+            this.Type = type;
         }
 
         public string Name
@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
         }
 
-        public string ReplicaRatio
+        public string Type
         {
             get;
         }

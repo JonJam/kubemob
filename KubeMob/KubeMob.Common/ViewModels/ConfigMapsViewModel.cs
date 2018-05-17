@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;

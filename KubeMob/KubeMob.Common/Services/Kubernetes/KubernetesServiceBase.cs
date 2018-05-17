@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using k8s;
 using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Settings;
 using Xamarin.Forms.Internals;
 

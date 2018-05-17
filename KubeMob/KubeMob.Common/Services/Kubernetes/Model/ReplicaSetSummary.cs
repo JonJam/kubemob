@@ -1,16 +1,16 @@
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class SecretSummary
+    public class ReplicaSetSummary
     {
-        public SecretSummary(
+        public ReplicaSetSummary(
             string name,
-            string type)
+            string replicaRatio)
         {
             this.Name = name;
-            this.Type = type;
+            this.ReplicaRatio = replicaRatio;
         }
 
         public string Name
@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
         }
 
-        public string Type
+        public string ReplicaRatio
         {
             get;
         }

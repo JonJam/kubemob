@@ -1,16 +1,16 @@
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class PodSummary
+    public class CronJobSummary
     {
-        public PodSummary(
+        public CronJobSummary(
             string name,
-            string phase)
+            string schedule)
         {
             this.Name = name;
-            this.Phase = phase;
+            this.Schedule = schedule;
         }
 
         public string Name
@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
         }
 
-        public string Phase
+        public string Schedule
         {
             get;
         }

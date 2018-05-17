@@ -1,11 +1,11 @@
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.Kubernetes
+namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class JobSummary
+    public class ReplicationControllerSummary
     {
-        public JobSummary(
+        public ReplicationControllerSummary(
             string name,
             string podRatio)
         {

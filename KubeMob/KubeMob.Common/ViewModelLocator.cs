@@ -6,6 +6,7 @@ using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;

@@ -9,6 +9,8 @@
              Title="{markupExtensions:Translate JobsPage_Title}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
+    <!--TODO Reduce XAML duplication for list pages-->
+
     <Grid
       CompressedLayout.IsHeadless="true">
 
@@ -26,8 +28,8 @@
                 <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
                 <ListView
                     x:Name="Jobs"
-                    ItemsSource="{Binding Jobs}"
-                    IsVisible="{Binding HasJobs}"
+                    ItemsSource="{Binding ObjectSummaries}"
+                    IsVisible="{Binding HasObjectSummaries}"
                     SeparatorVisibility="None"
                     HasUnevenRows="False"
                     CachingStrategy="RecycleElement">
@@ -42,7 +44,7 @@
 
                 <Label
                     Text="{markupExtensions:Translate JobsPage_NoJobsMessage}"
-                    IsVisible="{Binding HasJobs, Converter={StaticResource InverseBoolConverter}}"/>
+                    IsVisible="{Binding HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
             </Grid>
         </Grid>
 

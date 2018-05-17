@@ -9,6 +9,8 @@
              Title="{markupExtensions:Translate CronJobsPage_Title}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
+    <!--TODO Reduce XAML duplication for list pages-->
+
     <Grid
       CompressedLayout.IsHeadless="true">
 
@@ -26,8 +28,8 @@
                 <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
                 <ListView
                     x:Name="CronJobs"
-                    ItemsSource="{Binding CronJobs}"
-                    IsVisible="{Binding HasCronJobs}"
+                    ItemsSource="{Binding ObjectSummaries}"
+                    IsVisible="{Binding HasObjectSummaries}"
                     SeparatorVisibility="None"
                     HasUnevenRows="False"
                     CachingStrategy="RecycleElement">
@@ -42,7 +44,7 @@
 
                 <Label
                     Text="{markupExtensions:Translate CronJobsPage_NoCronJobsMessage}"
-                    IsVisible="{Binding HasCronJobs, Converter={StaticResource InverseBoolConverter}}"/>
+                    IsVisible="{Binding HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
             </Grid>
         </Grid>
 

@@ -94,7 +94,10 @@ namespace KubeMob.Common.ViewModels
             private set => this.SetProperty(ref this.isEditing, value);
         }
 
-        public IList<CloudEnvironment> Environments { get; }
+        public IList<CloudEnvironment> Environments
+        {
+            get;
+        }
 
         public CloudEnvironment SelectedEnvironment
         {
@@ -102,11 +105,20 @@ namespace KubeMob.Common.ViewModels
             set => this.SetProperty(ref this.selectedEnvironment, value);
         }
 
-        public ValidatableObject<string> TenantId { get; }
+        public ValidatableObject<string> TenantId
+        {
+            get;
+        }
 
-        public ValidatableObject<string> ClientId { get; }
+        public ValidatableObject<string> ClientId
+        {
+            get;
+        }
 
-        public ValidatableObject<string> ClientSecret { get; }
+        public ValidatableObject<string> ClientSecret
+        {
+            get;
+        }
 
         public override async Task Initialize(object navigationData)
         {
@@ -124,9 +136,8 @@ namespace KubeMob.Common.ViewModels
             }
         }
 
-        private async Task SaveAccount()
+        private async Task SaveAccount() => await this.PerformBusyOperation(async () =>
         {
-            this.IsBusy = true;
             this.TopLevelErrorMessage = null;
 
             // Adding delay to give time for progress indicator to be displayed.
@@ -155,9 +166,7 @@ namespace KubeMob.Common.ViewModels
                     this.TopLevelErrorMessage = message;
                 }
             }
-
-            this.IsBusy = false;
-        }
+        });
 
         private bool Validate() => this.ClientId.Validate() &&
                                    this.ClientSecret.Validate() &&

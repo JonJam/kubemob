@@ -57,7 +57,7 @@ namespace KubeMob.Common.ViewModels
 
         public override async Task Initialize(object navigationData)
         {
-            // TODO Might want to refactor this to be resuable across pages ??
+            // TODO HasNoNetwork out to be reusable??
             this.IsBusy = true;
             this.HasNoNetwork = false;
 

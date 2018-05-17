@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using k8s;
-using k8s.Models;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Model;
@@ -35,9 +34,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             get;
         }
-
-        // TODO Refactor summary methods to use common method
-
+        
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
             // TODO Add filter support

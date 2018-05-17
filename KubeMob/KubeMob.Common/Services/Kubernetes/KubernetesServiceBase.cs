@@ -35,11 +35,13 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
         }
 
+        // TODO Refactor summary methods to use common method
+
         public async Task<IList<DeploymentSummary>> GetDeploymentSummaries()
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1DeploymentList deployments = await this.GetDeployments();
+            k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListDeploymentForAllNamespacesAsync());
 
             return Mapper.Map<IList<DeploymentSummary>>(deployments.Items)
                 .OrderBy(d => d.Name)
@@ -50,7 +52,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support - ListNamespacedPodAsync
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1PodList podList = await this.GetPods();
+            k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListPodForAllNamespacesAsync());
 
             return Mapper.Map<IList<PodSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
@@ -61,7 +63,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1ReplicaSetList replicaSetList = await this.GetReplicaSets();
+            k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListReplicaSetForAllNamespacesAsync());
 
             return Mapper.Map<IList<ReplicaSetSummary>>(replicaSetList.Items)
                 .OrderBy(p => p.Name)
@@ -72,7 +74,8 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1ServiceList serviceList = await this.GetServices();
+            k8s.Models.V1ServiceList serviceList =
+                await this.PerformClientOperation((c) => c.ListServiceForAllNamespacesAsync());
 
             return Mapper.Map<IList<ServiceSummary>>(serviceList.Items)
                 .OrderBy(p => p.Name)
@@ -83,7 +86,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1beta1IngressList ingressList = await this.GetIngresses();
+            k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListIngressForAllNamespacesAsync());
 
             return Mapper.Map<IList<IngressSummary>>(ingressList.Items)
                 .OrderBy(p => p.Name)
@@ -94,7 +97,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1ConfigMapList configMapList = await this.GetConfigMaps();
+            k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListConfigMapForAllNamespacesAsync());
 
             return Mapper.Map<IList<ConfigMapSummary>>(configMapList.Items)
                 .OrderBy(p => p.Name)
@@ -105,7 +108,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1SecretList secretList = await this.GetSecrets();
+            k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListSecretForAllNamespacesAsync());
 
             return Mapper.Map<IList<SecretSummary>>(secretList.Items)
                 .OrderBy(p => p.Name)
@@ -116,7 +119,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1beta1CronJobList cronJobList = await this.GetCronJobs();
+            k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListCronJobForAllNamespacesAsync());
 
             return Mapper.Map<IList<CronJobSummary>>(cronJobList.Items)
                 .OrderBy(p => p.Name)
@@ -127,7 +130,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1DaemonSetList daemonSetsList = await this.GetDaemonSets();
+            k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListDaemonSetForAllNamespacesAsync());
 
             return Mapper.Map<IList<DaemonSetSummary>>(daemonSetsList.Items)
                 .OrderBy(p => p.Name)
@@ -138,7 +141,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1JobList jobList = await this.GetJobs();
+            k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListJobForAllNamespacesAsync());
 
             return Mapper.Map<IList<JobSummary>>(jobList.Items)
                 .OrderBy(p => p.Name)
@@ -149,7 +152,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.GetReplicationControllers();
+            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListReplicationControllerForAllNamespacesAsync());
 
             return Mapper.Map<IList<ReplicationControllerSummary>>(replicationControllerList.Items)
                 .OrderBy(p => p.Name)
@@ -160,7 +163,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1StatefulSetList statefulSetList = await this.GetStatefulSets();
+            k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListStatefulSetForAllNamespacesAsync());
 
             return Mapper.Map<IList<StatefulSetSummary>>(statefulSetList.Items)
                 .OrderBy(p => p.Name)
@@ -171,7 +174,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             // TODO Add filter support
             // TODO Handle API not being supported by cluster
-            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.GetPersistentVolumeClaims();
+            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => c.ListPersistentVolumeClaimForAllNamespacesAsync());
 
             return Mapper.Map<IList<PersistentVolumeClaimsSummary>>(persistentVolumeClaimsList.Items)
                 .OrderBy(p => p.Name)
@@ -180,31 +183,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
-        protected abstract Task<k8s.Models.V1DeploymentList> GetDeployments();
-
-        protected abstract Task<k8s.Models.V1PodList> GetPods();
-
-        protected abstract Task<k8s.Models.V1ReplicaSetList> GetReplicaSets();
-
-        protected abstract Task<k8s.Models.V1ServiceList> GetServices();
-
-        protected abstract Task<k8s.Models.V1beta1IngressList> GetIngresses();
-
-        protected abstract Task<k8s.Models.V1ConfigMapList> GetConfigMaps();
-
-        protected abstract Task<k8s.Models.V1SecretList> GetSecrets();
-
-        protected abstract Task<k8s.Models.V1beta1CronJobList> GetCronJobs();
-
-        protected abstract Task<k8s.Models.V1DaemonSetList> GetDaemonSets();
-
-        protected abstract Task<k8s.Models.V1JobList> GetJobs();
-
-        protected abstract Task<k8s.Models.V1ReplicationControllerList> GetReplicationControllers();
-
-        protected abstract Task<k8s.Models.V1StatefulSetList> GetStatefulSets();
-
-        protected abstract Task<k8s.Models.V1PersistentVolumeClaimList> GetPersistentVolumeClaims();
+        protected abstract Task<T> PerformClientOperation<T>(Func<IKubernetes, Task<T>> clientOperation);
 
         private async Task<IKubernetes> CreateClient()
         {

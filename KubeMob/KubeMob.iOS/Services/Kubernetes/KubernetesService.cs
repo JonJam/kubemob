@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using k8s;
-using k8s.Models;
 using KubeMob.Common;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
@@ -43,219 +43,13 @@ namespace KubeMob.iOS.Services.Kubernetes
 
         protected override IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client) => client;
 
-        // TODO Refactor below
-
-        protected override async Task<V1DeploymentList> GetDeployments()
+        protected override async Task<T> PerformClientOperation<T>(Func<IKubernetes, Task<T>> clientOperation)
         {
             try
             {
                 IKubernetes client = await this.Client.Value;
 
-                return await client.ListDeploymentForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1PodList> GetPods()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListPodForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ReplicaSetList> GetReplicaSets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListReplicaSetForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ServiceList> GetServices()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListServiceForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1beta1IngressList> GetIngresses()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListIngressForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ConfigMapList> GetConfigMaps()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListConfigMapForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1SecretList> GetSecrets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListSecretForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1beta1CronJobList> GetCronJobs()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListCronJobForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1DaemonSetList> GetDaemonSets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListDaemonSetForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1JobList> GetJobs()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListJobForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ReplicationControllerList> GetReplicationControllers()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListReplicationControllerForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1StatefulSetList> GetStatefulSets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListStatefulSetForAllNamespacesAsync();
-            }
-            catch (HttpRequestException e) when (e.InnerException is WebException web &&
-                                                 web.Status == WebExceptionStatus.NameResolutionFailure)
-            {
-                // TODO Verify this is correct exception type on device.
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1PersistentVolumeClaimList> GetPersistentVolumeClaims()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListPersistentVolumeClaimForAllNamespacesAsync();
+                return await clientOperation(client);
             }
             catch (HttpRequestException e) when (e.InnerException is WebException web &&
                                                  web.Status == WebExceptionStatus.NameResolutionFailure)

@@ -37,22 +37,26 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToAddEditAzureAccountPage(string id = null) => NavigationService.InternalNavigate(typeof(AddEditAzureAccountPage), id);
 
-        public async Task NavigateToClusterPage()
+        public async Task NavigateToClusterOverviewPage()
         {
-            await NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
+            if (Application.Current.MainPage is ClusterMasterDetailPage masterDetailPage)
+            {
+                ExtendedNavigationPage detail = (ExtendedNavigationPage) masterDetailPage.Detail;
+                await detail.PopToRootAsync();
+            }
+            else
+            {
+                await NavigationService.InternalNavigate(typeof(ClusterMasterDetailPage));
 
-            await this.RemoveBackStack();
+                await this.RemoveBackStack();
+            }
         }
 
         public async Task GoBackToClustersPage()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)
             {
-                do
-                {
-                    await mainPage.PopAsync();
-                }
-                while (mainPage.CurrentPage.GetType() != typeof(ClustersPage));
+                await mainPage.PopToRootAsync();
             }
         }
 
@@ -121,7 +125,7 @@ namespace KubeMob.Common.Services.Navigation
             switch (Application.Current.MainPage)
             {
                 case ClusterMasterDetailPage masterDetailPage:
-                    await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
+                    await ((ExtendedNavigationPage) masterDetailPage.Detail).PushAsync(page);
                     break;
                 case ExtendedNavigationPage navigationPage:
                     if (page is ClusterMasterDetailPage)
@@ -132,6 +136,7 @@ namespace KubeMob.Common.Services.Navigation
                     {
                         await navigationPage.PushAsync(page);
                     }
+
                     break;
                 default:
                     Application.Current.MainPage = page is ClusterMasterDetailPage ? page : new ExtendedNavigationPage(page);

@@ -62,6 +62,12 @@ namespace KubeMob.Droid.Services.Kubernetes
                 // No internet.
                 throw new NoNetworkException(e.Message, e);
             }
+            catch (OperationCanceledException e)
+            {
+                // Request was cancelled e.g. a Kubernetes cluster being brought up and not responding
+                // to API calls. Treat as no internet.
+                throw new NoNetworkException(e.Message, e);
+            }
         }
     }
 }

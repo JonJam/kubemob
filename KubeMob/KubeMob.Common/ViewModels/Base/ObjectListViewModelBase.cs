@@ -16,7 +16,6 @@ namespace KubeMob.Common.ViewModels
         private readonly IPopupService popupService;
 
         private IList<ObjectSummary> objectSummaries = new List<ObjectSummary>();
-        private bool hasNoNetwork;
 
         protected ObjectListViewModelBase(
             IKubernetesService kubernetesService,
@@ -42,12 +41,6 @@ namespace KubeMob.Common.ViewModels
             }
         }
 
-        public bool HasNoNetwork
-        {
-            get => this.hasNoNetwork;
-            set => this.SetProperty(ref this.hasNoNetwork, value);
-        }
-
         public bool HasObjectSummaries => this.ObjectSummaries.Count > 0;
 
         protected IKubernetesService KubernetesService
@@ -55,19 +48,11 @@ namespace KubeMob.Common.ViewModels
             get;
         }
 
-        public override async Task Initialize(object navigationData)
+        public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
         {
-            // TODO HasNoNetwork out to be reusable??
-            this.IsBusy = true;
-            this.HasNoNetwork = false;
-
             try
             {
                 this.ObjectSummaries = await this.GetObjectSummaries();
-            }
-            catch (NoNetworkException)
-            {
-                this.HasNoNetwork = true;
             }
             catch (AccountInvalidException)
             {
@@ -76,9 +61,7 @@ namespace KubeMob.Common.ViewModels
                     AppResources.AccountInvalid_Message,
                     AppResources.OkAlertText);
             }
-
-            this.IsBusy = false;
-        }
+        });
 
         protected abstract Task<IList<ObjectSummary>> GetObjectSummaries();
     }

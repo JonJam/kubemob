@@ -136,13 +136,10 @@ namespace KubeMob.Common.ViewModels
             }
         }
 
-        private async Task SaveAccount() => await this.PerformBusyOperation(async () =>
+        private Task SaveAccount() => this.PerformNetworkOperation(async () =>
         {
             this.TopLevelErrorMessage = null;
-
-            // Adding delay to give time for progress indicator to be displayed.
-            await Task.Delay(100);
-
+            
             if (this.Validate())
             {
                 CloudEnvironment env = this.SelectedEnvironment;

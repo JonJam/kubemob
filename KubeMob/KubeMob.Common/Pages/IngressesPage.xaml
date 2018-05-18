@@ -42,7 +42,7 @@
 
                 <Label
                     Text="{markupExtensions:Translate IngressesPage_NoIngressesMessage}"
-                    IsVisible="{Binding ObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
+                    IsVisible="{Binding HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
             </Grid>
         </Grid>
 

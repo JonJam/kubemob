@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using KubeMob.Common.Exceptions;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Base
@@ -8,36 +9,37 @@ namespace KubeMob.Common.ViewModels.Base
     public abstract class ViewModelBase : ExtendedBindableObject
     {
         private bool isBusy;
+        private bool hasNoNetwork;
 
         public bool IsBusy
         {
             get => this.isBusy;
-            private set => this.SetProperty(ref this.isBusy, value);
+            protected set => this.SetProperty(ref this.isBusy, value);
+        }
+
+        public bool HasNoNetwork
+        {
+            get => this.hasNoNetwork;
+            private set => this.SetProperty(ref this.hasNoNetwork, value);
         }
 
         public virtual Task Initialize(object navigationData) => Task.CompletedTask;
 
-        protected Task PerformBusyOperation<T>(Func<Task> busyOperation)
+        protected async Task PerformNetworkOperation(Func<Task> busyOperation)
         {
             this.IsBusy = true;
+            this.HasNoNetwork = false;
+
+            // Adding delay to give time for progress indicator to be displayed.
+            await Task.Delay(100);
 
             try
             {
-                return busyOperation();
+                await busyOperation();
             }
-            finally
+            catch (NoNetworkException)
             {
-                this.IsBusy = false;
-            }
-        }
-
-        protected Task<T> PerformBusyOperation<T>(Func<Task<T>> busyOperation)
-        {
-            this.IsBusy = true;
-
-            try
-            {
-                return busyOperation();
+                this.HasNoNetwork = true;
             }
             finally
             {

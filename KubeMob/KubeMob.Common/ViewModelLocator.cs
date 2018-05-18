@@ -5,8 +5,6 @@ using System.Resources;
 using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
-using KubeMob.Common.Services.AccountManagement.Azure.Model;
-using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Localization;
@@ -16,7 +14,6 @@ using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
-using Xamarin.Auth;
 using Xamarin.Forms;
 
 namespace KubeMob.Common
@@ -82,7 +79,6 @@ namespace KubeMob.Common
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton(CrossSettings.Current);
-            serviceCollection.AddSingleton(AccountStore.Create());
         }
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
@@ -106,12 +102,6 @@ namespace KubeMob.Common
             // - AutoMapper
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<CloudAccount, Account>()
-                    .ConstructUsing((ca) => new Account(ca.Id, ca.Properties));
-
-                cfg.CreateMap<Account, AzureAccount>()
-                    .ConstructUsing((a) => new AzureAccount(a.Username, a.Properties));
-
                 cfg.CreateMap<k8s.Models.V1Deployment, ObjectSummary>()
                     .ConstructUsing((d) => new ObjectSummary(
                         d.Metadata.Name,

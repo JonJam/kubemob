@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using k8s;
-using k8s.Models;
 using KubeMob.Common;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
@@ -22,7 +22,7 @@ namespace KubeMob.Droid.Services.Kubernetes
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KubernetesService"/> class.
-        /// 
+        ///
         /// Since this is being constructed using <see cref="Xamarin.Forms.DependencyService"/> it has to be parameterless.
         /// Therefore using the ViewModelLocator to look up the dependencies.
         /// </summary>
@@ -49,194 +49,13 @@ namespace KubeMob.Droid.Services.Kubernetes
             return client;
         }
 
-        // TODO Refactor below
-        protected override async Task<V1DeploymentList> GetDeployments()
+        protected override async Task<T> PerformClientOperation<T>(Func<IKubernetes, Task<T>> clientOperation)
         {
             try
             {
                 IKubernetes client = await this.Client.Value;
 
-                return await client.ListDeploymentForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1PodList> GetPods()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListPodForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ReplicaSetList> GetReplicaSets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListReplicaSetForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ServiceList> GetServices()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListServiceForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1beta1IngressList> GetIngresses()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListIngressForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ConfigMapList> GetConfigMaps()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListConfigMapForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1SecretList> GetSecrets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListSecretForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1beta1CronJobList> GetCronJobs()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListCronJobForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1DaemonSetList> GetDaemonSets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListDaemonSetForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1JobList> GetJobs()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListJobForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1StatefulSetList> GetStatefulSets()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListStatefulSetForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1ReplicationControllerList> GetReplicationControllers()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListReplicationControllerForAllNamespacesAsync();
-            }
-            catch (Java.Net.UnknownHostException e)
-            {
-                // No internet.
-                throw new NoNetworkException(e.Message, e);
-            }
-        }
-
-        protected override async Task<V1PersistentVolumeClaimList> GetPersistentVolumeClaims()
-        {
-            try
-            {
-                IKubernetes client = await this.Client.Value;
-
-                return await client.ListPersistentVolumeClaimForAllNamespacesAsync();
+                return await clientOperation(client);
             }
             catch (Java.Net.UnknownHostException e)
             {

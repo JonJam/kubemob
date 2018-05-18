@@ -1,34 +1,35 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes
 {
     public interface IKubernetesService
     {
-        Task<IList<DeploymentSummary>> GetDeploymentSummaries();
+        Task<IList<ObjectSummary>> GetDeploymentSummaries();
 
-        Task<IList<PodSummary>> GetPodSummaries();
+        Task<IList<ObjectSummary>> GetPodSummaries();
 
-        Task<IList<ReplicaSetSummary>> GetReplicaSetSummaries();
+        Task<IList<ObjectSummary>> GetReplicaSetSummaries();
 
-        Task<IList<ServiceSummary>> GetServiceSummaries();
+        Task<IList<ObjectSummary>> GetServiceSummaries();
 
-        Task<IList<IngressSummary>> GetIngressSummaries();
+        Task<IList<ObjectSummary>> GetIngressSummaries();
 
-        Task<IList<ConfigMapSummary>> GetConfigMapSummaries();
+        Task<IList<ObjectSummary>> GetConfigMapSummaries();
 
-        Task<IList<SecretSummary>> GetSecretSummaries();
+        Task<IList<ObjectSummary>> GetSecretSummaries();
 
-        Task<IList<CronJobSummary>> GetCronJobSummaries();
+        Task<IList<ObjectSummary>> GetCronJobSummaries();
 
-        Task<IList<DaemonSetSummary>> GetDaemonSetSummaries();
+        Task<IList<ObjectSummary>> GetDaemonSetSummaries();
 
-        Task<IList<JobSummary>> GetJobSummaries();
+        Task<IList<ObjectSummary>> GetJobSummaries();
 
-        Task<IList<ReplicationControllerSummary>> GetReplicationControllerSummaries();
+        Task<IList<ObjectSummary>> GetReplicationControllerSummaries();
 
-        Task<IList<PersistentVolumeClaimsSummary>> GetPersistentVolumeClaimSummaries();
+        Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries();
 
-        Task<IList<StatefulSetSummary>> GetStatefulSetSummaries();
+        Task<IList<ObjectSummary>> GetStatefulSetSummaries();
     }
 }

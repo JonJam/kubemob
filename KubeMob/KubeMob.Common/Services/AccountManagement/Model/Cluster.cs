@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Services.AccountManagement
+namespace KubeMob.Common.Services.AccountManagement.Model
 {
     [Preserve(AllMembers = true)]
     public class Cluster

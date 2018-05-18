@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -42,19 +43,40 @@ namespace KubeMob.Common.ViewModels
             this.DeleteAccountCommand = new Command(this.OnDeleteAccount);
         }
 
-        public ICommand OnAppearingCommand { get; }
+        public ICommand OnAppearingCommand
+        {
+            get;
+        }
 
-        public ICommand AddAccountCommand { get; }
+        public ICommand AddAccountCommand
+        {
+            get;
+        }
 
-        public ICommand ViewToggleCommand { get; }
+        public ICommand ViewToggleCommand
+        {
+            get;
+        }
 
-        public ICommand ClusterSelectedCommand { get; }
+        public ICommand ClusterSelectedCommand
+        {
+            get;
+        }
 
-        public ICommand AccountSelectedCommand { get; }
+        public ICommand AccountSelectedCommand
+        {
+            get;
+        }
 
-        public ICommand EditAccountCommand { get; }
+        public ICommand EditAccountCommand
+        {
+            get;
+        }
 
-        public ICommand DeleteAccountCommand { get; }
+        public ICommand DeleteAccountCommand
+        {
+            get;
+        }
 
         public bool ViewAccounts
         {
@@ -76,7 +98,7 @@ namespace KubeMob.Common.ViewModels
 
         private async Task OnClusterSelected(object obj)
         {
-            Cluster cluster = (Cluster)obj;
+            Cluster cluster = (Cluster) obj;
 
             IAccountManager accountManager = this.accountManagers
                 .First(am => am.Key == cluster.AccountType);
@@ -88,7 +110,7 @@ namespace KubeMob.Common.ViewModels
 
         private async Task OnAccountSelected(object obj)
         {
-            ClusterGroup clusterGroup = (ClusterGroup)obj;
+            ClusterGroup clusterGroup = (ClusterGroup) obj;
 
             switch (clusterGroup.AccountType)
             {
@@ -102,7 +124,7 @@ namespace KubeMob.Common.ViewModels
 
         private void OnDeleteAccount(object obj)
         {
-            ClusterGroup clusterGroup = (ClusterGroup)obj;
+            ClusterGroup clusterGroup = (ClusterGroup) obj;
 
             IAccountManager accountManager = this.accountManagers.First(am => am.Key == clusterGroup.AccountType);
 
@@ -113,10 +135,8 @@ namespace KubeMob.Common.ViewModels
 
         private void OnClusterGroupsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => this.HasClusterGroups = this.ClusterGroups.Count > 0;
 
-        private async Task Refresh()
+        private Task Refresh() => this.PerformNetworkOperation(async () =>
         {
-            this.IsBusy = true;
-
             // Resetting to false so displays individial clusters, after an add/edit to accounts.
             this.ViewAccounts = false;
 
@@ -125,9 +145,7 @@ namespace KubeMob.Common.ViewModels
             IEnumerable<Task> gettingClusters = this.accountManagers.Select(this.PopulateClusterGroups);
 
             await Task.WhenAny(gettingClusters);
-
-            this.IsBusy = false;
-        }
+        });
 
         private async Task PopulateClusterGroups(IAccountManager accountManager)
         {

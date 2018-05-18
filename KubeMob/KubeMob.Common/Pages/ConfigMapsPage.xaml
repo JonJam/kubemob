@@ -9,6 +9,7 @@
              Title="{markupExtensions:Translate ConfigMapsPage_Title}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
+    <!--TODO Reduce XAML duplication for list pages-->
     <Grid
       CompressedLayout.IsHeadless="true">
 
@@ -26,8 +27,8 @@
                 <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
                 <ListView
                     x:Name="ConfigMaps"
-                    ItemsSource="{Binding ConfigMaps}"
-                    IsVisible="{Binding HasConfigMaps}"
+                    ItemsSource="{Binding ObjectSummaries}"
+                    IsVisible="{Binding HasObjectSummaries}"
                     SeparatorVisibility="None"
                     HasUnevenRows="False"
                     CachingStrategy="RecycleElement">
@@ -41,7 +42,7 @@
 
                 <Label
                     Text="{markupExtensions:Translate ConfigMapsPage_NoConfigMapsMessage}"
-                    IsVisible="{Binding HasConfigMaps, Converter={StaticResource InverseBoolConverter}}"/>
+                    IsVisible="{Binding HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
             </Grid>
         </Grid>
 

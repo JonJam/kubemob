@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
+using KubeMob.Common.Services.AccountManagement.Model;
 
-namespace KubeMob.Common.Services.AccountManagement.Azure
+namespace KubeMob.Common.Services.AccountManagement.Azure.Model
 {
     public class AzureAccount : CloudAccount
     {
-        public AzureAccount(
-            string id,
-            IDictionary<string, string> properties)
-            : base(id, properties)
-        {
-        }
-
         public AzureAccount(
             string name,
             string environmentId,
@@ -26,22 +19,19 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public string EnvironmentId
         {
-            get => this.Properties[nameof(this.EnvironmentId)];
-            set => this.Properties[nameof(this.EnvironmentId)] = value;
+            get;
         }
 
         public string TenantId => this.Id;
 
         public string ClientId
         {
-            get => this.Properties[nameof(this.ClientId)];
-            set => this.Properties[nameof(this.ClientId)] = value;
+            get;
         }
 
         public string ClientSecret
         {
-            get => this.Properties[nameof(this.ClientSecret)];
-            set => this.Properties[nameof(this.ClientSecret)] = value;
+            get;
         }
     }
 }

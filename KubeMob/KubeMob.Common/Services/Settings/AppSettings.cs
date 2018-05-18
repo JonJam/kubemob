@@ -1,12 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
-using KubeMob.Common.Services.AccountManagement;
+using KubeMob.Common.Services.AccountManagement.Model;
 using Newtonsoft.Json;
 using Plugin.Settings.Abstractions;
-using Xamarin.Auth;
+using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Settings
@@ -21,22 +20,22 @@ namespace KubeMob.Common.Services.Settings
         private const string CloudAccountsKey = "KubeMob-CloudAccounts";
 
         private readonly ISettings settings;
-        private readonly AccountStore accountStore;
 
         [Preserve]
         public AppSettings(
-            ISettings settings,
-            AccountStore accountStore)
+            ISettings settings)
         {
             this.settings = settings;
-            this.accountStore = accountStore;
 
             this.AzureHelpLink =
                 new Uri(
                     "https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal");
         }
 
-        public Uri AzureHelpLink { get; }
+        public Uri AzureHelpLink
+        {
+            get;
+        }
 
         public Cluster SelectedCluster
         {
@@ -57,30 +56,51 @@ namespace KubeMob.Common.Services.Settings
             CloudAccountType accountType)
             where T : CloudAccount
         {
-            List<Account> accounts = await this.accountStore
-                .FindAccountsForServiceAsync(AppSettings.CloudAccountsKey);
+            string savedAccountsRaw = await SecureStorage.GetAsync(AppSettings.CloudAccountsKey);
 
-            List<T> cloudAccounts = Mapper.Map<List<T>>(accounts);
+            if (string.IsNullOrWhiteSpace(savedAccountsRaw))
+            {
+                return new List<T>();
+            }
 
-            return cloudAccounts.Where(ca => ca.AccountType == accountType);
+            List<T> accounts = JsonConvert.DeserializeObject<List<T>>(savedAccountsRaw);
+
+            // Having to create a new list after deserialization, as for some reason performing
+            // where causes the app to crash.
+            accounts = new List<T>(accounts);
+
+            return accounts.Where(ca => ca.AccountType == accountType);
         }
 
-        public Task AddOrUpdateCloudAccount(CloudAccount cloudAccount)
+        public async Task AddOrUpdateCloudAccount(CloudAccount cloudAccount)
         {
-            Account account = Mapper.Map<Account>(cloudAccount);
+            string savedAccountsRaw = await SecureStorage.GetAsync(AppSettings.CloudAccountsKey);
 
-            return this.accountStore.SaveAsync(account, AppSettings.CloudAccountsKey);
+            List<CloudAccount> accountsToSave = new List<CloudAccount>();
+
+            if (!string.IsNullOrWhiteSpace(savedAccountsRaw))
+            {
+                accountsToSave = JsonConvert.DeserializeObject<List<CloudAccount>>(savedAccountsRaw);
+            }
+
+            accountsToSave.Add(cloudAccount);
+
+            await SecureStorage.SetAsync(AppSettings.CloudAccountsKey, JsonConvert.SerializeObject(accountsToSave));
         }
 
-        public Task RemoveCloudAccount(string id)
+        public async Task RemoveCloudAccount(string id)
         {
-            Account account = this.accountStore
-                .FindAccountsForService(AppSettings.CloudAccountsKey)
-                .FirstOrDefault(a => a.Username == id);
+            string savedAccountRaw = await SecureStorage.GetAsync(AppSettings.CloudAccountsKey);
 
-            return account != null ?
-                this.accountStore.DeleteAsync(account, AppSettings.CloudAccountsKey) : 
-                Task.CompletedTask;
+            if (!string.IsNullOrWhiteSpace(savedAccountRaw))
+            {
+                List<CloudAccount> savedAccounts = JsonConvert.DeserializeObject<List<CloudAccount>>(savedAccountRaw);
+
+                // Removing account.
+                savedAccounts = savedAccounts.Where(c => c.Id != id).ToList();
+
+                await SecureStorage.SetAsync(AppSettings.CloudAccountsKey, JsonConvert.SerializeObject(savedAccounts));
+            }
         }
     }
 }

@@ -9,6 +9,8 @@
              Title="{markupExtensions:Translate StatefulSetsPage_Title}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
+    <!--TODO Reduce XAML duplication for list pages-->
+
     <Grid
       CompressedLayout.IsHeadless="true">
 
@@ -26,8 +28,8 @@
                 <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
                 <ListView
                     x:Name="StatefulSets"
-                    ItemsSource="{Binding StatefulSets}"
-                    IsVisible="{Binding HasStatefulSets}"
+                    ItemsSource="{Binding ObjectSummaries}"
+                    IsVisible="{Binding HasObjectSummaries}"
                     SeparatorVisibility="None"
                     HasUnevenRows="False"
                     CachingStrategy="RecycleElement">
@@ -35,14 +37,14 @@
                         <DataTemplate>
                             <TextCell 
                             Text="{Binding Name}"
-                            Detail="{Binding ReplicaRatio}"/>
+                            Detail="{Binding Description}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
                 <Label
                     Text="{markupExtensions:Translate StatefulSetsPage_NoServicesMessage}"
-                    IsVisible="{Binding HasStatefulSets, Converter={StaticResource InverseBoolConverter}}"/>
+                    IsVisible="{Binding HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
             </Grid>
         </Grid>
 

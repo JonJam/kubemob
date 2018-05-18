@@ -1,4 +1,4 @@
-﻿namespace KubeMob.Common.Services.AccountManagement
+namespace KubeMob.Common.Services.AccountManagement.Model
 {
     public enum CloudAccountType
     {

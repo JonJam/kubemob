@@ -3,8 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Resx;
-using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
+using KubeMob.Common.Services.AccountManagement.Azure.Model;
+using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Validation;
 using KubeMob.Common.ViewModels.Base;
@@ -93,7 +94,10 @@ namespace KubeMob.Common.ViewModels
             private set => this.SetProperty(ref this.isEditing, value);
         }
 
-        public IList<CloudEnvironment> Environments { get; }
+        public IList<CloudEnvironment> Environments
+        {
+            get;
+        }
 
         public CloudEnvironment SelectedEnvironment
         {
@@ -101,11 +105,20 @@ namespace KubeMob.Common.ViewModels
             set => this.SetProperty(ref this.selectedEnvironment, value);
         }
 
-        public ValidatableObject<string> TenantId { get; }
+        public ValidatableObject<string> TenantId
+        {
+            get;
+        }
 
-        public ValidatableObject<string> ClientId { get; }
+        public ValidatableObject<string> ClientId
+        {
+            get;
+        }
 
-        public ValidatableObject<string> ClientSecret { get; }
+        public ValidatableObject<string> ClientSecret
+        {
+            get;
+        }
 
         public override async Task Initialize(object navigationData)
         {
@@ -123,14 +136,10 @@ namespace KubeMob.Common.ViewModels
             }
         }
 
-        private async Task SaveAccount()
+        private Task SaveAccount() => this.PerformNetworkOperation(async () =>
         {
-            this.IsBusy = true;
             this.TopLevelErrorMessage = null;
-
-            // Adding delay to give time for progress indicator to be displayed.
-            await Task.Delay(100);
-
+            
             if (this.Validate())
             {
                 CloudEnvironment env = this.SelectedEnvironment;
@@ -154,9 +163,7 @@ namespace KubeMob.Common.ViewModels
                     this.TopLevelErrorMessage = message;
                 }
             }
-
-            this.IsBusy = false;
-        }
+        });
 
         private bool Validate() => this.ClientId.Validate() &&
                                    this.ClientSecret.Validate() &&

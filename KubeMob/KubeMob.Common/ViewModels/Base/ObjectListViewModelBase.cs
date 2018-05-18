@@ -16,6 +16,7 @@ namespace KubeMob.Common.ViewModels
         private readonly IPopupService popupService;
 
         private IList<ObjectSummary> objectSummaries = new List<ObjectSummary>();
+        private bool objectTypeNotSupported;
 
         protected ObjectListViewModelBase(
             IKubernetesService kubernetesService,
@@ -43,6 +44,20 @@ namespace KubeMob.Common.ViewModels
 
         public bool HasObjectSummaries => this.ObjectSummaries.Count > 0;
 
+        public bool DisplayObjectSummariesInfo => !this.ObjectTypeNotSupported && !this.HasNoNetwork;
+
+        public bool ObjectTypeNotSupported
+        {
+            get => this.objectTypeNotSupported;
+            private set
+            {
+                if (this.SetProperty(ref this.objectTypeNotSupported, value))
+                {
+                    this.NotifyPropertyChanged(() => this.DisplayObjectSummariesInfo);
+                }
+            }
+        }
+
         protected IKubernetesService KubernetesService
         {
             get;
@@ -61,7 +76,21 @@ namespace KubeMob.Common.ViewModels
                     AppResources.AccountInvalid_Message,
                     AppResources.OkAlertText);
             }
+            catch (ObjectTypeNotSupportedException)
+            {
+                this.ObjectTypeNotSupported = true;
+            }
         });
+
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(this.HasNoNetwork))
+            {
+                this.NotifyPropertyChanged(() => this.DisplayObjectSummariesInfo);
+            }
+        }
 
         protected abstract Task<IList<ObjectSummary>> GetObjectSummaries();
     }

@@ -1,4 +1,3 @@
-﻿
 using KubeMob.Common.Pages.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -15,6 +14,9 @@ namespace KubeMob.Common.Pages
             this.MenuListView = this.MenuItems;
         }
 
-        public ListView MenuListView { get; }
+        public ListView MenuListView
+        {
+            get;
+        }
     }
 }

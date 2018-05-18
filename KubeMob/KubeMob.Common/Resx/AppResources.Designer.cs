@@ -664,6 +664,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This cluster doesn&apos;t support this object type. This maybe due to the version of Kubernetes installed; this application uses the 1.10 API..
+        /// </summary>
+        internal static string ObjectTypeNotSupportedMessage {
+            get {
+                return ResourceManager.GetString("ObjectTypeNotSupportedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string OkAlertText {

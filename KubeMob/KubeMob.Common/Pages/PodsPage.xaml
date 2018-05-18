@@ -21,8 +21,11 @@
             <views:NoNetworkIndicator
                 IsVisible="{Binding HasNoNetwork}"/>
 
+            <views:ObjectTypeNotSupportedMessage
+                IsVisible="{Binding ObjectTypeNotSupported}"/>
+
             <Grid
-                IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
+                IsVisible="{Binding DisplayObjectSummariesInfo}"
                 CompressedLayout.IsHeadless="true">
                 
                 <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->

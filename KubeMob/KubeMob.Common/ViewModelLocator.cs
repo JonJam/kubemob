@@ -76,10 +76,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<StatefulSetsViewModel>();
         }
 
-        private static void ConfigureXamPlugins(IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddSingleton(CrossSettings.Current);
-        }
+        private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);
 
         private static void ConfigureServices(IServiceCollection serviceCollection)
         {
@@ -97,6 +94,7 @@ namespace KubeMob.Common
         }
 
         private static void ConfigureMaps() =>
+
             // Using AutoMapper 6.1.1 rather than latest due to build error which is detailled here: https://github.com/AutoMapper/AutoMapper/issues/2455
             // Linker configured to skip the following otherwise causes this to fail:
             // - AutoMapper

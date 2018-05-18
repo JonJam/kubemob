@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 
 namespace KubeMob.Common.Services.Localization
 {
     /// <summary>
     /// Helper class for splitting locales like iOS: ms_MY, gsw_CH and Android: in-ID
     /// into parts so we can create a .NET culture (or fallback culture)
-    /// 
+    ///
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/localization?tabs=vswin#displaying-the-correct-language"/>
     /// </summary>
     public class PlatformCulture
@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Localization
             }
 
             // .NET expects dash, not underscore
-            this.PlatformString = platformCultureString.Replace("_", "-"); 
+            this.PlatformString = platformCultureString.Replace("_", "-");
 
             int dashIndex = this.PlatformString.IndexOf("-", StringComparison.Ordinal);
 

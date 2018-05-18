@@ -12,7 +12,7 @@ namespace KubeMob.Common.Services.Settings
 {
     /// <summary>
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/configuration-management"/>
-    /// 
+    ///
     /// To nuget warning caused by Xamarin.Essentials had to install Xamarin.Android.Support.CustomTabs directly.
     /// </summary>
     public class AppSettings : IAppSettings

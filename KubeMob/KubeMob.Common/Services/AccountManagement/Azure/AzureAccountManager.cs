@@ -21,7 +21,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 {
     // <summary>
     // Had to install Microsoft.IdentityModel.Clients.ActiveDirectory Nuget directly in iOS, as without it a TypeInitializationException is thrown.
-    // 
+    //
     // Microsoft.Azure.Management includes built in retry logic.
     //
     // Configured linker to skip the following otherwise causes methods in this class to fail:

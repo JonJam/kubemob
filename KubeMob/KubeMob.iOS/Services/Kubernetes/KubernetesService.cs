@@ -9,6 +9,7 @@ using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Settings;
+using Microsoft.Rest;
 using Xamarin.Forms.Internals;
 
 [assembly: Xamarin.Forms.Dependency(typeof(KubeMob.iOS.Services.Kubernetes.KubernetesService))]
@@ -48,7 +49,7 @@ namespace KubeMob.iOS.Services.Kubernetes
             try
             {
                 IKubernetes client = await this.Client.Value;
-
+                
                 return await clientOperation(client);
             }
             catch (HttpRequestException e) when (e.InnerException is WebException web &&
@@ -63,6 +64,11 @@ namespace KubeMob.iOS.Services.Kubernetes
                 // Request was cancelled e.g. a Kubernetes cluster being brought up and not responding
                 // to API calls. Treat as no internet.
                 throw new NoNetworkException(e.Message, e);
+            }
+            catch (HttpOperationException e) when (e.Response.StatusCode == HttpStatusCode.NotFound)
+            {
+                // The Kubernetes cluster doesn't support the API we are using.
+                throw new ObjectTypeNotSupportedException(e.Message, e);
             }
         }
     }

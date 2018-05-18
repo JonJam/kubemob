@@ -394,6 +394,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        internal static string ClusterMasterViewModel_Overview {
+            get {
+                return ResourceManager.GetString("ClusterMasterViewModel_Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workloads.
         /// </summary>
         internal static string ClusterMasterViewModel_Workloads {

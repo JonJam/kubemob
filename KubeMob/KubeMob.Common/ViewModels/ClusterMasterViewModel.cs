@@ -18,7 +18,13 @@ namespace KubeMob.Common.ViewModels
 
             this.MenuItems = new ObservableCollection<MenuItemGroup>(new[]
             {
-                // TODO Add Overview link
+                new MenuItemGroup(string.Empty)
+                {
+                    new MenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_Overview,
+                        new Command(async () => await navigationService.NavigateToClusterOverviewPage()))
+                },
+
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_Workloads)
                 {
                     new MenuItemViewModel(
@@ -82,9 +88,15 @@ namespace KubeMob.Common.ViewModels
             });
         }
 
-        public ICommand MenuItemSelected { get; }
+        public ICommand MenuItemSelected
+        {
+            get;
+        }
 
-        public ObservableCollection<MenuItemGroup> MenuItems { get; }
+        public ObservableCollection<MenuItemGroup> MenuItems
+        {
+            get;
+        }
 
         private static void OnMenuItemSelected(object obj)
         {

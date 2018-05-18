@@ -13,7 +13,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToAddEditAzureAccountPage(string id = null);
 
-        Task NavigateToClusterPage();
+        Task NavigateToClusterOverviewPage();
 
         Task NavigateToPodsPage();
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms.Internals;
 
@@ -12,6 +12,6 @@ namespace KubeMob.Common.ViewModels
 
         public string Title { get; }
 
-        public char ShortName => this.Title.First();
+        public char ShortName => !string.IsNullOrWhiteSpace(this.Title) ? this.Title.First() : '\0';
     }
 }

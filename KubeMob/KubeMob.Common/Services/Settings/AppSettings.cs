@@ -13,7 +13,7 @@ namespace KubeMob.Common.Services.Settings
     /// <summary>
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/configuration-management"/>
     /// 
-    /// In order to Xamarin.Auth for secure storage had to install Xamarin.Android.Support.CustomTabs directly.
+    /// To nuget warning caused by Xamarin.Essentials had to install Xamarin.Android.Support.CustomTabs directly.
     /// </summary>
     public class AppSettings : IAppSettings
     {

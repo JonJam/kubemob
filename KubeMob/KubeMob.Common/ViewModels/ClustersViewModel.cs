@@ -98,19 +98,19 @@ namespace KubeMob.Common.ViewModels
 
         private async Task OnClusterSelected(object obj)
         {
-            Cluster cluster = (Cluster) obj;
+            Cluster cluster = (Cluster)obj;
 
             IAccountManager accountManager = this.accountManagers
                 .First(am => am.Key == cluster.AccountType);
 
             accountManager.SetSelectedCluster(cluster);
 
-            await this.navigationService.NavigateToClusterPage();
+            await this.navigationService.NavigateToClusterOverviewPage();
         }
 
         private async Task OnAccountSelected(object obj)
         {
-            ClusterGroup clusterGroup = (ClusterGroup) obj;
+            ClusterGroup clusterGroup = (ClusterGroup)obj;
 
             switch (clusterGroup.AccountType)
             {
@@ -124,7 +124,7 @@ namespace KubeMob.Common.ViewModels
 
         private void OnDeleteAccount(object obj)
         {
-            ClusterGroup clusterGroup = (ClusterGroup) obj;
+            ClusterGroup clusterGroup = (ClusterGroup)obj;
 
             IAccountManager accountManager = this.accountManagers.First(am => am.Key == clusterGroup.AccountType);
 

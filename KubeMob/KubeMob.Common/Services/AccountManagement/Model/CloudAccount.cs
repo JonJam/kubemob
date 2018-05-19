@@ -12,8 +12,11 @@ namespace KubeMob.Common.Services.AccountManagement.Model
             this.AccountType = accountType;
         }
 
-        public string Id { get; }
-        
+        public string Id
+        {
+            get;
+        }
+
         public string Name
         {
             get;

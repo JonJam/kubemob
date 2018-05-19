@@ -41,7 +41,7 @@ namespace KubeMob.Common.Services.Navigation
         {
             if (Application.Current.MainPage is ClusterMasterDetailPage masterDetailPage)
             {
-                ExtendedNavigationPage detail = (ExtendedNavigationPage) masterDetailPage.Detail;
+                ExtendedNavigationPage detail = (ExtendedNavigationPage)masterDetailPage.Detail;
                 await detail.PopToRootAsync();
             }
             else
@@ -125,7 +125,7 @@ namespace KubeMob.Common.Services.Navigation
             switch (Application.Current.MainPage)
             {
                 case ClusterMasterDetailPage masterDetailPage:
-                    await ((ExtendedNavigationPage) masterDetailPage.Detail).PushAsync(page);
+                    await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
                     break;
                 case ExtendedNavigationPage navigationPage:
                     if (page is ClusterMasterDetailPage)

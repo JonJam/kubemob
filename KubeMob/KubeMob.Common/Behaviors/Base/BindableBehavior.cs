@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 
 namespace KubeMob.Common.Behaviors.Base
@@ -6,8 +6,9 @@ namespace KubeMob.Common.Behaviors.Base
     /// <summary>
     /// Based off <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/event-to-command-behavior"/>
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class BindableBehavior<T> : Behavior<T> where T : BindableObject
+    /// <typeparam name="T">The type to attach a behaviour to.</typeparam>
+    public class BindableBehavior<T> : Behavior<T>
+        where T : BindableObject
     {
         public T AssociatedObject
         {
@@ -28,7 +29,7 @@ namespace KubeMob.Common.Behaviors.Base
 
             bindable.BindingContextChanged += this.OnBindingContextChanged;
         }
-        
+
         protected override void OnDetachingFrom(T bindable)
         {
             base.OnDetachingFrom(bindable);

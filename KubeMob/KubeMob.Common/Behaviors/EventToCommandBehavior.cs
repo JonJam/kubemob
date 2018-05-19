@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -124,9 +124,7 @@ namespace KubeMob.Common.Behaviors
             this.handler = Expression.Lambda(
                 info.EventHandlerType,
                 Expression.Call(Expression.Constant(action), actionInvoke, eventParameters[0], eventParameters[1]),
-                eventParameters
-            )
-            .Compile();
+                eventParameters).Compile();
 
             info.AddEventHandler(item, this.handler);
         }

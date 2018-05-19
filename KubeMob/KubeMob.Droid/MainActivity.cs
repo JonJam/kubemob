@@ -9,7 +9,7 @@ namespace KubeMob.Droid
 {
     /// <summary>
     /// Material design Xamarin Forms: https://developer.xamarin.com/guides/xamarin-forms/platform-features/android/
-    /// 
+    ///
     /// Xamarin Essentials setup: https://docs.microsoft.com/en-us/xamarin/essentials/get-started?context=xamarin%2Fios&tabs=windows%2Candroid#installation
     /// </summary>
     [Activity(Label = "kubemob", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
@@ -22,20 +22,20 @@ namespace KubeMob.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        protected override void OnCreate(Bundle bundle)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
-            base.OnCreate(bundle);
+            base.OnCreate(savedInstanceState);
 
             // Enable fast renderers: https://developer.xamarin.com/guides/xamarin-forms/under-the-hood/fast-renderers/
             Forms.SetFlags("FastRenderers_Experimental");
 
             // Initializing Xamarin.Essentials.
-            Xamarin.Essentials.Platform.Init(this, bundle);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             this.LoadApplication(new App());
         }
     }

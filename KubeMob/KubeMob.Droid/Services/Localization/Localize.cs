@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Threading;
 using Android.Runtime;
 using Java.Util;
@@ -13,7 +13,7 @@ namespace KubeMob.Droid.Services.Localization
     /// </summary>
     public class Localize : ILocalize
     {
-        [Preserve()]
+        [Preserve]
         public Localize()
         {
         }
@@ -26,9 +26,8 @@ namespace KubeMob.Droid.Services.Localization
 
         public CultureInfo GetCurrentCultureInfo()
         {
-            string netLanguage = "en";
             Locale androidLocale = Java.Util.Locale.Default;
-            netLanguage = Localize.AndroidToDotNetLanguage(androidLocale.ToString().Replace("_", "-"));
+            string netLanguage = Localize.AndroidToDotNetLanguage(androidLocale.ToString().Replace("_", "-"));
 
             // This gets called a lot - try/catch can be expensive so consider caching or something.
             CultureInfo ci;
@@ -52,6 +51,7 @@ namespace KubeMob.Droid.Services.Localization
                     ci = new System.Globalization.CultureInfo("en");
                 }
             }
+
             return ci;
         }
 
@@ -65,30 +65,34 @@ namespace KubeMob.Droid.Services.Localization
                 // "Malaysian (Brunei)" not supported .NET culture.
                 // "Malaysian (Malaysia)" not supported .NET culture.
                 // "Malaysian (Singapore)" not supported .NET culture.
-                case "ms-BN":   
-                case "ms-MY":   
+                case "ms-BN":
+                case "ms-MY":
                 case "ms-SG":
                     // Closest supported
-                    netLanguage = "ms"; 
+                    netLanguage = "ms";
                     break;
+
                 // "Indonesian (Indonesia)" has different code in  .NET
                 case "in-ID":
                     // Correct code for .NET
                     netLanguage = "id-ID";
                     break;
+
                 // "Schwiizertüütsch (Swiss German)" not supported .NET culture
                 case "gsw-CH":
                     // Closest supported
-                    netLanguage = "de-CH"; 
+                    netLanguage = "de-CH";
                     break;
+
                 // TODO add more application-specific cases here (if required). ONLY use cultures that have been tested and known to work.
             }
+
             return netLanguage;
         }
 
         private static string ToDotNetFallbackLanguage(PlatformCulture platCulture)
         {
-            // Use the first part of the identifier (two chars, usually);
+            // Use the first part of the identifier (two chars usually).
             string netLanguage = platCulture.LanguageCode;
 
             switch (platCulture.LanguageCode)
@@ -97,6 +101,7 @@ namespace KubeMob.Droid.Services.Localization
                     // Equivalent to German (Switzerland) for this app.
                     netLanguage = "de-CH";
                     break;
+
                 // TODO add more application-specific cases here (if required). ONLY use cultures that have been tested and known to work.
             }
 

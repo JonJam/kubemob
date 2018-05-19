@@ -34,11 +34,10 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             get;
         }
-        
+
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListDeploymentForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(deployments.Items)
@@ -49,7 +48,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetPodSummaries()
         {
             // TODO Add filter support - ListNamespacedPodAsync
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListPodForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
@@ -60,7 +58,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListReplicaSetForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(replicaSetList.Items)
@@ -71,7 +68,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetServiceSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1ServiceList serviceList =
                 await this.PerformClientOperation((c) => c.ListServiceForAllNamespacesAsync());
 
@@ -83,7 +79,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetIngressSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListIngressForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(ingressList.Items)
@@ -94,7 +89,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetConfigMapSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListConfigMapForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(configMapList.Items)
@@ -105,7 +99,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetSecretSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListSecretForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(secretList.Items)
@@ -116,7 +109,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetCronJobSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListCronJobForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(cronJobList.Items)
@@ -127,7 +119,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetDaemonSetSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListDaemonSetForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(daemonSetsList.Items)
@@ -138,7 +129,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetJobSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListJobForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
@@ -149,7 +139,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetReplicationControllerSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListReplicationControllerForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(replicationControllerList.Items)
@@ -160,7 +149,6 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetStatefulSetSummaries()
         {
             // TODO Add filter support
-            // TODO Handle API not being supported by cluster
             k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListStatefulSetForAllNamespacesAsync());
 
             return Mapper.Map<IList<ObjectSummary>>(statefulSetList.Items)

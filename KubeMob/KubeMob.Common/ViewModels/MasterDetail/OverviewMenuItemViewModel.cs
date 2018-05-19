@@ -4,9 +4,9 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels.MasterDetail
 {
     [Preserve(AllMembers = true)]
-    public class MenuItemViewModel : IMenuItem
+    public class OverviewMenuItemViewModel : IMenuItem
     {
-        public MenuItemViewModel(
+        public OverviewMenuItemViewModel(
             string title,
             ICommand command)
         {

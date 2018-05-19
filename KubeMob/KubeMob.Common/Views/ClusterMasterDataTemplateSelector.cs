@@ -5,7 +5,7 @@ namespace KubeMob.Common.Views
 {
     public class ClusterMasterDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate ObjectTypeDataTemplate
+        public DataTemplate NamespaceSelectorDataTemplate
         {
             get;
             set;
@@ -17,17 +17,24 @@ namespace KubeMob.Common.Views
             set;
         }
 
+        public DataTemplate ObjectTypeDataTemplate
+        {
+            get;
+            set;
+        }
+
         protected override DataTemplate OnSelectTemplate(
             object item,
             BindableObject container)
         {
-            if (item is ObjectTypeMenuItemViewModel)
+            switch (item)
             {
-                return this.ObjectTypeDataTemplate;
-            }
-            else
-            {
-                return this.OverviewDataTemplate;
+                case OverviewMenuItemViewModel _:
+                    return this.OverviewDataTemplate;
+                case NamespaceSelectorViewModel _:
+                    return this.NamespaceSelectorDataTemplate;
+                default:
+                    return this.ObjectTypeDataTemplate;
             }
         }
     }

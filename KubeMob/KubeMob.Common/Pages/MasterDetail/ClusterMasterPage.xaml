@@ -9,9 +9,49 @@
                           x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="☰">
+
     <base:ExtendedContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="OverviewDataTemplate">
+            <DataTemplate x:Key="NamespaceSelectorDataTemplate">
+                <ViewCell>
+                    <StackLayout
+                        CompressedLayout.IsHeadless="true"
+                        Padding="15,10"
+                        HorizontalOptions="FillAndExpand">
+                        <!--TODO Move to string resources-->
+                        <Label 
+                            Text="Namespace"/>
+
+
+                        <!--Title="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Title}"
+                            ItemsSource="{Binding Environments}"
+
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"
+                    -->
+
+                        <!--TODO Bind-->
+                        <Picker
+                        x:Name="Test"
+                        Title="Namespace"                        
+                        Margin="10,0,0,0">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Baboon</x:String>
+                                    <x:String>Capuchin Monkey</x:String>
+                                    <x:String>Blue Monkey</x:String>
+                                    <x:String>Squirrel Monkey</x:String>
+                                    <x:String>Golden Lion Tamarin</x:String>
+                                    <x:String>Howler Monkey</x:String>
+                                    <x:String>Japanese Macaque</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupHeaderTemplate">
                 <ViewCell>
                     <StackLayout
                         CompressedLayout.IsHeadless="true"
@@ -26,14 +66,25 @@
                 </ViewCell>
             </DataTemplate>
 
-            <DataTemplate x:Key="ObjectTypeDataTemplate">                
-                <TextCell 
-                    Text="{Binding Title}" />
+            <DataTemplate x:Key="ObjectTypeDataTemplate">
+                <ViewCell>
+                    <StackLayout
+                        CompressedLayout.IsHeadless="true"
+                        HorizontalOptions="FillAndExpand"
+                        Padding="15,10">
+                        <Label 
+                            Text="{Binding Title}"
+                            FontSize="15"
+                            Margin="10,0,0,0">
+                        </Label>
+                    </StackLayout>
+                </ViewCell>
             </DataTemplate>
 
             <views:ClusterMasterDataTemplateSelector
                 x:Key="ClusterMasterDataTemplateSelector"
-                OverviewDataTemplate="{StaticResource OverviewDataTemplate}"
+                NamespaceSelectorDataTemplate="{StaticResource NamespaceSelectorDataTemplate}"
+                OverviewDataTemplate="{StaticResource GroupHeaderTemplate}"
                 ObjectTypeDataTemplate="{StaticResource ObjectTypeDataTemplate}" />
         </ResourceDictionary>
     </base:ExtendedContentPage.Resources>
@@ -49,7 +100,7 @@
         HasUnevenRows="true"
         CachingStrategy="RecycleElement"
         ItemTemplate="{StaticResource ClusterMasterDataTemplateSelector}"
-        GroupHeaderTemplate="{StaticResource OverviewDataTemplate}">
+        GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}">
         <ListView.Behaviors>
             <behaviors:EventToCommandBehavior
                 EventName="ItemTapped"

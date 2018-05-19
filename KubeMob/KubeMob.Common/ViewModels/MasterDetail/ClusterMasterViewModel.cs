@@ -20,7 +20,9 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             {
                 new MenuItemGroup(string.Empty)
                 {
-                    new MenuItemViewModel(
+                    new NamespaceSelectorViewModel(),
+
+                    new OverviewMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Overview,
                         new Command(async () => await navigationService.NavigateToClusterOverviewPage()))
                 },

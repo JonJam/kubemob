@@ -1,10 +1,10 @@
-﻿using System.Windows.Input;
+using System.Windows.Input;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.MasterDetail
 {
     [Preserve(AllMembers = true)]
-    public class MenuItemViewModel
+    public class MenuItemViewModel : IMenuItem
     {
         public MenuItemViewModel(
             string title,

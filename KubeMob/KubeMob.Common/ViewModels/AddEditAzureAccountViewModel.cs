@@ -139,7 +139,7 @@ namespace KubeMob.Common.ViewModels
         private Task SaveAccount() => this.PerformNetworkOperation(async () =>
         {
             this.TopLevelErrorMessage = null;
-            
+
             if (this.Validate())
             {
                 CloudEnvironment env = this.SelectedEnvironment;

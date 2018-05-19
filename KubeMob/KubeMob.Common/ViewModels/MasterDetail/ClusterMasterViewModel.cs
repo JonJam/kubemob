@@ -6,7 +6,7 @@ using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.MasterDetail
 {
     [Preserve(AllMembers = true)]
     public class ClusterMasterViewModel : ViewModelBase
@@ -27,61 +27,61 @@ namespace KubeMob.Common.ViewModels
 
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_Workloads)
                 {
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_CronJobs,
                         new Command(async () => await navigationService.NavigateToCronJobsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_DaemonSets,
                         new Command(async () => await navigationService.NavigateToDaemonSetsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_Deployments,
                         new Command(async () => await navigationService.NavigateToDeploymentsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_Jobs,
                         new Command(async () => await navigationService.NavigateToJobsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_Pods,
                         new Command(async () => await navigationService.NavigateToPodsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_ReplicaSets,
                         new Command(async () => await navigationService.NavigateToReplicaSetsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_ReplicationControllers,
                         new Command(async () => await navigationService.NavigateToReplicationControllersPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_Workloads_StatefulSets,
                         new Command(async () => await navigationService.NavigateToStatefulSetsPage()))
                 },
 
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing)
                 {
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses,
                         new Command(async () => await navigationService.NavigateToIngressesPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services,
                         new Command(async () => await navigationService.NavigateToServicesPage()))
                 },
 
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_ConfigAndStorage)
                 {
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_ConfigAndStorage_ConfigMaps,
                         new Command(async () => await navigationService.NavigateToConfigMapsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims,
                         new Command(async () => await navigationService.NavigateToPersistentVolumeClaimsPage())),
 
-                    new MenuItemViewModel(
+                    new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_ConfigAndStorage_Secrets,
                         new Command(async () => await navigationService.NavigateToSecretsPage()))
                 }
@@ -100,7 +100,7 @@ namespace KubeMob.Common.ViewModels
 
         private static void OnMenuItemSelected(object obj)
         {
-            if (obj is MenuItemViewModel menuItem)
+            if (obj is ObjectTypeMenuItemViewModel menuItem)
             {
                 menuItem.Command.Execute(null);
             }

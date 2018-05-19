@@ -1,7 +1,7 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Pages
+namespace KubeMob.Common.Pages.MasterDetail
 {
     public partial class ClusterMasterDetailPage : MasterDetailPage
     {
@@ -9,7 +9,7 @@ namespace KubeMob.Common.Pages
         public ClusterMasterDetailPage()
         {
             this.InitializeComponent();
-            
+
             // TODO Try refactor this into ViewModel.??
             this.MasterPage.MenuListView.ItemSelected += this.OnMenuItemSelected;
         }

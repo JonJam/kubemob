@@ -75,10 +75,10 @@
     <Compile Update="Pages\ClusterOverviewPage.xaml.cs">
       <DependentUpon>ClusterOverviewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\ClusterMasterPage.xaml.cs">
+    <Compile Update="Pages\MasterDetail\ClusterMasterPage.xaml.cs">
       <DependentUpon>ClusterMasterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\ClusterMasterDetailPage.xaml.cs">
+    <Compile Update="Pages\MasterDetail\ClusterMasterDetailPage.xaml.cs">
       <DependentUpon>ClusterMasterDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="ResourceDictionaries\Colors.xaml.cs">
@@ -107,13 +107,13 @@
     <EmbeddedResource Update="Pages\Base\ExtendedContentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ClusterMasterDetailPage.xaml">
+    <EmbeddedResource Update="Pages\MasterDetail\ClusterMasterDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ClusterOverviewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\ClusterMasterPage.xaml">
+    <EmbeddedResource Update="Pages\MasterDetail\ClusterMasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\ClustersPage.xaml">

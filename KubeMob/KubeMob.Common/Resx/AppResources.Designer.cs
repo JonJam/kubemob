@@ -484,6 +484,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We cannot find the selected cluster, it may be deleted. Please select another cluster..
+        /// </summary>
+        internal static string ClusterNotFound_Message {
+            get {
+                return ResourceManager.GetString("ClusterNotFound_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cluster not found.
+        /// </summary>
+        internal static string ClusterNotFound_Title {
+            get {
+                return ResourceManager.GetString("ClusterNotFound_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string ClustersPage_Accounts_Delete_MenuItemText {
@@ -673,7 +691,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string OkAlertText {
             get {

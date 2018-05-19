@@ -1,11 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                   xmlns:pages="clr-namespace:KubeMob.Common.Pages;assembly=KubeMob.Common"
-                  x:Class="KubeMob.Common.Pages.ClusterMasterDetailPage">
+                  xmlns:md="clr-namespace:KubeMob.Common.Pages.MasterDetail;assembly=KubeMob.Common"
+                  x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterDetailPage">
     <MasterDetailPage.Master>
-        <pages:ClusterMasterPage 
+        <md:ClusterMasterPage 
             x:Name="MasterPage"/>
     </MasterDetailPage.Master>
 

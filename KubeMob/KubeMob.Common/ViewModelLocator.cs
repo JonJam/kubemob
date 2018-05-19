@@ -12,6 +12,7 @@ using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using KubeMob.Common.ViewModels.MasterDetail;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;

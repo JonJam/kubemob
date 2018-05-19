@@ -221,6 +221,12 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
                 IKubernetesCluster kubernetesCluster = await azure.KubernetesClusters.GetByIdAsync(selectedCluster.Id);
 
+                if (kubernetesCluster == null)
+                {
+                    // Cluster not found - mostly likely deleted.
+                    throw new ClusterNotFoundException($"Cluster with Id: {selectedCluster.Id}");
+                }
+
                 return kubernetesCluster.UserKubeConfigContent;
             }
             catch (AdalServiceException e) when (e.ServiceErrorCodes != null &&

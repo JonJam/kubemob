@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.MasterDetail
 {
     [Preserve(AllMembers = true)]
-    public class MenuItemGroup : List<MenuItemViewModel>
+    public class MenuItemGroup : List<IMenuItem>
     {
         public MenuItemGroup(
             string title) => this.Title = title;

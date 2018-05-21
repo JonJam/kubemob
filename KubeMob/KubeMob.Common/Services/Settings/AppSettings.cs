@@ -52,6 +52,14 @@ namespace KubeMob.Common.Services.Settings
                 JsonConvert.SerializeObject(value));
         }
 
+        public string SelectedNamespace
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.SelectedNamespace), string.Empty);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.SelectedNamespace),
+                value);
+        }
+
         public async Task<IEnumerable<T>> GetCloudAccounts<T>(
             CloudAccountType accountType)
             where T : CloudAccount

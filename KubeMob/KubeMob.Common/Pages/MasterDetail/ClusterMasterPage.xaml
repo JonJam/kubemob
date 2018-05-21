@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
+                          xmlns:extensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterPage"
+             common:ViewModelLocator.AutoWireViewModel="False"
+             Title="☰">
+
+    <base:ExtendedContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="NamespaceSelectorDataTemplate">
+                <ViewCell>
+                    <StackLayout
+                        CompressedLayout.IsHeadless="true"
+                        Padding="15,10"
+                        HorizontalOptions="FillAndExpand">
+                        <Label 
+                            Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>
+                        <Picker
+                            x:Name="NamespacePicker"
+                            ItemsSource="{Binding Namespaces}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
+                            Margin="10,0,0,0">
+                        </Picker>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="GroupHeaderTemplate">
+                <ViewCell>
+                    <StackLayout
+                        CompressedLayout.IsHeadless="true"
+                        Padding="15,10"
+                        HorizontalOptions="FillAndExpand">
+                        <Label 
+                            Text="{Binding Title}"
+                            FontSize="24"
+                            LineBreakMode="TailTruncation"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ObjectTypeDataTemplate">
+                <ViewCell>
+                    <StackLayout
+                        CompressedLayout.IsHeadless="true"
+                        HorizontalOptions="FillAndExpand"
+                        Padding="15,10">
+                        <Label 
+                            Text="{Binding Title}"
+                            FontSize="15"
+                            Margin="10,0,0,0">
+                        </Label>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <views:ClusterMasterDataTemplateSelector
+                x:Key="ClusterMasterDataTemplateSelector"
+                NamespaceSelectorDataTemplate="{StaticResource NamespaceSelectorDataTemplate}"
+                ObjectTypeDataTemplate="{StaticResource ObjectTypeDataTemplate}" />
+        </ResourceDictionary>
+    </base:ExtendedContentPage.Resources>
+
+    <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->
+    <ListView
+        x:Name="MenuItems"
+        ItemsSource="{Binding MenuItems}"
+        GroupDisplayBinding="{Binding Title}"
+        IsGroupingEnabled="True"
+        SeparatorVisibility="None"
+        HasUnevenRows="true"
+        CachingStrategy="RecycleElement"
+        ItemTemplate="{StaticResource ClusterMasterDataTemplateSelector}"
+        GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}">
+        <ListView.Behaviors>
+            <behaviors:EventToCommandBehavior
+                EventName="ItemTapped"
+                Command="{Binding MenuItemSelected}"
+                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+        </ListView.Behaviors>
+        <ListView.Header>
+            <Grid 
+                BackgroundColor="#03A9F4"
+                CompressedLayout.IsHeadless="true">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    Text="{extensions:Translate AppName}"
+                    Style="{DynamicResource SubtitleStyle}"/>
+            </Grid>
+        </ListView.Header>
+    </ListView>
+</base:ExtendedContentPage>

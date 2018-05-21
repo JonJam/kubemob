@@ -12,6 +12,7 @@ using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using KubeMob.Common.ViewModels.MasterDetail;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -59,8 +60,11 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<AddAccountViewModel>();
             serviceCollection.AddTransient<AddEditAzureAccountViewModel>();
 
-            serviceCollection.AddTransient<ClusterOverviewViewModel>();
+            serviceCollection.AddTransient<ClusterMasterDetailViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
+            serviceCollection.AddTransient<NamespaceSelectorViewModel>();
+
+            serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
             serviceCollection.AddTransient<DeploymentsViewModel>();
             serviceCollection.AddTransient<ReplicaSetsViewModel>();

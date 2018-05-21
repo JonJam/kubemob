@@ -69,6 +69,13 @@ namespace KubeMob.Common.ViewModels
             {
                 this.ObjectSummaries = await this.GetObjectSummaries();
             }
+            catch (ClusterNotFoundException)
+            {
+                await this.popupService.DisplayAlert(
+                    AppResources.ClusterNotFound_Title,
+                    AppResources.ClusterNotFound_Message,
+                    AppResources.OkAlertText);
+            }
             catch (AccountInvalidException)
             {
                 await this.popupService.DisplayAlert(

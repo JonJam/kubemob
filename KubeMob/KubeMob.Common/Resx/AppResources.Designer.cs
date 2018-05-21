@@ -331,6 +331,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        internal static string ClusterMasterPage_NamespaceLabel {
+            get {
+                return ResourceManager.GetString("ClusterMasterPage_NamespaceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config and Storage.
         /// </summary>
         internal static string ClusterMasterViewModel_ConfigAndStorage {
@@ -390,15 +399,6 @@ namespace KubeMob.Common.Resx {
         internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services {
             get {
                 return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Overview.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Overview {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Overview", resourceCulture);
             }
         }
         
@@ -480,6 +480,24 @@ namespace KubeMob.Common.Resx {
         internal static string ClusterMasterViewModel_Workloads_StatefulSets {
             get {
                 return ResourceManager.GetString("ClusterMasterViewModel_Workloads_StatefulSets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We cannot find the selected cluster, it may be deleted. Please select another cluster..
+        /// </summary>
+        internal static string ClusterNotFound_Message {
+            get {
+                return ResourceManager.GetString("ClusterNotFound_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cluster not found.
+        /// </summary>
+        internal static string ClusterNotFound_Title {
+            get {
+                return ResourceManager.GetString("ClusterNotFound_Title", resourceCulture);
             }
         }
         
@@ -673,7 +691,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string OkAlertText {
             get {

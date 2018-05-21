@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -207,6 +207,9 @@
   <data name="AzureEnvironment_USGovernment" xml:space="preserve">
     <value>US Government</value>
   </data>
+  <data name="ClusterMasterPage_NamespaceLabel" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
   <data name="ClusterMasterViewModel_ConfigAndStorage" xml:space="preserve">
     <value>Config and Storage</value>
   </data>
@@ -227,9 +230,6 @@
   </data>
   <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services" xml:space="preserve">
     <value>Services</value>
-  </data>
-  <data name="ClusterMasterViewModel_Overview" xml:space="preserve">
-    <value>Overview</value>
   </data>
   <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
@@ -257,6 +257,12 @@
   </data>
   <data name="ClusterMasterViewModel_Workloads_StatefulSets" xml:space="preserve">
     <value>Stateful Sets</value>
+  </data>
+  <data name="ClusterNotFound_Message" xml:space="preserve">
+    <value>We cannot find the selected cluster, it may be deleted. Please select another cluster.</value>
+  </data>
+  <data name="ClusterNotFound_Title" xml:space="preserve">
+    <value>Cluster not found</value>
   </data>
   <data name="ClustersPage_Accounts_Delete_MenuItemText" xml:space="preserve">
     <value>Delete</value>
@@ -322,7 +328,7 @@
     <value>This cluster doesn't support this object type. This maybe due to the version of Kubernetes installed; this application uses the 1.10 API.</value>
   </data>
   <data name="OkAlertText" xml:space="preserve">
-    <value />
+    <value>Ok</value>
   </data>
   <data name="PersistentVolumeClaimsPage_NoServicesMessage" xml:space="preserve">
     <value>There are no persistent volume claims.</value>

@@ -11,6 +11,12 @@ namespace KubeMob.Common.Services.Settings
 
         Cluster SelectedCluster { get; set; }
 
+        string SelectedNamespace
+        {
+            get;
+            set;
+        }
+
         Task<IEnumerable<T>> GetCloudAccounts<T>(
             CloudAccountType accountType)
             where T : CloudAccount;

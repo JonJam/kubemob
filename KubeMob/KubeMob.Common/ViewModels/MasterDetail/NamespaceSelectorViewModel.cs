@@ -18,6 +18,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
 
         private async void Initialize()
         {
+            // TODO Handle exceptions
             var a = await this.kubernetesService.GetNamespaces();
 
             // TODO populate list property

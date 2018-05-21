@@ -60,6 +60,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<AddAccountViewModel>();
             serviceCollection.AddTransient<AddEditAzureAccountViewModel>();
 
+            serviceCollection.AddTransient<ClusterMasterDetailViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
             serviceCollection.AddTransient<NamespaceSelectorViewModel>();
 

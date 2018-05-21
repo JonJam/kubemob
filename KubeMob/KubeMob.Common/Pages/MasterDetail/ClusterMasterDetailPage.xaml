@@ -4,10 +4,14 @@
                   xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                   xmlns:pages="clr-namespace:KubeMob.Common.Pages;assembly=KubeMob.Common"
                   xmlns:md="clr-namespace:KubeMob.Common.Pages.MasterDetail;assembly=KubeMob.Common"
-                  x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterDetailPage">
+                  xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                  x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterDetailPage"
+                  common:ViewModelLocator.AutoWireViewModel="True">
+
     <MasterDetailPage.Master>
         <md:ClusterMasterPage 
-            x:Name="MasterPage"/>
+            x:Name="MasterPage"
+            BindingContext="{Binding MasterViewModel}"/>
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>

@@ -16,13 +16,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
         private IList<Namespace> namespaces;
         private Namespace selectedNamespace;
 
-        public NamespaceSelectorViewModel(IKubernetesService kubernetesService)
-        {
-            this.kubernetesService = kubernetesService;
-
-            // TODO Refactor this fire/forget ??
-            Task noTask = this.PopulateNamespaces();
-        }
+        public NamespaceSelectorViewModel(IKubernetesService kubernetesService) => this.kubernetesService = kubernetesService;
 
         public IList<Namespace> Namespaces
         {
@@ -42,13 +36,13 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             }
         }
 
-        public async Task PopulateNamespaces() => await this.PerformNetworkOperation(async () =>
+        public override async Task Initialize(object navigationData)
         {
             this.Namespaces = await this.kubernetesService.GetNamespaces();
 
             // Avoiding set this again when initializing.
             this.selectedNamespace = this.Namespaces.First(n => n.IsDefault);
             this.NotifyPropertyChanged(() => this.SelectedNamespace);
-        });
+        }
     }
 }

@@ -7,7 +7,7 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterPage"
-             common:ViewModelLocator.AutoWireViewModel="true"
+             common:ViewModelLocator.AutoWireViewModel="False"
              Title="☰">
 
     <base:ExtendedContentPage.Resources>

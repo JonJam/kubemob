@@ -331,6 +331,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        internal static string ClusterMasterPage_NamespaceLabel {
+            get {
+                return ResourceManager.GetString("ClusterMasterPage_NamespaceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config and Storage.
         /// </summary>
         internal static string ClusterMasterViewModel_ConfigAndStorage {
@@ -390,15 +399,6 @@ namespace KubeMob.Common.Resx {
         internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services {
             get {
                 return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Overview.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Overview {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Overview", resourceCulture);
             }
         }
         

@@ -11,12 +11,6 @@ namespace KubeMob.Common.Views
             set;
         }
 
-        public DataTemplate OverviewDataTemplate
-        {
-            get;
-            set;
-        }
-
         public DataTemplate ObjectTypeDataTemplate
         {
             get;
@@ -29,8 +23,6 @@ namespace KubeMob.Common.Views
         {
             switch (item)
             {
-                case OverviewMenuItemViewModel _:
-                    return this.OverviewDataTemplate;
                 case NamespaceSelectorViewModel _:
                     return this.NamespaceSelectorDataTemplate;
                 default:

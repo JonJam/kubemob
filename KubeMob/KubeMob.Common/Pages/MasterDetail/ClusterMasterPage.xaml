@@ -18,9 +18,8 @@
                         CompressedLayout.IsHeadless="true"
                         Padding="15,10"
                         HorizontalOptions="FillAndExpand">
-                        <!--TODO Move to string resources-->
                         <Label 
-                            Text="Namespace"/>
+                            Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>
 
 
                         <!--Title="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Title}"
@@ -32,10 +31,10 @@
 
                         <!--TODO Bind-->
                         <Picker
-                        x:Name="Test"
-                        Title="Namespace"                        
-                        Margin="10,0,0,0">
-                            <Picker.ItemsSource>
+                            x:Name="NamespacePicker"
+                            Title="Namespace"                        
+                            Margin="10,0,0,0">
+                            <!--<Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Baboon</x:String>
                                     <x:String>Capuchin Monkey</x:String>
@@ -45,7 +44,7 @@
                                     <x:String>Howler Monkey</x:String>
                                     <x:String>Japanese Macaque</x:String>
                                 </x:Array>
-                            </Picker.ItemsSource>
+                            </Picker.ItemsSource>-->
                         </Picker>
                     </StackLayout>
                 </ViewCell>
@@ -59,9 +58,8 @@
                         HorizontalOptions="FillAndExpand">
                         <Label 
                             Text="{Binding Title}"
-                            VerticalOptions="FillAndExpand" 
-                            VerticalTextAlignment="Center"
-                            FontSize="24"/>
+                            FontSize="24"
+                            LineBreakMode="TailTruncation"/>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
@@ -84,7 +82,6 @@
             <views:ClusterMasterDataTemplateSelector
                 x:Key="ClusterMasterDataTemplateSelector"
                 NamespaceSelectorDataTemplate="{StaticResource NamespaceSelectorDataTemplate}"
-                OverviewDataTemplate="{StaticResource GroupHeaderTemplate}"
                 ObjectTypeDataTemplate="{StaticResource ObjectTypeDataTemplate}" />
         </ResourceDictionary>
     </base:ExtendedContentPage.Resources>
@@ -94,7 +91,6 @@
         x:Name="MenuItems"
         ItemsSource="{Binding MenuItems}"
         GroupDisplayBinding="{Binding Title}"
-        GroupShortNameBinding="{Binding ShortName}"
         IsGroupingEnabled="True"
         SeparatorVisibility="None"
         HasUnevenRows="true"

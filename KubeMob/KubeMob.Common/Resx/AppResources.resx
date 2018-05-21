@@ -207,6 +207,9 @@
   <data name="AzureEnvironment_USGovernment" xml:space="preserve">
     <value>US Government</value>
   </data>
+  <data name="ClusterMasterPage_NamespaceLabel" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
   <data name="ClusterMasterViewModel_ConfigAndStorage" xml:space="preserve">
     <value>Config and Storage</value>
   </data>
@@ -227,9 +230,6 @@
   </data>
   <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services" xml:space="preserve">
     <value>Services</value>
-  </data>
-  <data name="ClusterMasterViewModel_Overview" xml:space="preserve">
-    <value>Overview</value>
   </data>
   <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>

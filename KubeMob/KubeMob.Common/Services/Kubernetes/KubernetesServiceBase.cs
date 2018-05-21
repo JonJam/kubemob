@@ -16,6 +16,15 @@ namespace KubeMob.Common.Services.Kubernetes
 {
     public abstract class KubernetesServiceBase : IKubernetesService
     {
+        private const string DefaultNamespace = "default";
+
+        private static readonly List<Namespace> InitialNamespaces = new List<Namespace>()
+        {
+            new Namespace("default"),
+            new Namespace("kube-public"),
+            new Namespace("kube-system")
+        };
+
         private readonly IAppSettings appSettings;
         private readonly IEnumerable<IAccountManager> accountManagers;
 
@@ -44,27 +53,30 @@ namespace KubeMob.Common.Services.Kubernetes
             try
             {
                 k8s.Models.V1NamespaceList namespaces = await this.PerformClientOperation((c) => c.ListNamespaceAsync());
+
+                return Mapper.Map<IList<Namespace>>(namespaces.Items)
+                    .OrderBy(d => d.Name)
+                    .ToList();
             }
             catch (NoNetworkException)
             {
-
+                return KubernetesServiceBase.InitialNamespaces;
             }
             catch (ClusterNotFoundException)
             {
+                return KubernetesServiceBase.InitialNamespaces;
             }
             catch (AccountInvalidException)
             {
+                return KubernetesServiceBase.InitialNamespaces;
             }
-
-            return Mapper.Map<IList<Namespace>>(namespaces.Items)
-                .OrderBy(d => d.Name)
-                .ToList();
         }
 
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListDeploymentForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListNamespacedDeploymentAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(deployments.Items)
                 .OrderBy(d => d.Name)
@@ -73,8 +85,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetPodSummaries()
         {
-            // TODO Add filter support - ListNamespacedPodAsync
-            k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListPodForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListNamespacedPodAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
@@ -83,8 +96,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListReplicaSetForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(replicaSetList.Items)
                 .OrderBy(p => p.Name)
@@ -93,9 +107,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetServiceSummaries()
         {
-            // TODO Add filter support
+            string kubernetesNamespace = this.GetNamespace();
+
             k8s.Models.V1ServiceList serviceList =
-                await this.PerformClientOperation((c) => c.ListServiceForAllNamespacesAsync());
+                await this.PerformClientOperation((c) => c.ListNamespacedServiceAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(serviceList.Items)
                 .OrderBy(p => p.Name)
@@ -104,8 +119,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetIngressSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListIngressForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListNamespacedIngressAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(ingressList.Items)
                 .OrderBy(p => p.Name)
@@ -114,8 +130,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetConfigMapSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListConfigMapForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListNamespacedConfigMapAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(configMapList.Items)
                 .OrderBy(p => p.Name)
@@ -124,8 +141,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetSecretSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListSecretForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListNamespacedSecretAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(secretList.Items)
                 .OrderBy(p => p.Name)
@@ -134,8 +152,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetCronJobSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListCronJobForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListNamespacedCronJobAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(cronJobList.Items)
                 .OrderBy(p => p.Name)
@@ -144,8 +163,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetDaemonSetSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListDaemonSetForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(daemonSetsList.Items)
                 .OrderBy(p => p.Name)
@@ -154,8 +174,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetJobSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListJobForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListNamespacedJobAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
                 .OrderBy(p => p.Name)
@@ -164,8 +185,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetReplicationControllerSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListReplicationControllerForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListNamespacedReplicationControllerAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(replicationControllerList.Items)
                 .OrderBy(p => p.Name)
@@ -174,8 +196,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetStatefulSetSummaries()
         {
-            // TODO Add filter support
-            k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListStatefulSetForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListNamespacedStatefulSetAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(statefulSetList.Items)
                 .OrderBy(p => p.Name)
@@ -184,9 +207,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries()
         {
-            // TODO Add filter support
-            // TODO Handle API not being supported by cluster
-            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => c.ListPersistentVolumeClaimForAllNamespacesAsync());
+            string kubernetesNamespace = this.GetNamespace();
+
+            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => c.ListNamespacedPersistentVolumeClaimAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(persistentVolumeClaimsList.Items)
                 .OrderBy(p => p.Name)
@@ -220,6 +243,15 @@ namespace KubeMob.Common.Services.Kubernetes
             IAccountManager accountManager = this.accountManagers.First(a => a.Key == selectedCluster.AccountType);
 
             return accountManager.GetSelectedClusterKubeConfigContent();
+        }
+
+        private string GetNamespace()
+        {
+            string selectedNamespace = this.appSettings.SelectedNamespace;
+
+            return !string.IsNullOrWhiteSpace(selectedNamespace)
+                ? selectedNamespace
+                : KubernetesServiceBase.DefaultNamespace;
         }
     }
 }

@@ -20,31 +20,12 @@
                         HorizontalOptions="FillAndExpand">
                         <Label 
                             Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>
-
-
-                        <!--Title="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Title}"
-                            ItemsSource="{Binding Environments}"
-
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedItem="{Binding SelectedEnvironment, Mode=TwoWay}"
-                    -->
-
-                        <!--TODO Bind-->
                         <Picker
                             x:Name="NamespacePicker"
                             ItemsSource="{Binding Namespaces}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
                             Margin="10,0,0,0">
-                            <!--<Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Baboon</x:String>
-                                    <x:String>Capuchin Monkey</x:String>
-                                    <x:String>Blue Monkey</x:String>
-                                    <x:String>Squirrel Monkey</x:String>
-                                    <x:String>Golden Lion Tamarin</x:String>
-                                    <x:String>Howler Monkey</x:String>
-                                    <x:String>Japanese Macaque</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>-->
                         </Picker>
                     </StackLayout>
                 </ViewCell>

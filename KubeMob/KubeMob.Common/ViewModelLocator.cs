@@ -163,10 +163,6 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Status.Phase));
-
-                cfg.CreateMap<k8s.Models.V1Namespace, Namespace>()
-                    .ConstructUsing((r) => new Namespace(
-                        r.Metadata.Name));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

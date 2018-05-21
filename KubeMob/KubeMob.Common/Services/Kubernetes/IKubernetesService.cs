@@ -8,6 +8,8 @@ namespace KubeMob.Common.Services.Kubernetes
     {
         Task<IList<Namespace>> GetNamespaces();
 
+        void SetSelectedNamespace(Namespace ns);
+
         Task<IList<ObjectSummary>> GetDeploymentSummaries();
 
         Task<IList<ObjectSummary>> GetPodSummaries();

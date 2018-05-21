@@ -20,7 +20,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         private static readonly List<Namespace> InitialNamespaces = new List<Namespace>()
         {
-            new Namespace("default"),
+            new Namespace("default", true),
             new Namespace("kube-public"),
             new Namespace("kube-system")
         };
@@ -52,11 +52,27 @@ namespace KubeMob.Common.Services.Kubernetes
             // If this caused by account or cluster issues, whatever detail page that is currently being displayed will handle these cases.
             try
             {
-                k8s.Models.V1NamespaceList namespaces = await this.PerformClientOperation((c) => c.ListNamespaceAsync());
+                k8s.Models.V1NamespaceList namespaceList = await this.PerformClientOperation((c) => c.ListNamespaceAsync());
 
-                return Mapper.Map<IList<Namespace>>(namespaces.Items)
+                List<Namespace> namespaces = namespaceList.Items.Select(n => new Namespace(n.Metadata.Name))
                     .OrderBy(d => d.Name)
                     .ToList();
+
+                string selectedNamespaceName = this.GetSelectedNamespaceName();
+                Namespace selectedNamespace = namespaces.FirstOrDefault(n => n.Name == selectedNamespaceName);
+
+                if (selectedNamespace == null)
+                {
+                    // Selected namespace doesn't exist anymomre, so reset.
+                    // Using "default" namespace, or if doesn't exist then first in list.
+                    selectedNamespace = namespaces.FirstOrDefault(n => n.Name == KubernetesServiceBase.DefaultNamespace) ?? namespaces.First();
+
+                    this.SetSelectedNamespace(selectedNamespace);
+                }
+
+                selectedNamespace.IsDefault = true;
+
+                return namespaces;
             }
             catch (NoNetworkException)
             {
@@ -72,9 +88,16 @@ namespace KubeMob.Common.Services.Kubernetes
             }
         }
 
+        public void SetSelectedNamespace(Namespace ns)
+        {
+            this.appSettings.SelectedNamespace = ns.Name;
+
+            // TODO Notify of change ?? Will only probably need to on overview.
+        }
+
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListNamespacedDeploymentAsync(kubernetesNamespace));
 
@@ -85,7 +108,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetPodSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListNamespacedPodAsync(kubernetesNamespace));
 
@@ -96,7 +119,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
@@ -107,7 +130,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetServiceSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1ServiceList serviceList =
                 await this.PerformClientOperation((c) => c.ListNamespacedServiceAsync(kubernetesNamespace));
@@ -119,7 +142,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetIngressSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListNamespacedIngressAsync(kubernetesNamespace));
 
@@ -130,7 +153,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetConfigMapSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListNamespacedConfigMapAsync(kubernetesNamespace));
 
@@ -141,7 +164,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetSecretSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListNamespacedSecretAsync(kubernetesNamespace));
 
@@ -152,7 +175,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetCronJobSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListNamespacedCronJobAsync(kubernetesNamespace));
 
@@ -163,7 +186,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetDaemonSetSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
@@ -174,7 +197,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetJobSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListNamespacedJobAsync(kubernetesNamespace));
 
@@ -185,7 +208,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetReplicationControllerSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListNamespacedReplicationControllerAsync(kubernetesNamespace));
 
@@ -196,7 +219,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetStatefulSetSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListNamespacedStatefulSetAsync(kubernetesNamespace));
 
@@ -207,7 +230,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries()
         {
-            string kubernetesNamespace = this.GetNamespace();
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => c.ListNamespacedPersistentVolumeClaimAsync(kubernetesNamespace));
 
@@ -245,7 +268,7 @@ namespace KubeMob.Common.Services.Kubernetes
             return accountManager.GetSelectedClusterKubeConfigContent();
         }
 
-        private string GetNamespace()
+        private string GetSelectedNamespaceName()
         {
             string selectedNamespace = this.appSettings.SelectedNamespace;
 

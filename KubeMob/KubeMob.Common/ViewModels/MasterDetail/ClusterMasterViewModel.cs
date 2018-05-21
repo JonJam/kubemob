@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Navigation;
@@ -12,7 +13,8 @@ namespace KubeMob.Common.ViewModels.MasterDetail
     public class ClusterMasterViewModel : ViewModelBase
     {
         public ClusterMasterViewModel(
-            INavigationService navigationService)
+            INavigationService navigationService,
+            NamespaceSelectorViewModel namespaceSelectorViewModel)
         {
             this.MenuItemSelected = new Command(ClusterMasterViewModel.OnMenuItemSelected);
 
@@ -20,7 +22,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             {
                 new MenuItemGroup(string.Empty)
                 {
-                    new NamespaceSelectorViewModel()
+                    namespaceSelectorViewModel
                 },
 
                 new MenuItemGroup(AppResources.ClusterMasterViewModel_Workloads)

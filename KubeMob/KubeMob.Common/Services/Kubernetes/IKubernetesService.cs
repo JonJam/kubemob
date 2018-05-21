@@ -6,6 +6,8 @@ namespace KubeMob.Common.Services.Kubernetes
 {
     public interface IKubernetesService
     {
+        Task<IList<Namespace>> GetNamespaces();
+
         Task<IList<ObjectSummary>> GetDeploymentSummaries();
 
         Task<IList<ObjectSummary>> GetPodSummaries();

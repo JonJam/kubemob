@@ -60,8 +60,10 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<AddAccountViewModel>();
             serviceCollection.AddTransient<AddEditAzureAccountViewModel>();
 
-            serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
+            serviceCollection.AddTransient<NamespaceSelectorViewModel>();
+
+            serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();
             serviceCollection.AddTransient<DeploymentsViewModel>();
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
@@ -161,6 +163,10 @@ namespace KubeMob.Common
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Status.Phase));
+
+                cfg.CreateMap<k8s.Models.V1Namespace, Namespace>()
+                    .ConstructUsing((r) => new Namespace(
+                        r.Metadata.Name));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

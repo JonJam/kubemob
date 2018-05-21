@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using k8s;
+using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Model;
@@ -33,6 +34,31 @@ namespace KubeMob.Common.Services.Kubernetes
         protected Lazy<Task<IKubernetes>> Client
         {
             get;
+        }
+
+        public async Task<IList<Namespace>> GetNamespaces()
+        {
+            // This is used in the master page. If for any reason we cannot get the list of namespaces, we do not want to
+            // display error messages and instead fallback to built in namespaces https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/.
+            // If this caused by account or cluster issues, whatever detail page that is currently being displayed will handle these cases.
+            try
+            {
+                k8s.Models.V1NamespaceList namespaces = await this.PerformClientOperation((c) => c.ListNamespaceAsync());
+            }
+            catch (NoNetworkException)
+            {
+
+            }
+            catch (ClusterNotFoundException)
+            {
+            }
+            catch (AccountInvalidException)
+            {
+            }
+
+            return Mapper.Map<IList<Namespace>>(namespaces.Items)
+                .OrderBy(d => d.Name)
+                .ToList();
         }
 
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()

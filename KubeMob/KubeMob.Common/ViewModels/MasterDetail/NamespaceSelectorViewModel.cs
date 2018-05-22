@@ -27,7 +27,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
         public Namespace SelectedNamespace
         {
             get => this.selectedNamespace;
-            private set
+            set
             {
                 if (this.SetProperty(ref this.selectedNamespace, value))
                 {

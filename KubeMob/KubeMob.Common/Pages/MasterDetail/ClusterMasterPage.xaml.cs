@@ -11,12 +11,12 @@ namespace KubeMob.Common.Pages.MasterDetail
         {
             this.InitializeComponent();
 
-            this.MenuListView = this.MenuItems;
+            //this.MenuListView = this.MenuItems;
         }
 
-        public ListView MenuListView
-        {
-            get;
-        }
+        //public ListView MenuListView
+        //{
+        //    get;
+        //}
     }
 }

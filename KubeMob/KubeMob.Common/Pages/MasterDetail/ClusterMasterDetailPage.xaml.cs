@@ -10,15 +10,15 @@ namespace KubeMob.Common.Pages.MasterDetail
         {
             this.InitializeComponent();
 
-            // TODO Try refactor this into ViewModel.??
-            this.MasterPage.MenuListView.ItemSelected += this.OnMenuItemSelected;
+            //// TODO Try refactor this into ViewModel.??
+            //this.MasterPage.MenuListView.ItemSelected += this.OnMenuItemSelected;
         }
 
-        private void OnMenuItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            this.IsPresented = false;
+        //private void OnMenuItemSelected(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    this.IsPresented = false;
 
-            this.MasterPage.MenuListView.SelectedItem = null;
-        }
+        //    this.MasterPage.MenuListView.SelectedItem = null;
+        //}
     }
 }

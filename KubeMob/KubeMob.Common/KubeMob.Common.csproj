@@ -101,6 +101,12 @@
     <Compile Update="Views\ObjectTypeNotSupportedMessage.xaml.cs">
       <DependentUpon>ObjectTypeNotSupportedMessage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\GroupMenuItem.xaml.cs">
+      <DependentUpon>GroupMenuItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TappableView.xaml.cs">
+      <DependentUpon>TappableView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -136,6 +142,9 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NoNetworkIndicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TappableView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -108,9 +108,15 @@
             </Grid>
         </ListView.Header>
     </ListView>-->
+
     <ScrollView>
         <StackLayout>
-            <Grid 
+            <views:TappableView>
+                <views:GroupMenuItem
+                    Title="Hi"/>
+            </views:TappableView>
+
+            <!--<Grid 
                 BackgroundColor="#03A9F4"
                 CompressedLayout.IsHeadless="true">
                 <Grid.ColumnDefinitions>
@@ -144,10 +150,10 @@
                     SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
                     Margin="10,0,0,0">
                 </Picker>
-            </StackLayout>
+            </StackLayout>-->
 
             <!-- Workloads -->
-            <StackLayout
+            <!--<StackLayout
                 CompressedLayout.IsHeadless="true"
                 Padding="15,10"
                 HorizontalOptions="FillAndExpand">
@@ -168,11 +174,7 @@
                 </Label>
                 <Button
                     Text="Deployments"></Button>
-            </StackLayout>
-
-            
-
-
+            </StackLayout>-->
         </StackLayout>
     </ScrollView>
 </base:ExtendedContentPage>

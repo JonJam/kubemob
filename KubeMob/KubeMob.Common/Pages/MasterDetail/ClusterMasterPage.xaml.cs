@@ -7,16 +7,6 @@ namespace KubeMob.Common.Pages.MasterDetail
     public partial class ClusterMasterPage : ExtendedContentPage
     {
         [Preserve]
-        public ClusterMasterPage()
-        {
-            this.InitializeComponent();
-
-            //this.MenuListView = this.MenuItems;
-        }
-
-        //public ListView MenuListView
-        //{
-        //    get;
-        //}
+        public ClusterMasterPage() => this.InitializeComponent();
     }
 }

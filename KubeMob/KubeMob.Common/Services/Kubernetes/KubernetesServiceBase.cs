@@ -16,11 +16,13 @@ namespace KubeMob.Common.Services.Kubernetes
 {
     public abstract class KubernetesServiceBase : IKubernetesService
     {
+        private const string AllNamespace = "all";
         private const string DefaultNamespace = "default";
 
         private static readonly List<Namespace> InitialNamespaces = new List<Namespace>()
         {
-            new Namespace("default", true),
+            new Namespace(KubernetesServiceBase.AllNamespace),
+            new Namespace(KubernetesServiceBase.DefaultNamespace, true),
             new Namespace("kube-public"),
             new Namespace("kube-system")
         };
@@ -54,9 +56,11 @@ namespace KubeMob.Common.Services.Kubernetes
             {
                 k8s.Models.V1NamespaceList namespaceList = await this.PerformClientOperation((c) => c.ListNamespaceAsync());
 
-                List<Namespace> namespaces = namespaceList.Items.Select(n => new Namespace(n.Metadata.Name))
-                    .OrderBy(d => d.Name)
-                    .ToList();
+                List<Namespace> namespaces = namespaceList.Items.Select(n => new Namespace(n.Metadata.Name)).ToList();
+
+                // Add the all namespace.
+                namespaces.Add(new Namespace(KubernetesServiceBase.AllNamespace));
+                namespaces = namespaces.OrderBy(d => d.Name).ToList();
 
                 string selectedNamespaceName = this.GetSelectedNamespaceName();
                 Namespace selectedNamespace = namespaces.FirstOrDefault(n => n.Name == selectedNamespaceName);
@@ -99,7 +103,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => c.ListNamespacedDeploymentAsync(kubernetesNamespace));
+            k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListDeploymentForAllNamespacesAsync()
+                : c.ListNamespacedDeploymentAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(deployments.Items)
                 .OrderBy(d => d.Name)
@@ -110,7 +116,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => c.ListNamespacedPodAsync(kubernetesNamespace));
+            k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListPodForAllNamespacesAsync()
+                : c.ListNamespacedPodAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
@@ -121,7 +129,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
+            k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListReplicaSetForAllNamespacesAsync()
+                : c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(replicaSetList.Items)
                 .OrderBy(p => p.Name)
@@ -132,8 +142,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ServiceList serviceList =
-                await this.PerformClientOperation((c) => c.ListNamespacedServiceAsync(kubernetesNamespace));
+            k8s.Models.V1ServiceList serviceList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListServiceForAllNamespacesAsync()
+                : c.ListNamespacedServiceAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(serviceList.Items)
                 .OrderBy(p => p.Name)
@@ -144,7 +155,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => c.ListNamespacedIngressAsync(kubernetesNamespace));
+            k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListIngressForAllNamespacesAsync()
+                : c.ListNamespacedIngressAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(ingressList.Items)
                 .OrderBy(p => p.Name)
@@ -155,7 +168,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => c.ListNamespacedConfigMapAsync(kubernetesNamespace));
+            k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListConfigMapForAllNamespacesAsync()
+                : c.ListNamespacedConfigMapAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(configMapList.Items)
                 .OrderBy(p => p.Name)
@@ -166,7 +181,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => c.ListNamespacedSecretAsync(kubernetesNamespace));
+            k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListSecretForAllNamespacesAsync()
+                : c.ListNamespacedSecretAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(secretList.Items)
                 .OrderBy(p => p.Name)
@@ -177,7 +194,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => c.ListNamespacedCronJobAsync(kubernetesNamespace));
+            k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListCronJobForAllNamespacesAsync()
+                : c.ListNamespacedCronJobAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(cronJobList.Items)
                 .OrderBy(p => p.Name)
@@ -188,7 +207,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
+            k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListDaemonSetForAllNamespacesAsync()
+                : c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(daemonSetsList.Items)
                 .OrderBy(p => p.Name)
@@ -199,7 +220,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => c.ListNamespacedJobAsync(kubernetesNamespace));
+            k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListJobForAllNamespacesAsync()
+                : c.ListNamespacedJobAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
                 .OrderBy(p => p.Name)
@@ -210,7 +233,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => c.ListNamespacedReplicationControllerAsync(kubernetesNamespace));
+            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListReplicationControllerForAllNamespacesAsync()
+                : c.ListNamespacedReplicationControllerAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(replicationControllerList.Items)
                 .OrderBy(p => p.Name)
@@ -221,7 +246,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => c.ListNamespacedStatefulSetAsync(kubernetesNamespace));
+            k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListStatefulSetForAllNamespacesAsync()
+                : c.ListNamespacedStatefulSetAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(statefulSetList.Items)
                 .OrderBy(p => p.Name)
@@ -232,7 +259,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => c.ListNamespacedPersistentVolumeClaimAsync(kubernetesNamespace));
+            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListPersistentVolumeClaimForAllNamespacesAsync()
+                : c.ListNamespacedPersistentVolumeClaimAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(persistentVolumeClaimsList.Items)
                 .OrderBy(p => p.Name)

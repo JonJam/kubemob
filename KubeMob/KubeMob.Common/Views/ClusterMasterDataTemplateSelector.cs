@@ -17,6 +17,12 @@ namespace KubeMob.Common.Views
             set;
         }
 
+        public DataTemplate SettingsDataTemplate
+        {
+            get;
+            set;
+        }
+
         protected override DataTemplate OnSelectTemplate(
             object item,
             BindableObject container)

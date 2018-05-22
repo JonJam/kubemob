@@ -63,7 +63,8 @@
             <views:ClusterMasterDataTemplateSelector
                 x:Key="ClusterMasterDataTemplateSelector"
                 NamespaceSelectorDataTemplate="{StaticResource NamespaceSelectorDataTemplate}"
-                ObjectTypeDataTemplate="{StaticResource ObjectTypeDataTemplate}" />
+                ObjectTypeDataTemplate="{StaticResource ObjectTypeDataTemplate}"
+                SettingsDataTemplate="{StaticResource GroupHeaderTemplate}"/>
         </ResourceDictionary>
     </base:ExtendedContentPage.Resources>
 

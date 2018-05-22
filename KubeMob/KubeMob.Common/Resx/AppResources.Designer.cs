@@ -808,6 +808,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsPage_Title {
+            get {
+                return ResourceManager.GetString("SettingsPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no stateful sets..
         /// </summary>
         internal static string StatefulSetsPage_NoServicesMessage {

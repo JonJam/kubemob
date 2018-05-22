@@ -78,6 +78,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
             serviceCollection.AddTransient<StatefulSetsViewModel>();
+
+            serviceCollection.AddTransient<SettingsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);

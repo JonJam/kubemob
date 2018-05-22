@@ -87,6 +87,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
 
+        public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

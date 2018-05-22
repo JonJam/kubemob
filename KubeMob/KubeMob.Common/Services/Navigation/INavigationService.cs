@@ -41,6 +41,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToPersistentVolumeClaimsPage();
 
+        Task NavigateToSettingsPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

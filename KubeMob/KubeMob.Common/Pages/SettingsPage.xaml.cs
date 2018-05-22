@@ -3,9 +3,9 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages
 {
-    public partial class StatefulSetsPage : ExtendedContentPage
+    public partial class SettingsPage : ExtendedContentPage
     {
         [Preserve]
-        public StatefulSetsPage() => this.InitializeComponent();
+        public SettingsPage() => this.InitializeComponent();
     }
 }

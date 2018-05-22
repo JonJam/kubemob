@@ -231,6 +231,9 @@
   <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services" xml:space="preserve">
     <value>Services</value>
   </data>
+  <data name="ClusterMasterViewModel_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
     <value>Workloads</value>
   </data>

@@ -88,6 +88,13 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                     new ObjectTypeMenuItemViewModel(
                         AppResources.ClusterMasterViewModel_ConfigAndStorage_Secrets,
                         new Command(async () => await navigationService.NavigateToSecretsPage()))
+                },
+
+                new MenuItemGroup(string.Empty)
+                {
+                    new SettingsMenuItemViewModel(
+                        AppResources.ClusterMasterViewModel_Settings,
+                        new Command(async () => await navigationService.NavigateToSettingsPage()))
                 }
             });
         }

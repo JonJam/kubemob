@@ -31,6 +31,8 @@ namespace KubeMob.Common.Views
             {
                 case NamespaceSelectorViewModel _:
                     return this.NamespaceSelectorDataTemplate;
+                case SettingsMenuItemViewModel _:
+                    return this.SettingsDataTemplate;
                 default:
                     return this.ObjectTypeDataTemplate;
             }

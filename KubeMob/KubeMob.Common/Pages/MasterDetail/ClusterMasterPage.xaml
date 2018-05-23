@@ -14,28 +14,6 @@
         <StackLayout
             CompressedLayout.IsHeadless="true">
 
-            <!--<Grid 
-                BackgroundColor="#03A9F4"
-                CompressedLayout.IsHeadless="true">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
-                <Label
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Text="{extensions:Translate AppName}"
-                    Style="{DynamicResource SubtitleStyle}"/>
-            </Grid>-->
-
-            <!-- Remove stacklayouts ?? -->
             <StackLayout
                 CompressedLayout.IsHeadless="true"
                 Padding="15,10"

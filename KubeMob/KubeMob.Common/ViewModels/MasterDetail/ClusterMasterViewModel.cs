@@ -17,6 +17,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
         private readonly IKubernetesService kubernetesService;
         private readonly INavigationService navigationService;
 
+        private ICommand toggleShowMasterCommand;
         private IList<Namespace> namespaces;
         private Namespace selectedNamespace;
 
@@ -27,50 +28,103 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             this.kubernetesService = kubernetesService;
             this.navigationService = navigationService;
         }
-
-        // TODO Handle closing of master page when click button
-
-        public ICommand NavigateToCronJobsCommand =>
-            new Command(async () => await this.navigationService.NavigateToCronJobsPage());
+        
+        public ICommand NavigateToCronJobsCommand => new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToCronJobsPage();
+            });
 
         public ICommand NavigateToDaemonSetsCommand =>
-            new Command(async () => await this.navigationService.NavigateToDaemonSetsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToDaemonSetsPage();
+            });
 
         public ICommand NavigateToDeploymentsCommand =>
-            new Command(async () => await this.navigationService.NavigateToDeploymentsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToDeploymentsPage();
+            });
 
         public ICommand NavigateToJobsCommand =>
-            new Command(async () => await this.navigationService.NavigateToJobsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToJobsPage();
+            });
 
         public ICommand NavigateToPodsCommand =>
-            new Command(async () => await this.navigationService.NavigateToPodsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToPodsPage();
+            });
 
         public ICommand NavigateToReplicaSetsCommand =>
-            new Command(async () => await this.navigationService.NavigateToReplicaSetsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToReplicaSetsPage();
+            });
 
         public ICommand NavigateToReplicationControllersCommand =>
-            new Command(async () => await this.navigationService.NavigateToReplicationControllersPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToReplicationControllersPage();
+            });
 
         public ICommand NavigateToStatefulSetsCommand =>
-            new Command(async () => await this.navigationService.NavigateToStatefulSetsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToStatefulSetsPage();
+            });
 
         public ICommand NavigateToIngressesCommand =>
-            new Command(async () => await this.navigationService.NavigateToIngressesPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToIngressesPage();
+            });
 
         public ICommand NavigateToServicesCommand =>
-            new Command(async () => await this.navigationService.NavigateToServicesPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToServicesPage();
+            });
 
         public ICommand NavigateToConfigMapsCommand =>
-            new Command(async () => await this.navigationService.NavigateToConfigMapsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToConfigMapsPage();
+            });
 
         public ICommand NavigateToPersistentVolumeClaimsCommand =>
-            new Command(async () => await this.navigationService.NavigateToPersistentVolumeClaimsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToPersistentVolumeClaimsPage();
+            });
 
         public ICommand NavigateToSecretsCommand =>
-            new Command(async () => await this.navigationService.NavigateToSecretsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToSecretsPage();
+            });
 
         public ICommand NavigateToSettingsCommand =>
-            new Command(async () => await this.navigationService.NavigateToSettingsPage());
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToSettingsPage();
+            });
 
         public IList<Namespace> Namespaces
         {
@@ -92,6 +146,8 @@ namespace KubeMob.Common.ViewModels.MasterDetail
 
         public override async Task Initialize(object navigationData)
         {
+            this.toggleShowMasterCommand = (ICommand)navigationData;
+
             this.Namespaces = await this.kubernetesService.GetNamespaces();
 
             // Avoiding set this again when initializing.

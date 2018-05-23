@@ -16,23 +16,28 @@ namespace KubeMob.Common.Views
             typeof(TappableView),
             null);
 
-        public TappableView() => this.InitializeComponent();
+        private readonly Color originalBackgroundColor;
+
+        public TappableView()
+        {
+            this.InitializeComponent();
+
+            this.originalBackgroundColor = this.BackgroundColor;
+        }
 
         public ICommand Command
         {
-            get => (ICommand)this.GetValue(EventToCommandBehavior.CommandProperty);
-            set => this.SetValue(EventToCommandBehavior.CommandProperty, value);
+            get => (ICommand)this.GetValue(TappableView.CommandProperty);
+            set => this.SetValue(TappableView.CommandProperty, value);
         }
 
         private async void HandleTap(object sender, EventArgs e)
         {
-            Color originalBackgroundColor = this.BackgroundColor;
-
             this.BackgroundColor = Color.LightGray;
 
             this.Command?.Execute(e);
 
-            await this.ColorTo(this.BackgroundColor, originalBackgroundColor, c => this.BackgroundColor = c);
+            await this.ColorTo(this.BackgroundColor, this.originalBackgroundColor, c => this.BackgroundColor = c);
         }
     }
 }

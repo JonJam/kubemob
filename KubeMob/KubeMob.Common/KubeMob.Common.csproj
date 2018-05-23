@@ -98,6 +98,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\MenuItem.xaml.cs">
+      <DependentUpon>MenuItem.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ObjectTypeNotSupportedMessage.xaml.cs">
       <DependentUpon>ObjectTypeNotSupportedMessage.xaml</DependentUpon>
     </Compile>

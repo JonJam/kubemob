@@ -62,7 +62,6 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<ClusterMasterDetailViewModel>();
             serviceCollection.AddTransient<ClusterMasterViewModel>();
-            serviceCollection.AddTransient<NamespaceSelectorViewModel>();
 
             serviceCollection.AddTransient<ClusterOverviewViewModel>();
             serviceCollection.AddTransient<PodsViewModel>();

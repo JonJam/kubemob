@@ -5,6 +5,7 @@ using System.Windows.Input;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -24,10 +25,13 @@ namespace KubeMob.Common.ViewModels.MasterDetail
 
         public ClusterMasterViewModel(
             IKubernetesService kubernetesService,
-            INavigationService navigationService)
+            INavigationService navigationService,
+            IPubSubService pubSubService)
         {
             this.kubernetesService = kubernetesService;
             this.navigationService = navigationService;
+
+                        //TODO Wireup prop and binding
         }
         
         public ICommand NavigateToCronJobsCommand => new Command(async () =>

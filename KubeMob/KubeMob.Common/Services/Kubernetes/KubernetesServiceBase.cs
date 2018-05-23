@@ -9,6 +9,7 @@ using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Model;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using Xamarin.Forms.Internals;
 
@@ -28,18 +29,32 @@ namespace KubeMob.Common.Services.Kubernetes
         };
 
         private readonly IAppSettings appSettings;
+        private readonly IPubSubService pubSubService;
         private readonly IEnumerable<IAccountManager> accountManagers;
 
         [Preserve]
         protected KubernetesServiceBase(
             IAppSettings appSettings,
+            IPubSubService pubSubService,
             IEnumerable<IAccountManager> accountManagers)
         {
             this.appSettings = appSettings;
+            this.pubSubService = pubSubService;
             this.accountManagers = accountManagers;
 
             // TODO This will need to be re-created when the user changes their selected cluster.
             this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
+        }
+
+        public bool ShowCronJobs
+        {
+            get => this.appSettings.ShowCronJobs;
+            set
+            {
+                this.appSettings.ShowCronJobs = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged(this, nameof(this.ShowCronJobs));
+            }
         }
 
         protected Lazy<Task<IKubernetes>> Client

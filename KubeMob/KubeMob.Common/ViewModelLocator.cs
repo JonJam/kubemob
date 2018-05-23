@@ -10,6 +10,7 @@ using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using KubeMob.Common.ViewModels.MasterDetail;
@@ -88,6 +89,7 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
 
+            serviceCollection.AddSingleton<IPubSubService, PubSubService>();
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IPopupService, PopupService>();
             serviceCollection.AddSingleton<IAppSettings, AppSettings>();

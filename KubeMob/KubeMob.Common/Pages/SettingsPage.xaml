@@ -11,23 +11,23 @@
     <TableView Intent="Settings">
         <TableRoot>
             <TableSection Title="{markupExtensions:Translate Workloads}">
-                <SwitchCell Text="{markupExtensions:Translate CronJobs}" On="{Binding Settings.ShowCronJobs, Mode=TwoWay}"/>
-                <SwitchCell Text="{markupExtensions:Translate DaemonSets}" On="{Binding Settings.ShowDaemonSets, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate Deployments}" On="{Binding Settings.ShowDeployments, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate Jobs}" On="{Binding Settings.ShowJobs, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate Pods}" On="{Binding Settings.ShowPods, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate ReplicaSets}" On="{Binding Settings.ShowReplicaSets, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate ReplicationControllers}" On="{Binding Settings.ShowReplicationControllers, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate StatefulSets}" On="{Binding Settings.ShowStatefulSets, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate CronJobs}" On="{Binding KubernetesService.ShowCronJobs, Mode=TwoWay}"/>
+                <SwitchCell Text="{markupExtensions:Translate DaemonSets}" On="{Binding KubernetesService.ShowDaemonSets, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Deployments}" On="{Binding KubernetesService.ShowDeployments, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Jobs}" On="{Binding KubernetesService.ShowJobs, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Pods}" On="{Binding KubernetesService.ShowPods, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate ReplicaSets}" On="{Binding KubernetesService.ShowReplicaSets, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate ReplicationControllers}" On="{Binding KubernetesService.ShowReplicationControllers, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate StatefulSets}" On="{Binding KubernetesService.ShowStatefulSets, Mode=TwoWay}" />
             </TableSection>
             <TableSection Title="{markupExtensions:Translate DiscoveryAndLoadBalancing}">
-                <SwitchCell Text="{markupExtensions:Translate Ingresses}" On="{Binding Settings.ShowIngresses, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate Services}" On="{Binding Settings.ShowServices, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Ingresses}" On="{Binding KubernetesService.ShowIngresses, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Services}" On="{Binding KubernetesService.ShowServices, Mode=TwoWay}" />
             </TableSection>
             <TableSection Title="{markupExtensions:Translate ConfigAndStorage}">
-                <SwitchCell Text="{markupExtensions:Translate ConfigMaps}" On="{Binding Settings.ShowConfigMaps, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate PersistentVolumeClaims}" On="{Binding Settings.ShowPersistentVolumeClaims, Mode=TwoWay}" />
-                <SwitchCell Text="{markupExtensions:Translate Secrets}" On="{Binding Settings.ShowSecrets, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate ConfigMaps}" On="{Binding KubernetesService.ShowConfigMaps, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate PersistentVolumeClaims}" On="{Binding KubernetesService.ShowPersistentVolumeClaims, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Secrets}" On="{Binding KubernetesService.ShowSecrets, Mode=TwoWay}" />
             </TableSection>
         </TableRoot>
     </TableView>

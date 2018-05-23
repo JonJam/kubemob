@@ -5,6 +5,7 @@ using System.Windows.Input;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
+using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -16,7 +17,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
     {
         private readonly IKubernetesService kubernetesService;
         private readonly INavigationService navigationService;
-
+        
         private ICommand toggleShowMasterCommand;
         private IList<Namespace> namespaces;
         private Namespace selectedNamespace;

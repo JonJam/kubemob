@@ -6,7 +6,7 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.ServicesPage"
-             Title="{markupExtensions:Translate ServicesPage_Title}"
+             Title="{markupExtensions:Translate Services}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
     <!--TODO Reduce XAML duplication for list pages-->

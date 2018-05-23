@@ -6,7 +6,7 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.PersistentVolumeClaimsPage"
-             Title="{markupExtensions:Translate PersistentVolumeClaimsPage_Title}"
+             Title="{markupExtensions:Translate PersistentVolumeClaims}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
     <!--TODO Reduce XAML duplication for list pages-->

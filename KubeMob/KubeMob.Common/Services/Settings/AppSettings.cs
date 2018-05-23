@@ -15,27 +15,15 @@ namespace KubeMob.Common.Services.Settings
     ///
     /// To nuget warning caused by Xamarin.Essentials had to install Xamarin.Android.Support.CustomTabs directly.
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class AppSettings : IAppSettings
     {
         private const string CloudAccountsKey = "KubeMob-CloudAccounts";
 
         private readonly ISettings settings;
 
-        [Preserve]
         public AppSettings(
-            ISettings settings)
-        {
-            this.settings = settings;
-
-            this.AzureHelpLink =
-                new Uri(
-                    "https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal");
-        }
-
-        public Uri AzureHelpLink
-        {
-            get;
-        }
+            ISettings settings) => this.settings = settings;
 
         public Cluster SelectedCluster
         {
@@ -57,6 +45,110 @@ namespace KubeMob.Common.Services.Settings
             get => this.settings.GetValueOrDefault(nameof(this.SelectedNamespace), string.Empty);
             set => this.settings.AddOrUpdateValue(
                 nameof(this.SelectedNamespace),
+                value);
+        }
+
+        public bool ShowCronJobs
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowCronJobs), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowCronJobs),
+                value);
+        }
+
+        public bool ShowDaemonSets
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowDaemonSets), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowDaemonSets),
+                value);
+        }
+
+        public bool ShowDeployments
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowDeployments), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowDeployments),
+                value);
+        }
+
+        public bool ShowJobs
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowJobs), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowJobs),
+                value);
+        }
+
+        public bool ShowPods
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowPods), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowPods),
+                value);
+        }
+
+        public bool ShowReplicaSets
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowReplicaSets), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowReplicaSets),
+                value);
+        }
+
+        public bool ShowReplicationControllers
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowReplicationControllers), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowReplicationControllers),
+                value);
+        }
+
+        public bool ShowStatefulSets
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowStatefulSets), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowStatefulSets),
+                value);
+        }
+
+        public bool ShowIngresses
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowIngresses), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowIngresses),
+                value);
+        }
+
+        public bool ShowServices
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowServices), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowServices),
+                value);
+        }
+
+        public bool ShowConfigMaps
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowConfigMaps), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowConfigMaps),
+                value);
+        }
+
+        public bool ShowPersistentVolumeClaims
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowPersistentVolumeClaims), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowPersistentVolumeClaims),
+                value);
+        }
+
+        public bool ShowSecrets
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowSecrets), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowSecrets),
                 value);
         }
 

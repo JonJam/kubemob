@@ -31,99 +31,99 @@
 
             <!-- Workloads -->
             <views:GroupMenuItem
-                Title="{extensions:Translate ClusterMasterViewModel_Workloads}"/>
+                Title="{extensions:Translate Workloads}"/>
 
             <views:TappableView
                 Command="{Binding NavigateToCronJobsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_CronJobs}"/>
+                    Title="{extensions:Translate CronJobs}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToDaemonSetsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_DaemonSets}"/>
+                    Title="{extensions:Translate DaemonSets}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToDeploymentsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_Deployments}"/>
+                    Title="{extensions:Translate Deployments}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToJobsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_Jobs}"/>
+                    Title="{extensions:Translate Jobs}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToPodsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_Pods}"/>
+                    Title="{extensions:Translate Pods}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToReplicaSetsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_ReplicaSets}"/>
+                    Title="{extensions:Translate ReplicaSets}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToReplicationControllersCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_ReplicationControllers}"/>
+                    Title="{extensions:Translate ReplicationControllers}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToStatefulSetsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Workloads_StatefulSets}"/>
+                    Title="{extensions:Translate StatefulSets}"/>
             </views:TappableView>
 
             <!-- Discovery and load balancing -->
             <views:GroupMenuItem
-                Title="{extensions:Translate ClusterMasterViewModel_DiscoveryAndLoadBalancing}"/>
+                Title="{extensions:Translate DiscoveryAndLoadBalancing}"/>
 
             <views:TappableView
                 Command="{Binding NavigateToIngressesCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses}"/>
+                    Title="{extensions:Translate Ingresses}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToServicesCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services}"/>
+                    Title="{extensions:Translate Services}"/>
             </views:TappableView>
 
             <!-- Config and storage -->
             <views:GroupMenuItem
-                Title="{extensions:Translate ClusterMasterViewModel_ConfigAndStorage}"/>
+                Title="{extensions:Translate ConfigAndStorage}"/>
 
             <views:TappableView
                 Command="{Binding NavigateToConfigMapsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_ConfigAndStorage_ConfigMaps}"/>
+                    Title="{extensions:Translate ConfigMaps}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToPersistentVolumeClaimsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims}"/>
+                    Title="{extensions:Translate PersistentVolumeClaims}"/>
             </views:TappableView>
 
             <views:TappableView
                 Command="{Binding NavigateToSecretsCommand}">
                 <views:MenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_ConfigAndStorage_Secrets}"/>
+                    Title="{extensions:Translate Secrets}"/>
             </views:TappableView>
 
             <!-- Other -->
             <views:TappableView
                 Command="{Binding NavigateToSettingsCommand}">
                 <views:GroupMenuItem
-                    Title="{extensions:Translate ClusterMasterViewModel_Settings}"/>
+                    Title="{extensions:Translate Settings}"/>
             </views:TappableView>
         </StackLayout>
     </ScrollView>

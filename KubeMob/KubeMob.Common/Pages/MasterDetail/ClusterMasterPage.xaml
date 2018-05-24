@@ -10,7 +10,8 @@
              common:ViewModelLocator.AutoWireViewModel="False"
              Title="☰">
 
-    <ScrollView>
+    <ScrollView
+        CompressedLayout.IsHeadless="true">
         <StackLayout
             CompressedLayout.IsHeadless="true">
 

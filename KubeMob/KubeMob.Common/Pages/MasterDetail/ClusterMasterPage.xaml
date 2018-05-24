@@ -31,6 +31,7 @@
 
             <!-- Workloads -->
             <StackLayout
+                CompressedLayout.IsHeadless="true"
                 IsVisible="{Binding ShowWorkloads}">
                 <views:GroupMenuItem
                 Title="{extensions:Translate Workloads}"/>
@@ -94,6 +95,7 @@
 
             <!-- Discovery and load balancing -->
             <StackLayout
+                CompressedLayout.IsHeadless="true"
                 IsVisible="{Binding ShowDiscoveryAndLoadBalancing}">
                 <views:GroupMenuItem
                 Title="{extensions:Translate DiscoveryAndLoadBalancing}"/>
@@ -115,6 +117,7 @@
 
             <!-- Config and storage -->
             <StackLayout
+                CompressedLayout.IsHeadless="true"
                 IsVisible="{Binding ShowConfigAndStorage}">
                 <views:GroupMenuItem
                 Title="{extensions:Translate ConfigAndStorage}"/>

@@ -13,16 +13,16 @@ namespace KubeMob.Common.Services.PubSub
         {
         }
 
-        public void SubscribeToResourceListingSettingChanged<T>(
-            T obj,
-            Action<T, string> ca)
-            where T : class => MessagingCenter.Subscribe(obj, PubSubService.ResourceListingSettingChangeMessage, ca);
+        public void SubscribeToResourceListingSettingChanged<TSender>(
+            object sender,
+            Action<TSender, string> ca)
+            where TSender : class => MessagingCenter.Subscribe(sender, PubSubService.ResourceListingSettingChangeMessage, ca);
 
-        public void PublishResourceListingSettingChanged<T>(
-            T obj,
+        public void PublishResourceListingSettingChanged<TSender>(
+            TSender sender,
             string resourceName)
-            where T : class => MessagingCenter.Send(
-                obj,
+            where TSender : class => MessagingCenter.Send(
+                sender,
                 PubSubService.ResourceListingSettingChangeMessage,
                 resourceName);
     }

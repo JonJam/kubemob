@@ -1,5 +1,4 @@
 using KubeMob.Common.Pages.Base;
-using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages.MasterDetail

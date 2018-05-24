@@ -6,6 +6,12 @@ namespace KubeMob.Common.Services.Kubernetes
 {
     public interface IKubernetesService
     {
+        bool ShowCronJobs
+        {
+            get;
+            set;
+        }
+
         Task<IList<Namespace>> GetNamespaces();
 
         void SetSelectedNamespace(Namespace ns);

@@ -34,7 +34,8 @@
                 Title="{extensions:Translate Workloads}"/>
 
             <views:TappableView
-                Command="{Binding NavigateToCronJobsCommand}">
+                Command="{Binding NavigateToCronJobsCommand}"
+                IsVisible="{Binding ShowCronJobs}">
                 <views:MenuItem
                     Title="{extensions:Translate CronJobs}"/>
             </views:TappableView>

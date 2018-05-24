@@ -18,7 +18,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
     {
         private readonly IKubernetesService kubernetesService;
         private readonly INavigationService navigationService;
-        
+
         private ICommand toggleShowMasterCommand;
         private IList<Namespace> namespaces;
         private Namespace selectedNamespace;
@@ -31,14 +31,19 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             this.kubernetesService = kubernetesService;
             this.navigationService = navigationService;
 
-                        //TODO Wireup prop and binding
+            pubSubService.SubscribeToResourceListingSettingChanged<IKubernetesService>(
+                this,
+                this.HandleResourceListingSettingChanged);
         }
-        
+
         public ICommand NavigateToCronJobsCommand => new Command(async () =>
             {
                 this.toggleShowMasterCommand.Execute(null);
                 await this.navigationService.NavigateToCronJobsPage();
             });
+
+        // TODO Add props
+        public bool ShowCronJobs => this.kubernetesService.ShowCronJobs;
 
         public ICommand NavigateToDaemonSetsCommand =>
             new Command(async () =>
@@ -158,6 +163,17 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             // Avoiding set this again when initializing.
             this.selectedNamespace = this.Namespaces.First(n => n.IsDefault);
             this.NotifyPropertyChanged(() => this.SelectedNamespace);
+        }
+
+        private void HandleResourceListingSettingChanged(
+            IKubernetesService sender,
+            string settingName)
+        {
+            // TODO add others
+            if (settingName == nameof(this.ShowCronJobs))
+            {
+                this.NotifyPropertyChanged(() => this.ShowCronJobs);
+            }
         }
     }
 }

@@ -4,14 +4,14 @@ namespace KubeMob.Common.Services.PubSub
 {
     public interface IPubSubService
     {
-        void SubscribeToResourceListingSettingChanged<T>(
-            T obj,
-            Action<T, string> ca)
-            where T : class;
+        void SubscribeToResourceListingSettingChanged<TSender>(
+            object sender,
+            Action<TSender, string> ca)
+            where TSender : class;
 
-        void PublishResourceListingSettingChanged<T>(
-            T obj,
+        void PublishResourceListingSettingChanged<TSender>(
+            TSender sender,
             string resourceName)
-            where T : class;
+            where TSender : class;
     }
 }

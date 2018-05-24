@@ -7,6 +7,7 @@ using KubeMob.Common;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using Microsoft.Rest;
 using Microsoft.Rest.TransientFaultHandling;
@@ -30,15 +31,16 @@ namespace KubeMob.Droid.Services.Kubernetes
         /// </summary>
         [Preserve]
         public KubernetesService()
-            : base(ViewModelLocator.Resolve<IAppSettings>(), ViewModelLocator.Resolve<IEnumerable<IAccountManager>>())
+            : base(ViewModelLocator.Resolve<IAppSettings>(), ViewModelLocator.Resolve<IPubSubService>(), ViewModelLocator.Resolve<IEnumerable<IAccountManager>>())
         {
         }
 
         [Preserve]
         public KubernetesService(
             IAppSettings appSettings,
+            IPubSubService pubSubService,
             IEnumerable<IAccountManager> accountManagers)
-            : base(appSettings, accountManagers)
+            : base(appSettings, pubSubService, accountManagers)
         {
         }
 

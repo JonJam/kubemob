@@ -210,54 +210,6 @@
   <data name="ClusterMasterPage_NamespaceLabel" xml:space="preserve">
     <value>Namespace</value>
   </data>
-  <data name="ClusterMasterViewModel_ConfigAndStorage" xml:space="preserve">
-    <value>Config and Storage</value>
-  </data>
-  <data name="ClusterMasterViewModel_ConfigAndStorage_ConfigMaps" xml:space="preserve">
-    <value>Config Maps</value>
-  </data>
-  <data name="ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims" xml:space="preserve">
-    <value>Persistent Volume Claims</value>
-  </data>
-  <data name="ClusterMasterViewModel_ConfigAndStorage_Secrets" xml:space="preserve">
-    <value>Secrets</value>
-  </data>
-  <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing" xml:space="preserve">
-    <value>Discovery and Load Balancing</value>
-  </data>
-  <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses" xml:space="preserve">
-    <value>Ingresses</value>
-  </data>
-  <data name="ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services" xml:space="preserve">
-    <value>Services</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads" xml:space="preserve">
-    <value>Workloads</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_CronJobs" xml:space="preserve">
-    <value>Cron Jobs</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_DaemonSets" xml:space="preserve">
-    <value>Daemon Sets</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_Deployments" xml:space="preserve">
-    <value>Deployments</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_Jobs" xml:space="preserve">
-    <value>Jobs</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_Pods" xml:space="preserve">
-    <value>Pods</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_ReplicaSets" xml:space="preserve">
-    <value>Replica sets</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_ReplicationControllers" xml:space="preserve">
-    <value>Replication Controllers</value>
-  </data>
-  <data name="ClusterMasterViewModel_Workloads_StatefulSets" xml:space="preserve">
-    <value>Stateful Sets</value>
-  </data>
   <data name="ClusterNotFound_Message" xml:space="preserve">
     <value>We cannot find the selected cluster, it may be deleted. Please select another cluster.</value>
   </data>
@@ -285,41 +237,47 @@
   <data name="ClustersPage_ViewToggle_ToolbarItem" xml:space="preserve">
     <value>Toggle view</value>
   </data>
+  <data name="ConfigAndStorage" xml:space="preserve">
+    <value>Config and Storage</value>
+  </data>
+  <data name="ConfigMaps" xml:space="preserve">
+    <value>Config Maps</value>
+  </data>
   <data name="ConfigMapsPage_NoConfigMapsMessage" xml:space="preserve">
     <value>There are no config maps.</value>
   </data>
-  <data name="ConfigMapsPage_Title" xml:space="preserve">
-    <value>Config Maps</value>
+  <data name="CronJobs" xml:space="preserve">
+    <value>Cron Jobs</value>
   </data>
   <data name="CronJobsPage_NoCronJobsMessage" xml:space="preserve">
     <value>There are no cron jobs.</value>
   </data>
-  <data name="CronJobsPage_Title" xml:space="preserve">
-    <value>Cron Jobs</value>
+  <data name="DaemonSets" xml:space="preserve">
+    <value>Daemon Sets</value>
   </data>
   <data name="DaemonSetsPage_NoDaemonSetsMessage" xml:space="preserve">
     <value>There are no daemon sets.</value>
   </data>
-  <data name="DaemonSetsPage_Title" xml:space="preserve">
-    <value>Daemon Sets</value>
-  </data>
-  <data name="DeploymentsPage_Title" xml:space="preserve">
+  <data name="Deployments" xml:space="preserve">
     <value>Deployments</value>
   </data>
   <data name="Deployments_NoDeploymentsMessage" xml:space="preserve">
     <value>There are no deployments.</value>
   </data>
+  <data name="DiscoveryAndLoadBalancing" xml:space="preserve">
+    <value>Discovery and Load Balancing</value>
+  </data>
+  <data name="Ingresses" xml:space="preserve">
+    <value>Ingresses</value>
+  </data>
   <data name="IngressesPage_NoIngressesMessage" xml:space="preserve">
     <value>There are no ingresses.</value>
   </data>
-  <data name="IngressesPage_Title" xml:space="preserve">
-    <value>Ingresses</value>
+  <data name="Jobs" xml:space="preserve">
+    <value>Jobs</value>
   </data>
   <data name="JobsPage_NoJobsMessage" xml:space="preserve">
     <value>There are no jobs.</value>
-  </data>
-  <data name="JobsPage_Title" xml:space="preserve">
-    <value>Jobs</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>We are having connectivity issues doing that right now. Please try again.</value>
@@ -330,46 +288,52 @@
   <data name="OkAlertText" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="PersistentVolumeClaims" xml:space="preserve">
+    <value>Persistent Volume Claims</value>
+  </data>
   <data name="PersistentVolumeClaimsPage_NoServicesMessage" xml:space="preserve">
     <value>There are no persistent volume claims.</value>
   </data>
-  <data name="PersistentVolumeClaimsPage_Title" xml:space="preserve">
-    <value>Persistent Volume Claims</value>
+  <data name="Pods" xml:space="preserve">
+    <value>Pods</value>
   </data>
   <data name="PodsPage_NoPodsMessage" xml:space="preserve">
     <value>There are no pods.</value>
   </data>
-  <data name="PodsPage_Title" xml:space="preserve">
-    <value>Pods</value>
-  </data>
-  <data name="ReplicaSetsPage_Title" xml:space="preserve">
+  <data name="ReplicaSets" xml:space="preserve">
     <value>Replica sets</value>
   </data>
   <data name="ReplicaSets_NoReplicaSetsMessage" xml:space="preserve">
     <value>There are no replica sets.</value>
   </data>
+  <data name="ReplicationControllers" xml:space="preserve">
+    <value>Replication Controllers</value>
+  </data>
   <data name="ReplicationControllersPage_NoReplicationControllersMessage" xml:space="preserve">
     <value>There are no replication controllers.</value>
   </data>
-  <data name="ReplicationControllersPage_Title" xml:space="preserve">
-    <value>Replication Controllers</value>
+  <data name="Secrets" xml:space="preserve">
+    <value>Secrets</value>
   </data>
   <data name="SecretsPage_NoSecretsMessage" xml:space="preserve">
     <value>There are no secrets.</value>
   </data>
-  <data name="SecretsPage_Title" xml:space="preserve">
-    <value>Secrets</value>
+  <data name="Services" xml:space="preserve">
+    <value>Services</value>
   </data>
   <data name="ServicesPage_NoServicesMessage" xml:space="preserve">
     <value>There are no services.</value>
   </data>
-  <data name="ServicesPage_Title" xml:space="preserve">
-    <value>Services</value>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="StatefulSets" xml:space="preserve">
+    <value>Stateful Sets</value>
   </data>
   <data name="StatefulSetsPage_NoServicesMessage" xml:space="preserve">
     <value>There are no stateful sets.</value>
   </data>
-  <data name="StatefulSetsPage_Title" xml:space="preserve">
-    <value>Stateful Sets</value>
+  <data name="Workloads" xml:space="preserve">
+    <value>Workloads</value>
   </data>
 </root>

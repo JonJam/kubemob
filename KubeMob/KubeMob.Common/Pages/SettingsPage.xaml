@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.SettingsPage"
+             Title="{markupExtensions:Translate Settings}"
+             common:ViewModelLocator.AutoWireViewModel="true">
+
+    <TableView Intent="Settings">
+        <TableRoot>
+            <TableSection Title="{markupExtensions:Translate Workloads}">
+                <SwitchCell Text="{markupExtensions:Translate CronJobs}" On="{Binding ShowCronJobs, Mode=TwoWay}"/>
+                <SwitchCell Text="{markupExtensions:Translate DaemonSets}" On="{Binding ShowDaemonSets, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Deployments}" On="{Binding ShowDeployments, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Jobs}" On="{Binding ShowJobs, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Pods}" On="{Binding ShowPods, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate ReplicaSets}" On="{Binding ShowReplicaSets, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate ReplicationControllers}" On="{Binding ShowReplicationControllers, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate StatefulSets}" On="{Binding ShowStatefulSets, Mode=TwoWay}" />
+            </TableSection>
+            <TableSection Title="{markupExtensions:Translate DiscoveryAndLoadBalancing}">
+                <SwitchCell Text="{markupExtensions:Translate Ingresses}" On="{Binding ShowIngresses, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Services}" On="{Binding ShowServices, Mode=TwoWay}" />
+            </TableSection>
+            <TableSection Title="{markupExtensions:Translate ConfigAndStorage}">
+                <SwitchCell Text="{markupExtensions:Translate ConfigMaps}" On="{Binding ShowConfigMaps, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate PersistentVolumeClaims}" On="{Binding ShowPersistentVolumeClaims, Mode=TwoWay}" />
+                <SwitchCell Text="{markupExtensions:Translate Secrets}" On="{Binding ShowSecrets, Mode=TwoWay}" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</base:ExtendedContentPage>

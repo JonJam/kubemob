@@ -6,7 +6,7 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.ReplicaSetsPage"
-             Title="{markupExtensions:Translate ReplicaSetsPage_Title}"
+             Title="{markupExtensions:Translate ReplicaSets}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
     <!--TODO Reduce XAML duplication for list pages-->

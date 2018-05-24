@@ -6,7 +6,8 @@
                   xmlns:md="clr-namespace:KubeMob.Common.Pages.MasterDetail;assembly=KubeMob.Common"
                   xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                   x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterDetailPage"
-                  common:ViewModelLocator.AutoWireViewModel="True">
+                  common:ViewModelLocator.AutoWireViewModel="True"
+                  IsPresented="{Binding ShowMaster, Mode=TwoWay}">
 
     <MasterDetailPage.Master>
         <md:ClusterMasterPage 

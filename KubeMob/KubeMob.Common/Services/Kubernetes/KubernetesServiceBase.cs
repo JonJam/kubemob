@@ -9,11 +9,14 @@ using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Model;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes
 {
+    [Preserve(AllMembers = true)]
     public abstract class KubernetesServiceBase : IKubernetesService
     {
         private const string AllNamespace = "all";
@@ -28,18 +31,189 @@ namespace KubeMob.Common.Services.Kubernetes
         };
 
         private readonly IAppSettings appSettings;
+        private readonly IPubSubService pubSubService;
         private readonly IEnumerable<IAccountManager> accountManagers;
 
-        [Preserve]
         protected KubernetesServiceBase(
             IAppSettings appSettings,
+            IPubSubService pubSubService,
             IEnumerable<IAccountManager> accountManagers)
         {
             this.appSettings = appSettings;
+            this.pubSubService = pubSubService;
             this.accountManagers = accountManagers;
 
             // TODO This will need to be re-created when the user changes their selected cluster.
             this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
+        }
+
+        public bool ShowCronJobs
+        {
+            get => this.appSettings.ShowCronJobs;
+            set
+            {
+                this.appSettings.ShowCronJobs = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowCronJobs));
+            }
+        }
+
+        public bool ShowDaemonSets
+        {
+            get => this.appSettings.ShowDaemonSets;
+            set
+            {
+                this.appSettings.ShowDaemonSets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowDaemonSets));
+            }
+        }
+
+        public bool ShowDeployments
+        {
+            get => this.appSettings.ShowDeployments;
+            set
+            {
+                this.appSettings.ShowDeployments = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowDeployments));
+            }
+        }
+
+        public bool ShowJobs
+        {
+            get => this.appSettings.ShowJobs;
+            set
+            {
+                this.appSettings.ShowJobs = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowJobs));
+            }
+        }
+
+        public bool ShowPods
+        {
+            get => this.appSettings.ShowPods;
+            set
+            {
+                this.appSettings.ShowPods = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowPods));
+            }
+        }
+
+        public bool ShowReplicaSets
+        {
+            get => this.appSettings.ShowReplicaSets;
+            set
+            {
+                this.appSettings.ShowReplicaSets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowReplicaSets));
+            }
+        }
+
+        public bool ShowReplicationControllers
+        {
+            get => this.appSettings.ShowReplicationControllers;
+            set
+            {
+                this.appSettings.ShowReplicationControllers = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowReplicationControllers));
+            }
+        }
+
+        public bool ShowStatefulSets
+        {
+            get => this.appSettings.ShowStatefulSets;
+            set
+            {
+                this.appSettings.ShowStatefulSets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowStatefulSets));
+            }
+        }
+
+        public bool ShowIngresses
+        {
+            get => this.appSettings.ShowIngresses;
+            set
+            {
+                this.appSettings.ShowIngresses = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowIngresses));
+            }
+        }
+
+        public bool ShowServices
+        {
+            get => this.appSettings.ShowServices;
+            set
+            {
+                this.appSettings.ShowServices = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowServices));
+            }
+        }
+
+        public bool ShowConfigMaps
+        {
+            get => this.appSettings.ShowConfigMaps;
+            set
+            {
+                this.appSettings.ShowConfigMaps = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowConfigMaps));
+            }
+        }
+
+        public bool ShowPersistentVolumeClaims
+        {
+            get => this.appSettings.ShowPersistentVolumeClaims;
+            set
+            {
+                this.appSettings.ShowPersistentVolumeClaims = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowPersistentVolumeClaims));
+            }
+        }
+
+        public bool ShowSecrets
+        {
+            get => this.appSettings.ShowSecrets;
+            set
+            {
+                this.appSettings.ShowSecrets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowSecrets));
+            }
         }
 
         protected Lazy<Task<IKubernetes>> Client

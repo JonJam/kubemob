@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -41,6 +42,9 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
         private const string AdalTenantDoesntExistServiceErrorCode = "90002";
         private const int AdalRequestTimeoutStatusCode = 408;
 
+        private static readonly Uri AzureHelpLink = new Uri(
+            "https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal");
+
         private readonly IAppSettings appSettings;
 
         [Preserve]
@@ -76,7 +80,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             get;
         }
 
-        public void LaunchHelp() => Device.OpenUri(this.appSettings.AzureHelpLink);
+        public void LaunchHelp() => Device.OpenUri(AzureAccountManager.AzureHelpLink);
 
         public void SetSelectedCluster(Cluster cluster) => this.appSettings.SelectedCluster = cluster;
 

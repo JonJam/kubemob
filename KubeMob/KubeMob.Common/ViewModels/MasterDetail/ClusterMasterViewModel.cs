@@ -1,8 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,103 +15,213 @@ namespace KubeMob.Common.ViewModels.MasterDetail
     [Preserve(AllMembers = true)]
     public class ClusterMasterViewModel : ViewModelBase
     {
-        private readonly NamespaceSelectorViewModel namespaceSelectorViewModel;
+        private readonly IKubernetesService kubernetesService;
+        private readonly INavigationService navigationService;
+
+        private ICommand toggleShowMasterCommand;
+        private IList<Namespace> namespaces;
+        private Namespace selectedNamespace;
 
         public ClusterMasterViewModel(
+            IKubernetesService kubernetesService,
             INavigationService navigationService,
-            NamespaceSelectorViewModel namespaceSelectorViewModel)
+            IPubSubService pubSubService)
         {
-            this.namespaceSelectorViewModel = namespaceSelectorViewModel;
+            this.kubernetesService = kubernetesService;
+            this.navigationService = navigationService;
 
-            this.MenuItemSelected = new Command(ClusterMasterViewModel.OnMenuItemSelected);
+            pubSubService.SubscribeToResourceListingSettingChanged<IKubernetesService>(
+                this,
+                this.HandleResourceListingSettingChanged);
+        }
 
-            this.MenuItems = new List<MenuItemGroup>(new[]
+        public ICommand NavigateToCronJobsCommand => new Command(async () =>
             {
-                new MenuItemGroup(string.Empty)
-                {
-                    this.namespaceSelectorViewModel
-                },
-
-                new MenuItemGroup(AppResources.ClusterMasterViewModel_Workloads)
-                {
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_CronJobs,
-                        new Command(async () => await navigationService.NavigateToCronJobsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_DaemonSets,
-                        new Command(async () => await navigationService.NavigateToDaemonSetsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_Deployments,
-                        new Command(async () => await navigationService.NavigateToDeploymentsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_Jobs,
-                        new Command(async () => await navigationService.NavigateToJobsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_Pods,
-                        new Command(async () => await navigationService.NavigateToPodsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_ReplicaSets,
-                        new Command(async () => await navigationService.NavigateToReplicaSetsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_ReplicationControllers,
-                        new Command(async () => await navigationService.NavigateToReplicationControllersPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_Workloads_StatefulSets,
-                        new Command(async () => await navigationService.NavigateToStatefulSetsPage()))
-                },
-
-                new MenuItemGroup(AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing)
-                {
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses,
-                        new Command(async () => await navigationService.NavigateToIngressesPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services,
-                        new Command(async () => await navigationService.NavigateToServicesPage()))
-                },
-
-                new MenuItemGroup(AppResources.ClusterMasterViewModel_ConfigAndStorage)
-                {
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_ConfigAndStorage_ConfigMaps,
-                        new Command(async () => await navigationService.NavigateToConfigMapsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims,
-                        new Command(async () => await navigationService.NavigateToPersistentVolumeClaimsPage())),
-
-                    new ObjectTypeMenuItemViewModel(
-                        AppResources.ClusterMasterViewModel_ConfigAndStorage_Secrets,
-                        new Command(async () => await navigationService.NavigateToSecretsPage()))
-                }
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToCronJobsPage();
             });
-        }
 
-        public ICommand MenuItemSelected
-        {
-            get;
-        }
-
-        public List<MenuItemGroup> MenuItems
-        {
-            get;
-        }
-
-        public override Task Initialize(object navigationData) => this.namespaceSelectorViewModel.Initialize(navigationData);
-
-        private static void OnMenuItemSelected(object obj)
-        {
-            if (obj is ObjectTypeMenuItemViewModel menuItem)
+        public ICommand NavigateToDaemonSetsCommand =>
+            new Command(async () =>
             {
-                menuItem.Command.Execute(null);
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToDaemonSetsPage();
+            });
+
+        public ICommand NavigateToDeploymentsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToDeploymentsPage();
+            });
+
+        public ICommand NavigateToJobsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToJobsPage();
+            });
+
+        public ICommand NavigateToPodsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToPodsPage();
+            });
+
+        public ICommand NavigateToReplicaSetsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToReplicaSetsPage();
+            });
+
+        public ICommand NavigateToReplicationControllersCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToReplicationControllersPage();
+            });
+
+        public ICommand NavigateToStatefulSetsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToStatefulSetsPage();
+            });
+
+        public ICommand NavigateToIngressesCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToIngressesPage();
+            });
+
+        public ICommand NavigateToServicesCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToServicesPage();
+            });
+
+        public ICommand NavigateToConfigMapsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToConfigMapsPage();
+            });
+
+        public ICommand NavigateToPersistentVolumeClaimsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToPersistentVolumeClaimsPage();
+            });
+
+        public ICommand NavigateToSecretsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToSecretsPage();
+            });
+
+        public ICommand NavigateToSettingsCommand =>
+            new Command(async () =>
+            {
+                this.toggleShowMasterCommand.Execute(null);
+                await this.navigationService.NavigateToSettingsPage();
+            });
+
+        public IList<Namespace> Namespaces
+        {
+            get => this.namespaces;
+            private set => this.SetProperty(ref this.namespaces, value);
+        }
+
+        public Namespace SelectedNamespace
+        {
+            get => this.selectedNamespace;
+            set
+            {
+                if (this.SetProperty(ref this.selectedNamespace, value))
+                {
+                    this.kubernetesService.SetSelectedNamespace(this.selectedNamespace);
+                }
+            }
+        }
+
+        public bool ShowWorkloads => this.ShowCronJobs ||
+                                     this.ShowDaemonSets ||
+                                     this.ShowDeployments ||
+                                     this.ShowJobs ||
+                                     this.ShowReplicaSets ||
+                                     this.ShowReplicationControllers ||
+                                     this.ShowStatefulSets;
+
+        public bool ShowCronJobs => this.kubernetesService.ShowCronJobs;
+
+        public bool ShowDaemonSets => this.kubernetesService.ShowDaemonSets;
+
+        public bool ShowDeployments => this.kubernetesService.ShowDeployments;
+
+        public bool ShowJobs => this.kubernetesService.ShowJobs;
+
+        public bool ShowPods => this.kubernetesService.ShowPods;
+
+        public bool ShowReplicaSets => this.kubernetesService.ShowReplicaSets;
+
+        public bool ShowReplicationControllers => this.kubernetesService.ShowReplicationControllers;
+
+        public bool ShowStatefulSets => this.kubernetesService.ShowStatefulSets;
+
+        public bool ShowDiscoveryAndLoadBalancing => this.ShowIngresses ||
+                                     this.ShowServices;
+
+        public bool ShowIngresses => this.kubernetesService.ShowIngresses;
+
+        public bool ShowServices => this.kubernetesService.ShowServices;
+
+        public bool ShowConfigAndStorage => this.ShowConfigMaps ||
+                                            this.ShowPersistentVolumeClaims ||
+                                            this.ShowSecrets;
+
+        public bool ShowConfigMaps => this.kubernetesService.ShowConfigMaps;
+
+        public bool ShowPersistentVolumeClaims => this.kubernetesService.ShowPersistentVolumeClaims;
+
+        public bool ShowSecrets => this.kubernetesService.ShowSecrets;
+
+        public override async Task Initialize(object navigationData)
+        {
+            this.toggleShowMasterCommand = (ICommand)navigationData;
+
+            this.Namespaces = await this.kubernetesService.GetNamespaces();
+
+            // Avoiding set this again when initializing.
+            this.selectedNamespace = this.Namespaces.First(n => n.IsDefault);
+            this.NotifyPropertyChanged(() => this.SelectedNamespace);
+        }
+
+        private void HandleResourceListingSettingChanged(
+            IKubernetesService sender,
+            string settingName)
+        {
+            this.OnPropertyChanged(settingName);
+
+            switch (settingName)
+            {
+                case nameof(this.ShowIngresses):
+                case nameof(this.ShowServices):
+                    this.NotifyPropertyChanged(() => this.ShowDiscoveryAndLoadBalancing);
+                    break;
+                case nameof(this.ShowConfigMaps):
+                case nameof(this.ShowPersistentVolumeClaims):
+                case nameof(this.ShowSecrets):
+                    this.NotifyPropertyChanged(() => this.ShowConfigAndStorage);
+                    break;
+                default:
+                    this.NotifyPropertyChanged(() => this.ShowWorkloads);
+                    break;
             }
         }
     }

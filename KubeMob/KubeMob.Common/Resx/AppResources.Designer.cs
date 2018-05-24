@@ -340,150 +340,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Config and Storage.
-        /// </summary>
-        internal static string ClusterMasterViewModel_ConfigAndStorage {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Config Maps.
-        /// </summary>
-        internal static string ClusterMasterViewModel_ConfigAndStorage_ConfigMaps {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage_ConfigMaps", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Persistent Volume Claims.
-        /// </summary>
-        internal static string ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage_PersistentVolumeClaims", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Secrets.
-        /// </summary>
-        internal static string ClusterMasterViewModel_ConfigAndStorage_Secrets {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_ConfigAndStorage_Secrets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discovery and Load Balancing.
-        /// </summary>
-        internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ingresses.
-        /// </summary>
-        internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing_Ingresses", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Services.
-        /// </summary>
-        internal static string ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_DiscoveryAndLoadBalancing_Services", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Workloads.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cron Jobs.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_CronJobs {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_CronJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Daemon Sets.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_DaemonSets {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_DaemonSets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deployments.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_Deployments {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Deployments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Jobs.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_Jobs {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Jobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pods.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_Pods {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_Pods", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Replica sets.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_ReplicaSets {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_ReplicaSets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Replication Controllers.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_ReplicationControllers {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_ReplicationControllers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stateful Sets.
-        /// </summary>
-        internal static string ClusterMasterViewModel_Workloads_StatefulSets {
-            get {
-                return ResourceManager.GetString("ClusterMasterViewModel_Workloads_StatefulSets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to We cannot find the selected cluster, it may be deleted. Please select another cluster..
         /// </summary>
         internal static string ClusterNotFound_Message {
@@ -565,6 +421,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Config and Storage.
+        /// </summary>
+        internal static string ConfigAndStorage {
+            get {
+                return ResourceManager.GetString("ConfigAndStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Config Maps.
+        /// </summary>
+        internal static string ConfigMaps {
+            get {
+                return ResourceManager.GetString("ConfigMaps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no config maps..
         /// </summary>
         internal static string ConfigMapsPage_NoConfigMapsMessage {
@@ -574,11 +448,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Config Maps.
+        ///   Looks up a localized string similar to Cron Jobs.
         /// </summary>
-        internal static string ConfigMapsPage_Title {
+        internal static string CronJobs {
             get {
-                return ResourceManager.GetString("ConfigMapsPage_Title", resourceCulture);
+                return ResourceManager.GetString("CronJobs", resourceCulture);
             }
         }
         
@@ -592,11 +466,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cron Jobs.
+        ///   Looks up a localized string similar to Daemon Sets.
         /// </summary>
-        internal static string CronJobsPage_Title {
+        internal static string DaemonSets {
             get {
-                return ResourceManager.GetString("CronJobsPage_Title", resourceCulture);
+                return ResourceManager.GetString("DaemonSets", resourceCulture);
             }
         }
         
@@ -610,11 +484,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daemon Sets.
+        ///   Looks up a localized string similar to Deployments.
         /// </summary>
-        internal static string DaemonSetsPage_Title {
+        internal static string Deployments {
             get {
-                return ResourceManager.GetString("DaemonSetsPage_Title", resourceCulture);
+                return ResourceManager.GetString("Deployments", resourceCulture);
             }
         }
         
@@ -628,11 +502,20 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deployments.
+        ///   Looks up a localized string similar to Discovery and Load Balancing.
         /// </summary>
-        internal static string DeploymentsPage_Title {
+        internal static string DiscoveryAndLoadBalancing {
             get {
-                return ResourceManager.GetString("DeploymentsPage_Title", resourceCulture);
+                return ResourceManager.GetString("DiscoveryAndLoadBalancing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingresses.
+        /// </summary>
+        internal static string Ingresses {
+            get {
+                return ResourceManager.GetString("Ingresses", resourceCulture);
             }
         }
         
@@ -646,11 +529,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ingresses.
+        ///   Looks up a localized string similar to Jobs.
         /// </summary>
-        internal static string IngressesPage_Title {
+        internal static string Jobs {
             get {
-                return ResourceManager.GetString("IngressesPage_Title", resourceCulture);
+                return ResourceManager.GetString("Jobs", resourceCulture);
             }
         }
         
@@ -660,15 +543,6 @@ namespace KubeMob.Common.Resx {
         internal static string JobsPage_NoJobsMessage {
             get {
                 return ResourceManager.GetString("JobsPage_NoJobsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Jobs.
-        /// </summary>
-        internal static string JobsPage_Title {
-            get {
-                return ResourceManager.GetString("JobsPage_Title", resourceCulture);
             }
         }
         
@@ -700,6 +574,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Persistent Volume Claims.
+        /// </summary>
+        internal static string PersistentVolumeClaims {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no persistent volume claims..
         /// </summary>
         internal static string PersistentVolumeClaimsPage_NoServicesMessage {
@@ -709,11 +592,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Persistent Volume Claims.
+        ///   Looks up a localized string similar to Pods.
         /// </summary>
-        internal static string PersistentVolumeClaimsPage_Title {
+        internal static string Pods {
             get {
-                return ResourceManager.GetString("PersistentVolumeClaimsPage_Title", resourceCulture);
+                return ResourceManager.GetString("Pods", resourceCulture);
             }
         }
         
@@ -727,11 +610,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pods.
+        ///   Looks up a localized string similar to Replica sets.
         /// </summary>
-        internal static string PodsPage_Title {
+        internal static string ReplicaSets {
             get {
-                return ResourceManager.GetString("PodsPage_Title", resourceCulture);
+                return ResourceManager.GetString("ReplicaSets", resourceCulture);
             }
         }
         
@@ -745,11 +628,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replica sets.
+        ///   Looks up a localized string similar to Replication Controllers.
         /// </summary>
-        internal static string ReplicaSetsPage_Title {
+        internal static string ReplicationControllers {
             get {
-                return ResourceManager.GetString("ReplicaSetsPage_Title", resourceCulture);
+                return ResourceManager.GetString("ReplicationControllers", resourceCulture);
             }
         }
         
@@ -763,11 +646,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replication Controllers.
+        ///   Looks up a localized string similar to Secrets.
         /// </summary>
-        internal static string ReplicationControllersPage_Title {
+        internal static string Secrets {
             get {
-                return ResourceManager.GetString("ReplicationControllersPage_Title", resourceCulture);
+                return ResourceManager.GetString("Secrets", resourceCulture);
             }
         }
         
@@ -781,11 +664,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Secrets.
+        ///   Looks up a localized string similar to Services.
         /// </summary>
-        internal static string SecretsPage_Title {
+        internal static string Services {
             get {
-                return ResourceManager.GetString("SecretsPage_Title", resourceCulture);
+                return ResourceManager.GetString("Services", resourceCulture);
             }
         }
         
@@ -799,11 +682,20 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Services.
+        ///   Looks up a localized string similar to Settings.
         /// </summary>
-        internal static string ServicesPage_Title {
+        internal static string Settings {
             get {
-                return ResourceManager.GetString("ServicesPage_Title", resourceCulture);
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stateful Sets.
+        /// </summary>
+        internal static string StatefulSets {
+            get {
+                return ResourceManager.GetString("StatefulSets", resourceCulture);
             }
         }
         
@@ -817,11 +709,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stateful Sets.
+        ///   Looks up a localized string similar to Workloads.
         /// </summary>
-        internal static string StatefulSetsPage_Title {
+        internal static string Workloads {
             get {
-                return ResourceManager.GetString("StatefulSetsPage_Title", resourceCulture);
+                return ResourceManager.GetString("Workloads", resourceCulture);
             }
         }
     }

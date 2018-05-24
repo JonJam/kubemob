@@ -10,101 +10,147 @@
              common:ViewModelLocator.AutoWireViewModel="False"
              Title="☰">
 
-    <base:ExtendedContentPage.Resources>
-        <ResourceDictionary>
-            <DataTemplate x:Key="NamespaceSelectorDataTemplate">
-                <ViewCell>
-                    <StackLayout
-                        CompressedLayout.IsHeadless="true"
-                        Padding="15,10"
-                        HorizontalOptions="FillAndExpand">
-                        <Label 
-                            Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>
-                        <Picker
-                            x:Name="NamespacePicker"
-                            ItemsSource="{Binding Namespaces}"
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
-                            Margin="10,0,0,0">
-                        </Picker>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
+    <ScrollView
+        CompressedLayout.IsHeadless="true">
+        <StackLayout
+            CompressedLayout.IsHeadless="true">
 
-            <DataTemplate x:Key="GroupHeaderTemplate">
-                <ViewCell>
-                    <StackLayout
-                        CompressedLayout.IsHeadless="true"
-                        Padding="15,10"
-                        HorizontalOptions="FillAndExpand">
-                        <Label 
-                            Text="{Binding Title}"
-                            FontSize="24"
-                            LineBreakMode="TailTruncation"/>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
+            <StackLayout
+                CompressedLayout.IsHeadless="true"
+                Padding="15,10"
+                HorizontalOptions="FillAndExpand">
+                <Label 
+                    Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>
+                <Picker
+                    x:Name="NamespacePicker"
+                    ItemsSource="{Binding Namespaces}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
+                    Margin="10,0,0,0">
+                </Picker>
+            </StackLayout>
 
-            <DataTemplate x:Key="ObjectTypeDataTemplate">
-                <ViewCell>
-                    <StackLayout
-                        CompressedLayout.IsHeadless="true"
-                        HorizontalOptions="FillAndExpand"
-                        Padding="15,10">
-                        <Label 
-                            Text="{Binding Title}"
-                            FontSize="15"
-                            Margin="10,0,0,0">
-                        </Label>
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
+            <!-- Workloads -->
+            <StackLayout
+                CompressedLayout.IsHeadless="true"
+                IsVisible="{Binding ShowWorkloads}">
+                <views:GroupMenuItem
+                Title="{extensions:Translate Workloads}"/>
 
-            <views:ClusterMasterDataTemplateSelector
-                x:Key="ClusterMasterDataTemplateSelector"
-                NamespaceSelectorDataTemplate="{StaticResource NamespaceSelectorDataTemplate}"
-                ObjectTypeDataTemplate="{StaticResource ObjectTypeDataTemplate}" />
-        </ResourceDictionary>
-    </base:ExtendedContentPage.Resources>
+                <views:TappableView
+                Command="{Binding NavigateToCronJobsCommand}"
+                IsVisible="{Binding ShowCronJobs}">
+                    <views:MenuItem
+                    Title="{extensions:Translate CronJobs}"/>
+                </views:TappableView>
 
-    <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->
-    <ListView
-        x:Name="MenuItems"
-        ItemsSource="{Binding MenuItems}"
-        GroupDisplayBinding="{Binding Title}"
-        IsGroupingEnabled="True"
-        SeparatorVisibility="None"
-        HasUnevenRows="true"
-        CachingStrategy="RecycleElement"
-        ItemTemplate="{StaticResource ClusterMasterDataTemplateSelector}"
-        GroupHeaderTemplate="{StaticResource GroupHeaderTemplate}">
-        <ListView.Behaviors>
-            <behaviors:EventToCommandBehavior
-                EventName="ItemTapped"
-                Command="{Binding MenuItemSelected}"
-                EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-        </ListView.Behaviors>
-        <ListView.Header>
-            <Grid 
-                BackgroundColor="#03A9F4"
-                CompressedLayout.IsHeadless="true">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="10"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="80"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="10"/>
-                </Grid.RowDefinitions>
-                <Label
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Text="{extensions:Translate AppName}"
-                    Style="{DynamicResource SubtitleStyle}"/>
-            </Grid>
-        </ListView.Header>
-    </ListView>
+                <views:TappableView
+                Command="{Binding NavigateToDaemonSetsCommand}"
+                IsVisible="{Binding ShowDaemonSets}">
+                    <views:MenuItem
+                    Title="{extensions:Translate DaemonSets}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToDeploymentsCommand}"
+                IsVisible="{Binding ShowDeployments}">
+                    <views:MenuItem
+                    Title="{extensions:Translate Deployments}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToJobsCommand}"
+                IsVisible="{Binding ShowJobs}">
+                    <views:MenuItem
+                    Title="{extensions:Translate Jobs}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToPodsCommand}"
+                IsVisible="{Binding ShowPods}">
+                    <views:MenuItem
+                    Title="{extensions:Translate Pods}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToReplicaSetsCommand}"
+                IsVisible="{Binding ShowReplicaSets}">
+                    <views:MenuItem
+                    Title="{extensions:Translate ReplicaSets}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToReplicationControllersCommand}"
+                IsVisible="{Binding ShowReplicationControllers}">
+                    <views:MenuItem
+                    Title="{extensions:Translate ReplicationControllers}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToStatefulSetsCommand}"
+                IsVisible="{Binding ShowStatefulSets}">
+                    <views:MenuItem
+                    Title="{extensions:Translate StatefulSets}"/>
+                </views:TappableView>
+            </StackLayout>
+
+            <!-- Discovery and load balancing -->
+            <StackLayout
+                CompressedLayout.IsHeadless="true"
+                IsVisible="{Binding ShowDiscoveryAndLoadBalancing}">
+                <views:GroupMenuItem
+                Title="{extensions:Translate DiscoveryAndLoadBalancing}"/>
+
+                <views:TappableView
+                Command="{Binding NavigateToIngressesCommand}"
+                IsVisible="{Binding ShowIngresses}">
+                    <views:MenuItem
+                    Title="{extensions:Translate Ingresses}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToServicesCommand}"
+                IsVisible="{Binding ShowServices}">
+                    <views:MenuItem
+                    Title="{extensions:Translate Services}"/>
+                </views:TappableView>
+            </StackLayout>
+
+            <!-- Config and storage -->
+            <StackLayout
+                CompressedLayout.IsHeadless="true"
+                IsVisible="{Binding ShowConfigAndStorage}">
+                <views:GroupMenuItem
+                Title="{extensions:Translate ConfigAndStorage}"/>
+
+                <views:TappableView
+                Command="{Binding NavigateToConfigMapsCommand}"
+                IsVisible="{Binding ShowConfigMaps}">
+                    <views:MenuItem
+                    Title="{extensions:Translate ConfigMaps}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToPersistentVolumeClaimsCommand}"
+                IsVisible="{Binding ShowPersistentVolumeClaims}">
+                    <views:MenuItem
+                    Title="{extensions:Translate PersistentVolumeClaims}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                Command="{Binding NavigateToSecretsCommand}"
+                IsVisible="{Binding ShowSecrets}">
+                    <views:MenuItem
+                    Title="{extensions:Translate Secrets}"/>
+                </views:TappableView>
+            </StackLayout>
+
+            <!-- Other -->
+            <views:TappableView
+                Command="{Binding NavigateToSettingsCommand}">
+                <views:GroupMenuItem
+                    Title="{extensions:Translate Settings}"/>
+            </views:TappableView>
+        </StackLayout>
+    </ScrollView>
 </base:ExtendedContentPage>

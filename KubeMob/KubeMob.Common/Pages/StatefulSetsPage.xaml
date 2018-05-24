@@ -6,7 +6,7 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.StatefulSetsPage"
-             Title="{markupExtensions:Translate StatefulSetsPage_Title}"
+             Title="{markupExtensions:Translate StatefulSets}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
     <!--TODO Reduce XAML duplication for list pages-->

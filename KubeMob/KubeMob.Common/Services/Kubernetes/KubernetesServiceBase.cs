@@ -46,7 +46,7 @@ namespace KubeMob.Common.Services.Kubernetes
             // TODO This will need to be re-created when the user changes their selected cluster.
             this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
         }
-//TODO create props
+
         public bool ShowCronJobs
         {
             get => this.appSettings.ShowCronJobs;
@@ -57,6 +57,162 @@ namespace KubeMob.Common.Services.Kubernetes
                 this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
                     this,
                     nameof(this.ShowCronJobs));
+            }
+        }
+
+        public bool ShowDaemonSets
+        {
+            get => this.appSettings.ShowDaemonSets;
+            set
+            {
+                this.appSettings.ShowDaemonSets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowDaemonSets));
+            }
+        }
+
+        public bool ShowDeployments
+        {
+            get => this.appSettings.ShowDeployments;
+            set
+            {
+                this.appSettings.ShowDeployments = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowDeployments));
+            }
+        }
+
+        public bool ShowJobs
+        {
+            get => this.appSettings.ShowJobs;
+            set
+            {
+                this.appSettings.ShowJobs = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowJobs));
+            }
+        }
+
+        public bool ShowPods
+        {
+            get => this.appSettings.ShowPods;
+            set
+            {
+                this.appSettings.ShowPods = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowPods));
+            }
+        }
+
+        public bool ShowReplicaSets
+        {
+            get => this.appSettings.ShowReplicaSets;
+            set
+            {
+                this.appSettings.ShowReplicaSets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowReplicaSets));
+            }
+        }
+
+        public bool ShowReplicationControllers
+        {
+            get => this.appSettings.ShowReplicationControllers;
+            set
+            {
+                this.appSettings.ShowReplicationControllers = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowReplicationControllers));
+            }
+        }
+
+        public bool ShowStatefulSets
+        {
+            get => this.appSettings.ShowStatefulSets;
+            set
+            {
+                this.appSettings.ShowStatefulSets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowStatefulSets));
+            }
+        }
+
+        public bool ShowIngresses
+        {
+            get => this.appSettings.ShowIngresses;
+            set
+            {
+                this.appSettings.ShowIngresses = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowIngresses));
+            }
+        }
+
+        public bool ShowServices
+        {
+            get => this.appSettings.ShowServices;
+            set
+            {
+                this.appSettings.ShowServices = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowServices));
+            }
+        }
+
+        public bool ShowConfigMaps
+        {
+            get => this.appSettings.ShowConfigMaps;
+            set
+            {
+                this.appSettings.ShowConfigMaps = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowConfigMaps));
+            }
+        }
+
+        public bool ShowPersistentVolumeClaims
+        {
+            get => this.appSettings.ShowPersistentVolumeClaims;
+            set
+            {
+                this.appSettings.ShowPersistentVolumeClaims = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowPersistentVolumeClaims));
+            }
+        }
+
+        public bool ShowSecrets
+        {
+            get => this.appSettings.ShowSecrets;
+            set
+            {
+                this.appSettings.ShowSecrets = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowSecrets));
             }
         }
 

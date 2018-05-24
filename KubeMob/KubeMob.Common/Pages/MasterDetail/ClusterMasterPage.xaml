@@ -30,95 +30,116 @@
             </StackLayout>
 
             <!-- Workloads -->
-            <views:GroupMenuItem
+            <StackLayout
+                IsVisible="{Binding ShowWorkloads}">
+                <views:GroupMenuItem
                 Title="{extensions:Translate Workloads}"/>
 
-            <views:TappableView
+                <views:TappableView
                 Command="{Binding NavigateToCronJobsCommand}"
                 IsVisible="{Binding ShowCronJobs}">
-                <views:MenuItem
+                    <views:MenuItem
                     Title="{extensions:Translate CronJobs}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToDaemonSetsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToDaemonSetsCommand}"
+                IsVisible="{Binding ShowDaemonSets}">
+                    <views:MenuItem
                     Title="{extensions:Translate DaemonSets}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToDeploymentsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToDeploymentsCommand}"
+                IsVisible="{Binding ShowDeployments}">
+                    <views:MenuItem
                     Title="{extensions:Translate Deployments}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToJobsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToJobsCommand}"
+                IsVisible="{Binding ShowJobs}">
+                    <views:MenuItem
                     Title="{extensions:Translate Jobs}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToPodsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToPodsCommand}"
+                IsVisible="{Binding ShowPods}">
+                    <views:MenuItem
                     Title="{extensions:Translate Pods}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToReplicaSetsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToReplicaSetsCommand}"
+                IsVisible="{Binding ShowReplicaSets}">
+                    <views:MenuItem
                     Title="{extensions:Translate ReplicaSets}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToReplicationControllersCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToReplicationControllersCommand}"
+                IsVisible="{Binding ShowReplicationControllers}">
+                    <views:MenuItem
                     Title="{extensions:Translate ReplicationControllers}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToStatefulSetsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToStatefulSetsCommand}"
+                IsVisible="{Binding ShowStatefulSets}">
+                    <views:MenuItem
                     Title="{extensions:Translate StatefulSets}"/>
-            </views:TappableView>
+                </views:TappableView>
+            </StackLayout>
 
             <!-- Discovery and load balancing -->
-            <views:GroupMenuItem
+            <StackLayout
+                IsVisible="{Binding ShowDiscoveryAndLoadBalancing}">
+                <views:GroupMenuItem
                 Title="{extensions:Translate DiscoveryAndLoadBalancing}"/>
 
-            <views:TappableView
-                Command="{Binding NavigateToIngressesCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToIngressesCommand}"
+                IsVisible="{Binding ShowIngresses}">
+                    <views:MenuItem
                     Title="{extensions:Translate Ingresses}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToServicesCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToServicesCommand}"
+                IsVisible="{Binding ShowServices}">
+                    <views:MenuItem
                     Title="{extensions:Translate Services}"/>
-            </views:TappableView>
+                </views:TappableView>
+            </StackLayout>
 
             <!-- Config and storage -->
-            <views:GroupMenuItem
+            <StackLayout
+                IsVisible="{Binding ShowConfigAndStorage}">
+                <views:GroupMenuItem
                 Title="{extensions:Translate ConfigAndStorage}"/>
 
-            <views:TappableView
-                Command="{Binding NavigateToConfigMapsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToConfigMapsCommand}"
+                IsVisible="{Binding ShowConfigMaps}">
+                    <views:MenuItem
                     Title="{extensions:Translate ConfigMaps}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToPersistentVolumeClaimsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToPersistentVolumeClaimsCommand}"
+                IsVisible="{Binding ShowPersistentVolumeClaims}">
+                    <views:MenuItem
                     Title="{extensions:Translate PersistentVolumeClaims}"/>
-            </views:TappableView>
+                </views:TappableView>
 
-            <views:TappableView
-                Command="{Binding NavigateToSecretsCommand}">
-                <views:MenuItem
+                <views:TappableView
+                Command="{Binding NavigateToSecretsCommand}"
+                IsVisible="{Binding ShowSecrets}">
+                    <views:MenuItem
                     Title="{extensions:Translate Secrets}"/>
-            </views:TappableView>
+                </views:TappableView>
+            </StackLayout>
 
             <!-- Other -->
             <views:TappableView

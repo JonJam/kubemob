@@ -46,7 +46,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             "https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal");
 
         private readonly IAppSettings appSettings;
-            
+
         [Preserve]
         public AzureAccountManager(IAppSettings appSettings)
         {

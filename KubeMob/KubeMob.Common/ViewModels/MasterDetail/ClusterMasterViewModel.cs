@@ -6,7 +6,6 @@ using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.PubSub;
-using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -41,9 +40,6 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                 this.toggleShowMasterCommand.Execute(null);
                 await this.navigationService.NavigateToCronJobsPage();
             });
-
-        // TODO Add props
-        public bool ShowCronJobs => this.kubernetesService.ShowCronJobs;
 
         public ICommand NavigateToDaemonSetsCommand =>
             new Command(async () =>
@@ -154,6 +150,47 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             }
         }
 
+        public bool ShowWorkloads => this.ShowCronJobs ||
+                                     this.ShowDaemonSets ||
+                                     this.ShowDeployments ||
+                                     this.ShowJobs ||
+                                     this.ShowReplicaSets ||
+                                     this.ShowReplicationControllers ||
+                                     this.ShowStatefulSets;
+
+        public bool ShowCronJobs => this.kubernetesService.ShowCronJobs;
+
+        public bool ShowDaemonSets => this.kubernetesService.ShowDaemonSets;
+
+        public bool ShowDeployments => this.kubernetesService.ShowDeployments;
+
+        public bool ShowJobs => this.kubernetesService.ShowJobs;
+
+        public bool ShowPods => this.kubernetesService.ShowPods;
+
+        public bool ShowReplicaSets => this.kubernetesService.ShowReplicaSets;
+
+        public bool ShowReplicationControllers => this.kubernetesService.ShowReplicationControllers;
+
+        public bool ShowStatefulSets => this.kubernetesService.ShowStatefulSets;
+
+        public bool ShowDiscoveryAndLoadBalancing => this.ShowIngresses ||
+                                     this.ShowServices;
+
+        public bool ShowIngresses => this.kubernetesService.ShowIngresses;
+
+        public bool ShowServices => this.kubernetesService.ShowServices;
+
+        public bool ShowConfigAndStorage => this.ShowConfigMaps ||
+                                            this.ShowPersistentVolumeClaims ||
+                                            this.ShowSecrets;
+
+        public bool ShowConfigMaps => this.kubernetesService.ShowConfigMaps;
+
+        public bool ShowPersistentVolumeClaims => this.kubernetesService.ShowPersistentVolumeClaims;
+
+        public bool ShowSecrets => this.kubernetesService.ShowSecrets;
+
         public override async Task Initialize(object navigationData)
         {
             this.toggleShowMasterCommand = (ICommand)navigationData;
@@ -169,10 +206,22 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             IKubernetesService sender,
             string settingName)
         {
-            // TODO add others
-            if (settingName == nameof(this.ShowCronJobs))
+            this.OnPropertyChanged(settingName);
+
+            switch (settingName)
             {
-                this.NotifyPropertyChanged(() => this.ShowCronJobs);
+                case nameof(this.ShowIngresses):
+                case nameof(this.ShowServices):
+                    this.NotifyPropertyChanged(() => this.ShowDiscoveryAndLoadBalancing);
+                    break;
+                case nameof(this.ShowConfigMaps):
+                case nameof(this.ShowPersistentVolumeClaims):
+                case nameof(this.ShowSecrets):
+                    this.NotifyPropertyChanged(() => this.ShowConfigAndStorage);
+                    break;
+                default:
+                    this.NotifyPropertyChanged(() => this.ShowWorkloads);
+                    break;
             }
         }
     }

@@ -62,6 +62,8 @@ namespace KubeMob.Common.Services.Navigation
             }
         }
 
+        public Task NavigateToClustersPage() => NavigationService.InternalNavigate(typeof(ClustersPage));
+
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 
         public Task NavigateToDeploymentsPage() => NavigationService.InternalNavigate(typeof(DeploymentsPage));
@@ -131,7 +133,16 @@ namespace KubeMob.Common.Services.Navigation
             switch (Application.Current.MainPage)
             {
                 case ClusterMasterDetailPage masterDetailPage:
-                    await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
+                    if (page is ClustersPage)
+                    {
+                        // Resetting the stack.
+                        Application.Current.MainPage = new ExtendedNavigationPage(page);
+                    }
+                    else
+                    {
+                        await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
+                    }
+
                     break;
                 case ExtendedNavigationPage navigationPage:
                     if (page is ClusterMasterDetailPage)

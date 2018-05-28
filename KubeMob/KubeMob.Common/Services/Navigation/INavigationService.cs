@@ -50,5 +50,7 @@ namespace KubeMob.Common.Services.Navigation
         Task RemoveBackStack();
 
         Task GoBackToClustersPage();
+
+        Task NavigateToClustersPage();
     }
 }

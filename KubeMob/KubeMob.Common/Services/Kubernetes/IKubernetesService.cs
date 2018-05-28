@@ -84,6 +84,8 @@ namespace KubeMob.Common.Services.Kubernetes
             set;
         }
 
+        void ResetClient();
+
         Task<IList<Namespace>> GetNamespaces();
 
         void SetSelectedNamespace(Namespace ns);

@@ -18,6 +18,8 @@ namespace KubeMob.Common.Services.AccountManagement
 
         void SetSelectedCluster(Cluster cluster);
 
+        void RemoveSelectedCluster();
+
         Task<byte[]> GetSelectedClusterKubeConfigContent();
     }
 }

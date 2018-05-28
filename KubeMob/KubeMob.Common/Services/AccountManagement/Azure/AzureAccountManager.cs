@@ -84,6 +84,8 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
 
         public void SetSelectedCluster(Cluster cluster) => this.appSettings.SelectedCluster = cluster;
 
+        public void RemoveSelectedCluster() => this.appSettings.SelectedCluster = null;
+
         public async Task<(bool isValid, string message)> TrySaveCredentials(
             CloudEnvironment cloudEnvironment,
             string tenantId,

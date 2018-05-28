@@ -11,7 +11,6 @@ using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
-using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes
@@ -43,8 +42,7 @@ namespace KubeMob.Common.Services.Kubernetes
             this.pubSubService = pubSubService;
             this.accountManagers = accountManagers;
 
-            // TODO This will need to be re-created when the user changes their selected cluster.
-            this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
+            this.ResetClient();
         }
 
         public bool ShowCronJobs
@@ -219,7 +217,10 @@ namespace KubeMob.Common.Services.Kubernetes
         protected Lazy<Task<IKubernetes>> Client
         {
             get;
+            private set;
         }
+
+        public void ResetClient() => this.Client = new Lazy<Task<IKubernetes>>(this.CreateClient);
 
         public async Task<IList<Namespace>> GetNamespaces()
         {

@@ -143,7 +143,10 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             get => this.selectedNamespace;
             set
             {
-                if (this.SetProperty(ref this.selectedNamespace, value))
+                // value is null when navigating away from page e.g. to Settings, so
+                // ignoring this so not to remove user set value.
+                if (this.SetProperty(ref this.selectedNamespace, value) &&
+                    value != null)
                 {
                     this.kubernetesService.SetSelectedNamespace(this.selectedNamespace);
                 }

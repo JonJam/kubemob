@@ -312,6 +312,9 @@
   <data name="ReplicationControllersPage_NoReplicationControllersMessage" xml:space="preserve">
     <value>There are no replication controllers.</value>
   </data>
+  <data name="ResourceListingPage_Title" xml:space="preserve">
+    <value>Resource Listing</value>
+  </data>
   <data name="Secrets" xml:space="preserve">
     <value>Secrets</value>
   </data>
@@ -326,6 +329,12 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="SettingsPage_ResourceListing" xml:space="preserve">
+    <value>Resource Listing</value>
+  </data>
+  <data name="SettingsPage_SwitchCluster" xml:space="preserve">
+    <value>Switch Cluster</value>
   </data>
   <data name="StatefulSets" xml:space="preserve">
     <value>Stateful Sets</value>

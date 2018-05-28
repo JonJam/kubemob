@@ -646,6 +646,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resource Listing.
+        /// </summary>
+        internal static string ResourceListingPage_Title {
+            get {
+                return ResourceManager.GetString("ResourceListingPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Secrets.
         /// </summary>
         internal static string Secrets {
@@ -687,6 +696,24 @@ namespace KubeMob.Common.Resx {
         internal static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource Listing.
+        /// </summary>
+        internal static string SettingsPage_ResourceListing {
+            get {
+                return ResourceManager.GetString("SettingsPage_ResourceListing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch Cluster.
+        /// </summary>
+        internal static string SettingsPage_SwitchCluster {
+            get {
+                return ResourceManager.GetString("SettingsPage_SwitchCluster", resourceCulture);
             }
         }
         

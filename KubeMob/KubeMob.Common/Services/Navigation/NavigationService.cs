@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.MasterDetail;
+using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -88,6 +89,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
 
         public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
+
+        public Task NavigateToResourceListingPage() => NavigationService.InternalNavigate(typeof(ResourceListingPage));
 
         public Task RemoveLastFromBackStack()
         {

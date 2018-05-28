@@ -14,6 +14,7 @@ using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using KubeMob.Common.ViewModels.MasterDetail;
+using KubeMob.Common.ViewModels.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -80,6 +81,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<StatefulSetsViewModel>();
 
             serviceCollection.AddTransient<SettingsViewModel>();
+            serviceCollection.AddTransient<ResourceListingViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);

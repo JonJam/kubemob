@@ -43,6 +43,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToSettingsPage();
 
+        Task NavigateToResourceListingPage();
+
         Task RemoveLastFromBackStack();
 
         Task RemoveBackStack();

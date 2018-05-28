@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.MasterDetail;
+using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -61,6 +62,8 @@ namespace KubeMob.Common.Services.Navigation
             }
         }
 
+        public Task NavigateToClustersPage() => NavigationService.InternalNavigate(typeof(ClustersPage));
+
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 
         public Task NavigateToDeploymentsPage() => NavigationService.InternalNavigate(typeof(DeploymentsPage));
@@ -88,6 +91,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
 
         public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
+
+        public Task NavigateToResourceListingPage() => NavigationService.InternalNavigate(typeof(ResourceListingPage));
 
         public Task RemoveLastFromBackStack()
         {
@@ -128,7 +133,16 @@ namespace KubeMob.Common.Services.Navigation
             switch (Application.Current.MainPage)
             {
                 case ClusterMasterDetailPage masterDetailPage:
-                    await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
+                    if (page is ClustersPage)
+                    {
+                        // Resetting the stack.
+                        Application.Current.MainPage = new ExtendedNavigationPage(page);
+                    }
+                    else
+                    {
+                        await ((ExtendedNavigationPage)masterDetailPage.Detail).PushAsync(page);
+                    }
+
                     break;
                 case ExtendedNavigationPage navigationPage:
                     if (page is ClusterMasterDetailPage)

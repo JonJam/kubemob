@@ -2,14 +2,14 @@ using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.Settings
 {
     [Preserve(AllMembers = true)]
-    public class SettingsViewModel : ViewModelBase
+    public class ResourceListingViewModel : ViewModelBase
     {
         private readonly IKubernetesService kubernetesService;
 
-        public SettingsViewModel(IKubernetesService kubernetesService)
+        public ResourceListingViewModel(IKubernetesService kubernetesService)
             => this.kubernetesService = kubernetesService;
 
         public bool ShowCronJobs

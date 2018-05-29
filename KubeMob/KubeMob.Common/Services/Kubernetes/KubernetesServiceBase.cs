@@ -295,6 +295,59 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListPodForAllNamespacesAsync()
                 : c.ListNamespacedPodAsync(kubernetesNamespace));
 
+            var first = podList.Items.First();
+
+            // TODO CPU??
+            // TODO Memory ??
+
+            // Details
+            var name = first.Metadata.Name;
+            var namespaceName = first.Metadata.NamespaceProperty;
+            var labels = first.Metadata.Labels;
+            var annotations = first.Metadata.Annotations;
+            // TODO Links ??
+
+            var creationTime = first.Metadata.CreationTimestamp;
+            var status = first.Status.Phase;
+            var qoc = first.Status.QosClass;
+
+            // Containers
+            var containers = first.Spec.Containers;
+
+            var containerName = first.Spec.Containers[0].Name;
+            var containerImageName = first.Spec.Containers[0].Image;
+            var containerImageEnvironmentVars = first.Spec.Containers[0].Env;
+
+            var containerImageEnvironmentVarName = first.Spec.Containers[0].Env[0].Name;
+            var containerImageEnvironmentVarValue = first.Spec.Containers[0].Env[1].Name;
+            // TODO Links ??
+
+            var containerImageCommands = first.Spec.Containers[0].Command;
+            // TODO Find one to see output
+
+            var containerImageArgs = first.Spec.Containers[0].Args;
+            // TODO Find one to see output
+            
+            // Conditions
+            var conditions = first.Status.Conditions;
+
+            var conditionType = first.Status.Conditions[0].Type;
+            var conditionStatus = first.Status.Conditions[0].Status;
+            var conditionLastHeartBeat = first.Status.Conditions[0].LastProbeTime;
+            var conditionLastHTransitionTime = first.Status.Conditions[0].LastTransitionTime;
+            var conditionReason = first.Status.Conditions[0].Reason;
+
+            // Created by
+            var ownerReferences = first.Metadata.OwnerReferences;
+            var ownerName = ownerReferences[0].Name;
+            var ownerKind = ownerReferences[0].Kind;
+
+            // TODO Events ??
+            var test = first.Status.ContainerStatuses;
+
+            // TODO PVC ??
+            //first.Spec.Volumes
+
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();

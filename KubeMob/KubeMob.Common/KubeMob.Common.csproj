@@ -39,6 +39,9 @@
     <Compile Update="Pages\ConfigMapsPage.xaml.cs">
       <DependentUpon>ConfigMapsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Pods\PodDetailPage.xaml.cs">
+      <DependentUpon>PodDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\SecretsPage.xaml.cs">
       <DependentUpon>SecretsPage.xaml</DependentUpon>
     </Compile>
@@ -75,7 +78,7 @@
     <Compile Update="Pages\DeploymentsPage.xaml.cs">
       <DependentUpon>DeploymentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\PodsPage.xaml.cs">
+    <Compile Update="Pages\Pods\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ClusterOverviewPage.xaml.cs">

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.MasterDetail;
+using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
@@ -65,6 +66,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToClustersPage() => NavigationService.InternalNavigate(typeof(ClustersPage));
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
+
+        public Task NavigateToPodDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(PodDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToDeploymentsPage() => NavigationService.InternalNavigate(typeof(DeploymentsPage));
 

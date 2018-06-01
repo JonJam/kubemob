@@ -3,12 +3,79 @@
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Pods.PodDetailPage"
+                          Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
-    
-    <!--
-    TODO Bind title
-    Title="{markupExtensions:Translate Pods}"
-    -->
 
+    <ScrollView        
+        CompressedLayout.IsHeadless="true">
+        <Grid
+        CompressedLayout.IsHeadless="true">
+
+            <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            >
+
+                <views:NoNetworkIndicator IsVisible="{Binding HasNoNetwork}"/>
+
+                <StackLayout
+                IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
+                CompressedLayout.IsHeadless="true">
+
+                    <!--TODO Populate-->
+                    <!--TODO Move to resource-->
+                    <Label
+                    Text="Name"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.Name}"/>
+
+                    <Label
+                    Text="Namespace"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.NamespaceName}"/>
+
+                    <Label
+                    Text="Creation Time"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.CreationTime}"/>
+
+                    <Label
+                    Text="Status"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.Status}"/>
+
+                    <Label
+                    Text="QoS Class"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.QualityOfServiceClass}"/>
+
+                    <Label
+                    Text="Node"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.NodeName}"/>
+
+                    <Label
+                    Text="IP Address"
+                    FontAttributes="Bold"/>
+                    <Label
+                    Text="{Binding Detail.PodIpAddress}"/>
+
+                </StackLayout>
+            </Grid>
+
+            <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+        </Grid>
+    </ScrollView>
 </base:ExtendedContentPage>

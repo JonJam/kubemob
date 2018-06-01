@@ -14,6 +14,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string creationTime,
             string status,
             string qualityOfServiceClass,
+            string nodeName,
+            string podIpAddress,
             IReadOnlyList<Container> containers,
             IReadOnlyList<PodCondition> conditions,
             IReadOnlyList<OwnerReference> owners)
@@ -25,6 +27,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.CreationTime = creationTime;
             this.Status = status;
             this.QualityOfServiceClass = qualityOfServiceClass;
+            this.NodeName = nodeName;
+            this.PodIpAddress = podIpAddress;
             this.Containers = containers;
             this.Conditions = conditions;
             this.Owners = owners;
@@ -62,6 +66,16 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         public string QualityOfServiceClass
+        {
+            get;
+        }
+
+        public string NodeName
+        {
+            get;
+        }
+
+        public string PodIpAddress
         {
             get;
         }

@@ -171,7 +171,6 @@ namespace KubeMob.Common
                         o.Name,
                         o.Kind));
 
-                // TODO expand this.
                 cfg.CreateMap<k8s.Models.V1Pod, PodDetail>()
                     .ConstructUsing((p) =>
                     {
@@ -193,6 +192,8 @@ namespace KubeMob.Common
                             creationTime,
                             p.Status.Phase,
                             p.Status.QosClass,
+                            p.Spec.NodeName,
+                            p.Status.PodIP,
                             containers.AsReadOnly(),
                             conditions.AsReadOnly(),
                             owners.AsReadOnly());

@@ -308,14 +308,12 @@ namespace KubeMob.Common.Services.Kubernetes
             // TODO Handle pod not being found ??
             V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
 
-            // TODO Configure map
-            // TODO Add network information
-            var podDetail = Mapper.Map<PodDetail>(pod);
+            PodDetail podDetail = Mapper.Map<PodDetail>(pod);
 
-            // TODO Add event information
-
-            // TODO PVC
-            //pod.Spec.Volumes
+            // TODO Event information ?? Requires another API call ListEventForAllNamespacesAsync and
+            // filtering e => e.InvolvedObject.Name == podDetail.Name. Also should only display "non-expired"
+            // events (logic needs working out).
+            // TODO PVC ?? Requires another API call from pod.Spec.Volumes.Where(v => v.PersistentVolumeClaim != null)
 
             return podDetail;
         }

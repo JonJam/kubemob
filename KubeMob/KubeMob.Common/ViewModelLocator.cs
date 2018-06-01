@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
 using AutoMapper;
@@ -125,9 +127,76 @@ namespace KubeMob.Common
                         p.Metadata.NamespaceProperty,
                         p.Status.Phase));
 
+                cfg.CreateMap<k8s.Models.V1EnvVar, EnvironmentVariable>()
+                    .ConstructUsing((e) => new EnvironmentVariable(
+                        e.Name,
+                        e.Value));
+
+                cfg.CreateMap<k8s.Models.V1Container, Container>()
+                    .ConstructUsing((c) =>
+                    {
+                        List<EnvironmentVariable> envVars = c.Env != null ? Mapper.Map<List<EnvironmentVariable>>(c.Env) : new List<EnvironmentVariable>();
+                        List<string> commands = c.Command?.ToList() ?? new List<string>();
+                        List<string> args = c.Args?.ToList() ?? new List<string>();
+
+                        return new Container(
+                            c.Name,
+                            c.Image,
+                            envVars.AsReadOnly(),
+                            commands.AsReadOnly(),
+                            args.AsReadOnly());
+                    });
+
+                cfg.CreateMap<k8s.Models.V1PodCondition, PodCondition>()
+                    .ConstructUsing((c) =>
+                    {
+                        string lastHeartbeatTime = c.LastProbeTime.HasValue
+                            ? $"{c.LastProbeTime.Value.ToUniversalTime():s} UTC"
+                            : string.Empty;
+
+                        string lastTransitionTime = c.LastTransitionTime.HasValue
+                            ? $"{c.LastTransitionTime.Value.ToUniversalTime():s} UTC"
+                            : string.Empty;
+
+                        return new PodCondition(
+                            c.Type,
+                            c.Status,
+                            lastHeartbeatTime,
+                            lastTransitionTime,
+                            c.Reason);
+                    });
+
+                cfg.CreateMap<k8s.Models.V1OwnerReference, OwnerReference>()
+                    .ConstructUsing((o) => new OwnerReference(
+                        o.Name,
+                        o.Kind));
+
                 // TODO expand this.
                 cfg.CreateMap<k8s.Models.V1Pod, PodDetail>()
-                    .ConstructUsing((p) => new PodDetail());
+                    .ConstructUsing((p) =>
+                    {
+                        string creationTime = p.Metadata.CreationTimestamp.HasValue
+                            ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                            : string.Empty;
+
+                        List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                          new List<string>();
+                        List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
+                        List<PodCondition> conditions = Mapper.Map<List<PodCondition>>(p.Status.Conditions);
+                        List<OwnerReference> owners = Mapper.Map<List<OwnerReference>>(p.Metadata.OwnerReferences);
+
+                        return new PodDetail(
+                            p.Metadata.Name,
+                            p.Metadata.NamespaceProperty,
+                            p.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList().AsReadOnly(),
+                            annotations,
+                            creationTime,
+                            p.Status.Phase,
+                            p.Status.QosClass,
+                            containers.AsReadOnly(),
+                            conditions.AsReadOnly(),
+                            owners.AsReadOnly());
+                    });
 
                 cfg.CreateMap<k8s.Models.V1ReplicaSet, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

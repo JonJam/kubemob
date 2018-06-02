@@ -1,98 +1,54 @@
-//
-// WrapLayout.cs
-//
-// Author:
-//       Documentation team - https://developer.xamarin.com/samples/xamarin-forms/UserInterface/CustomLayout/WrapLayout/
-//
-// Copyright (c) 2016-2018 Xamarin, Microsoft.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-
-//TODO Move to new folder
-// TODO Tidy
-
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace KubeMob.Common.Layout
+namespace KubeMob.Common.Layouts
 {
     /// <summary>
     /// This class provides a wrapping layout container for Xamarin.Forms
+    /// 
+    /// Based off <see cref="https://github.com/xamarinhq/xamu-infrastructure/blob/master/src/XamU.Infrastructure/Layout/WrapLayout.cs"/>
     /// </summary>
     public class WrapLayout : Layout<View>
     {
         /// <summary>
-        /// Internal structure to hold data about the structure of the panel.
+        /// Bindable property definition for the ColumnSpacing property
         /// </summary>
-        struct LayoutData
-        {
-            public int VisibleChildCount;
-            public Size CellSize;
-            public int Rows;
-            public int Columns;
-
-            public LayoutData(int visibleChildCount, Size cellSize, int rows, int columns)
-            {
-                VisibleChildCount = visibleChildCount;
-                CellSize = cellSize;
-                Rows = rows;
-                Columns = columns;
-            }
-        }
+        public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(
+            nameof(ColumnSpacing),
+            typeof(double),
+            typeof(WrapLayout),
+            5.0,
+            propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateLayout());
 
         /// <summary>
         /// Bindable property definition for the ColumnSpacing property
         /// </summary>
-        public static readonly BindableProperty ColumnSpacingProperty = BindableProperty.Create(
-            nameof(ColumnSpacing), typeof(double), typeof(WrapLayout), 5.0,
+        public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(
+            nameof(RowSpacing),
+            typeof(double),
+            typeof(WrapLayout),
+            5.0,
             propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateLayout());
+
+        private readonly Dictionary<Size, LayoutData> layoutDataCache = new Dictionary<Size, LayoutData>();
 
         /// <summary>
         /// This controls the spacing between columns
         /// </summary>
         public double ColumnSpacing
         {
-            set => SetValue(ColumnSpacingProperty, value);
-            get => (double)GetValue(ColumnSpacingProperty);
+            get => (double)this.GetValue(ColumnSpacingProperty);
+            set => this.SetValue(ColumnSpacingProperty, value);
         }
-
-        /// <summary>
-        /// Bindable property definition for the ColumnSpacing property
-        /// </summary>
-        public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create(
-                nameof(RowSpacing), typeof(double), typeof(WrapLayout), 5.0,
-                propertyChanged: (bindable, oldvalue, newvalue) => ((WrapLayout)bindable).InvalidateLayout());
 
         /// <summary>
         /// This controls the spacing between rows
         /// </summary>
         public double RowSpacing
         {
-            set
-            {
-                SetValue(RowSpacingProperty, value);
-            }
-            get
-            {
-                return (double)GetValue(RowSpacingProperty);
-            }
+            get => (double)this.GetValue(RowSpacingProperty);
+            set => this.SetValue(RowSpacingProperty, value);
         }
 
         /// <summary>
@@ -106,14 +62,17 @@ namespace KubeMob.Common.Layout
         /// <remarks>To be added.</remarks>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            LayoutData layoutData = GetLayoutData(widthConstraint, heightConstraint);
+            LayoutData layoutData = this.GetLayoutData(widthConstraint, heightConstraint);
+
             if (layoutData.VisibleChildCount == 0)
             {
-                return new SizeRequest();
+                return default(SizeRequest);
             }
 
-            Size totalSize = new Size((layoutData.CellSize.Width * layoutData.Columns) + ColumnSpacing * (layoutData.Columns - 1),
-                                      (layoutData.CellSize.Height * layoutData.Rows) + RowSpacing * (layoutData.Rows - 1));
+            Size totalSize = new Size(
+                (layoutData.CellSize.Width * layoutData.Columns) + (this.ColumnSpacing * (layoutData.Columns - 1)),
+                (layoutData.CellSize.Height * layoutData.Rows) + (this.RowSpacing * (layoutData.Rows - 1)));
+
             return new SizeRequest(totalSize);
         }
 
@@ -127,7 +86,8 @@ namespace KubeMob.Common.Layout
         /// <param name="height">Height available</param>
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            LayoutData layoutData = GetLayoutData(width, height);
+            LayoutData layoutData = this.GetLayoutData(width, height);
+
             if (layoutData.VisibleChildCount == 0)
             {
                 return;
@@ -135,10 +95,9 @@ namespace KubeMob.Common.Layout
 
             double xChild = x;
             double yChild = y;
-            int row = 0;
             int column = 0;
 
-            foreach (View child in Children)
+            foreach (View child in this.Children)
             {
                 if (!child.IsVisible)
                 {
@@ -150,13 +109,12 @@ namespace KubeMob.Common.Layout
                 if (++column == layoutData.Columns)
                 {
                     column = 0;
-                    row++;
                     xChild = x;
-                    yChild += RowSpacing + layoutData.CellSize.Height;
+                    yChild += this.RowSpacing + layoutData.CellSize.Height;
                 }
                 else
                 {
-                    xChild += ColumnSpacing + layoutData.CellSize.Width;
+                    xChild += this.ColumnSpacing + layoutData.CellSize.Width;
                 }
             }
         }
@@ -169,34 +127,36 @@ namespace KubeMob.Common.Layout
         /// <param name="width">Available width</param>
         /// <param name="height">Available height</param>
         /// <returns></returns>
-        LayoutData GetLayoutData(double width, double height)
+        private LayoutData GetLayoutData(double width, double height)
         {
             Size size = new Size(width, height);
 
             // Check if cached information is available.
-            if (layoutDataCache.ContainsKey(size))
+            if (this.layoutDataCache.ContainsKey(size))
             {
-                return layoutDataCache[size];
+                return this.layoutDataCache[size];
             }
 
             int visibleChildCount = 0;
-            Size maxChildSize = new Size();
-            int rows = 0;
-            int columns = 0;
-            LayoutData layoutData = new LayoutData();
+            Size maxChildSize = default(Size);
+            LayoutData layoutData = default(LayoutData);
 
             // Enumerate through all the children.
-            foreach (View child in Children)
+            foreach (View child in this.Children)
             {
                 // Skip invisible children.
                 if (!child.IsVisible)
+                {
                     continue;
+                }
 
                 // Count the visible children.
                 visibleChildCount++;
 
                 // Get the child's requested size.
-                SizeRequest childSizeRequest = child.Measure(Double.PositiveInfinity, Double.PositiveInfinity);
+                SizeRequest childSizeRequest = child.Measure(
+                    double.PositiveInfinity,
+                    double.PositiveInfinity);
 
                 // Accumulate the maximum child size.
                 maxChildSize.Width = Math.Max(maxChildSize.Width, childSizeRequest.Request.Width);
@@ -206,37 +166,40 @@ namespace KubeMob.Common.Layout
             if (visibleChildCount != 0)
             {
                 // Calculate the number of rows and columns.
-                if (Double.IsPositiveInfinity(width))
+                int columns = 0;
+                int rows = 0;
+
+                if (double.IsPositiveInfinity(width))
                 {
                     columns = visibleChildCount;
                     rows = 1;
                 }
                 else
                 {
-                    columns = (int)((width + ColumnSpacing) / (maxChildSize.Width + ColumnSpacing));
+                    columns = (int)((width + this.ColumnSpacing) / (maxChildSize.Width + this.ColumnSpacing));
                     columns = Math.Max(1, columns);
                     rows = (visibleChildCount + columns - 1) / columns;
                 }
 
                 // Now maximize the cell size based on the layout size.
-                Size cellSize = new Size();
+                Size cellSize = default(Size);
 
-                if (Double.IsPositiveInfinity(width))
+                if (double.IsPositiveInfinity(width))
                 {
                     cellSize.Width = maxChildSize.Width;
                 }
                 else
                 {
-                    cellSize.Width = (width - (ColumnSpacing * (columns - 1))) / columns;
+                    cellSize.Width = (width - (this.ColumnSpacing * (columns - 1))) / columns;
                 }
 
-                if (Double.IsPositiveInfinity(height))
+                if (double.IsPositiveInfinity(height))
                 {
                     cellSize.Height = maxChildSize.Height;
                 }
                 else
                 {
-                    cellSize.Height = (height - (RowSpacing * (rows - 1))) / rows;
+                    cellSize.Height = (height - (this.RowSpacing * (rows - 1))) / rows;
                 }
 
                 layoutData = new LayoutData(visibleChildCount, cellSize, rows, columns);
@@ -246,7 +209,7 @@ namespace KubeMob.Common.Layout
             // many variations.
             if (Device.Idiom != TargetIdiom.Desktop)
             {
-                layoutDataCache.Add(size, layoutData);
+                this.layoutDataCache.Add(size, layoutData);
             }
 
             return layoutData;
@@ -263,7 +226,7 @@ namespace KubeMob.Common.Layout
             base.InvalidateLayout();
 
             // Discard all layout information for children added or removed.
-            layoutDataCache.Clear();
+            this.layoutDataCache.Clear();
         }
 
         /// <summary>
@@ -275,9 +238,31 @@ namespace KubeMob.Common.Layout
             base.OnChildMeasureInvalidated();
 
             // Discard all layout information for child size changed.
-            layoutDataCache.Clear();
+            this.layoutDataCache.Clear();
         }
 
-        readonly Dictionary<Size, LayoutData> layoutDataCache = new Dictionary<Size, LayoutData>();
+        /// <summary>
+        /// Internal structure to hold data about the structure of the panel.
+        /// </summary>
+        private struct LayoutData
+        {
+            public readonly int VisibleChildCount;
+            public readonly int Rows;
+            public readonly int Columns;
+
+            public Size CellSize;
+
+            public LayoutData(
+                int visibleChildCount,
+                Size cellSize,
+                int rows,
+                int columns)
+            {
+                this.VisibleChildCount = visibleChildCount;
+                this.CellSize = cellSize;
+                this.Rows = rows;
+                this.Columns = columns;
+            }
+        }
     }
 }

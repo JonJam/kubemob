@@ -10,10 +10,8 @@
                           Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
     <!--TODO Test scrolling-->
-    <ScrollView        
-        CompressedLayout.IsHeadless="true">
-        <Grid
-        CompressedLayout.IsHeadless="true">
+    <ScrollView        >
+        <Grid>
 
             <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
@@ -23,7 +21,7 @@
 
                 <StackLayout
                 IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"
-                CompressedLayout.IsHeadless="true">
+                >
 
                     <!--TODO Populate-->
                     <!--TODO Move to resource-->
@@ -49,9 +47,6 @@
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Labels}">
-                        <views:ItemsControl.ItemsPanel>
-                            <layouts:WrapLayout ColumnSpacing="1" />
-                        </views:ItemsControl.ItemsPanel>
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Label
@@ -67,9 +62,6 @@
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Annotations}">
-                        <views:ItemsControl.ItemsPanel>
-                            <layouts:WrapLayout ColumnSpacing="1" />
-                        </views:ItemsControl.ItemsPanel>
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Label
@@ -113,6 +105,72 @@
                     <Label
                         Text="Containers"
                         FontSize="18"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Containers}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label
+                                        Text="{Binding Name}"/>
+
+                                    <Label
+                                        Text="Image"
+                                        FontAttributes="Bold"/>
+                                    <Label
+                                        Text="{Binding Image}"/>
+
+                                    <Label
+                                        Text="Environment variables"
+                                        FontAttributes="Bold"/>
+                                    <views:ItemsControl
+                                        ItemsSource="{Binding EnvironmentVariables}">
+                                        <views:ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackLayout>
+                                                    <Label
+                                                        Text="{Binding Name}"/>
+                                                    <Label
+                                                        Text="{Binding Value}"
+                                                        IsVisible="{Binding Value, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </views:ItemsControl.ItemTemplate>
+                                    </views:ItemsControl>
+
+                                    <Label
+                                        Text="Commands"
+                                        FontAttributes="Bold"
+                                        IsVisible="{Binding Commands, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                                    <views:ItemsControl
+                                        ItemsSource="{Binding Commands}"
+                                        IsVisible="{Binding Commands, Converter={StaticResource NotEmptyToBoolConverter}}">
+                                        <views:ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                    <Label
+                                                        Text="{Binding .}"/>
+                                            </DataTemplate>
+                                        </views:ItemsControl.ItemTemplate>
+                                    </views:ItemsControl>
+
+                                    <Label
+                                        Text="Args"
+                                        FontAttributes="Bold"
+                                        IsVisible="{Binding Arguments, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                                    <views:ItemsControl
+                                        ItemsSource="{Binding Arguments}"
+                                        IsVisible="{Binding Arguments, Converter={StaticResource NotEmptyToBoolConverter}}">
+                                        <views:ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label
+                                                    Text="{Binding .}"/>
+                                            </DataTemplate>
+                                        </views:ItemsControl.ItemTemplate>
+                                    </views:ItemsControl>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
 
                 </StackLayout>
             </Grid>

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Views
 {
@@ -13,6 +14,7 @@ namespace KubeMob.Common.Views
     /// Based off <see cref="https://github.com/xamarinhq/xamu-infrastructure/blob/master/src/XamU.Infrastructure/Controls/ItemsControl.cs"/>
     /// https://docs.microsoft.com/en-us/xamarin/cross-platform/desktop/controls/wpf#itemscontrol
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class ItemsControl : ContentView
     {
         /// <summary>

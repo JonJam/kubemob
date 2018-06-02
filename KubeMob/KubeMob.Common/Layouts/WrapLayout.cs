@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Layouts
 {
@@ -9,6 +10,7 @@ namespace KubeMob.Common.Layouts
     /// 
     /// Based off <see cref="https://github.com/xamarinhq/xamu-infrastructure/blob/master/src/XamU.Infrastructure/Layout/WrapLayout.cs"/>
     /// </summary>
+    [Preserve(AllMembers = true)]
     public class WrapLayout : Layout<View>
     {
         /// <summary>

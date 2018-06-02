@@ -208,7 +208,42 @@
                         </views:ItemsControl.ItemTemplate>
                     </views:ItemsControl>
 
-                </StackLayout>
+                    <Label
+                        Text="Created by"
+                        FontSize="18"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="Name"/>
+                        <Label
+                            Grid.Column="1"
+                            Text="Kind"/>
+                    </Grid>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Owners}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="{Binding Name}"/>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Kind}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    </StackLayout>
             </Grid>
 
             <ActivityIndicator

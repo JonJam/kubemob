@@ -5,10 +5,11 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:layout="clr-namespace:KubeMob.Common.Layout;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Pods.PodDetailPage"
                           Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
-
+<!--TODO Test scrolling-->
     <ScrollView        
         CompressedLayout.IsHeadless="true">
         <Grid
@@ -26,6 +27,7 @@
 
                     <!--TODO Populate-->
                     <!--TODO Move to resource-->
+                    <!--TODO hiding if empty -->
                     <Label
                     Text="Name"
                     FontAttributes="Bold"/>
@@ -37,6 +39,27 @@
                     FontAttributes="Bold"/>
                     <Label
                     Text="{Binding Detail.NamespaceName}"/>
+
+                    <Label
+                        Text="Labels"
+                        FontAttributes="Bold"/>
+<views:ItemsControl
+    ItemsSource="{Binding Detail.Labels}"
+    >
+<views:ItemsControl.ItemsPanel>
+    <layout:WrapLayout ColumnSpacing="1" />
+</views:ItemsControl.ItemsPanel>
+    <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray" HorizontalOptions="Start"
+                                    
+                                    />
+                            </DataTemplate>
+    </views:ItemsControl.ItemTemplate>
+    </views:ItemsControl>
 
                     <Label
                     Text="Creation Time"

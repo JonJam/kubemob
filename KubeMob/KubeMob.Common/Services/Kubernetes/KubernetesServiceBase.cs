@@ -305,7 +305,6 @@ namespace KubeMob.Common.Services.Kubernetes
             string podName,
             string podNamespace)
         {
-            // TODO Handle pod not being found ??
             V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
 
             PodDetail podDetail = Mapper.Map<PodDetail>(pod);

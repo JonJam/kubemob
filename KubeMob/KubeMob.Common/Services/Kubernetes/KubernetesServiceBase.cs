@@ -312,8 +312,6 @@ namespace KubeMob.Common.Services.Kubernetes
             // TODO Event information ?? Requires another API call ListEventForAllNamespacesAsync and
             // filtering e => e.InvolvedObject.Name == podDetail.Name. Also should only display "non-expired"
             // events (logic needs working out).
-            // TODO PVC ?? Requires another API call from pod.Spec.Volumes.Where(v => v.PersistentVolumeClaim != null)
-
             return podDetail;
         }
 

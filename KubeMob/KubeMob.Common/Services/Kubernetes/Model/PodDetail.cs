@@ -18,7 +18,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string podIpAddress,
             IReadOnlyList<Container> containers,
             IReadOnlyList<PodCondition> conditions,
-            IReadOnlyList<OwnerReference> owners)
+            IReadOnlyList<OwnerReference> owners,
+            IReadOnlyList<string> persistentVolumeClaims)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
@@ -32,6 +33,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.Containers = containers;
             this.Conditions = conditions;
             this.Owners = owners;
+            this.PersistentVolumeClaims = persistentVolumeClaims;
         }
 
         public string Name
@@ -91,8 +93,14 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO Investigate how handle this link
+        // TODO Handle links
         public IReadOnlyList<OwnerReference> Owners
+        {
+            get;
+        }
+
+        // TODO Handle links
+        public IReadOnlyList<string> PersistentVolumeClaims
         {
             get;
         }

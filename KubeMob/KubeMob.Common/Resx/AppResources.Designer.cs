@@ -592,6 +592,213 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conditions.
+        /// </summary>
+        internal static string PodDetailPage_Conditions {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Conditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string PodDetailPage_Conditions_Status {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Conditions_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string PodDetailPage_Conditions_Type {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Conditions_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Containers.
+        /// </summary>
+        internal static string PodDetailPage_Containers {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Containers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Args.
+        /// </summary>
+        internal static string PodDetailPage_Containers_Args {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Containers_Args", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commands.
+        /// </summary>
+        internal static string PodDetailPage_Containers_Commands {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Containers_Commands", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Environment Variables.
+        /// </summary>
+        internal static string PodDetailPage_Containers_EnvironmentVariables {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Containers_EnvironmentVariables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        internal static string PodDetailPage_Containers_Image {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Containers_Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created by.
+        /// </summary>
+        internal static string PodDetailPage_CreatedBy {
+            get {
+                return ResourceManager.GetString("PodDetailPage_CreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kind.
+        /// </summary>
+        internal static string PodDetailPage_CreatedBy_Kind {
+            get {
+                return ResourceManager.GetString("PodDetailPage_CreatedBy_Kind", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string PodDetailPage_CreatedBy_Name {
+            get {
+                return ResourceManager.GetString("PodDetailPage_CreatedBy_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string PodDetailPage_Details {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Annotations.
+        /// </summary>
+        internal static string PodDetailPage_Details_Annotations {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_Annotations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation Time.
+        /// </summary>
+        internal static string PodDetailPage_Details_CreationTime {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_CreationTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address.
+        /// </summary>
+        internal static string PodDetailPage_Details_IpAddress {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_IpAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Labels.
+        /// </summary>
+        internal static string PodDetailPage_Details_Labels {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_Labels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string PodDetailPage_Details_Name {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        internal static string PodDetailPage_Details_Namespace {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_Namespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Node.
+        /// </summary>
+        internal static string PodDetailPage_Details_Node {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_Node", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QoS Class.
+        /// </summary>
+        internal static string PodDetailPage_Details_QoS {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_QoS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string PodDetailPage_Details_Status {
+            get {
+                return ResourceManager.GetString("PodDetailPage_Details_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Persistent Volume Claims.
+        /// </summary>
+        internal static string PodDetailPage_PersistentVolumeClaims {
+            get {
+                return ResourceManager.GetString("PodDetailPage_PersistentVolumeClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is nothing to display here..
+        /// </summary>
+        internal static string PodDetailPage_PersistentVolumeClaims_EmptyMessage {
+            get {
+                return ResourceManager.GetString("PodDetailPage_PersistentVolumeClaims_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
         internal static string Pods {

@@ -183,6 +183,9 @@ namespace KubeMob.Common
                         List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
                         List<PodCondition> conditions = Mapper.Map<List<PodCondition>>(p.Status.Conditions);
                         List<OwnerReference> owners = Mapper.Map<List<OwnerReference>>(p.Metadata.OwnerReferences);
+                        List<string> pvcs = p.Spec.Volumes
+                            .Where(v => v.PersistentVolumeClaim != null)
+                            .Select(v => v.PersistentVolumeClaim.ClaimName).ToList();
 
                         return new PodDetail(
                             p.Metadata.Name,
@@ -196,7 +199,8 @@ namespace KubeMob.Common
                             p.Status.PodIP,
                             containers.AsReadOnly(),
                             conditions.AsReadOnly(),
-                            owners.AsReadOnly());
+                            owners.AsReadOnly(),
+                            pvcs.AsReadOnly());
                     });
 
                 cfg.CreateMap<k8s.Models.V1ReplicaSet, ObjectSummary>()

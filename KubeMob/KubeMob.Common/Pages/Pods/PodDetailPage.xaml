@@ -8,8 +8,7 @@
                           x:Class="KubeMob.Common.Pages.Pods.PodDetailPage"
                           Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
-
-    <!--TODO Reduce XAML duplication-->
+    <!--TODO Reduce XAML duplication amongst detail pages-->
 
     <ScrollView>
         <Grid>

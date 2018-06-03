@@ -21,6 +21,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToDeploymentsPage();
 
+        Task NavigateToDeploymentDetailPage(string name, string namespaceName);
+
         Task NavigateToReplicaSetsPage();
 
         Task NavigateToServicesPage();

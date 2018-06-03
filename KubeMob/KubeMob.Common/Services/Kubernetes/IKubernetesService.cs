@@ -92,6 +92,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetDeploymentSummaries();
 
+        Task<DeploymentDetail> GetDeploymentDetail(
+            string deploymentName,
+            string deploymentNamespace);
+
         Task<IList<ObjectSummary>> GetPodSummaries();
 
         Task<PodDetail> GetPodDetail(

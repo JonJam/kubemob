@@ -10,18 +10,18 @@ using Xamarin.Forms.Internals;
 
 // TODO Reduce duplication amongst detail pages
 
-namespace KubeMob.Common.ViewModels.Pods
+namespace KubeMob.Common.ViewModels.Deployments
 {
     [Preserve(AllMembers = true)]
-    public class PodDetailViewModel : ViewModelBase
+    public class DeploymentDetailViewModel : ViewModelBase
     {
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
         private string name;
-        private PodDetail detail;
+        private DeploymentDetail detail;
 
-        public PodDetailViewModel(
+        public DeploymentDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService)
         {
@@ -39,7 +39,7 @@ namespace KubeMob.Common.ViewModels.Pods
             private set => this.SetProperty(ref this.name, value);
         }
 
-        public PodDetail Detail
+        public DeploymentDetail Detail
         {
             get => this.detail;
             private set => this.SetProperty(ref this.detail, value);
@@ -55,7 +55,7 @@ namespace KubeMob.Common.ViewModels.Pods
             {
                 try
                 {
-                    this.Detail = await this.kubernetesService.GetPodDetail(objectId.Name, objectId.NamespaceName);
+                    this.Detail = await this.kubernetesService.GetDeploymentDetail(objectId.Name, objectId.NamespaceName);
                 }
                 catch (ClusterNotFoundException)
                 {

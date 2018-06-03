@@ -33,6 +33,12 @@
     <Compile Update="Pages\Base\ExtendedContentPage.xaml.cs">
       <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Deployments\DeploymentsPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Deployments\DeploymentDetailPage.xaml.cs">
+      <DependentUpon>DeploymentDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\IngressesPage.xaml.cs">
       <DependentUpon>IngressesPage.xaml</DependentUpon>
     </Compile>
@@ -74,9 +80,6 @@
     </Compile>
     <Compile Update="Pages\ReplicaSetsPage.xaml.cs">
       <DependentUpon>ReplicaSetsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\DeploymentsPage.xaml.cs">
-      <DependentUpon>DeploymentsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Pods\PodsPage.xaml.cs">
       <DependentUpon>PodsPage.xaml</DependentUpon>

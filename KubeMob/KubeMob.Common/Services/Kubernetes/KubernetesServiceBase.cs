@@ -288,6 +288,18 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<DeploymentDetail> GetDeploymentDetail(
+            string deploymentName,
+            string deploymentNamespace)
+        {
+            V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
+
+            // TODO Event information ??
+            // Requires another API call ListEventForAllNamespacesAsync and filtering e => e.InvolvedObject.Name == podDetail.Name.
+            // Also should only display "non-expired" events (logic needs working out).
+            return Mapper.Map<DeploymentDetail>(deployment);
+        }
+
         public async Task<IList<ObjectSummary>> GetPodSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

@@ -15,6 +15,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.Settings;
@@ -74,6 +75,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<PodDetailViewModel>();
 
             serviceCollection.AddTransient<DeploymentsViewModel>();
+            serviceCollection.AddTransient<DeploymentDetailViewModel>();
+            
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
             serviceCollection.AddTransient<ServicesViewModel>();
             serviceCollection.AddTransient<IngressesViewModel>();
@@ -121,6 +124,13 @@ namespace KubeMob.Common
                         d.Metadata.NamespaceProperty,
                         $"{d.Status.AvailableReplicas}/{d.Status.Replicas}"));
 
+                cfg.CreateMap<k8s.Models.V1Deployment, DeploymentDetail>()
+                    .ConstructUsing((p) =>
+                    {
+                       
+                        return new DeploymentDetail();
+                    });
+                
                 cfg.CreateMap<k8s.Models.V1Pod, ObjectSummary>()
                     .ConstructUsing((p) => new ObjectSummary(
                         p.Metadata.Name,

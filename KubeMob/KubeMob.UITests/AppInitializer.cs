@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Linq;
 using Xamarin.UITest;
-using Xamarin.UITest.Queries;
 
 namespace KubeMob.UITests
 {
-    public class AppInitializer
+    public static class AppInitializer
     {
         public static IApp StartApp(Platform platform)
         {
@@ -24,4 +20,3 @@ namespace KubeMob.UITests
         }
     }
 }
-

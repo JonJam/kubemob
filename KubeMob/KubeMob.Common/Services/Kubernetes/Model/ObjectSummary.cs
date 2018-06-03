@@ -6,20 +6,28 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class ObjectSummary
     {
         public ObjectSummary(
-            string name)
-            : this(name, string.Empty)
+            string name,
+            string namespaceName)
+            : this(name, namespaceName, string.Empty)
         {
         }
 
         public ObjectSummary(
             string name,
+            string namespaceName,
             string description)
         {
             this.Name = name;
+            this.NamespaceName = namespaceName;
             this.Description = description;
         }
 
         public string Name
+        {
+            get;
+        }
+
+        public string NamespaceName
         {
             get;
         }

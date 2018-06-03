@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using k8s;
+using k8s.Models;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
@@ -298,6 +299,18 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
+        }
+
+        public async Task<PodDetail> GetPodDetail(
+            string podName,
+            string podNamespace)
+        {
+            V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
+
+            // TODO Event information ??
+            // Requires another API call ListEventForAllNamespacesAsync and filtering e => e.InvolvedObject.Name == podDetail.Name.
+            // Also should only display "non-expired" events (logic needs working out).
+            return Mapper.Map<PodDetail>(pod);
         }
 
         public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()

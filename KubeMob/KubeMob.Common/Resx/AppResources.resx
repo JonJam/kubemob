@@ -294,6 +294,75 @@
   <data name="PersistentVolumeClaimsPage_NoServicesMessage" xml:space="preserve">
     <value>There are no persistent volume claims.</value>
   </data>
+  <data name="PodDetailPage_Conditions" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="PodDetailPage_Conditions_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="PodDetailPage_Conditions_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="PodDetailPage_Containers" xml:space="preserve">
+    <value>Containers</value>
+  </data>
+  <data name="PodDetailPage_Containers_Args" xml:space="preserve">
+    <value>Args</value>
+  </data>
+  <data name="PodDetailPage_Containers_Commands" xml:space="preserve">
+    <value>Commands</value>
+  </data>
+  <data name="PodDetailPage_Containers_EnvironmentVariables" xml:space="preserve">
+    <value>Environment Variables</value>
+  </data>
+  <data name="PodDetailPage_Containers_Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="PodDetailPage_CreatedBy" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+  <data name="PodDetailPage_CreatedBy_Kind" xml:space="preserve">
+    <value>Kind</value>
+  </data>
+  <data name="PodDetailPage_CreatedBy_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PodDetailPage_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="PodDetailPage_Details_Annotations" xml:space="preserve">
+    <value>Annotations</value>
+  </data>
+  <data name="PodDetailPage_Details_CreationTime" xml:space="preserve">
+    <value>Creation Time</value>
+  </data>
+  <data name="PodDetailPage_Details_IpAddress" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="PodDetailPage_Details_Labels" xml:space="preserve">
+    <value>Labels</value>
+  </data>
+  <data name="PodDetailPage_Details_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PodDetailPage_Details_Namespace" xml:space="preserve">
+    <value>Namespace</value>
+  </data>
+  <data name="PodDetailPage_Details_Node" xml:space="preserve">
+    <value>Node</value>
+  </data>
+  <data name="PodDetailPage_Details_QoS" xml:space="preserve">
+    <value>QoS Class</value>
+  </data>
+  <data name="PodDetailPage_Details_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="PodDetailPage_PersistentVolumeClaims" xml:space="preserve">
+    <value>Persistent Volume Claims</value>
+  </data>
+  <data name="PodDetailPage_PersistentVolumeClaims_EmptyMessage" xml:space="preserve">
+    <value>There is nothing to display here.</value>
+  </data>
   <data name="Pods" xml:space="preserve">
     <value>Pods</value>
   </data>

@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
+using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
-using KubeMob.Common.ViewModels.Base;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.Base
 {
     [Preserve(AllMembers = true)]
     public abstract class ObjectListViewModelBase : ViewModelBase
@@ -19,15 +21,24 @@ namespace KubeMob.Common.ViewModels
         private bool objectTypeNotSupported;
 
         protected ObjectListViewModelBase(
+            INavigationService navigationService,
             IKubernetesService kubernetesService,
             IPopupService popupService)
         {
+            this.NavigationService = navigationService;
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
+
+            this.ObjectSummarySelectedCommand = new Command(async (o) => await this.OnObjectSummarySelectedExecute(o));
 
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
             this.IsBusy = true;
+        }
+
+        public ICommand ObjectSummarySelectedCommand
+        {
+            get;
         }
 
         public IList<ObjectSummary> ObjectSummaries
@@ -56,6 +67,11 @@ namespace KubeMob.Common.ViewModels
                     this.NotifyPropertyChanged(() => this.DisplayObjectSummariesInfo);
                 }
             }
+        }
+
+        protected INavigationService NavigationService
+        {
+            get;
         }
 
         protected IKubernetesService KubernetesService
@@ -100,5 +116,7 @@ namespace KubeMob.Common.ViewModels
         }
 
         protected abstract Task<IList<ObjectSummary>> GetObjectSummaries();
+
+        protected abstract Task OnObjectSummarySelectedExecute(object obj);
     }
 }

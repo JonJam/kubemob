@@ -51,7 +51,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO Handle link to other object type
+        // TODO Handle links
         public IReadOnlyList<string> Annotations
         {
             get;
@@ -82,7 +82,6 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO Handle links to secrets
         public IReadOnlyList<Container> Containers
         {
             get;

@@ -307,12 +307,10 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
 
-            PodDetail podDetail = Mapper.Map<PodDetail>(pod);
-
-            // TODO Event information ?? Requires another API call ListEventForAllNamespacesAsync and
-            // filtering e => e.InvolvedObject.Name == podDetail.Name. Also should only display "non-expired"
-            // events (logic needs working out).
-            return podDetail;
+            // TODO Event information ??
+            // Requires another API call ListEventForAllNamespacesAsync and filtering e => e.InvolvedObject.Name == podDetail.Name.
+            // Also should only display "non-expired" events (logic needs working out).
+            return Mapper.Map<PodDetail>(pod);
         }
 
         public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()

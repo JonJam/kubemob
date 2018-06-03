@@ -7,7 +7,7 @@ namespace KubeMob.Common.Layouts
 {
     /// <summary>
     /// This class provides a wrapping layout container for Xamarin.Forms
-    /// 
+    ///
     /// Based off <see cref="https://github.com/xamarinhq/xamu-infrastructure/blob/master/src/XamU.Infrastructure/Layout/WrapLayout.cs"/>
     /// </summary>
     [Preserve(AllMembers = true)]
@@ -35,18 +35,12 @@ namespace KubeMob.Common.Layouts
 
         private readonly Dictionary<Size, LayoutData> layoutDataCache = new Dictionary<Size, LayoutData>();
 
-        /// <summary>
-        /// This controls the spacing between columns
-        /// </summary>
         public double ColumnSpacing
         {
             get => (double)this.GetValue(ColumnSpacingProperty);
             set => this.SetValue(ColumnSpacingProperty, value);
         }
 
-        /// <summary>
-        /// This controls the spacing between rows
-        /// </summary>
         public double RowSpacing
         {
             get => (double)this.GetValue(RowSpacingProperty);
@@ -54,14 +48,12 @@ namespace KubeMob.Common.Layouts
         }
 
         /// <summary>
-        /// Initial size calculation performed to determine how much space is required to 
-        /// display the child elements
+        /// Initial size calculation performed to determine how much space is required to display the child elements
         /// </summary>
         /// <param name="widthConstraint">The width constraint to request.</param>
         /// <param name="heightConstraint">The height constraint to request.</param>
         /// <summary>Method that is called when a layout measurement happens.</summary>
         /// <returns>To be added.</returns>
-        /// <remarks>To be added.</remarks>
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             LayoutData layoutData = this.GetLayoutData(widthConstraint, heightConstraint);
@@ -122,13 +114,39 @@ namespace KubeMob.Common.Layouts
         }
 
         /// <summary>
+        /// Invalidates the current layout.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method will invalidate the measure and triggers a new layout cycle.
+        /// </remarks>
+        protected override void InvalidateLayout()
+        {
+            base.InvalidateLayout();
+
+            // Discard all layout information for children added or removed.
+            this.layoutDataCache.Clear();
+        }
+
+        /// <summary>
+        /// Invoked whenever a child of the layout has emitted <see cref="E:Xamarin.Forms.VisualElement.MeaureInvalidated" />.
+        /// Implement this method to add class handling for this event.
+        /// </summary>
+        protected override void OnChildMeasureInvalidated()
+        {
+            base.OnChildMeasureInvalidated();
+
+            // Discard all layout information for child size changed.
+            this.layoutDataCache.Clear();
+        }
+
+        /// <summary>
         /// Calculate the rows/columns to use for the given width/height and cache it off.
         /// Ideally, we will only calculate this twice for most cases (orientations), however
         /// desktop apps can resize at will.
         /// </summary>
         /// <param name="width">Available width</param>
         /// <param name="height">Available height</param>
-        /// <returns></returns>
+        /// <returns>The rows/columns to use for the given width/height.</returns>
         private LayoutData GetLayoutData(double width, double height)
         {
             Size size = new Size(width, height);
@@ -215,32 +233,6 @@ namespace KubeMob.Common.Layouts
             }
 
             return layoutData;
-        }
-
-        /// <summary>
-        /// Invalidates the current layout.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method will invalidate the measure and triggers a new layout cycle.
-        /// </remarks>
-        protected override void InvalidateLayout()
-        {
-            base.InvalidateLayout();
-
-            // Discard all layout information for children added or removed.
-            this.layoutDataCache.Clear();
-        }
-
-        /// <summary>
-        /// Invoked whenever a child of the layout has emitted <see cref="E:Xamarin.Forms.VisualElement.MeaureInvalidated" />. 
-        /// Implement this method to add class handling for this event.
-        /// </summary>
-        protected override void OnChildMeasureInvalidated()
-        {
-            base.OnChildMeasureInvalidated();
-
-            // Discard all layout information for child size changed.
-            this.layoutDataCache.Clear();
         }
 
         /// <summary>

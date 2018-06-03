@@ -10,7 +10,7 @@ namespace KubeMob.Common.Views
     /// Simple ItemsControl to render a list of things in a stacked view using
     /// either text labels, or an inflated data template. It also includes the ability
     /// to display a text placeholder if no items are present in the data bound collection.
-    /// 
+    ///
     /// Based off <see cref="https://github.com/xamarinhq/xamu-infrastructure/blob/master/src/XamU.Infrastructure/Controls/ItemsControl.cs"/>
     /// https://docs.microsoft.com/en-us/xamarin/cross-platform/desktop/controls/wpf#itemscontrol
     /// </summary>
@@ -85,9 +85,6 @@ namespace KubeMob.Common.Views
         private readonly Label noItemsLabel;
         private StackLayout stack;
 
-        /// <summary>
-        /// Initializes an ItemsControl.
-        /// </summary>
         public ItemsControl()
         {
             this.Padding = new Thickness(5, 0, 5, 5);
@@ -115,7 +112,7 @@ namespace KubeMob.Common.Views
         }
 
         /// <summary>
-        /// Gets or Sets the Orientation for the default layout panel
+        /// Gets or sets the Orientation for the default layout panel
         /// This is not used if you replace the panel!
         /// </summary>
         /// <value>Orientation value</value>
@@ -126,7 +123,7 @@ namespace KubeMob.Common.Views
         }
 
         /// <summary>
-        /// Gets or Sets the Spacing for the default layout panel
+        /// Gets or sets the Spacing for the default layout panel
         /// This is not used if you replace the panel!
         /// </summary>
         /// <value>Spacing value</value>
@@ -148,7 +145,7 @@ namespace KubeMob.Common.Views
         }
 
         /// <summary>
-        /// Gets or Sets the container used for the layout panel
+        /// Gets or sets the container used for the layout panel
         /// If not set, a StackLayout is used.
         /// </summary>
         /// <value>Orientation value</value>
@@ -281,8 +278,7 @@ namespace KubeMob.Common.Views
 
         /// <summary>
         /// Instance method called when the underlying data source is changed through the
-        /// <see cref="ItemsSource"/> property. This re-generates the list based on the 
-        /// new collection.
+        /// <see cref="ItemsSource"/> property. This re-generates the list based on the new collection.
         /// </summary>
         /// <param name="oldValue">Old value.</param>
         /// <param name="newValue">New value.</param>
@@ -437,6 +433,7 @@ namespace KubeMob.Common.Views
         /// </summary>
         /// <param name="template">Template.</param>
         /// <param name="item">Item.</param>
+        /// <returns>The view.</returns>
         private View InflateTemplate(DataTemplate template, object item)
         {
             // Pull real template from selector if necessary.
@@ -461,9 +458,6 @@ namespace KubeMob.Common.Views
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">E.</param>
-        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            this.FillContainer(null, (IList)sender, this.ItemTemplate);
-        }
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => this.FillContainer(null, (IList)sender, this.ItemTemplate);
     }
 }

@@ -20,7 +20,106 @@
                 <StackLayout
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
 
-                 </StackLayout>
+                    <!--TODO update strings-->
+                    <Label
+                        Text="{markupExtensions:Translate PodDetailPage_Details}"
+                        FontSize="18"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate PodDetailPage_Details_Name}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Name}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate PodDetailPage_Details_Namespace}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.NamespaceName}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate PodDetailPage_Details_Labels}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Labels}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate PodDetailPage_Details_Annotations}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Annotations}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate PodDetailPage_Details_CreationTime}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.CreationTime}"/>
+
+                    <Label
+                        Text="Selectors"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Selectors}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="Strategy"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Strategy}"/>
+
+                    <Label
+                        Text="Min ready seconds"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.MinReadySeconds}"/>
+
+                    <Label
+                        Text="Revision history limit"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.RevisionHistoryLimit}"/>
+
+                    <Label
+                        Text="Rolling update strategy"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.RollingUpdateStrategy}"/>
+
+                    <Label
+                        Text="Status"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Status}"/>
+                </StackLayout>
             </Grid>
 
             <ActivityIndicator

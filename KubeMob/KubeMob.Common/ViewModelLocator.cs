@@ -122,13 +122,44 @@ namespace KubeMob.Common
                     .ConstructUsing((d) => new ObjectSummary(
                         d.Metadata.Name,
                         d.Metadata.NamespaceProperty,
-                        $"{d.Status.AvailableReplicas}/{d.Status.Replicas}"));
+                        $"{d.Status.AvailableReplicas.GetValueOrDefault(0)}/{d.Status.Replicas.GetValueOrDefault(0)}"));
 
                 cfg.CreateMap<k8s.Models.V1Deployment, DeploymentDetail>()
-                    .ConstructUsing((p) =>
+                    .ConstructUsing((d) =>
                     {
-                       
-                        return new DeploymentDetail();
+                        List<string> labels = d.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+                        List<string> annotations = d.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                                   new List<string>();
+
+                        // TODO check for expression prop usage.
+                        List<string> selectors = d.Spec.Selector.MatchLabels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+
+                        string creationTime = d.Metadata.CreationTimestamp.HasValue
+                            ? $"{d.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                            : string.Empty;
+
+                        // TODO move string to resources
+                        int minReadySeconds = d.Spec.MinReadySeconds.GetValueOrDefault(0);
+                        string revisionHistoryLimit = d.Spec.RevisionHistoryLimit?.ToString() ?? "Not set";
+                        string rollingUpdateStrategy = $"Max surge: {d.Spec.Strategy.RollingUpdate.MaxSurge.Value}, " +
+                                                       $"Max unavailable:{d.Spec.Strategy.RollingUpdate.MaxUnavailable.Value}";
+                        string status = $"{d.Status.UpdatedReplicas.GetValueOrDefault(0)} updated, " +
+                                        $"{d.Status.Replicas.GetValueOrDefault(0)} total, " +
+                                        $"{d.Status.AvailableReplicas.GetValueOrDefault(0)} available, " +
+                                        $"{d.Status.UnavailableReplicas.GetValueOrDefault(0)} unavailable";
+
+                        return new DeploymentDetail(
+                            d.Metadata.Name,
+                            d.Metadata.NamespaceProperty,
+                            labels.AsReadOnly(),
+                            annotations.AsReadOnly(),
+                            creationTime,
+                            selectors.AsReadOnly(),
+                            d.Spec.Strategy.Type,
+                            minReadySeconds,
+                            revisionHistoryLimit,
+                            rollingUpdateStrategy,
+                            status);
                     });
                 
                 cfg.CreateMap<k8s.Models.V1Pod, ObjectSummary>()
@@ -188,6 +219,7 @@ namespace KubeMob.Common
                             ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                             : string.Empty;
 
+                        List<string> labels = p.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
                         List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                           new List<string>();
                         List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
@@ -200,8 +232,8 @@ namespace KubeMob.Common
                         return new PodDetail(
                             p.Metadata.Name,
                             p.Metadata.NamespaceProperty,
-                            p.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList().AsReadOnly(),
-                            annotations,
+                            labels.AsReadOnly(),
+                            annotations.AsReadOnly(),
                             creationTime,
                             p.Status.Phase,
                             p.Status.QosClass,

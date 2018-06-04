@@ -66,6 +66,9 @@
     <Compile Update="Pages\ReplicationControllersPage.xaml.cs">
       <DependentUpon>ReplicationControllersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Services\ServiceDetailPage.xaml.cs">
+      <DependentUpon>ServiceDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Services\ServicesPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>

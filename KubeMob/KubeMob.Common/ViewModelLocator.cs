@@ -82,6 +82,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ReplicaSetDetailViewModel>();
 
             serviceCollection.AddTransient<ServicesViewModel>();
+            serviceCollection.AddTransient<ServiceDetailViewModel>();
 
             serviceCollection.AddTransient<IngressesViewModel>();
             serviceCollection.AddTransient<ConfigMapsViewModel>();
@@ -125,12 +126,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<DeploymentMappingProfile>();
                 cfg.AddProfile<PodMappingProfile>();
                 cfg.AddProfile<ReplicaSetMappingProfile>();
-
-                cfg.CreateMap<k8s.Models.V1Service, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        r.Spec.ClusterIP));
+                cfg.AddProfile<ServiceMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

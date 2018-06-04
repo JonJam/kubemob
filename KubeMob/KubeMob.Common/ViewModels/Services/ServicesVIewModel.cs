@@ -25,7 +25,9 @@ namespace KubeMob.Common.ViewModels.Services
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {
-            throw new System.NotImplementedException();
+            ObjectSummary selected = (ObjectSummary)obj;
+
+            return this.NavigationService.NavigateToServiceDetailPage(selected.Name, selected.NamespaceName);
         }
     }
 }

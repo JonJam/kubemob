@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -30,7 +31,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     : string.Empty;
 
                 string images = string.Join(
-                    ", ",
+                    Environment.NewLine,
                     r.Spec.Template.Spec.Containers.Select(c => c.Image));
 
                 string pods = string.Format(

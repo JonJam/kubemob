@@ -82,6 +82,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToServicesPage() => NavigationService.InternalNavigate(typeof(ServicesPage));
 
+        public Task NavigateToServiceDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ServiceDetailPage), new ObjectId(name, namespaceName));
+        
         public Task NavigateToIngressesPage() => NavigationService.InternalNavigate(typeof(IngressesPage));
 
         public Task NavigateToConfigMapsPage() => NavigationService.InternalNavigate(typeof(ConfigMapsPage));

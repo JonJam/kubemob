@@ -365,6 +365,16 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<ServiceDetail> GetServiceDetail(
+            string serviceName,
+            string serviceNamespace)
+        {
+            V1Service serviceDetail = await this.PerformClientOperation((c) => c.ReadNamespacedServiceStatusAsync(serviceName, serviceNamespace));
+
+            // TODO Event information ??
+            return Mapper.Map<ServiceDetail>(serviceDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetIngressSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

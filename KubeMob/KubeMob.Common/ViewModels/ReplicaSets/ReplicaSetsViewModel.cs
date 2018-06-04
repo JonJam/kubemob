@@ -25,7 +25,9 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {
-            throw new System.NotImplementedException();
+            ObjectSummary selected = (ObjectSummary)obj;
+
+            return this.NavigationService.NavigateToReplicaSetDetailPage(selected.Name, selected.NamespaceName);
         }
     }
 }

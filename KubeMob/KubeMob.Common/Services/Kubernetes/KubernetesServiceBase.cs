@@ -339,6 +339,16 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<ReplicaSetDetail> GetReplicaSetDetail(
+            string replicaSetName,
+            string replicaSetNamespace)
+        {
+            V1ReplicaSet replicaSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicaSetStatusAsync(replicaSetName, replicaSetNamespace));
+
+            // TODO Event information ??
+            return Mapper.Map<ReplicaSetDetail>(replicaSetDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetServiceSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

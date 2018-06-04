@@ -63,6 +63,9 @@
     <Compile Update="Pages\ReplicationControllersPage.xaml.cs">
       <DependentUpon>ReplicationControllersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Services\ServicesPage.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Settings\ResourceListingPage.xaml.cs">
       <DependentUpon>ResourceListingPage.xaml</DependentUpon>
     </Compile>
@@ -74,9 +77,6 @@
     </Compile>
     <Compile Update="Pages\PersistentVolumeClaimsPage.xaml.cs">
       <DependentUpon>PersistentVolumeClaimsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\ServicesPage.xaml.cs">
-      <DependentUpon>ServicesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ReplicaSetsPage.xaml.cs">
       <DependentUpon>ReplicaSetsPage.xaml</DependentUpon>

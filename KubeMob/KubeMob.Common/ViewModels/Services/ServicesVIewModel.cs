@@ -7,7 +7,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.Services
 {
     [Preserve(AllMembers = true)]
     public class ServicesViewModel : ObjectListViewModelBase

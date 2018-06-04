@@ -21,23 +21,23 @@
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details}"
+                        Text="{markupExtensions:Translate DetailPage_Details}"
                         FontSize="18"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Name}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Name}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Namespace}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.NamespaceName}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Labels}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Labels}">
@@ -52,7 +52,7 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Annotations}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Annotations}"
@@ -68,13 +68,13 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_CreationTime}"
+                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.CreationTime}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Status}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Status}"/>

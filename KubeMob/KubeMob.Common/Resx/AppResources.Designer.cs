@@ -484,6 +484,69 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max surge: {0}, Max unavailable: {1}.
+        /// </summary>
+        internal static string DeploymentDetail_RollingUpdateStrategy {
+            get {
+                return ResourceManager.GetString("DeploymentDetail_RollingUpdateStrategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} updated, {1} total, {2} available, {3} unavailable.
+        /// </summary>
+        internal static string DeploymentDetail_Status {
+            get {
+                return ResourceManager.GetString("DeploymentDetail_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min ready seconds.
+        /// </summary>
+        internal static string DeploymentDetailPage_Details_MinReadySeconds {
+            get {
+                return ResourceManager.GetString("DeploymentDetailPage_Details_MinReadySeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revision history limit.
+        /// </summary>
+        internal static string DeploymentDetailPage_Details_RevisionHistoryLimit {
+            get {
+                return ResourceManager.GetString("DeploymentDetailPage_Details_RevisionHistoryLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rolling update strategy.
+        /// </summary>
+        internal static string DeploymentDetailPage_Details_RollingUpdateStrategy {
+            get {
+                return ResourceManager.GetString("DeploymentDetailPage_Details_RollingUpdateStrategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selectors.
+        /// </summary>
+        internal static string DeploymentDetailPage_Details_Selectors {
+            get {
+                return ResourceManager.GetString("DeploymentDetailPage_Details_Selectors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Strategy.
+        /// </summary>
+        internal static string DeploymentDetailPage_Details_Strategy {
+            get {
+                return ResourceManager.GetString("DeploymentDetailPage_Details_Strategy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deployments.
         /// </summary>
         internal static string Deployments {
@@ -498,6 +561,69 @@ namespace KubeMob.Common.Resx {
         internal static string Deployments_NoDeploymentsMessage {
             get {
                 return ResourceManager.GetString("Deployments_NoDeploymentsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string DetailPage_Details {
+            get {
+                return ResourceManager.GetString("DetailPage_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Annotations.
+        /// </summary>
+        internal static string DetailPage_Details_Annotations {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Annotations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation Time.
+        /// </summary>
+        internal static string DetailPage_Details_CreationTime {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_CreationTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Labels.
+        /// </summary>
+        internal static string DetailPage_Details_Labels {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Labels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string DetailPage_Details_Name {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Namespace.
+        /// </summary>
+        internal static string DetailPage_Details_Namespace {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Namespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string DetailPage_Details_Status {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Status", resourceCulture);
             }
         }
         
@@ -552,6 +678,15 @@ namespace KubeMob.Common.Resx {
         internal static string NoInternetErrorMessage {
             get {
                 return ResourceManager.GetString("NoInternetErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not set..
+        /// </summary>
+        internal static string ObjectDetail_NotSet {
+            get {
+                return ResourceManager.GetString("ObjectDetail_NotSet", resourceCulture);
             }
         }
         
@@ -691,65 +826,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Details.
-        /// </summary>
-        internal static string PodDetailPage_Details {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Annotations.
-        /// </summary>
-        internal static string PodDetailPage_Details_Annotations {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details_Annotations", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Creation Time.
-        /// </summary>
-        internal static string PodDetailPage_Details_CreationTime {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details_CreationTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to IP Address.
         /// </summary>
         internal static string PodDetailPage_Details_IpAddress {
             get {
                 return ResourceManager.GetString("PodDetailPage_Details_IpAddress", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Labels.
-        /// </summary>
-        internal static string PodDetailPage_Details_Labels {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details_Labels", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        internal static string PodDetailPage_Details_Name {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Namespace.
-        /// </summary>
-        internal static string PodDetailPage_Details_Namespace {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details_Namespace", resourceCulture);
             }
         }
         
@@ -768,15 +849,6 @@ namespace KubeMob.Common.Resx {
         internal static string PodDetailPage_Details_QoS {
             get {
                 return ResourceManager.GetString("PodDetailPage_Details_QoS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status.
-        /// </summary>
-        internal static string PodDetailPage_Details_Status {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Details_Status", resourceCulture);
             }
         }
         

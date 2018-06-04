@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Resources;
 using AutoMapper;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Kubernetes.MappingProfiles;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
@@ -76,7 +75,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<DeploymentsViewModel>();
             serviceCollection.AddTransient<DeploymentDetailViewModel>();
-            
+
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
             serviceCollection.AddTransient<ServicesViewModel>();
             serviceCollection.AddTransient<IngressesViewModel>();
@@ -118,132 +117,8 @@ namespace KubeMob.Common
             // - AutoMapper
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<k8s.Models.V1Deployment, ObjectSummary>()
-                    .ConstructUsing((d) => new ObjectSummary(
-                        d.Metadata.Name,
-                        d.Metadata.NamespaceProperty,
-                        $"{d.Status.AvailableReplicas.GetValueOrDefault(0)}/{d.Status.Replicas.GetValueOrDefault(0)}"));
-
-                cfg.CreateMap<k8s.Models.V1Deployment, DeploymentDetail>()
-                    .ConstructUsing((d) =>
-                    {
-                        List<string> labels = d.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
-                        List<string> annotations = d.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                                   new List<string>();
-
-                        // TODO check for expression prop usage.
-                        List<string> selectors = d.Spec.Selector.MatchLabels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
-
-                        string creationTime = d.Metadata.CreationTimestamp.HasValue
-                            ? $"{d.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
-                            : string.Empty;
-
-                        // TODO move string to resources
-                        int minReadySeconds = d.Spec.MinReadySeconds.GetValueOrDefault(0);
-                        string revisionHistoryLimit = d.Spec.RevisionHistoryLimit?.ToString() ?? "Not set";
-                        string rollingUpdateStrategy = $"Max surge: {d.Spec.Strategy.RollingUpdate.MaxSurge.Value}, " +
-                                                       $"Max unavailable:{d.Spec.Strategy.RollingUpdate.MaxUnavailable.Value}";
-                        string status = $"{d.Status.UpdatedReplicas.GetValueOrDefault(0)} updated, " +
-                                        $"{d.Status.Replicas.GetValueOrDefault(0)} total, " +
-                                        $"{d.Status.AvailableReplicas.GetValueOrDefault(0)} available, " +
-                                        $"{d.Status.UnavailableReplicas.GetValueOrDefault(0)} unavailable";
-
-                        return new DeploymentDetail(
-                            d.Metadata.Name,
-                            d.Metadata.NamespaceProperty,
-                            labels.AsReadOnly(),
-                            annotations.AsReadOnly(),
-                            creationTime,
-                            selectors.AsReadOnly(),
-                            d.Spec.Strategy.Type,
-                            minReadySeconds,
-                            revisionHistoryLimit,
-                            rollingUpdateStrategy,
-                            status);
-                    });
-                
-                cfg.CreateMap<k8s.Models.V1Pod, ObjectSummary>()
-                    .ConstructUsing((p) => new ObjectSummary(
-                        p.Metadata.Name,
-                        p.Metadata.NamespaceProperty,
-                        p.Status.Phase));
-
-                cfg.CreateMap<k8s.Models.V1EnvVar, EnvironmentVariable>()
-                    .ConstructUsing((e) => new EnvironmentVariable(
-                        e.Name,
-                        e.Value));
-
-                cfg.CreateMap<k8s.Models.V1Container, Container>()
-                    .ConstructUsing((c) =>
-                    {
-                        List<EnvironmentVariable> envVars = c.Env != null ? Mapper.Map<List<EnvironmentVariable>>(c.Env) : new List<EnvironmentVariable>();
-                        List<string> commands = c.Command?.ToList() ?? new List<string>();
-                        List<string> args = c.Args?.ToList() ?? new List<string>();
-
-                        return new Container(
-                            c.Name,
-                            c.Image,
-                            envVars.AsReadOnly(),
-                            commands.AsReadOnly(),
-                            args.AsReadOnly());
-                    });
-
-                cfg.CreateMap<k8s.Models.V1PodCondition, PodCondition>()
-                    .ConstructUsing((c) =>
-                    {
-                        string lastHeartbeatTime = c.LastProbeTime.HasValue
-                            ? $"{c.LastProbeTime.Value.ToUniversalTime():s} UTC"
-                            : string.Empty;
-
-                        string lastTransitionTime = c.LastTransitionTime.HasValue
-                            ? $"{c.LastTransitionTime.Value.ToUniversalTime():s} UTC"
-                            : string.Empty;
-
-                        return new PodCondition(
-                            c.Type,
-                            c.Status,
-                            lastHeartbeatTime,
-                            lastTransitionTime,
-                            c.Reason);
-                    });
-
-                cfg.CreateMap<k8s.Models.V1OwnerReference, OwnerReference>()
-                    .ConstructUsing((o) => new OwnerReference(
-                        o.Name,
-                        o.Kind));
-
-                cfg.CreateMap<k8s.Models.V1Pod, PodDetail>()
-                    .ConstructUsing((p) =>
-                    {
-                        string creationTime = p.Metadata.CreationTimestamp.HasValue
-                            ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
-                            : string.Empty;
-
-                        List<string> labels = p.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
-                        List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
-                        List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
-                        List<PodCondition> conditions = Mapper.Map<List<PodCondition>>(p.Status.Conditions);
-                        List<OwnerReference> owners = Mapper.Map<List<OwnerReference>>(p.Metadata.OwnerReferences);
-                        List<string> pvcs = p.Spec.Volumes
-                            .Where(v => v.PersistentVolumeClaim != null)
-                            .Select(v => v.PersistentVolumeClaim.ClaimName).ToList();
-
-                        return new PodDetail(
-                            p.Metadata.Name,
-                            p.Metadata.NamespaceProperty,
-                            labels.AsReadOnly(),
-                            annotations.AsReadOnly(),
-                            creationTime,
-                            p.Status.Phase,
-                            p.Status.QosClass,
-                            p.Spec.NodeName,
-                            p.Status.PodIP,
-                            containers.AsReadOnly(),
-                            conditions.AsReadOnly(),
-                            owners.AsReadOnly(),
-                            pvcs.AsReadOnly());
-                    });
+                cfg.AddProfile<DeploymentMappingProfile>();
+                cfg.AddProfile<PodMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1ReplicaSet, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

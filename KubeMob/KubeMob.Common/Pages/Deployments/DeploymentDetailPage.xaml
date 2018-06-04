@@ -20,25 +20,24 @@
                 <StackLayout
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
 
-                    <!--TODO update strings-->
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details}"
+                        Text="{markupExtensions:Translate DetailPage_Details}"
                         FontSize="18"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Name}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Name}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Namespace}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.NamespaceName}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Labels}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Labels}">
@@ -53,7 +52,7 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Annotations}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Annotations}"
@@ -69,13 +68,13 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_CreationTime}"
+                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.CreationTime}"/>
 
                     <Label
-                        Text="Selectors"
+                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_Selectors}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Selectors}"
@@ -91,31 +90,31 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="Strategy"
+                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_Strategy}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Strategy}"/>
 
                     <Label
-                        Text="Min ready seconds"
+                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_MinReadySeconds}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.MinReadySeconds}"/>
 
                     <Label
-                        Text="Revision history limit"
+                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.RevisionHistoryLimit}"/>
 
                     <Label
-                        Text="Rolling update strategy"
+                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.RollingUpdateStrategy}"/>
 
                     <Label
-                        Text="Status"
+                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Status}"/>

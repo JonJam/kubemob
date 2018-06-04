@@ -48,6 +48,9 @@
     <Compile Update="Pages\Pods\PodDetailPage.xaml.cs">
       <DependentUpon>PodDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ReplicaSets\ReplicaSetDetailPage.xaml.cs">
+      <DependentUpon>ReplicaSetDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\SecretsPage.xaml.cs">
       <DependentUpon>SecretsPage.xaml</DependentUpon>
     </Compile>
@@ -78,7 +81,7 @@
     <Compile Update="Pages\PersistentVolumeClaimsPage.xaml.cs">
       <DependentUpon>PersistentVolumeClaimsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\ReplicaSetsPage.xaml.cs">
+    <Compile Update="Pages\ReplicaSets\ReplicaSetsPage.xaml.cs">
       <DependentUpon>ReplicaSetsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Pods\PodsPage.xaml.cs">

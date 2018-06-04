@@ -6,6 +6,7 @@ using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.Services;
+using KubeMob.Common.Pages.ReplicaSets;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
@@ -76,6 +77,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToDeploymentDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DeploymentDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToReplicaSetsPage() => NavigationService.InternalNavigate(typeof(ReplicaSetsPage));
+
+        public Task NavigateToReplicaSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ReplicaSetDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToServicesPage() => NavigationService.InternalNavigate(typeof(ServicesPage));
 

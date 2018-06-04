@@ -5,7 +5,7 @@
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          x:Class="KubeMob.Common.Pages.Deployments.DeploymentDetailPage"
+                          x:Class="KubeMob.Common.Pages.ReplicaSets.ReplicaSetDetailPage"
                           Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
@@ -19,7 +19,6 @@
 
                 <StackLayout
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
-
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details}"
                         FontSize="18"/>
@@ -90,34 +89,17 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_Strategy}"
+                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Images}"
                         FontAttributes="Bold"/>
                     <Label
-                        Text="{Binding Detail.Strategy}"/>
+                        Text="{Binding Detail.Images}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_MinReadySeconds}"
+                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Pods}"
                         FontAttributes="Bold"/>
                     <Label
-                        Text="{Binding Detail.MinReadySeconds}"/>
+                        Text="{Binding Detail.Pods}"/>
 
-                    <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.RevisionHistoryLimit}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.RollingUpdateStrategy}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Status}"/>
                 </StackLayout>
             </Grid>
 

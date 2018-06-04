@@ -295,8 +295,9 @@ namespace KubeMob.Common.Services.Kubernetes
             V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
 
             // TODO Event information ??
-            // Requires another API call ListEventForAllNamespacesAsync and filtering e => e.InvolvedObject.Name == podDetail.Name.
-            // Also should only display "non-expired" events (logic needs working out).
+            // TODO New replica set information (info not contained in V1Deployment) ??
+            // TODO Old replica set information (info not contained in V1Deployment) ??
+            // TODO Horizontal pod autoscaler information (info not contained in V1Deployment) ??
             return Mapper.Map<DeploymentDetail>(deployment);
         }
 

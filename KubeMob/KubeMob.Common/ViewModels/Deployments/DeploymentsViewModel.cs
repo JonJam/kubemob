@@ -28,7 +28,6 @@ namespace KubeMob.Common.ViewModels.Deployments
             ObjectSummary selected = (ObjectSummary)obj;
 
             return this.NavigationService.NavigateToDeploymentDetailPage(selected.Name, selected.NamespaceName);
-
         }
     }
 }

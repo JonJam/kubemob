@@ -17,8 +17,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             int minReadySeconds,
             string revisionHistoryLimit,
             string rollingUpdateStrategy,
-            string status
-        )
+            string status)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;

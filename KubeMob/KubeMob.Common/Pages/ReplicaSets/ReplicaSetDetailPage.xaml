@@ -19,9 +19,87 @@
 
                 <StackLayout
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details}"
+                        FontSize="18"/>
 
-                    <!--TODO populate-->
-                 
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Name}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.NamespaceName}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Labels}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Annotations}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.CreationTime}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Selectors}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Images}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Images}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Pods}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Pods}"/>
+
                 </StackLayout>
             </Grid>
 

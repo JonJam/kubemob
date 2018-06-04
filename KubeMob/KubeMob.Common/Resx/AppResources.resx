@@ -432,10 +432,19 @@
   <data name="DeploymentDetailPage_Details_RollingUpdateStrategy" xml:space="preserve">
     <value>Rolling update strategy</value>
   </data>
-  <data name="DeploymentDetailPage_Details_Selectors" xml:space="preserve">
+  <data name="DetailPage_Details_Selectors" xml:space="preserve">
     <value>Selectors</value>
   </data>
   <data name="DeploymentDetailPage_Details_Strategy" xml:space="preserve">
     <value>Strategy</value>
+  </data>
+  <data name="ReplicaSetDetailPage_Details_Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="ReplicaSetDetail_Pods" xml:space="preserve">
+    <value>{0} running</value>
+  </data>
+  <data name="ReplicaSetDetailPage_Details_Pods" xml:space="preserve">
+    <value>Pods</value>
   </data>
 </root>

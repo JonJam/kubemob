@@ -346,6 +346,9 @@ namespace KubeMob.Common.Services.Kubernetes
             V1ReplicaSet replicaSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicaSetStatusAsync(replicaSetName, replicaSetNamespace));
 
             // TODO Event information ??
+            // TODO Pods information (info not contained in V1ReplicaSet)??
+            // TODO Services information (info not contained in V1ReplicaSet)??
+            // TODO Horizontal pod autoscaler information (info not contained in V1ReplicaSet) ??
             return Mapper.Map<ReplicaSetDetail>(replicaSetDetail);
         }
 

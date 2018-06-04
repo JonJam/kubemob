@@ -30,7 +30,7 @@ namespace KubeMob.iOS.Services.Localization
             {
                 string pref = NSLocale.PreferredLanguages[0];
 
-                netLanguage = Localize.iOSToDotNetLanguage(pref);
+                netLanguage = Localize.ToDotNetLanguage(pref);
             }
 
             // This gets called a lot - try/catch can be expensive so consider caching or something.
@@ -59,11 +59,12 @@ namespace KubeMob.iOS.Services.Localization
             return ci;
         }
 
-        private static string iOSToDotNetLanguage(string iosLanguage)
+        private static string ToDotNetLanguage(string iosLanguage)
         {
             string netLanguage = iosLanguage;
 
             // Certain languages need to be converted to CultureInfo equivalent
+            // TODO add more application-specific cases here (if required). ONLY use cultures that have been tested and known to work.
             switch (iosLanguage)
             {
                 // "Malaysian (Malaysia)" not supported .NET culture
@@ -73,12 +74,12 @@ namespace KubeMob.iOS.Services.Localization
                     // Closest supported
                     netLanguage = "ms";
                     break;
+
                 // "Schwiizertüütsch (Swiss German)" not supported .NET culture
                 case "gsw-CH":
                     // Closest supported
                     netLanguage = "de-CH";
                     break;
-                // TODO add more application-specific cases here (if required). ONLY use cultures that have been tested and known to work.
             }
 
             return netLanguage;
@@ -99,7 +100,6 @@ namespace KubeMob.iOS.Services.Localization
                     // Equivalent to German (Switzerland) for this app.
                     netLanguage = "de-CH";
                     break;
-                
             }
 
             return netLanguage;

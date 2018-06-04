@@ -288,6 +288,19 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<DeploymentDetail> GetDeploymentDetail(
+            string deploymentName,
+            string deploymentNamespace)
+        {
+            V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
+
+            // TODO Event information ??
+            // TODO New replica set information (info not contained in V1Deployment) ??
+            // TODO Old replica set information (info not contained in V1Deployment) ??
+            // TODO Horizontal pod autoscaler information (info not contained in V1Deployment) ??
+            return Mapper.Map<DeploymentDetail>(deployment);
+        }
+
         public async Task<IList<ObjectSummary>> GetPodSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

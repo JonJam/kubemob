@@ -25,7 +25,7 @@ namespace KubeMob.iOS.Services.Kubernetes
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KubernetesService"/> class.
-        /// 
+        ///
         /// Since this is being constructed using <see cref="Xamarin.Forms.DependencyService"/> it has to be parameterless.
         /// Therefore using the ViewModelLocator to look up the dependencies.
         /// </summary>

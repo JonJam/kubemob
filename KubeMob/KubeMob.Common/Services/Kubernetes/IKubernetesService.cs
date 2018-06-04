@@ -104,6 +104,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetReplicaSetSummaries();
 
+        Task<ReplicaSetDetail> GetReplicaSetDetail(
+            string replicaSetName,
+            string replicaSetNamespace);
+
         Task<IList<ObjectSummary>> GetServiceSummaries();
 
         Task<IList<ObjectSummary>> GetIngressSummaries();

@@ -5,6 +5,7 @@ using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
+using KubeMob.Common.Pages.ReplicaSets;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;

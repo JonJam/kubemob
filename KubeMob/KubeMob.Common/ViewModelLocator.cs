@@ -17,6 +17,7 @@ using KubeMob.Common.ViewModels;
 using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
+using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
@@ -77,6 +78,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<DeploymentDetailViewModel>();
 
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
+
             serviceCollection.AddTransient<ServicesViewModel>();
             serviceCollection.AddTransient<IngressesViewModel>();
             serviceCollection.AddTransient<ConfigMapsViewModel>();

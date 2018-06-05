@@ -30,9 +30,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     ? $"{r.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                     : string.Empty;
 
-                string images = string.Join(
-                    Environment.NewLine,
-                    r.Spec.Template.Spec.Containers.Select(c => c.Image));
+                List<string> images = r.Spec.Template.Spec.Containers.Select(c => c.Image).ToList();
 
                 string pods = string.Format(
                     AppResources.ReplicaSetDetail_Pods,
@@ -45,7 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     annotations.AsReadOnly(),
                     creationTime,
                     selectors.AsReadOnly(),
-                    images,
+                    images.AsReadOnly(),
                     pods);
             });
         }

@@ -372,6 +372,8 @@ namespace KubeMob.Common.Services.Kubernetes
             V1Service serviceDetail = await this.PerformClientOperation((c) => c.ReadNamespacedServiceStatusAsync(serviceName, serviceNamespace));
 
             // TODO Event information ??
+            // TODO Endpoints ??
+            // TODO Pods ??
             return Mapper.Map<ServiceDetail>(serviceDetail);
         }
 

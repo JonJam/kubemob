@@ -91,8 +91,17 @@
                     <Label
                         Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Images}"
                         FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Images}"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Images}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
 
                     <Label
                         Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Pods}"

@@ -12,21 +12,24 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime,
-            IReadOnlyList<string> labelSelectors,
+            IReadOnlyList<string> labelSelector,
             string type,
             string sessionAffinity,
-            string clusterIp
-            )
+            string clusterIp,
+            IReadOnlyList<string> internalEndpoints,
+            IReadOnlyList<string> externalEndpoints)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
             this.Labels = labels;
             this.Annotations = annotations;
             this.CreationTime = creationTime;
-            this.LabelSelectors = labelSelectors;
+            this.LabelSelector = labelSelector;
             this.Type = type;
             this.SessionAffinity = sessionAffinity;
             this.ClusterIp = clusterIp;
+            this.InternalEndpoints = internalEndpoints;
+            this.ExternalEndpoints = externalEndpoints;
         }
 
         public string Name
@@ -54,7 +57,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> LabelSelectors
+        public IReadOnlyList<string> LabelSelector
         {
             get;
         }
@@ -70,6 +73,16 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         public string ClusterIp
+        {
+            get;
+        }
+
+        public IReadOnlyList<string> InternalEndpoints
+        {
+            get;
+        }
+
+        public IReadOnlyList<string> ExternalEndpoints
         {
             get;
         }

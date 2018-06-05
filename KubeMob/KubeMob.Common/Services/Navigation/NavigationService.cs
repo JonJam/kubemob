@@ -2,11 +2,12 @@ using System;
 using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
+using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
-using KubeMob.Common.Pages.Services;
 using KubeMob.Common.Pages.ReplicaSets;
+using KubeMob.Common.Pages.Services;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
@@ -83,7 +84,7 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToServicesPage() => NavigationService.InternalNavigate(typeof(ServicesPage));
 
         public Task NavigateToServiceDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ServiceDetailPage), new ObjectId(name, namespaceName));
-        
+
         public Task NavigateToIngressesPage() => NavigationService.InternalNavigate(typeof(IngressesPage));
 
         public Task NavigateToConfigMapsPage() => NavigationService.InternalNavigate(typeof(ConfigMapsPage));
@@ -91,6 +92,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToSecretsPage() => NavigationService.InternalNavigate(typeof(SecretsPage));
 
         public Task NavigateToCronJobsPage() => NavigationService.InternalNavigate(typeof(CronJobsPage));
+
+        public Task NavigateToCronJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(CronJobDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToDaemonSetsPage() => NavigationService.InternalNavigate(typeof(DaemonSetsPage));
 

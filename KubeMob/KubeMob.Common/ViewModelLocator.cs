@@ -14,11 +14,12 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
-using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.ReplicaSets;
+using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
@@ -87,7 +88,10 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<IngressesViewModel>();
             serviceCollection.AddTransient<ConfigMapsViewModel>();
             serviceCollection.AddTransient<SecretsViewModel>();
+
             serviceCollection.AddTransient<CronJobsViewModel>();
+            serviceCollection.AddTransient<CronJobDetailViewModel>();
+
             serviceCollection.AddTransient<DaemonSetsViewModel>();
             serviceCollection.AddTransient<JobsViewModel>();
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
@@ -127,6 +131,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<PodMappingProfile>();
                 cfg.AddProfile<ReplicaSetMappingProfile>();
                 cfg.AddProfile<ServiceMappingProfile>();
+                cfg.AddProfile<CronJobMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
@@ -143,12 +148,6 @@ namespace KubeMob.Common
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         r.Type));
-
-                cfg.CreateMap<k8s.Models.V1beta1CronJob, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        r.Spec.Schedule));
 
                 cfg.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

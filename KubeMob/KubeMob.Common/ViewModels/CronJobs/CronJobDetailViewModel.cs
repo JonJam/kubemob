@@ -9,18 +9,18 @@ using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
 // TODO Reduce duplication amongst detail pages
-namespace KubeMob.Common.ViewModels.Services
+namespace KubeMob.Common.ViewModels.CronJobs
 {
     [Preserve(AllMembers = true)]
-    public class ServiceDetailViewModel : ViewModelBase
+    public class CronJobDetailViewModel : ViewModelBase
     {
         private readonly IKubernetesService kubernetesService;
         private readonly IPopupService popupService;
 
         private string name;
-        private ServiceDetail detail;
+        private CronJobDetail detail;
 
-        public ServiceDetailViewModel(
+        public CronJobDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService)
         {
@@ -38,7 +38,7 @@ namespace KubeMob.Common.ViewModels.Services
             private set => this.SetProperty(ref this.name, value);
         }
 
-        public ServiceDetail Detail
+        public CronJobDetail Detail
         {
             get => this.detail;
             private set => this.SetProperty(ref this.detail, value);
@@ -54,7 +54,7 @@ namespace KubeMob.Common.ViewModels.Services
             {
                 try
                 {
-                    this.Detail = await this.kubernetesService.GetServiceDetail(objectId.Name, objectId.NamespaceName);
+                    this.Detail = await this.kubernetesService.GetCronJobDetail(objectId.Name, objectId.NamespaceName);
                 }
                 catch (ClusterNotFoundException)
                 {

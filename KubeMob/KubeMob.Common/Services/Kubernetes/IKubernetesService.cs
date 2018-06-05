@@ -122,6 +122,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetCronJobSummaries();
 
+        Task<CronJobDetail> GetCronJobDetail(
+            string cronJobName,
+            string cronJobNamespace);
+
         Task<IList<ObjectSummary>> GetDaemonSetSummaries();
 
         Task<IList<ObjectSummary>> GetJobSummaries();

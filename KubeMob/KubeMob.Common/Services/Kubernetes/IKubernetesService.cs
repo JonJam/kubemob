@@ -110,6 +110,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetServiceSummaries();
 
+        Task<ServiceDetail> GetServiceDetail(
+            string serviceName,
+            string serviceNamespace);
+
         Task<IList<ObjectSummary>> GetIngressSummaries();
 
         Task<IList<ObjectSummary>> GetConfigMapSummaries();

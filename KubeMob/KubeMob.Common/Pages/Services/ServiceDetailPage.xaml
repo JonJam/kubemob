@@ -5,7 +5,7 @@
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          x:Class="KubeMob.Common.Pages.ReplicaSets.ReplicaSetDetailPage"
+                          x:Class="KubeMob.Common.Pages.Services.ServiceDetailPage"
                           Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
@@ -19,6 +19,7 @@
 
                 <StackLayout
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
+
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details}"
                         FontSize="18"/>
@@ -39,7 +40,8 @@
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
-                        ItemsSource="{Binding Detail.Labels}">
+                        ItemsSource="{Binding Detail.Labels}"
+                        PlaceholderText="-">
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Label
@@ -73,10 +75,10 @@
                         Text="{Binding Detail.CreationTime}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+                        Text="{markupExtensions:Translate ServiceDetailPage_Details_LabelSelector}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
-                        ItemsSource="{Binding Detail.Selectors}"
+                        ItemsSource="{Binding Detail.LabelSelector}"
                         PlaceholderText="-">
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -89,10 +91,28 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Images}"
+                        Text="{markupExtensions:Translate ServiceDetailPage_Details_Type}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Type}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate ServiceDetailPage_Details_SessionAffinity}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.SessionAffinity}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate ServiceDetailPage_Details_ClusterIp}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.ClusterIp}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate ServiceDetailPage_Details_InternalEndpoints}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
-                        ItemsSource="{Binding Detail.Images}"
+                        ItemsSource="{Binding Detail.InternalEndpoints}"
                         PlaceholderText="-">
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -104,11 +124,20 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Pods}"
+                        Text="{markupExtensions:Translate ServiceDetailPage_Details_ExternalEndpoints}"
                         FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Pods}"/>
-
+                    <!--TODO Launch in browser ??-->
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.ExternalEndpoints}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
                 </StackLayout>
             </Grid>
 

@@ -4,26 +4,32 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class ReplicaSetDetail
+    public class ServiceDetail
     {
-        public ReplicaSetDetail(
+        public ServiceDetail(
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime,
-            IReadOnlyList<string> selectors,
-            IReadOnlyList<string> images,
-            string pods)
+            IReadOnlyList<string> labelSelector,
+            string type,
+            string sessionAffinity,
+            string clusterIp,
+            IReadOnlyList<string> internalEndpoints,
+            IReadOnlyList<string> externalEndpoints)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
             this.Labels = labels;
             this.Annotations = annotations;
             this.CreationTime = creationTime;
-            this.Selectors = selectors;
-            this.Images = images;
-            this.Pods = pods;
+            this.LabelSelector = labelSelector;
+            this.Type = type;
+            this.SessionAffinity = sessionAffinity;
+            this.ClusterIp = clusterIp;
+            this.InternalEndpoints = internalEndpoints;
+            this.ExternalEndpoints = externalEndpoints;
         }
 
         public string Name
@@ -51,17 +57,32 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> Selectors
+        public IReadOnlyList<string> LabelSelector
         {
             get;
         }
 
-        public IReadOnlyList<string> Images
+        public string Type
         {
             get;
         }
 
-        public string Pods
+        public string SessionAffinity
+        {
+            get;
+        }
+
+        public string ClusterIp
+        {
+            get;
+        }
+
+        public IReadOnlyList<string> InternalEndpoints
+        {
+            get;
+        }
+
+        public IReadOnlyList<string> ExternalEndpoints
         {
             get;
         }

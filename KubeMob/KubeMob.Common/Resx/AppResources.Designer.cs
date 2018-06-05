@@ -979,6 +979,60 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cluster IP.
+        /// </summary>
+        internal static string ServiceDetailPage_Details_ClusterIp {
+            get {
+                return ResourceManager.GetString("ServiceDetailPage_Details_ClusterIp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External endpoints.
+        /// </summary>
+        internal static string ServiceDetailPage_Details_ExternalEndpoints {
+            get {
+                return ResourceManager.GetString("ServiceDetailPage_Details_ExternalEndpoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal endpoints.
+        /// </summary>
+        internal static string ServiceDetailPage_Details_InternalEndpoints {
+            get {
+                return ResourceManager.GetString("ServiceDetailPage_Details_InternalEndpoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Label selector.
+        /// </summary>
+        internal static string ServiceDetailPage_Details_LabelSelector {
+            get {
+                return ResourceManager.GetString("ServiceDetailPage_Details_LabelSelector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Session Affinity.
+        /// </summary>
+        internal static string ServiceDetailPage_Details_SessionAffinity {
+            get {
+                return ResourceManager.GetString("ServiceDetailPage_Details_SessionAffinity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string ServiceDetailPage_Details_Type {
+            get {
+                return ResourceManager.GetString("ServiceDetailPage_Details_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Services.
         /// </summary>
         internal static string Services {

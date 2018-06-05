@@ -447,4 +447,22 @@
   <data name="ReplicaSetDetailPage_Details_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
+  <data name="ServiceDetailPage_Details_SessionAffinity" xml:space="preserve">
+    <value>Session Affinity</value>
+  </data>
+  <data name="ServiceDetailPage_Details_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ServiceDetailPage_Details_ClusterIp" xml:space="preserve">
+    <value>Cluster IP</value>
+  </data>
+  <data name="ServiceDetailPage_Details_ExternalEndpoints" xml:space="preserve">
+    <value>External endpoints</value>
+  </data>
+  <data name="ServiceDetailPage_Details_InternalEndpoints" xml:space="preserve">
+    <value>Internal endpoints</value>
+  </data>
+  <data name="ServiceDetailPage_Details_LabelSelector" xml:space="preserve">
+    <value>Label selector</value>
+  </data>
 </root>

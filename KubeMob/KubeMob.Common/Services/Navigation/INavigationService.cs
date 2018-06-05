@@ -29,6 +29,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToServicesPage();
 
+        Task NavigateToServiceDetailPage(string name, string namespaceName);
+
         Task NavigateToIngressesPage();
 
         Task NavigateToConfigMapsPage();

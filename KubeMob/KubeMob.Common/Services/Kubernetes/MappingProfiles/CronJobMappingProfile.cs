@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using KubeMob.Common.Services.Kubernetes.Model;
 
@@ -14,10 +16,26 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     r.Spec.Schedule));
 
             this.CreateMap<k8s.Models.V1beta1CronJob, CronJobDetail>()
-                .ConstructUsing((s) =>
+                .ConstructUsing((c) =>
                 {
+                    List<string> labels = c.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+                    List<string> annotations = c.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                               new List<string>();
                     
-                    return new CronJobDetail();
+                    string creationTime = c.Metadata.CreationTimestamp.HasValue
+                        ? $"{c.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
+
+                    var active = c.Status.Active;
+                    var lastScheduleTime = c.Status.LastScheduleTime;
+
+                    return new CronJobDetail(
+                        c.Metadata.Name,
+                        c.Metadata.NamespaceProperty,
+                        labels.AsReadOnly(),
+                        annotations.AsReadOnly(),
+                        creationTime,
+                        c.Spec.Schedule);
                 });
         }
     }

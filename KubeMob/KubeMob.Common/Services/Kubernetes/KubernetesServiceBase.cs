@@ -455,6 +455,8 @@ namespace KubeMob.Common.Services.Kubernetes
             V1DaemonSet daemonSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedDaemonSetStatusAsync(daemonSetName, daemonSetNamespace));
 
             // TODO Event information ??
+            // TODO Services ??
+            // TODO Pods ??
             return Mapper.Map<DaemonSetDetail>(daemonSetDetail);
         }
 

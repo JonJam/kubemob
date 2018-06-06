@@ -438,13 +438,13 @@
   <data name="DeploymentDetailPage_Details_Strategy" xml:space="preserve">
     <value>Strategy</value>
   </data>
-  <data name="ReplicaSetDetailPage_Details_Images" xml:space="preserve">
+  <data name="DetailPage_Details_Images" xml:space="preserve">
     <value>Images</value>
   </data>
-  <data name="ReplicaSetDetail_Pods" xml:space="preserve">
+  <data name="Detail_Pods" xml:space="preserve">
     <value>{0} running</value>
   </data>
-  <data name="ReplicaSetDetailPage_Details_Pods" xml:space="preserve">
+  <data name="DetailPage_Details_Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
   <data name="ServiceDetailPage_Details_SessionAffinity" xml:space="preserve">

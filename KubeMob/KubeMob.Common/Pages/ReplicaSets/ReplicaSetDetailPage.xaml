@@ -89,7 +89,7 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Images}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Images}"
                         FontAttributes="Bold"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Images}"
@@ -104,7 +104,7 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate ReplicaSetDetailPage_Details_Pods}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Pods}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Pods}"/>

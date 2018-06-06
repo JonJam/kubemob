@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -33,7 +32,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 List<string> images = r.Spec.Template.Spec.Containers.Select(c => c.Image).ToList();
 
                 string pods = string.Format(
-                    AppResources.ReplicaSetDetail_Pods,
+                    AppResources.Detail_Pods,
                     r.Status.AvailableReplicas.GetValueOrDefault(0));
 
                 return new ReplicaSetDetail(

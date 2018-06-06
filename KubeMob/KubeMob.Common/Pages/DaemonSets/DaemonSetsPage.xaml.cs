@@ -10,9 +10,9 @@ namespace KubeMob.Common.Pages.DaemonSets
         public DaemonSetsPage()
         {
             this.InitializeComponent();
-            this.DaemonSets.ItemSelected += this.OnCronJobSelected;
+            this.DaemonSets.ItemSelected += this.OnDaemonSetSelected;
         }
 
-        private void OnCronJobSelected(object sender, SelectedItemChangedEventArgs e) => this.DaemonSets.SelectedItem = null;
+        private void OnDaemonSetSelected(object sender, SelectedItemChangedEventArgs e) => this.DaemonSets.SelectedItem = null;
     }
 }

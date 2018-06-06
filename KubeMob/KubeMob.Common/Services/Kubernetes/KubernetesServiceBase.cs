@@ -473,6 +473,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<JobDetail> GetJobDetail(
+            string jobName,
+            string jobNamespace)
+        {
+            V1Job jobDetail = await this.PerformClientOperation((c) => c.ReadNamespacedJobStatusAsync(jobName, jobNamespace));
+
+            // TODO Event information ??
+            // TODO Pods ??
+            return Mapper.Map<JobDetail>(jobDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetReplicationControllerSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

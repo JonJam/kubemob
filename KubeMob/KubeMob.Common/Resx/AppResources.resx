@@ -489,4 +489,16 @@
   <data name="CronJobDetailPage_Details_Suspend" xml:space="preserve">
     <value>Suspend</value>
   </data>
+  <data name="JobDetail_Status" xml:space="preserve">
+    <value>{0} active, {1} succeeded, {2} failed</value>
+  </data>
+  <data name="JobDetailPage_Details_Completions" xml:space="preserve">
+    <value>Completions</value>
+  </data>
+  <data name="JobDetailPage_Details_Parallelism" xml:space="preserve">
+    <value>Parallelism</value>
+  </data>
+  <data name="JobDetailPage_Details_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>

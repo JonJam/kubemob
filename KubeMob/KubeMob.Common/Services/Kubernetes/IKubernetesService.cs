@@ -134,6 +134,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetJobSummaries();
 
+        Task<JobDetail> GetJobDetail(
+            string jobName,
+            string jobNamespace);
+
         Task<IList<ObjectSummary>> GetReplicationControllerSummaries();
 
         Task<ReplicationControllerDetail> GetReplicationControllerDetail(

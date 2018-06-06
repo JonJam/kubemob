@@ -15,6 +15,7 @@ using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
 using KubeMob.Common.ViewModels.CronJobs;
+using KubeMob.Common.ViewModels.DaemonSets;
 using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
@@ -93,6 +94,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<CronJobDetailViewModel>();
 
             serviceCollection.AddTransient<DaemonSetsViewModel>();
+            serviceCollection.AddTransient<DaemonSetDetailViewModel>();
+
             serviceCollection.AddTransient<JobsViewModel>();
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
@@ -127,11 +130,14 @@ namespace KubeMob.Common
             // - AutoMapper
             Mapper.Initialize(cfg =>
             {
+                cfg.AddProfile<CommonMappingProfile>();
+
                 cfg.AddProfile<DeploymentMappingProfile>();
                 cfg.AddProfile<PodMappingProfile>();
                 cfg.AddProfile<ReplicaSetMappingProfile>();
                 cfg.AddProfile<ServiceMappingProfile>();
                 cfg.AddProfile<CronJobMappingProfile>();
+                cfg.AddProfile<DaemonSetMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
@@ -148,12 +154,6 @@ namespace KubeMob.Common
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         r.Type));
-
-                cfg.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        $"{r.Status.CurrentNumberScheduled}/{r.Status.DesiredNumberScheduled}"));
 
                 cfg.CreateMap<k8s.Models.V1Job, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

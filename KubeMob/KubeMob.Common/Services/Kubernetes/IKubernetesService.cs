@@ -128,6 +128,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetDaemonSetSummaries();
 
+        Task<DaemonSetDetail> GetDaemonSetDetail(
+            string daemonSetName,
+            string daemonSetNamespace);
+
         Task<IList<ObjectSummary>> GetJobSummaries();
 
         Task<IList<ObjectSummary>> GetReplicationControllerSummaries();

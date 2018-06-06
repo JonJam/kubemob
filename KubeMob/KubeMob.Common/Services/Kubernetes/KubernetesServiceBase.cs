@@ -448,6 +448,16 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<DaemonSetDetail> GetDaemonSetDetail(
+            string daemonSetName,
+            string daemonSetNamespace)
+        {
+            V1DaemonSet daemonSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedDaemonSetStatusAsync(daemonSetName, daemonSetNamespace));
+
+            // TODO Event information ??
+            return Mapper.Map<DaemonSetDetail>(daemonSetDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetJobSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

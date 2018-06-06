@@ -8,6 +8,7 @@ using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.ReplicaSets;
+using KubeMob.Common.Pages.ReplicationControllers;
 using KubeMob.Common.Pages.Services;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Services.Settings;
@@ -103,6 +104,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToJobsPage() => NavigationService.InternalNavigate(typeof(JobsPage));
 
         public Task NavigateToReplicationControllersPage() => NavigationService.InternalNavigate(typeof(ReplicationControllersPage));
+
+        public Task NavigateToReplicationControllerDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ReplicationControllerDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToPersistentVolumeClaimsPage() => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimsPage));
 

@@ -49,6 +49,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToReplicationControllersPage();
 
+        Task NavigateToReplicationControllerDetailPage(string name, string namespaceName);
+
         Task NavigateToStatefulSetsPage();
 
         Task NavigateToPersistentVolumeClaimsPage();

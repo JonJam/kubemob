@@ -486,6 +486,19 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<ReplicationControllerDetail> GetReplicationControllerDetail(
+            string replicationControllerName,
+            string replicationControllerNamespace)
+        {
+            V1ReplicationController replicationControllerDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicationControllerStatusAsync(replicationControllerName, replicationControllerNamespace));
+
+            // TODO Event information ??
+            // TODO Pods information ??
+            // TODO Services information ??
+            // TODO Horizontal pod autoscaler information ??
+            return Mapper.Map<ReplicationControllerDetail>(replicationControllerDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetStatefulSetSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

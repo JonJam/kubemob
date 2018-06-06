@@ -47,6 +47,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToJobsPage();
 
+        Task NavigateToJobDetailPage(string name, string namespaceName);
+
         Task NavigateToReplicationControllersPage();
 
         Task NavigateToReplicationControllerDetailPage(string name, string namespaceName);

@@ -754,6 +754,42 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} active, {1} succeeded, {2} failed.
+        /// </summary>
+        internal static string JobDetail_Status {
+            get {
+                return ResourceManager.GetString("JobDetail_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Completions.
+        /// </summary>
+        internal static string JobDetailPage_Details_Completions {
+            get {
+                return ResourceManager.GetString("JobDetailPage_Details_Completions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parallelism.
+        /// </summary>
+        internal static string JobDetailPage_Details_Parallelism {
+            get {
+                return ResourceManager.GetString("JobDetailPage_Details_Parallelism", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string JobDetailPage_Details_Status {
+            get {
+                return ResourceManager.GetString("JobDetailPage_Details_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jobs.
         /// </summary>
         internal static string Jobs {

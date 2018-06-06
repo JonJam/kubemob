@@ -17,6 +17,7 @@ using KubeMob.Common.ViewModels;
 using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.DaemonSets;
 using KubeMob.Common.ViewModels.Deployments;
+using KubeMob.Common.ViewModels.Jobs;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
@@ -88,7 +89,9 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ServiceDetailViewModel>();
 
             serviceCollection.AddTransient<IngressesViewModel>();
+
             serviceCollection.AddTransient<ConfigMapsViewModel>();
+
             serviceCollection.AddTransient<SecretsViewModel>();
 
             serviceCollection.AddTransient<CronJobsViewModel>();
@@ -98,11 +101,13 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<DaemonSetDetailViewModel>();
 
             serviceCollection.AddTransient<JobsViewModel>();
+            serviceCollection.AddTransient<JobDetailViewModel>();
 
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
             serviceCollection.AddTransient<ReplicationControllerDetailViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
+
             serviceCollection.AddTransient<StatefulSetsViewModel>();
 
             serviceCollection.AddTransient<SettingsViewModel>();
@@ -143,6 +148,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<CronJobMappingProfile>();
                 cfg.AddProfile<DaemonSetMappingProfile>();
                 cfg.AddProfile<ReplicationControllerMappingProfile>();
+                cfg.AddProfile<JobMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
@@ -159,12 +165,6 @@ namespace KubeMob.Common
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         r.Type));
-
-                cfg.CreateMap<k8s.Models.V1Job, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        $"{r.Status.Active.GetValueOrDefault(0)}/{r.Spec.Parallelism}"));
                 
                 cfg.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

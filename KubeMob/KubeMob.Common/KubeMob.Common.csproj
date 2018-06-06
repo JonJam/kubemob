@@ -51,6 +51,9 @@
     <Compile Update="Pages\ConfigMapsPage.xaml.cs">
       <DependentUpon>ConfigMapsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Jobs\JobDetailPage.xaml.cs">
+      <DependentUpon>JobDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Pods\PodDetailPage.xaml.cs">
       <DependentUpon>PodDetailPage.xaml</DependentUpon>
     </Compile>
@@ -69,7 +72,7 @@
     <Compile Update="Pages\DaemonSets\DaemonSetsPage.xaml.cs">
       <DependentUpon>DaemonSetsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\JobsPage.xaml.cs">
+    <Compile Update="Pages\Jobs\JobsPage.xaml.cs">
       <DependentUpon>JobsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ReplicationControllers\ReplicationControllersPage.xaml.cs">

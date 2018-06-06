@@ -5,6 +5,7 @@ using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
+using KubeMob.Common.Pages.Jobs;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.ReplicaSets;
@@ -102,6 +103,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToDaemonSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DaemonSetDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToJobsPage() => NavigationService.InternalNavigate(typeof(JobsPage));
+
+        public Task NavigateToJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(JobDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToReplicationControllersPage() => NavigationService.InternalNavigate(typeof(ReplicationControllersPage));
 

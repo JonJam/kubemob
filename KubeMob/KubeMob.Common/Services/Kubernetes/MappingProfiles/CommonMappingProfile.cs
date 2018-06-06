@@ -10,6 +10,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1OwnerReference, OwnerReference>()
                 .ConstructUsing((o) => new OwnerReference(
                     o.Name,
-                    o.Kind));}
+                    o.Kind));
+        }
     }
 }

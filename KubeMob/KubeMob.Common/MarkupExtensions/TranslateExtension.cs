@@ -37,9 +37,7 @@ namespace KubeMob.Common.MarkupExtensions
             if (translation == null)
             {
 #if DEBUG
-                throw new ArgumentException(
-                    $"Key '{this.Text}' was not found in resources for culture '{this.ci.Name}'.",
-                    nameof(this.Text));
+                throw new NotImplementedException($"Key '{this.Text}' was not found in resources for culture '{this.ci.Name}'.");
 #else
 				translation = this.Text; // returns the key, which GETS DISPLAYED TO THE USER
 #endif

@@ -10,10 +10,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         public CronJobMappingProfile()
         {
             this.CreateMap<k8s.Models.V1beta1CronJob, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty,
-                    r.Spec.Schedule));
+                .ConstructUsing((c) => new ObjectSummary(
+                    c.Metadata.Name,
+                    c.Metadata.NamespaceProperty,
+                    c.Spec.Schedule));
 
             this.CreateMap<k8s.Models.V1beta1CronJob, CronJobDetail>()
                 .ConstructUsing((c) =>

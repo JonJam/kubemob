@@ -628,6 +628,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} running.
+        /// </summary>
+        internal static string Detail_Pods {
+            get {
+                return ResourceManager.GetString("Detail_Pods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         internal static string DetailPage_Details {
@@ -655,6 +664,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        internal static string DetailPage_Details_Images {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Images", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Labels.
         /// </summary>
         internal static string DetailPage_Details_Labels {
@@ -678,6 +696,15 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Details_Namespace {
             get {
                 return ResourceManager.GetString("DetailPage_Details_Namespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pods.
+        /// </summary>
+        internal static string DetailPage_Details_Pods {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Pods", resourceCulture);
             }
         }
         
@@ -957,33 +984,6 @@ namespace KubeMob.Common.Resx {
         internal static string PodsPage_NoPodsMessage {
             get {
                 return ResourceManager.GetString("PodsPage_NoPodsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} running.
-        /// </summary>
-        internal static string ReplicaSetDetail_Pods {
-            get {
-                return ResourceManager.GetString("ReplicaSetDetail_Pods", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Images.
-        /// </summary>
-        internal static string ReplicaSetDetailPage_Details_Images {
-            get {
-                return ResourceManager.GetString("ReplicaSetDetailPage_Details_Images", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pods.
-        /// </summary>
-        internal static string ReplicaSetDetailPage_Details_Pods {
-            get {
-                return ResourceManager.GetString("ReplicaSetDetailPage_Details_Pods", resourceCulture);
             }
         }
         

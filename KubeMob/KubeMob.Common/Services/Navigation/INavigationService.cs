@@ -43,6 +43,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToDaemonSetsPage();
 
+        Task NavigateToDaemonSetDetailPage(string name, string namespaceName);
+
         Task NavigateToJobsPage();
 
         Task NavigateToReplicationControllersPage();

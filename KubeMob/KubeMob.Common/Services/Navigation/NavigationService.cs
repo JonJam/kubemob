@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.CronJobs;
+using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
@@ -96,6 +97,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToCronJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(CronJobDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToDaemonSetsPage() => NavigationService.InternalNavigate(typeof(DaemonSetsPage));
+
+        public Task NavigateToDaemonSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DaemonSetDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToJobsPage() => NavigationService.InternalNavigate(typeof(JobsPage));
 

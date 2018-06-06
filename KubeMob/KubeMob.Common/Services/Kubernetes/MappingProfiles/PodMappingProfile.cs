@@ -53,12 +53,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         lastTransitionTime,
                         c.Reason);
                 });
-
-            this.CreateMap<k8s.Models.V1OwnerReference, OwnerReference>()
-                .ConstructUsing((o) => new OwnerReference(
-                    o.Name,
-                    o.Kind));
-
+            
             this.CreateMap<k8s.Models.V1Pod, PodDetail>()
                 .ConstructUsing((p) =>
                 {

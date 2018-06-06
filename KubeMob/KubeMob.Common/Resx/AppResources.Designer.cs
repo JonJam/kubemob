@@ -448,6 +448,78 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Jobs.
+        /// </summary>
+        internal static string CronJobDetailPage_ActiveJobs {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_ActiveJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is nothing to display here..
+        /// </summary>
+        internal static string CronJobDetailPage_ActiveJobs_EmptyMessage {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_ActiveJobs_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        internal static string CronJobDetailPage_Details_ActiveJobCount {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_Details_ActiveJobCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Concurrency Policy.
+        /// </summary>
+        internal static string CronJobDetailPage_Details_ConcurrencyPolicy {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_Details_ConcurrencyPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Schedule.
+        /// </summary>
+        internal static string CronJobDetailPage_Details_LastSchedule {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_Details_LastSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule.
+        /// </summary>
+        internal static string CronJobDetailPage_Details_Schedule {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_Details_Schedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Deadline Seconds.
+        /// </summary>
+        internal static string CronJobDetailPage_Details_StartingDeadlineSeconds {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_Details_StartingDeadlineSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspend.
+        /// </summary>
+        internal static string CronJobDetailPage_Details_Suspend {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_Details_Suspend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cron Jobs.
         /// </summary>
         internal static string CronJobs {

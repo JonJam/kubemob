@@ -21,13 +21,20 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     List<string> labels = c.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
                     List<string> annotations = c.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                new List<string>();
-                    
+
                     string creationTime = c.Metadata.CreationTimestamp.HasValue
                         ? $"{c.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    var active = c.Status.Active;
-                    var lastScheduleTime = c.Status.LastScheduleTime;
+                    List<OwnerReference> activeJobs = Mapper.Map<List<OwnerReference>>(c.Status.Active) ?? new List<OwnerReference>();
+
+                    bool suspend = c.Spec.Suspend.GetValueOrDefault(false);
+                    string lastSchedule = c.Status.LastScheduleTime.HasValue
+                        ? $"{c.Status.LastScheduleTime.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
+
+                    string concurrencyPolicy = c.Spec.ConcurrencyPolicy;
+                    string startingDeadlineSeconds = c.Spec.StartingDeadlineSeconds?.ToString() ?? "-";
 
                     return new CronJobDetail(
                         c.Metadata.Name,
@@ -35,7 +42,12 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
                         creationTime,
-                        c.Spec.Schedule);
+                        c.Spec.Schedule,
+                        suspend,
+                        lastSchedule,
+                        concurrencyPolicy,
+                        startingDeadlineSeconds,
+                        activeJobs.AsReadOnly());
                 });
         }
     }

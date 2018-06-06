@@ -4,6 +4,7 @@
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.CronJobs.CronJobDetailPage"
                           Title="{Binding Name}"
              common:ViewModelLocator.AutoWireViewModel="true">
@@ -19,6 +20,108 @@
                 <StackLayout
                     IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
 
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details}"
+                        FontSize="18"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Name}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.NamespaceName}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Labels}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+                        FontAttributes="Bold"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Annotations}"
+                        PlaceholderText="-">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.CreationTime}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_Details_Schedule}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Schedule}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_Details_ActiveJobCount}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.ActiveJobCount}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_Details_Suspend}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.Suspend}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_Details_LastSchedule}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.LastSchedule}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_Details_ConcurrencyPolicy}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.ConcurrencyPolicy}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_Details_StartingDeadlineSeconds}"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="{Binding Detail.StartingDeadlineSeconds}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate CronJobDetailPage_ActiveJobs}"
+                        FontSize="18"/>
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.ActiveJobs}"
+                        PlaceholderText="{markupExtensions:Translate CronJobDetailPage_ActiveJobs_EmptyMessage}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                     Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
 
                 </StackLayout>
             </Grid>

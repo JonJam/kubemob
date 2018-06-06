@@ -7,7 +7,8 @@ namespace KubeMob.Common.Pages.Services
     public partial class ServicesPage : ExtendedContentPage
     {
         [Preserve]
-        public ServicesPage() {
+        public ServicesPage()
+        {
             this.InitializeComponent();
             this.Services.ItemSelected += this.OnReplicaSetSelected;
         }

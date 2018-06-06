@@ -7,7 +7,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.CronJobs
 {
     [Preserve(AllMembers = true)]
     public class CronJobsViewModel : ObjectListViewModelBase
@@ -24,7 +24,9 @@ namespace KubeMob.Common.ViewModels
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {
-            throw new System.NotImplementedException();
+            ObjectSummary selected = (ObjectSummary)obj;
+
+            return this.NavigationService.NavigateToCronJobDetailPage(selected.Name, selected.NamespaceName);
         }
     }
 }

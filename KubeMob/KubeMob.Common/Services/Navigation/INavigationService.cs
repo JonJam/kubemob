@@ -39,6 +39,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToCronJobsPage();
 
+        Task NavigateToCronJobDetailPage(string name, string namespaceName);
+
         Task NavigateToDaemonSetsPage();
 
         Task NavigateToJobsPage();

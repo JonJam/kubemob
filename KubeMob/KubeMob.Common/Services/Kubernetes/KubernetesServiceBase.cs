@@ -268,12 +268,8 @@ namespace KubeMob.Common.Services.Kubernetes
             }
         }
 
-        public void SetSelectedNamespace(Namespace ns)
-        {
-            this.appSettings.SelectedNamespace = ns.Name;
-
-            // TODO Notify of change ?? Will only probably need to on overview.
-        }
+        // TODO Notify of change ?? Will only probably need to on overview.
+        public void SetSelectedNamespace(Namespace ns) => this.appSettings.SelectedNamespace = ns.Name;
 
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
@@ -427,6 +423,16 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<IList<ObjectSummary>>(cronJobList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
+        }
+
+        public async Task<CronJobDetail> GetCronJobDetail(
+            string cronJobName,
+            string cronJobNamespace)
+        {
+            V1beta1CronJob cronJobDetail = await this.PerformClientOperation((c) => c.ReadNamespacedCronJobStatusAsync(cronJobName, cronJobNamespace));
+
+            // TODO Event information ??
+            return Mapper.Map<CronJobDetail>(cronJobDetail);
         }
 
         public async Task<IList<ObjectSummary>> GetDaemonSetSummaries()

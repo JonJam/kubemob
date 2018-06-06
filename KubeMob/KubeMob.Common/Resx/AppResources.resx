@@ -465,4 +465,28 @@
   <data name="ServiceDetailPage_Details_LabelSelector" xml:space="preserve">
     <value>Label selector</value>
   </data>
+  <data name="CronJobDetailPage_ActiveJobs" xml:space="preserve">
+    <value>Active Jobs</value>
+  </data>
+  <data name="CronJobDetailPage_ActiveJobs_EmptyMessage" xml:space="preserve">
+    <value>There is nothing to display here.</value>
+  </data>
+  <data name="CronJobDetailPage_Details_ActiveJobCount" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="CronJobDetailPage_Details_ConcurrencyPolicy" xml:space="preserve">
+    <value>Concurrency Policy</value>
+  </data>
+  <data name="CronJobDetailPage_Details_LastSchedule" xml:space="preserve">
+    <value>Last Schedule</value>
+  </data>
+  <data name="CronJobDetailPage_Details_Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="CronJobDetailPage_Details_StartingDeadlineSeconds" xml:space="preserve">
+    <value>Starting Deadline Seconds</value>
+  </data>
+  <data name="CronJobDetailPage_Details_Suspend" xml:space="preserve">
+    <value>Suspend</value>
+  </data>
 </root>

@@ -9,7 +9,6 @@ using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
 // TODO Reduce duplication amongst detail pages
-
 namespace KubeMob.Common.ViewModels.Pods
 {
     [Preserve(AllMembers = true)]

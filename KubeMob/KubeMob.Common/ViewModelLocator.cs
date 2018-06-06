@@ -20,6 +20,7 @@ using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
+using KubeMob.Common.ViewModels.ReplicationControllers;
 using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
 using Microsoft.Extensions.DependencyInjection;
@@ -97,7 +98,10 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<DaemonSetDetailViewModel>();
 
             serviceCollection.AddTransient<JobsViewModel>();
+
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
+            serviceCollection.AddTransient<ReplicationControllerDetailViewModel>();
+
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
             serviceCollection.AddTransient<StatefulSetsViewModel>();
 
@@ -138,6 +142,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<ServiceMappingProfile>();
                 cfg.AddProfile<CronJobMappingProfile>();
                 cfg.AddProfile<DaemonSetMappingProfile>();
+                cfg.AddProfile<ReplicationControllerMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
@@ -160,13 +165,7 @@ namespace KubeMob.Common
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         $"{r.Status.Active.GetValueOrDefault(0)}/{r.Spec.Parallelism}"));
-
-                cfg.CreateMap<k8s.Models.V1ReplicationController, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Spec.Replicas}"));
-
+                
                 cfg.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.NamespaceProperty,

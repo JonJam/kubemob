@@ -136,6 +136,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetReplicationControllerSummaries();
 
+        Task<ReplicationControllerDetail> GetReplicationControllerDetail(
+            string replicationControllerName,
+            string replicationControllerNamespace);
+
         Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries();
 
         Task<IList<ObjectSummary>> GetStatefulSetSummaries();

@@ -6,24 +6,28 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     [Preserve(AllMembers = true)]
     public class PersistentVolumeClaimDetail
     {
-        public PersistentVolumeClaimDetail()
-            //string name,
-            //string namespaceName,
-            //IReadOnlyList<string> labels,
-            //IReadOnlyList<string> annotations,
-            //string creationTime,
-            //IReadOnlyList<string> selectors,
-            //IReadOnlyList<string> images,
-            //string pods)
+        public PersistentVolumeClaimDetail(
+            string name,
+            string namespaceName,
+            IReadOnlyList<string> labels,
+            IReadOnlyList<string> annotations,
+            string creationTime,
+            string status,
+            string volumeName,
+            IReadOnlyList<string> accessModes,
+            string storageClassName,
+            List<Capacity> capacity)
         {
-            //this.Name = name;
-            //this.NamespaceName = namespaceName;
-            //this.Labels = labels;
-            //this.Annotations = annotations;
-            //this.CreationTime = creationTime;
-            //this.Selectors = selectors;
-            //this.Images = images;
-            //this.Pods = pods;
+            this.Name = name;
+            this.NamespaceName = namespaceName;
+            this.Labels = labels;
+            this.Annotations = annotations;
+            this.CreationTime = creationTime;
+            this.Status = status;
+            this.VolumeName = volumeName;
+            this.AccessModes = accessModes;
+            this.StorageClassName = storageClassName;
+            this.Capacity = capacity;
         }
 
         public string Name
@@ -50,18 +54,28 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         {
             get;
         }
-
-        public IReadOnlyList<string> Selectors
+        
+        public string Status
         {
             get;
         }
 
-        public IReadOnlyList<string> Images
+        public string VolumeName
         {
             get;
         }
 
-        public string Pods
+        public IReadOnlyList<string> AccessModes
+        {
+            get;
+        }
+
+        public string StorageClassName
+        {
+            get;
+        }
+
+        public List<Capacity> Capacity
         {
             get;
         }

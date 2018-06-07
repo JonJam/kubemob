@@ -17,33 +17,31 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     r.Status.Phase));
 
             this.CreateMap<k8s.Models.V1PersistentVolumeClaim, PersistentVolumeClaimDetail>()
-                .ConstructUsing((s) =>
+                .ConstructUsing((p) =>
                 {
-                    //List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                    //                      new List<string>();
-                    //List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                    //                           new List<string>();
+                    List<string> labels = p.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                          new List<string>();
+                    List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                               new List<string>();
 
-                    //string creationTime = s.Metadata.CreationTimestamp.HasValue
-                    //    ? $"{s.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
-                    //    : string.Empty;
+                    string creationTime = p.Metadata.CreationTimestamp.HasValue
+                        ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
 
-                    //List<string> images = s.Spec.Template.Spec.Containers.Select(c => c.Image).ToList();
-
-                    //// TODO When look up pods, base status of that (see web-0 in kube-system) as this is currently incorrect.??
-                    //// TODO Based off previous, change other objects which use pod status in detail.
-                    //string pods = string.Format(
-                    //    AppResources.Detail_Pods,
-                    //    s.Status.CurrentReplicas.GetValueOrDefault(0));
-
-                    return new PersistentVolumeClaimDetail();
-                    //s.Metadata.Name,
-                    //s.Metadata.NamespaceProperty,
-                    //labels.AsReadOnly(),
-                    //annotations.AsReadOnly(),
-                    //creationTime,
-                    //images.AsReadOnly(),
-                    //pods);
+                    List<Capacity> capacity = p.Status.Capacity.Select(kvp => new Capacity(kvp.Key, kvp.Value.ToString()))
+                        .ToList();
+                    
+                    return new PersistentVolumeClaimDetail(
+                        p.Metadata.Name,
+                        p.Metadata.NamespaceProperty,
+                        labels.AsReadOnly(),
+                        annotations.AsReadOnly(),
+                        creationTime,
+                        p.Status.Phase,
+                        p.Spec.VolumeName,
+                        p.Spec.AccessModes.ToList().AsReadOnly(),
+                        p.Spec.StorageClassName,
+                        capacity.AsReadOnly());
                 });
         }
     }

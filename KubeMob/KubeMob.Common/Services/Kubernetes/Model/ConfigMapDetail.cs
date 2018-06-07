@@ -6,30 +6,20 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     [Preserve(AllMembers = true)]
     public class ConfigMapDetail
     {
-        public ConfigMapDetail()
-            //string name,
-            //string namespaceName,
-            //IReadOnlyList<string> labels,
-            //IReadOnlyList<string> annotations,
-            //string creationTime,
-            //string schedule,
-            //bool suspend,
-            //string lastSchedule,
-            //string concurrencyPolicy,
-            //string startingDeadlineSeconds,
-            //IReadOnlyList<OwnerReference> activeJobs)
+        public ConfigMapDetail(
+            string name,
+            string namespaceName,
+            IReadOnlyList<string> labels,
+            IReadOnlyList<string> annotations,
+            string creationTime,
+            IReadOnlyList<KeyValuePair<string, string>> data)
         {
-            //this.Name = name;
-            //this.NamespaceName = namespaceName;
-            //this.Labels = labels;
-            //this.Annotations = annotations;
-            //this.CreationTime = creationTime;
-            //this.Schedule = schedule;
-            //this.Suspend = suspend;
-            //this.LastSchedule = lastSchedule;
-            //this.ConcurrencyPolicy = concurrencyPolicy;
-            //this.StartingDeadlineSeconds = startingDeadlineSeconds;
-            //this.ActiveJobs = activeJobs;
+            this.Name = name;
+            this.NamespaceName = namespaceName;
+            this.Labels = labels;
+            this.Annotations = annotations;
+            this.CreationTime = creationTime;
+            this.Data = data;
         }
 
         public string Name
@@ -57,37 +47,9 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string Schedule
+        public IReadOnlyList<KeyValuePair<string, string>> Data
         {
             get;
         }
-
-        public bool Suspend
-        {
-            get;
-        }
-
-        public string LastSchedule
-        {
-            get;
-        }
-
-        public string ConcurrencyPolicy
-        {
-            get;
-        }
-
-        public string StartingDeadlineSeconds
-        {
-            get;
-        }
-
-        // TODO Handle links
-        public IReadOnlyList<OwnerReference> ActiveJobs
-        {
-            get;
-        }
-
-        public int ActiveJobCount => this.ActiveJobs.Count;
     }
 }

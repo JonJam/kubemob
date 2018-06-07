@@ -5,7 +5,8 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          x:Class="KubeMob.Common.Pages.IngressesPage"
+                          xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
+                          x:Class="KubeMob.Common.Pages.Ingresses.IngressesPage"
              Title="{markupExtensions:Translate Ingresses}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
@@ -35,6 +36,12 @@
                     SeparatorVisibility="None"
                     HasUnevenRows="False"
                     CachingStrategy="RecycleElement">
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="ItemTapped"
+                            Command="{Binding ObjectSummarySelectedCommand}"
+                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
+                    </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 

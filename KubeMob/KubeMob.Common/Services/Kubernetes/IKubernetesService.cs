@@ -116,6 +116,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetIngressSummaries();
 
+        Task<IngressDetail> GetIngressDetail(
+            string ingressName,
+            string ingressNamespace);
+
         Task<IList<ObjectSummary>> GetConfigMapSummaries();
 
         Task<IList<ObjectSummary>> GetSecretSummaries();

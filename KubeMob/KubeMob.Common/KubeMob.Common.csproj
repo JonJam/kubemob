@@ -45,7 +45,10 @@
     <Compile Update="Pages\Deployments\DeploymentDetailPage.xaml.cs">
       <DependentUpon>DeploymentDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\IngressesPage.xaml.cs">
+    <Compile Update="Pages\Ingresses\IngressDetailPage.xaml.cs">
+      <DependentUpon>IngressDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Ingresses\IngressesPage.xaml.cs">
       <DependentUpon>IngressesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ConfigMapsPage.xaml.cs">

@@ -60,6 +60,9 @@
     <Compile Update="Pages\Jobs\JobDetailPage.xaml.cs">
       <DependentUpon>JobDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\PersistentVolumeClaims\PersistentVolumeClaimDetailPage.xaml.cs">
+      <DependentUpon>PersistentVolumeClaimDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Pods\PodDetailPage.xaml.cs">
       <DependentUpon>PodDetailPage.xaml</DependentUpon>
     </Compile>
@@ -102,7 +105,7 @@
     <Compile Update="Pages\StatefulSets\StatefulSetsPage.xaml.cs">
       <DependentUpon>StatefulSetsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\PersistentVolumeClaimsPage.xaml.cs">
+    <Compile Update="Pages\PersistentVolumeClaims\PersistentVolumeClaimsPage.xaml.cs">
       <DependentUpon>PersistentVolumeClaimsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\ReplicaSets\ReplicaSetsPage.xaml.cs">

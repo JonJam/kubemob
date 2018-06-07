@@ -27,6 +27,7 @@ using KubeMob.Common.ViewModels.ReplicationControllers;
 using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
 using KubeMob.Common.ViewModels.StatefulSets;
+using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -112,6 +113,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ReplicationControllerDetailViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
+            serviceCollection.AddTransient<PersistentVolumeClaimDetailViewModel>();
 
             serviceCollection.AddTransient<StatefulSetsViewModel>();
             serviceCollection.AddTransient<StatefulSetDetailViewModel>();
@@ -158,18 +160,13 @@ namespace KubeMob.Common
                 cfg.AddProfile<StatefulSetMappingProfile>();
                 cfg.AddProfile<IngressMappingProfile>();
                 cfg.AddProfile<ConfigMapMappingProfile>();
+                cfg.AddProfile<PersistentVolumeClaimMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         r.Type));
-
-                cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        r.Status.Phase));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

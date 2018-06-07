@@ -414,7 +414,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1ConfigMap configMapDetail = await this.PerformClientOperation((c) => c.ReadNamespacedConfigMapAsync(configMapName, configMapNamespace));
 
-            // TODO
             return Mapper.Map<ConfigMapDetail>(configMapDetail);
         }
 
@@ -564,6 +563,15 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<IList<ObjectSummary>>(persistentVolumeClaimsList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
+        }
+
+        public async Task<PersistentVolumeClaimDetail> GetPersistentVolumeClaimDetail(
+            string persistentVolumeClaimName,
+            string persistentVolumeClaimNamespace)
+        {
+            V1PersistentVolumeClaim persistentVolumeClaimDetail = await this.PerformClientOperation((c) => c.ReadNamespacedPersistentVolumeClaimAsync(persistentVolumeClaimName, persistentVolumeClaimNamespace));
+
+            return Mapper.Map<PersistentVolumeClaimDetail>(persistentVolumeClaimDetail);
         }
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);

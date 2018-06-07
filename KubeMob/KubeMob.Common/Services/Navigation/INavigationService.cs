@@ -63,6 +63,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToPersistentVolumeClaimsPage();
 
+        Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName);
+
         Task NavigateToSettingsPage();
 
         Task NavigateToResourceListingPage();

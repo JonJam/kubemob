@@ -90,7 +90,10 @@
     <Compile Update="Pages\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\StatefulSetsPage.xaml.cs">
+    <Compile Update="Pages\StatefulSets\StatefulSetDetailPage.xaml.cs">
+      <DependentUpon>StatefulSetDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\StatefulSets\StatefulSetsPage.xaml.cs">
       <DependentUpon>StatefulSetsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\PersistentVolumeClaimsPage.xaml.cs">

@@ -12,6 +12,7 @@ using KubeMob.Common.Pages.ReplicaSets;
 using KubeMob.Common.Pages.ReplicationControllers;
 using KubeMob.Common.Pages.Services;
 using KubeMob.Common.Pages.Settings;
+using KubeMob.Common.Pages.StatefulSets;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
@@ -113,6 +114,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToPersistentVolumeClaimsPage() => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimsPage));
 
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
+
+        public Task NavigateToStatefulSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(StatefulSetDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
 

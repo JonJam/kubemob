@@ -24,6 +24,7 @@ using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.ReplicationControllers;
 using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
+using KubeMob.Common.ViewModels.StatefulSets;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -109,6 +110,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
 
             serviceCollection.AddTransient<StatefulSetsViewModel>();
+            serviceCollection.AddTransient<StatefulSetDetailViewModel>();
 
             serviceCollection.AddTransient<SettingsViewModel>();
             serviceCollection.AddTransient<ResourceListingViewModel>();
@@ -149,6 +151,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<DaemonSetMappingProfile>();
                 cfg.AddProfile<ReplicationControllerMappingProfile>();
                 cfg.AddProfile<JobMappingProfile>();
+                cfg.AddProfile<StatefulSetMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
@@ -166,12 +169,6 @@ namespace KubeMob.Common
                         r.Metadata.NamespaceProperty,
                         r.Type));
                 
-                cfg.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.NamespaceProperty,
-                        r.Metadata.Name,
-                        $"{r.Status.CurrentReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
-
                 cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,

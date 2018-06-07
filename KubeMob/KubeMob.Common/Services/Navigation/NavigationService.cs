@@ -5,6 +5,7 @@ using KubeMob.Common.Pages.Base;
 using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
+using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
 using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Pods;
@@ -90,6 +91,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToServiceDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ServiceDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToIngressesPage() => NavigationService.InternalNavigate(typeof(IngressesPage));
+
+        public Task NavigateToIngressDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(IngressDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToConfigMapsPage() => NavigationService.InternalNavigate(typeof(ConfigMapsPage));
 

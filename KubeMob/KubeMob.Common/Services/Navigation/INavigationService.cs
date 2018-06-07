@@ -33,6 +33,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToIngressesPage();
 
+        Task NavigateToIngressDetailPage(string name, string namespaceName);
+
         Task NavigateToConfigMapsPage();
 
         Task NavigateToSecretsPage();

@@ -17,6 +17,7 @@ using KubeMob.Common.ViewModels;
 using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.DaemonSets;
 using KubeMob.Common.ViewModels.Deployments;
+using KubeMob.Common.ViewModels.Ingresses;
 using KubeMob.Common.ViewModels.Jobs;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Pods;
@@ -90,6 +91,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ServiceDetailViewModel>();
 
             serviceCollection.AddTransient<IngressesViewModel>();
+            serviceCollection.AddTransient<IngressDetailViewModel>();
 
             serviceCollection.AddTransient<ConfigMapsViewModel>();
 
@@ -152,11 +154,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<ReplicationControllerMappingProfile>();
                 cfg.AddProfile<JobMappingProfile>();
                 cfg.AddProfile<StatefulSetMappingProfile>();
-
-                cfg.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty));
+                cfg.AddProfile<IngressMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1ConfigMap, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

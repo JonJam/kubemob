@@ -386,6 +386,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IngressDetail> GetIngressDetail(
+            string ingressName,
+            string ingressNamespace)
+        {
+            V1beta1Ingress ingressDetail = await this.PerformClientOperation((c) => c.ReadNamespacedIngressStatusAsync(ingressName, ingressNamespace));
+
+            return Mapper.Map<IngressDetail>(ingressDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetConfigMapSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

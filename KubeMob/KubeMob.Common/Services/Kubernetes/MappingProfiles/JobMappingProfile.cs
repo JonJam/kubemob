@@ -33,7 +33,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 
                     int parallelism = j.Spec.Parallelism.Value;
                     int completions = j.Status.Succeeded.GetValueOrDefault(0);
-                    
+
                     string status = string.Format(
                         AppResources.JobDetail_Status,
                         j.Status.Active.GetValueOrDefault(0),

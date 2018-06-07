@@ -55,6 +55,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToStatefulSetsPage();
 
+        Task NavigateToStatefulSetDetailPage(string name, string namespaceName);
+
         Task NavigateToPersistentVolumeClaimsPage();
 
         Task NavigateToSettingsPage();

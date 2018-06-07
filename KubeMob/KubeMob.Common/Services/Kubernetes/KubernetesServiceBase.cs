@@ -523,6 +523,17 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<StatefulSetDetail> GetStatefulSetDetail(
+            string statefulSetName,
+            string statefulSetNamespace)
+        {
+            V1StatefulSet statefulSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedStatefulSetStatusAsync(statefulSetName, statefulSetNamespace));
+
+            // TODO Event information ??
+            // TODO Pods ??
+            return Mapper.Map<StatefulSetDetail>(statefulSetDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

@@ -7,7 +7,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.StatefulSets
 {
     [Preserve(AllMembers = true)]
     public class StatefulSetsViewModel : ObjectListViewModelBase
@@ -25,7 +25,9 @@ namespace KubeMob.Common.ViewModels
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {
-            throw new System.NotImplementedException();
+            ObjectSummary selected = (ObjectSummary)obj;
+
+            return this.NavigationService.NavigateToStatefulSetDetailPage(selected.Name, selected.NamespaceName);
         }
     }
 }

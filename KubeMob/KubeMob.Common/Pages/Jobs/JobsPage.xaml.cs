@@ -7,7 +7,8 @@ namespace KubeMob.Common.Pages.Jobs
     public partial class JobsPage : ExtendedContentPage
     {
         [Preserve]
-        public JobsPage(){
+        public JobsPage()
+        {
             this.InitializeComponent();
             this.Jobs.ItemSelected += this.OnDeploymentSelected;
         }

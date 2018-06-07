@@ -168,7 +168,7 @@ namespace KubeMob.Common
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         r.Type));
-                
+
                 cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,

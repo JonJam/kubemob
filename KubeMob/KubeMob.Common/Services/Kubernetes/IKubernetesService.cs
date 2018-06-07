@@ -122,6 +122,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetConfigMapSummaries();
 
+        Task<ConfigMapDetail> GetConfigMapDetail(
+            string configMapName,
+            string configMapNamespace);
+
         Task<IList<ObjectSummary>> GetSecretSummaries();
 
         Task<IList<ObjectSummary>> GetCronJobSummaries();

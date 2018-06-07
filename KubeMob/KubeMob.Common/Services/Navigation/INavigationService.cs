@@ -37,6 +37,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToConfigMapsPage();
 
+        Task NavigateToConfigMapDetailPage(string name, string namespaceName);
+
         Task NavigateToSecretsPage();
 
         Task NavigateToCronJobsPage();

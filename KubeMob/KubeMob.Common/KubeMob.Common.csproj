@@ -33,6 +33,9 @@
     <Compile Update="Pages\Base\ExtendedContentPage.xaml.cs">
       <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ConfigMaps\ConfigMapDetailPage.xaml.cs">
+      <DependentUpon>ConfigMapDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\CronJobs\CronJobDetailPage.xaml.cs">
       <DependentUpon>CronJobDetailPage.xaml</DependentUpon>
     </Compile>
@@ -51,7 +54,7 @@
     <Compile Update="Pages\Ingresses\IngressesPage.xaml.cs">
       <DependentUpon>IngressesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\ConfigMapsPage.xaml.cs">
+    <Compile Update="Pages\ConfigMaps\ConfigMapsPage.xaml.cs">
       <DependentUpon>ConfigMapsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Jobs\JobDetailPage.xaml.cs">

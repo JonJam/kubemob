@@ -408,6 +408,16 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<ConfigMapDetail> GetConfigMapDetail(
+            string configMapName,
+            string configMapNamespace)
+        {
+            V1ConfigMap configMapDetail = await this.PerformClientOperation((c) => c.ReadNamespacedConfigMapAsync(configMapName, configMapNamespace));
+
+            // TODO
+            return Mapper.Map<ConfigMapDetail>(configMapDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetSecretSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

@@ -14,6 +14,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using KubeMob.Common.ViewModels.ConfigMaps;
 using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.DaemonSets;
 using KubeMob.Common.ViewModels.Deployments;
@@ -94,6 +95,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<IngressDetailViewModel>();
 
             serviceCollection.AddTransient<ConfigMapsViewModel>();
+            serviceCollection.AddTransient<ConfigMapDetailViewModel>();
 
             serviceCollection.AddTransient<SecretsViewModel>();
 
@@ -155,11 +157,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<JobMappingProfile>();
                 cfg.AddProfile<StatefulSetMappingProfile>();
                 cfg.AddProfile<IngressMappingProfile>();
-
-                cfg.CreateMap<k8s.Models.V1ConfigMap, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty));
+                cfg.AddProfile<ConfigMapMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(

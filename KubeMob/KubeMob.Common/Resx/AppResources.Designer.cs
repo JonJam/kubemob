@@ -430,24 +430,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data.
-        /// </summary>
-        internal static string ConfigMapDetailPage_Data {
-            get {
-                return ResourceManager.GetString("ConfigMapDetailPage_Data", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is nothing here to display..
-        /// </summary>
-        internal static string ConfigMapDetailPage_Data_EmptyMessage {
-            get {
-                return ResourceManager.GetString("ConfigMapDetailPage_Data_EmptyMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Config Maps.
         /// </summary>
         internal static string ConfigMaps {
@@ -655,6 +637,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data.
+        /// </summary>
+        internal static string DetailPage_Data {
+            get {
+                return ResourceManager.GetString("DetailPage_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is nothing here to display..
+        /// </summary>
+        internal static string DetailPage_Data_EmptyMessage {
+            get {
+                return ResourceManager.GetString("DetailPage_Data_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
         internal static string DetailPage_Details {
@@ -741,6 +741,15 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Details_Status {
             get {
                 return ResourceManager.GetString("DetailPage_Details_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string DetailPage_Details_Type {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_Type", resourceCulture);
             }
         }
         
@@ -1200,15 +1209,6 @@ namespace KubeMob.Common.Resx {
         internal static string ServiceDetailPage_Details_SessionAffinity {
             get {
                 return ResourceManager.GetString("ServiceDetailPage_Details_SessionAffinity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type.
-        /// </summary>
-        internal static string ServiceDetailPage_Details_Type {
-            get {
-                return ResourceManager.GetString("ServiceDetailPage_Details_Type", resourceCulture);
             }
         }
         

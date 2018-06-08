@@ -450,7 +450,7 @@
   <data name="ServiceDetailPage_Details_SessionAffinity" xml:space="preserve">
     <value>Session Affinity</value>
   </data>
-  <data name="ServiceDetailPage_Details_Type" xml:space="preserve">
+  <data name="DetailPage_Details_Type" xml:space="preserve">
     <value>Type</value>
   </data>
   <data name="ServiceDetailPage_Details_ClusterIp" xml:space="preserve">
@@ -498,10 +498,10 @@
   <data name="JobDetailPage_Details_Parallelism" xml:space="preserve">
     <value>Parallelism</value>
   </data>
-  <data name="ConfigMapDetailPage_Data" xml:space="preserve">
+  <data name="DetailPage_Data" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="ConfigMapDetailPage_Data_EmptyMessage" xml:space="preserve">
+  <data name="DetailPage_Data_EmptyMessage" xml:space="preserve">
     <value>There is nothing here to display.</value>
   </data>
   <data name="PersistentVolumeClaimDetailPage_Details_AccessModes" xml:space="preserve">

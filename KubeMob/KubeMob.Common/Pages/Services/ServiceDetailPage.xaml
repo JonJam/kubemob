@@ -91,7 +91,7 @@
                     </views:ItemsControl>
 
                     <Label
-                        Text="{markupExtensions:Translate ServiceDetailPage_Details_Type}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Type}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Type}"/>

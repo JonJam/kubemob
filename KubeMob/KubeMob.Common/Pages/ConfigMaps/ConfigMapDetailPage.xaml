@@ -76,11 +76,11 @@
 
 
                     <Label
-                        Text="{markupExtensions:Translate ConfigMapDetailPage_Data}"
+                        Text="{markupExtensions:Translate DetailPage_Data}"
                         FontSize="18"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Data}"
-                        PlaceholderText="{markupExtensions:Translate ConfigMapDetailPage_Data_EmptyMessage}">
+                        PlaceholderText="{markupExtensions:Translate DetailPage_Data_EmptyMessage}">
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>

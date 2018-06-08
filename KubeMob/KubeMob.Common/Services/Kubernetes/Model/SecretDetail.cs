@@ -6,22 +6,22 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     [Preserve(AllMembers = true)]
     public class SecretDetail
     {
-        public SecretDetail()
-            //string name,
-            //string namespaceName,
-            //IReadOnlyList<string> labels,
-            //IReadOnlyList<string> annotations,
-            //string creationTime,
-            //IReadOnlyList<string> images,
-            //string pods)
+        public SecretDetail(
+            string name,
+            string namespaceName,
+            IReadOnlyList<string> labels,
+            IReadOnlyList<string> annotations,
+            string creationTime,
+            string type,
+            IReadOnlyList<SecretData> data)
         {
-            //this.Name = name;
-            //this.NamespaceName = namespaceName;
-            //this.Labels = labels;
-            //this.Annotations = annotations;
-            //this.CreationTime = creationTime;
-            //this.Images = images;
-            //this.Pods = pods;
+            this.Name = name;
+            this.NamespaceName = namespaceName;
+            this.Labels = labels;
+            this.Annotations = annotations;
+            this.CreationTime = creationTime;
+            this.Type = type;
+            this.Data = data;
         }
 
         public string Name
@@ -49,12 +49,12 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> Images
+        public string Type
         {
             get;
         }
 
-        public string Pods
+        public IReadOnlyList<SecretData> Data
         {
             get;
         }

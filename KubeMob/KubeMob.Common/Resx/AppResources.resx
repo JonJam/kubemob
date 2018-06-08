@@ -498,13 +498,31 @@
   <data name="JobDetailPage_Details_Parallelism" xml:space="preserve">
     <value>Parallelism</value>
   </data>
-  <data name="JobDetailPage_Details_Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="ConfigMapDetailPage_Data" xml:space="preserve">
     <value>Data</value>
   </data>
   <data name="ConfigMapDetailPage_Data_EmptyMessage" xml:space="preserve">
     <value>There is nothing here to display.</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Details_AccessModes" xml:space="preserve">
+    <value>Access modes</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Details_StorageClass" xml:space="preserve">
+    <value>Storage class</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Details_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Capacity" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Capacity_EmptyMessage" xml:space="preserve">
+    <value>There is nothing to display here.</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Capacity_Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="PersistentVolumeClaimDetailPage_Capacity_ResourceName" xml:space="preserve">
+    <value>Resource name</value>
   </data>
 </root>

@@ -7,7 +7,8 @@ namespace KubeMob.Common.Pages.PersistentVolumeClaims
     public partial class PersistentVolumeClaimsPage : ExtendedContentPage
     {
         [Preserve]
-        public PersistentVolumeClaimsPage(){
+        public PersistentVolumeClaimsPage()
+        {
             this.InitializeComponent();
             this.PersistentVolumeClaims.ItemSelected += this.OnPersistentVolumeClaimSelected;
         }

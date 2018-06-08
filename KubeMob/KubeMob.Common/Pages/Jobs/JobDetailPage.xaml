@@ -100,7 +100,7 @@
                         Text="{Binding Detail.Parallelism}"/>
 
                     <Label
-                        Text="{markupExtensions:Translate JobDetailPage_Details_Status}"
+                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
                         FontAttributes="Bold"/>
                     <Label
                         Text="{Binding Detail.Status}"/>

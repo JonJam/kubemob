@@ -28,9 +28,9 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    List<Capacity> capacity = p.Status.Capacity.Select(kvp => new Capacity(kvp.Key, kvp.Value.ToString()))
-                        .ToList();
-                    
+                    List<Capacity> capacity = p.Status.Capacity?.Select(kvp => new Capacity(kvp.Key, kvp.Value.ToString())).ToList() ??
+                                              new List<Capacity>();
+
                     return new PersistentVolumeClaimDetail(
                         p.Metadata.Name,
                         p.Metadata.NamespaceProperty,

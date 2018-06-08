@@ -16,7 +16,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string volumeName,
             IReadOnlyList<string> accessModes,
             string storageClassName,
-            List<Capacity> capacity)
+            IReadOnlyList<Capacity> capacity)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
@@ -54,7 +54,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         {
             get;
         }
-        
+
         public string Status
         {
             get;
@@ -75,7 +75,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public List<Capacity> Capacity
+        public IReadOnlyList<Capacity> Capacity
         {
             get;
         }

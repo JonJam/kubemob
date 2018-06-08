@@ -799,15 +799,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status.
-        /// </summary>
-        internal static string JobDetailPage_Details_Status {
-            get {
-                return ResourceManager.GetString("JobDetailPage_Details_Status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Jobs.
         /// </summary>
         internal static string Jobs {
@@ -858,6 +849,69 @@ namespace KubeMob.Common.Resx {
         internal static string OkAlertText {
             get {
                 return ResourceManager.GetString("OkAlertText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Capacity {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is nothing to display here..
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Capacity_EmptyMessage {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity_EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Capacity_Quantity {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity_Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource name.
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Capacity_ResourceName {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity_ResourceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access modes.
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Details_AccessModes {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Details_AccessModes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage class.
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Details_StorageClass {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Details_StorageClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        internal static string PersistentVolumeClaimDetailPage_Details_Volume {
+            get {
+                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Details_Volume", resourceCulture);
             }
         }
         

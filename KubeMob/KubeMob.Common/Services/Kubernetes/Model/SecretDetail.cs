@@ -4,30 +4,24 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class PersistentVolumeClaimDetail
+    public class SecretDetail
     {
-        public PersistentVolumeClaimDetail(
+        public SecretDetail(
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime,
-            string status,
-            string volumeName,
-            IReadOnlyList<string> accessModes,
-            string storageClassName,
-            IReadOnlyList<Capacity> capacity)
+            string type,
+            IReadOnlyList<SecretData> data)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
             this.Labels = labels;
             this.Annotations = annotations;
             this.CreationTime = creationTime;
-            this.Status = status;
-            this.VolumeName = volumeName;
-            this.AccessModes = accessModes;
-            this.StorageClassName = storageClassName;
-            this.Capacity = capacity;
+            this.Type = type;
+            this.Data = data;
         }
 
         public string Name
@@ -55,29 +49,12 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string Status
+        public string Type
         {
             get;
         }
 
-        // TODO Link
-        public string VolumeName
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> AccessModes
-        {
-            get;
-        }
-
-        public string StorageClassName
-        {
-            get;
-        }
-
-        // TODO Link
-        public IReadOnlyList<Capacity> Capacity
+        public IReadOnlyList<SecretData> Data
         {
             get;
         }

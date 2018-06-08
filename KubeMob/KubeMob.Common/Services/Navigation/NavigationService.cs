@@ -13,6 +13,7 @@ using KubeMob.Common.Pages.PersistentVolumeClaims;
 using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.ReplicaSets;
 using KubeMob.Common.Pages.ReplicationControllers;
+using KubeMob.Common.Pages.Secrets;
 using KubeMob.Common.Pages.Services;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Pages.StatefulSets;
@@ -101,6 +102,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToConfigMapDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ConfigMapDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToSecretsPage() => NavigationService.InternalNavigate(typeof(SecretsPage));
+
+        public Task NavigateToSecretDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(SecretDetailPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToCronJobsPage() => NavigationService.InternalNavigate(typeof(CronJobsPage));
 

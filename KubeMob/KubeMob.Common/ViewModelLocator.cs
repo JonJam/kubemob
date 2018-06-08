@@ -25,6 +25,7 @@ using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.ReplicationControllers;
+using KubeMob.Common.ViewModels.Secrets;
 using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
 using KubeMob.Common.ViewModels.StatefulSets;
@@ -99,6 +100,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ConfigMapDetailViewModel>();
 
             serviceCollection.AddTransient<SecretsViewModel>();
+            serviceCollection.AddTransient<SecretDetailViewModel>();
 
             serviceCollection.AddTransient<CronJobsViewModel>();
             serviceCollection.AddTransient<CronJobDetailViewModel>();
@@ -161,12 +163,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<IngressMappingProfile>();
                 cfg.AddProfile<ConfigMapMappingProfile>();
                 cfg.AddProfile<PersistentVolumeClaimMappingProfile>();
-
-                cfg.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        r.Type));
+                cfg.AddProfile<SecretMappingProfile>();
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

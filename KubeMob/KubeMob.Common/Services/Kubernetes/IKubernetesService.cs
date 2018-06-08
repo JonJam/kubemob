@@ -154,6 +154,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries();
 
+        Task<PersistentVolumeClaimDetail> GetPersistentVolumeClaimDetail(
+            string persistentVolumeClaimName,
+            string persistentVolumeClaimNamespace);
+
         Task<IList<ObjectSummary>> GetStatefulSetSummaries();
 
         Task<StatefulSetDetail> GetStatefulSetDetail(

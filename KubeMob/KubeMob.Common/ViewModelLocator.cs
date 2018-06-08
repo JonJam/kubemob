@@ -21,6 +21,7 @@ using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.Ingresses;
 using KubeMob.Common.ViewModels.Jobs;
 using KubeMob.Common.ViewModels.MasterDetail;
+using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.ReplicationControllers;
@@ -112,6 +113,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ReplicationControllerDetailViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
+            serviceCollection.AddTransient<PersistentVolumeClaimDetailViewModel>();
 
             serviceCollection.AddTransient<StatefulSetsViewModel>();
             serviceCollection.AddTransient<StatefulSetDetailViewModel>();
@@ -158,18 +160,13 @@ namespace KubeMob.Common
                 cfg.AddProfile<StatefulSetMappingProfile>();
                 cfg.AddProfile<IngressMappingProfile>();
                 cfg.AddProfile<ConfigMapMappingProfile>();
+                cfg.AddProfile<PersistentVolumeClaimMappingProfile>();
 
                 cfg.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
                     .ConstructUsing((r) => new ObjectSummary(
                         r.Metadata.Name,
                         r.Metadata.NamespaceProperty,
                         r.Type));
-
-                cfg.CreateMap<k8s.Models.V1PersistentVolumeClaim, ObjectSummary>()
-                    .ConstructUsing((r) => new ObjectSummary(
-                        r.Metadata.Name,
-                        r.Metadata.NamespaceProperty,
-                        r.Status.Phase));
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

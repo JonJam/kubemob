@@ -28,29 +28,29 @@
             <Grid
                 IsVisible="{Binding DisplayObjectSummariesInfo}"
                 CompressedLayout.IsHeadless="true">
-                
+
+                <!--CachingStrategy="RecycleElement"-->
                 <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
-                <ListView
+                <views:NoSelectListView
                     x:Name="Services"
                     ItemsSource="{Binding ObjectSummaries}"
                     IsVisible="{Binding HasObjectSummaries}"
                     SeparatorVisibility="None"
-                    HasUnevenRows="False"
-                    CachingStrategy="RecycleElement">
-                    <ListView.Behaviors>
+                    HasUnevenRows="False">
+                    <views:NoSelectListView.Behaviors>
                         <behaviors:EventToCommandBehavior
                             EventName="ItemTapped"
                             Command="{Binding ObjectSummarySelectedCommand}"
                             EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
+                    </views:NoSelectListView.Behaviors>
+                    <views:NoSelectListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 
                             Text="{Binding Name}"
                             Detail="{Binding Description}"/>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </views:NoSelectListView.ItemTemplate>
+                </views:NoSelectListView>
 
                 <Label
                     Text="{markupExtensions:Translate ServicesPage_NoServicesMessage}"

@@ -128,6 +128,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetSecretSummaries();
 
+        Task<SecretDetail> GetSecretDetail(
+            string secretName,
+            string secretNamespace);
+
         Task<IList<ObjectSummary>> GetCronJobSummaries();
 
         Task<CronJobDetail> GetCronJobDetail(

@@ -41,6 +41,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToSecretsPage();
 
+        Task NavigateToSecretDetailPage(string name, string namespaceName);
+
         Task NavigateToCronJobsPage();
 
         Task NavigateToCronJobDetailPage(string name, string namespaceName);

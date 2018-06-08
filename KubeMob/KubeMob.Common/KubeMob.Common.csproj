@@ -72,7 +72,10 @@
     <Compile Update="Pages\ReplicationControllers\ReplicationControllerDetailPage.xaml.cs">
       <DependentUpon>ReplicationControllerDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\SecretsPage.xaml.cs">
+    <Compile Update="Pages\Secrets\SecretDetailPage.xaml.cs">
+      <DependentUpon>SecretDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Secrets\SecretsPage.xaml.cs">
       <DependentUpon>SecretsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\CronJobs\CronJobsPage.xaml.cs">

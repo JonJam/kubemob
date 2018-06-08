@@ -60,6 +60,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
+        // TODO Link
         public string VolumeName
         {
             get;
@@ -75,6 +76,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
+        // TODO Link
         public IReadOnlyList<Capacity> Capacity
         {
             get;

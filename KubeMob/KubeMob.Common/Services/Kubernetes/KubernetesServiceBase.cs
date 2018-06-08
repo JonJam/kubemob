@@ -430,6 +430,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<SecretDetail> GetSecretDetail(
+            string secretName,
+            string secretNamespace)
+        {
+            V1Secret secretDetail = await this.PerformClientOperation((c) => c.ReadNamespacedSecretAsync(secretName, secretNamespace));
+
+            return Mapper.Map<SecretDetail>(secretDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetCronJobSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

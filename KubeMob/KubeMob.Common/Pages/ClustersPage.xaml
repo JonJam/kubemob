@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors;assembly=KubeMob.Common"
@@ -48,30 +48,23 @@
                 IsVisible="{Binding HasClusterGroups}"
                 CompressedLayout.IsHeadless="true">
 
-                <!-- Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance -->
-                <ListView
+                <views:ExtendedListView
                     x:Name="Clusters"
                     ItemsSource="{Binding ClusterGroups}"
                     GroupDisplayBinding="{Binding Title}"
                     GroupShortNameBinding="{Binding ShortName}"
                     IsVisible="{Binding ViewAccounts, Converter={StaticResource InverseBoolConverter}}"
+                    ItemTappedCommand="{Binding ClusterSelectedCommand}"
                     IsGroupingEnabled="True"
                     SeparatorVisibility="None"
-                    HasUnevenRows="True"
-                    CachingStrategy="RecycleElement">
-                    <ListView.Behaviors>
-                        <behaviors:EventToCommandBehavior
-                            EventName="ItemTapped"
-                            Command="{Binding ClusterSelectedCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
+                    HasUnevenRows="True">
+                    <views:ExtendedListView.ItemTemplate>
                         <DataTemplate>
                             <TextCell 
                                 Text="{Binding Name}" />
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.GroupHeaderTemplate>
+                    </views:ExtendedListView.ItemTemplate>
+                    <views:ExtendedListView.GroupHeaderTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout
@@ -88,22 +81,16 @@
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
-                    </ListView.GroupHeaderTemplate>
-                </ListView>
+                    </views:ExtendedListView.GroupHeaderTemplate>
+                </views:ExtendedListView>
 
-                <ListView
+                <views:ExtendedListView
                     x:Name="Accounts"
                     ItemsSource="{Binding ClusterGroups}"
                     IsVisible="{Binding ViewAccounts}"
-                    SeparatorVisibility="None"
-                    CachingStrategy="RecycleElement">
-                    <ListView.Behaviors>
-                        <behaviors:EventToCommandBehavior
-                            EventName="ItemTapped"
-                            Command="{Binding AccountSelectedCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
+                    ItemTappedCommand="{Binding AccountSelectedCommand}"
+                    SeparatorVisibility="None">
+                    <views:ExtendedListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.ContextActions>
@@ -123,8 +110,8 @@
                                     Text="{Binding Title}"/>
                             </ViewCell>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </views:ExtendedListView.ItemTemplate>
+                </views:ExtendedListView>
             </StackLayout>
 
             <Label

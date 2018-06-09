@@ -763,6 +763,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is nothing to display here..
+        /// </summary>
+        internal static string EmptyMessage {
+            get {
+                return ResourceManager.GetString("EmptyMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ingresses.
         /// </summary>
         internal static string Ingresses {

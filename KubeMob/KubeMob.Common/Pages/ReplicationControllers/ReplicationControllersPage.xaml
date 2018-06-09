@@ -1,67 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
-                          xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          xmlns:behaviors="clr-namespace:KubeMob.Common.Behaviors"
                           x:Class="KubeMob.Common.Pages.ReplicationControllers.ReplicationControllersPage"
-             Title="{markupExtensions:Translate ReplicationControllers}"
-             common:ViewModelLocator.AutoWireViewModel="true">
+                          Title="{markupExtensions:Translate ReplicationControllers}"
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectListTemplate}">
 
-    <!--TODO Reduce XAML duplication for list pages-->
-
-    <Grid
-      CompressedLayout.IsHeadless="true">
-
-        <Grid
-            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
-            CompressedLayout.IsHeadless="true">
-
-            <views:NoNetworkIndicator
-                IsVisible="{Binding HasNoNetwork}"/>
-
-            <views:ObjectTypeNotSupportedMessage
-                IsVisible="{Binding ObjectTypeNotSupported}"/>
-
-            <Grid
-                IsVisible="{Binding DisplayObjectSummariesInfo}"
-                CompressedLayout.IsHeadless="true">
-                
-                <!--Performance improvements for ListView: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/listview/performance--> 
-                <ListView
-                    x:Name="ReplicationControllers"
-                    ItemsSource="{Binding ObjectSummaries}"
-                    IsVisible="{Binding HasObjectSummaries}"
-                    SeparatorVisibility="None"
-                    HasUnevenRows="False"
-                    CachingStrategy="RecycleElement">
-                    <ListView.Behaviors>
-                        <behaviors:EventToCommandBehavior
-                            EventName="ItemTapped"
-                            Command="{Binding ObjectSummarySelectedCommand}"
-                            EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"/>
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell 
-                            Text="{Binding Name}"
-                            Detail="{Binding Description}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <Label
-                    Text="{markupExtensions:Translate ReplicationControllersPage_NoReplicationControllersMessage}"
-                    IsVisible="{Binding HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
-            </Grid>
-        </Grid>
-
-        <ActivityIndicator
-            IsRunning="{Binding IsBusy}"  
-            IsVisible="{Binding IsBusy}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
-    </Grid>
 </base:ExtendedContentPage>

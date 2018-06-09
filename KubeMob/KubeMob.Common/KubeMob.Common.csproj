@@ -143,9 +143,6 @@
     <Compile Update="Views\MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ObjectTypeNotSupportedMessage.xaml.cs">
-      <DependentUpon>ObjectTypeNotSupportedMessage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\GroupMenuItem.xaml.cs">
       <DependentUpon>GroupMenuItem.xaml</DependentUpon>
     </Compile>

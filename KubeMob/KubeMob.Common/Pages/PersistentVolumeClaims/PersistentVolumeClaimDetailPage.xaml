@@ -118,7 +118,7 @@
                             Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_ResourceName}"/>
                         <Label
                             Grid.Column="1"
-                            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_EmptyMessage}"/>
+                            Text="{markupExtensions:Translate EmptyMessage}"/>
                     </Grid>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.Capacity}"

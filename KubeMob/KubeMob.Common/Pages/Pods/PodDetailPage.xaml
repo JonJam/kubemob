@@ -240,7 +240,7 @@
                         Text="{markupExtensions:Translate PodDetailPage_PersistentVolumeClaims}"
                         FontSize="18"/>
                     <views:ItemsControl
-                        PlaceholderText="{markupExtensions:Translate PodDetailPage_PersistentVolumeClaims_EmptyMessage}"
+                        PlaceholderText="{markupExtensions:Translate EmptyMessage}"
                         ItemsSource="{Binding Detail.PersistentVolumeClaims}">
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>

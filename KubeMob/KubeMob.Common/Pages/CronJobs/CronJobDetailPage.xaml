@@ -114,7 +114,7 @@
                         FontSize="18"/>
                     <views:ItemsControl
                         ItemsSource="{Binding Detail.ActiveJobs}"
-                        PlaceholderText="{markupExtensions:Translate CronJobDetailPage_ActiveJobs_EmptyMessage}">
+                        PlaceholderText="{markupExtensions:Translate EmptyMessage}">
                         <views:ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Label

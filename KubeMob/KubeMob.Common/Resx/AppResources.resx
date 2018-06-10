@@ -225,12 +225,6 @@
   <data name="ClustersPage_AddAccount_ToolbarItem" xml:space="preserve">
     <value>Add account</value>
   </data>
-  <data name="ClustersPage_Clusters_EmptyGroupMessage" xml:space="preserve">
-    <value>This account contains no clusters.</value>
-  </data>
-  <data name="ClustersPage_Clusters_NoAccountsMessage" xml:space="preserve">
-    <value>Nothing here right now. Add an account.</value>
-  </data>
   <data name="ClustersPage_Title" xml:space="preserve">
     <value>Clusters</value>
   </data>
@@ -243,20 +237,11 @@
   <data name="ConfigMaps" xml:space="preserve">
     <value>Config Maps</value>
   </data>
-  <data name="ConfigMapsPage_NoConfigMapsMessage" xml:space="preserve">
-    <value>There are no config maps.</value>
-  </data>
   <data name="CronJobs" xml:space="preserve">
     <value>Cron Jobs</value>
   </data>
-  <data name="CronJobsPage_NoCronJobsMessage" xml:space="preserve">
-    <value>There are no cron jobs.</value>
-  </data>
   <data name="DaemonSets" xml:space="preserve">
     <value>Daemon Sets</value>
-  </data>
-  <data name="DaemonSetsPage_NoDaemonSetsMessage" xml:space="preserve">
-    <value>There are no daemon sets.</value>
   </data>
   <data name="DeploymentDetail_RollingUpdateStrategy" xml:space="preserve">
     <value>Max surge: {0}, Max unavailable: {1}</value>
@@ -266,9 +251,6 @@
   </data>
   <data name="Deployments" xml:space="preserve">
     <value>Deployments</value>
-  </data>
-  <data name="Deployments_NoDeploymentsMessage" xml:space="preserve">
-    <value>There are no deployments.</value>
   </data>
   <data name="DetailPage_Details" xml:space="preserve">
     <value>Details</value>
@@ -282,14 +264,8 @@
   <data name="Ingresses" xml:space="preserve">
     <value>Ingresses</value>
   </data>
-  <data name="IngressesPage_NoIngressesMessage" xml:space="preserve">
-    <value>There are no ingresses.</value>
-  </data>
   <data name="Jobs" xml:space="preserve">
     <value>Jobs</value>
-  </data>
-  <data name="JobsPage_NoJobsMessage" xml:space="preserve">
-    <value>There are no jobs.</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
     <value>We are having connectivity issues doing that right now. Please try again.</value>
@@ -305,9 +281,6 @@
   </data>
   <data name="PersistentVolumeClaims" xml:space="preserve">
     <value>Persistent Volume Claims</value>
-  </data>
-  <data name="PersistentVolumeClaimsPage_NoServicesMessage" xml:space="preserve">
-    <value>There are no persistent volume claims.</value>
   </data>
   <data name="PodDetailPage_Conditions" xml:space="preserve">
     <value>Conditions</value>
@@ -369,26 +342,14 @@
   <data name="PodDetailPage_PersistentVolumeClaims" xml:space="preserve">
     <value>Persistent Volume Claims</value>
   </data>
-  <data name="PodDetailPage_PersistentVolumeClaims_EmptyMessage" xml:space="preserve">
-    <value>There is nothing to display here.</value>
-  </data>
   <data name="Pods" xml:space="preserve">
     <value>Pods</value>
-  </data>
-  <data name="PodsPage_NoPodsMessage" xml:space="preserve">
-    <value>There are no pods.</value>
   </data>
   <data name="ReplicaSets" xml:space="preserve">
     <value>Replica sets</value>
   </data>
-  <data name="ReplicaSets_NoReplicaSetsMessage" xml:space="preserve">
-    <value>There are no replica sets.</value>
-  </data>
   <data name="ReplicationControllers" xml:space="preserve">
     <value>Replication Controllers</value>
-  </data>
-  <data name="ReplicationControllersPage_NoReplicationControllersMessage" xml:space="preserve">
-    <value>There are no replication controllers.</value>
   </data>
   <data name="ResourceListingPage_Title" xml:space="preserve">
     <value>Resource Listing</value>
@@ -396,14 +357,8 @@
   <data name="Secrets" xml:space="preserve">
     <value>Secrets</value>
   </data>
-  <data name="SecretsPage_NoSecretsMessage" xml:space="preserve">
-    <value>There are no secrets.</value>
-  </data>
   <data name="Services" xml:space="preserve">
     <value>Services</value>
-  </data>
-  <data name="ServicesPage_NoServicesMessage" xml:space="preserve">
-    <value>There are no services.</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -416,9 +371,6 @@
   </data>
   <data name="StatefulSets" xml:space="preserve">
     <value>Stateful Sets</value>
-  </data>
-  <data name="StatefulSetsPage_NoServicesMessage" xml:space="preserve">
-    <value>There are no stateful sets.</value>
   </data>
   <data name="Workloads" xml:space="preserve">
     <value>Workloads</value>
@@ -468,9 +420,6 @@
   <data name="CronJobDetailPage_ActiveJobs" xml:space="preserve">
     <value>Active Jobs</value>
   </data>
-  <data name="CronJobDetailPage_ActiveJobs_EmptyMessage" xml:space="preserve">
-    <value>There is nothing to display here.</value>
-  </data>
   <data name="CronJobDetailPage_Details_ActiveJobCount" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -501,9 +450,6 @@
   <data name="DetailPage_Data" xml:space="preserve">
     <value>Data</value>
   </data>
-  <data name="DetailPage_Data_EmptyMessage" xml:space="preserve">
-    <value>There is nothing here to display.</value>
-  </data>
   <data name="PersistentVolumeClaimDetailPage_Details_AccessModes" xml:space="preserve">
     <value>Access modes</value>
   </data>
@@ -515,9 +461,6 @@
   </data>
   <data name="PersistentVolumeClaimDetailPage_Capacity" xml:space="preserve">
     <value>Capacity</value>
-  </data>
-  <data name="PersistentVolumeClaimDetailPage_Capacity_EmptyMessage" xml:space="preserve">
-    <value>There is nothing to display here.</value>
   </data>
   <data name="PersistentVolumeClaimDetailPage_Capacity_Quantity" xml:space="preserve">
     <value>Quantity</value>

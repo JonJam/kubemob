@@ -76,7 +76,7 @@
                                         TextColor="{StaticResource ErrorColor}"
                                         IsVisible="{Binding HasErrorMessage}" />
                                     <Label
-                                        Text="{markupExtensions:Translate ClustersPage_Clusters_EmptyGroupMessage}"
+                                        Text="{markupExtensions:Translate EmptyMessage}"
                                         IsVisible="{Binding IsEmpty}" />
                                 </StackLayout>
                             </ViewCell>
@@ -115,7 +115,7 @@
             </StackLayout>
 
             <Label
-                Text="{markupExtensions:Translate ClustersPage_Clusters_NoAccountsMessage}"
+                Text="{markupExtensions:Translate EmptyMessage}"
                 IsVisible="{Binding HasClusterGroups, Converter={StaticResource InverseBoolConverter}}"/>
         </StackLayout>
 

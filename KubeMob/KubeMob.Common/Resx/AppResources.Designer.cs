@@ -385,24 +385,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This account contains no clusters..
-        /// </summary>
-        internal static string ClustersPage_Clusters_EmptyGroupMessage {
-            get {
-                return ResourceManager.GetString("ClustersPage_Clusters_EmptyGroupMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nothing here right now. Add an account..
-        /// </summary>
-        internal static string ClustersPage_Clusters_NoAccountsMessage {
-            get {
-                return ResourceManager.GetString("ClustersPage_Clusters_NoAccountsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clusters.
         /// </summary>
         internal static string ClustersPage_Title {
@@ -439,29 +421,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no config maps..
-        /// </summary>
-        internal static string ConfigMapsPage_NoConfigMapsMessage {
-            get {
-                return ResourceManager.GetString("ConfigMapsPage_NoConfigMapsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Active Jobs.
         /// </summary>
         internal static string CronJobDetailPage_ActiveJobs {
             get {
                 return ResourceManager.GetString("CronJobDetailPage_ActiveJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is nothing to display here..
-        /// </summary>
-        internal static string CronJobDetailPage_ActiveJobs_EmptyMessage {
-            get {
-                return ResourceManager.GetString("CronJobDetailPage_ActiveJobs_EmptyMessage", resourceCulture);
             }
         }
         
@@ -529,29 +493,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no cron jobs..
-        /// </summary>
-        internal static string CronJobsPage_NoCronJobsMessage {
-            get {
-                return ResourceManager.GetString("CronJobsPage_NoCronJobsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Daemon Sets.
         /// </summary>
         internal static string DaemonSets {
             get {
                 return ResourceManager.GetString("DaemonSets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no daemon sets..
-        /// </summary>
-        internal static string DaemonSetsPage_NoDaemonSetsMessage {
-            get {
-                return ResourceManager.GetString("DaemonSetsPage_NoDaemonSetsMessage", resourceCulture);
             }
         }
         
@@ -619,15 +565,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no deployments..
-        /// </summary>
-        internal static string Deployments_NoDeploymentsMessage {
-            get {
-                return ResourceManager.GetString("Deployments_NoDeploymentsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} running.
         /// </summary>
         internal static string Detail_Pods {
@@ -642,15 +579,6 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Data {
             get {
                 return ResourceManager.GetString("DetailPage_Data", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is nothing here to display..
-        /// </summary>
-        internal static string DetailPage_Data_EmptyMessage {
-            get {
-                return ResourceManager.GetString("DetailPage_Data_EmptyMessage", resourceCulture);
             }
         }
         
@@ -781,15 +709,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no ingresses..
-        /// </summary>
-        internal static string IngressesPage_NoIngressesMessage {
-            get {
-                return ResourceManager.GetString("IngressesPage_NoIngressesMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} active, {1} succeeded, {2} failed.
         /// </summary>
         internal static string JobDetail_Status {
@@ -822,15 +741,6 @@ namespace KubeMob.Common.Resx {
         internal static string Jobs {
             get {
                 return ResourceManager.GetString("Jobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no jobs..
-        /// </summary>
-        internal static string JobsPage_NoJobsMessage {
-            get {
-                return ResourceManager.GetString("JobsPage_NoJobsMessage", resourceCulture);
             }
         }
         
@@ -876,15 +786,6 @@ namespace KubeMob.Common.Resx {
         internal static string PersistentVolumeClaimDetailPage_Capacity {
             get {
                 return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There is nothing to display here..
-        /// </summary>
-        internal static string PersistentVolumeClaimDetailPage_Capacity_EmptyMessage {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity_EmptyMessage", resourceCulture);
             }
         }
         
@@ -939,15 +840,6 @@ namespace KubeMob.Common.Resx {
         internal static string PersistentVolumeClaims {
             get {
                 return ResourceManager.GetString("PersistentVolumeClaims", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no persistent volume claims..
-        /// </summary>
-        internal static string PersistentVolumeClaimsPage_NoServicesMessage {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimsPage_NoServicesMessage", resourceCulture);
             }
         }
         
@@ -1087,29 +979,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is nothing to display here..
-        /// </summary>
-        internal static string PodDetailPage_PersistentVolumeClaims_EmptyMessage {
-            get {
-                return ResourceManager.GetString("PodDetailPage_PersistentVolumeClaims_EmptyMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pods.
         /// </summary>
         internal static string Pods {
             get {
                 return ResourceManager.GetString("Pods", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no pods..
-        /// </summary>
-        internal static string PodsPage_NoPodsMessage {
-            get {
-                return ResourceManager.GetString("PodsPage_NoPodsMessage", resourceCulture);
             }
         }
         
@@ -1123,29 +997,11 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no replica sets..
-        /// </summary>
-        internal static string ReplicaSets_NoReplicaSetsMessage {
-            get {
-                return ResourceManager.GetString("ReplicaSets_NoReplicaSetsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Replication Controllers.
         /// </summary>
         internal static string ReplicationControllers {
             get {
                 return ResourceManager.GetString("ReplicationControllers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no replication controllers..
-        /// </summary>
-        internal static string ReplicationControllersPage_NoReplicationControllersMessage {
-            get {
-                return ResourceManager.GetString("ReplicationControllersPage_NoReplicationControllersMessage", resourceCulture);
             }
         }
         
@@ -1164,15 +1020,6 @@ namespace KubeMob.Common.Resx {
         internal static string Secrets {
             get {
                 return ResourceManager.GetString("Secrets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no secrets..
-        /// </summary>
-        internal static string SecretsPage_NoSecretsMessage {
-            get {
-                return ResourceManager.GetString("SecretsPage_NoSecretsMessage", resourceCulture);
             }
         }
         
@@ -1231,15 +1078,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no services..
-        /// </summary>
-        internal static string ServicesPage_NoServicesMessage {
-            get {
-                return ResourceManager.GetString("ServicesPage_NoServicesMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         internal static string Settings {
@@ -1272,15 +1110,6 @@ namespace KubeMob.Common.Resx {
         internal static string StatefulSets {
             get {
                 return ResourceManager.GetString("StatefulSets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are no stateful sets..
-        /// </summary>
-        internal static string StatefulSetsPage_NoServicesMessage {
-            get {
-                return ResourceManager.GetString("StatefulSetsPage_NoServicesMessage", resourceCulture);
             }
         }
         

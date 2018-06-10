@@ -59,6 +59,29 @@
                         HorizontalOptions="Center"/>
                 </Grid>
             </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailTemplate">
+                <ScrollView>
+                    <Grid>
+                        <Grid
+                            IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
+
+                            <views:NoNetworkIndicator IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+
+                            <StackLayout
+                                IsVisible="{TemplateBinding BindingContext.HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
+                                <ContentPresenter/>
+                            </StackLayout>
+                        </Grid>
+
+                        <ActivityIndicator
+                            IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                            IsVisible="{TemplateBinding BindingContext.IsBusy}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"/>
+                    </Grid>
+                </ScrollView>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

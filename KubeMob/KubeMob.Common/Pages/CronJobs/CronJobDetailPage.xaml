@@ -7,130 +7,113 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.CronJobs.CronJobDetailPage"
                           Title="{Binding Name}"
-             common:ViewModelLocator.AutoWireViewModel="true">
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
 
-    <!--TODO Reduce XAML duplication amongst detail pages-->
-    <ScrollView>
-        <Grid>
-            <Grid
-                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+    <StackLayout>
 
-                <views:NoNetworkIndicator IsVisible="{Binding HasNoNetwork}"/>
-
-                <StackLayout
-                    IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
-
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details}"
                         FontSize="18"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Name}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Name}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.NamespaceName}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         FontAttributes="Bold"/>
-                    <views:ItemsControl
+        <views:ItemsControl
                         ItemsSource="{Binding Detail.Labels}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
                                     Text="{Binding .}"
                                     BackgroundColor="Gray"
                                     HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
                         FontAttributes="Bold"/>
-                    <views:ItemsControl
+        <views:ItemsControl
                         ItemsSource="{Binding Detail.Annotations}"
                         PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
                                     Text="{Binding .}"
                                     BackgroundColor="Gray"
                                     HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.CreationTime}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_Details_Schedule}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Schedule}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_Details_ActiveJobCount}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.ActiveJobCount}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_Details_Suspend}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Suspend}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_Details_LastSchedule}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.LastSchedule}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_Details_ConcurrencyPolicy}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.ConcurrencyPolicy}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_Details_StartingDeadlineSeconds}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.StartingDeadlineSeconds}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate CronJobDetailPage_ActiveJobs}"
                         FontSize="18"/>
-                    <views:ItemsControl
+        <views:ItemsControl
                         ItemsSource="{Binding Detail.ActiveJobs}"
                         PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
                                      Text="{Binding Name}"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                </StackLayout>
-            </Grid>
-
-            <ActivityIndicator
-                IsRunning="{Binding IsBusy}"  
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
-        </Grid>
-    </ScrollView>
+    </StackLayout>
 </base:ExtendedContentPage>

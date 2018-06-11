@@ -7,125 +7,59 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Deployments.DeploymentDetailPage"
                           Title="{Binding Name}"
-             common:ViewModelLocator.AutoWireViewModel="true">
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
 
-    <!--TODO Reduce XAML duplication amongst detail pages-->
-    <ScrollView>
-        <Grid>
-            <Grid
-                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+    <StackLayout>
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
-                <views:NoNetworkIndicator IsVisible="{Binding HasNoNetwork}"/>
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <views:ItemsControl
+            ItemsSource="{Binding Detail.Selectors}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding .}"
+                        BackgroundColor="Gray"
+                        HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                <StackLayout
-                    IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
+        <Label
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_Strategy}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Strategy}"/>
 
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details}"
-                        FontSize="18"/>
+        <Label
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_MinReadySeconds}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.MinReadySeconds}"/>
 
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Name}"/>
+        <Label
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.RevisionHistoryLimit}"/>
 
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.NamespaceName}"/>
+        <Label
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.RollingUpdateStrategy}"/>
 
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        FontAttributes="Bold"/>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Labels}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        FontAttributes="Bold"/>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Annotations}"
-                        PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.CreationTime}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-                        FontAttributes="Bold"/>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Selectors}"
-                        PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_Strategy}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Strategy}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_MinReadySeconds}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.MinReadySeconds}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.RevisionHistoryLimit}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.RollingUpdateStrategy}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Status}"/>
-                </StackLayout>
-            </Grid>
-
-            <ActivityIndicator
-                IsRunning="{Binding IsBusy}"  
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
-        </Grid>
-    </ScrollView>
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Status}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Status}"/>
+    </StackLayout>
 </base:ExtendedContentPage>

@@ -7,107 +7,71 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.PersistentVolumeClaims.PersistentVolumeClaimDetailPage"
                           Title="{Binding Name}"
-             common:ViewModelLocator.AutoWireViewModel="true">
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
 
-    <!--TODO Reduce XAML duplication amongst detail pages-->
-    <ScrollView>
+    <StackLayout>
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Status}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Status}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_Volume}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <Label
+            Text="{Binding Detail.VolumeName}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_AccessModes}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <views:ItemsControl
+            ItemsSource="{Binding Detail.AccessModes}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding .}"
+                        HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_StorageClass}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.StorageClassName}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity}"             
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <Grid>
-            <Grid
-                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
-
-                <views:NoNetworkIndicator IsVisible="{Binding HasNoNetwork}"/>
-
-                <StackLayout
-                    IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details}"
-                        FontSize="18"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Name}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.NamespaceName}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        FontAttributes="Bold"/>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Labels}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        FontAttributes="Bold"/>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Annotations}"
-                        PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.CreationTime}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.Status}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_Volume}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.VolumeName}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_AccessModes}"
-                        FontAttributes="Bold"/>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.AccessModes}"
-                        PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_StorageClass}"
-                        FontAttributes="Bold"/>
-                    <Label
-                        Text="{Binding Detail.StorageClassName}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity}"             
-                        FontSize="18"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Column="0"
+                Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_ResourceName}"/>
+            <Label
+                Grid.Column="1"
+                Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_Quantity}"/>
+        </Grid>
+        <views:ItemsControl
+            ItemsSource="{Binding Detail.Capacity}"
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -115,39 +79,13 @@
                         </Grid.ColumnDefinitions>
                         <Label
                             Grid.Column="0"
-                            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_ResourceName}"/>
+                            Text="{Binding ResourceName}"/>
                         <Label
                             Grid.Column="1"
-                            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_EmptyMessage}"/>
+                            Text="{Binding Quantity}"/>
                     </Grid>
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Capacity}"
-                        PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label
-                                        Grid.Column="0"
-                                        Text="{Binding ResourceName}"/>
-                                    <Label
-                                        Grid.Column="1"
-                                        Text="{Binding Quantity}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-                </StackLayout>
-            </Grid>
-
-            <ActivityIndicator
-                IsRunning="{Binding IsBusy}"  
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
-        </Grid>
-    </ScrollView>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
+    </StackLayout>
 </base:ExtendedContentPage>

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using KubeMob.Common.Services.Kubernetes.Model.Base;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class ReplicationControllerDetail
+    public class ReplicationControllerDetail : ObjectDetailBase
     {
         public ReplicationControllerDetail(
             string name,
@@ -15,40 +16,11 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> selectors,
             IReadOnlyList<string> images,
             string pods)
+            : base(name, namespaceName, labels, annotations, creationTime)
         {
-            this.Name = name;
-            this.NamespaceName = namespaceName;
-            this.Labels = labels;
-            this.Annotations = annotations;
-            this.CreationTime = creationTime;
             this.Selectors = selectors;
             this.Images = images;
             this.Pods = pods;
-        }
-
-        public string Name
-        {
-            get;
-        }
-
-        public string NamespaceName
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Labels
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Annotations
-        {
-            get;
-        }
-
-        public string CreationTime
-        {
-            get;
         }
 
         public IReadOnlyList<string> Selectors

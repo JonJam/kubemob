@@ -1,7 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:resourceDictionaries="clr-namespace:KubeMob.Common.ResourceDictionaries"
+             xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -10,6 +12,132 @@
                 <resourceDictionaries:Styles />
                 <resourceDictionaries:Converters />
             </ResourceDictionary.MergedDictionaries>
+
+            <ControlTemplate x:Key="ObjectListTemplate">
+                <Grid
+                    CompressedLayout.IsHeadless="true">
+                    <Grid
+                        IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                        CompressedLayout.IsHeadless="true">
+
+                        <views:NoNetworkIndicator
+                            IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+
+                        <Label        
+                            Text="{markupExtensions:Translate ObjectTypeNotSupportedMessage}"
+                            IsVisible="{TemplateBinding BindingContext.ObjectTypeNotSupported}"/>
+
+                        <Grid
+                            IsVisible="{TemplateBinding BindingContext.DisplayObjectSummariesInfo}"
+                            CompressedLayout.IsHeadless="true">
+
+                            <views:ExtendedListView
+                                ItemsSource="{TemplateBinding BindingContext.ObjectSummaries}"
+                                IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
+                                ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
+                                SeparatorVisibility="None"
+                                HasUnevenRows="False">
+                                <views:ExtendedListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextCell 
+                                            Text="{Binding Name}"
+                                            Detail="{Binding Description}"/>
+                                    </DataTemplate>
+                                </views:ExtendedListView.ItemTemplate>
+                            </views:ExtendedListView>
+
+                            <Label
+                                Text="{markupExtensions:Translate EmptyMessage}"
+                                IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
+                        </Grid>
+                    </Grid>
+
+                    <ActivityIndicator
+                        IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                        IsVisible="{TemplateBinding BindingContext.IsBusy}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailTemplate">
+                <ScrollView>
+                    <Grid>
+                        <Grid
+                            IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
+
+                            <views:NoNetworkIndicator IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+
+                            <ContentPresenter
+                                IsVisible="{TemplateBinding BindingContext.HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"/>
+                        </Grid>
+
+                        <ActivityIndicator
+                            IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                            IsVisible="{TemplateBinding BindingContext.IsBusy}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"/>
+                    </Grid>
+                </ScrollView>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailCommonPropertiesTemplate">
+                <StackLayout>
+                    <!--TODO Create control?-->
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+                    <Label
+                        Text="{TemplateBinding BindingContext.Detail.Name}"/>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+                    <Label
+                        Text="{TemplateBinding BindingContext.Detail.NamespaceName}"/>
+
+                    <!--TODO Create control?-->
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                        IsVisible="{TemplateBinding BindingContext.Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                    <views:ItemsControl
+                        ItemsSource="{TemplateBinding BindingContext.Detail.Labels}"
+                        IsVisible="{TemplateBinding BindingContext.Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                        IsVisible="{TemplateBinding BindingContext.Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                    <views:ItemsControl
+                        ItemsSource="{TemplateBinding BindingContext.Detail.Annotations}"
+                        IsVisible="{TemplateBinding BindingContext.Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+                    <Label
+                        Text="{TemplateBinding BindingContext.Detail.CreationTime}"/>
+                </StackLayout>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

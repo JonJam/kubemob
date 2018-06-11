@@ -151,19 +151,19 @@ namespace KubeMob.Common
             {
                 cfg.AddProfile<CommonMappingProfile>();
 
-                cfg.AddProfile<DeploymentMappingProfile>();
-                cfg.AddProfile<PodMappingProfile>();
-                cfg.AddProfile<ReplicaSetMappingProfile>();
-                cfg.AddProfile<ServiceMappingProfile>();
+                cfg.AddProfile<ConfigMapMappingProfile>();
                 cfg.AddProfile<CronJobMappingProfile>();
                 cfg.AddProfile<DaemonSetMappingProfile>();
-                cfg.AddProfile<ReplicationControllerMappingProfile>();
-                cfg.AddProfile<JobMappingProfile>();
-                cfg.AddProfile<StatefulSetMappingProfile>();
+                cfg.AddProfile<DeploymentMappingProfile>();
                 cfg.AddProfile<IngressMappingProfile>();
-                cfg.AddProfile<ConfigMapMappingProfile>();
+                cfg.AddProfile<JobMappingProfile>();
                 cfg.AddProfile<PersistentVolumeClaimMappingProfile>();
+                cfg.AddProfile<PodMappingProfile>();
+                cfg.AddProfile<ReplicaSetMappingProfile>();
+                cfg.AddProfile<ReplicationControllerMappingProfile>();
                 cfg.AddProfile<SecretMappingProfile>();
+                cfg.AddProfile<ServiceMappingProfile>();
+                cfg.AddProfile<StatefulSetMappingProfile>();
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

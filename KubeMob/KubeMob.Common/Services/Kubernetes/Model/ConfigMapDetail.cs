@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using KubeMob.Common.Services.Kubernetes.Model.Base;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class ConfigMapDetail
+    public class ConfigMapDetail : ObjectDetailBase
     {
         public ConfigMapDetail(
             string name,
@@ -13,39 +14,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> annotations,
             string creationTime,
             IReadOnlyList<KeyValuePair<string, string>> data)
-        {
-            this.Name = name;
-            this.NamespaceName = namespaceName;
-            this.Labels = labels;
-            this.Annotations = annotations;
-            this.CreationTime = creationTime;
-            this.Data = data;
-        }
-
-        public string Name
-        {
-            get;
-        }
-
-        public string NamespaceName
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Labels
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Annotations
-        {
-            get;
-        }
-
-        public string CreationTime
-        {
-            get;
-        }
+            : base(name, namespaceName, labels, annotations, creationTime) => this.Data = data;
 
         public IReadOnlyList<KeyValuePair<string, string>> Data
         {

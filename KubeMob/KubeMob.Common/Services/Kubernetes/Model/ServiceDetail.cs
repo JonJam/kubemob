@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using KubeMob.Common.Services.Kubernetes.Model.Base;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class ServiceDetail
+    public class ServiceDetail : ObjectDetailBase
     {
         public ServiceDetail(
             string name,
@@ -18,43 +19,14 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string clusterIp,
             IReadOnlyList<string> internalEndpoints,
             IReadOnlyList<string> externalEndpoints)
+            : base(name, namespaceName, labels, annotations, creationTime)
         {
-            this.Name = name;
-            this.NamespaceName = namespaceName;
-            this.Labels = labels;
-            this.Annotations = annotations;
-            this.CreationTime = creationTime;
             this.LabelSelector = labelSelector;
             this.Type = type;
             this.SessionAffinity = sessionAffinity;
             this.ClusterIp = clusterIp;
             this.InternalEndpoints = internalEndpoints;
             this.ExternalEndpoints = externalEndpoints;
-        }
-
-        public string Name
-        {
-            get;
-        }
-
-        public string NamespaceName
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Labels
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Annotations
-        {
-            get;
-        }
-
-        public string CreationTime
-        {
-            get;
         }
 
         public IReadOnlyList<string> LabelSelector

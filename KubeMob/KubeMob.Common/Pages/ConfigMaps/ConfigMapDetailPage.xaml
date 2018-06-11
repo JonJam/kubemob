@@ -11,73 +11,24 @@
                           ControlTemplate="{StaticResource ObjectDetailTemplate}">
     <StackLayout>
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details}"
-                        FontSize="18"/>
+            Text="{markupExtensions:Translate DetailPage_Details}"
+            FontSize="18"/>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                        FontAttributes="Bold"/>
-        <Label
-                        Text="{Binding Detail.Name}"/>
-
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                        FontAttributes="Bold"/>
-        <Label
-                        Text="{Binding Detail.NamespaceName}"/>
-
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Data}"
+            FontSize="18"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Labels}"
-                        PlaceholderText="-">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        FontAttributes="Bold"/>
-        <views:ItemsControl
-                        ItemsSource="{Binding Detail.Annotations}"
-                        PlaceholderText="-">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                        FontAttributes="Bold"/>
-        <Label
-                        Text="{Binding Detail.CreationTime}"/>
-
-
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Data}"
-                        FontSize="18"/>
-        <views:ItemsControl
-                        ItemsSource="{Binding Detail.Data}"
-                        PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+            ItemsSource="{Binding Detail.Data}"
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Label
-                                        Text="{Binding Key}"/>
+                            Text="{Binding Key}"/>
                         <Label
-                                        Text="{Binding Value}"/>
+                            Text="{Binding Value}"/>
                     </StackLayout>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using KubeMob.Common.Services.Kubernetes.Model.Base;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class IngressDetail
+    public class IngressDetail : ObjectDetailBase
     {
         public IngressDetail(
             string name,
@@ -12,38 +13,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime)
+            : base(name, namespaceName, labels, annotations, creationTime)
         {
-            this.Name = name;
-            this.NamespaceName = namespaceName;
-            this.Labels = labels;
-            this.Annotations = annotations;
-            this.CreationTime = creationTime;
-        }
-
-        public string Name
-        {
-            get;
-        }
-
-        public string NamespaceName
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Labels
-        {
-            get;
-        }
-
-        // TODO Handle links
-        public IReadOnlyList<string> Annotations
-        {
-            get;
-        }
-
-        public string CreationTime
-        {
-            get;
         }
     }
 }

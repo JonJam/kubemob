@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using KubeMob.Common.Services.Kubernetes.Model.Base;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
     [Preserve(AllMembers = true)]
-    public class CronJobDetail
+    public class CronJobDetail : ObjectDetailBase
     {
         public CronJobDetail(
             string name,
@@ -18,43 +19,14 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string concurrencyPolicy,
             string startingDeadlineSeconds,
             IReadOnlyList<OwnerReference> activeJobs)
+            : base(name, namespaceName, labels, annotations, creationTime)
         {
-            this.Name = name;
-            this.NamespaceName = namespaceName;
-            this.Labels = labels;
-            this.Annotations = annotations;
-            this.CreationTime = creationTime;
             this.Schedule = schedule;
             this.Suspend = suspend;
             this.LastSchedule = lastSchedule;
             this.ConcurrencyPolicy = concurrencyPolicy;
             this.StartingDeadlineSeconds = startingDeadlineSeconds;
             this.ActiveJobs = activeJobs;
-        }
-
-        public string Name
-        {
-            get;
-        }
-
-        public string NamespaceName
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Labels
-        {
-            get;
-        }
-
-        public IReadOnlyList<string> Annotations
-        {
-            get;
-        }
-
-        public string CreationTime
-        {
-            get;
         }
 
         public string Schedule

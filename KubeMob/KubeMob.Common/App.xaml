@@ -82,6 +82,62 @@
                     </Grid>
                 </ScrollView>
             </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailCommonPropertiesTemplate">
+                <StackLayout>
+                <Label
+                    Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text="{TemplateBinding BindingContext.Detail.Name}"/>
+
+                <Label
+                    Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text="{TemplateBinding BindingContext.Detail.NamespaceName}"/>
+
+                <Label
+                    Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+                    FontAttributes="Bold"
+                    IsVisible="{TemplateBinding BindingContext.Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                <views:ItemsControl
+                    ItemsSource="{TemplateBinding BindingContext.Detail.Labels}"
+                    IsVisible="{TemplateBinding BindingContext.Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}">
+                    <views:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label
+                                Text="{Binding .}"
+                                BackgroundColor="Gray"
+                                HorizontalOptions="Start"/>
+                        </DataTemplate>
+                    </views:ItemsControl.ItemTemplate>
+                </views:ItemsControl>
+
+                <Label
+                    Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+                    FontAttributes="Bold"
+                    IsVisible="{TemplateBinding BindingContext.Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                <views:ItemsControl
+                    ItemsSource="{TemplateBinding BindingContext.Detail.Annotations}"
+                    IsVisible="{TemplateBinding BindingContext.Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}">
+                    <views:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label
+                                Text="{Binding .}"
+                                BackgroundColor="Gray"
+                                HorizontalOptions="Start"/>
+                        </DataTemplate>
+                    </views:ItemsControl.ItemTemplate>
+                </views:ItemsControl>
+
+                <Label
+                    Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                    FontAttributes="Bold"/>
+                <Label
+                    Text="{TemplateBinding BindingContext.Detail.CreationTime}"/>
+                </StackLayout>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

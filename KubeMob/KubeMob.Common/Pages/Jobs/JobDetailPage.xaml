@@ -13,41 +13,40 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Images}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Images}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Images}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.Images}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate JobDetailPage_Details_Completions}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate JobDetailPage_Details_Completions}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Completions}"/>
+            Text="{Binding Detail.Completions}"/>
 
         <Label
-                        Text="{markupExtensions:Translate JobDetailPage_Details_Parallelism}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate JobDetailPage_Details_Parallelism}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Parallelism}"/>
+            Text="{Binding Detail.Parallelism}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Status}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Status}"/>
+            Text="{Binding Detail.Status}"/>
     </StackLayout>
 </base:ExtendedContentPage>

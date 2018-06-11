@@ -22,7 +22,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.Images = images;
             this.Pods = pods;
         }
-        
+
         public IReadOnlyList<string> Selectors
         {
             get;

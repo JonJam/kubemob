@@ -13,71 +13,74 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate ServiceDetailPage_Details_LabelSelector}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate ServiceDetailPage_Details_LabelSelector}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.LabelSelector, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.LabelSelector}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.LabelSelector}"
+            IsVisible="{Binding Detail.LabelSelector, Converter={StaticResource NotEmptyToBoolConverter}}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        BackgroundColor="Gray"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Type}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Type}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Type}"/>
+            Text="{Binding Detail.Type}"/>
 
         <Label
-                        Text="{markupExtensions:Translate ServiceDetailPage_Details_SessionAffinity}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate ServiceDetailPage_Details_SessionAffinity}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.SessionAffinity}"/>
+            Text="{Binding Detail.SessionAffinity}"/>
 
         <Label
-                        Text="{markupExtensions:Translate ServiceDetailPage_Details_ClusterIp}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate ServiceDetailPage_Details_ClusterIp}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.ClusterIp}"/>
+            Text="{Binding Detail.ClusterIp}"/>
 
         <Label
-                        Text="{markupExtensions:Translate ServiceDetailPage_Details_InternalEndpoints}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate ServiceDetailPage_Details_InternalEndpoints}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.InternalEndpoints, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.InternalEndpoints}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.InternalEndpoints}"
+            IsVisible="{Binding Detail.InternalEndpoints, Converter={StaticResource NotEmptyToBoolConverter}}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate ServiceDetailPage_Details_ExternalEndpoints}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate ServiceDetailPage_Details_ExternalEndpoints}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.ExternalEndpoints, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <!--TODO Launch in browser ??-->
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.ExternalEndpoints}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.ExternalEndpoints}"
+            IsVisible="{Binding Detail.ExternalEndpoints, Converter={StaticResource NotEmptyToBoolConverter}}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>

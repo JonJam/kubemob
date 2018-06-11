@@ -12,13 +12,13 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Data}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
             ItemsSource="{Binding Detail.Data}"
             PlaceholderText="{markupExtensions:Translate EmptyMessage}">

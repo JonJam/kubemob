@@ -24,7 +24,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.Completions = completions;
             this.Status = status;
         }
-        
+
         public string Status
         {
             get;

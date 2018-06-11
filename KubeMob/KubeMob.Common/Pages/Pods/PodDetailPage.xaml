@@ -13,94 +13,97 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Status}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Status}"/>
+            Text="{Binding Detail.Status}"/>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_QoS}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate PodDetailPage_Details_QoS}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.QualityOfServiceClass}"/>
+            Text="{Binding Detail.QualityOfServiceClass}"/>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_Node}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate PodDetailPage_Details_Node}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.NodeName}"/>
+            Text="{Binding Detail.NodeName}"/>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Details_IpAddress}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate PodDetailPage_Details_IpAddress}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.PodIpAddress}"/>
+            Text="{Binding Detail.PodIpAddress}"/>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Containers}"
-                        FontSize="18"/>
+            Text="{markupExtensions:Translate PodDetailPage_Containers}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Containers}">
+            ItemsSource="{Binding Detail.Containers}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Label
-                                        Text="{Binding Name}"/>
+                            Text="{Binding Name}"/>
 
                         <Label
-                                        Text="{markupExtensions:Translate PodDetailPage_Containers_Image}"
-                                        FontAttributes="Bold"/>
+                            Text="{markupExtensions:Translate PodDetailPage_Containers_Image}"
+                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
                         <Label
-                                        Text="{Binding Image}"/>
+                            Text="{Binding Image}"/>
 
                         <Label
-                                        Text="{markupExtensions:Translate PodDetailPage_Containers_EnvironmentVariables}"
-                                        FontAttributes="Bold"/>
+                            Text="{markupExtensions:Translate PodDetailPage_Containers_EnvironmentVariables}"
+                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                            IsVisible="{Binding EnvironmentVariables, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                         <views:ItemsControl
-                                        ItemsSource="{Binding EnvironmentVariables}"
-                                        PlaceholderText="-">
+                            ItemsSource="{Binding EnvironmentVariables}"
+                            IsVisible="{Binding EnvironmentVariables, Converter={StaticResource NotEmptyToBoolConverter}}">
                             <views:ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
                                         <Label
-                                                        Text="{Binding Name}"/>
+                                            Text="{Binding Name}"/>
                                         <Label
-                                                        Text="{Binding Value}"
-                                                        IsVisible="{Binding Value, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                                            Text="{Binding Value}"
+                                            IsVisible="{Binding Value, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                                     </StackLayout>
                                 </DataTemplate>
                             </views:ItemsControl.ItemTemplate>
                         </views:ItemsControl>
 
                         <Label
-                                        Text="{markupExtensions:Translate PodDetailPage_Containers_Commands}"
-                                        FontAttributes="Bold"/>
+                            Text="{markupExtensions:Translate PodDetailPage_Containers_Commands}"
+                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                            IsVisible="{Binding Commands, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                         <views:ItemsControl
-                                        ItemsSource="{Binding Commands}"
-                                        PlaceholderText="-">
+                            ItemsSource="{Binding Commands}"
+                            IsVisible="{Binding Commands, Converter={StaticResource NotEmptyToBoolConverter}}">
                             <views:ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label
-                                                    Text="{Binding .}"/>
+                                        Text="{Binding .}"/>
                                 </DataTemplate>
                             </views:ItemsControl.ItemTemplate>
                         </views:ItemsControl>
 
                         <Label
-                                        Text="{markupExtensions:Translate PodDetailPage_Containers_Args}"
-                                        FontAttributes="Bold"/>
+                            Text="{markupExtensions:Translate PodDetailPage_Containers_Args}"
+                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                            IsVisible="{Binding Arguments, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                         <views:ItemsControl
-                                        ItemsSource="{Binding Arguments}"
-                                        PlaceholderText="-">
+                            ItemsSource="{Binding Arguments}"
+                            IsVisible="{Binding Arguments, Converter={StaticResource NotEmptyToBoolConverter}}">
                             <views:ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label
-                                                    Text="{Binding .}"/>
+                                        Text="{Binding .}"/>
                                 </DataTemplate>
                             </views:ItemsControl.ItemTemplate>
                         </views:ItemsControl>
@@ -110,23 +113,23 @@
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_Conditions}"             
-                        FontSize="18"/>
+            Text="{markupExtensions:Translate PodDetailPage_Conditions}"             
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label
-                            Grid.Column="0"
-                            Text="{markupExtensions:Translate PodDetailPage_Conditions_Type}"/>
+                Grid.Column="0"
+                Text="{markupExtensions:Translate PodDetailPage_Conditions_Type}"/>
             <Label
-                            Grid.Column="1"
-                            Text="{markupExtensions:Translate PodDetailPage_Conditions_Status}"/>
+                Grid.Column="1"
+                Text="{markupExtensions:Translate PodDetailPage_Conditions_Status}"/>
         </Grid>
         <!--TODO a condition detail page??-->
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Conditions}">
+            ItemsSource="{Binding Detail.Conditions}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -135,33 +138,33 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label
-                                        Grid.Column="0"
-                                        Text="{Binding Type}"/>
+                            Grid.Column="0"
+                            Text="{Binding Type}"/>
                         <Label
-                                        Grid.Column="1"
-                                        Text="{Binding Status}"/>
+                            Grid.Column="1"
+                            Text="{Binding Status}"/>
                     </Grid>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_CreatedBy}"
-                        FontSize="18"/>
+            Text="{markupExtensions:Translate PodDetailPage_CreatedBy}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label
-                            Grid.Column="0"
-                            Text="{markupExtensions:Translate PodDetailPage_CreatedBy_Name}"/>
+                Grid.Column="0"
+                Text="{markupExtensions:Translate PodDetailPage_CreatedBy_Name}"/>
             <Label
-                            Grid.Column="1"
-                            Text="{markupExtensions:Translate PodDetailPage_CreatedBy_Kind}"/>
+                Grid.Column="1"
+                Text="{markupExtensions:Translate PodDetailPage_CreatedBy_Kind}"/>
         </Grid>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Owners}">
+            ItemsSource="{Binding Detail.Owners}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -170,29 +173,28 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label
-                                        Grid.Column="0"
-                                        Text="{Binding Name}"/>
+                            Grid.Column="0"
+                            Text="{Binding Name}"/>
                         <Label
-                                        Grid.Column="1"
-                                        Text="{Binding Kind}"/>
+                            Grid.Column="1"
+                            Text="{Binding Kind}"/>
                     </Grid>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate PodDetailPage_PersistentVolumeClaims}"
-                        FontSize="18"/>
+            Text="{markupExtensions:Translate PodDetailPage_PersistentVolumeClaims}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
-                        PlaceholderText="{markupExtensions:Translate EmptyMessage}"
-                        ItemsSource="{Binding Detail.PersistentVolumeClaims}">
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}"
+            ItemsSource="{Binding Detail.PersistentVolumeClaims}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"/>
+                        Text="{Binding .}"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
     </StackLayout>
-
 </base:ExtendedContentPage>

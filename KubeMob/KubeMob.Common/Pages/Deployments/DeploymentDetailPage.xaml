@@ -13,54 +13,53 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Selectors}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.Selectors}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        BackgroundColor="Gray"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_Strategy}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_Strategy}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Strategy}"/>
+            Text="{Binding Detail.Strategy}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_MinReadySeconds}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_MinReadySeconds}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.MinReadySeconds}"/>
+            Text="{Binding Detail.MinReadySeconds}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.RevisionHistoryLimit}"/>
+            Text="{Binding Detail.RevisionHistoryLimit}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.RollingUpdateStrategy}"/>
+            Text="{Binding Detail.RollingUpdateStrategy}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Status}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Status}"/>
+            Text="{Binding Detail.Status}"/>
     </StackLayout>
 </base:ExtendedContentPage>

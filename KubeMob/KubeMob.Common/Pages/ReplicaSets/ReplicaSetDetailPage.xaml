@@ -13,46 +13,43 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Selectors}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.Selectors}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        BackgroundColor="Gray"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Images}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Images}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.Images}"
-                        PlaceholderText="-">
+            ItemsSource="{Binding Detail.Images}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                    Text="{Binding .}"
-                                    HorizontalOptions="Start"/>
+                        Text="{Binding .}"
+                        HorizontalOptions="Start"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Pods}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Pods}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Pods}"/>
-
+            Text="{Binding Detail.Pods}"/>
     </StackLayout>
 </base:ExtendedContentPage>

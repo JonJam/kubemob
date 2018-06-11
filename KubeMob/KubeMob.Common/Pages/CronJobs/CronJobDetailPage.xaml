@@ -13,59 +13,58 @@
     <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
-            FontSize="18"/>
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_Details_Schedule}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_Details_Schedule}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Schedule}"/>
+            Text="{Binding Detail.Schedule}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_Details_ActiveJobCount}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_Details_ActiveJobCount}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.ActiveJobCount}"/>
+            Text="{Binding Detail.ActiveJobCount}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_Details_Suspend}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_Details_Suspend}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.Suspend}"/>
+            Text="{Binding Detail.Suspend}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_Details_LastSchedule}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_Details_LastSchedule}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.LastSchedule}"/>
+            Text="{Binding Detail.LastSchedule}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_Details_ConcurrencyPolicy}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_Details_ConcurrencyPolicy}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.ConcurrencyPolicy}"/>
+            Text="{Binding Detail.ConcurrencyPolicy}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_Details_StartingDeadlineSeconds}"
-                        FontAttributes="Bold"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_Details_StartingDeadlineSeconds}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
-                        Text="{Binding Detail.StartingDeadlineSeconds}"/>
+            Text="{Binding Detail.StartingDeadlineSeconds}"/>
 
         <Label
-                        Text="{markupExtensions:Translate CronJobDetailPage_ActiveJobs}"
-                        FontSize="18"/>
+            Text="{markupExtensions:Translate CronJobDetailPage_ActiveJobs}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
-                        ItemsSource="{Binding Detail.ActiveJobs}"
-                        PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+            ItemsSource="{Binding Detail.ActiveJobs}"
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
-                                     Text="{Binding Name}"/>
+                        Text="{Binding Name}"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
-
     </StackLayout>
 </base:ExtendedContentPage>

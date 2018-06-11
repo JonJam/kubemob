@@ -26,7 +26,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.StorageClassName = storageClassName;
             this.Capacity = capacity;
         }
-        
+
         public string Status
         {
             get;

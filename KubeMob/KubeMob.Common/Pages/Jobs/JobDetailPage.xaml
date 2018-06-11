@@ -7,111 +7,94 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Jobs.JobDetailPage"
                           Title="{Binding Name}"
-             common:ViewModelLocator.AutoWireViewModel="true">
+             common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
 
-    <!--TODO Reduce XAML duplication amongst detail pages-->
-    <ScrollView>
-        <Grid>
-            <Grid
-                IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
-
-                <views:NoNetworkIndicator IsVisible="{Binding HasNoNetwork}"/>
-
-                <StackLayout
-                    IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
-                    <Label
+    <StackLayout>
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details}"
                         FontSize="18"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Name}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Name}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.NamespaceName}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         FontAttributes="Bold"/>
-                    <views:ItemsControl
+        <views:ItemsControl
                         ItemsSource="{Binding Detail.Labels}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
                                     Text="{Binding .}"
                                     BackgroundColor="Gray"
                                     HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
                         FontAttributes="Bold"/>
-                    <views:ItemsControl
+        <views:ItemsControl
                         ItemsSource="{Binding Detail.Annotations}"
                         PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
                                     Text="{Binding .}"
                                     BackgroundColor="Gray"
                                     HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.CreationTime}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Images}"
                         FontAttributes="Bold"/>
-                    <views:ItemsControl
+        <views:ItemsControl
                         ItemsSource="{Binding Detail.Images}"
                         PlaceholderText="-">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
                                     Text="{Binding .}"
                                     HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate JobDetailPage_Details_Completions}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Completions}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate JobDetailPage_Details_Parallelism}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Parallelism}"/>
 
-                    <Label
+        <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Status}"
                         FontAttributes="Bold"/>
-                    <Label
+        <Label
                         Text="{Binding Detail.Status}"/>
-                </StackLayout>
-            </Grid>
-
-            <ActivityIndicator
-                IsRunning="{Binding IsBusy}"  
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
-        </Grid>
-    </ScrollView>
+    </StackLayout>
 </base:ExtendedContentPage>

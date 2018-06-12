@@ -314,7 +314,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string podNamespace)
         {
             V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
-            
+
             return Mapper.Map<PodDetail>(pod);
         }
 
@@ -336,7 +336,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string replicaSetNamespace)
         {
             V1ReplicaSet replicaSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicaSetStatusAsync(replicaSetName, replicaSetNamespace));
-            
+
             // TODO Pods information (info not contained in V1ReplicaSet)??
             // TODO Services information (info not contained in V1ReplicaSet)??
             // TODO Horizontal pod autoscaler information (info not contained in V1ReplicaSet) ??
@@ -497,7 +497,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string jobNamespace)
         {
             V1Job jobDetail = await this.PerformClientOperation((c) => c.ReadNamespacedJobStatusAsync(jobName, jobNamespace));
-            
+
             // TODO Pods ??
             return Mapper.Map<JobDetail>(jobDetail);
         }
@@ -545,7 +545,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string statefulSetNamespace)
         {
             V1StatefulSet statefulSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedStatefulSetStatusAsync(statefulSetName, statefulSetNamespace));
-            
+
             // TODO Pods ??
             return Mapper.Map<StatefulSetDetail>(statefulSetDetail);
         }
@@ -575,7 +575,7 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName)
         {
             V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(namespaceName, fieldSelector: $"involvedObject.name={objectName}"));
-            
+
             return Mapper.Map<IList<Event>>(events.Items)
                 .OrderBy(e => e.LastSeen)
                 .ToList();

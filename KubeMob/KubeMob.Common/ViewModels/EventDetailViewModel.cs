@@ -8,13 +8,21 @@ namespace KubeMob.Common.ViewModels
     [Preserve(AllMembers = true)]
     public class EventDetailViewModel : ViewModelBase
     {
+        private Event detail;
+
         public EventDetailViewModel()
         {
         }
 
+        public Event Detail
+        {
+            get => this.detail;
+            private set => this.SetProperty(ref this.detail, value);
+        }
+
         public override Task Initialize(object navigationData)
         {
-            Event eventDetail = (Event)navigationData;
+            this.Detail = (Event)navigationData;
 
             return Task.CompletedTask;
         }

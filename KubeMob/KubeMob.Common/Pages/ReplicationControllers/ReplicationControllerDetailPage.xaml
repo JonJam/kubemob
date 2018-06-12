@@ -36,8 +36,7 @@
             Text="{markupExtensions:Translate DetailPage_Details_Images}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <views:ItemsControl
-            ItemsSource="{Binding Detail.Images}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}">
+            ItemsSource="{Binding Detail.Images}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Label
@@ -52,5 +51,25 @@
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
             Text="{Binding Detail.Pods}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Events}"             
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <views:ItemsControl
+            x:Name="Events"
+            ItemsSource="{Binding Events}"
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <views:TappableView
+                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
+                        CommandParameter="{Binding .}">
+                        <Label
+                            Text="{Binding Message}"
+                            LineBreakMode="TailTruncation"/>
+                    </views:TappableView>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
     </StackLayout>
 </base:ExtendedContentPage>

@@ -48,5 +48,25 @@
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
             Text="{Binding Detail.Status}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Events}"             
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <views:ItemsControl
+            x:Name="Events"
+            ItemsSource="{Binding Events}"
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <views:TappableView
+                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
+                        CommandParameter="{Binding .}">
+                        <Label
+                            Text="{Binding Message}"
+                            LineBreakMode="TailTruncation"/>
+                    </views:TappableView>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
     </StackLayout>
 </base:ExtendedContentPage>

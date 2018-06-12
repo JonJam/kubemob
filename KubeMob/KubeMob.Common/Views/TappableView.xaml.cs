@@ -46,7 +46,11 @@ namespace KubeMob.Common.Views
         {
             this.BackgroundColor = Color.LightGray;
 
-            this.Command?.Execute(this.CommandParameter);
+            if (this.Command != null &&
+                this.Command.CanExecute(this.CommandParameter))
+            {
+                this.Command.Execute(this.CommandParameter);
+            }
 
             await this.ColorTo(this.BackgroundColor, this.originalBackgroundColor, c => this.BackgroundColor = c);
         }

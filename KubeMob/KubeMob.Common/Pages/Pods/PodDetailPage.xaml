@@ -183,9 +183,8 @@
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
-        <!--TODO string resources-->
         <Label
-            Text="Events"             
+            Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
             x:Name="Events"

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Navigation
 {
@@ -66,6 +67,8 @@ namespace KubeMob.Common.Services.Navigation
         Task NavigateToPersistentVolumeClaimsPage();
 
         Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName);
+
+        Task NavigateToEventDetailPage(Event eventDetail);
 
         Task NavigateToSettingsPage();
 

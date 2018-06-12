@@ -122,6 +122,8 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<SettingsViewModel>();
             serviceCollection.AddTransient<ResourceListingViewModel>();
+
+            serviceCollection.AddTransient<EventDetailViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);

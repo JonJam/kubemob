@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Input;
-using KubeMob.Common.Behaviors;
 using KubeMob.Common.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -13,6 +12,12 @@ namespace KubeMob.Common.Views
         public static readonly BindableProperty CommandProperty = BindableProperty.CreateAttached(
             nameof(TappableView.Command),
             typeof(ICommand),
+            typeof(TappableView),
+            null);
+
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.CreateAttached(
+            nameof(TappableView.CommandParameter),
+            typeof(object),
             typeof(TappableView),
             null);
 
@@ -31,11 +36,17 @@ namespace KubeMob.Common.Views
             set => this.SetValue(TappableView.CommandProperty, value);
         }
 
+        public object CommandParameter
+        {
+            get => this.GetValue(TappableView.CommandParameterProperty);
+            set => this.SetValue(TappableView.CommandParameterProperty, value);
+        }
+
         private async void HandleTap(object sender, EventArgs e)
         {
             this.BackgroundColor = Color.LightGray;
 
-            this.Command?.Execute(e);
+            this.Command?.Execute(this.CommandParameter);
 
             await this.ColorTo(this.BackgroundColor, this.originalBackgroundColor, c => this.BackgroundColor = c);
         }

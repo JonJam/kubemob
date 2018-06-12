@@ -1,10 +1,14 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes;
+using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Kubernetes.Model.Base;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Base
@@ -14,20 +18,31 @@ namespace KubeMob.Common.ViewModels.Base
         where T : ObjectDetailBase
     {
         private readonly IPopupService popupService;
+        private readonly INavigationService navigationService;
 
         private string name;
         private T detail;
+        private IList<Event> events;
 
         protected ObjectDetailViewModelBase(
             IKubernetesService kubernetesService,
-            IPopupService popupService)
+            IPopupService popupService,
+            INavigationService navigationService)
         {
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
+            this.navigationService = navigationService;
 
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
             this.IsBusy = true;
+
+            this.NavigateToEventDetailCommand = new Command(async (o) => await this.OnNavigateToEventDetailCommandExecute(o));
+        }
+
+        public ICommand NavigateToEventDetailCommand
+        {
+            get;
         }
 
         public string Name
@@ -40,6 +55,12 @@ namespace KubeMob.Common.ViewModels.Base
         {
             get => this.detail;
             private set => this.SetProperty(ref this.detail, value);
+        }
+
+        public IList<Event> Events
+        {
+            get => this.events;
+            private set => this.SetProperty(ref this.events, value);
         }
 
         protected IKubernetesService KubernetesService
@@ -57,7 +78,20 @@ namespace KubeMob.Common.ViewModels.Base
             {
                 try
                 {
-                    this.Detail = await this.GetObjectDetail(objectId.Name, objectId.NamespaceName);
+                    async Task SetDetail()
+                    {
+                        this.Detail = await this.GetObjectDetail(objectId.Name, objectId.NamespaceName);
+                    }
+
+                    async Task SetEvents()
+                    {
+                        this.Events =
+                            await this.KubernetesService.GetEventsForObject(objectId.Name, objectId.NamespaceName);
+                    }
+
+                    await Task.WhenAll(
+                        SetDetail(),
+                        SetEvents());
                 }
                 catch (ClusterNotFoundException)
                 {
@@ -77,5 +111,13 @@ namespace KubeMob.Common.ViewModels.Base
         }
 
         protected abstract Task<T> GetObjectDetail(string name, string namespaceName);
+
+        private async Task OnNavigateToEventDetailCommandExecute(object obj)
+        {
+            if (obj is Event eventDetail)
+            {
+                await this.navigationService.NavigateToEventDetailPage(eventDetail);
+            }
+        }
     }
 }

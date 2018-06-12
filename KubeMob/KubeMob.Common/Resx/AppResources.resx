@@ -471,4 +471,28 @@
   <data name="EmptyMessage" xml:space="preserve">
     <value>There is nothing to display here.</value>
   </data>
+  <data name="EventDetailPage_Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="EventDetailPage_FirstSeen" xml:space="preserve">
+    <value>First seen</value>
+  </data>
+  <data name="EventDetailPage_LastSeen" xml:space="preserve">
+    <value>Last seen</value>
+  </data>
+  <data name="EventDetailPage_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="EventDetailPage_Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="EventDetailPage_SubObject" xml:space="preserve">
+    <value>Sub-object</value>
+  </data>
+  <data name="DetailPage_Events" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="EventDetailPage_Title" xml:space="preserve">
+    <value>Event detail</value>
+  </data>
 </root>

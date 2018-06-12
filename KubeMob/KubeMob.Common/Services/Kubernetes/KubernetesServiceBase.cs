@@ -290,7 +290,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
 
-            // TODO Event information ??
             // TODO New replica set information (info not contained in V1Deployment) ??
             // TODO Old replica set information (info not contained in V1Deployment) ??
             // TODO Horizontal pod autoscaler information (info not contained in V1Deployment) ??
@@ -316,9 +315,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
 
-            // TODO Event information ??
-            // Requires another API call ListEventForAllNamespacesAsync and filtering e => e.InvolvedObject.Name == podDetail.Name.
-            // Also should only display "non-expired" events (logic needs working out).
             return Mapper.Map<PodDetail>(pod);
         }
 
@@ -341,7 +337,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1ReplicaSet replicaSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicaSetStatusAsync(replicaSetName, replicaSetNamespace));
 
-            // TODO Event information ??
             // TODO Pods information (info not contained in V1ReplicaSet)??
             // TODO Services information (info not contained in V1ReplicaSet)??
             // TODO Horizontal pod autoscaler information (info not contained in V1ReplicaSet) ??
@@ -367,7 +362,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Service serviceDetail = await this.PerformClientOperation((c) => c.ReadNamespacedServiceStatusAsync(serviceName, serviceNamespace));
 
-            // TODO Event information ??
             // TODO Endpoints ??
             // TODO Pods ??
             return Mapper.Map<ServiceDetail>(serviceDetail);
@@ -458,7 +452,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1beta1CronJob cronJobDetail = await this.PerformClientOperation((c) => c.ReadNamespacedCronJobStatusAsync(cronJobName, cronJobNamespace));
 
-            // TODO Event information ??
             return Mapper.Map<CronJobDetail>(cronJobDetail);
         }
 
@@ -481,7 +474,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1DaemonSet daemonSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedDaemonSetStatusAsync(daemonSetName, daemonSetNamespace));
 
-            // TODO Event information ??
             // TODO Services ??
             // TODO Pods ??
             return Mapper.Map<DaemonSetDetail>(daemonSetDetail);
@@ -506,7 +498,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Job jobDetail = await this.PerformClientOperation((c) => c.ReadNamespacedJobStatusAsync(jobName, jobNamespace));
 
-            // TODO Event information ??
             // TODO Pods ??
             return Mapper.Map<JobDetail>(jobDetail);
         }
@@ -530,7 +521,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1ReplicationController replicationControllerDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicationControllerStatusAsync(replicationControllerName, replicationControllerNamespace));
 
-            // TODO Event information ??
             // TODO Pods information ??
             // TODO Services information ??
             // TODO Horizontal pod autoscaler information ??
@@ -556,7 +546,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1StatefulSet statefulSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedStatefulSetStatusAsync(statefulSetName, statefulSetNamespace));
 
-            // TODO Event information ??
             // TODO Pods ??
             return Mapper.Map<StatefulSetDetail>(statefulSetDetail);
         }
@@ -581,6 +570,15 @@ namespace KubeMob.Common.Services.Kubernetes
             V1PersistentVolumeClaim persistentVolumeClaimDetail = await this.PerformClientOperation((c) => c.ReadNamespacedPersistentVolumeClaimAsync(persistentVolumeClaimName, persistentVolumeClaimNamespace));
 
             return Mapper.Map<PersistentVolumeClaimDetail>(persistentVolumeClaimDetail);
+        }
+
+        public async Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName)
+        {
+            V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(namespaceName, fieldSelector: $"involvedObject.name={objectName}"));
+
+            return Mapper.Map<IList<Event>>(events.Items)
+                .OrderBy(e => e.LastSeen)
+                .ToList();
         }
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);

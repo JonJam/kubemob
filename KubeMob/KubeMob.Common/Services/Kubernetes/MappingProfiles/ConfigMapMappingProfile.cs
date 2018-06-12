@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles

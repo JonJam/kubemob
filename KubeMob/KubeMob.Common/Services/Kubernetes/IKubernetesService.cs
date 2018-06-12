@@ -167,5 +167,7 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<StatefulSetDetail> GetStatefulSetDetail(
             string statefulSetName,
             string statefulSetNamespace);
+
+        Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName);
     }
 }

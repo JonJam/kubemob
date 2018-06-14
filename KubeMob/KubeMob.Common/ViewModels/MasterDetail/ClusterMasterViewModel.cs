@@ -53,6 +53,12 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             await this.navigationService.NavigateToPersistentVolumesPage();
         });
 
+        public ICommand NavigateToStorageClassesCommand => new Command(async () =>
+        {
+            this.toggleShowMasterCommand.Execute(null);
+            await this.navigationService.NavigateToStorageClassesPage();
+        });
+        
         public ICommand NavigateToCronJobsCommand => new Command(async () =>
             {
                 this.toggleShowMasterCommand.Execute(null);

@@ -38,6 +38,12 @@
                         Title="{extensions:Translate PersistentVolumes}"/>
                 </views:TappableView>
 
+                <views:TappableView
+                    Command="{Binding NavigateToStorageClassesCommand}">
+                    <views:MenuItem
+                        Title="{extensions:Translate StorageClasses}"/>
+                </views:TappableView>
+
             </StackLayout>
 
             <StackLayout

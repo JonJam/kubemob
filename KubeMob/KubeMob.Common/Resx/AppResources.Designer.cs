@@ -1222,6 +1222,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Storage Classes.
+        /// </summary>
+        internal static string StorageClasses {
+            get {
+                return ResourceManager.GetString("StorageClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workloads.
         /// </summary>
         internal static string Workloads {

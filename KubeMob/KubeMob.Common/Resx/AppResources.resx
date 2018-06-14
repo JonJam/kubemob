@@ -507,4 +507,7 @@
   <data name="PersistentVolumes" xml:space="preserve">
     <value>Persistent Volumes</value>
   </data>
+  <data name="StorageClasses" xml:space="preserve">
+    <value>Storage Classes</value>
+  </data>
 </root>

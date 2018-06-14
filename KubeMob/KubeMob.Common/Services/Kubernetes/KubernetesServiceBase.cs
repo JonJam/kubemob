@@ -46,6 +46,58 @@ namespace KubeMob.Common.Services.Kubernetes
             this.ResetClient();
         }
 
+        public bool ShowNamespaces
+        {
+            get => this.appSettings.ShowNamespaces;
+            set
+            {
+                this.appSettings.ShowNamespaces = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowNamespaces));
+            }
+        }
+
+        public bool ShowNodes
+        {
+            get => this.appSettings.ShowNodes;
+            set
+            {
+                this.appSettings.ShowNodes = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowNodes));
+            }
+        }
+
+        public bool ShowPersistentVolumes
+        {
+            get => this.appSettings.ShowPersistentVolumes;
+            set
+            {
+                this.appSettings.ShowPersistentVolumes = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowPersistentVolumes));
+            }
+        }
+
+        public bool ShowStorageClasses
+        {
+            get => this.appSettings.ShowStorageClasses;
+            set
+            {
+                this.appSettings.ShowStorageClasses = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowStorageClasses));
+            }
+        }
+
         public bool ShowCronJobs
         {
             get => this.appSettings.ShowCronJobs;

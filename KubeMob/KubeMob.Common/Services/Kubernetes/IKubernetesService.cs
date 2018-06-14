@@ -6,6 +6,30 @@ namespace KubeMob.Common.Services.Kubernetes
 {
     public interface IKubernetesService
     {
+        bool ShowNamespaces
+        {
+            get;
+            set;
+        }
+
+        bool ShowNodes
+        {
+            get;
+            set;
+        }
+
+        bool ShowPersistentVolumes
+        {
+            get;
+            set;
+        }
+
+        bool ShowStorageClasses
+        {
+            get;
+            set;
+        }
+
         bool ShowCronJobs
         {
             get;

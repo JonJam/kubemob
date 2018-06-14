@@ -32,6 +32,12 @@
                         Title="{extensions:Translate Nodes}"/>
                 </views:TappableView>
 
+                <views:TappableView
+                    Command="{Binding NavigateToPersistentVolumesCommand}">
+                    <views:MenuItem
+                        Title="{extensions:Translate PersistentVolumes}"/>
+                </views:TappableView>
+
             </StackLayout>
 
             <StackLayout

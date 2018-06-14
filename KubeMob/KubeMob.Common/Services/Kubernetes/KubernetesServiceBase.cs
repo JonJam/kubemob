@@ -289,6 +289,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<ObjectSummary>> GetPersistentVolumeSummaries()
+        {
+            V1PersistentVolumeList persistentVolumes = await this.PerformClientOperation((c) => c.ListPersistentVolumeAsync());
+
+            return Mapper.Map<IList<ObjectSummary>>(persistentVolumes.Items)
+                .OrderBy(d => d.Name)
+                .ToList();
+        }
+
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

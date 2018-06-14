@@ -12,6 +12,7 @@ using KubeMob.Common.Pages.MasterDetail;
 using KubeMob.Common.Pages.Namespaces;
 using KubeMob.Common.Pages.Nodes;
 using KubeMob.Common.Pages.PersistentVolumeClaims;
+using KubeMob.Common.Pages.PersistentVolumes;
 using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.ReplicaSets;
 using KubeMob.Common.Pages.ReplicationControllers;
@@ -83,6 +84,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToNamespacesPage() => NavigationService.InternalNavigate(typeof(NamespacesPage));
 
         public Task NavigateToNodesPage() => NavigationService.InternalNavigate(typeof(NodesPage));
+
+        public Task NavigateToPersistentVolumesPage() => NavigationService.InternalNavigate(typeof(PersistentVolumesPage));
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 

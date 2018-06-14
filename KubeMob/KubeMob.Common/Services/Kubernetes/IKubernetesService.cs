@@ -94,6 +94,8 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetNodeSummaries();
 
+        Task<IList<ObjectSummary>> GetPersistentVolumeSummaries();
+
         Task<IList<ObjectSummary>> GetDeploymentSummaries();
 
         Task<DeploymentDetail> GetDeploymentDetail(

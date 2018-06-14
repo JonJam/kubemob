@@ -26,6 +26,12 @@
                         Title="{extensions:Translate Namespaces}"/>
                 </views:TappableView>
 
+                <views:TappableView
+                    Command="{Binding NavigateToNodesCommand}">
+                    <views:MenuItem
+                        Title="{extensions:Translate Nodes}"/>
+                </views:TappableView>
+
             </StackLayout>
 
             <StackLayout

@@ -18,6 +18,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToNamespacesPage();
 
+        Task NavigateToNodesPage();
+
         Task NavigateToPodsPage();
 
         Task NavigateToPodDetailPage(string name, string namespaceName);

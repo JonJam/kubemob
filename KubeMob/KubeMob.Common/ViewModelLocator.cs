@@ -21,6 +21,7 @@ using KubeMob.Common.ViewModels.Ingresses;
 using KubeMob.Common.ViewModels.Jobs;
 using KubeMob.Common.ViewModels.MasterDetail;
 using KubeMob.Common.ViewModels.Namespaces;
+using KubeMob.Common.ViewModels.Nodes;
 using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
@@ -126,6 +127,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<EventDetailViewModel>();
 
             serviceCollection.AddTransient<NamespacesViewModel>();
+            serviceCollection.AddTransient<NodesViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);
@@ -156,6 +158,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<CommonMappingProfile>();
 
                 cfg.AddProfile<NamespaceMappingProfile>();
+                cfg.AddProfile<NodeMappingProfile>();
 
                 cfg.AddProfile<ConfigMapMappingProfile>();
                 cfg.AddProfile<CronJobMappingProfile>();

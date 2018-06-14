@@ -943,6 +943,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Persistent Volumes.
+        /// </summary>
+        internal static string PersistentVolumes {
+            get {
+                return ResourceManager.GetString("PersistentVolumes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Conditions.
         /// </summary>
         internal static string PodDetailPage_Conditions {

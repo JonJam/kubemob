@@ -504,4 +504,7 @@
   <data name="Nodes" xml:space="preserve">
     <value>Nodes</value>
   </data>
+  <data name="PersistentVolumes" xml:space="preserve">
+    <value>Persistent Volumes</value>
+  </data>
 </root>

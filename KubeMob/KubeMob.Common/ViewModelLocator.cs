@@ -7,7 +7,6 @@ using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.MappingProfiles;
-using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
@@ -21,6 +20,7 @@ using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.Ingresses;
 using KubeMob.Common.ViewModels.Jobs;
 using KubeMob.Common.ViewModels.MasterDetail;
+using KubeMob.Common.ViewModels.Namespaces;
 using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
@@ -124,6 +124,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ResourceListingViewModel>();
 
             serviceCollection.AddTransient<EventDetailViewModel>();
+
+            serviceCollection.AddTransient<NamespacesViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);
@@ -152,6 +154,8 @@ namespace KubeMob.Common
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<CommonMappingProfile>();
+
+                cfg.AddProfile<NamespaceMappingProfile>();
 
                 cfg.AddProfile<ConfigMapMappingProfile>();
                 cfg.AddProfile<CronJobMappingProfile>();

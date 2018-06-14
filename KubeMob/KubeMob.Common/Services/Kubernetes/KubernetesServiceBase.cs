@@ -271,11 +271,20 @@ namespace KubeMob.Common.Services.Kubernetes
         // TODO Notify of change ?? Will only probably need to on overview.
         public void SetSelectedNamespace(Namespace ns) => this.appSettings.SelectedNamespace = ns.Name;
 
+        public async Task<IList<ObjectSummary>> GetNamespaceSummaries()
+        {
+            V1NamespaceList namespaces = await this.PerformClientOperation((c) => c.ListNamespaceAsync());
+
+            return Mapper.Map<IList<ObjectSummary>>(namespaces.Items)
+                .OrderBy(d => d.Name)
+                .ToList();
+        }
+
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1DeploymentList deployments = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+           V1DeploymentList deployments = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListDeploymentForAllNamespacesAsync()
                 : c.ListNamespacedDeploymentAsync(kubernetesNamespace));
 
@@ -300,7 +309,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListPodForAllNamespacesAsync()
                 : c.ListNamespacedPodAsync(kubernetesNamespace));
 
@@ -322,7 +331,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListReplicaSetForAllNamespacesAsync()
                 : c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
@@ -347,7 +356,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ServiceList serviceList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1ServiceList serviceList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListServiceForAllNamespacesAsync()
                 : c.ListNamespacedServiceAsync(kubernetesNamespace));
 
@@ -371,7 +380,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1beta1IngressList ingressList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1beta1IngressList ingressList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListIngressForAllNamespacesAsync()
                 : c.ListNamespacedIngressAsync(kubernetesNamespace));
 
@@ -393,7 +402,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ConfigMapList configMapList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1ConfigMapList configMapList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListConfigMapForAllNamespacesAsync()
                 : c.ListNamespacedConfigMapAsync(kubernetesNamespace));
 
@@ -415,7 +424,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1SecretList secretList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1SecretList secretList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListSecretForAllNamespacesAsync()
                 : c.ListNamespacedSecretAsync(kubernetesNamespace));
 
@@ -437,7 +446,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1beta1CronJobList cronJobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListCronJobForAllNamespacesAsync()
                 : c.ListNamespacedCronJobAsync(kubernetesNamespace));
 
@@ -459,7 +468,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListDaemonSetForAllNamespacesAsync()
                 : c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
@@ -483,7 +492,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListJobForAllNamespacesAsync()
                 : c.ListNamespacedJobAsync(kubernetesNamespace));
 
@@ -506,7 +515,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListReplicationControllerForAllNamespacesAsync()
                 : c.ListNamespacedReplicationControllerAsync(kubernetesNamespace));
 
@@ -531,7 +540,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListStatefulSetForAllNamespacesAsync()
                 : c.ListNamespacedStatefulSetAsync(kubernetesNamespace));
 
@@ -554,7 +563,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            k8s.Models.V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListPersistentVolumeClaimForAllNamespacesAsync()
                 : c.ListNamespacedPersistentVolumeClaimAsync(kubernetesNamespace));
 

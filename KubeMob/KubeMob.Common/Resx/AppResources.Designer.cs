@@ -835,6 +835,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nodes.
+        /// </summary>
+        internal static string Nodes {
+            get {
+                return ResourceManager.GetString("Nodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We are having connectivity issues doing that right now. Please try again..
         /// </summary>
         internal static string NoInternetErrorMessage {

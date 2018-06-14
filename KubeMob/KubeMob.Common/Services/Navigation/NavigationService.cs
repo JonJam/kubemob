@@ -20,6 +20,7 @@ using KubeMob.Common.Pages.Secrets;
 using KubeMob.Common.Pages.Services;
 using KubeMob.Common.Pages.Settings;
 using KubeMob.Common.Pages.StatefulSets;
+using KubeMob.Common.Pages.StorageClasses;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels.Base;
@@ -88,6 +89,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToPersistentVolumesPage() => NavigationService.InternalNavigate(typeof(PersistentVolumesPage));
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
+
+        public Task NavigateToStorageClassesPage() => NavigationService.InternalNavigate(typeof(StorageClassesPage));
 
         public Task NavigateToPodDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(PodDetailPage), new ObjectId(name, namespaceName));
 

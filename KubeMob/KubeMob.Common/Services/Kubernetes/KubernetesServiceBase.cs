@@ -298,6 +298,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<IList<ObjectSummary>> GetStorageClassesSummaries()
+        {
+            V1StorageClassList storageClasses = await this.PerformClientOperation((c) => c.ListStorageClassAsync());
+
+            return Mapper.Map<IList<ObjectSummary>>(storageClasses.Items)
+                .OrderBy(d => d.Name)
+                .ToList();
+        }
+
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();

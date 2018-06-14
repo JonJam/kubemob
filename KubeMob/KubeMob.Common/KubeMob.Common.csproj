@@ -36,6 +36,9 @@
     <Compile Update="Pages\ConfigMaps\ConfigMapDetailPage.xaml.cs">
       <DependentUpon>ConfigMapDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\StorageClasses\StorageClassesPage.xaml.cs">
+      <DependentUpon>StorageClassesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumesPage.xaml.cs">
       <DependentUpon>PersistentVolumesPage.xaml</DependentUpon>
     </Compile>

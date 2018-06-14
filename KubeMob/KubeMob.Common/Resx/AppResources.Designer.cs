@@ -331,6 +331,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cluster.
+        /// </summary>
+        internal static string ClusterMasterPage_Cluster {
+            get {
+                return ResourceManager.GetString("ClusterMasterPage_Cluster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Namespace.
         /// </summary>
         internal static string ClusterMasterPage_NamespaceLabel {
@@ -813,6 +822,15 @@ namespace KubeMob.Common.Resx {
         internal static string Jobs {
             get {
                 return ResourceManager.GetString("Jobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Namespaces.
+        /// </summary>
+        internal static string Namespaces {
+            get {
+                return ResourceManager.GetString("Namespaces", resourceCulture);
             }
         }
         

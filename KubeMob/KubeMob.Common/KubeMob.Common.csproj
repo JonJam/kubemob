@@ -36,6 +36,9 @@
     <Compile Update="Pages\ConfigMaps\ConfigMapDetailPage.xaml.cs">
       <DependentUpon>ConfigMapDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Namespaces\NamespacesPage.xaml.cs">
+      <DependentUpon>NamespacesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\CronJobs\CronJobDetailPage.xaml.cs">
       <DependentUpon>CronJobDetailPage.xaml</DependentUpon>
     </Compile>

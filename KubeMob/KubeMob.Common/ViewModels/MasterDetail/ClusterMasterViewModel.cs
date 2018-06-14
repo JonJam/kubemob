@@ -35,6 +35,12 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                 this.HandleResourceListingSettingChanged);
         }
 
+        public ICommand NavigateToNamespacesCommand => new Command(async () =>
+        {
+            this.toggleShowMasterCommand.Execute(null);
+            await this.navigationService.NavigateToNamespacesPage();
+        });
+
         public ICommand NavigateToCronJobsCommand => new Command(async () =>
             {
                 this.toggleShowMasterCommand.Execute(null);

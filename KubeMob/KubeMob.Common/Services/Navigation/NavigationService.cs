@@ -9,6 +9,7 @@ using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
 using KubeMob.Common.Pages.MasterDetail;
+using KubeMob.Common.Pages.Namespaces;
 using KubeMob.Common.Pages.PersistentVolumeClaims;
 using KubeMob.Common.Pages.Pods;
 using KubeMob.Common.Pages.ReplicaSets;
@@ -77,6 +78,8 @@ namespace KubeMob.Common.Services.Navigation
         }
 
         public Task NavigateToClustersPage() => NavigationService.InternalNavigate(typeof(ClustersPage));
+
+        public Task NavigateToNamespacesPage() => NavigationService.InternalNavigate(typeof(NamespacesPage));
 
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 

@@ -12,6 +12,54 @@ namespace KubeMob.Common.ViewModels.Settings
         public ResourceListingViewModel(IKubernetesService kubernetesService)
             => this.kubernetesService = kubernetesService;
 
+        public bool ShowNamespaces
+        {
+            get => this.kubernetesService.ShowNamespaces;
+            set
+            {
+                if (this.kubernetesService.ShowNamespaces != value)
+                {
+                    this.kubernetesService.ShowNamespaces = value;
+                }
+            }
+        }
+
+        public bool ShowNodes
+        {
+            get => this.kubernetesService.ShowNodes;
+            set
+            {
+                if (this.kubernetesService.ShowNodes != value)
+                {
+                    this.kubernetesService.ShowNodes = value;
+                }
+            }
+        }
+
+        public bool ShowPersistentVolumes
+        {
+            get => this.kubernetesService.ShowPersistentVolumes;
+            set
+            {
+                if (this.kubernetesService.ShowPersistentVolumes != value)
+                {
+                    this.kubernetesService.ShowPersistentVolumes = value;
+                }
+            }
+        }
+
+        public bool ShowStorageClasses
+        {
+            get => this.kubernetesService.ShowStorageClasses;
+            set
+            {
+                if (this.kubernetesService.ShowStorageClasses != value)
+                {
+                    this.kubernetesService.ShowStorageClasses = value;
+                }
+            }
+        }
+
         public bool ShowCronJobs
         {
             get => this.kubernetesService.ShowCronJobs;

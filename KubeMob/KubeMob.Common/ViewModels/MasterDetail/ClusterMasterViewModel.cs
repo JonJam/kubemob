@@ -58,7 +58,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             this.toggleShowMasterCommand.Execute(null);
             await this.navigationService.NavigateToStorageClassesPage();
         });
-        
+
         public ICommand NavigateToCronJobsCommand => new Command(async () =>
             {
                 this.toggleShowMasterCommand.Execute(null);
@@ -177,6 +177,19 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             }
         }
 
+        public bool ShowCluster => this.ShowNamespaces ||
+                                     this.ShowNodes ||
+                                     this.ShowPersistentVolumes ||
+                                     this.ShowStorageClasses;
+
+        public bool ShowNamespaces => this.kubernetesService.ShowNamespaces;
+
+        public bool ShowNodes => this.kubernetesService.ShowNodes;
+
+        public bool ShowPersistentVolumes => this.kubernetesService.ShowPersistentVolumes;
+
+        public bool ShowStorageClasses => this.kubernetesService.ShowStorageClasses;
+
         public bool ShowWorkloads => this.ShowCronJobs ||
                                      this.ShowDaemonSets ||
                                      this.ShowDeployments ||
@@ -245,6 +258,12 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                 case nameof(this.ShowPersistentVolumeClaims):
                 case nameof(this.ShowSecrets):
                     this.NotifyPropertyChanged(() => this.ShowConfigAndStorage);
+                    break;
+                case nameof(this.ShowNamespaces):
+                case nameof(this.ShowNodes):
+                case nameof(this.ShowPersistentVolumes):
+                case nameof(this.ShowStorageClasses):
+                    this.NotifyPropertyChanged(() => this.ShowCluster);
                     break;
                 default:
                     this.NotifyPropertyChanged(() => this.ShowWorkloads);

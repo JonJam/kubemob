@@ -333,9 +333,9 @@ namespace KubeMob.Common.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Cluster.
         /// </summary>
-        internal static string ClusterMasterPage_Cluster {
+        internal static string Cluster {
             get {
-                return ResourceManager.GetString("ClusterMasterPage_Cluster", resourceCulture);
+                return ResourceManager.GetString("Cluster", resourceCulture);
             }
         }
         

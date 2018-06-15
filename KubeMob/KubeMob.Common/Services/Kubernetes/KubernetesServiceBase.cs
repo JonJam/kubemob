@@ -332,6 +332,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+
+        public async Task<NamespaceDetail> GetNamespaceDetail(
+            string namespaceName)
+        {
+            V1Namespace namespaceDetail = await this.PerformClientOperation((c) => c.ReadNamespaceStatusAsync(namespaceName));
+
+            return Mapper.Map<NamespaceDetail>(namespaceDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetNodeSummaries()
         {
             V1NodeList nodes = await this.PerformClientOperation((c) => c.ListNodeAsync());

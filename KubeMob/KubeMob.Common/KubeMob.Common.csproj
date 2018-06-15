@@ -39,6 +39,9 @@
     <Compile Update="Pages\StorageClasses\StorageClassesPage.xaml.cs">
       <DependentUpon>StorageClassesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Namespaces\NamespaceDetailPage.xaml.cs">
+      <DependentUpon>NamespaceDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumesPage.xaml.cs">
       <DependentUpon>PersistentVolumesPage.xaml</DependentUpon>
     </Compile>

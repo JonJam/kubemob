@@ -27,7 +27,7 @@ namespace KubeMob.Common.ViewModels.Nodes
         {
             ObjectSummary selected = (ObjectSummary)obj;
 
-            throw new NotImplementedException();
+            return this.NavigationService.NavigateToNodeDetailPage(selected.Name);
         }
     }
 }

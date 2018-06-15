@@ -121,6 +121,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetNodeSummaries();
 
+        Task<NodeDetail> GetNodeDetail(
+            string nodeName);
+
         Task<IList<ObjectSummary>> GetPersistentVolumeSummaries();
 
         Task<IList<ObjectSummary>> GetStorageClassesSummaries();

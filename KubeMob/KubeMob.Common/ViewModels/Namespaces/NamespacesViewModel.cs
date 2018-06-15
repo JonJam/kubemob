@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using KubeMob.Common.Services.Kubernetes;
@@ -27,7 +26,7 @@ namespace KubeMob.Common.ViewModels.Namespaces
         {
             ObjectSummary selected = (ObjectSummary)obj;
 
-            throw new NotImplementedException();
+            return this.NavigationService.NavigateToNamespaceDetailPage(selected.Name);
         }
     }
 }

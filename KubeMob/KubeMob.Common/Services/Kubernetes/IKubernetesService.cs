@@ -92,6 +92,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetNamespaceSummaries();
 
+        Task<NamespaceDetail> GetNamespaceDetail(
+            string namespaceName);
+
         Task<IList<ObjectSummary>> GetNodeSummaries();
 
         Task<IList<ObjectSummary>> GetPersistentVolumeSummaries();

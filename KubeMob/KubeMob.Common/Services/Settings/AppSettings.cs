@@ -48,6 +48,38 @@ namespace KubeMob.Common.Services.Settings
                 value);
         }
 
+        public bool ShowNamespaces
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowNamespaces), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowNamespaces),
+                value);
+        }
+
+        public bool ShowNodes
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowNodes), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowNodes),
+                value);
+        }
+
+        public bool ShowPersistentVolumes
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowPersistentVolumes), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowPersistentVolumes),
+                value);
+        }
+
+        public bool ShowStorageClasses
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowStorageClasses), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowStorageClasses),
+                value);
+        }
+
         public bool ShowCronJobs
         {
             get => this.settings.GetValueOrDefault(nameof(this.ShowCronJobs), true);

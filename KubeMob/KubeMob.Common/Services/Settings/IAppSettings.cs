@@ -15,6 +15,30 @@ namespace KubeMob.Common.Services.Settings
             set;
         }
 
+        bool ShowNamespaces
+        {
+            get;
+            set;
+        }
+
+        bool ShowNodes
+        {
+            get;
+            set;
+        }
+
+        bool ShowPersistentVolumes
+        {
+            get;
+            set;
+        }
+
+        bool ShowStorageClasses
+        {
+            get;
+            set;
+        }
+
         bool ShowCronJobs
         {
             get;

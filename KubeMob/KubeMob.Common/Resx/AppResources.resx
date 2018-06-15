@@ -498,7 +498,7 @@
   <data name="Namespaces" xml:space="preserve">
     <value>Namespaces</value>
   </data>
-  <data name="ClusterMasterPage_Cluster" xml:space="preserve">
+  <data name="Cluster" xml:space="preserve">
     <value>Cluster</value>
   </data>
   <data name="Nodes" xml:space="preserve">
@@ -506,5 +506,8 @@
   </data>
   <data name="PersistentVolumes" xml:space="preserve">
     <value>Persistent Volumes</value>
+  </data>
+  <data name="StorageClasses" xml:space="preserve">
+    <value>Storage Classes</value>
   </data>
 </root>

@@ -11,37 +11,45 @@
              Title="☰">
 
     <ScrollView>
-        <StackLayout
-            CompressedLayout.IsHeadless="true">
+        <StackLayout>
 
             <!-- Cluster -->
             <StackLayout
-                CompressedLayout.IsHeadless="true">
+                IsVisible="{Binding ShowCluster}">
                 <views:GroupMenuItem
-                    Title="{extensions:Translate ClusterMasterPage_Cluster}"/>
+                    Title="{extensions:Translate Cluster}"/>
 
                 <views:TappableView
-                    Command="{Binding NavigateToNamespacesCommand}">
+                    Command="{Binding NavigateToNamespacesCommand}"
+                    IsVisible="{Binding ShowNamespaces}">
                     <views:MenuItem
                         Title="{extensions:Translate Namespaces}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                    Command="{Binding NavigateToNodesCommand}">
+                    Command="{Binding NavigateToNodesCommand}"
+                    IsVisible="{Binding ShowNodes}">
                     <views:MenuItem
                         Title="{extensions:Translate Nodes}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                    Command="{Binding NavigateToPersistentVolumesCommand}">
+                    Command="{Binding NavigateToPersistentVolumesCommand}"
+                    IsVisible="{Binding ShowPersistentVolumes}">
                     <views:MenuItem
                         Title="{extensions:Translate PersistentVolumes}"/>
+                </views:TappableView>
+
+                <views:TappableView
+                    Command="{Binding NavigateToStorageClassesCommand}"
+                    IsVisible="{Binding ShowStorageClasses}">
+                    <views:MenuItem
+                        Title="{extensions:Translate StorageClasses}"/>
                 </views:TappableView>
 
             </StackLayout>
 
             <StackLayout
-                CompressedLayout.IsHeadless="true"
                 Padding="15,10"
                 HorizontalOptions="FillAndExpand">
                 <Label 
@@ -57,7 +65,6 @@
 
             <!-- Workloads -->
             <StackLayout
-                CompressedLayout.IsHeadless="true"
                 IsVisible="{Binding ShowWorkloads}">
                 <views:GroupMenuItem
                 Title="{extensions:Translate Workloads}"/>
@@ -121,7 +128,6 @@
 
             <!-- Discovery and load balancing -->
             <StackLayout
-                CompressedLayout.IsHeadless="true"
                 IsVisible="{Binding ShowDiscoveryAndLoadBalancing}">
                 <views:GroupMenuItem
                 Title="{extensions:Translate DiscoveryAndLoadBalancing}"/>
@@ -143,7 +149,6 @@
 
             <!-- Config and storage -->
             <StackLayout
-                CompressedLayout.IsHeadless="true"
                 IsVisible="{Binding ShowConfigAndStorage}">
                 <views:GroupMenuItem
                 Title="{extensions:Translate ConfigAndStorage}"/>

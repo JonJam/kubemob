@@ -10,6 +10,13 @@
 
     <TableView Intent="Settings">
         <TableRoot>
+            <TableSection Title="{markupExtensions:Translate Cluster}">
+                <SwitchCell Text="{markupExtensions:Translate Namespaces}" On="{Binding ShowNamespaces, Mode=TwoWay}"/>
+                <SwitchCell Text="{markupExtensions:Translate Nodes}" On="{Binding ShowNodes, Mode=TwoWay}"/>
+                <SwitchCell Text="{markupExtensions:Translate PersistentVolumes}" On="{Binding ShowPersistentVolumes, Mode=TwoWay}"/>
+                <SwitchCell Text="{markupExtensions:Translate StorageClasses}" On="{Binding ShowStorageClasses, Mode=TwoWay}"/>
+            </TableSection>
+
             <TableSection Title="{markupExtensions:Translate Workloads}">
                 <SwitchCell Text="{markupExtensions:Translate CronJobs}" On="{Binding ShowCronJobs, Mode=TwoWay}"/>
                 <SwitchCell Text="{markupExtensions:Translate DaemonSets}" On="{Binding ShowDaemonSets, Mode=TwoWay}" />

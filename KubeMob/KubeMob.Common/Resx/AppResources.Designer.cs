@@ -333,9 +333,9 @@ namespace KubeMob.Common.Resx {
         /// <summary>
         ///   Looks up a localized string similar to Cluster.
         /// </summary>
-        internal static string ClusterMasterPage_Cluster {
+        internal static string Cluster {
             get {
-                return ResourceManager.GetString("ClusterMasterPage_Cluster", resourceCulture);
+                return ResourceManager.GetString("Cluster", resourceCulture);
             }
         }
         
@@ -1218,6 +1218,15 @@ namespace KubeMob.Common.Resx {
         internal static string StatefulSets {
             get {
                 return ResourceManager.GetString("StatefulSets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage Classes.
+        /// </summary>
+        internal static string StorageClasses {
+            get {
+                return ResourceManager.GetString("StorageClasses", resourceCulture);
             }
         }
         

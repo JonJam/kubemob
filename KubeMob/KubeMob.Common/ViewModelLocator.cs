@@ -27,6 +27,7 @@ using KubeMob.Common.ViewModels.PersistentVolumes;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.ReplicationControllers;
+using KubeMob.Common.ViewModels.StorageClasses;
 using KubeMob.Common.ViewModels.Secrets;
 using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
@@ -133,6 +134,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<NodesViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumesViewModel>();
+
+            serviceCollection.AddTransient<StorageClassesViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);
@@ -165,6 +168,7 @@ namespace KubeMob.Common
                 cfg.AddProfile<NamespaceMappingProfile>();
                 cfg.AddProfile<NodeMappingProfile>();
                 cfg.AddProfile<PersistentVolumeMappingProfile>();
+                cfg.AddProfile<StorageClassMappingProfile>();
 
                 cfg.AddProfile<ConfigMapMappingProfile>();
                 cfg.AddProfile<CronJobMappingProfile>();

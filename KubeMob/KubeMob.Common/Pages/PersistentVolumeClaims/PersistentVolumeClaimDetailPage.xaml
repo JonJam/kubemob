@@ -29,7 +29,6 @@
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <Label
             Text="{Binding Detail.VolumeName}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
         <Label

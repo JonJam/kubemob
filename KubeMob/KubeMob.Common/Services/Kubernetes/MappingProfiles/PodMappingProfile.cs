@@ -35,7 +35,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         args.AsReadOnly());
                 });
 
-            this.CreateMap<k8s.Models.V1PodCondition, PodCondition>()
+            this.CreateMap<k8s.Models.V1PodCondition, Condition>()
                 .ConstructUsing((c) =>
                 {
                     string lastHeartbeatTime = c.LastProbeTime.HasValue
@@ -46,12 +46,13 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{c.LastTransitionTime.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    return new PodCondition(
+                    return new Condition(
                         c.Type,
                         c.Status,
                         lastHeartbeatTime,
                         lastTransitionTime,
-                        c.Reason);
+                        c.Reason,
+                        c.Message);
                 });
 
             this.CreateMap<k8s.Models.V1Pod, PodDetail>()
@@ -65,7 +66,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                       new List<string>();
                     List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
-                    List<PodCondition> conditions = Mapper.Map<List<PodCondition>>(p.Status.Conditions);
+                    List<Condition> conditions = Mapper.Map<List<Condition>>(p.Status.Conditions);
                     List<OwnerReference> owners = Mapper.Map<List<OwnerReference>>(p.Metadata.OwnerReferences);
                     List<string> pvcs = p.Spec.Volumes
                         .Where(v => v.PersistentVolumeClaim != null)

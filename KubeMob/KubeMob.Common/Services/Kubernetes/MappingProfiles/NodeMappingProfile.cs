@@ -14,6 +14,26 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     n.Metadata.Name,
                     n.Metadata.NamespaceProperty));
 
+            this.CreateMap<k8s.Models.V1NodeCondition, Condition>()
+                .ConstructUsing((c) =>
+                {
+                    string lastHeartbeatTime = c.LastHeartbeatTime.HasValue
+                        ? $"{c.LastHeartbeatTime.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
+
+                    string lastTransitionTime = c.LastTransitionTime.HasValue
+                        ? $"{c.LastTransitionTime.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
+
+                    return new Condition(
+                        c.Type,
+                        c.Status,
+                        lastHeartbeatTime,
+                        lastTransitionTime,
+                        c.Reason,
+                        c.Message);
+                });
+
             this.CreateMap<k8s.Models.V1Node, NodeDetail>()
                 .ConstructUsing((n) =>
                 {
@@ -26,20 +46,31 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{n.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    var addresses = n.Status.Addresses.Select(a => $"{a.Type}: {a.Address}");
-                    var podCidr = n.Spec.PodCIDR;
-                    var providerId = n.Spec.ProviderID;
-                    var unschedulable = n.Spec.Unschedulable.GetValueOrDefault(false);
+                    List<string> addresses = n.Status.Addresses.Select(a => $"{a.Type}: {a.Address}").ToList();
 
-                    // TODO expand this.
-                    var machineId = n.Status.NodeInfo;
+                    List<Condition> conditions = Mapper.Map<List<Condition>>(n.Status.Conditions);
 
                     return new NodeDetail(
                         n.Metadata.Name,
                         n.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
-                        creationTime);
+                        creationTime,
+                        addresses.AsReadOnly(),
+                        n.Spec.PodCIDR,
+                        n.Spec.ProviderID,
+                        n.Spec.Unschedulable.GetValueOrDefault(false),
+                        n.Status.NodeInfo.MachineID,
+                        n.Status.NodeInfo.SystemUUID,
+                        n.Status.NodeInfo.BootID,
+                        n.Status.NodeInfo.KernelVersion,
+                        n.Status.NodeInfo.OsImage,
+                        n.Status.NodeInfo.ContainerRuntimeVersion,
+                        n.Status.NodeInfo.KubeletVersion,
+                        n.Status.NodeInfo.KubeProxyVersion,
+                        n.Status.NodeInfo.OperatingSystem,
+                        n.Status.NodeInfo.Architecture,
+                        conditions.AsReadOnly());
                 });
         }
     }

@@ -112,41 +112,8 @@
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
-        <Label
-            Text="{markupExtensions:Translate PodDetailPage_Conditions}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Text="{markupExtensions:Translate PodDetailPage_Conditions_Type}"/>
-            <Label
-                Grid.Column="1"
-                Text="{markupExtensions:Translate PodDetailPage_Conditions_Status}"/>
-        </Grid>
-        <!--TODO a condition detail page??-->
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.Conditions}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Column="0"
-                            Text="{Binding Type}"/>
-                        <Label
-                            Grid.Column="1"
-                            Text="{Binding Status}"/>
-                    </Grid>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailConditionsTemplate}"/>
 
         <Label
             Text="{markupExtensions:Translate PodDetailPage_CreatedBy}"

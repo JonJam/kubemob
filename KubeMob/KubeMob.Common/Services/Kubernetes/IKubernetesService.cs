@@ -126,6 +126,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<ObjectSummary>> GetPersistentVolumeSummaries();
 
+        Task<PersistentVolumeDetail> GetPersistentVolumeDetail(
+            string persistentVolumeName);
+
         Task<IList<ObjectSummary>> GetStorageClassesSummaries();
 
         Task<IList<ObjectSummary>> GetDeploymentSummaries();

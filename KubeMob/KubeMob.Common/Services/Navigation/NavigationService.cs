@@ -92,6 +92,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToPersistentVolumesPage() => NavigationService.InternalNavigate(typeof(PersistentVolumesPage));
 
+        public Task NavigateToPersistentVolumeDetailPage(string name) => NavigationService.InternalNavigate(typeof(PersistentVolumeDetailPage), new ObjectId(name));
+
         public Task NavigateToPodsPage() => NavigationService.InternalNavigate(typeof(PodsPage));
 
         public Task NavigateToStorageClassesPage() => NavigationService.InternalNavigate(typeof(StorageClassesPage));

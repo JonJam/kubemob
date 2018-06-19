@@ -26,7 +26,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{c.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    var data = c.Data?.ToList() ?? new List<KeyValuePair<string, string>>();
+                    List<KeyValuePair<string, string>> data = c.Data?.ToList() ?? new List<KeyValuePair<string, string>>();
 
                     return new ConfigMapDetail(
                         c.Metadata.Name,

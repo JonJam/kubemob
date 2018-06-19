@@ -366,6 +366,14 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
+        public async Task<PersistentVolumeDetail> GetPersistentVolumeDetail(
+            string persistentVolumeName)
+        {
+            V1PersistentVolume persistentVolumeDetail = await this.PerformClientOperation((c) => c.ReadPersistentVolumeStatusAsync(persistentVolumeName));
+
+            return Mapper.Map<PersistentVolumeDetail>(persistentVolumeDetail);
+        }
+
         public async Task<IList<ObjectSummary>> GetStorageClassesSummaries()
         {
             V1StorageClassList storageClasses = await this.PerformClientOperation((c) => c.ListStorageClassAsync());

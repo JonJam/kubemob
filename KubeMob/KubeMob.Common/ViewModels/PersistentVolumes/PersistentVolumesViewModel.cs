@@ -27,7 +27,7 @@ namespace KubeMob.Common.ViewModels.PersistentVolumes
         {
             ObjectSummary selected = (ObjectSummary)obj;
 
-            throw new NotImplementedException();
+            return this.NavigationService.NavigateToPersistentVolumeDetailPage(selected.Name);
         }
     }
 }

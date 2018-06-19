@@ -13,6 +13,53 @@
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Status}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Status}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Claim}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Claim}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_ReclaimPolicy}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.ReclaimPolicy}"/>
+
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailAccessModesTemplate}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.StorageClass}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Reason}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <Label
+            Text="{Binding Detail.Reason}"
+            IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <Label
+            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Message}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <Label
+            Text="{Binding Detail.Message}"
+            IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>
     </StackLayout>
 </base:ExtendedContentPage>

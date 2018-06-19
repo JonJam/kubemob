@@ -27,27 +27,25 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    var status = p.Status.Phase;
-                    // TODO Handle link
-                    var claim = $"{p.Spec.ClaimRef.NamespaceProperty}/{p.Spec.ClaimRef.Name}";
-                    var reclaimPolicy = p.Spec.PersistentVolumeReclaimPolicy;
-                    var accessModes = string.Join(", ", p.Spec.AccessModes);
-                    // TODO Handle link
-                    var storageClass = p.Spec.StorageClassName;
+                    string claim = $"{p.Spec.ClaimRef.NamespaceProperty}/{p.Spec.ClaimRef.Name}";
 
-                    // TODO add isvisible binding.
-                    var reason = p.Status.Reason;
-                    var message = p.Status.Message;
-
-                    // TODO capacity
-                    p.Spec.Capacity;
+                    List<Capacity> capacity = p.Spec.Capacity?.Select(kvp => new Capacity(kvp.Key, kvp.Value.ToString())).ToList() ??
+                                              new List<Capacity>();
 
                     return new PersistentVolumeDetail(
                         p.Metadata.Name,
                         p.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
-                        creationTime);
+                        creationTime,
+                        p.Status.Phase,
+                        claim,
+                        p.Spec.PersistentVolumeReclaimPolicy,
+                        p.Spec.AccessModes.ToList().AsReadOnly(),
+                        p.Spec.StorageClassName,
+                        p.Status.Reason,
+                        p.Status.Message,
+                        capacity.AsReadOnly());
                 });
         }
     }

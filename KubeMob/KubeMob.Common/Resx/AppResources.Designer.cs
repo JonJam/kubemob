@@ -583,6 +583,33 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Capacity.
+        /// </summary>
+        internal static string DetailPage_Capacity {
+            get {
+                return ResourceManager.GetString("DetailPage_Capacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        internal static string DetailPage_Capacity_Quantity {
+            get {
+                return ResourceManager.GetString("DetailPage_Capacity_Quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resource name.
+        /// </summary>
+        internal static string DetailPage_Capacity_ResourceName {
+            get {
+                return ResourceManager.GetString("DetailPage_Capacity_ResourceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Conditions.
         /// </summary>
         internal static string DetailPage_Conditions {
@@ -624,6 +651,15 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Details {
             get {
                 return ResourceManager.GetString("DetailPage_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access modes.
+        /// </summary>
+        internal static string DetailPage_Details_AccessModes {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_AccessModes", resourceCulture);
             }
         }
         
@@ -705,6 +741,15 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Details_Status {
             get {
                 return ResourceManager.GetString("DetailPage_Details_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage class.
+        /// </summary>
+        internal static string DetailPage_Details_StorageClass {
+            get {
+                return ResourceManager.GetString("DetailPage_Details_StorageClass", resourceCulture);
             }
         }
         
@@ -1033,51 +1078,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capacity.
-        /// </summary>
-        internal static string PersistentVolumeClaimDetailPage_Capacity {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Quantity.
-        /// </summary>
-        internal static string PersistentVolumeClaimDetailPage_Capacity_Quantity {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity_Quantity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Resource name.
-        /// </summary>
-        internal static string PersistentVolumeClaimDetailPage_Capacity_ResourceName {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Capacity_ResourceName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Access modes.
-        /// </summary>
-        internal static string PersistentVolumeClaimDetailPage_Details_AccessModes {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Details_AccessModes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage class.
-        /// </summary>
-        internal static string PersistentVolumeClaimDetailPage_Details_StorageClass {
-            get {
-                return ResourceManager.GetString("PersistentVolumeClaimDetailPage_Details_StorageClass", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Volume.
         /// </summary>
         internal static string PersistentVolumeClaimDetailPage_Details_Volume {
@@ -1092,6 +1092,42 @@ namespace KubeMob.Common.Resx {
         internal static string PersistentVolumeClaims {
             get {
                 return ResourceManager.GetString("PersistentVolumeClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Claim.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_Claim {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_Claim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_Message {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_Reason {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reclaim policy.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_ReclaimPolicy {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_ReclaimPolicy", resourceCulture);
             }
         }
         

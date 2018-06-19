@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.StorageClasses.StorageClassDetailPage"
+                          Title="{Binding Name}"
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
+
+    <StackLayout>
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+    </StackLayout>
+</base:ExtendedContentPage>

@@ -138,6 +138,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<PersistentVolumeDetailViewModel>();
 
             serviceCollection.AddTransient<StorageClassesViewModel>();
+            serviceCollection.AddTransient<StorageClassDetailViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);

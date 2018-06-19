@@ -27,7 +27,7 @@ namespace KubeMob.Common.ViewModels.StorageClasses
         {
             ObjectSummary selected = (ObjectSummary)obj;
 
-            throw new NotImplementedException();
+            return this.NavigationService.NavigateToStorageClassDetailPage(selected.Name);
         }
     }
 }

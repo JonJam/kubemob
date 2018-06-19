@@ -31,61 +31,17 @@
             Text="{Binding Detail.VolumeName}"
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_AccessModes}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.AccessModes}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        Text="{Binding .}"
-                        HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailAccessModesTemplate}"/>
 
         <Label
-            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_StorageClass}"
+            Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
         <Label
             Text="{Binding Detail.StorageClassName}"/>
 
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_ResourceName}"/>
-            <Label
-                Grid.Column="1"
-                Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Capacity_Quantity}"/>
-        </Grid>
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.Capacity}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Column="0"
-                            Text="{Binding ResourceName}"/>
-                        <Label
-                            Grid.Column="1"
-                            Text="{Binding Quantity}"/>
-                    </Grid>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             

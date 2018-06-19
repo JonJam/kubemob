@@ -22,6 +22,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToPersistentVolumesPage();
 
+        Task NavigateToPersistentVolumeDetailPage(string name);
+
         Task NavigateToNodesPage();
 
         Task NavigateToNodeDetailPage(string name);

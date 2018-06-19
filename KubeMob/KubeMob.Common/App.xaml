@@ -92,9 +92,11 @@
 
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                        IsVisible="{TemplateBinding BindingContext.Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <Label
-                        Text="{TemplateBinding BindingContext.Detail.NamespaceName}"/>
+                        Text="{TemplateBinding BindingContext.Detail.NamespaceName}"
+                        IsVisible="{TemplateBinding BindingContext.Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
                     <!--TODO Create control?-->
                     <Label
@@ -172,6 +174,64 @@
                                     <Label
                                         Grid.Column="1"
                                         Text="{Binding Status}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+                </StackLayout>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailAccessModesTemplate">
+                <StackLayout>
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_AccessModes}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+                    <views:ItemsControl
+                        ItemsSource="{TemplateBinding BindingContext.Detail.AccessModes}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label
+                                    Text="{Binding .}"
+                                    HorizontalOptions="Start"/>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+                </StackLayout>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailCapacityTemplate">
+                <StackLayout>
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Capacity}"             
+                        Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="{markupExtensions:Translate DetailPage_Capacity_ResourceName}"/>
+                        <Label
+                            Grid.Column="1"
+                            Text="{markupExtensions:Translate DetailPage_Capacity_Quantity}"/>
+                    </Grid>
+                    <views:ItemsControl
+                        ItemsSource="{TemplateBinding BindingContext.Detail.Capacity}"
+                        PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="{Binding ResourceName}"/>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Quantity}"/>
                                 </Grid>
                             </DataTemplate>
                         </views:ItemsControl.ItemTemplate>

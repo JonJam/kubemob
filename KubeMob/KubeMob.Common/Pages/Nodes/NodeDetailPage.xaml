@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.Nodes.NodeDetailPage"
+                          Title="{Binding Name}"
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
+    <StackLayout>
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details}"
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_Addresses}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <views:ItemsControl
+            ItemsSource="{Binding Detail.Addresses}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding .}"
+                        BackgroundColor="Gray"
+                        HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_PodCidr}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.PodCidr}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_ProviderId}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.ProviderId}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_Unschedulable}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Unschedulable}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_MachineId}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.MachineId}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_SystemUuid}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.SystemUuid}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_BootId}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.BootId}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_KernelVersion}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.KernelVersion}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_OsImage}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.OsImage}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_ContainerRuntimeVersion}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.ContainerRuntimeVersion}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_KubeletVersion}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.KubeletVersion}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_KubeProxyVersion}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.KubeProxyVersion}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_OperatingSystem}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.OperatingSystem}"/>
+
+        <Label
+            Text="{markupExtensions:Translate NodeDetailPage_Details_Architecture}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Architecture}"/>
+
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailConditionsTemplate}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Events}"             
+            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+        <views:ItemsControl
+            x:Name="Events"
+            ItemsSource="{Binding Events}"
+            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <views:TappableView
+                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
+                        CommandParameter="{Binding .}">
+                        <Label
+                            Text="{Binding Message}"
+                            LineBreakMode="TailTruncation"/>
+                    </views:TappableView>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
+    </StackLayout>
+</base:ExtendedContentPage>

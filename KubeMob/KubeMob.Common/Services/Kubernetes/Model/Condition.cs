@@ -4,20 +4,22 @@ namespace KubeMob.Common.Services.Kubernetes.Model
 {
     // TODO Remove properties that do not display
     [Preserve(AllMembers = true)]
-    public class PodCondition
+    public class Condition
     {
-        public PodCondition(
+        public Condition(
             string type,
             string status,
             string lastHeartbeatTime,
             string lastTransitionTime,
-            string reason)
+            string reason,
+            string message)
         {
             this.Type = type;
             this.Status = status;
             this.LastHeartbeatTime = lastHeartbeatTime;
             this.LastTransitionTime = lastTransitionTime;
             this.Reason = reason;
+            this.Message = message;
         }
 
         public string Type
@@ -41,6 +43,11 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         public string Reason
+        {
+            get;
+        }
+
+        public string Message
         {
             get;
         }

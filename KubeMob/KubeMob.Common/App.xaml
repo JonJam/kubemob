@@ -138,6 +138,46 @@
                         Text="{TemplateBinding BindingContext.Detail.CreationTime}"/>
                 </StackLayout>
             </ControlTemplate>
+
+            <ControlTemplate x:Key="ObjectDetailConditionsTemplate">
+                <StackLayout>
+                    <!--TODO Navigate to a condition detail page??-->
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Conditions}"             
+                        Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="{markupExtensions:Translate DetailPage_Conditions_Type}"/>
+                        <Label
+                            Grid.Column="1"
+                            Text="{markupExtensions:Translate DetailPage_Conditions_Status}"/>
+                    </Grid>
+                    <views:ItemsControl
+                        ItemsSource="{TemplateBinding BindingContext.Detail.Conditions}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="{Binding Type}"/>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Status}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+                </StackLayout>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

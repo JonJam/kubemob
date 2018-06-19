@@ -583,6 +583,33 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conditions.
+        /// </summary>
+        internal static string DetailPage_Conditions {
+            get {
+                return ResourceManager.GetString("DetailPage_Conditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string DetailPage_Conditions_Status {
+            get {
+                return ResourceManager.GetString("DetailPage_Conditions_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string DetailPage_Conditions_Type {
+            get {
+                return ResourceManager.GetString("DetailPage_Conditions_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data.
         /// </summary>
         internal static string DetailPage_Data {
@@ -835,6 +862,132 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Addresses.
+        /// </summary>
+        internal static string NodeDetailPage_Details_Addresses {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_Addresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Architecture.
+        /// </summary>
+        internal static string NodeDetailPage_Details_Architecture {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_Architecture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Boot ID.
+        /// </summary>
+        internal static string NodeDetailPage_Details_BootId {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_BootId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Container Runtime Version.
+        /// </summary>
+        internal static string NodeDetailPage_Details_ContainerRuntimeVersion {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_ContainerRuntimeVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kernel Version.
+        /// </summary>
+        internal static string NodeDetailPage_Details_KernelVersion {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_KernelVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kubelet Version.
+        /// </summary>
+        internal static string NodeDetailPage_Details_KubeletVersion {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_KubeletVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KubeProxyVersion.
+        /// </summary>
+        internal static string NodeDetailPage_Details_KubeProxyVersion {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_KubeProxyVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Machine Id.
+        /// </summary>
+        internal static string NodeDetailPage_Details_MachineId {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_MachineId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operating System.
+        /// </summary>
+        internal static string NodeDetailPage_Details_OperatingSystem {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_OperatingSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OS Image.
+        /// </summary>
+        internal static string NodeDetailPage_Details_OsImage {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_OsImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pod CIDR.
+        /// </summary>
+        internal static string NodeDetailPage_Details_PodCidr {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_PodCidr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ProviderID.
+        /// </summary>
+        internal static string NodeDetailPage_Details_ProviderId {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_ProviderId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System UUID.
+        /// </summary>
+        internal static string NodeDetailPage_Details_SystemUuid {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_SystemUuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unschedulable.
+        /// </summary>
+        internal static string NodeDetailPage_Details_Unschedulable {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_Unschedulable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nodes.
         /// </summary>
         internal static string Nodes {
@@ -948,33 +1101,6 @@ namespace KubeMob.Common.Resx {
         internal static string PersistentVolumes {
             get {
                 return ResourceManager.GetString("PersistentVolumes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Conditions.
-        /// </summary>
-        internal static string PodDetailPage_Conditions {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Conditions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status.
-        /// </summary>
-        internal static string PodDetailPage_Conditions_Status {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Conditions_Status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type.
-        /// </summary>
-        internal static string PodDetailPage_Conditions_Type {
-            get {
-                return ResourceManager.GetString("PodDetailPage_Conditions_Type", resourceCulture);
             }
         }
         

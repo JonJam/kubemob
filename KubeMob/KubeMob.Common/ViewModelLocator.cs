@@ -132,6 +132,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<NamespaceDetailViewModel>();
 
             serviceCollection.AddTransient<NodesViewModel>();
+            serviceCollection.AddTransient<NodeDetailViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumesViewModel>();
 

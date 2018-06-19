@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string nodeName,
             string podIpAddress,
             IReadOnlyList<Container> containers,
-            IReadOnlyList<PodCondition> conditions,
+            IReadOnlyList<Condition> conditions,
             IReadOnlyList<OwnerReference> owners,
             IReadOnlyList<string> persistentVolumeClaims)
             : base(name, namespaceName, labels, annotations, creationTime)
@@ -58,7 +58,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<PodCondition> Conditions
+        public IReadOnlyList<Condition> Conditions
         {
             get;
         }

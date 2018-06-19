@@ -332,7 +332,6 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
-
         public async Task<NamespaceDetail> GetNamespaceDetail(
             string namespaceName)
         {
@@ -348,6 +347,14 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<IList<ObjectSummary>>(nodes.Items)
                 .OrderBy(d => d.Name)
                 .ToList();
+        }
+
+        public async Task<NodeDetail> GetNodeDetail(
+            string nodeName)
+        {
+            V1Node nodeDetail = await this.PerformClientOperation((c) => c.ReadNodeStatusAsync(nodeName));
+
+            return Mapper.Map<NodeDetail>(nodeDetail);
         }
 
         public async Task<IList<ObjectSummary>> GetPersistentVolumeSummaries()

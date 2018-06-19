@@ -23,7 +23,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string kernelVersion,
             string osImage,
             string containerRuntimeVersion,
-            string kubletVersion,
+            string kubeletVersion,
             string kubeProxyVersion,
             string operatingSystem,
             string architecture,
@@ -40,7 +40,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.KernelVersion = kernelVersion;
             this.OsImage = osImage;
             this.ContainerRuntimeVersion = containerRuntimeVersion;
-            this.KubletVersion = kubletVersion;
+            this.KubeletVersion = kubeletVersion;
             this.KubeProxyVersion = kubeProxyVersion;
             this.OperatingSystem = operatingSystem;
             this.Architecture = architecture;
@@ -97,7 +97,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string KubletVersion
+        public string KubeletVersion
         {
             get;
         }

@@ -332,7 +332,6 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
-
         public async Task<NamespaceDetail> GetNamespaceDetail(
             string namespaceName)
         {

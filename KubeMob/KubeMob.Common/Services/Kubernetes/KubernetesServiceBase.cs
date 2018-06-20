@@ -320,6 +320,14 @@ namespace KubeMob.Common.Services.Kubernetes
             }
         }
 
+
+        public async Task Test(
+            string name)
+        {
+            var events = await this.PerformClientOperation((c) => c.ListPodForAllNamespacesAsync(fieldSelector: $"spec.nodeName={name}"));
+            var a = 1;
+        }
+
         // TODO Notify of change ?? Will only probably need to on overview.
         public void SetSelectedNamespace(Namespace ns) => this.appSettings.SelectedNamespace = ns.Name;
 

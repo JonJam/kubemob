@@ -20,5 +20,10 @@ namespace KubeMob.Common.ViewModels.Nodes
         }
 
         protected override Task<NodeDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetNodeDetail(name);
+
+        protected override async Task GetRelatedObjects(string name, string namespaceName)
+        {
+            await this.KubernetesService.Test();
+        }
     }
 }

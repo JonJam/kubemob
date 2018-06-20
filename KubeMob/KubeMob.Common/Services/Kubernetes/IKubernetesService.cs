@@ -107,6 +107,9 @@ namespace KubeMob.Common.Services.Kubernetes
             get;
             set;
         }
+        
+        Task Test(
+            string name);
 
         void ResetClient();
 

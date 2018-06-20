@@ -89,9 +89,15 @@ namespace KubeMob.Common.ViewModels.Base
                             await this.KubernetesService.GetEventsForObject(objectId.Name, objectId.NamespaceName);
                     }
 
+                    async Task SetRelatedObjects()
+                    {
+                        return this.GetRelatedObjects(objectId.Name, objectId.NamespaceName);
+                    }
+
                     await Task.WhenAll(
                         SetDetail(),
-                        SetEvents());
+                        SetEvents(),
+                        SetRelatedObjects());
                 }
                 catch (ClusterNotFoundException)
                 {
@@ -111,6 +117,8 @@ namespace KubeMob.Common.ViewModels.Base
         }
 
         protected abstract Task<T> GetObjectDetail(string name, string namespaceName);
+
+        protected virtual Task GetRelatedObjects(string name, string namespaceName) => Task.Completed;
 
         private async Task OnNavigateToEventDetailCommandExecute(object obj)
         {

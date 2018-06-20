@@ -564,4 +564,10 @@
   <data name="PersistentVolumeDetailPage_Details_Reason" xml:space="preserve">
     <value>Reason</value>
   </data>
+  <data name="StorageClassDetailPage_Details_Provisioner" xml:space="preserve">
+    <value>Provisioner</value>
+  </data>
+  <data name="StorageClassDetailPage_Details_Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
 </root>

@@ -1384,6 +1384,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parameters.
+        /// </summary>
+        internal static string StorageClassDetailPage_Details_Parameters {
+            get {
+                return ResourceManager.GetString("StorageClassDetailPage_Details_Parameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisioner.
+        /// </summary>
+        internal static string StorageClassDetailPage_Details_Provisioner {
+            get {
+                return ResourceManager.GetString("StorageClassDetailPage_Details_Provisioner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage Classes.
         /// </summary>
         internal static string StorageClasses {

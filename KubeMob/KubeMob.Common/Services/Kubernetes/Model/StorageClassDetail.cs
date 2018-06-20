@@ -12,9 +12,23 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
-            string creationTime)
+            string creationTime,
+            string provisioner,
+            IReadOnlyList<string> parameters)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
+            this.Provisioner = provisioner;
+            this.Parameters = parameters;
+        }
+
+        public string Provisioner
+        {
+            get;
+        }
+
+        public IReadOnlyList<string> Parameters
+        {
+            get;
         }
     }
 }

@@ -15,24 +15,27 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     r.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1StorageClass, StorageClassDetail>()
-                .ConstructUsing((n) =>
+                .ConstructUsing((s) =>
                 {
-                    List<string> labels = n.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                    List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                           new List<string>();
-                    List<string> annotations = n.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                    List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                new List<string>();
 
-                    string creationTime = n.Metadata.CreationTimestamp.HasValue
-                        ? $"{n.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                    string creationTime = s.Metadata.CreationTimestamp.HasValue
+                        ? $"{s.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    // TODO expand
+                    List<string> parameters = s.Parameters.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+
                     return new StorageClassDetail(
-                        n.Metadata.Name,
-                        n.Metadata.NamespaceProperty,
+                        s.Metadata.Name,
+                        s.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
-                        creationTime);
+                        creationTime,
+                        s.Provisioner,
+                        parameters);
                 });
 
         }

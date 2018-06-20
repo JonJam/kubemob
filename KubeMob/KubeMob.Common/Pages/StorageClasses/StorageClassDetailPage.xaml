@@ -16,5 +16,26 @@
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+
+        <Label
+            Text="{markupExtensions:Translate StorageClassDetailPage_Details_Provisioner}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+            Text="{Binding Detail.Provisioner}"/>
+
+        <Label
+            Text="{markupExtensions:Translate StorageClassDetailPage_Details_Parameters}"
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <views:ItemsControl
+            ItemsSource="{Binding Detail.Parameters}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding .}"
+                        BackgroundColor="Gray"
+                        HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
     </StackLayout>
 </base:ExtendedContentPage>

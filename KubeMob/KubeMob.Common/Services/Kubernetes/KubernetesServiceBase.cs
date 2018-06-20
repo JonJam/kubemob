@@ -382,6 +382,14 @@ namespace KubeMob.Common.Services.Kubernetes
                 .OrderBy(d => d.Name)
                 .ToList();
         }
+        
+        public async Task<StorageClassDetail> GetStorageClassDetail(
+            string storageClassName)
+        {
+            V1StorageClass storageClassDetail = await this.PerformClientOperation((c) => c.ReadStorageClassAsync(storageClassName));
+
+            return Mapper.Map<StorageClassDetail>(storageClassDetail);
+        }
 
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()
         {

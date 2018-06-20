@@ -130,6 +130,9 @@ namespace KubeMob.Common.Services.Kubernetes
             string persistentVolumeName);
 
         Task<IList<ObjectSummary>> GetStorageClassesSummaries();
+        
+        Task<StorageClassDetail> GetStorageClassDetail(
+            string storageClassName);
 
         Task<IList<ObjectSummary>> GetDeploymentSummaries();
 

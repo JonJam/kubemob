@@ -156,6 +156,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToEventDetailPage(Event eventDetail) => NavigationService.InternalNavigate(typeof(EventDetailPage), eventDetail);
 
+        public Task NavigateToConditionDetailPage(Kubernetes.Model.Condition conditionDetail) => NavigationService.InternalNavigate(typeof(ConditionDetailPage), conditionDetail);
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

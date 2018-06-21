@@ -19,12 +19,30 @@ namespace KubeMob.Common.ViewModels.Nodes
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
         {
+            this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+            this.NavigateToConditionDetailCommand = new Command(async (o) => await this.OnNavigateToConditionDetailCommandExecute(o));
         }
 
-        public ICommand ViewRelatedPodsCommand => new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+        public ICommand ViewRelatedPodsCommand
+        {
+            get;
+        }
+
+        public ICommand NavigateToConditionDetailCommand
+        {
+            get;
+        }
 
         protected override Task<NodeDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetNodeDetail(name);
 
         private Task OnViewRelatedPodsCommandExecute() => this.NavigationService.NavigateToPodsPage($"spec.nodeName={this.Name}");
+
+        private async Task OnNavigateToConditionDetailCommandExecute(object obj)
+        {
+            if (obj is Common.Services.Kubernetes.Model.Condition conditionDetail)
+            {
+                await this.NavigationService.NavigateToConditionDetailPage(conditionDetail);
+            }
+        }
     }
 }

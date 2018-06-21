@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Globalization;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -16,15 +15,22 @@ namespace KubeMob.Common.Converters
             object parameter,
             CultureInfo culture)
         {
+            bool notEmpty = false;
+
             switch (value)
             {
                 case string s:
-                    return !string.IsNullOrWhiteSpace(s);
+                    notEmpty = !string.IsNullOrWhiteSpace(s);
+                    break;
                 case IEnumerable e:
-                    return e.GetEnumerator().MoveNext();
+                    notEmpty = e.GetEnumerator().MoveNext();
+                    break;
+                default:
+                    notEmpty = value != null;
+                    break;
             }
 
-            return value != null;
+            return bool.TryParse(parameter?.ToString(), out bool flip) && flip ? !notEmpty : notEmpty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();

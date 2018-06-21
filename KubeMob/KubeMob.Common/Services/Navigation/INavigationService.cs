@@ -86,6 +86,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToEventDetailPage(Event eventDetail);
 
+        Task NavigateToConditionDetailPage(Condition conditionDetail);
+
         Task NavigateToSettingsPage();
 
         Task NavigateToResourceListingPage();

@@ -32,7 +32,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToStorageClassDetailPage(string name);
 
-        Task NavigateToPodsPage();
+        Task NavigateToPodsPage(string fieldSelector = null);
 
         Task NavigateToPodDetailPage(string name, string namespaceName);
 
@@ -85,6 +85,8 @@ namespace KubeMob.Common.Services.Navigation
         Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName);
 
         Task NavigateToEventDetailPage(Event eventDetail);
+
+        Task NavigateToConditionDetailPage(Condition conditionDetail);
 
         Task NavigateToSettingsPage();
 

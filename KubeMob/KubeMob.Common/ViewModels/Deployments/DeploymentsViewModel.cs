@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.Deployments
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() =>
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) =>
             this.KubernetesService.GetDeploymentSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)

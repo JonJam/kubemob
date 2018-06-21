@@ -18,7 +18,6 @@ namespace KubeMob.Common.ViewModels.Base
         where T : ObjectDetailBase
     {
         private readonly IPopupService popupService;
-        private readonly INavigationService navigationService;
 
         private string name;
         private T detail;
@@ -31,7 +30,7 @@ namespace KubeMob.Common.ViewModels.Base
         {
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
-            this.navigationService = navigationService;
+            this.NavigationService = navigationService;
 
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
@@ -64,6 +63,11 @@ namespace KubeMob.Common.ViewModels.Base
         }
 
         protected IKubernetesService KubernetesService
+        {
+            get;
+        }
+
+        protected INavigationService NavigationService
         {
             get;
         }
@@ -116,7 +120,7 @@ namespace KubeMob.Common.ViewModels.Base
         {
             if (obj is Event eventDetail)
             {
-                await this.navigationService.NavigateToEventDetailPage(eventDetail);
+                await this.NavigationService.NavigateToEventDetailPage(eventDetail);
             }
         }
     }

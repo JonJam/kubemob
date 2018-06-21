@@ -27,11 +27,11 @@ using KubeMob.Common.ViewModels.PersistentVolumes;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.ReplicationControllers;
-using KubeMob.Common.ViewModels.StorageClasses;
 using KubeMob.Common.ViewModels.Secrets;
 using KubeMob.Common.ViewModels.Services;
 using KubeMob.Common.ViewModels.Settings;
 using KubeMob.Common.ViewModels.StatefulSets;
+using KubeMob.Common.ViewModels.StorageClasses;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.Settings;
 using Xamarin.Forms;
@@ -127,6 +127,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<ResourceListingViewModel>();
 
             serviceCollection.AddTransient<EventDetailViewModel>();
+            serviceCollection.AddTransient<ConditionDetailViewModel>();
 
             serviceCollection.AddTransient<NamespacesViewModel>();
             serviceCollection.AddTransient<NamespaceDetailViewModel>();

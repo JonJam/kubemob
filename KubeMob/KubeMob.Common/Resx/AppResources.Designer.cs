@@ -412,6 +412,51 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last heartbeat time.
+        /// </summary>
+        internal static string ConditionDetailPage_LastHeartbeatTime {
+            get {
+                return ResourceManager.GetString("ConditionDetailPage_LastHeartbeatTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last transition time.
+        /// </summary>
+        internal static string ConditionDetailPage_LastTransitionTime {
+            get {
+                return ResourceManager.GetString("ConditionDetailPage_LastTransitionTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string ConditionDetailPage_Message {
+            get {
+                return ResourceManager.GetString("ConditionDetailPage_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        internal static string ConditionDetailPage_Reason {
+            get {
+                return ResourceManager.GetString("ConditionDetailPage_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Condition detail.
+        /// </summary>
+        internal static string ConditionDetailPage_Title {
+            get {
+                return ResourceManager.GetString("ConditionDetailPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config and Storage.
         /// </summary>
         internal static string ConfigAndStorage {
@@ -615,24 +660,6 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Conditions {
             get {
                 return ResourceManager.GetString("DetailPage_Conditions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status.
-        /// </summary>
-        internal static string DetailPage_Conditions_Status {
-            get {
-                return ResourceManager.GetString("DetailPage_Conditions_Status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type.
-        /// </summary>
-        internal static string DetailPage_Conditions_Type {
-            get {
-                return ResourceManager.GetString("DetailPage_Conditions_Type", resourceCulture);
             }
         }
         
@@ -1029,6 +1056,15 @@ namespace KubeMob.Common.Resx {
         internal static string NodeDetailPage_Details_Unschedulable {
             get {
                 return ResourceManager.GetString("NodeDetailPage_Details_Unschedulable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related pods.
+        /// </summary>
+        internal static string NodeDetailPage_ViewRelatedPods {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_ViewRelatedPods", resourceCulture);
             }
         }
         

@@ -2,7 +2,6 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.Model
 {
-    // TODO Remove properties that do not display
     [Preserve(AllMembers = true)]
     public class Condition
     {

@@ -25,8 +25,9 @@
         <Label
             Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Claim}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.Claim}"/>
+        <Button
+            Text="{Binding Detail.Claim.Summary}"
+            Command="{Binding NavigateToPersistentVolumeClaimCommand}"/>
 
         <Label
             Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_ReclaimPolicy}"
@@ -40,8 +41,9 @@
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.StorageClass}"/>
+        <Button
+            Text="{Binding Detail.StorageClass}"
+            Command="{Binding NavigateToStorageClassCommand}"/>
 
         <Label
             Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Reason}"

@@ -27,7 +27,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    string claim = $"{p.Spec.ClaimRef.NamespaceProperty}/{p.Spec.ClaimRef.Name}";
+                    ObjectReference claim = Mapper.Map<ObjectReference>(p.Spec.ClaimRef);
 
                     List<Capacity> capacity = p.Spec.Capacity?.Select(kvp => new Capacity(kvp.Key, kvp.Value.ToString())).ToList() ??
                                               new List<Capacity>();

@@ -67,7 +67,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                                       new List<string>();
                     List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
                     List<Condition> conditions = Mapper.Map<List<Condition>>(p.Status.Conditions);
-                    List<OwnerReference> owners = Mapper.Map<List<OwnerReference>>(p.Metadata.OwnerReferences);
+                    List<ObjectReference> owners = Mapper.Map<List<ObjectReference>>(p.Metadata.OwnerReferences);
                     List<string> pvcs = p.Spec.Volumes
                         .Where(v => v.PersistentVolumeClaim != null)
                         .Select(v => v.PersistentVolumeClaim.ClaimName).ToList();

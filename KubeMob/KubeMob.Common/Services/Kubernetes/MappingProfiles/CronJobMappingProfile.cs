@@ -26,7 +26,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{c.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    List<OwnerReference> activeJobs = Mapper.Map<List<OwnerReference>>(c.Status.Active) ?? new List<OwnerReference>();
+                    List<ObjectReference> activeJobs = Mapper.Map<List<ObjectReference>>(c.Status.Active) ?? new List<ObjectReference>();
 
                     bool suspend = c.Spec.Suspend.GetValueOrDefault(false);
                     string lastSchedule = c.Status.LastScheduleTime.HasValue

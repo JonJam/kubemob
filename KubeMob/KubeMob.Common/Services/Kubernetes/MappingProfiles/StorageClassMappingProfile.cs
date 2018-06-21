@@ -37,7 +37,6 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         s.Provisioner,
                         parameters);
                 });
-
         }
     }
 }

@@ -358,11 +358,22 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<NodeDetail>(nodeDetail);
         }
 
-        public async Task<IList<ObjectSummary>> GetPersistentVolumeSummaries()
+        public async Task<IList<ObjectSummary>> GetPersistentVolumeSummaries(
+            string fieldSelector)
         {
+            // TODO Refactor this after done few related objects ??
+            // fieldSelector for Persistent volumes currently doesn't support query of spec.storageClass.
+            // Instead having to get all and filter using LINQ.
             V1PersistentVolumeList persistentVolumes = await this.PerformClientOperation((c) => c.ListPersistentVolumeAsync());
 
-            return Mapper.Map<IList<ObjectSummary>>(persistentVolumes.Items)
+            IEnumerable<V1PersistentVolume> items = persistentVolumes.Items;
+
+            if (!string.IsNullOrWhiteSpace(fieldSelector))
+            {
+                items = items.Where(p => p.Spec.StorageClassName == fieldSelector);
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(d => d.Name)
                 .ToList();
         }
@@ -396,9 +407,9 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-           V1DeploymentList deployments = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListDeploymentForAllNamespacesAsync()
-                : c.ListNamespacedDeploymentAsync(kubernetesNamespace));
+            V1DeploymentList deployments = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                 ? c.ListDeploymentForAllNamespacesAsync()
+                 : c.ListNamespacedDeploymentAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(deployments.Items)
                 .OrderBy(d => d.Name)

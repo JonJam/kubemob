@@ -90,7 +90,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToNodeDetailPage(string name) => NavigationService.InternalNavigate(typeof(NodeDetailPage), new ObjectId(name));
 
-        public Task NavigateToPersistentVolumesPage() => NavigationService.InternalNavigate(typeof(PersistentVolumesPage));
+        public Task NavigateToPersistentVolumesPage(string fieldSelector = null) => NavigationService.InternalNavigate(typeof(PersistentVolumesPage), fieldSelector);
 
         public Task NavigateToPersistentVolumeDetailPage(string name) => NavigationService.InternalNavigate(typeof(PersistentVolumeDetailPage), new ObjectId(name));
 

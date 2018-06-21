@@ -1438,6 +1438,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View related persistent volumes.
+        /// </summary>
+        internal static string StorageClassDetailPage_ViewRelatedPersistentVolumes {
+            get {
+                return ResourceManager.GetString("StorageClassDetailPage_ViewRelatedPersistentVolumes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage Classes.
         /// </summary>
         internal static string StorageClasses {

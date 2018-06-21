@@ -37,5 +37,9 @@
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
+
+        <Button
+            Text="{markupExtensions:Translate StorageClassDetailPage_ViewRelatedPersistentVolumes}"
+            Command="{Binding ViewRelatedPersistentVolumesCommand}"/>
     </StackLayout>
 </base:ExtendedContentPage>

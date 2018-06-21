@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.Secrets
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() => this.KubernetesService.GetSecretSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetSecretSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

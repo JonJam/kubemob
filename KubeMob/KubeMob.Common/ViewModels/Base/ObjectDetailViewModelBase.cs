@@ -18,7 +18,6 @@ namespace KubeMob.Common.ViewModels.Base
         where T : ObjectDetailBase
     {
         private readonly IPopupService popupService;
-        private readonly INavigationService navigationService;
 
         private string name;
         private T detail;
@@ -31,7 +30,7 @@ namespace KubeMob.Common.ViewModels.Base
         {
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
-            this.navigationService = navigationService;
+            this.NavigationService = navigationService;
 
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
@@ -68,6 +67,11 @@ namespace KubeMob.Common.ViewModels.Base
             get;
         }
 
+        protected INavigationService NavigationService
+        {
+            get;
+        }
+
         public override async Task Initialize(object navigationData)
         {
             ObjectId objectId = (ObjectId)navigationData;
@@ -89,15 +93,9 @@ namespace KubeMob.Common.ViewModels.Base
                             await this.KubernetesService.GetEventsForObject(objectId.Name, objectId.NamespaceName);
                     }
 
-                    async Task SetRelatedObjects()
-                    {
-                        return this.GetRelatedObjects(objectId.Name, objectId.NamespaceName);
-                    }
-
                     await Task.WhenAll(
                         SetDetail(),
-                        SetEvents(),
-                        SetRelatedObjects());
+                        SetEvents());
                 }
                 catch (ClusterNotFoundException)
                 {
@@ -118,13 +116,11 @@ namespace KubeMob.Common.ViewModels.Base
 
         protected abstract Task<T> GetObjectDetail(string name, string namespaceName);
 
-        protected virtual Task GetRelatedObjects(string name, string namespaceName) => Task.Completed;
-
         private async Task OnNavigateToEventDetailCommandExecute(object obj)
         {
             if (obj is Event eventDetail)
             {
-                await this.navigationService.NavigateToEventDetailPage(eventDetail);
+                await this.NavigationService.NavigateToEventDetailPage(eventDetail);
             }
         }
     }

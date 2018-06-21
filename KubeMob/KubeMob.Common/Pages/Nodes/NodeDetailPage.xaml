@@ -112,6 +112,10 @@
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailConditionsTemplate}"/>
 
+        <Button
+            Text="{markupExtensions:Translate NodeDetailPage_ViewRelatedPods}"
+            Command="{Binding ViewRelatedPodsCommand}"/>
+        
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>

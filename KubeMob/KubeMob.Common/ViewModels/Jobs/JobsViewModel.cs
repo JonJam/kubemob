@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.Jobs
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() => this.KubernetesService.GetJobSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetJobSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

@@ -16,6 +16,7 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes
 {
+    // TODO Change IList to IReadonlyList
     [Preserve(AllMembers = true)]
     public abstract class KubernetesServiceBase : IKubernetesService
     {
@@ -320,14 +321,6 @@ namespace KubeMob.Common.Services.Kubernetes
             }
         }
 
-
-        public async Task Test(
-            string name)
-        {
-            var events = await this.PerformClientOperation((c) => c.ListPodForAllNamespacesAsync(fieldSelector: $"spec.nodeName={name}"));
-            var a = 1;
-        }
-
         // TODO Notify of change ?? Will only probably need to on overview.
         public void SetSelectedNamespace(Namespace ns) => this.appSettings.SelectedNamespace = ns.Name;
 
@@ -390,7 +383,7 @@ namespace KubeMob.Common.Services.Kubernetes
                 .OrderBy(d => d.Name)
                 .ToList();
         }
-        
+
         public async Task<StorageClassDetail> GetStorageClassDetail(
             string storageClassName)
         {
@@ -424,17 +417,26 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<DeploymentDetail>(deployment);
         }
 
-        public async Task<IList<ObjectSummary>> GetPodSummaries()
+        public async Task<IList<ObjectSummary>> GetPodSummaries(
+            string fieldSelector)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
+            if (!string.IsNullOrWhiteSpace(fieldSelector))
+            {
+                // If we are using the field selector, then skip filtering on namespace.
+                // TODO Refactor this after done few related objects ??
+                kubernetesNamespace = KubernetesServiceBase.AllNamespace;
+            }
+
             V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListPodForAllNamespacesAsync()
-                : c.ListNamespacedPodAsync(kubernetesNamespace));
+                ? c.ListPodForAllNamespacesAsync(fieldSelector: fieldSelector)
+                : c.ListNamespacedPodAsync(kubernetesNamespace, fieldSelector: fieldSelector));
 
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)
-                .ToList();
+                .ToList()
+                .AsReadOnly();
         }
 
         public async Task<PodDetail> GetPodDetail(

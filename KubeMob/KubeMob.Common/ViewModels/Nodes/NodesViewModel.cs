@@ -21,7 +21,7 @@ namespace KubeMob.Common.ViewModels.Nodes
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() => this.KubernetesService.GetNodeSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetNodeSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

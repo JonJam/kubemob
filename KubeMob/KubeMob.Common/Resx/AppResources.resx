@@ -570,4 +570,7 @@
   <data name="StorageClassDetailPage_Details_Parameters" xml:space="preserve">
     <value>Parameters</value>
   </data>
+  <data name="NodeDetailPage_ViewRelatedPods" xml:space="preserve">
+    <value>View related pods</value>
+  </data>
 </root>

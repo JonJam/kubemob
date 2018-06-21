@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
+using System.Windows.Input;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Nodes
@@ -19,11 +21,10 @@ namespace KubeMob.Common.ViewModels.Nodes
         {
         }
 
+        public ICommand ViewRelatedPodsCommand => new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+
         protected override Task<NodeDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetNodeDetail(name);
 
-        protected override async Task GetRelatedObjects(string name, string namespaceName)
-        {
-            await this.KubernetesService.Test();
-        }
+        private Task OnViewRelatedPodsCommandExecute() => this.NavigationService.NavigateToPodsPage($"spec.nodeName={this.Name}");
     }
 }

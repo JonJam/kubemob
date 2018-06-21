@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using KubeMob.Common.Services.Kubernetes;
@@ -21,7 +20,7 @@ namespace KubeMob.Common.ViewModels.StorageClasses
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() => this.KubernetesService.GetStorageClassesSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetStorageClassesSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

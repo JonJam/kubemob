@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.PersistentVolumeClaims
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() =>
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) =>
             this.KubernetesService.GetPersistentVolumeClaimSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)

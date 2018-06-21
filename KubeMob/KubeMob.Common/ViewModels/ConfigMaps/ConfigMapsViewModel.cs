@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.ConfigMaps
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries() => this.KubernetesService.GetConfigMapSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetConfigMapSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

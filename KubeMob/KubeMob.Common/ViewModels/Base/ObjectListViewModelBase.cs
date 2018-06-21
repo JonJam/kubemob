@@ -81,9 +81,17 @@ namespace KubeMob.Common.ViewModels.Base
 
         public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
         {
+            string fieldSelector = null;
+
+            if (navigationData is string selector &&
+                !string.IsNullOrWhiteSpace(selector))
+            {
+                fieldSelector = selector;
+            }
+
             try
             {
-                this.ObjectSummaries = await this.GetObjectSummaries();
+                this.ObjectSummaries = await this.GetObjectSummaries(fieldSelector);
             }
             catch (ClusterNotFoundException)
             {
@@ -115,7 +123,7 @@ namespace KubeMob.Common.ViewModels.Base
             }
         }
 
-        protected abstract Task<IList<ObjectSummary>> GetObjectSummaries();
+        protected abstract Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector);
 
         protected abstract Task OnObjectSummarySelectedExecute(object obj);
     }

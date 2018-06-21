@@ -1033,6 +1033,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View related pods.
+        /// </summary>
+        internal static string NodeDetailPage_ViewRelatedPods {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_ViewRelatedPods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nodes.
         /// </summary>
         internal static string Nodes {

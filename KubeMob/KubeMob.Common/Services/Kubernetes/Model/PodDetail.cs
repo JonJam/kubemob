@@ -19,7 +19,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string podIpAddress,
             IReadOnlyList<Container> containers,
             IReadOnlyList<Condition> conditions,
-            IReadOnlyList<OwnerReference> owners,
+            IReadOnlyList<ObjectReference> owners,
             IReadOnlyList<string> persistentVolumeClaims)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
@@ -64,7 +64,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         // TODO Handle links
-        public IReadOnlyList<OwnerReference> Owners
+        public IReadOnlyList<ObjectReference> Owners
         {
             get;
         }

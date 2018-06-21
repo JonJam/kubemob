@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string lastSchedule,
             string concurrencyPolicy,
             string startingDeadlineSeconds,
-            IReadOnlyList<OwnerReference> activeJobs)
+            IReadOnlyList<ObjectReference> activeJobs)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
             this.Schedule = schedule;
@@ -55,7 +55,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         // TODO Handle links
-        public IReadOnlyList<OwnerReference> ActiveJobs
+        public IReadOnlyList<ObjectReference> ActiveJobs
         {
             get;
         }

@@ -14,7 +14,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> annotations,
             string creationTime,
             string status,
-            string claim,
+            ObjectReference claim,
             string reclaimPolicy,
             IReadOnlyList<string> accessModes,
             string storageClass,
@@ -38,8 +38,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO handle link
-        public string Claim
+        public ObjectReference Claim
         {
             get;
         }
@@ -54,7 +53,6 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO handle link
         public string StorageClass
         {
             get;

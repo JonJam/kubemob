@@ -124,7 +124,8 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<NodeDetail> GetNodeDetail(
             string nodeName);
 
-        Task<IList<ObjectSummary>> GetPersistentVolumeSummaries();
+        Task<IList<ObjectSummary>> GetPersistentVolumeSummaries(
+            string fieldSelector);
 
         Task<PersistentVolumeDetail> GetPersistentVolumeDetail(
             string persistentVolumeName);

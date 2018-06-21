@@ -20,7 +20,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToNamespaceDetailPage(string name);
 
-        Task NavigateToPersistentVolumesPage();
+        Task NavigateToPersistentVolumesPage(string fieldSelector = null);
 
         Task NavigateToPersistentVolumeDetailPage(string name);
 

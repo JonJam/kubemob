@@ -582,4 +582,7 @@
   <data name="ConditionDetailPage_Reason" xml:space="preserve">
     <value>Reason</value>
   </data>
+  <data name="StorageClassDetailPage_ViewRelatedPersistentVolumes" xml:space="preserve">
+    <value>View related persistent volumes</value>
+  </data>
 </root>

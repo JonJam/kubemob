@@ -561,7 +561,7 @@
   <data name="StorageClassDetailPage_Details_Parameters" xml:space="preserve">
     <value>Parameters</value>
   </data>
-  <data name="NodeDetailPage_ViewRelatedPods" xml:space="preserve">
+  <data name="ViewRelatedPods" xml:space="preserve">
     <value>View related pods</value>
   </data>
   <data name="ConditionDetailPage_Title" xml:space="preserve">
@@ -582,7 +582,10 @@
   <data name="StorageClassDetailPage_ViewRelatedPersistentVolumes" xml:space="preserve">
     <value>View related persistent volumes</value>
   </data>
-  <data name="CronJobDetailPage_ViewRelatedJobs" xml:space="preserve">
+  <data name="ViewRelatedJobs" xml:space="preserve">
     <value>View related jobs</value>
+  </data>
+  <data name="ViewRelatedServices" xml:space="preserve">
+    <value>View related services</value>
   </data>
 </root>

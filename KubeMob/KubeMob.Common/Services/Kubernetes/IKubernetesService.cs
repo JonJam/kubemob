@@ -125,7 +125,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string nodeName);
 
         Task<IList<ObjectSummary>> GetPersistentVolumeSummaries(
-            string filter);
+            Filter filter);
 
         Task<PersistentVolumeDetail> GetPersistentVolumeDetail(
             string persistentVolumeName);
@@ -141,8 +141,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string deploymentName,
             string deploymentNamespace);
 
-        Task<IList<ObjectSummary>> GetPodSummaries(
-            string filter);
+        Task<IList<ObjectSummary>> GetPodSummaries(Filter filter);
 
         Task<PodDetail> GetPodDetail(
             string podName,
@@ -154,7 +153,8 @@ namespace KubeMob.Common.Services.Kubernetes
             string replicaSetName,
             string replicaSetNamespace);
 
-        Task<IList<ObjectSummary>> GetServiceSummaries();
+        Task<IList<ObjectSummary>> GetServiceSummaries(
+            Filter filter);
 
         Task<ServiceDetail> GetServiceDetail(
             string serviceName,
@@ -191,7 +191,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string daemonSetNamespace);
 
         Task<IList<ObjectSummary>> GetJobSummaries(
-            string filter);
+            Filter filter);
 
         Task<JobDetail> GetJobDetail(
             string jobName,

@@ -81,13 +81,7 @@ namespace KubeMob.Common.ViewModels.Base
 
         public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
         {
-            string filter = null;
-
-            if (navigationData is string f &&
-                !string.IsNullOrWhiteSpace(f))
-            {
-                filter = f;
-            }
+            Filter filter = (Filter)navigationData;
 
             try
             {
@@ -123,7 +117,7 @@ namespace KubeMob.Common.ViewModels.Base
             }
         }
 
-        protected abstract Task<IList<ObjectSummary>> GetObjectSummaries(string filter);
+        protected abstract Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter);
 
         protected abstract Task OnObjectSummarySelectedExecute(object obj);
     }

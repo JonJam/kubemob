@@ -90,11 +90,11 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToNodeDetailPage(string name) => NavigationService.InternalNavigate(typeof(NodeDetailPage), new ObjectId(name));
 
-        public Task NavigateToPersistentVolumesPage(string filter = null) => NavigationService.InternalNavigate(typeof(PersistentVolumesPage), filter);
+        public Task NavigateToPersistentVolumesPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(PersistentVolumesPage), filter);
 
         public Task NavigateToPersistentVolumeDetailPage(string name) => NavigationService.InternalNavigate(typeof(PersistentVolumeDetailPage), new ObjectId(name));
 
-        public Task NavigateToPodsPage(string filter = null) => NavigationService.InternalNavigate(typeof(PodsPage), filter);
+        public Task NavigateToPodsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(PodsPage), filter);
 
         public Task NavigateToStorageClassesPage() => NavigationService.InternalNavigate(typeof(StorageClassesPage));
 
@@ -110,7 +110,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToReplicaSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ReplicaSetDetailPage), new ObjectId(name, namespaceName));
 
-        public Task NavigateToServicesPage() => NavigationService.InternalNavigate(typeof(ServicesPage));
+        public Task NavigateToServicesPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(ServicesPage), filter);
 
         public Task NavigateToServiceDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ServiceDetailPage), new ObjectId(name, namespaceName));
 
@@ -134,7 +134,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToDaemonSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DaemonSetDetailPage), new ObjectId(name, namespaceName));
 
-        public Task NavigateToJobsPage(string filter = null) => NavigationService.InternalNavigate(typeof(JobsPage), filter);
+        public Task NavigateToJobsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(JobsPage), filter);
 
         public Task NavigateToJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(JobDetailPage), new ObjectId(name, namespaceName));
 

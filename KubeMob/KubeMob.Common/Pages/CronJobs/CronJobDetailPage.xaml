@@ -54,7 +54,7 @@
             Text="{Binding Detail.StartingDeadlineSeconds}"/>
 
         <Button
-            Text="{markupExtensions:Translate CronJobDetailPage_ViewRelatedJobs}"
+            Text="{markupExtensions:Translate ViewRelatedJobs}"
             Command="{Binding ViewRelatedJobsCommand}"/>
 
         <Label

@@ -529,15 +529,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View related jobs.
-        /// </summary>
-        internal static string CronJobDetailPage_ViewRelatedJobs {
-            get {
-                return ResourceManager.GetString("CronJobDetailPage_ViewRelatedJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cron Jobs.
         /// </summary>
         internal static string CronJobs {
@@ -1060,15 +1051,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View related pods.
-        /// </summary>
-        internal static string NodeDetailPage_ViewRelatedPods {
-            get {
-                return ResourceManager.GetString("NodeDetailPage_ViewRelatedPods", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Nodes.
         /// </summary>
         internal static string Nodes {
@@ -1452,6 +1434,33 @@ namespace KubeMob.Common.Resx {
         internal static string StorageClasses {
             get {
                 return ResourceManager.GetString("StorageClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related jobs.
+        /// </summary>
+        internal static string ViewRelatedJobs {
+            get {
+                return ResourceManager.GetString("ViewRelatedJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related pods.
+        /// </summary>
+        internal static string ViewRelatedPods {
+            get {
+                return ResourceManager.GetString("ViewRelatedPods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related services.
+        /// </summary>
+        internal static string ViewRelatedServices {
+            get {
+                return ResourceManager.GetString("ViewRelatedServices", resourceCulture);
             }
         }
         

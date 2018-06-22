@@ -26,6 +26,11 @@ namespace KubeMob.Common.ViewModels.StorageClasses
 
         protected override Task<StorageClassDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetStorageClassDetail(name);
 
-        private Task OnViewRelatedPersistentVolumesCommand() => this.NavigationService.NavigateToPersistentVolumesPage(this.Name);
+        private Task OnViewRelatedPersistentVolumesCommand()
+        {
+            Filter filter = new Filter(other: this.Name);
+
+            return this.NavigationService.NavigateToPersistentVolumesPage(filter);
+        }
     }
 }

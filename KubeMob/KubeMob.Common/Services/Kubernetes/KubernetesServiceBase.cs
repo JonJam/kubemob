@@ -359,18 +359,16 @@ namespace KubeMob.Common.Services.Kubernetes
         }
 
         public async Task<IList<ObjectSummary>> GetPersistentVolumeSummaries(
-            string filter)
+            Filter filter)
         {
-            // TODO Refactor this after done few related objects ??
-            // fieldSelector for Persistent volumes currently doesn't support query of spec.storageClass.
-            // Instead having to get all and filter using LINQ.
             V1PersistentVolumeList persistentVolumes = await this.PerformClientOperation((c) => c.ListPersistentVolumeAsync());
 
             IEnumerable<V1PersistentVolume> items = persistentVolumes.Items;
 
-            if (!string.IsNullOrWhiteSpace(filter))
+            // Related to Storage Class.
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Spec.StorageClassName == filter);
+                items = items.Where(p => p.Spec.StorageClassName == filter?.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -429,22 +427,24 @@ namespace KubeMob.Common.Services.Kubernetes
         }
 
         public async Task<IList<ObjectSummary>> GetPodSummaries(
-            string filter)
+            Filter filter)
         {
-            string kubernetesNamespace = this.GetSelectedNamespaceName();
-
-            if (!string.IsNullOrWhiteSpace(filter))
-            {
-                // If we have a filter specified, then skip filtering on namespace.
-                // TODO Refactor this after done few related objects ??
-                kubernetesNamespace = KubernetesServiceBase.AllNamespace;
-            }
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
+            string fieldSelector = filter?.FieldSelector;
+            string labelSelector = filter?.LabelSelector;
 
             V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListPodForAllNamespacesAsync(fieldSelector: filter)
-                : c.ListNamespacedPodAsync(kubernetesNamespace, fieldSelector: filter));
+                ? c.ListPodForAllNamespacesAsync(fieldSelector: fieldSelector, labelSelector: labelSelector)
+                : c.ListNamespacedPodAsync(kubernetesNamespace, fieldSelector: fieldSelector, labelSelector: labelSelector));
 
-            return Mapper.Map<IList<ObjectSummary>>(podList.Items)
+            IEnumerable<V1Pod> items = podList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter?.Other));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList()
                 .AsReadOnly();
@@ -484,7 +484,7 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<ReplicaSetDetail>(replicaSetDetail);
         }
 
-        public async Task<IList<ObjectSummary>> GetServiceSummaries()
+        public async Task<IList<ObjectSummary>> GetServiceSummaries(Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
@@ -492,7 +492,23 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListServiceForAllNamespacesAsync()
                 : c.ListNamespacedServiceAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(serviceList.Items)
+            IList<V1Service> items = serviceList.Items;
+
+            // Related to Daemon Sets.
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                bool IsRelated(V1Service s)
+                {
+                    IEnumerable<string> labels = s.Spec.Selector?.Select(kvp => $"{kvp.Key}={kvp.Value}");
+
+                    return labels != null && string.Join(",", labels) == filter.Other;
+                }
+
+                items = items.Where(IsRelated)
+                    .ToList();
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -621,13 +637,14 @@ namespace KubeMob.Common.Services.Kubernetes
         }
 
         public async Task<IList<ObjectSummary>> GetJobSummaries(
-            string filter)
+            Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
+            string labelSelector = filter?.LabelSelector;
 
             V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListJobForAllNamespacesAsync(labelSelector: filter)
-                : c.ListNamespacedJobAsync(kubernetesNamespace, labelSelector: filter));
+                ? c.ListJobForAllNamespacesAsync(labelSelector: labelSelector)
+                : c.ListNamespacedJobAsync(kubernetesNamespace, labelSelector: labelSelector));
 
             return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
                 .OrderBy(p => p.Name)

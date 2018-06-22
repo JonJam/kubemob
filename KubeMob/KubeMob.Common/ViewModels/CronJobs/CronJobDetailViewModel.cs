@@ -26,6 +26,11 @@ namespace KubeMob.Common.ViewModels.CronJobs
 
         protected override Task<CronJobDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetCronJobDetail(name, namespaceName);
 
-        private Task OnViewRelatedJobsCommandExecute() => this.NavigationService.NavigateToJobsPage($"run={this.Name}");
+        private Task OnViewRelatedJobsCommandExecute()
+        {
+            Filter filter = new Filter(labelSelector: this.Detail.LabelSelector);
+
+            return this.NavigationService.NavigateToJobsPage(filter);
+        }
     }
 }

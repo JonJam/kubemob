@@ -130,7 +130,7 @@
         </views:ItemsControl>
 
         <Button
-            Text="{markupExtensions:Translate NodeDetailPage_ViewRelatedPods}"
+            Text="{markupExtensions:Translate ViewRelatedPods}"
             Command="{Binding ViewRelatedPodsCommand}"/>
         
         <Label

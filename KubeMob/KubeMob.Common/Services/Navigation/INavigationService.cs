@@ -40,7 +40,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToDeploymentDetailPage(string name, string namespaceName);
 
-        Task NavigateToReplicaSetsPage();
+        Task NavigateToReplicaSetsPage(Filter filter = null);
 
         Task NavigateToReplicaSetDetailPage(string name, string namespaceName);
 

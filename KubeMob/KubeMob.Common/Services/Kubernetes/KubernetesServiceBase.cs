@@ -368,7 +368,7 @@ namespace KubeMob.Common.Services.Kubernetes
             // Related to Storage Class.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Spec.StorageClassName == filter?.Other);
+                items = items.Where(p => p.Spec.StorageClassName == filter.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -420,7 +420,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
 
-            // TODO New replica set information (info not contained in V1Deployment) ??
             // TODO Old replica set information (info not contained in V1Deployment) ??
             // TODO Horizontal pod autoscaler information (info not contained in V1Deployment) ??
             return Mapper.Map<DeploymentDetail>(deployment);
@@ -441,7 +440,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter?.Other));
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -459,7 +458,8 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<PodDetail>(pod);
         }
 
-        public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()
+        public async Task<IList<ObjectSummary>> GetReplicaSetSummaries(
+            Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
@@ -467,7 +467,14 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListReplicaSetForAllNamespacesAsync()
                 : c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(replicaSetList.Items)
+            IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }

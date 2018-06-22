@@ -588,4 +588,7 @@
   <data name="ViewRelatedServices" xml:space="preserve">
     <value>View related services</value>
   </data>
+  <data name="ViewRelatedReplicaSets" xml:space="preserve">
+    <value>View related replica sets.</value>
+  </data>
 </root>

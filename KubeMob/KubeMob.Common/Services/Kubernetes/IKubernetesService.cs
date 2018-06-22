@@ -147,7 +147,8 @@ namespace KubeMob.Common.Services.Kubernetes
             string podName,
             string podNamespace);
 
-        Task<IList<ObjectSummary>> GetReplicaSetSummaries();
+        Task<IList<ObjectSummary>> GetReplicaSetSummaries(
+            Filter filter);
 
         Task<ReplicaSetDetail> GetReplicaSetDetail(
             string replicaSetName,

@@ -14,11 +14,13 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> annotations,
             string creationTime,
             IReadOnlyList<string> images,
-            string pods)
+            string pods,
+            string selector)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
             this.Images = images;
             this.Pods = pods;
+            this.Selector = selector;
         }
 
         public IReadOnlyList<string> Images
@@ -27,6 +29,11 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         public string Pods
+        {
+            get;
+        }
+
+        public string Selector
         {
             get;
         }

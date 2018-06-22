@@ -33,6 +33,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         AppResources.Detail_Pods,
                         d.Status.CurrentNumberScheduled);
 
+                    string selector = string.Join(",", d.Spec.Selector.MatchLabels.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+
                     return new DaemonSetDetail(
                         d.Metadata.Name,
                         d.Metadata.NamespaceProperty,
@@ -40,7 +42,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         annotations.AsReadOnly(),
                         creationTime,
                         images.AsReadOnly(),
-                        pods);
+                        pods,
+                        selector);
                 });
         }
     }

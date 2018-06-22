@@ -585,4 +585,7 @@
   <data name="ViewRelatedJobs" xml:space="preserve">
     <value>View related jobs</value>
   </data>
+  <data name="ViewRelatedServices" xml:space="preserve">
+    <value>View related services</value>
+  </data>
 </root>

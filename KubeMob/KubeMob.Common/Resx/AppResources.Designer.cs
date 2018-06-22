@@ -1456,6 +1456,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View related services.
+        /// </summary>
+        internal static string ViewRelatedServices {
+            get {
+                return ResourceManager.GetString("ViewRelatedServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workloads.
         /// </summary>
         internal static string Workloads {

@@ -21,7 +21,7 @@ namespace KubeMob.Common.ViewModels.Services
         }
 
         protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) =>
-            this.KubernetesService.GetServiceSummaries();
+            this.KubernetesService.GetServiceSummaries(filter);
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

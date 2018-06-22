@@ -153,7 +153,8 @@ namespace KubeMob.Common.Services.Kubernetes
             string replicaSetName,
             string replicaSetNamespace);
 
-        Task<IList<ObjectSummary>> GetServiceSummaries();
+        Task<IList<ObjectSummary>> GetServiceSummaries(
+            Filter filter);
 
         Task<ServiceDetail> GetServiceDetail(
             string serviceName,

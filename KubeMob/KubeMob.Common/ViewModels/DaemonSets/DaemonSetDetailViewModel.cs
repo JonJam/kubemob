@@ -18,7 +18,15 @@ namespace KubeMob.Common.ViewModels.DaemonSets
             IPopupService popupService,
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
-            => this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+        {
+            this.ViewRelatedServicesCommand = new Command(async () => await this.OnViewRelatedServicesCommandExecute());
+            this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+        }
+
+        public ICommand ViewRelatedServicesCommand
+        {
+            get;
+        }
 
         public ICommand ViewRelatedPodsCommand
         {
@@ -27,6 +35,13 @@ namespace KubeMob.Common.ViewModels.DaemonSets
 
         protected override Task<DaemonSetDetail> GetObjectDetail(string name, string namespaceName)
             => this.KubernetesService.GetDaemonSetDetail(name, namespaceName);
+
+        private Task OnViewRelatedServicesCommandExecute()
+        {
+            Filter filter = new Filter(other: this.Detail.Selector);
+
+            return this.NavigationService.NavigateToServicesPage(filter);
+        }
 
         private Task OnViewRelatedPodsCommandExecute()
         {

@@ -365,6 +365,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1PersistentVolume> items = persistentVolumes.Items;
 
+            // Related to Storage Class.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 items = items.Where(p => p.Spec.StorageClassName == filter?.Other);
@@ -483,7 +484,7 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<ReplicaSetDetail>(replicaSetDetail);
         }
 
-        public async Task<IList<ObjectSummary>> GetServiceSummaries()
+        public async Task<IList<ObjectSummary>> GetServiceSummaries(Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
@@ -491,7 +492,23 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListServiceForAllNamespacesAsync()
                 : c.ListNamespacedServiceAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(serviceList.Items)
+            IList<V1Service> items = serviceList.Items;
+
+            // Related to Daemon Sets.
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                bool IsRelated(V1Service s)
+                {
+                    IEnumerable<string> labels = s.Spec.Selector?.Select(kvp => $"{kvp.Key}={kvp.Value}");
+
+                    return labels != null && string.Join(",", labels) == filter.Other;
+                }
+
+                items = items.Where(IsRelated)
+                    .ToList();
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }

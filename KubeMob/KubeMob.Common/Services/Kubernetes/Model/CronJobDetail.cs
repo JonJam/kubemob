@@ -18,7 +18,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string lastSchedule,
             string concurrencyPolicy,
             string startingDeadlineSeconds,
-            int activeJobCount)
+            int activeJobCount,
+            string labelSelector)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
             this.Schedule = schedule;
@@ -27,6 +28,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.ConcurrencyPolicy = concurrencyPolicy;
             this.StartingDeadlineSeconds = startingDeadlineSeconds;
             this.ActiveJobCount = activeJobCount;
+            this.LabelSelector = labelSelector;
         }
 
         public string Schedule
@@ -55,6 +57,11 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         public int ActiveJobCount
+        {
+            get;
+        }
+
+        public string LabelSelector
         {
             get;
         }

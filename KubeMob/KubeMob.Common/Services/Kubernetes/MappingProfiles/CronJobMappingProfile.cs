@@ -20,6 +20,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 .ConstructUsing((c) =>
                 {
                     List<string> labels = c.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+                    string labelSelector = string.Join(",", c.Metadata.Labels.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+
                     List<string> annotations = c.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                new List<string>();
 
@@ -48,7 +50,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         lastSchedule,
                         concurrencyPolicy,
                         startingDeadlineSeconds,
-                        activeJobs.Count);
+                        activeJobs.Count,
+                        labelSelector);
                 });
         }
     }

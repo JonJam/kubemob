@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.DaemonSets
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) =>
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) =>
             this.KubernetesService.GetDaemonSetSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)

@@ -359,7 +359,7 @@ namespace KubeMob.Common.Services.Kubernetes
         }
 
         public async Task<IList<ObjectSummary>> GetPersistentVolumeSummaries(
-            string fieldSelector)
+            string filter)
         {
             // TODO Refactor this after done few related objects ??
             // fieldSelector for Persistent volumes currently doesn't support query of spec.storageClass.
@@ -368,9 +368,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1PersistentVolume> items = persistentVolumes.Items;
 
-            if (!string.IsNullOrWhiteSpace(fieldSelector))
+            if (!string.IsNullOrWhiteSpace(filter))
             {
-                items = items.Where(p => p.Spec.StorageClassName == fieldSelector);
+                items = items.Where(p => p.Spec.StorageClassName == filter);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -429,20 +429,20 @@ namespace KubeMob.Common.Services.Kubernetes
         }
 
         public async Task<IList<ObjectSummary>> GetPodSummaries(
-            string fieldSelector)
+            string filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            if (!string.IsNullOrWhiteSpace(fieldSelector))
+            if (!string.IsNullOrWhiteSpace(filter))
             {
-                // If we are using the field selector, then skip filtering on namespace.
+                // If we have a filter specified, then skip filtering on namespace.
                 // TODO Refactor this after done few related objects ??
                 kubernetesNamespace = KubernetesServiceBase.AllNamespace;
             }
 
             V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListPodForAllNamespacesAsync(fieldSelector: fieldSelector)
-                : c.ListNamespacedPodAsync(kubernetesNamespace, fieldSelector: fieldSelector));
+                ? c.ListPodForAllNamespacesAsync(fieldSelector: filter)
+                : c.ListNamespacedPodAsync(kubernetesNamespace, fieldSelector: filter));
 
             return Mapper.Map<IList<ObjectSummary>>(podList.Items)
                 .OrderBy(p => p.Name)

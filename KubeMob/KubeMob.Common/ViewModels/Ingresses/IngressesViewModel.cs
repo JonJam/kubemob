@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.Ingresses
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) =>
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) =>
             this.KubernetesService.GetIngressSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)

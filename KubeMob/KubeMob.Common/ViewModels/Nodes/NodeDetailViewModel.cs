@@ -35,7 +35,12 @@ namespace KubeMob.Common.ViewModels.Nodes
 
         protected override Task<NodeDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetNodeDetail(name);
 
-        private Task OnViewRelatedPodsCommandExecute() => this.NavigationService.NavigateToPodsPage($"spec.nodeName={this.Name}");
+        private Task OnViewRelatedPodsCommandExecute()
+        {
+            Filter filter = new Filter(fieldSelector: $"spec.nodeName={this.Name}");
+
+            return this.NavigationService.NavigateToPodsPage(filter);
+        }
 
         private async Task OnNavigateToConditionDetailCommandExecute(object obj)
         {

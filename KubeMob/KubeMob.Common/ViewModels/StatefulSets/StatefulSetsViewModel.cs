@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.StatefulSets
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) =>
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) =>
             this.KubernetesService.GetStatefulSetSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)

@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.StorageClasses
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) => this.KubernetesService.GetStorageClassesSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) => this.KubernetesService.GetStorageClassesSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

@@ -53,19 +53,9 @@
         <Label
             Text="{Binding Detail.StartingDeadlineSeconds}"/>
 
-        <Label
-            Text="{markupExtensions:Translate CronJobDetailPage_ActiveJobs}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.ActiveJobs}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        Text="{Binding Name}"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <Button
+            Text="{markupExtensions:Translate CronJobDetailPage_ViewRelatedJobs}"
+            Command="{Binding ViewRelatedJobsCommand}"/>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             

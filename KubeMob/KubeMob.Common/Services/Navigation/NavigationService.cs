@@ -90,11 +90,11 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToNodeDetailPage(string name) => NavigationService.InternalNavigate(typeof(NodeDetailPage), new ObjectId(name));
 
-        public Task NavigateToPersistentVolumesPage(string fieldSelector = null) => NavigationService.InternalNavigate(typeof(PersistentVolumesPage), fieldSelector);
+        public Task NavigateToPersistentVolumesPage(string filter = null) => NavigationService.InternalNavigate(typeof(PersistentVolumesPage), filter);
 
         public Task NavigateToPersistentVolumeDetailPage(string name) => NavigationService.InternalNavigate(typeof(PersistentVolumeDetailPage), new ObjectId(name));
 
-        public Task NavigateToPodsPage(string fieldSelector = null) => NavigationService.InternalNavigate(typeof(PodsPage), fieldSelector);
+        public Task NavigateToPodsPage(string filter = null) => NavigationService.InternalNavigate(typeof(PodsPage), filter);
 
         public Task NavigateToStorageClassesPage() => NavigationService.InternalNavigate(typeof(StorageClassesPage));
 
@@ -134,7 +134,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToDaemonSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DaemonSetDetailPage), new ObjectId(name, namespaceName));
 
-        public Task NavigateToJobsPage() => NavigationService.InternalNavigate(typeof(JobsPage));
+        public Task NavigateToJobsPage(string filter = null) => NavigationService.InternalNavigate(typeof(JobsPage), filter);
 
         public Task NavigateToJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(JobDetailPage), new ObjectId(name, namespaceName));
 

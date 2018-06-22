@@ -411,9 +411,6 @@
   <data name="ServiceDetailPage_Details_LabelSelector" xml:space="preserve">
     <value>Label selector</value>
   </data>
-  <data name="CronJobDetailPage_ActiveJobs" xml:space="preserve">
-    <value>Active Jobs</value>
-  </data>
   <data name="CronJobDetailPage_Details_ActiveJobCount" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -584,5 +581,8 @@
   </data>
   <data name="StorageClassDetailPage_ViewRelatedPersistentVolumes" xml:space="preserve">
     <value>View related persistent volumes</value>
+  </data>
+  <data name="CronJobDetailPage_ViewRelatedJobs" xml:space="preserve">
+    <value>View related jobs</value>
   </data>
 </root>

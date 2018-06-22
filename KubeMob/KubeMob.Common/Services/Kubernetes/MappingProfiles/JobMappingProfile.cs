@@ -3,7 +3,6 @@ using System.Linq;
 using AutoMapper;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes.Model;
-using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 {

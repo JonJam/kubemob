@@ -20,7 +20,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToNamespaceDetailPage(string name);
 
-        Task NavigateToPersistentVolumesPage(string fieldSelector = null);
+        Task NavigateToPersistentVolumesPage(string filter = null);
 
         Task NavigateToPersistentVolumeDetailPage(string name);
 
@@ -32,7 +32,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToStorageClassDetailPage(string name);
 
-        Task NavigateToPodsPage(string fieldSelector = null);
+        Task NavigateToPodsPage(string filter = null);
 
         Task NavigateToPodDetailPage(string name, string namespaceName);
 
@@ -68,7 +68,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToDaemonSetDetailPage(string name, string namespaceName);
 
-        Task NavigateToJobsPage();
+        Task NavigateToJobsPage(
+            string filter = null);
 
         Task NavigateToJobDetailPage(string name, string namespaceName);
 

@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) =>
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) =>
             this.KubernetesService.GetReplicaSetSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)

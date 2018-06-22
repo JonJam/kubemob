@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.Namespaces
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetNamespaceSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) => this.KubernetesService.GetNamespaceSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

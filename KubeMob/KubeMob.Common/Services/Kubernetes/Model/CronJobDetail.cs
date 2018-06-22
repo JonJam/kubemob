@@ -18,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string lastSchedule,
             string concurrencyPolicy,
             string startingDeadlineSeconds,
-            IReadOnlyList<ObjectReference> activeJobs)
+            int activeJobCount)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
             this.Schedule = schedule;
@@ -26,7 +26,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.LastSchedule = lastSchedule;
             this.ConcurrencyPolicy = concurrencyPolicy;
             this.StartingDeadlineSeconds = startingDeadlineSeconds;
-            this.ActiveJobs = activeJobs;
+            this.ActiveJobCount = activeJobCount;
         }
 
         public string Schedule
@@ -54,12 +54,9 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO Handle links
-        public IReadOnlyList<ObjectReference> ActiveJobs
+        public int ActiveJobCount
         {
             get;
         }
-
-        public int ActiveJobCount => this.ActiveJobs.Count;
     }
 }

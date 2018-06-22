@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.Pods
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetPodSummaries(fieldSelector);
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) => this.KubernetesService.GetPodSummaries(filter);
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

@@ -20,7 +20,7 @@ namespace KubeMob.Common.ViewModels.CronJobs
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string fieldSelector) => this.KubernetesService.GetCronJobSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(string filter) => this.KubernetesService.GetCronJobSummaries();
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

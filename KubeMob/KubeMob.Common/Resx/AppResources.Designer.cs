@@ -475,15 +475,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active Jobs.
-        /// </summary>
-        internal static string CronJobDetailPage_ActiveJobs {
-            get {
-                return ResourceManager.GetString("CronJobDetailPage_ActiveJobs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         internal static string CronJobDetailPage_Details_ActiveJobCount {
@@ -534,6 +525,15 @@ namespace KubeMob.Common.Resx {
         internal static string CronJobDetailPage_Details_Suspend {
             get {
                 return ResourceManager.GetString("CronJobDetailPage_Details_Suspend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related jobs.
+        /// </summary>
+        internal static string CronJobDetailPage_ViewRelatedJobs {
+            get {
+                return ResourceManager.GetString("CronJobDetailPage_ViewRelatedJobs", resourceCulture);
             }
         }
         

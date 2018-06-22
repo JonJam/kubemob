@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using k8s.Models;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -26,7 +27,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{c.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    List<ObjectReference> activeJobs = Mapper.Map<List<ObjectReference>>(c.Status.Active) ?? new List<ObjectReference>();
+                    IList<V1ObjectReference> activeJobs = c.Status.Active ?? new List<V1ObjectReference>();
 
                     bool suspend = c.Spec.Suspend.GetValueOrDefault(false);
                     string lastSchedule = c.Status.LastScheduleTime.HasValue
@@ -47,7 +48,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         lastSchedule,
                         concurrencyPolicy,
                         startingDeadlineSeconds,
-                        activeJobs.AsReadOnly());
+                        activeJobs.Count);
                 });
         }
     }

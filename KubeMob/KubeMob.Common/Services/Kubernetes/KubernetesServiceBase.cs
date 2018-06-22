@@ -620,13 +620,14 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<DaemonSetDetail>(daemonSetDetail);
         }
 
-        public async Task<IList<ObjectSummary>> GetJobSummaries()
+        public async Task<IList<ObjectSummary>> GetJobSummaries(
+            string filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
             V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListJobForAllNamespacesAsync()
-                : c.ListNamespacedJobAsync(kubernetesNamespace));
+                ? c.ListJobForAllNamespacesAsync(labelSelector: filter)
+                : c.ListNamespacedJobAsync(kubernetesNamespace, labelSelector: filter));
 
             return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
                 .OrderBy(p => p.Name)

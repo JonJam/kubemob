@@ -190,7 +190,8 @@ namespace KubeMob.Common.Services.Kubernetes
             string daemonSetName,
             string daemonSetNamespace);
 
-        Task<IList<ObjectSummary>> GetJobSummaries();
+        Task<IList<ObjectSummary>> GetJobSummaries(
+            string filter);
 
         Task<JobDetail> GetJobDetail(
             string jobName,

@@ -436,7 +436,14 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListPodForAllNamespacesAsync(fieldSelector: fieldSelector, labelSelector: labelSelector)
                 : c.ListNamespacedPodAsync(kubernetesNamespace, fieldSelector: fieldSelector, labelSelector: labelSelector));
 
-            return Mapper.Map<IList<ObjectSummary>>(podList.Items)
+            IEnumerable<V1Pod> items = podList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter?.Other));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList()
                 .AsReadOnly();

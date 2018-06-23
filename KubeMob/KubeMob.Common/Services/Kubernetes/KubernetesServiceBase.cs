@@ -769,16 +769,14 @@ namespace KubeMob.Common.Services.Kubernetes
                 .AsReadOnly();
         }
 
-        // TODO add detail for horizontal pod
-        //public async Task<PodDetail> GetPodDetail(
-        //    string podName,
-        //    string podNamespace)
-        //{
-        //    V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
+        public async Task<HorizontalPodAutoscalerDetail> GetHorizontalPodAutoscalerDetail(
+            string horizontalPodAutoscalerName,
+            string horizontalPodAutoscalerNamespace)
+        {
+            V1HorizontalPodAutoscaler horizontalPodAutoscaler = await this.PerformClientOperation((c) => c.ReadNamespacedHorizontalPodAutoscalerStatusAsync(horizontalPodAutoscalerName, horizontalPodAutoscalerNamespace));
 
-        //    return Mapper.Map<PodDetail>(pod);
-        //}
-
+            return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
+        }
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 

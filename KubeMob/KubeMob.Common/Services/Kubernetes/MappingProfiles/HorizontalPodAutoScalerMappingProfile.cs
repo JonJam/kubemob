@@ -14,30 +14,27 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     r.Metadata.Name,
                     r.Metadata.NamespaceProperty));
 
-            // TODO map
-            //this.CreateMap<k8s.Models.V1StorageClass, StorageClassDetail>()
-            //    .ConstructUsing((s) =>
-            //    {
-            //        List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-            //                              new List<string>();
-            //        List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-            //                                   new List<string>();
+            this.CreateMap<k8s.Models.V1HorizontalPodAutoscaler, HorizontalPodAutoscalerDetail>()
+                .ConstructUsing((s) =>
+                {
+                    List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                          new List<string>();
+                    List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                               new List<string>();
 
-            //        string creationTime = s.Metadata.CreationTimestamp.HasValue
-            //            ? $"{s.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
-            //            : string.Empty;
+                    string creationTime = s.Metadata.CreationTimestamp.HasValue
+                        ? $"{s.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
 
-            //        List<string> parameters = s.Parameters.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+                    // TODO populate
 
-            //        return new StorageClassDetail(
-            //            s.Metadata.Name,
-            //            s.Metadata.NamespaceProperty,
-            //            labels.AsReadOnly(),
-            //            annotations.AsReadOnly(),
-            //            creationTime,
-            //            s.Provisioner,
-            //            parameters);
-            //    });
+                    return new HorizontalPodAutoscalerDetail(
+                        s.Metadata.Name,
+                        s.Metadata.NamespaceProperty,
+                        labels.AsReadOnly(),
+                        annotations.AsReadOnly(),
+                        creationTime);
+                });
         }
     }
 }

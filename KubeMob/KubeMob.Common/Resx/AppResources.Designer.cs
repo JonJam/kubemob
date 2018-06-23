@@ -1474,7 +1474,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View related replica sets..
+        ///   Looks up a localized string similar to View related replica sets.
         /// </summary>
         internal static string ViewRelatedReplicaSets {
             get {

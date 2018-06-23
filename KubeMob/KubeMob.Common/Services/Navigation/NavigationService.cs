@@ -161,6 +161,8 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToHorizontalPodAutoscalersPage() => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalersPage));
 
+        public Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalerDetailPage), new ObjectId(name, namespaceName));
+
         public Task RemoveLastFromBackStack()
         {
             if (Application.Current.MainPage is ExtendedNavigationPage mainPage)

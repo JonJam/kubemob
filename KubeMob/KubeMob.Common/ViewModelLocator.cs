@@ -143,6 +143,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<StorageClassDetailViewModel>();
 
             serviceCollection.AddTransient<HorizontalPodAutoscalersViewModel>();
+            serviceCollection.AddTransient<HorizontalPodAutoscalerDetailViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);

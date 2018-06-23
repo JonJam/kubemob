@@ -589,7 +589,7 @@
     <value>View related services</value>
   </data>
   <data name="ViewRelatedReplicaSets" xml:space="preserve">
-    <value>View related replica sets.</value>
+    <value>View related replica sets</value>
   </data>
   <data name="HorizontalPodAutoscalers" xml:space="preserve">
     <value>Horizontal Pod Autoscalers</value>

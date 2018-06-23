@@ -26,7 +26,8 @@ namespace KubeMob.Common.ViewModels.HorizontalPodAutoscalers
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {
             ObjectSummary selected = (ObjectSummary)obj;
-            throw new NotImplementedException();
+
+            return this.NavigationService.NavigateToHorizontalPodAutoscalerDetailPage(selected.Name, selected.NamespaceName);
         }
     }
 }

@@ -17,6 +17,7 @@ using KubeMob.Common.ViewModels.ConfigMaps;
 using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.DaemonSets;
 using KubeMob.Common.ViewModels.Deployments;
+using KubeMob.Common.ViewModels.HorizontalPodAutoscalers;
 using KubeMob.Common.ViewModels.Ingresses;
 using KubeMob.Common.ViewModels.Jobs;
 using KubeMob.Common.ViewModels.MasterDetail;
@@ -140,6 +141,8 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<StorageClassesViewModel>();
             serviceCollection.AddTransient<StorageClassDetailViewModel>();
+
+            serviceCollection.AddTransient<HorizontalPodAutoscalersViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);
@@ -187,6 +190,8 @@ namespace KubeMob.Common
                 cfg.AddProfile<SecretMappingProfile>();
                 cfg.AddProfile<ServiceMappingProfile>();
                 cfg.AddProfile<StatefulSetMappingProfile>();
+
+                cfg.AddProfile<HorizontalPodAutoscalerMappingProfile>();
             });
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

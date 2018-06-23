@@ -591,4 +591,10 @@
   <data name="ViewRelatedReplicaSets" xml:space="preserve">
     <value>View related replica sets.</value>
   </data>
+  <data name="HorizontalPodAutoscalers" xml:space="preserve">
+    <value>Horizontal Pod Autoscalers</value>
+  </data>
+  <data name="ViewRelatedHorizontalPodAutoscalers" xml:space="preserve">
+    <value>View related horizontal pod autoscalers</value>
+  </data>
 </root>

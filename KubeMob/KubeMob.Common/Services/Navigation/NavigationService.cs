@@ -6,6 +6,7 @@ using KubeMob.Common.Pages.ConfigMaps;
 using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
+using KubeMob.Common.Pages.HorizontalPodAutoscalers;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
 using KubeMob.Common.Pages.MasterDetail;
@@ -157,6 +158,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToEventDetailPage(Event eventDetail) => NavigationService.InternalNavigate(typeof(EventDetailPage), eventDetail);
 
         public Task NavigateToConditionDetailPage(Kubernetes.Model.Condition conditionDetail) => NavigationService.InternalNavigate(typeof(ConditionDetailPage), conditionDetail);
+
+        public Task NavigateToHorizontalPodAutoscalersPage() => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalersPage));
 
         public Task RemoveLastFromBackStack()
         {

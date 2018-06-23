@@ -88,6 +88,8 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToConditionDetailPage(Condition conditionDetail);
 
+        Task NavigateToHorizontalPodAutoscalersPage();
+
         Task NavigateToSettingsPage();
 
         Task NavigateToResourceListingPage();

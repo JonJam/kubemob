@@ -871,6 +871,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Horizontal Pod Autoscalers.
+        /// </summary>
+        internal static string HorizontalPodAutoscalers {
+            get {
+                return ResourceManager.GetString("HorizontalPodAutoscalers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ingresses.
         /// </summary>
         internal static string Ingresses {
@@ -1434,6 +1443,15 @@ namespace KubeMob.Common.Resx {
         internal static string StorageClasses {
             get {
                 return ResourceManager.GetString("StorageClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related horizontal pod autoscalers.
+        /// </summary>
+        internal static string ViewRelatedHorizontalPodAutoscalers {
+            get {
+                return ResourceManager.GetString("ViewRelatedHorizontalPodAutoscalers", resourceCulture);
             }
         }
         

@@ -20,10 +20,15 @@ namespace KubeMob.Common.ViewModels.Deployments
             : base(kubernetesService, popupService, navigationService)
         {
             this.ViewRelatedReplicaSetsCommand = new Command(async () => await this.OnViewRelatedReplicaSetsCommandExecute());
-
+            this.ViewRelatedHorizontalPodAutoscalersCommand = new Command(async () => await this.OnViewHorizontalPodAutoscalersCommandExecute());
         }
 
         public ICommand ViewRelatedReplicaSetsCommand
+        {
+            get;
+        }
+
+        public ICommand ViewRelatedHorizontalPodAutoscalersCommand
         {
             get;
         }
@@ -35,6 +40,13 @@ namespace KubeMob.Common.ViewModels.Deployments
             Filter filter = new Filter(other: this.Name);
 
             return this.NavigationService.NavigateToReplicaSetsPage(filter);
+        }
+
+        private Task OnViewHorizontalPodAutoscalersCommandExecute()
+        {
+            //TODO add filter
+
+            return this.NavigationService.NavigateToHorizontalPodAutoscalersPage();
         }
     }
 }

@@ -647,13 +647,20 @@ namespace KubeMob.Common.Services.Kubernetes
             Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
-            string labelSelector = filter?.LabelSelector;
 
             V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListJobForAllNamespacesAsync(labelSelector: labelSelector)
-                : c.ListNamespacedJobAsync(kubernetesNamespace, labelSelector: labelSelector));
+                ? c.ListJobForAllNamespacesAsync()
+                : c.ListNamespacedJobAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
+            // Related to Cron Jobs.
+            IEnumerable<V1Job> items = jobList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -746,6 +753,32 @@ namespace KubeMob.Common.Services.Kubernetes
                 .OrderBy(e => e.LastSeen)
                 .ToList();
         }
+
+        // TODO add Filter
+        public async Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries()
+        {
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
+
+            V1HorizontalPodAutoscalerList horizontalPodAutoscalerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListHorizontalPodAutoscalerForAllNamespacesAsync()
+                : c.ListNamespacedHorizontalPodAutoscalerAsync(kubernetesNamespace));
+
+            return Mapper.Map<IList<ObjectSummary>>(horizontalPodAutoscalerList.Items)
+                .OrderBy(p => p.Name)
+                .ToList()
+                .AsReadOnly();
+        }
+
+        // TODO add detail for horizontal pod
+        //public async Task<PodDetail> GetPodDetail(
+        //    string podName,
+        //    string podNamespace)
+        //{
+        //    V1Pod pod = await this.PerformClientOperation((c) => c.ReadNamespacedPodStatusAsync(podName, podNamespace));
+
+        //    return Mapper.Map<PodDetail>(pod);
+        //}
+
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 

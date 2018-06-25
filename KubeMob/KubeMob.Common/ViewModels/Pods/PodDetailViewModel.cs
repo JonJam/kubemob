@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Services.Kubernetes;
@@ -7,6 +8,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Condition = KubeMob.Common.Services.Kubernetes.Model.Condition;
 
 namespace KubeMob.Common.ViewModels.Pods
 {
@@ -17,9 +19,27 @@ namespace KubeMob.Common.ViewModels.Pods
             IKubernetesService kubernetesService,
             IPopupService popupService,
             INavigationService navigationService)
-            : base(kubernetesService, popupService, navigationService) => this.NavigateToConditionDetailCommand = new Command(async (o) => await this.OnNavigateToConditionDetailCommandExecute(o));
+            : base(kubernetesService, popupService, navigationService)
+        {
+            this.NavigateToConditionDetailCommand =
+                new Command(async (o) => await this.OnNavigateToConditionDetailCommandExecute(o));
+
+            this.NavigateToOwnerCommand = new Command(async (o) => await this.OnNavigateToOwnerCommandExecute(o));
+
+            this.ViewRelatedPersistentVolumeClaimsCommand = new Command(async () => await this.OnViewRelatedPersistentVolumeClaimsCommandExecute());
+        }
 
         public ICommand NavigateToConditionDetailCommand
+        {
+            get;
+        }
+
+        public ICommand NavigateToOwnerCommand
+        {
+            get;
+        }
+
+        public ICommand ViewRelatedPersistentVolumeClaimsCommand
         {
             get;
         }
@@ -28,10 +48,39 @@ namespace KubeMob.Common.ViewModels.Pods
 
         private async Task OnNavigateToConditionDetailCommandExecute(object obj)
         {
-            if (obj is Common.Services.Kubernetes.Model.Condition conditionDetail)
+            Condition conditionDetail = (Condition)obj;
+
+            await this.NavigationService.NavigateToConditionDetailPage(conditionDetail);
+        }
+
+        private Task OnNavigateToOwnerCommandExecute(object obj)
+        {
+            ObjectReference owner = (ObjectReference)obj;
+
+            switch (owner.Kind)
             {
-                await this.NavigationService.NavigateToConditionDetailPage(conditionDetail);
+                case "DaemonSet":
+                    return this.NavigationService.NavigateToDaemonSetDetailPage(owner.Name, this.NamespaceName);
+                case "StatefulSet":
+                    return this.NavigationService.NavigateToStatefulSetDetailPage(owner.Name, this.NamespaceName);
+                case "ReplicaSet":
+                    return this.NavigationService.NavigateToReplicaSetDetailPage(owner.Name, this.NamespaceName);
+                case "ReplicationController":
+                    return this.NavigationService.NavigateToReplicationControllerDetailPage(owner.Name, this.NamespaceName);
+                case "Job":
+                    return this.NavigationService.NavigateToJobDetailPage(owner.Name, this.NamespaceName);
+                default:
+                    throw new NotImplementedException();
             }
+        }
+
+        private Task OnViewRelatedPersistentVolumeClaimsCommandExecute()
+        {
+            Filter filter = new Filter(
+                this.NamespaceName,
+                other: string.Join(",", this.Detail.PersistentVolumeClaims));
+
+            return this.NavigationService.NavigateToPersistentVolumeClaimsPage(filter);
         }
     }
 }

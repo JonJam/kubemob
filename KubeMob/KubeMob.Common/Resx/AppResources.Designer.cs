@@ -1267,24 +1267,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kind.
-        /// </summary>
-        internal static string PodDetailPage_CreatedBy_Kind {
-            get {
-                return ResourceManager.GetString("PodDetailPage_CreatedBy_Kind", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        internal static string PodDetailPage_CreatedBy_Name {
-            get {
-                return ResourceManager.GetString("PodDetailPage_CreatedBy_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to IP Address.
         /// </summary>
         internal static string PodDetailPage_Details_IpAddress {
@@ -1497,6 +1479,15 @@ namespace KubeMob.Common.Resx {
         internal static string ViewRelatedJobs {
             get {
                 return ResourceManager.GetString("ViewRelatedJobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related persistent volume claims.
+        /// </summary>
+        internal static string ViewRelatedPersistentVolumeClaims {
+            get {
+                return ResourceManager.GetString("ViewRelatedPersistentVolumeClaims", resourceCulture);
             }
         }
         

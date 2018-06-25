@@ -303,12 +303,6 @@
   <data name="PodDetailPage_CreatedBy" xml:space="preserve">
     <value>Created by</value>
   </data>
-  <data name="PodDetailPage_CreatedBy_Kind" xml:space="preserve">
-    <value>Kind</value>
-  </data>
-  <data name="PodDetailPage_CreatedBy_Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
   <data name="DetailPage_Details_Annotations" xml:space="preserve">
     <value>Annotations</value>
   </data>
@@ -608,5 +602,8 @@
   </data>
   <data name="PersistentVolumeDetailPage_Details_TargetCpuUtilization" xml:space="preserve">
     <value>Target CPU Utilization</value>
+  </data>
+  <data name="ViewRelatedPersistentVolumeClaims" xml:space="preserve">
+    <value>View related persistent volume claims</value>
   </data>
 </root>

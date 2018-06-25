@@ -368,7 +368,7 @@ namespace KubeMob.Common.Services.Kubernetes
             // Related to Storage Class.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Spec.StorageClassName == filter?.Other);
+                items = items.Where(p => p.Spec.StorageClassName == filter.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -420,9 +420,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
 
-            // TODO New replica set information (info not contained in V1Deployment) ??
-            // TODO Old replica set information (info not contained in V1Deployment) ??
-            // TODO Horizontal pod autoscaler information (info not contained in V1Deployment) ??
             return Mapper.Map<DeploymentDetail>(deployment);
         }
 
@@ -441,7 +438,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter?.Other));
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -459,7 +456,8 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<PodDetail>(pod);
         }
 
-        public async Task<IList<ObjectSummary>> GetReplicaSetSummaries()
+        public async Task<IList<ObjectSummary>> GetReplicaSetSummaries(
+            Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
@@ -467,7 +465,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListReplicaSetForAllNamespacesAsync()
                 : c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(replicaSetList.Items)
+            IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
+
+            // Related to Deployments.
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -631,8 +637,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1DaemonSet daemonSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedDaemonSetStatusAsync(daemonSetName, daemonSetNamespace));
 
-            // TODO Services ??
-            // TODO Pods ??
             return Mapper.Map<DaemonSetDetail>(daemonSetDetail);
         }
 
@@ -640,13 +644,20 @@ namespace KubeMob.Common.Services.Kubernetes
             Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
-            string labelSelector = filter?.LabelSelector;
 
             V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListJobForAllNamespacesAsync(labelSelector: labelSelector)
-                : c.ListNamespacedJobAsync(kubernetesNamespace, labelSelector: labelSelector));
+                ? c.ListJobForAllNamespacesAsync()
+                : c.ListNamespacedJobAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(jobList.Items)
+            // Related to Cron Jobs.
+            IEnumerable<V1Job> items = jobList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -738,6 +749,37 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<IList<Event>>(events.Items)
                 .OrderBy(e => e.LastSeen)
                 .ToList();
+        }
+
+        public async Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter)
+        {
+            string kubernetesNamespace = this.GetSelectedNamespaceName();
+
+            V1HorizontalPodAutoscalerList horizontalPodAutoscalerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListHorizontalPodAutoscalerForAllNamespacesAsync()
+                : c.ListNamespacedHorizontalPodAutoscalerAsync(kubernetesNamespace));
+
+            // Related to Deployments.
+            IEnumerable<V1HorizontalPodAutoscaler> items = horizontalPodAutoscalerList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Spec.ScaleTargetRef.Name == filter.Other);
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
+                .OrderBy(p => p.Name)
+                .ToList()
+                .AsReadOnly();
+        }
+
+        public async Task<HorizontalPodAutoscalerDetail> GetHorizontalPodAutoscalerDetail(
+            string horizontalPodAutoscalerName,
+            string horizontalPodAutoscalerNamespace)
+        {
+            V1HorizontalPodAutoscaler horizontalPodAutoscaler = await this.PerformClientOperation((c) => c.ReadNamespacedHorizontalPodAutoscalerStatusAsync(horizontalPodAutoscalerName, horizontalPodAutoscalerNamespace));
+
+            return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
         }
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);

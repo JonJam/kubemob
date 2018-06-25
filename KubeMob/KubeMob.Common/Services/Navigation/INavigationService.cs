@@ -40,7 +40,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToDeploymentDetailPage(string name, string namespaceName);
 
-        Task NavigateToReplicaSetsPage();
+        Task NavigateToReplicaSetsPage(Filter filter = null);
 
         Task NavigateToReplicaSetDetailPage(string name, string namespaceName);
 
@@ -87,6 +87,10 @@ namespace KubeMob.Common.Services.Navigation
         Task NavigateToEventDetailPage(Event eventDetail);
 
         Task NavigateToConditionDetailPage(Condition conditionDetail);
+
+        Task NavigateToHorizontalPodAutoscalersPage(Filter filter = null);
+
+        Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName);
 
         Task NavigateToSettingsPage();
 

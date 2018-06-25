@@ -72,11 +72,18 @@ namespace KubeMob.Common.ViewModels.Base
             get;
         }
 
+        protected string NamespaceName
+        {
+            get;
+            private set;
+        }
+
         public override async Task Initialize(object navigationData)
         {
             ObjectId objectId = (ObjectId)navigationData;
 
             this.Name = objectId.Name;
+            this.NamespaceName = objectId.NamespaceName;
 
             await this.PerformNetworkOperation(async () =>
             {

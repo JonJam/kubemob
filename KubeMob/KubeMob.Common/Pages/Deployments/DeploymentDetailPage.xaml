@@ -62,6 +62,14 @@
         <Label
             Text="{Binding Detail.Status}"/>
 
+        <Button
+            Text="{markupExtensions:Translate ViewRelatedReplicaSets}"
+            Command="{Binding ViewRelatedReplicaSetsCommand}"/>
+
+        <Button
+            Text="{markupExtensions:Translate ViewRelatedHorizontalPodAutoscalers}"
+            Command="{Binding ViewRelatedHorizontalPodAutoscalersCommand}"/>
+
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>

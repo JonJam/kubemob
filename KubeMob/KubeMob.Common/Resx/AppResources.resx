@@ -333,9 +333,6 @@
   <data name="DetailPage_Details_Status" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="PodDetailPage_PersistentVolumeClaims" xml:space="preserve">
-    <value>Persistent Volume Claims</value>
-  </data>
   <data name="Pods" xml:space="preserve">
     <value>Pods</value>
   </data>
@@ -468,9 +465,6 @@
   <data name="EventDetailPage_LastSeen" xml:space="preserve">
     <value>Last seen</value>
   </data>
-  <data name="EventDetailPage_Message" xml:space="preserve">
-    <value>Message</value>
-  </data>
   <data name="EventDetailPage_Source" xml:space="preserve">
     <value>Source</value>
   </data>
@@ -549,12 +543,6 @@
   <data name="DetailPage_Details_AccessModes" xml:space="preserve">
     <value>Access modes</value>
   </data>
-  <data name="PersistentVolumeDetailPage_Details_Message" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="PersistentVolumeDetailPage_Details_Reason" xml:space="preserve">
-    <value>Reason</value>
-  </data>
   <data name="StorageClassDetailPage_Details_Provisioner" xml:space="preserve">
     <value>Provisioner</value>
   </data>
@@ -573,10 +561,10 @@
   <data name="ConditionDetailPage_LastTransitionTime" xml:space="preserve">
     <value>Last transition time</value>
   </data>
-  <data name="ConditionDetailPage_Message" xml:space="preserve">
+  <data name="DetailPage_Message" xml:space="preserve">
     <value>Message</value>
   </data>
-  <data name="ConditionDetailPage_Reason" xml:space="preserve">
+  <data name="DetailPage_Reason" xml:space="preserve">
     <value>Reason</value>
   </data>
   <data name="StorageClassDetailPage_ViewRelatedPersistentVolumes" xml:space="preserve">
@@ -587,5 +575,38 @@
   </data>
   <data name="ViewRelatedServices" xml:space="preserve">
     <value>View related services</value>
+  </data>
+  <data name="ViewRelatedReplicaSets" xml:space="preserve">
+    <value>View related replica sets</value>
+  </data>
+  <data name="HorizontalPodAutoscalers" xml:space="preserve">
+    <value>Horizontal Pod Autoscalers</value>
+  </data>
+  <data name="ViewRelatedHorizontalPodAutoscalers" xml:space="preserve">
+    <value>View related horizontal pod autoscalers</value>
+  </data>
+  <data name="HorizontalPodAutoscalerDetailPage_Details_Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_CurrentCpuUtilization" xml:space="preserve">
+    <value>Cuurent CPU Utilization</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_CurrentReplicas" xml:space="preserve">
+    <value>Current Replicas</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_DesiredReplicas" xml:space="preserve">
+    <value>Desired Replicas</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_LastScaled" xml:space="preserve">
+    <value>Last Scaled</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_MaxReplicas" xml:space="preserve">
+    <value>Max Replicas</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_MinReplicas" xml:space="preserve">
+    <value>Min Replicas</value>
+  </data>
+  <data name="PersistentVolumeDetailPage_Details_TargetCpuUtilization" xml:space="preserve">
+    <value>Target CPU Utilization</value>
   </data>
 </root>

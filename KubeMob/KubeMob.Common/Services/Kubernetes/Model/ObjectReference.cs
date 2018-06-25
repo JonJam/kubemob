@@ -8,7 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         public ObjectReference(
             string name,
             string kind)
-        : this(name, string.Empty, kind)
+            : this(name, string.Empty, kind)
         {
         }
 
@@ -37,6 +37,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string Summary => $"{this.NamespaceName}/{this.Name}";
+        public string Summary => !string.IsNullOrWhiteSpace(this.NamespaceName)
+            ? $"{this.NamespaceName}/{this.Name}"
+            : $"{this.Kind}/{this.Name}";
     }
 }

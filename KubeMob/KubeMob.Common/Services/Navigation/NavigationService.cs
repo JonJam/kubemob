@@ -6,6 +6,7 @@ using KubeMob.Common.Pages.ConfigMaps;
 using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
+using KubeMob.Common.Pages.HorizontalPodAutoscalers;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
 using KubeMob.Common.Pages.MasterDetail;
@@ -106,7 +107,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToDeploymentDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DeploymentDetailPage), new ObjectId(name, namespaceName));
 
-        public Task NavigateToReplicaSetsPage() => NavigationService.InternalNavigate(typeof(ReplicaSetsPage));
+        public Task NavigateToReplicaSetsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(ReplicaSetsPage), filter);
 
         public Task NavigateToReplicaSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ReplicaSetDetailPage), new ObjectId(name, namespaceName));
 
@@ -157,6 +158,10 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToEventDetailPage(Event eventDetail) => NavigationService.InternalNavigate(typeof(EventDetailPage), eventDetail);
 
         public Task NavigateToConditionDetailPage(Kubernetes.Model.Condition conditionDetail) => NavigationService.InternalNavigate(typeof(ConditionDetailPage), conditionDetail);
+
+        public Task NavigateToHorizontalPodAutoscalersPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalersPage), filter);
+
+        public Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalerDetailPage), new ObjectId(name, namespaceName));
 
         public Task RemoveLastFromBackStack()
         {

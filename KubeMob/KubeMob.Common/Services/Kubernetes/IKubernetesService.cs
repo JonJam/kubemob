@@ -147,7 +147,8 @@ namespace KubeMob.Common.Services.Kubernetes
             string podName,
             string podNamespace);
 
-        Task<IList<ObjectSummary>> GetReplicaSetSummaries();
+        Task<IList<ObjectSummary>> GetReplicaSetSummaries(
+            Filter filter);
 
         Task<ReplicaSetDetail> GetReplicaSetDetail(
             string replicaSetName,
@@ -216,5 +217,11 @@ namespace KubeMob.Common.Services.Kubernetes
             string statefulSetNamespace);
 
         Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName);
+
+        Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter);
+
+        Task<HorizontalPodAutoscalerDetail> GetHorizontalPodAutoscalerDetail(
+            string horizontalPodAutoscalerName,
+            string horizontalPodAutoscalerNamespace);
     }
 }

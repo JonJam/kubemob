@@ -28,7 +28,7 @@ namespace KubeMob.Common.ViewModels.CronJobs
 
         private Task OnViewRelatedJobsCommandExecute()
         {
-            Filter filter = new Filter(labelSelector: this.Detail.LabelSelector);
+            Filter filter = new Filter(other: this.Detail.Name);
 
             return this.NavigationService.NavigateToJobsPage(filter);
         }

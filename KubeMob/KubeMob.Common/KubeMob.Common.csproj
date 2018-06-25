@@ -39,8 +39,14 @@
     <Compile Update="Pages\ConditionDetailPage.xaml.cs">
       <DependentUpon>ConditionDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailPage.xaml.cs">
+      <DependentUpon>HorizontalPodAutoscalerDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumeDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalersPage.xaml.cs">
+      <DependentUpon>HorizontalPodAutoscalersPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\StorageClasses\StorageClassDetailPage.xaml.cs">
       <DependentUpon>StorageClassDetailPage.xaml</DependentUpon>

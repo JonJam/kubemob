@@ -36,13 +36,13 @@
                     Text="{Binding Detail.LastTransitionTime}"/>
 
                 <Label
-                    Text="{markupExtensions:Translate ConditionDetailPage_Reason}"
+                    Text="{markupExtensions:Translate DetailPage_Reason}"
                     Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
                 <Label
                     Text="{Binding Detail.Reason}"/>
 
                 <Label
-                    Text="{markupExtensions:Translate ConditionDetailPage_Message}"
+                    Text="{markupExtensions:Translate DetailPage_Message}"
                     Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
                 <Label
                     Text="{Binding Detail.Message}"/>

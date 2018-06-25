@@ -18,6 +18,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     o.NamespaceProperty,
                     o.Kind));
 
+            this.CreateMap<k8s.Models.V1CrossVersionObjectReference, ObjectReference>()
+                .ConstructUsing((o) => new ObjectReference(
+                    o.Name,
+                    o.Kind));
+
             this.CreateMap<k8s.Models.V1Event, Event>()
                 .ConstructUsing((e) =>
                 {

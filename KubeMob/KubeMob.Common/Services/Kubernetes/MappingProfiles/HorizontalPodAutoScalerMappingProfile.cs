@@ -15,25 +15,45 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     r.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1HorizontalPodAutoscaler, HorizontalPodAutoscalerDetail>()
-                .ConstructUsing((s) =>
+                .ConstructUsing((h) =>
                 {
-                    List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                    List<string> labels = h.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                           new List<string>();
-                    List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                    List<string> annotations = h.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                new List<string>();
 
-                    string creationTime = s.Metadata.CreationTimestamp.HasValue
-                        ? $"{s.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                    string creationTime = h.Metadata.CreationTimestamp.HasValue
+                        ? $"{h.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
-                    // TODO populate
+                    ObjectReference target = Mapper.Map<ObjectReference>(h.Spec.ScaleTargetRef);
+
+                    int minReplicas = h.Spec.MinReplicas.GetValueOrDefault(0);
+
+                    string targetCpuUtilization = h.Spec.TargetCPUUtilizationPercentage.HasValue
+                        ? $"{ h.Spec.TargetCPUUtilizationPercentage.Value}%"
+                        : string.Empty;
+                    string currentCpuUtilization = h.Status.CurrentCPUUtilizationPercentage.HasValue
+                        ? $"{h.Status.CurrentCPUUtilizationPercentage.Value}%"
+                        : string.Empty;
+                    string lastScaled = h.Status.LastScaleTime.HasValue
+                        ? $"{h.Status.LastScaleTime.Value.ToUniversalTime():s} UTC"
+                        : string.Empty;
 
                     return new HorizontalPodAutoscalerDetail(
-                        s.Metadata.Name,
-                        s.Metadata.NamespaceProperty,
+                        h.Metadata.Name,
+                        h.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
-                        creationTime);
+                        creationTime,
+                        target,
+                        minReplicas,
+                        h.Spec.MaxReplicas,
+                        targetCpuUtilization,
+                        h.Status.CurrentReplicas,
+                        h.Status.DesiredReplicas,
+                        currentCpuUtilization,
+                        lastScaled);
                 });
         }
     }

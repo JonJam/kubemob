@@ -188,7 +188,7 @@
         </views:ItemsControl>
 
         <Label
-            Text="{markupExtensions:Translate PodDetailPage_PersistentVolumeClaims}"
+            Text="{markupExtensions:Translate PersistentVolumeClaims}"
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
             PlaceholderText="{markupExtensions:Translate EmptyMessage}"

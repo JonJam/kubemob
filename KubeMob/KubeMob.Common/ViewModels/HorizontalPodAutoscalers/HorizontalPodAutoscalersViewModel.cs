@@ -21,7 +21,7 @@ namespace KubeMob.Common.ViewModels.HorizontalPodAutoscalers
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) => this.KubernetesService.GetHorizontalPodAutoscalerSummaries();
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) => this.KubernetesService.GetHorizontalPodAutoscalerSummaries(filter);
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

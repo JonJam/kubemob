@@ -430,24 +430,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message.
-        /// </summary>
-        internal static string ConditionDetailPage_Message {
-            get {
-                return ResourceManager.GetString("ConditionDetailPage_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reason.
-        /// </summary>
-        internal static string ConditionDetailPage_Reason {
-            get {
-                return ResourceManager.GetString("ConditionDetailPage_Reason", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Condition detail.
         /// </summary>
         internal static string ConditionDetailPage_Title {
@@ -790,6 +772,24 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        internal static string DetailPage_Message {
+            get {
+                return ResourceManager.GetString("DetailPage_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        internal static string DetailPage_Reason {
+            get {
+                return ResourceManager.GetString("DetailPage_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discovery and Load Balancing.
         /// </summary>
         internal static string DiscoveryAndLoadBalancing {
@@ -835,15 +835,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message.
-        /// </summary>
-        internal static string EventDetailPage_Message {
-            get {
-                return ResourceManager.GetString("EventDetailPage_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Source.
         /// </summary>
         internal static string EventDetailPage_Source {
@@ -867,6 +858,15 @@ namespace KubeMob.Common.Resx {
         internal static string EventDetailPage_Title {
             get {
                 return ResourceManager.GetString("EventDetailPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target.
+        /// </summary>
+        internal static string HorizontalPodAutoscalerDetailPage_Details_Target {
+            get {
+                return ResourceManager.GetString("HorizontalPodAutoscalerDetailPage_Details_Target", resourceCulture);
             }
         }
         
@@ -1132,20 +1132,56 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message.
+        ///   Looks up a localized string similar to Cuurent CPU Utilization.
         /// </summary>
-        internal static string PersistentVolumeDetailPage_Details_Message {
+        internal static string PersistentVolumeDetailPage_Details_CurrentCpuUtilization {
             get {
-                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_Message", resourceCulture);
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_CurrentCpuUtilization", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reason.
+        ///   Looks up a localized string similar to Current Replicas.
         /// </summary>
-        internal static string PersistentVolumeDetailPage_Details_Reason {
+        internal static string PersistentVolumeDetailPage_Details_CurrentReplicas {
             get {
-                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_Reason", resourceCulture);
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_CurrentReplicas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Desired Replicas.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_DesiredReplicas {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_DesiredReplicas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Scaled.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_LastScaled {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_LastScaled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Replicas.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_MaxReplicas {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_MaxReplicas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min Replicas.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_MinReplicas {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_MinReplicas", resourceCulture);
             }
         }
         
@@ -1155,6 +1191,15 @@ namespace KubeMob.Common.Resx {
         internal static string PersistentVolumeDetailPage_Details_ReclaimPolicy {
             get {
                 return ResourceManager.GetString("PersistentVolumeDetailPage_Details_ReclaimPolicy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target CPU Utilization.
+        /// </summary>
+        internal static string PersistentVolumeDetailPage_Details_TargetCpuUtilization {
+            get {
+                return ResourceManager.GetString("PersistentVolumeDetailPage_Details_TargetCpuUtilization", resourceCulture);
             }
         }
         
@@ -1263,15 +1308,6 @@ namespace KubeMob.Common.Resx {
         internal static string PodDetailPage_Details_QoS {
             get {
                 return ResourceManager.GetString("PodDetailPage_Details_QoS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Persistent Volume Claims.
-        /// </summary>
-        internal static string PodDetailPage_PersistentVolumeClaims {
-            get {
-                return ResourceManager.GetString("PodDetailPage_PersistentVolumeClaims", resourceCulture);
             }
         }
         

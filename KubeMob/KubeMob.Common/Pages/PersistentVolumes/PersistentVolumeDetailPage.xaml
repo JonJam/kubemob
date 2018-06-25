@@ -46,7 +46,7 @@
             Command="{Binding NavigateToStorageClassCommand}"/>
 
         <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Reason}"
+            Text="{markupExtensions:Translate DetailPage_Reason}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
             IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <Label
@@ -54,7 +54,7 @@
             IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
         <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Message}"
+            Text="{markupExtensions:Translate DetailPage_Message}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
             IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <Label

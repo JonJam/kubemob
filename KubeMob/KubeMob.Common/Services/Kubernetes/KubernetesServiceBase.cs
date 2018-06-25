@@ -754,8 +754,7 @@ namespace KubeMob.Common.Services.Kubernetes
                 .ToList();
         }
 
-        // TODO add Filter
-        public async Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries()
+        public async Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter)
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
@@ -763,7 +762,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListHorizontalPodAutoscalerForAllNamespacesAsync()
                 : c.ListNamespacedHorizontalPodAutoscalerAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(horizontalPodAutoscalerList.Items)
+            // Related to Deployments.
+            IEnumerable<V1HorizontalPodAutoscaler> items = horizontalPodAutoscalerList.Items;
+
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                items = items.Where(p => p.Spec.ScaleTargetRef.Name == filter.Other);
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList()
                 .AsReadOnly();

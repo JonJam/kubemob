@@ -13,7 +13,7 @@
             <StackLayout
                 IsVisible="{Binding Detail, Converter={StaticResource NotEmptyToBoolConverter}}">
                 <Label
-                    Text="{markupExtensions:Translate EventDetailPage_Message}"
+                    Text="{markupExtensions:Translate DetailPage_Message}"
                     Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
                 <Label
                     Text="{Binding Detail.Message}"/>

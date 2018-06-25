@@ -88,7 +88,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToConditionDetailPage(Condition conditionDetail);
 
-        Task NavigateToHorizontalPodAutoscalersPage();
+        Task NavigateToHorizontalPodAutoscalersPage(Filter filter = null);
 
         Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName);
 

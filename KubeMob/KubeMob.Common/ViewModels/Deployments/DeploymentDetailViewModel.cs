@@ -44,9 +44,9 @@ namespace KubeMob.Common.ViewModels.Deployments
 
         private Task OnViewHorizontalPodAutoscalersCommandExecute()
         {
-            //TODO add filter
+            Filter filter = new Filter(other: this.Name);
 
-            return this.NavigationService.NavigateToHorizontalPodAutoscalersPage();
+            return this.NavigationService.NavigateToHorizontalPodAutoscalersPage(filter);
         }
     }
 }

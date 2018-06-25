@@ -218,7 +218,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName);
 
-        Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries();
+        Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter);
 
         Task<HorizontalPodAutoscalerDetail> GetHorizontalPodAutoscalerDetail(
             string horizontalPodAutoscalerName,

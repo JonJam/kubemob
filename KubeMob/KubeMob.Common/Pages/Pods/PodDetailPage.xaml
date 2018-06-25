@@ -135,34 +135,15 @@
         <Label
             Text="{markupExtensions:Translate PodDetailPage_CreatedBy}"
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label
-                Grid.Column="0"
-                Text="{markupExtensions:Translate PodDetailPage_CreatedBy_Name}"/>
-            <Label
-                Grid.Column="1"
-                Text="{markupExtensions:Translate PodDetailPage_CreatedBy_Kind}"/>
-        </Grid>
         <views:ItemsControl
+            x:Name="Owners"
             ItemsSource="{Binding Detail.Owners}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Column="0"
-                            Text="{Binding Name}"/>
-                        <Label
-                            Grid.Column="1"
-                            Text="{Binding Kind}"/>
-                    </Grid>
+                    <Button
+                        Text="{Binding Summary}"
+                        Command="{Binding Source={x:Reference Owners}, Path=BindingContext.NavigateToOwnerCommand}"
+                        CommandParameter="{Binding .}"/>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>

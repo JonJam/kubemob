@@ -1267,24 +1267,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kind.
-        /// </summary>
-        internal static string PodDetailPage_CreatedBy_Kind {
-            get {
-                return ResourceManager.GetString("PodDetailPage_CreatedBy_Kind", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        internal static string PodDetailPage_CreatedBy_Name {
-            get {
-                return ResourceManager.GetString("PodDetailPage_CreatedBy_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to IP Address.
         /// </summary>
         internal static string PodDetailPage_Details_IpAddress {

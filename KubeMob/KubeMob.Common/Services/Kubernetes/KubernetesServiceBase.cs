@@ -420,8 +420,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Deployment deployment = await this.PerformClientOperation((c) => c.ReadNamespacedDeploymentStatusAsync(deploymentName, deploymentNamespace));
 
-            // TODO Old replica set information (info not contained in V1Deployment) ??
-            // TODO Horizontal pod autoscaler information (info not contained in V1Deployment) ??
             return Mapper.Map<DeploymentDetail>(deployment);
         }
 
@@ -638,8 +636,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1DaemonSet daemonSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedDaemonSetStatusAsync(daemonSetName, daemonSetNamespace));
 
-            // TODO Services ??
-            // TODO Pods ??
             return Mapper.Map<DaemonSetDetail>(daemonSetDetail);
         }
 

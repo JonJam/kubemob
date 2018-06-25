@@ -467,6 +467,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
 
+            // Related to Deployments.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));

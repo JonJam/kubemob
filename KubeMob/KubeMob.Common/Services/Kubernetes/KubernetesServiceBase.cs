@@ -720,15 +720,24 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<StatefulSetDetail>(statefulSetDetail);
         }
 
-        public async Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries()
+        public async Task<IList<ObjectSummary>> GetPersistentVolumeClaimSummaries(Filter filter)
         {
-            string kubernetesNamespace = this.GetSelectedNamespaceName();
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
 
             V1PersistentVolumeClaimList persistentVolumeClaimsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListPersistentVolumeClaimForAllNamespacesAsync()
                 : c.ListNamespacedPersistentVolumeClaimAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(persistentVolumeClaimsList.Items)
+            IEnumerable<V1PersistentVolumeClaim> items = persistentVolumeClaimsList.Items;
+
+            // Related to Pods.
+            if (!string.IsNullOrWhiteSpace(filter?.Other))
+            {
+                string[] names = filter.Other.Split(',');
+                items = items.Where(p => names.Contains(p.Metadata.Name));
+            }
+
+            return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }

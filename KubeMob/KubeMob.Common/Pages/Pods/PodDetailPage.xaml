@@ -168,18 +168,8 @@
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeClaims}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}"
-            ItemsSource="{Binding Detail.PersistentVolumeClaims}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        Text="{Binding .}"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <Button
+            Text="{markupExtensions:Translate ViewRelatedPersistentVolumeClaims}"
+            Command="{Binding ViewRelatedPersistentVolumeClaimsCommand}"/>
     </StackLayout>
 </base:ExtendedContentPage>

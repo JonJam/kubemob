@@ -23,7 +23,10 @@ namespace KubeMob.Common.ViewModels.Pods
         {
             this.NavigateToConditionDetailCommand =
                 new Command(async (o) => await this.OnNavigateToConditionDetailCommandExecute(o));
+
             this.NavigateToOwnerCommand = new Command(async (o) => await this.OnNavigateToOwnerCommandExecute(o));
+
+            this.ViewRelatedPersistentVolumeClaimsCommand = new Command(async () => await this.OnViewRelatedPersistentVolumeClaimsCommandExecute());
         }
 
         public ICommand NavigateToConditionDetailCommand
@@ -32,6 +35,11 @@ namespace KubeMob.Common.ViewModels.Pods
         }
 
         public ICommand NavigateToOwnerCommand
+        {
+            get;
+        }
+
+        public ICommand ViewRelatedPersistentVolumeClaimsCommand
         {
             get;
         }
@@ -64,6 +72,15 @@ namespace KubeMob.Common.ViewModels.Pods
                 default:
                     throw new NotImplementedException();
             }
+        }
+
+        private Task OnViewRelatedPersistentVolumeClaimsCommandExecute()
+        {
+            Filter filter = new Filter(
+                this.NamespaceName,
+                other: string.Join(",", this.Detail.PersistentVolumeClaims));
+
+            return this.NavigationService.NavigateToPersistentVolumeClaimsPage(filter);
         }
     }
 }

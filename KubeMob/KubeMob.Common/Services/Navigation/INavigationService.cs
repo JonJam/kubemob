@@ -80,7 +80,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToStatefulSetDetailPage(string name, string namespaceName);
 
-        Task NavigateToPersistentVolumeClaimsPage();
+        Task NavigateToPersistentVolumeClaimsPage(Filter filter = null);
 
         Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName);
 

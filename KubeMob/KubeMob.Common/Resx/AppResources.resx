@@ -603,4 +603,7 @@
   <data name="PersistentVolumeDetailPage_Details_TargetCpuUtilization" xml:space="preserve">
     <value>Target CPU Utilization</value>
   </data>
+  <data name="ViewRelatedPersistentVolumeClaims" xml:space="preserve">
+    <value>View related persistent volume claims</value>
+  </data>
 </root>

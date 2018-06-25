@@ -1483,6 +1483,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View related persistent volume claims.
+        /// </summary>
+        internal static string ViewRelatedPersistentVolumeClaims {
+            get {
+                return ResourceManager.GetString("ViewRelatedPersistentVolumeClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View related pods.
         /// </summary>
         internal static string ViewRelatedPods {

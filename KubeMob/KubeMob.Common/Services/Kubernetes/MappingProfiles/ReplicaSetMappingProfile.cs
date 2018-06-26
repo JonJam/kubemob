@@ -35,6 +35,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     AppResources.Detail_Pods,
                     r.Status.AvailableReplicas.GetValueOrDefault(0));
 
+                string selector = string.Join(",", r.Spec.Selector.MatchLabels.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+
                 return new ReplicaSetDetail(
                     r.Metadata.Name,
                     r.Metadata.NamespaceProperty,
@@ -43,7 +45,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     creationTime,
                     selectors.AsReadOnly(),
                     images.AsReadOnly(),
-                    pods);
+                    pods,
+                    selector);
             });
         }
     }

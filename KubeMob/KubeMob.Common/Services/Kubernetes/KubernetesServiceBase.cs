@@ -500,14 +500,15 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IList<V1Service> items = serviceList.Items;
 
-            // Related to Daemon Sets.
+            // Related to Daemon Sets or Replica Sets.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 bool IsRelated(V1Service s)
                 {
-                    IEnumerable<string> labels = s.Spec.Selector?.Select(kvp => $"{kvp.Key}={kvp.Value}");
+                    IEnumerable<string> filterLabels = filter.Other.Split(',');
+                    IEnumerable<string> selectorLabels = s.Spec.Selector?.Select(kvp => $"{kvp.Key}={kvp.Value}");
 
-                    return labels != null && string.Join(",", labels) == filter.Other;
+                    return selectorLabels != null && selectorLabels.Any(l => filterLabels.Contains(l));
                 }
 
                 items = items.Where(IsRelated)

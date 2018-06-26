@@ -505,10 +505,9 @@ namespace KubeMob.Common.Services.Kubernetes
             {
                 bool IsRelated(V1Service s)
                 {
-                    IEnumerable<string> filterLabels = filter.Other.Split(',');
-                    IEnumerable<string> selectorLabels = s.Spec.Selector?.Select(kvp => $"{kvp.Key}={kvp.Value}");
+                    IEnumerable<string> labels = s.Spec.Selector?.Select(kvp => $"{kvp.Key}={kvp.Value}");
 
-                    return selectorLabels != null && selectorLabels.Any(l => filterLabels.Contains(l));
+                    return labels != null && string.Join(",", labels) == filter.Other;
                 }
 
                 items = items.Where(IsRelated)

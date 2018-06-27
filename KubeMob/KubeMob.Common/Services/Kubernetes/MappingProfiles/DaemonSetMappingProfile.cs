@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -33,7 +34,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         AppResources.Detail_Pods,
                         d.Status.CurrentNumberScheduled);
 
-                    string relatedSelector = Mapper.Map<string>(d.Spec.Selector);
+                    string relatedSelector = d.Spec.Selector.ToRelatedSelector();
 
                     return new DaemonSetDetail(
                         d.Metadata.Name,

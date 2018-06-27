@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using KubeMob.Common.Services.Kubernetes.Model;
 
@@ -39,25 +37,6 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         firstSeen,
                         e.LastTimestamp.Value,
                         lastSeen);
-                });
-
-            // Create selector for Replica Set and Daemon Set to related Services.
-            // Cannot find exact logic to match this to related Services, this is best effort.
-            this.CreateMap<k8s.Models.V1LabelSelector, string>()
-                .ConstructUsing((l) =>
-                {
-                    const string kubernetesAppLabelKey = "k8s-app";
-
-                    // Ignoring pod-template-hash as auto-generated: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pod-template-hash-label
-                    IList<KeyValuePair<string, string>> filteredSelectors = l.MatchLabels.Where(ml => ml.Key != "pod-template-hash").ToList();
-
-                    if (filteredSelectors.Any(kvp => kvp.Key == kubernetesAppLabelKey))
-                    {
-                        // For a Kubernetes app e.g. Dashboard, DNS, selectors seem to only use this label so remove all other selectors.
-                        filteredSelectors = filteredSelectors.Where(kvp => kvp.Key == kubernetesAppLabelKey).ToList();
-                    }
-
-                    return string.Join(",", filteredSelectors.Select(kvp => $"{kvp.Key}={kvp.Value}"));
                 });
         }
     }

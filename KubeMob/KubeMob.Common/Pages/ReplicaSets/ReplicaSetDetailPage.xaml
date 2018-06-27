@@ -52,7 +52,6 @@
         <Label
             Text="{Binding Detail.Pods}"/>
 
-
         <Button
             Text="{markupExtensions:Translate ViewRelatedPods}"
             Command="{Binding ViewRelatedPodsCommand}"/>

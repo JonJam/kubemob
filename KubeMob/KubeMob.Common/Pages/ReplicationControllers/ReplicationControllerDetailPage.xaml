@@ -52,6 +52,10 @@
         <Label
             Text="{Binding Detail.Pods}"/>
 
+        <Button
+            Text="{markupExtensions:Translate ViewRelatedServices}"
+            Command="{Binding ViewRelatedServicesCommand}"/>
+
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>

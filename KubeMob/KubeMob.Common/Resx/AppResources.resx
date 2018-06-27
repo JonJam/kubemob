@@ -331,7 +331,7 @@
     <value>Pods</value>
   </data>
   <data name="ReplicaSets" xml:space="preserve">
-    <value>Replica sets</value>
+    <value>Replica Sets</value>
   </data>
   <data name="ReplicationControllers" xml:space="preserve">
     <value>Replication Controllers</value>

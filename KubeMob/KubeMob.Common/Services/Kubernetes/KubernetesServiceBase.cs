@@ -484,9 +484,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1ReplicaSet replicaSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicaSetStatusAsync(replicaSetName, replicaSetNamespace));
 
-            // TODO Pods information (info not contained in V1ReplicaSet)??
-            // TODO Services information (info not contained in V1ReplicaSet)??
-            // TODO Horizontal pod autoscaler information (info not contained in V1ReplicaSet) ??
             return Mapper.Map<ReplicaSetDetail>(replicaSetDetail);
         }
 
@@ -500,7 +497,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IList<V1Service> items = serviceList.Items;
 
-            // Related to Daemon Sets.
+            // Related to Daemon Sets or Replica Sets.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 bool IsRelated(V1Service s)
@@ -668,7 +665,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Job jobDetail = await this.PerformClientOperation((c) => c.ReadNamespacedJobStatusAsync(jobName, jobNamespace));
 
-            // TODO Pods ??
             return Mapper.Map<JobDetail>(jobDetail);
         }
 

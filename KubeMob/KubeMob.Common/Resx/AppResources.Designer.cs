@@ -1303,7 +1303,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replica sets.
+        ///   Looks up a localized string similar to Replica Sets.
         /// </summary>
         internal static string ReplicaSets {
             get {

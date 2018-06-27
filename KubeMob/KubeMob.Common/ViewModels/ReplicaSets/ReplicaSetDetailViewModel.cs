@@ -21,6 +21,7 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
         {
             this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
             this.ViewRelatedServicesCommand = new Command(async () => await this.OnViewRelatedServicesCommandExecute());
+            this.ViewRelatedHorizontalPodAutoscalersCommand = new Command(async () => await this.OnViewHorizontalPodAutoscalersCommandExecute());
         }
 
         public ICommand ViewRelatedPodsCommand
@@ -29,6 +30,11 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
         }
 
         public ICommand ViewRelatedServicesCommand
+        {
+            get;
+        }
+
+        public ICommand ViewRelatedHorizontalPodAutoscalersCommand
         {
             get;
         }
@@ -47,6 +53,13 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
             Filter filter = new Filter(other: this.Detail.RelatedSelector);
 
             return this.NavigationService.NavigateToServicesPage(filter);
+        }
+
+        private Task OnViewHorizontalPodAutoscalersCommandExecute()
+        {
+            Filter filter = new Filter(other: this.Name);
+
+            return this.NavigationService.NavigateToHorizontalPodAutoscalersPage(filter);
         }
     }
 }

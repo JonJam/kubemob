@@ -36,5 +36,9 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         {
             get;
         }
+
+        public bool IsEmpty => string.IsNullOrWhiteSpace(this.FieldSelector) &&
+                               string.IsNullOrWhiteSpace(this.LabelSelector) &&
+                               string.IsNullOrWhiteSpace(this.Other);
     }
 }

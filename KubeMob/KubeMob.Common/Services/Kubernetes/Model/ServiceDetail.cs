@@ -18,7 +18,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string sessionAffinity,
             string clusterIp,
             IReadOnlyList<string> internalEndpoints,
-            IReadOnlyList<string> externalEndpoints)
+            IReadOnlyList<string> externalEndpoints,
+            string selector)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
             this.LabelSelector = labelSelector;
@@ -27,6 +28,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.ClusterIp = clusterIp;
             this.InternalEndpoints = internalEndpoints;
             this.ExternalEndpoints = externalEndpoints;
+            this.Selector = selector;
         }
 
         public IReadOnlyList<string> LabelSelector
@@ -55,6 +57,11 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         }
 
         public IReadOnlyList<string> ExternalEndpoints
+        {
+            get;
+        }
+
+        public string Selector
         {
             get;
         }

@@ -10,7 +10,7 @@ namespace KubeMob.Common.Services.Kubernetes.Extensions
 
         public static string ToRelatedSelector(this IDictionary<string, string> selectors)
         {
-            // Create selector for Replica Set and Daemon Set to related Services.
+            // Create selector for Daemon Set, Replica Set and Replication Controllers to related Services.
             // Cannot find exact logic to match this to related Services, this is best effort.
             const string kubernetesAppLabelKey = "k8s-app";
 

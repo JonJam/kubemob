@@ -33,7 +33,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         AppResources.Detail_Pods,
                         d.Status.CurrentNumberScheduled);
 
-                    string selector = string.Join(",", d.Spec.Selector.MatchLabels.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+                    string relatedSelector = Mapper.Map<string>(d.Spec.Selector);
 
                     return new DaemonSetDetail(
                         d.Metadata.Name,
@@ -43,7 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         creationTime,
                         images.AsReadOnly(),
                         pods,
-                        selector);
+                        relatedSelector);
                 });
         }
     }

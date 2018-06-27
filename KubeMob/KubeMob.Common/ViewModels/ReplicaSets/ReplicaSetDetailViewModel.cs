@@ -44,7 +44,7 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
 
         private Task OnViewRelatedServicesCommandExecute()
         {
-            Filter filter = new Filter(other: this.Detail.Selector);
+            Filter filter = new Filter(other: this.Detail.RelatedSelector);
 
             return this.NavigationService.NavigateToServicesPage(filter);
         }

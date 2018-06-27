@@ -489,7 +489,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetServiceSummaries(Filter filter)
         {
-            string kubernetesNamespace = this.GetSelectedNamespaceName();
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ?
+                filter.Namespace :
+                this.GetSelectedNamespaceName();
 
             V1ServiceList serviceList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListServiceForAllNamespacesAsync()
@@ -497,7 +499,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IList<V1Service> items = serviceList.Items;
 
-            // Related to Daemon Sets or Replica Sets.
+            // Related to Daemon Sets, Replica Sets or Replication Controllers.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 bool IsRelated(V1Service s)

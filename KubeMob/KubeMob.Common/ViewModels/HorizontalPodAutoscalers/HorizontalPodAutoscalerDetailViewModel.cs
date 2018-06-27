@@ -39,6 +39,10 @@ namespace KubeMob.Common.ViewModels.HorizontalPodAutoscalers
                     return this.NavigationService.NavigateToReplicaSetDetailPage(
                         this.Detail.Target.Name,
                         this.NamespaceName);
+                case "ReplicationController":
+                    return this.NavigationService.NavigateToReplicationControllerDetailPage(
+                        this.Detail.Target.Name,
+                        this.NamespaceName);
                 default:
                     throw new NotImplementedException();
             }

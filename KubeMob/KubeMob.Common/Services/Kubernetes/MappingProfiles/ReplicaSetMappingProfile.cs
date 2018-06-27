@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -35,7 +36,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     AppResources.Detail_Pods,
                     r.Status.AvailableReplicas.GetValueOrDefault(0));
 
-                string relatedSelector = Mapper.Map<string>(r.Spec.Selector);
+                string relatedSelector = r.Spec.Selector.ToRelatedSelector();
 
                 return new ReplicaSetDetail(
                     r.Metadata.Name,

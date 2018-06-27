@@ -19,8 +19,14 @@ namespace KubeMob.Common.ViewModels.ReplicationControllers
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
         {
+            this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
             this.ViewRelatedServicesCommand = new Command(async () => await this.OnViewRelatedServicesCommandExecute());
             this.ViewRelatedHorizontalPodAutoscalersCommand = new Command(async () => await this.OnViewHorizontalPodAutoscalersCommandExecute());
+        }
+
+        public ICommand ViewRelatedPodsCommand
+        {
+            get;
         }
 
         public ICommand ViewRelatedServicesCommand
@@ -34,6 +40,13 @@ namespace KubeMob.Common.ViewModels.ReplicationControllers
         }
 
         protected override Task<ReplicationControllerDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetReplicationControllerDetail(name, namespaceName);
+
+        private Task OnViewRelatedPodsCommandExecute()
+        {
+            Filter filter = new Filter(other: this.Name);
+
+            return this.NavigationService.NavigateToPodsPage(filter);
+        }
 
         private Task OnViewRelatedServicesCommandExecute()
         {

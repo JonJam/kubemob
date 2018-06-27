@@ -53,6 +53,10 @@
             Text="{Binding Detail.Pods}"/>
 
         <Button
+            Text="{markupExtensions:Translate ViewRelatedPods}"
+            Command="{Binding ViewRelatedPodsCommand}"/>
+
+        <Button
             Text="{markupExtensions:Translate ViewRelatedServices}"
             Command="{Binding ViewRelatedServicesCommand}"/>
 

@@ -37,8 +37,9 @@
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.StorageClassName}"/>
+        <Button
+            Text="{Binding Detail.StorageClass}"
+            Command="{Binding NavigateToStorageClassCommand}"/>
 
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>

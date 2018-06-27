@@ -606,4 +606,7 @@
   <data name="ViewRelatedPersistentVolumeClaims" xml:space="preserve">
     <value>View related persistent volume claims</value>
   </data>
+  <data name="ObjectNotFoundMessage" xml:space="preserve">
+    <value>The selected object could not be found.</value>
+  </data>
 </root>

@@ -66,10 +66,15 @@
                         <Grid
                             IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
-                            <views:NoNetworkIndicator IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+                            <views:NoNetworkIndicator
+                                IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+
+                            <Label        
+                                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
+                                IsVisible="{TemplateBinding BindingContext.ObjectNotFound}"/>
 
                             <ContentPresenter
-                                IsVisible="{TemplateBinding BindingContext.HasNoNetwork, Converter={StaticResource InverseBoolConverter}}"/>
+                                IsVisible="{TemplateBinding BindingContext.DisplayInfo}"/>
                         </Grid>
 
                         <ActivityIndicator

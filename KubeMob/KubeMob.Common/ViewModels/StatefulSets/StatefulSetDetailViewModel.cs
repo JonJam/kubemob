@@ -1,9 +1,11 @@
 using System.Threading.Tasks;
+using System.Windows.Input;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.StatefulSets
@@ -16,9 +18,22 @@ namespace KubeMob.Common.ViewModels.StatefulSets
             IPopupService popupService,
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
+            => this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+
+        public ICommand ViewRelatedPodsCommand
         {
+            get;
         }
 
         protected override Task<StatefulSetDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetStatefulSetDetail(name, namespaceName);
+
+        private Task OnViewRelatedPodsCommandExecute()
+        {
+            Filter filter = new Filter(
+                this.NamespaceName,
+                other: this.Name);
+
+            return this.NavigationService.NavigateToPodsPage(filter);
+        }
     }
 }

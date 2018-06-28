@@ -3,9 +3,9 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages.Endpoints
 {
-    public partial class EndpointsPage : ExtendedContentPage
+    public partial class EndpointDetailPage : ExtendedContentPage
     {
         [Preserve]
-        public EndpointsPage() => this.InitializeComponent();
+        public EndpointDetailPage() => this.InitializeComponent();
     }
 }

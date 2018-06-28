@@ -783,30 +783,14 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
         }
 
-        public async Task<IList<ObjectSummary>> GetEndpointsSummaries(Filter filter)
+        public async Task<EndpointDetail> GetEndpointDetail(
+            string endpointName,
+            string endpointNamespace)
         {
-            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
-            string fieldSelector = filter?.FieldSelector;
+            V1EndpointsList endpointsList = await this.PerformClientOperation((c) => c.ListNamespacedEndpointsAsync(endpointNamespace, fieldSelector: $"metadata.name={endpointName}"));
 
-            V1EndpointsList endpointsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListEndpointsForAllNamespacesAsync(fieldSelector: fieldSelector)
-                : c.ListNamespacedEndpointsAsync(kubernetesNamespace, fieldSelector: fieldSelector));
-
-            return Mapper.Map<IList<ObjectSummary>>(endpointsList.Items)
-                .OrderBy(p => p.Name)
-                .ToList()
-                .AsReadOnly();
+            return Mapper.Map<EndpointDetail>(endpointsList.Items.FirstOrDefault());
         }
-
-        // TODO Create endpoint detail api
-        //public async Task<HorizontalPodAutoscalerDetail> GetEndpointDetail(
-        //    string horizontalPodAutoscalerName,
-        //    string horizontalPodAutoscalerNamespace)
-        //{
-        //    V1HorizontalPodAutoscaler horizontalPodAutoscaler = await this.PerformClientOperation((c) => c.ReadNamespacedHorizontalPodAutoscalerStatusAsync(horizontalPodAutoscalerName, horizontalPodAutoscalerNamespace));
-
-        //    return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
-        //}
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 

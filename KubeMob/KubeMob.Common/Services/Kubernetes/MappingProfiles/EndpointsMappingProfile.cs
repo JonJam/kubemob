@@ -9,52 +9,44 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public EndpointsMappingProfile()
         {
-            this.CreateMap<k8s.Models.V1Endpoints, ObjectSummary>()
-                .ConstructUsing((e) => new ObjectSummary(
-                    e.Metadata.Name,
-                    e.Metadata.NamespaceProperty));
+            this.CreateMap<k8s.Models.V1Endpoints, EndpointDetail>()
+                .ConstructUsing((e) =>
+                {
+                    IEnumerable<EndpointAddress> addresses = e.Subsets.SelectMany(s =>
+                    {
+                        IEnumerable<string> ports = s.Ports.Select(ep =>
+                        {
+                            List<string> parts = new List<string>();
 
-            //this.CreateMap<k8s.Models.V1HorizontalPodAutoscaler, HorizontalPodAutoscalerDetail>()
-            //    .ConstructUsing((h) =>
-            //    {
-            //        List<string> labels = h.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-            //                              new List<string>();
-            //        List<string> annotations = h.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-            //                                   new List<string>();
+                            if (!string.IsNullOrWhiteSpace(ep.Name))
+                            {
+                                parts.Add(ep.Name);
+                            }
+                            parts.Add(ep.Port.ToString());
+                            parts.Add(ep.Protocol);
 
-            //        string creationTime = h.Metadata.CreationTimestamp.HasValue
-            //            ? $"{h.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
-            //            : string.Empty;
+                            return string.Join(", ", parts);
+                        });
 
-            //        ObjectReference target = Mapper.Map<ObjectReference>(h.Spec.ScaleTargetRef);
+                        IEnumerable<EndpointAddress> readyAddresses =
+                            s.Addresses?.SelectMany(a =>
+                                ports.Select(p => new EndpointAddress(a.Hostname, p, a.NodeName, true))) ??
+                            new List<EndpointAddress>();
 
-            //        int minReplicas = h.Spec.MinReplicas.GetValueOrDefault(0);
+                        IEnumerable<EndpointAddress> notReadyAddresses = s.NotReadyAddresses?.SelectMany(a => ports.Select(p => new EndpointAddress(a.Ip, p, a.NodeName, false))) ??
+                                                                         new List<EndpointAddress>();
 
-            //        string targetCpuUtilization = h.Spec.TargetCPUUtilizationPercentage.HasValue
-            //            ? $"{ h.Spec.TargetCPUUtilizationPercentage.Value}%"
-            //            : string.Empty;
-            //        string currentCpuUtilization = h.Status.CurrentCPUUtilizationPercentage.HasValue
-            //            ? $"{h.Status.CurrentCPUUtilizationPercentage.Value}%"
-            //            : string.Empty;
-            //        string lastScaled = h.Status.LastScaleTime.HasValue
-            //            ? $"{h.Status.LastScaleTime.Value.ToUniversalTime():s} UTC"
-            //            : string.Empty;
+                        List<EndpointAddress> subsetAddresses = new List<EndpointAddress>();
 
-            //        return new HorizontalPodAutoscalerDetail(
-            //            h.Metadata.Name,
-            //            h.Metadata.NamespaceProperty,
-            //            labels.AsReadOnly(),
-            //            annotations.AsReadOnly(),
-            //            creationTime,
-            //            target,
-            //            minReplicas,
-            //            h.Spec.MaxReplicas,
-            //            targetCpuUtilization,
-            //            h.Status.CurrentReplicas,
-            //            h.Status.DesiredReplicas,
-            //            currentCpuUtilization,
-            //            lastScaled);
-            //    });
+                        subsetAddresses.AddRange(readyAddresses);
+                        subsetAddresses.AddRange(notReadyAddresses);
+
+                        return subsetAddresses;
+                    });
+
+                    return new EndpointDetail(
+                        addresses.ToList().AsReadOnly());
+                });
         }
     }
 }

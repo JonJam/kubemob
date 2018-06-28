@@ -783,6 +783,31 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
         }
 
+        public async Task<IList<ObjectSummary>> GetEndpointsSummaries(Filter filter)
+        {
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
+            string fieldSelector = filter?.FieldSelector;
+
+            V1EndpointsList endpointsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListEndpointsForAllNamespacesAsync(fieldSelector: fieldSelector)
+                : c.ListNamespacedEndpointsAsync(kubernetesNamespace, fieldSelector: fieldSelector));
+
+            return Mapper.Map<IList<ObjectSummary>>(endpointsList.Items)
+                .OrderBy(p => p.Name)
+                .ToList()
+                .AsReadOnly();
+        }
+
+        // TODO Create endpoint detail api
+        //public async Task<HorizontalPodAutoscalerDetail> GetEndpointDetail(
+        //    string horizontalPodAutoscalerName,
+        //    string horizontalPodAutoscalerNamespace)
+        //{
+        //    V1HorizontalPodAutoscaler horizontalPodAutoscaler = await this.PerformClientOperation((c) => c.ReadNamespacedHorizontalPodAutoscalerStatusAsync(horizontalPodAutoscalerName, horizontalPodAutoscalerNamespace));
+
+        //    return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
+        //}
+
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);
 
         protected abstract Task<T> PerformClientOperation<T>(Func<IKubernetes, Task<T>> clientOperation);

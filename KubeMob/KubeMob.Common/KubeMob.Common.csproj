@@ -39,6 +39,9 @@
     <Compile Update="Pages\ConditionDetailPage.xaml.cs">
       <DependentUpon>ConditionDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Endpoints\EndpointsPage.xaml.cs">
+      <DependentUpon>EndpointsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailPage.xaml.cs">
       <DependentUpon>HorizontalPodAutoscalerDetailPage.xaml</DependentUpon>
     </Compile>

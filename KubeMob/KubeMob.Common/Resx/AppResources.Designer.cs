@@ -808,6 +808,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Endpoints.
+        /// </summary>
+        internal static string Endpoints {
+            get {
+                return ResourceManager.GetString("Endpoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         internal static string EventDetailPage_Count {
@@ -1470,6 +1479,15 @@ namespace KubeMob.Common.Resx {
         internal static string StorageClasses {
             get {
                 return ResourceManager.GetString("StorageClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View related endpoints.
+        /// </summary>
+        internal static string ViewRelatedEndpoints {
+            get {
+                return ResourceManager.GetString("ViewRelatedEndpoints", resourceCulture);
             }
         }
         

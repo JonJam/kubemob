@@ -92,6 +92,10 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName);
 
+        Task NavigateToEndpointsPage(Filter filter = null);
+
+        //Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName);
+
         Task NavigateToSettingsPage();
 
         Task NavigateToResourceListingPage();

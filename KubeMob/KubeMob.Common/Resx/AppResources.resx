@@ -609,4 +609,10 @@
   <data name="ObjectNotFoundMessage" xml:space="preserve">
     <value>The selected object could not be found.</value>
   </data>
+  <data name="Endpoints" xml:space="preserve">
+    <value>Endpoints</value>
+  </data>
+  <data name="ViewRelatedEndpoints" xml:space="preserve">
+    <value>View related endpoints</value>
+  </data>
 </root>

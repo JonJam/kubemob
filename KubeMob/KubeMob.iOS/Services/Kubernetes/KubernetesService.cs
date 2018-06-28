@@ -69,8 +69,9 @@ namespace KubeMob.iOS.Services.Kubernetes
             }
             catch (HttpOperationException e) when (e.Response.StatusCode == HttpStatusCode.NotFound)
             {
-                // The Kubernetes cluster doesn't support the API we are using.
-                throw new ObjectTypeNotSupportedException(e.Message, e);
+                // For list operations, if this occurs then the Kubernetes cluster doesn't support the API we are using.
+                // For status operation, if this occurs then the object cannot be found.
+                throw new ObjectNotFoundException(e.Message, e);
             }
         }
     }

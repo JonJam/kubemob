@@ -16,14 +16,14 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string status,
             string volumeName,
             IReadOnlyList<string> accessModes,
-            string storageClassName,
+            string storageClass,
             IReadOnlyList<Capacity> capacity)
             : base(name, namespaceName, labels, annotations, creationTime)
         {
             this.Status = status;
             this.VolumeName = volumeName;
             this.AccessModes = accessModes;
-            this.StorageClassName = storageClassName;
+            this.StorageClass = storageClass;
             this.Capacity = capacity;
         }
 
@@ -43,7 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string StorageClassName
+        public string StorageClass
         {
             get;
         }

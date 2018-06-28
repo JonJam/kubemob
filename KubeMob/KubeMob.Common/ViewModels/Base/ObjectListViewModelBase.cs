@@ -101,7 +101,7 @@ namespace KubeMob.Common.ViewModels.Base
                     AppResources.AccountInvalid_Message,
                     AppResources.OkAlertText);
             }
-            catch (ObjectTypeNotSupportedException)
+            catch (ObjectNotFoundException)
             {
                 this.ObjectTypeNotSupported = true;
             }

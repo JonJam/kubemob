@@ -27,8 +27,9 @@
             Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_Volume}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
+        <Button
             Text="{Binding Detail.VolumeName}"
+            Command="{Binding NavigateToPersistentVolumeCommand}"
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
         <ContentView

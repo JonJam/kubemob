@@ -20,16 +20,25 @@ namespace KubeMob.Common.ViewModels.PersistentVolumeClaims
             : base(kubernetesService, popupService, navigationService)
         {
             this.NavigateToStorageClassCommand = new Command(async () => await this.OnNavigateToStorageClassCommandExecute());
+            this.NavigateToPersistentVolumeCommand = new Command(async () => await this.OnNavigateToPersistentVolumeCommandExecute());
         }
 
         public ICommand NavigateToStorageClassCommand
         {
             get;
         }
-        
+
+        public ICommand NavigateToPersistentVolumeCommand
+        {
+            get;
+        }
+
         protected override Task<PersistentVolumeClaimDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetPersistentVolumeClaimDetail(name, namespaceName);
-        
+
         private Task OnNavigateToStorageClassCommandExecute() => this.NavigationService.NavigateToStorageClassDetailPage(
             this.Detail.StorageClass);
+
+        private Task OnNavigateToPersistentVolumeCommandExecute() => this.NavigationService.NavigateToPersistentVolumeDetailPage(
+            this.Detail.VolumeName);
     }
 }

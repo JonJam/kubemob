@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -45,6 +46,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         });
                     });
 
+                    string selector = s.Spec.Selector != null
+                        ? string.Join(",", s.Spec.Selector.Select(kvp => $"{kvp.Key}={kvp.Value}"))
+                        : null;
+
                     return new ServiceDetail(
                         s.Metadata.Name,
                         s.Metadata.NamespaceProperty,
@@ -56,7 +61,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         s.Spec.SessionAffinity,
                         s.Spec.ClusterIP,
                         internalEndpoints.AsReadOnly(),
-                        externalEndpoints.AsReadOnly());
+                        externalEndpoints.AsReadOnly(),
+                        selector);
                 });
         }
     }

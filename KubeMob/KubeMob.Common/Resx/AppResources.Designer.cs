@@ -1087,6 +1087,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected object could not be found..
+        /// </summary>
+        internal static string ObjectNotFoundMessage {
+            get {
+                return ResourceManager.GetString("ObjectNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This cluster doesn&apos;t support this object type. This maybe due to the version of Kubernetes installed; this application uses the 1.10 API..
         /// </summary>
         internal static string ObjectTypeNotSupportedMessage {

@@ -27,8 +27,9 @@
             Text="{markupExtensions:Translate PersistentVolumeClaimDetailPage_Details_Volume}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
+        <Button
             Text="{Binding Detail.VolumeName}"
+            Command="{Binding NavigateToPersistentVolumeCommand}"
             IsVisible="{Binding Detail.VolumeName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
         <ContentView
@@ -37,8 +38,9 @@
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.StorageClassName}"/>
+        <Button
+            Text="{Binding Detail.StorageClass}"
+            Command="{Binding NavigateToStorageClassCommand}"/>
 
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>

@@ -22,6 +22,7 @@ namespace KubeMob.Common.ViewModels.Base
         private string name;
         private T detail;
         private IList<Event> events;
+        private bool objectNotFound;
 
         protected ObjectDetailViewModelBase(
             IKubernetesService kubernetesService,
@@ -62,6 +63,20 @@ namespace KubeMob.Common.ViewModels.Base
             private set => this.SetProperty(ref this.events, value);
         }
 
+        public bool DisplayInfo => !this.ObjectNotFound && !this.HasNoNetwork;
+
+        public bool ObjectNotFound
+        {
+            get => this.objectNotFound;
+            private set
+            {
+                if (this.SetProperty(ref this.objectNotFound, value))
+                {
+                    this.NotifyPropertyChanged(() => this.DisplayInfo);
+                }
+            }
+        }
+
         protected IKubernetesService KubernetesService
         {
             get;
@@ -94,6 +109,7 @@ namespace KubeMob.Common.ViewModels.Base
                         this.Detail = await this.GetObjectDetail(objectId.Name, objectId.NamespaceName);
                     }
 
+                    // TODO refactor to seperate page.
                     async Task SetEvents()
                     {
                         this.Events =
@@ -117,6 +133,10 @@ namespace KubeMob.Common.ViewModels.Base
                         AppResources.AccountInvalid_Title,
                         AppResources.AccountInvalid_Message,
                         AppResources.OkAlertText);
+                }
+                catch (ObjectNotFoundException)
+                {
+                    this.ObjectNotFound = true;
                 }
             });
         }

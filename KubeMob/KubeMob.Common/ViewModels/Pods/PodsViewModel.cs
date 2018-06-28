@@ -20,7 +20,19 @@ namespace KubeMob.Common.ViewModels.Pods
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) => this.KubernetesService.GetPodSummaries(filter);
+        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter)
+        {
+            // Handling special case where just want to show empty page e.g. for Kybernetes Service's
+            // related pods.
+            if (filter == null || !filter.IsEmpty)
+            {
+                return this.KubernetesService.GetPodSummaries(filter);
+            }
+            else
+            {
+                return Task.FromResult<IList<ObjectSummary>>(new List<ObjectSummary>());
+            }
+        }
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {

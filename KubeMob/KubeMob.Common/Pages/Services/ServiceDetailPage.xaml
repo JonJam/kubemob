@@ -85,6 +85,10 @@
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
+        <Button
+            Text="{markupExtensions:Translate ViewRelatedPods}"
+            Command="{Binding ViewRelatedPodsCommand}"/>
+
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>

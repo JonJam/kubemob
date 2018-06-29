@@ -20,9 +20,11 @@
                         IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}"
                         CompressedLayout.IsHeadless="true">
 
+                        <!--TODO Style-->
                         <views:NoNetworkIndicator
                             IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
+                        <!--TODO Style-->
                         <Label        
                             Text="{markupExtensions:Translate ObjectTypeNotSupportedMessage}"
                             IsVisible="{TemplateBinding BindingContext.ObjectTypeNotSupported}"/>
@@ -42,36 +44,42 @@
                                 SeparatorColor="Gray">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <!--<TextCell
-                                            Text="{Binding Name}"
-                                            Detail="{Binding Description}"></TextCell>-->
                                         <!--TODO Remove description from ObjectSummary-->
-                                        <!--TODO Logic for which icon to use-->
                                         <ViewCell>
                                             <!--TODO Padding/Margin-->
-                                            <!--TODO Icon -->
-                                            <!--TODO Text trim -->
+                                             <!--TODO Update icon colours--> 
                                             <Grid
                                                 BackgroundColor="White">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="3*"/>
                                                 </Grid.ColumnDefinitions>
+
+                                                <!--TODO Logic for which icon to use-->
+                                                <Image
+                                                    Grid.Column="0"
+                                                    Source="success.png"
+                                                    />
                                                 <Label
-                                                    Grid.Row="0"
+                                                    Grid.Column="1"
                                                     Text="{Binding Name}"
-                                                    VerticalOptions="Center"/>
+                                                    VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"/>
                                             </Grid>
                                         </ViewCell>
+                                        
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
 
+                            <!--TODO Style-->
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
                         </Grid>
                     </Grid>
 
+                    <!--TODO Style-->
                     <ActivityIndicator
                         IsRunning="{TemplateBinding BindingContext.IsBusy}"  
                         IsVisible="{TemplateBinding BindingContext.IsBusy}"

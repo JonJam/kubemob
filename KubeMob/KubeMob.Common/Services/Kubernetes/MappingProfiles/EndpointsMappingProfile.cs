@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
@@ -12,7 +13,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1Endpoints, EndpointDetail>()
                 .ConstructUsing((e) =>
                 {
-                    IEnumerable<EndpointAddress> addresses = e.Subsets.SelectMany(s =>
+                    IEnumerable<EndpointAddress> addresses = e.Subsets?.SelectMany(s =>
                     {
                         IEnumerable<string> ports = s.Ports.Select(ep =>
                         {
@@ -22,30 +23,31 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                             {
                                 parts.Add(ep.Name);
                             }
+
                             parts.Add(ep.Port.ToString());
                             parts.Add(ep.Protocol);
 
                             return string.Join(", ", parts);
                         });
 
+                        string combinedPorts = string.Join(Environment.NewLine, ports);
+
                         IEnumerable<EndpointAddress> readyAddresses =
-                            s.Addresses?.SelectMany(a =>
-                                ports.Select(p => new EndpointAddress(a.Hostname, p, a.NodeName, true))) ??
+                            s.Addresses?.Select(a => new EndpointAddress(a.Ip, combinedPorts, a.NodeName, true)) ??
+                            new List<EndpointAddress>();
+                        IEnumerable<EndpointAddress> notReadyAddresses =
+                            s.NotReadyAddresses?.Select(a => new EndpointAddress(a.Ip, combinedPorts, a.NodeName, false)) ??
                             new List<EndpointAddress>();
 
-                        IEnumerable<EndpointAddress> notReadyAddresses = s.NotReadyAddresses?.SelectMany(a => ports.Select(p => new EndpointAddress(a.Ip, p, a.NodeName, false))) ??
-                                                                         new List<EndpointAddress>();
-
                         List<EndpointAddress> subsetAddresses = new List<EndpointAddress>();
-
                         subsetAddresses.AddRange(readyAddresses);
                         subsetAddresses.AddRange(notReadyAddresses);
 
                         return subsetAddresses;
-                    });
+                    }) ?? new List<EndpointAddress>();
 
                     return new EndpointDetail(
-                        addresses.ToList());
+                        addresses.ToList().AsReadOnly());
                 });
         }
     }

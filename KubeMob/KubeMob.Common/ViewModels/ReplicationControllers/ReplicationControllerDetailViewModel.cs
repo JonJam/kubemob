@@ -61,7 +61,9 @@ namespace KubeMob.Common.ViewModels.ReplicationControllers
 
         private Task OnViewHorizontalPodAutoscalersCommandExecute()
         {
-            Filter filter = new Filter(other: this.Name);
+            Filter filter = new Filter(
+                this.NamespaceName,
+                other: this.Name);
 
             return this.NavigationService.NavigateToHorizontalPodAutoscalersPage(filter);
         }

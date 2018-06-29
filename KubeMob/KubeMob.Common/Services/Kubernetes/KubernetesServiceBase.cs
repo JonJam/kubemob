@@ -459,7 +459,7 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetReplicaSetSummaries(
             Filter filter)
         {
-            string kubernetesNamespace = this.GetSelectedNamespaceName();
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
 
             V1ReplicaSetList replicaSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListReplicaSetForAllNamespacesAsync()
@@ -470,7 +470,7 @@ namespace KubeMob.Common.Services.Kubernetes
             // Related to Deployments.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+                items = items.Where(r => r.Metadata.OwnerReferences.Any(o => o.Name == filter.Other) && r.Spec.Replicas.GetValueOrDefault(0) != 0);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -640,7 +640,7 @@ namespace KubeMob.Common.Services.Kubernetes
         public async Task<IList<ObjectSummary>> GetJobSummaries(
             Filter filter)
         {
-            string kubernetesNamespace = this.GetSelectedNamespaceName();
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
 
             V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListJobForAllNamespacesAsync()
@@ -754,7 +754,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter)
         {
-            string kubernetesNamespace = this.GetSelectedNamespaceName();
+            string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
 
             V1HorizontalPodAutoscalerList horizontalPodAutoscalerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListHorizontalPodAutoscalerForAllNamespacesAsync()

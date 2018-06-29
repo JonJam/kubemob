@@ -37,14 +37,18 @@ namespace KubeMob.Common.ViewModels.Deployments
 
         private Task OnViewRelatedReplicaSetsCommandExecute()
         {
-            Filter filter = new Filter(other: this.Name);
+            Filter filter = new Filter(
+                this.NamespaceName,
+                other: this.Name);
 
             return this.NavigationService.NavigateToReplicaSetsPage(filter);
         }
 
         private Task OnViewHorizontalPodAutoscalersCommandExecute()
         {
-            Filter filter = new Filter(other: this.Name);
+            Filter filter = new Filter(
+                this.NamespaceName,
+                other: this.Name);
 
             return this.NavigationService.NavigateToHorizontalPodAutoscalersPage(filter);
         }

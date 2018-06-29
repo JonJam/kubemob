@@ -8,7 +8,7 @@
                           Title="{markupExtensions:Translate CronJobs}"
                           common:ViewModelLocator.AutoWireViewModel="true"
                           ControlTemplate="{StaticResource ObjectListTemplate}"
-                          BackgroundColor="#eee">
+                          BackgroundColor="LightGray">
 
     <!--TODO Do need this?-->
     <!--<ContentPage.Padding>

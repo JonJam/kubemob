@@ -41,28 +41,32 @@
                                 SeparatorVisibility="Default"
                                 HasUnevenRows="False"
                                 BackgroundColor="Transparent"
-                                SeparatorColor="Gray">
+                                SeparatorColor="DarkGray">
+
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
                                         <!--TODO Remove description from ObjectSummary-->
                                         <ViewCell>
                                             <!--TODO Padding/Margin-->
-                                             <!--TODO Update icon colours--> 
+                                             <!--TODO Update icon colours
+                                            https://github.com/luberda-molinet/FFImageLoading--> 
                                             <Grid
                                                 BackgroundColor="White">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="3*"/>
+                                                    <ColumnDefinition Width="4*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <!--TODO Logic for which icon to use-->
                                                 <Image
                                                     Grid.Column="0"
                                                     Source="success.png"
-                                                    />
+                                                    HeightRequest="25"
+                                                    VerticalOptions="Center"/>
                                                 <Label
                                                     Grid.Column="1"
                                                     Text="{Binding Name}"
+                                                    Style="{DynamicResource SubtitleStyle}"
                                                     VerticalOptions="Center"
                                                     LineBreakMode="TailTruncation"/>
                                             </Grid>

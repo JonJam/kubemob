@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.Endpoints.EndpointDetailPage"
+                          Title="{Binding Name}"
+                          common:ViewModelLocator.AutoWireViewModel="true">
+
+    <Grid
+        CompressedLayout.IsHeadless="true">
+        <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            CompressedLayout.IsHeadless="true">
+
+            <views:NoNetworkIndicator
+                IsVisible="{Binding HasNoNetwork}"/>
+
+            <Label        
+                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
+                IsVisible="{Binding ObjectNotFound}"/>
+
+            <Grid
+                IsVisible="{Binding ObjectNotFound, Converter={StaticResource InverseBoolConverter}}"
+                CompressedLayout.IsHeadless="true">
+
+                <views:ExtendedListView
+                    ItemsSource="{Binding Detail.Addresses}"
+                    IsVisible="{Binding Detail.Addresses, Converter={StaticResource NotEmptyToBoolConverter}}"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="True">
+                    <views:ExtendedListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout
+                                    CompressedLayout.IsHeadless="true">
+                                    <Label        
+                                        Text="{Binding Host}"/>
+                                    <Label        
+                                        Text="{Binding Ports}"/>
+                                    <Label        
+                                        Text="{Binding Node}"/>
+                                    <Label        
+                                        Text="{Binding IsReady}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </views:ExtendedListView.ItemTemplate>
+                </views:ExtendedListView>
+
+                <Label
+                    Text="{markupExtensions:Translate EmptyMessage}"
+                    IsVisible="{Binding Detail.Addresses, Converter={StaticResource NotEmptyToBoolConverter}, ConverterParameter=true}"/>
+            </Grid>
+        </Grid>
+
+        <ActivityIndicator
+                    IsRunning="{Binding IsBusy}"  
+                    IsVisible="{Binding IsBusy}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"/>
+    </Grid>
+</base:ExtendedContentPage>

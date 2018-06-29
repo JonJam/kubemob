@@ -524,8 +524,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1Service serviceDetail = await this.PerformClientOperation((c) => c.ReadNamespacedServiceStatusAsync(serviceName, serviceNamespace));
 
-            // TODO Endpoints ??
-            // TODO Pods ??
             return Mapper.Map<ServiceDetail>(serviceDetail);
         }
 
@@ -689,9 +687,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1ReplicationController replicationControllerDetail = await this.PerformClientOperation((c) => c.ReadNamespacedReplicationControllerStatusAsync(replicationControllerName, replicationControllerNamespace));
 
-            // TODO Pods information ??
-            // TODO Services information ??
-            // TODO Horizontal pod autoscaler information ??
             return Mapper.Map<ReplicationControllerDetail>(replicationControllerDetail);
         }
 
@@ -714,7 +709,6 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             V1StatefulSet statefulSetDetail = await this.PerformClientOperation((c) => c.ReadNamespacedStatefulSetStatusAsync(statefulSetName, statefulSetNamespace));
 
-            // TODO Pods ??
             return Mapper.Map<StatefulSetDetail>(statefulSetDetail);
         }
 
@@ -787,6 +781,15 @@ namespace KubeMob.Common.Services.Kubernetes
             V1HorizontalPodAutoscaler horizontalPodAutoscaler = await this.PerformClientOperation((c) => c.ReadNamespacedHorizontalPodAutoscalerStatusAsync(horizontalPodAutoscalerName, horizontalPodAutoscalerNamespace));
 
             return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
+        }
+
+        public async Task<EndpointDetail> GetEndpointDetail(
+            string endpointName,
+            string endpointNamespace)
+        {
+            V1EndpointsList endpointsList = await this.PerformClientOperation((c) => c.ListNamespacedEndpointsAsync(endpointNamespace, fieldSelector: $"metadata.name={endpointName}"));
+
+            return Mapper.Map<EndpointDetail>(endpointsList.Items.FirstOrDefault());
         }
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);

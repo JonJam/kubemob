@@ -223,5 +223,9 @@ namespace KubeMob.Common.Services.Kubernetes
         Task<HorizontalPodAutoscalerDetail> GetHorizontalPodAutoscalerDetail(
             string horizontalPodAutoscalerName,
             string horizontalPodAutoscalerNamespace);
+
+        Task<EndpointDetail> GetEndpointDetail(
+            string endpointName,
+            string endpointNamespace);
     }
 }

@@ -86,6 +86,10 @@
         </views:ItemsControl>
 
         <Button
+            Text="{markupExtensions:Translate ViewRelatedEndpoints}"
+            Command="{Binding ViewRelatedEndpointsCommand}"/>
+
+        <Button
             Text="{markupExtensions:Translate ViewRelatedPods}"
             Command="{Binding ViewRelatedPodsCommand}"/>
 

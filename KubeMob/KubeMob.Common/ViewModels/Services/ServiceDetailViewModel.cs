@@ -18,7 +18,15 @@ namespace KubeMob.Common.ViewModels.Services
             IPopupService popupService,
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
-            => this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+        {
+            this.ViewRelatedEndpointsCommand = new Command(async () => await this.OnViewRelatedEndpointsCommandExecute());
+            this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+        }
+
+        public ICommand ViewRelatedEndpointsCommand
+        {
+            get;
+        }
 
         public ICommand ViewRelatedPodsCommand
         {
@@ -26,6 +34,8 @@ namespace KubeMob.Common.ViewModels.Services
         }
 
         protected override Task<ServiceDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetServiceDetail(name, namespaceName);
+
+        private Task OnViewRelatedEndpointsCommandExecute() => this.NavigationService.NavigateToEndpointDetailPage(this.Name, this.NamespaceName);
 
         private Task OnViewRelatedPodsCommandExecute()
         {

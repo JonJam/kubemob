@@ -6,6 +6,7 @@ using KubeMob.Common.Pages.ConfigMaps;
 using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
+using KubeMob.Common.Pages.Endpoints;
 using KubeMob.Common.Pages.HorizontalPodAutoscalers;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
@@ -162,6 +163,8 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToHorizontalPodAutoscalersPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalersPage), filter);
 
         public Task NavigateToHorizontalPodAutoscalerDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalerDetailPage), new ObjectId(name, namespaceName));
+
+        public Task NavigateToEndpointDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(EndpointDetailPage), new ObjectId(name, namespaceName));
 
         public Task RemoveLastFromBackStack()
         {

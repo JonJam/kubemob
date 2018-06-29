@@ -31,17 +31,37 @@
                             IsVisible="{TemplateBinding BindingContext.DisplayObjectSummariesInfo}"
                             CompressedLayout.IsHeadless="true">
 
+                            <!--TODO Create style for list view i.e. color-->
                             <views:ExtendedListView
                                 ItemsSource="{TemplateBinding BindingContext.ObjectSummaries}"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
                                 ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
-                                SeparatorVisibility="None"
-                                HasUnevenRows="False">
+                                SeparatorVisibility="Default"
+                                HasUnevenRows="False"
+                                BackgroundColor="Transparent"
+                                SeparatorColor="Gray">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <TextCell 
+                                        <!--<TextCell
                                             Text="{Binding Name}"
-                                            Detail="{Binding Description}"/>
+                                            Detail="{Binding Description}"></TextCell>-->
+                                        <!--TODO Remove description from ObjectSummary-->
+                                        <!--TODO Logic for which icon to use-->
+                                        <ViewCell>
+                                            <!--TODO Padding/Margin-->
+                                            <!--TODO Icon -->
+                                            <!--TODO Text trim -->
+                                            <Grid
+                                                BackgroundColor="White">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label
+                                                    Grid.Row="0"
+                                                    Text="{Binding Name}"
+                                                    VerticalOptions="Center"/>
+                                            </Grid>
+                                        </ViewCell>
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>

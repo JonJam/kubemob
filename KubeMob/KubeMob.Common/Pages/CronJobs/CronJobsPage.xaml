@@ -7,6 +7,15 @@
                           x:Class="KubeMob.Common.Pages.CronJobs.CronJobsPage"
                           Title="{markupExtensions:Translate CronJobs}"
                           common:ViewModelLocator.AutoWireViewModel="true"
-                          ControlTemplate="{StaticResource ObjectListTemplate}">
+                          ControlTemplate="{StaticResource ObjectListTemplate}"
+                          BackgroundColor="#eee">
+
+    <!--TODO Do need this?-->
+    <!--<ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="20, 40, 20, 20" />
+            <On Platform="Android" Value="20" />
+        </OnPlatform>
+    </ContentPage.Padding>-->
 
 </base:ExtendedContentPage>

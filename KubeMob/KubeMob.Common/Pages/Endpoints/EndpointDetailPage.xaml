@@ -20,7 +20,26 @@
                     Text="{markupExtensions:Translate ObjectNotFoundMessage}"
                     IsVisible="{Binding ObjectNotFound}"/>
 
-                <!--TODO populate-->
+                <!--IsVisible="{Binding ObjectNotFound, Converter={StaticResource InverseBoolConverter}}"-->
+                <views:ExtendedListView
+                    ItemsSource="{Binding Detail.Addresses}"
+                    SeparatorVisibility="None"
+                    HasUnevenRows="False">
+                    <views:ExtendedListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label        
+                                    Text="test"/>
+                                <!--<Label        
+                                    Text="{Binding Ports}"/>
+                                <Label        
+                                    Text="{Binding Node}"/>
+                                <Label        
+                                    Text="{Binding IsReady}"/>-->
+                            </StackLayout>
+                        </DataTemplate>
+                    </views:ExtendedListView.ItemTemplate>
+                </views:ExtendedListView>
             </Grid>
 
             <ActivityIndicator

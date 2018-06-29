@@ -45,7 +45,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     });
 
                     return new EndpointDetail(
-                        addresses.ToList().AsReadOnly());
+                        addresses.ToList());
                 });
         }
     }

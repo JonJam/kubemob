@@ -85,8 +85,7 @@ namespace KubeMob.Common.ViewModels.Base
 
             try
             {
-                //this.ObjectSummaries = await this.GetObjectSummaries(filter);
-                throw new ObjectNotFoundException();
+                this.ObjectSummaries = await this.GetObjectSummaries(filter);
             }
             catch (ClusterNotFoundException)
             {

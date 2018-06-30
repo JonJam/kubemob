@@ -15,8 +15,8 @@
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
             CompressedLayout.IsHeadless="true">
 
-            <ContentView
-                ControlTemplate="{StaticResource NoNetworkTemplate}"
+            <views:ErrorMessage
+                Message="{markupExtensions:Translate NoInternetErrorMessage}"
                 IsVisible="{Binding HasNoNetwork}"/>
 
             <Label        

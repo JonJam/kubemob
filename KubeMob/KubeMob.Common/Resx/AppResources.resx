@@ -274,7 +274,7 @@
     <value>Not set.</value>
   </data>
   <data name="ObjectTypeNotSupportedMessage" xml:space="preserve">
-    <value>This cluster doesn't support this object type. This maybe due to the version of Kubernetes installed; this application uses the 1.10 API.</value>
+    <value>This object type isn't supported (Kubernetes API version: 1.10)</value>
   </data>
   <data name="OkAlertText" xml:space="preserve">
     <value>Ok</value>

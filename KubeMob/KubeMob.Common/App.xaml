@@ -15,25 +15,6 @@
                 <resourceDictionaries:Converters />
             </ResourceDictionary.MergedDictionaries>
 
-            <ControlTemplate x:Key="NoNetworkTemplate">
-                <Grid
-                    CompressedLayout.IsHeadless="true"
-                    Padding="20,0,20,0">
-                    <StackLayout
-                        CompressedLayout.IsHeadless="true"
-                        VerticalOptions="Center">
-                        <ffImageLoading:CachedImage
-                            Source="error.png"
-                            HorizontalOptions="Center"/>
-                        <Label        
-                            Text="{markupExtensions:Translate NoInternetErrorMessage}"
-                            Style="{DynamicResource SubtitleStyle}"
-                            TextColor="{StaticResource MessageColor}"
-                            HorizontalTextAlignment="Center"/>
-                    </StackLayout>
-                </Grid>
-            </ControlTemplate>
-
             <ControlTemplate x:Key="ObjectListTemplate">
                 <Grid
                     CompressedLayout.IsHeadless="true">
@@ -41,13 +22,12 @@
                         IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}"
                         CompressedLayout.IsHeadless="true">
 
-                        <ContentView
-                            ControlTemplate="{StaticResource NoNetworkTemplate}"
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate NoInternetErrorMessage}"
                             IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
-                        <!--TODO Style-->
-                        <Label        
-                            Text="{markupExtensions:Translate ObjectTypeNotSupportedMessage}"
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate ObjectTypeNotSupportedMessage}"
                             IsVisible="{TemplateBinding BindingContext.ObjectTypeNotSupported}"/>
 
                         <Grid
@@ -139,8 +119,8 @@
                         <Grid
                             IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
-                            <ContentView
-                                ControlTemplate="{StaticResource NoNetworkTemplate}"
+                            <views:ErrorMessage
+                                Message="{markupExtensions:Translate NoInternetErrorMessage}"
                                 IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
                             <Label        

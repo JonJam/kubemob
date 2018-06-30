@@ -11,11 +11,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public ServiceMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1Service, ObjectSummary>()
                 .ConstructUsing((s) => new ObjectSummary(
                     s.Metadata.Name,
-                    s.Metadata.NamespaceProperty,
-                    s.Spec.ClusterIP));
+                    s.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1Service, ServiceDetail>()
                 .ConstructUsing((s) =>

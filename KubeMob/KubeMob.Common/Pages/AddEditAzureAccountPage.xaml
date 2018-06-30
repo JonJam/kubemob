@@ -122,8 +122,6 @@
 
         <ActivityIndicator
             IsRunning="{Binding IsBusy}"  
-            IsVisible="{Binding IsBusy}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+            IsVisible="{Binding IsBusy}"/>
     </Grid>
 </base:ExtendedContentPage>

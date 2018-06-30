@@ -35,7 +35,6 @@
                             IsVisible="{TemplateBinding BindingContext.DisplayObjectSummariesInfo}"
                             CompressedLayout.IsHeadless="true">
 
-                            <!--TODO Create style for list view i.e. color-->
                             <views:ExtendedListView
                                 ItemsSource="{TemplateBinding BindingContext.ObjectSummaries}"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
@@ -44,10 +43,8 @@
                                 HasUnevenRows="False"
                                 BackgroundColor="Transparent"
                                 SeparatorColor="DarkGray">
-
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <!--TODO Remove description from ObjectSummary-->
                                         <ViewCell>
                                             <!--TODO Padding/Margin-->
                                             <Grid
@@ -57,18 +54,41 @@
                                                     <ColumnDefinition Width="4*"/>
                                                 </Grid.ColumnDefinitions>
 
-                                                <!--TODO Logic for which icon to use-->
-                                                <ffImageLoading:CachedImage
+                                                <Grid
                                                     Grid.Column="0"
-                                                    Source="success.png"
-                                                    VerticalOptions="Center"
-                                                    HeightRequest="25">
-                                                    <ffImageLoading:CachedImage.Transformations>
-                                                        <transformations:TintTransformation
-                                                            HexColor="#008000"
-                                                            EnableSolidColor="true"/>
-                                                    </ffImageLoading:CachedImage.Transformations>
-                                                </ffImageLoading:CachedImage>
+                                                    IsVisible="{Binding IsStatusNone, Converter={StaticResource InverseBoolConverter}}">
+
+<!--TODO common style-->
+                                                    <ffImageLoading:CachedImage
+                                                        Source="success.png"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="25"
+                                                        IsVisible="{Binding IsStatusSuccess}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="#008000"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="pending.png"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="25"
+                                                        IsVisible="{Binding IsStatusPending}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="#757575"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="error.png"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="25"
+                                                        IsVisible="{Binding IsStatusError}"/>
+                                                </Grid>
 
                                                 <Label
                                                     Grid.Column="1"
@@ -90,12 +110,9 @@
                         </Grid>
                     </Grid>
 
-                    <!--TODO Style-->
                     <ActivityIndicator
                         IsRunning="{TemplateBinding BindingContext.IsBusy}"  
-                        IsVisible="{TemplateBinding BindingContext.IsBusy}"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"/>
+                        IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
                 </Grid>
             </ControlTemplate>
 
@@ -118,9 +135,7 @@
 
                         <ActivityIndicator
                             IsRunning="{TemplateBinding BindingContext.IsBusy}"  
-                            IsVisible="{TemplateBinding BindingContext.IsBusy}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"/>
+                            IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
                     </Grid>
                 </ScrollView>
             </ControlTemplate>

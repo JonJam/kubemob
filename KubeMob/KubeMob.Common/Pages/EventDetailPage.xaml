@@ -53,9 +53,7 @@
             </StackLayout>
             <ActivityIndicator
                 IsRunning="{Binding Detail, Converter={StaticResource NotEmptyToBoolConverter}, ConverterParameter=true}"  
-                IsVisible="{Binding Detail, Converter={StaticResource NotEmptyToBoolConverter}, ConverterParameter=true}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"/>
+                IsVisible="{Binding Detail, Converter={StaticResource NotEmptyToBoolConverter}, ConverterParameter=true}"/>
         </Grid>
     </ScrollView>
 

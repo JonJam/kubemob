@@ -9,11 +9,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public PersistentVolumeMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1PersistentVolume, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,
-                    r.Metadata.NamespaceProperty,
-                    r.Status.Phase));
+                    r.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1PersistentVolume, PersistentVolumeDetail>()
                 .ConstructUsing((p) =>

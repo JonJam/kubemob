@@ -8,18 +8,18 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         public ObjectSummary(
             string name,
             string namespaceName)
-            : this(name, namespaceName, string.Empty)
+            : this(name, namespaceName, Status.None)
         {
         }
 
         public ObjectSummary(
             string name,
             string namespaceName,
-            string description)
+            Status status)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
-            this.Description = description;
+            this.Status = status;
         }
 
         public string Name
@@ -32,9 +32,17 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public string Description
+        public Status Status
         {
             get;
         }
+
+        public bool IsStatusSuccess => this.Status == Status.Success;
+
+        public bool IsStatusError => this.Status == Status.Error;
+
+        public bool IsStatusPending => this.Status == Status.Pending;
+
+        public bool IsStatusNone => this.Status == Status.None;
     }
 }

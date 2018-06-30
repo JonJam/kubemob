@@ -9,12 +9,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     public class JobMappingProfile : Profile
     {
         public JobMappingProfile()
-        {
+        {//TODO status
             this.CreateMap<k8s.Models.V1Job, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,
-                    r.Metadata.NamespaceProperty,
-                    $"{r.Status.Active.GetValueOrDefault(0)}/{r.Spec.Parallelism.Value}"));
+                    r.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1Job, JobDetail>()
                 .ConstructUsing((j) =>

@@ -11,11 +11,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public ReplicationControllerMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1ReplicationController, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,
-                    r.Metadata.NamespaceProperty,
-                    $"{r.Status.AvailableReplicas.GetValueOrDefault(0)}/{r.Spec.Replicas}"));
+                    r.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1ReplicationController, ReplicationControllerDetail>()
                 .ConstructUsing((r) =>

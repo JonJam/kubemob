@@ -11,11 +11,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public DaemonSetMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
                 .ConstructUsing((d) => new ObjectSummary(
                     d.Metadata.Name,
-                    d.Metadata.NamespaceProperty,
-                    $"{d.Status.CurrentNumberScheduled}/{d.Status.DesiredNumberScheduled}"));
+                    d.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1DaemonSet, DaemonSetDetail>()
                 .ConstructUsing((d) =>

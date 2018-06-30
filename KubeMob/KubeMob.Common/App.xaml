@@ -4,6 +4,8 @@
              xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
              xmlns:resourceDictionaries="clr-namespace:KubeMob.Common.ResourceDictionaries"
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+             xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="KubeMob.Common.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -20,11 +22,12 @@
                         IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}"
                         CompressedLayout.IsHeadless="true">
 
-                        <views:NoNetworkIndicator
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate NoInternetErrorMessage}"
                             IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
-                        <Label        
-                            Text="{markupExtensions:Translate ObjectTypeNotSupportedMessage}"
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate ObjectTypeNotSupportedMessage}"
                             IsVisible="{TemplateBinding BindingContext.ObjectTypeNotSupported}"/>
 
                         <Grid
@@ -35,28 +38,78 @@
                                 ItemsSource="{TemplateBinding BindingContext.ObjectSummaries}"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
                                 ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
-                                SeparatorVisibility="None"
-                                HasUnevenRows="False">
+                                SeparatorVisibility="Default"
+                                HasUnevenRows="False"
+                                BackgroundColor="Transparent"
+                                SeparatorColor="DarkGray">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <TextCell 
-                                            Text="{Binding Name}"
-                                            Detail="{Binding Description}"/>
+                                        <ViewCell>
+                                            <!--TODO Padding/Margin-->
+                                            <Grid
+                                                BackgroundColor="White">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="4*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid
+                                                    Grid.Column="0"
+                                                    IsVisible="{Binding IsStatusNone, Converter={StaticResource InverseBoolConverter}}">
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="success.png"
+                                                        Style="{StaticResource StatusIconImageStyle}"
+                                                        IsVisible="{Binding IsStatusSuccess}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="#008000"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="pending.png"
+                                                        Style="{StaticResource StatusIconImageStyle}"
+                                                        IsVisible="{Binding IsStatusPending}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="#757575"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="error.png"
+                                                        Style="{StaticResource StatusIconImageStyle}"
+                                                        IsVisible="{Binding IsStatusError}"/>
+                                                </Grid>
+
+                                                <Label
+                                                    Grid.Column="1"
+                                                    Text="{Binding Name}"
+                                                    Style="{DynamicResource SubtitleStyle}"
+                                                    VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"/>
+                                            </Grid>
+                                        </ViewCell>
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
 
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
+                                Style="{DynamicResource SubtitleStyle}"
+                                TextColor="{StaticResource MessageColor}"
+                                VerticalOptions="Center"
+                                HorizontalTextAlignment="Center"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
                         </Grid>
                     </Grid>
 
                     <ActivityIndicator
                         IsRunning="{TemplateBinding BindingContext.IsBusy}"  
-                        IsVisible="{TemplateBinding BindingContext.IsBusy}"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center"/>
+                        IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
                 </Grid>
             </ControlTemplate>
 
@@ -66,7 +119,8 @@
                         <Grid
                             IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
-                            <views:NoNetworkIndicator
+                            <views:ErrorMessage
+                                Message="{markupExtensions:Translate NoInternetErrorMessage}"
                                 IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
                             <Label        
@@ -79,9 +133,7 @@
 
                         <ActivityIndicator
                             IsRunning="{TemplateBinding BindingContext.IsBusy}"  
-                            IsVisible="{TemplateBinding BindingContext.IsBusy}"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"/>
+                            IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
                     </Grid>
                 </ScrollView>
             </ControlTemplate>

@@ -15,7 +15,8 @@
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
             CompressedLayout.IsHeadless="true">
 
-            <views:NoNetworkIndicator
+            <views:ErrorMessage
+                Message="{markupExtensions:Translate NoInternetErrorMessage}"
                 IsVisible="{Binding HasNoNetwork}"/>
 
             <Label        
@@ -58,8 +59,6 @@
 
         <ActivityIndicator
                     IsRunning="{Binding IsBusy}"  
-                    IsVisible="{Binding IsBusy}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"/>
+                    IsVisible="{Binding IsBusy}"/>
     </Grid>
 </base:ExtendedContentPage>

@@ -9,6 +9,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public NodeMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1Node, ObjectSummary>()
                 .ConstructUsing((n) => new ObjectSummary(
                     n.Metadata.Name,

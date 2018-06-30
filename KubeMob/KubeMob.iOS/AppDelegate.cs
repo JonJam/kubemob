@@ -19,6 +19,9 @@ namespace KubeMob.iOS
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
+            // Initializing FFImageLoading: https://github.com/luberda-molinet/FFImageLoading/wiki/Xamarin.Forms-API
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+
             global::Xamarin.Forms.Forms.Init();
             this.LoadApplication(new App());
 

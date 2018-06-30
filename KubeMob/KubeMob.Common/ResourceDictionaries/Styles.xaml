@@ -2,11 +2,30 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:resourceDictionaries="clr-namespace:KubeMob.Common.ResourceDictionaries;assembly=KubeMob.Common"
+                    xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                     x:Class="KubeMob.Common.ResourceDictionaries.Styles">
 
     <ResourceDictionary.MergedDictionaries>
         <resourceDictionaries:Colors />
     </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="base:ExtendedContentPage" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="LightGray" />
+    </Style>
+
+    <Style TargetType="ActivityIndicator">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Color" Value="{StaticResource KubernetesBlueColor}" />
+    </Style>
+
+    <Style x:Key="StatusIconImageStyle" TargetType="ffImageLoading:CachedImage">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HeightRequest" Value="25" />
+    </Style>
+
+
 
     <Style x:Key="ValidationErrorLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />

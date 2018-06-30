@@ -268,13 +268,13 @@
     <value>Jobs</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
-    <value>We are having connectivity issues doing that right now. Please try again.</value>
+    <value>There seems to be connectivity issues right now</value>
   </data>
   <data name="ObjectDetail_NotSet" xml:space="preserve">
     <value>Not set.</value>
   </data>
   <data name="ObjectTypeNotSupportedMessage" xml:space="preserve">
-    <value>This cluster doesn't support this object type. This maybe due to the version of Kubernetes installed; this application uses the 1.10 API.</value>
+    <value>This object type isn't supported (Kubernetes API version: 1.10)</value>
   </data>
   <data name="OkAlertText" xml:space="preserve">
     <value>Ok</value>
@@ -448,7 +448,7 @@
     <value>Resource name</value>
   </data>
   <data name="EmptyMessage" xml:space="preserve">
-    <value>There is nothing to display here.</value>
+    <value>There is nothing to display here</value>
   </data>
   <data name="EventDetailPage_Count" xml:space="preserve">
     <value>Count</value>

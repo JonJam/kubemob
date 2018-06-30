@@ -35,6 +35,9 @@ namespace KubeMob.Droid
             // Initializing Xamarin.Essentials.
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
+            // Initializing FFImageLoading: https://github.com/luberda-molinet/FFImageLoading/wiki/Xamarin.Forms-API
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             this.LoadApplication(new App());
         }

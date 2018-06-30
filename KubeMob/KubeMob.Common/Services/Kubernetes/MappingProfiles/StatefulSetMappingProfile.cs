@@ -10,11 +10,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public StatefulSetMappingProfile()
         {
+            // TODO status
             this.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,
-                    r.Metadata.NamespaceProperty,
-                    $"{r.Status.CurrentReplicas.GetValueOrDefault(0)}/{r.Status.Replicas}"));
+                    r.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1StatefulSet, StatefulSetDetail>()
                 .ConstructUsing((s) =>

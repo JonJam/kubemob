@@ -14,7 +14,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 .ConstructUsing((c) => new ObjectSummary(
                     c.Metadata.Name,
                     c.Metadata.NamespaceProperty,
-                    c.Spec.Schedule));
+                    c.Spec.Suspend.GetValueOrDefault(false) ? Status.Error : Status.Success));
 
             this.CreateMap<k8s.Models.V1beta1CronJob, CronJobDetail>()
                 .ConstructUsing((c) =>

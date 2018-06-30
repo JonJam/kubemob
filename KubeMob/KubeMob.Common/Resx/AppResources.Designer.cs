@@ -799,7 +799,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is nothing to display here..
+        ///   Looks up a localized string similar to There is nothing to display here.
         /// </summary>
         internal static string EmptyMessage {
             get {
@@ -1078,7 +1078,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are having connectivity issues doing that right now. Please try again..
+        ///   Looks up a localized string similar to There seems to be connectivity issues right now.
         /// </summary>
         internal static string NoInternetErrorMessage {
             get {
@@ -1105,7 +1105,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This cluster doesn&apos;t support this object type. This maybe due to the version of Kubernetes installed; this application uses the 1.10 API..
+        ///   Looks up a localized string similar to This object type isn&apos;t supported (Kubernetes API version: 1.10).
         /// </summary>
         internal static string ObjectTypeNotSupportedMessage {
             get {

@@ -9,11 +9,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public PodMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1Pod, ObjectSummary>()
                  .ConstructUsing((p) => new ObjectSummary(
                      p.Metadata.Name,
-                     p.Metadata.NamespaceProperty,
-                     p.Status.Phase));
+                     p.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1EnvVar, EnvironmentVariable>()
                 .ConstructUsing((e) => new EnvironmentVariable(

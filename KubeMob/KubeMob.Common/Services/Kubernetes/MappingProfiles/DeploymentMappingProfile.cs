@@ -10,11 +10,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public DeploymentMappingProfile()
         {
+            //TODO status
             this.CreateMap<k8s.Models.V1Deployment, ObjectSummary>()
                    .ConstructUsing((d) => new ObjectSummary(
                        d.Metadata.Name,
-                       d.Metadata.NamespaceProperty,
-                       $"{d.Status.AvailableReplicas.GetValueOrDefault(0)}/{d.Status.Replicas.GetValueOrDefault(0)}"));
+                       d.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1Deployment, DeploymentDetail>()
                 .ConstructUsing((d) =>

@@ -799,7 +799,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is nothing to display here..
+        ///   Looks up a localized string similar to There is nothing to display here.
         /// </summary>
         internal static string EmptyMessage {
             get {
@@ -1078,7 +1078,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are having connectivity issues doing that right now. Please try again..
+        ///   Looks up a localized string similar to There seems to be connectivity issues right now.
         /// </summary>
         internal static string NoInternetErrorMessage {
             get {

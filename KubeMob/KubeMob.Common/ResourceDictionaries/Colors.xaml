@@ -5,4 +5,5 @@
 
     <Color x:Key="ErrorColor">Red</Color>
     <Color x:Key="KubernetesBlueColor">#326de6</Color>
+    <Color x:Key="MessageColor">#888</Color>
 </ResourceDictionary>

@@ -15,6 +15,25 @@
                 <resourceDictionaries:Converters />
             </ResourceDictionary.MergedDictionaries>
 
+            <ControlTemplate x:Key="NoNetworkTemplate">
+                <Grid
+                    CompressedLayout.IsHeadless="true"
+                    Padding="20,0,20,0">
+                    <StackLayout
+                        CompressedLayout.IsHeadless="true"
+                        VerticalOptions="Center">
+                        <ffImageLoading:CachedImage
+                            Source="error.png"
+                            HorizontalOptions="Center"/>
+                        <Label        
+                            Text="{markupExtensions:Translate NoInternetErrorMessage}"
+                            Style="{DynamicResource SubtitleStyle}"
+                            TextColor="{StaticResource MessageColor}"
+                            HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </Grid>
+            </ControlTemplate>
+
             <ControlTemplate x:Key="ObjectListTemplate">
                 <Grid
                     CompressedLayout.IsHeadless="true">
@@ -22,8 +41,8 @@
                         IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}"
                         CompressedLayout.IsHeadless="true">
 
-                        <!--TODO Style-->
-                        <views:NoNetworkIndicator
+                        <ContentView
+                            ControlTemplate="{StaticResource NoNetworkTemplate}"
                             IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
                         <!--TODO Style-->
@@ -58,11 +77,9 @@
                                                     Grid.Column="0"
                                                     IsVisible="{Binding IsStatusNone, Converter={StaticResource InverseBoolConverter}}">
 
-<!--TODO common style-->
                                                     <ffImageLoading:CachedImage
                                                         Source="success.png"
-                                                        VerticalOptions="Center"
-                                                        HeightRequest="25"
+                                                        Style="{StaticResource StatusIconImageStyle}"
                                                         IsVisible="{Binding IsStatusSuccess}">
                                                         <ffImageLoading:CachedImage.Transformations>
                                                             <transformations:TintTransformation
@@ -73,8 +90,7 @@
 
                                                     <ffImageLoading:CachedImage
                                                         Source="pending.png"
-                                                        VerticalOptions="Center"
-                                                        HeightRequest="25"
+                                                        Style="{StaticResource StatusIconImageStyle}"
                                                         IsVisible="{Binding IsStatusPending}">
                                                         <ffImageLoading:CachedImage.Transformations>
                                                             <transformations:TintTransformation
@@ -85,8 +101,7 @@
 
                                                     <ffImageLoading:CachedImage
                                                         Source="error.png"
-                                                        VerticalOptions="Center"
-                                                        HeightRequest="25"
+                                                        Style="{StaticResource StatusIconImageStyle}"
                                                         IsVisible="{Binding IsStatusError}"/>
                                                 </Grid>
 
@@ -98,14 +113,16 @@
                                                     LineBreakMode="TailTruncation"/>
                                             </Grid>
                                         </ViewCell>
-                                        
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
 
-                            <!--TODO Style-->
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
+                                Style="{DynamicResource SubtitleStyle}"
+                                TextColor="{StaticResource MessageColor}"
+                                VerticalOptions="Center"
+                                HorizontalTextAlignment="Center"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
                         </Grid>
                     </Grid>
@@ -122,7 +139,8 @@
                         <Grid
                             IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
-                            <views:NoNetworkIndicator
+                            <ContentView
+                                ControlTemplate="{StaticResource NoNetworkTemplate}"
                                 IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
 
                             <Label        

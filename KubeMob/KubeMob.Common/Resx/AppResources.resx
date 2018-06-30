@@ -268,7 +268,7 @@
     <value>Jobs</value>
   </data>
   <data name="NoInternetErrorMessage" xml:space="preserve">
-    <value>We are having connectivity issues doing that right now. Please try again.</value>
+    <value>There seems to be connectivity issues right now</value>
   </data>
   <data name="ObjectDetail_NotSet" xml:space="preserve">
     <value>Not set.</value>
@@ -448,7 +448,7 @@
     <value>Resource name</value>
   </data>
   <data name="EmptyMessage" xml:space="preserve">
-    <value>There is nothing to display here.</value>
+    <value>There is nothing to display here</value>
   </data>
   <data name="EventDetailPage_Count" xml:space="preserve">
     <value>Count</value>

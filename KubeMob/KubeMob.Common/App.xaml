@@ -91,6 +91,28 @@
                                                     </ffImageLoading:CachedImage>
 
                                                     <ffImageLoading:CachedImage
+                                                        Source="update.png"
+                                                        Style="{StaticResource StatusIconImageStyle}"
+                                                        IsVisible="{Binding IsStatusUpdate}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="{StaticResource GreyStatusIconColor}"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="remove_circle.png"
+                                                        Style="{StaticResource StatusIconImageStyle}"
+                                                        IsVisible="{Binding IsStatusWarning}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="#ffad20"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
                                                         Source="error.png"
                                                         Style="{StaticResource StatusIconImageStyle}"
                                                         IsVisible="{Binding IsStatusError}"/>

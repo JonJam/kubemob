@@ -13,9 +13,16 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         {
             //TODO status
             this.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
-                .ConstructUsing((d) => new ObjectSummary(
-                    d.Metadata.Name,
-                    d.Metadata.NamespaceProperty));
+                .ConstructUsing((d) =>
+                {
+                    // NEED TO lookup pods here to get status
+                    // See card_component.js and card.html in daemonset > list
+                    // See podinfo.go  in common
+                    // See list.go in daemonset
+                    return new ObjectSummary(
+                        d.Metadata.Name,
+                        d.Metadata.NamespaceProperty);
+                });
 
             this.CreateMap<k8s.Models.V1DaemonSet, DaemonSetDetail>()
                 .ConstructUsing((d) =>

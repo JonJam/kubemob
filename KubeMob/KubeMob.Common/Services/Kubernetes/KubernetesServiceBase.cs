@@ -436,6 +436,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1Pod> items = podList.Items;
 
+            // TODO Change OwnerReferences to use UUID not name
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
@@ -466,7 +467,8 @@ namespace KubeMob.Common.Services.Kubernetes
                 : c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
             IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
-
+            
+            // TODO Change OwnerReferences to use UUID not name
             // Related to Deployments.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
@@ -648,7 +650,8 @@ namespace KubeMob.Common.Services.Kubernetes
 
             // Related to Cron Jobs.
             IEnumerable<V1Job> items = jobList.Items;
-
+            
+            // TODO Change OwnerReferences to use UUID not name
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));

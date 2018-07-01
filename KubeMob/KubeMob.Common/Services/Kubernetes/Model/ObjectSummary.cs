@@ -44,5 +44,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         public bool IsStatusPending => this.Status == Status.Pending;
 
         public bool IsStatusNone => this.Status == Status.None;
+
+        public bool IsStatusUnknown => this.Status == Status.Unknown;
     }
 }

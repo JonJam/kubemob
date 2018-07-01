@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using k8s.Models;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -9,11 +10,33 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public NodeMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1Node, ObjectSummary>()
-                .ConstructUsing((n) => new ObjectSummary(
-                    n.Metadata.Name,
-                    n.Metadata.NamespaceProperty));
+                .ConstructUsing((n) =>
+                {
+                    Status status = Status.Unknown;
+
+                    V1NodeCondition cond = n.Status.Conditions.FirstOrDefault(c => c.Type == "Ready");
+
+                    if (cond != null)
+                    {
+                        switch (cond.Status)
+                        {
+                            case "True":
+                                status = Status.Success;
+                                break;
+                            case "False":
+                                status = Status.Error;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    return new ObjectSummary(
+                        n.Metadata.Name,
+                        n.Metadata.NamespaceProperty,
+                        status);
+                });
 
             this.CreateMap<k8s.Models.V1NodeCondition, Condition>()
                 .ConstructUsing((c) =>

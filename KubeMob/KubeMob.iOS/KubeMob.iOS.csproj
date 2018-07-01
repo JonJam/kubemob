@@ -288,6 +288,15 @@
     <BundleResource Include="Resources\success%403x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\help%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\help%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\remove_circle%402s.png" />
   </ItemGroup>
   <ItemGroup>

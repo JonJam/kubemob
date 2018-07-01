@@ -45,64 +45,77 @@
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <!--TODO Padding/Margin-->
-                                            <Grid
-                                                BackgroundColor="White">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="4*"/>
-                                                </Grid.ColumnDefinitions>
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                BackgroundColor="White"
+                                                Padding="20,0,20,0">
 
-                                                <Grid
-                                                    Grid.Column="0"
-                                                    IsVisible="{Binding IsStatusNone, Converter={StaticResource InverseBoolConverter}}">
+                                                <ffImageLoading:CachedImage
+                                                    Source="success.png"
+                                                    Style="{StaticResource StatusIconImageStyle}"
+                                                    IsVisible="{Binding IsStatusSuccess}">
+                                                    <ffImageLoading:CachedImage.Transformations>
+                                                        <transformations:TintTransformation
+                                                            HexColor="#008000"
+                                                            EnableSolidColor="true"/>
+                                                    </ffImageLoading:CachedImage.Transformations>
+                                                </ffImageLoading:CachedImage>
 
-                                                    <ffImageLoading:CachedImage
-                                                        Source="success.png"
-                                                        Style="{StaticResource StatusIconImageStyle}"
-                                                        IsVisible="{Binding IsStatusSuccess}">
-                                                        <ffImageLoading:CachedImage.Transformations>
-                                                            <transformations:TintTransformation
-                                                                HexColor="#008000"
-                                                                EnableSolidColor="true"/>
-                                                        </ffImageLoading:CachedImage.Transformations>
-                                                    </ffImageLoading:CachedImage>
+                                                <ffImageLoading:CachedImage
+                                                    Source="pending.png"
+                                                    Style="{StaticResource StatusIconImageStyle}"
+                                                    IsVisible="{Binding IsStatusPending}">
+                                                    <ffImageLoading:CachedImage.Transformations>
+                                                        <transformations:TintTransformation
+                                                            HexColor="{StaticResource GreyStatusIconColor}"
+                                                            EnableSolidColor="true"/>
+                                                    </ffImageLoading:CachedImage.Transformations>
+                                                </ffImageLoading:CachedImage>
 
-                                                    <ffImageLoading:CachedImage
-                                                        Source="pending.png"
-                                                        Style="{StaticResource StatusIconImageStyle}"
-                                                        IsVisible="{Binding IsStatusPending}">
-                                                        <ffImageLoading:CachedImage.Transformations>
-                                                            <transformations:TintTransformation
-                                                                HexColor="{StaticResource GreyStatusIconColor}"
-                                                                EnableSolidColor="true"/>
-                                                        </ffImageLoading:CachedImage.Transformations>
-                                                    </ffImageLoading:CachedImage>
+                                                <ffImageLoading:CachedImage
+                                                    Source="help.png"
+                                                    Style="{StaticResource StatusIconImageStyle}"
+                                                    IsVisible="{Binding IsStatusUnknown}">
+                                                    <ffImageLoading:CachedImage.Transformations>
+                                                        <transformations:TintTransformation
+                                                            HexColor="{StaticResource GreyStatusIconColor}"
+                                                            EnableSolidColor="true"/>
+                                                    </ffImageLoading:CachedImage.Transformations>
+                                                </ffImageLoading:CachedImage>
 
-                                                    <ffImageLoading:CachedImage
-                                                        Source="help.png"
-                                                        Style="{StaticResource StatusIconImageStyle}"
-                                                        IsVisible="{Binding IsStatusUnknown}">
-                                                        <ffImageLoading:CachedImage.Transformations>
-                                                            <transformations:TintTransformation
-                                                                HexColor="{StaticResource GreyStatusIconColor}"
-                                                                EnableSolidColor="true"/>
-                                                        </ffImageLoading:CachedImage.Transformations>
-                                                    </ffImageLoading:CachedImage>
+                                                <ffImageLoading:CachedImage
+                                                    Source="update.png"
+                                                    Style="{StaticResource StatusIconImageStyle}"
+                                                    IsVisible="{Binding IsStatusUpdate}">
+                                                    <ffImageLoading:CachedImage.Transformations>
+                                                        <transformations:TintTransformation
+                                                            HexColor="{StaticResource GreyStatusIconColor}"
+                                                            EnableSolidColor="true"/>
+                                                    </ffImageLoading:CachedImage.Transformations>
+                                                </ffImageLoading:CachedImage>
 
-                                                    <ffImageLoading:CachedImage
-                                                        Source="error.png"
-                                                        Style="{StaticResource StatusIconImageStyle}"
-                                                        IsVisible="{Binding IsStatusError}"/>
-                                                </Grid>
+                                                <ffImageLoading:CachedImage
+                                                    Source="remove_circle.png"
+                                                    Style="{StaticResource StatusIconImageStyle}"
+                                                    IsVisible="{Binding IsStatusWarning}">
+                                                    <ffImageLoading:CachedImage.Transformations>
+                                                        <transformations:TintTransformation
+                                                            HexColor="#ffad20"
+                                                            EnableSolidColor="true"/>
+                                                    </ffImageLoading:CachedImage.Transformations>
+                                                </ffImageLoading:CachedImage>
+
+                                                <ffImageLoading:CachedImage
+                                                    Source="error.png"
+                                                    Style="{StaticResource StatusIconImageStyle}"
+                                                    IsVisible="{Binding IsStatusError}"/>
 
                                                 <Label
-                                                    Grid.Column="1"
                                                     Text="{Binding Name}"
                                                     Style="{DynamicResource SubtitleStyle}"
                                                     VerticalOptions="Center"
                                                     LineBreakMode="TailTruncation"/>
-                                            </Grid>
+                                            </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>

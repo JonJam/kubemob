@@ -6,6 +6,8 @@ namespace KubeMob.Common.Services.Kubernetes.Model
         Error,
         Pending,
         Success,
-        Unknown
+        Unknown,
+        Update,
+        Warning
     }
 }

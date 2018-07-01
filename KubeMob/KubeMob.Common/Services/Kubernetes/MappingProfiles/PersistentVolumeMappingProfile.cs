@@ -9,11 +9,35 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public PersistentVolumeMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1PersistentVolume, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((p) =>
+                {
+                    Status status = Status.Unknown;
+
+                    switch (p.Status.Phase)
+                    {
+                        case "Available":
+                        case "Bound":
+                            status = Status.Success;
+                            break;
+                        case "Pending":
+                            status = Status.Update;
+                            break;
+                        case "Released":
+                            status = Status.Warning;
+                            break;
+                        case "Failed":
+                            status = Status.Error;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return new ObjectSummary(
+                        p.Metadata.Name,
+                        p.Metadata.NamespaceProperty,
+                        status);
+                });
 
             this.CreateMap<k8s.Models.V1PersistentVolume, PersistentVolumeDetail>()
                 .ConstructUsing((p) =>

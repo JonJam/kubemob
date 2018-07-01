@@ -74,7 +74,18 @@
                                                         IsVisible="{Binding IsStatusPending}">
                                                         <ffImageLoading:CachedImage.Transformations>
                                                             <transformations:TintTransformation
-                                                                HexColor="#757575"
+                                                                HexColor="{StaticResource GreyStatusIconColor}"
+                                                                EnableSolidColor="true"/>
+                                                        </ffImageLoading:CachedImage.Transformations>
+                                                    </ffImageLoading:CachedImage>
+
+                                                    <ffImageLoading:CachedImage
+                                                        Source="help.png"
+                                                        Style="{StaticResource StatusIconImageStyle}"
+                                                        IsVisible="{Binding IsStatusUnknown}">
+                                                        <ffImageLoading:CachedImage.Transformations>
+                                                            <transformations:TintTransformation
+                                                                HexColor="{StaticResource GreyStatusIconColor}"
                                                                 EnableSolidColor="true"/>
                                                         </ffImageLoading:CachedImage.Transformations>
                                                     </ffImageLoading:CachedImage>

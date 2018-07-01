@@ -23,6 +23,7 @@
     <Style x:Key="StatusIconImageStyle" TargetType="ffImageLoading:CachedImage">
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="HeightRequest" Value="25" />
+        <Setter Property="Margin" Value="0,0,10,0" />
     </Style>
 
 

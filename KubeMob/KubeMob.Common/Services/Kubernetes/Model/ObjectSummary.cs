@@ -43,10 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
 
         // TODO Remove??
         public bool IsStatusPending => this.Status == Status.Pending;
-
-        // TODO Remove??
-        public bool IsStatusNone => this.Status == Status.None;
-
+        
         public bool IsStatusUnknown => this.Status == Status.Unknown;
 
         public bool IsStatusUpdate => this.Status == Status.Update;

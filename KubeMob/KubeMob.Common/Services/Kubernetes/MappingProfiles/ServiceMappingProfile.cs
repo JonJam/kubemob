@@ -11,11 +11,25 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public ServiceMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1Service, ObjectSummary>()
-                .ConstructUsing((s) => new ObjectSummary(
-                    s.Metadata.Name,
-                    s.Metadata.NamespaceProperty));
+                .ConstructUsing((s) =>
+                {
+                    Status status = Status.Success;
+
+                    bool? hasExternalEndpoints = s.Status.LoadBalancer.Ingress?.Any();
+
+                    if (string.IsNullOrWhiteSpace(s.Spec.ClusterIP) ||
+                        (s.Spec.Type == "LoadBalancer" &&
+                         !hasExternalEndpoints.GetValueOrDefault(false)))
+                    {
+                        status = Status.Pending;
+                    }
+
+                    return new ObjectSummary(
+                        s.Metadata.Name,
+                        s.Metadata.NamespaceProperty,
+                        status);
+                });
 
             this.CreateMap<k8s.Models.V1Service, ServiceDetail>()
                 .ConstructUsing((s) =>

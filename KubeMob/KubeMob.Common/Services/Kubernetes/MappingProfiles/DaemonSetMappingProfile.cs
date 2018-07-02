@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using k8s.Models;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
@@ -9,12 +10,18 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 {
     public class DaemonSetMappingProfile : Profile
     {
+        public const string PodsKey = "Pods";
+
         public DaemonSetMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
-                .ConstructUsing((d) =>
+                .ConstructUsing((d, rc) =>
                 {
+                    var pods = (IList<V1Pod>)rc.Items[DaemonSetMappingProfile.PodsKey];
+
+                    // TODO Filter pods to daemon set (CREATE common method from k8s service and use everywhere).
+                    // TODO work out status
+
                     // NEED TO lookup pods here to get status
                     // See card_component.js and card.html in daemonset > list
                     // See podinfo.go  in common

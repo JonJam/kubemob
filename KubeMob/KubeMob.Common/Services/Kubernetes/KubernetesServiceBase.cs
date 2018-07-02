@@ -9,6 +9,7 @@ using k8s.Models;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
+using KubeMob.Common.Services.Kubernetes.MappingProfiles;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
@@ -621,11 +622,18 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
+            // TODO Improve how perform these calls ??
             V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListDaemonSetForAllNamespacesAsync()
                 : c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(daemonSetsList.Items)
+            V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListPodForAllNamespacesAsync()
+                : c.ListNamespacedPodAsync(kubernetesNamespace));
+
+            return Mapper.Map<IList<ObjectSummary>>(
+                    daemonSetsList.Items,
+                    options => options.Items[DaemonSetMappingProfile.PodsKey] = podList.Items)
                 .OrderBy(p => p.Name)
                 .ToList();
         }

@@ -10,11 +10,31 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public PersistentVolumeClaimMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1PersistentVolumeClaim, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((p) =>
+                {
+                    Status status = Status.None;
+
+                    switch (p.Status.Phase)
+                    {
+                        case "Bound":
+                            status = Status.Success;
+                            break;
+                        case "Pending":
+                            status = Status.Pending;
+                            break;
+                        case "Lost":
+                            status = Status.Error;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return new ObjectSummary(
+                        p.Metadata.Name,
+                        p.Metadata.NamespaceProperty,
+                        status);
+                });
 
             this.CreateMap<k8s.Models.V1PersistentVolumeClaim, PersistentVolumeClaimDetail>()
                 .ConstructUsing((p) =>

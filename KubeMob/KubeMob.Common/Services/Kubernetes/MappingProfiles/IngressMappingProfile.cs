@@ -8,7 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     public class IngressMappingProfile : Profile
     {
         public IngressMappingProfile()
-        {//TODO status
+        {
             this.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,

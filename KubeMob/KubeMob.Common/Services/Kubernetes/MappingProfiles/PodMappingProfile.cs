@@ -9,11 +9,32 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public PodMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1Pod, ObjectSummary>()
-                 .ConstructUsing((p) => new ObjectSummary(
-                     p.Metadata.Name,
-                     p.Metadata.NamespaceProperty));
+                 .ConstructUsing((p) =>
+                {
+                    Status status = Status.None;
+
+                    switch (p.Status.Phase)
+                    {
+                        case "Pending":
+                            status = Status.Pending;
+                            break;
+                        case "Running":
+                        case "Succeeded":
+                            status = Status.Success;
+                            break;
+                        case "Failed":
+                            status = Status.Error;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    return new ObjectSummary(
+                        p.Metadata.Name,
+                        p.Metadata.NamespaceProperty,
+                        status);
+                });
 
             this.CreateMap<k8s.Models.V1EnvVar, EnvironmentVariable>()
                 .ConstructUsing((e) => new EnvironmentVariable(

@@ -5,7 +5,6 @@ using k8s.Models;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
-using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 {
@@ -16,54 +15,33 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 
         public DaemonSetMappingProfile()
         {
-            this.CreateMap<k8s.Models.V1DaemonSet, ObjectSummary>()
+            this.CreateMap<V1DaemonSet, ObjectSummary>()
                 .ConstructUsing((d, rc) =>
                 {
-                    var pods = (IList<V1Pod>)rc.Items[DaemonSetMappingProfile.PodsKey];
-                    var events = (IList<V1Event>)rc.Items[DaemonSetMappingProfile.EventsKey];
+                    IList<V1Pod> pods = (IList<V1Pod>)rc.Items[DaemonSetMappingProfile.PodsKey];
+                    IList<V1Event> events = (IList<V1Event>)rc.Items[DaemonSetMappingProfile.EventsKey];
 
-                    var filteredPods = pods.FilterPods(d.Metadata.Name);
-                    var filteredEvents = events.Where(e => e.InvolvedObject.Uid == d.Metadata.Uid);
+                    IEnumerable<V1Pod> relatedPendingPods = pods.FilterPodsForOwner(d.Metadata.Name).FilterPendingPods();
+                    IEnumerable<V1Event> relatedWarningEvents = events.FilterEventsForInvolvedObject(d.Metadata.Uid).FilterWarningEvents();
 
-                    int running = 0;
-                    int pending = 0;
-                    int failed = 0;
-                    int succeeded = 0;
-                    int warnings = 0;
+                    Status status = Status.Success;
 
-                    filteredPods.ForEach(p =>
+                    if (relatedWarningEvents.Any())
                     {
-                        switch (p.Status.Phase)
-                        {
-                            case "Running":
-                                running++;
-                                break;
-                            case "Pending":
-                                pending++;
-                                break;
-                            case "Failed":
-                                failed++;
-                                break;
-                            case "Succeeded":
-                                succeeded++;
-                                break;
-                        }
-                    });
-                     //Warnings ??
+                        status = Status.Warning;
+                    }
+                    else if (relatedPendingPods.Any())
+                    {
+                        status = Status.Pending;
+                    }
 
-
-                    // TODO work out status
-
-                    // NEED TO lookup pods here to get status
-                    // See card_component.js and card.html in daemonset > list
-                    // See podinfo.go  in common
-                    // See list.go in daemonset
                     return new ObjectSummary(
                         d.Metadata.Name,
-                        d.Metadata.NamespaceProperty);
+                        d.Metadata.NamespaceProperty,
+                        status);
                 });
 
-            this.CreateMap<k8s.Models.V1DaemonSet, DaemonSetDetail>()
+            this.CreateMap<V1DaemonSet, DaemonSetDetail>()
                 .ConstructUsing((d) =>
                 {
                     List<string> labels = d.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();

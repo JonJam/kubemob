@@ -440,7 +440,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.FilterPods(filter.Other);
+                items = items.FilterPodsForOwner(filter.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)

@@ -28,10 +28,16 @@ namespace KubeMob.Common.Services.Kubernetes.Extensions
         }
 
         // TODO Change OwnerReferences to use UUID not name
-        public static IEnumerable<V1Pod> FilterPods(this IEnumerable<V1Pod> pods, string ownerName)
+        public static IEnumerable<V1Pod> FilterPodsForOwner(this IEnumerable<V1Pod> pods, string ownerName)
             => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == ownerName));
 
-        //public static IEnumerable<V1Pod> Filter(this IEnumerable<V1Pod> pods, string ownerName)
-        //    => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == ownerName));
+        public static IEnumerable<V1Pod> FilterPendingPods(this IEnumerable<V1Pod> pods)
+            => pods.Where(p => p.Status.Phase == "Pending");
+
+        public static IEnumerable<V1Event> FilterEventsForInvolvedObject(this IEnumerable<V1Event> events, string uid)
+            => events.Where(e => e.InvolvedObject.Uid == uid);
+
+        public static IEnumerable<V1Event> FilterWarningEvents(this IEnumerable<V1Event> events)
+            => events.Where(e => e.Type == "Warning");
     }
 }

@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using k8s.Models;
+using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.Extensions
 {
     public static class KubernetesExtensions
     {
+        public const string PodsKey = "Pods";
+        public const string EventsKey = "Events";
+
         public static string ToRelatedSelector(this V1LabelSelector l) => l.MatchLabels.ToRelatedSelector();
 
         public static string ToRelatedSelector(this IDictionary<string, string> selectors)
@@ -31,13 +36,39 @@ namespace KubeMob.Common.Services.Kubernetes.Extensions
         public static IEnumerable<V1Pod> FilterPodsForOwner(this IEnumerable<V1Pod> pods, string ownerName)
             => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == ownerName));
 
-        public static IEnumerable<V1Pod> FilterPendingPods(this IEnumerable<V1Pod> pods)
+        public static Status GetStatus(
+            this ResolutionContext rc,
+            string uid,
+            string name)
+        {
+            IList<V1Pod> pods = (IList<V1Pod>)rc.Items[KubernetesExtensions.PodsKey];
+            IList<V1Event> events = (IList<V1Event>)rc.Items[KubernetesExtensions.EventsKey];
+
+            IEnumerable<V1Pod> relatedPendingPods = pods.FilterPodsForOwner(name).FilterPendingPods();
+            IEnumerable<V1Event> relatedWarningEvents =
+                events.FilterEventsForInvolvedObject(uid).FilterWarningEvents();
+
+            Status status = Status.Success;
+
+            if (relatedWarningEvents.Any())
+            {
+                status = Status.Warning;
+            }
+            else if (relatedPendingPods.Any())
+            {
+                status = Status.Pending;
+            }
+
+            return status;
+        }
+
+        private static IEnumerable<V1Pod> FilterPendingPods(this IEnumerable<V1Pod> pods)
             => pods.Where(p => p.Status.Phase == "Pending");
 
-        public static IEnumerable<V1Event> FilterEventsForInvolvedObject(this IEnumerable<V1Event> events, string uid)
+        private static IEnumerable<V1Event> FilterEventsForInvolvedObject(this IEnumerable<V1Event> events, string uid)
             => events.Where(e => e.InvolvedObject.Uid == uid);
 
-        public static IEnumerable<V1Event> FilterWarningEvents(this IEnumerable<V1Event> events)
+        private static IEnumerable<V1Event> FilterWarningEvents(this IEnumerable<V1Event> events)
             => events.Where(e => e.Type == "Warning");
     }
 }

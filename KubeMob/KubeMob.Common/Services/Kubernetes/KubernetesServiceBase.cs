@@ -9,6 +9,8 @@ using k8s.Models;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
+using KubeMob.Common.Services.Kubernetes.Extensions;
+using KubeMob.Common.Services.Kubernetes.MappingProfiles;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
@@ -438,7 +440,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+                items = items.FilterPodsForOwner(filter.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -467,6 +469,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
 
+            // TODO Change OwnerReferences to use UUID not name
             // Related to Deployments.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
@@ -619,11 +622,26 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
+            // TODO Improve how perform these calls
             V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListDaemonSetForAllNamespacesAsync()
                 : c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(daemonSetsList.Items)
+            V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListPodForAllNamespacesAsync()
+                : c.ListNamespacedPodAsync(kubernetesNamespace));
+
+            V1EventList events = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListEventForAllNamespacesAsync()
+                : c.ListNamespacedEventAsync(kubernetesNamespace));
+
+            return Mapper.Map<IList<ObjectSummary>>(
+                    daemonSetsList.Items,
+                    options =>
+                    {
+                        options.Items[DaemonSetMappingProfile.PodsKey] = podList.Items;
+                        options.Items[DaemonSetMappingProfile.EventsKey] = events.Items;
+                    })
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -649,6 +667,7 @@ namespace KubeMob.Common.Services.Kubernetes
             // Related to Cron Jobs.
             IEnumerable<V1Job> items = jobList.Items;
 
+            // TODO Change OwnerReferences to use UUID not name
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
                 items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
@@ -745,6 +764,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName)
         {
+            // TODO Change to uuid ?
             V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(namespaceName, fieldSelector: $"involvedObject.name={objectName}"));
 
             return Mapper.Map<IList<Event>>(events.Items)

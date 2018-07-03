@@ -468,7 +468,7 @@ namespace KubeMob.Common.Services.Kubernetes
                 : c.ListNamespacedReplicaSetAsync(kubernetesNamespace));
 
             IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
-            
+
             // TODO Change OwnerReferences to use UUID not name
             // Related to Deployments.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
@@ -622,7 +622,7 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            // TODO Improve how perform these calls ??
+            // TODO Improve how perform these calls
             V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListDaemonSetForAllNamespacesAsync()
                 : c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
@@ -631,8 +631,9 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListPodForAllNamespacesAsync()
                 : c.ListNamespacedPodAsync(kubernetesNamespace));
 
-            // TODO Way to improve this ??
-            V1EventList events = await this.PerformClientOperation((c) => c.ListEventForAllNamespacesAsync());
+            V1EventList events = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListEventForAllNamespacesAsync()
+                : c.ListNamespacedEventAsync(kubernetesNamespace));
 
             return Mapper.Map<IList<ObjectSummary>>(
                     daemonSetsList.Items,
@@ -665,7 +666,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             // Related to Cron Jobs.
             IEnumerable<V1Job> items = jobList.Items;
-            
+
             // TODO Change OwnerReferences to use UUID not name
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {

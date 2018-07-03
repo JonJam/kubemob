@@ -44,11 +44,12 @@
                                 SeparatorColor="DarkGray">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell>
+                                        <ViewCell
+                                            StyleId="DisclosureIndicator">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                BackgroundColor="White"
-                                                Padding="20,0,20,0">
+                                                Padding="20,0,20,0"
+                                                BackgroundColor="White">
 
                                                 <ffImageLoading:CachedImage
                                                     Source="success.png"

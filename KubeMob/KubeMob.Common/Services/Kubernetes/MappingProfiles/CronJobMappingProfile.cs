@@ -10,16 +10,17 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public CronJobMappingProfile()
         {
-            this.CreateMap<k8s.Models.V1beta1CronJob, ObjectSummary>()
+            this.CreateMap<V1beta1CronJob, ObjectSummary>()
                 .ConstructUsing((c) => new ObjectSummary(
                     c.Metadata.Name,
                     c.Metadata.NamespaceProperty,
                     c.Spec.Suspend.GetValueOrDefault(false) ? Status.Error : Status.Success));
 
-            this.CreateMap<k8s.Models.V1beta1CronJob, CronJobDetail>()
+            this.CreateMap<V1beta1CronJob, CronJobDetail>()
                 .ConstructUsing((c) =>
                 {
-                    List<string> labels = c.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+                    List<string> labels = c.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                                          new List<string>();
                     List<string> annotations = c.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                new List<string>();
 

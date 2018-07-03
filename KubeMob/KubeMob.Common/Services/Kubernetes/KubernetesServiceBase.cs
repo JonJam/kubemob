@@ -10,11 +10,11 @@ using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
 using KubeMob.Common.Services.Kubernetes.Extensions;
-using KubeMob.Common.Services.Kubernetes.MappingProfiles;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using Xamarin.Forms.Internals;
+using KubernetesExtensions = KubeMob.Common.Services.Kubernetes.Extensions.KubernetesExtensions;
 
 namespace KubeMob.Common.Services.Kubernetes
 {
@@ -426,8 +426,8 @@ namespace KubeMob.Common.Services.Kubernetes
                     deployments.Items,
                     options =>
                     {
-                        options.Items[DeploymentMappingProfile.PodsKey] = podList.Items;
-                        options.Items[DeploymentMappingProfile.EventsKey] = events.Items;
+                        options.Items[KubernetesExtensions.PodsKey] = podList.Items;
+                        options.Items[KubernetesExtensions.EventsKey] = events.Items;
                     })
                 .OrderBy(d => d.Name)
                 .ToList();
@@ -658,8 +658,8 @@ namespace KubeMob.Common.Services.Kubernetes
                     daemonSetsList.Items,
                     options =>
                     {
-                        options.Items[DaemonSetMappingProfile.PodsKey] = podList.Items;
-                        options.Items[DaemonSetMappingProfile.EventsKey] = events.Items;
+                        options.Items[KubernetesExtensions.PodsKey] = podList.Items;
+                        options.Items[KubernetesExtensions.EventsKey] = events.Items;
                     })
                 .OrderBy(p => p.Name)
                 .ToList();
@@ -679,9 +679,20 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = !string.IsNullOrWhiteSpace(filter?.Namespace) ? filter.Namespace : this.GetSelectedNamespaceName();
 
-            V1JobList jobList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            // Starting tasks and waiting when all complete.
+            Task<V1JobList> jobsTask = this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListJobForAllNamespacesAsync()
                 : c.ListNamespacedJobAsync(kubernetesNamespace));
+
+            Task<V1PodList> podsTask = this.GetPods(kubernetesNamespace);
+            Task<V1EventList> eventsTask = this.GetEvents(kubernetesNamespace);
+
+            await Task.WhenAll(jobsTask, podsTask, eventsTask);
+
+            // Tasks already complete here.
+            V1JobList jobList = await jobsTask;
+            V1PodList podList = await podsTask;
+            V1EventList events = await eventsTask;
 
             // Related to Cron Jobs.
             IEnumerable<V1Job> items = jobList.Items;
@@ -692,7 +703,13 @@ namespace KubeMob.Common.Services.Kubernetes
                 items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
             }
 
-            return Mapper.Map<IList<ObjectSummary>>(items)
+            return Mapper.Map<IList<ObjectSummary>>(
+                    items,
+                    options =>
+                    {
+                        options.Items[KubernetesExtensions.PodsKey] = podList.Items;
+                        options.Items[KubernetesExtensions.EventsKey] = events.Items;
+                    })
                 .OrderBy(p => p.Name)
                 .ToList();
         }

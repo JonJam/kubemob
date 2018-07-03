@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using k8s.Models;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -9,13 +11,19 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     public class JobMappingProfile : Profile
     {
         public JobMappingProfile()
-        {//TODO status
-            this.CreateMap<k8s.Models.V1Job, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+        {
+            this.CreateMap<V1Job, ObjectSummary>()
+                .ConstructUsing((j, rc) =>
+                {
+                    Status status = rc.GetStatus(j.Metadata.Uid, j.Metadata.Name);
 
-            this.CreateMap<k8s.Models.V1Job, JobDetail>()
+                    return new ObjectSummary(
+                        j.Metadata.Name,
+                        j.Metadata.NamespaceProperty,
+                        status);
+                });
+
+            this.CreateMap<V1Job, JobDetail>()
                 .ConstructUsing((j) =>
                 {
                     List<string> labels = j.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??

@@ -1,22 +1,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
+using k8s.Models;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 {
     public class DeploymentMappingProfile : Profile
     {
+        public const string PodsKey = "Pods";
+        public const string EventsKey = "Events";
+
         public DeploymentMappingProfile()
         {
-            //TODO status
-            this.CreateMap<k8s.Models.V1Deployment, ObjectSummary>()
-                   .ConstructUsing((d) => new ObjectSummary(
-                       d.Metadata.Name,
-                       d.Metadata.NamespaceProperty));
+            this.CreateMap<V1Deployment, ObjectSummary>()
+                   .ConstructUsing((d, rc) =>
+                {
+                    IList<V1Pod> pods = (IList<V1Pod>)rc.Items[DeploymentMappingProfile.PodsKey];
+                    IList<V1Event> events = (IList<V1Event>)rc.Items[DeploymentMappingProfile.EventsKey];
 
-            this.CreateMap<k8s.Models.V1Deployment, DeploymentDetail>()
+                    IEnumerable<V1Pod> relatedPendingPods = pods.FilterPodsForOwner(d.Metadata.Name).FilterPendingPods();
+                    IEnumerable<V1Event> relatedWarningEvents = events.FilterEventsForInvolvedObject(d.Metadata.Uid).FilterWarningEvents();
+
+                    Status status = Status.Success;
+
+                    if (relatedWarningEvents.Any())
+                    {
+                        status = Status.Warning;
+                    }
+                    else if (relatedPendingPods.Any())
+                    {
+                        status = Status.Pending;
+                    }
+
+                    return new ObjectSummary(
+                        d.Metadata.Name,
+                        d.Metadata.NamespaceProperty,
+                        status);
+                });
+
+            this.CreateMap<V1Deployment, DeploymentDetail>()
                 .ConstructUsing((d) =>
                 {
                     List<string> labels = d.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();

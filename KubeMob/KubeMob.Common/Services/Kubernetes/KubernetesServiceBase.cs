@@ -407,11 +407,28 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            V1DeploymentList deployments = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            // Starting tasks and waiting when all complete.
+            Task<V1DeploymentList> deploymentsTask = this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                  ? c.ListDeploymentForAllNamespacesAsync()
                  : c.ListNamespacedDeploymentAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(deployments.Items)
+            Task<V1PodList> podsTask = this.GetPods(kubernetesNamespace);
+            Task<V1EventList> eventsTask = this.GetEvents(kubernetesNamespace);
+
+            await Task.WhenAll(deploymentsTask, podsTask, eventsTask);
+
+            // Tasks already complete here.
+            V1DeploymentList deployments = await deploymentsTask;
+            V1PodList podList = await podsTask;
+            V1EventList events = await eventsTask;
+
+            return Mapper.Map<IList<ObjectSummary>>(
+                    deployments.Items,
+                    options =>
+                    {
+                        options.Items[DeploymentMappingProfile.PodsKey] = podList.Items;
+                        options.Items[DeploymentMappingProfile.EventsKey] = events.Items;
+                    })
                 .OrderBy(d => d.Name)
                 .ToList();
         }
@@ -622,18 +639,20 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            // TODO Improve how perform these calls
-            V1DaemonSetList daemonSetsList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            // Starting tasks and waiting when all complete.
+            Task<V1DaemonSetList> daemonSetsTask = this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListDaemonSetForAllNamespacesAsync()
                 : c.ListNamespacedDaemonSetAsync(kubernetesNamespace));
 
-            V1PodList podList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListPodForAllNamespacesAsync()
-                : c.ListNamespacedPodAsync(kubernetesNamespace));
+            Task<V1PodList> podsTask = this.GetPods(kubernetesNamespace);
+            Task<V1EventList> eventsTask = this.GetEvents(kubernetesNamespace);
 
-            V1EventList events = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
-                ? c.ListEventForAllNamespacesAsync()
-                : c.ListNamespacedEventAsync(kubernetesNamespace));
+            await Task.WhenAll(daemonSetsTask, podsTask, eventsTask);
+
+            // Tasks already complete here.
+            V1DaemonSetList daemonSetsList = await daemonSetsTask;
+            V1PodList podList = await podsTask;
+            V1EventList events = await eventsTask;
 
             return Mapper.Map<IList<ObjectSummary>>(
                     daemonSetsList.Items,
@@ -849,5 +868,15 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? selectedNamespace
                 : KubernetesServiceBase.DefaultNamespace;
         }
+
+        private Task<V1PodList> GetPods(string kubernetesNamespace) =>
+            this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+                ? c.ListPodForAllNamespacesAsync()
+                : c.ListNamespacedPodAsync(kubernetesNamespace));
+
+        private Task<V1EventList> GetEvents(string kubernetesNamespace) =>
+            this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            ? c.ListEventForAllNamespacesAsync()
+            : c.ListNamespacedEventAsync(kubernetesNamespace));
     }
 }

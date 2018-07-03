@@ -5,12 +5,14 @@ using k8s.Models;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 {
     public class DaemonSetMappingProfile : Profile
     {
         public const string PodsKey = "Pods";
+        public const string EventsKey = "Events";
 
         public DaemonSetMappingProfile()
         {
@@ -18,8 +20,38 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 .ConstructUsing((d, rc) =>
                 {
                     var pods = (IList<V1Pod>)rc.Items[DaemonSetMappingProfile.PodsKey];
+                    var events = (IList<V1Event>)rc.Items[DaemonSetMappingProfile.EventsKey];
 
-                    // TODO Filter pods to daemon set (CREATE common method from k8s service and use everywhere).
+                    var filteredPods = pods.FilterPods(d.Metadata.Name);
+                    var filteredEvents = events.Where(e => e.InvolvedObject.Uid == d.Metadata.Uid);
+
+                    int running = 0;
+                    int pending = 0;
+                    int failed = 0;
+                    int succeeded = 0;
+                    int warnings = 0;
+
+                    filteredPods.ForEach(p =>
+                    {
+                        switch (p.Status.Phase)
+                        {
+                            case "Running":
+                                running++;
+                                break;
+                            case "Pending":
+                                pending++;
+                                break;
+                            case "Failed":
+                                failed++;
+                                break;
+                            case "Succeeded":
+                                succeeded++;
+                                break;
+                        }
+                    });
+                     //Warnings ??
+
+
                     // TODO work out status
 
                     // NEED TO lookup pods here to get status

@@ -9,6 +9,7 @@ using k8s.Models;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Model;
+using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.MappingProfiles;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.PubSub;
@@ -437,10 +438,9 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1Pod> items = podList.Items;
 
-            // TODO Change OwnerReferences to use UUID not name
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+                items = items.FilterPods(filter.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -631,9 +631,16 @@ namespace KubeMob.Common.Services.Kubernetes
                 ? c.ListPodForAllNamespacesAsync()
                 : c.ListNamespacedPodAsync(kubernetesNamespace));
 
+            // TODO Way to improve this ??
+            V1EventList events = await this.PerformClientOperation((c) => c.ListEventForAllNamespacesAsync());
+
             return Mapper.Map<IList<ObjectSummary>>(
                     daemonSetsList.Items,
-                    options => options.Items[DaemonSetMappingProfile.PodsKey] = podList.Items)
+                    options =>
+                    {
+                        options.Items[DaemonSetMappingProfile.PodsKey] = podList.Items;
+                        options.Items[DaemonSetMappingProfile.EventsKey] = events.Items;
+                    })
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -756,6 +763,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName)
         {
+            // TODO Change to uuid ?
             V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(namespaceName, fieldSelector: $"involvedObject.name={objectName}"));
 
             return Mapper.Map<IList<Event>>(events.Items)

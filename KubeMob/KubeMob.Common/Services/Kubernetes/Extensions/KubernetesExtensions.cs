@@ -26,5 +26,12 @@ namespace KubeMob.Common.Services.Kubernetes.Extensions
 
             return string.Join(",", filteredSelectors.Select(kvp => $"{kvp.Key}={kvp.Value}"));
         }
+
+        // TODO Change OwnerReferences to use UUID not name
+        public static IEnumerable<V1Pod> FilterPods(this IEnumerable<V1Pod> pods, string ownerName)
+            => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == ownerName));
+
+        //public static IEnumerable<V1Pod> Filter(this IEnumerable<V1Pod> pods, string ownerName)
+        //    => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == ownerName));
     }
 }

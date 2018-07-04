@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using KubeMob.Common.Resx;
+using KubeMob.Common.Services.Kubernetes.Extensions;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -10,11 +11,16 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public StatefulSetMappingProfile()
         {
-            // TODO status
             this.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((s, rc) =>
+                {
+                    Status status = rc.GetStatus(s.Metadata.Uid, s.Metadata.Name);
+
+                    return new ObjectSummary(
+                        s.Metadata.Name,
+                        s.Metadata.NamespaceProperty,
+                        status);
+                });
 
             this.CreateMap<k8s.Models.V1StatefulSet, StatefulSetDetail>()
                 .ConstructUsing((s) =>

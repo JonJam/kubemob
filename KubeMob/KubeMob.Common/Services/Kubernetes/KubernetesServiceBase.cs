@@ -766,7 +766,6 @@ namespace KubeMob.Common.Services.Kubernetes
                         options.Items[KubernetesExtensions.PodsKey] = podList.Items;
                         options.Items[KubernetesExtensions.EventsKey] = events.Items;
                     })
-
                 .OrderBy(p => p.Name)
                 .ToList();
         }
@@ -784,11 +783,28 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            V1StatefulSetList statefulSetList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            // Starting tasks and waiting when all complete.
+            Task<V1StatefulSetList> statefulSet = this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListStatefulSetForAllNamespacesAsync()
                 : c.ListNamespacedStatefulSetAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(statefulSetList.Items)
+            Task<V1PodList> podsTask = this.GetPods(kubernetesNamespace);
+            Task<V1EventList> eventsTask = this.GetEvents(kubernetesNamespace);
+
+            await Task.WhenAll(statefulSet, podsTask, eventsTask);
+
+            // Tasks already complete here.
+            V1StatefulSetList statefulSetList = await statefulSet;
+            V1PodList podList = await podsTask;
+            V1EventList events = await eventsTask;
+
+            return Mapper.Map<IList<ObjectSummary>>(
+                    statefulSetList.Items,
+                    options =>
+                    {
+                        options.Items[KubernetesExtensions.PodsKey] = podList.Items;
+                        options.Items[KubernetesExtensions.EventsKey] = events.Items;
+                    })
                 .OrderBy(p => p.Name)
                 .ToList();
         }

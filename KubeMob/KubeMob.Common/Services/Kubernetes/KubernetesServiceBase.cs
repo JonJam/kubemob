@@ -744,11 +744,29 @@ namespace KubeMob.Common.Services.Kubernetes
         {
             string kubernetesNamespace = this.GetSelectedNamespaceName();
 
-            V1ReplicationControllerList replicationControllerList = await this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
+            // Starting tasks and waiting when all complete.
+            Task<V1ReplicationControllerList> replicationControllersTask = this.PerformClientOperation((c) => kubernetesNamespace == KubernetesServiceBase.AllNamespace
                 ? c.ListReplicationControllerForAllNamespacesAsync()
                 : c.ListNamespacedReplicationControllerAsync(kubernetesNamespace));
 
-            return Mapper.Map<IList<ObjectSummary>>(replicationControllerList.Items)
+            Task<V1PodList> podsTask = this.GetPods(kubernetesNamespace);
+            Task<V1EventList> eventsTask = this.GetEvents(kubernetesNamespace);
+
+            await Task.WhenAll(replicationControllersTask, podsTask, eventsTask);
+
+            // Tasks already complete here.
+            V1ReplicationControllerList replicationControllerList = await replicationControllersTask;
+            V1PodList podList = await podsTask;
+            V1EventList events = await eventsTask;
+
+            return Mapper.Map<IList<ObjectSummary>>(
+                    replicationControllerList.Items,
+                    options =>
+                    {
+                        options.Items[KubernetesExtensions.PodsKey] = podList.Items;
+                        options.Items[KubernetesExtensions.EventsKey] = events.Items;
+                    })
+
                 .OrderBy(p => p.Name)
                 .ToList();
         }

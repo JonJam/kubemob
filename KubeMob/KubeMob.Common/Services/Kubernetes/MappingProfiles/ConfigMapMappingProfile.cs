@@ -9,7 +9,6 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public ConfigMapMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1ConfigMap, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,

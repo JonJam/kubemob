@@ -40,7 +40,7 @@
                                 ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
                                 SeparatorVisibility="Default"
                                 HasUnevenRows="False"
-                                BackgroundColor="Transparent"
+                                BackgroundColor="White"
                                 SeparatorColor="DarkGray">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
@@ -48,9 +48,7 @@
                                             StyleId="DisclosureIndicator">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Padding="20,0,20,0"
-                                                BackgroundColor="White">
-
+                                                Padding="20,0,20,0">
                                                 <ffImageLoading:CachedImage
                                                     Source="success.png"
                                                     Style="{StaticResource StatusIconImageStyle}"

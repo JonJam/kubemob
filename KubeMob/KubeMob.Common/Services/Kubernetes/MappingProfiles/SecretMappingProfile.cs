@@ -10,7 +10,6 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public SecretMappingProfile()
         {
-            //TODO status
             this.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
                 .ConstructUsing((r) => new ObjectSummary(
                     r.Metadata.Name,

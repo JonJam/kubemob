@@ -39,10 +39,6 @@ namespace KubeMob.iOS.Renderers
                     break;
             }
 
-            var view = new UIView();
-            view.BackgroundColor = UIColor.Red;
-            cell.AccessoryView = view;
-
             return cell;
         }
     }

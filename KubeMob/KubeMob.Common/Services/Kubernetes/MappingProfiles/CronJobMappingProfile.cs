@@ -39,6 +39,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     string startingDeadlineSeconds = c.Spec.StartingDeadlineSeconds?.ToString() ?? "-";
 
                     return new CronJobDetail(
+                        c.Metadata.Uid,
                         c.Metadata.Name,
                         c.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

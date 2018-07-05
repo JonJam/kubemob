@@ -15,7 +15,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<V1DaemonSet, ObjectSummary>()
                 .ConstructUsing((d, rc) =>
                 {
-                    Status status = rc.GetStatus(d.Metadata.Uid, d.Metadata.Name);
+                    Status status = rc.GetStatus(d.Metadata.Uid);
 
                     return new ObjectSummary(
                         d.Metadata.Name,
@@ -43,6 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     string relatedSelector = d.Spec.Selector.ToRelatedSelector();
 
                     return new DaemonSetDetail(
+                        d.Metadata.Uid,
                         d.Metadata.Name,
                         d.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

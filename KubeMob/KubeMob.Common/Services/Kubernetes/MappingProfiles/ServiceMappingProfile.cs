@@ -65,6 +65,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         : null;
 
                     return new ServiceDetail(
+                        s.Metadata.Uid,
                         s.Metadata.Name,
                         s.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class PodDetail : ObjectDetailBase
     {
         public PodDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -21,7 +22,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<Condition> conditions,
             IReadOnlyList<ObjectReference> owners,
             IReadOnlyList<string> persistentVolumeClaims)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Status = status;
             this.QualityOfServiceClass = qualityOfServiceClass;

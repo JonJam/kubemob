@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class SecretDetail : ObjectDetailBase
     {
         public SecretDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -15,7 +16,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string creationTime,
             string type,
             IReadOnlyList<SecretData> data)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Type = type;
             this.Data = data;

@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class DeploymentDetail : ObjectDetailBase
     {
         public DeploymentDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -19,7 +20,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string revisionHistoryLimit,
             string rollingUpdateStrategy,
             string status)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Selectors = selectors;
             this.Strategy = strategy;

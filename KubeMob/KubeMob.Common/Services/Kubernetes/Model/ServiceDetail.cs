@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class ServiceDetail : ObjectDetailBase
     {
         public ServiceDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -20,7 +21,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> internalEndpoints,
             IReadOnlyList<string> externalEndpoints,
             string selector)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.LabelSelector = labelSelector;
             this.Type = type;

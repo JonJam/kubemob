@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes.Model;
 
 namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
@@ -52,6 +51,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                                               new List<Capacity>();
 
                     return new PersistentVolumeClaimDetail(
+                        p.Metadata.Uid,
                         p.Metadata.Name,
                         p.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

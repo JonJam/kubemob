@@ -10,25 +10,26 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         public IngressMappingProfile()
         {
             this.CreateMap<k8s.Models.V1beta1Ingress, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((i) => new ObjectSummary(
+                    i.Metadata.Name,
+                    i.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1beta1Ingress, IngressDetail>()
-                .ConstructUsing((s) =>
+                .ConstructUsing((i) =>
                 {
-                    List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                    List<string> labels = i.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                           new List<string>();
-                    List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
+                    List<string> annotations = i.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                new List<string>();
 
-                    string creationTime = s.Metadata.CreationTimestamp.HasValue
-                        ? $"{s.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
+                    string creationTime = i.Metadata.CreationTimestamp.HasValue
+                        ? $"{i.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
                     return new IngressDetail(
-                        s.Metadata.Name,
-                        s.Metadata.NamespaceProperty,
+                        i.Metadata.Uid,
+                        i.Metadata.Name,
+                        i.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
                         creationTime);

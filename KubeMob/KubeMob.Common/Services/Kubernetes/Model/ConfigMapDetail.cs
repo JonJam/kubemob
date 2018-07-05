@@ -8,13 +8,14 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class ConfigMapDetail : ObjectDetailBase
     {
         public ConfigMapDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime,
             IReadOnlyList<KeyValuePair<string, string>> data)
-            : base(name, namespaceName, labels, annotations, creationTime) => this.Data = data;
+            : base(uid, name, namespaceName, labels, annotations, creationTime) => this.Data = data;
 
         public IReadOnlyList<KeyValuePair<string, string>> Data
         {

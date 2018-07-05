@@ -94,6 +94,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         .Select(v => v.PersistentVolumeClaim.ClaimName).ToList();
 
                     return new PodDetail(
+                        p.Metadata.Uid,
                         p.Metadata.Name,
                         p.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

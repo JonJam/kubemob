@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class StorageClassDetail : ObjectDetailBase
     {
         public StorageClassDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -15,7 +16,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string creationTime,
             string provisioner,
             IReadOnlyList<string> parameters)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Provisioner = provisioner;
             this.Parameters = parameters;

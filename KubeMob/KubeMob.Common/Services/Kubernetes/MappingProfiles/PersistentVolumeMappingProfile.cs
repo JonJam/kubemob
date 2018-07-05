@@ -57,6 +57,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                                               new List<Capacity>();
 
                     return new PersistentVolumeDetail(
+                        p.Metadata.Uid,
                         p.Metadata.Name,
                         p.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

@@ -45,7 +45,7 @@ namespace KubeMob.Common.ViewModels.ReplicaSets
         {
             Filter filter = new Filter(
                 this.NamespaceName,
-                other: this.Name);
+                other: this.Detail.Uid);
 
             return this.NavigationService.NavigateToPodsPage(filter);
         }

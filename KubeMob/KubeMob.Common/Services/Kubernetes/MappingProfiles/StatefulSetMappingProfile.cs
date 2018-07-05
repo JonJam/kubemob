@@ -14,7 +14,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1StatefulSet, ObjectSummary>()
                 .ConstructUsing((s, rc) =>
                 {
-                    Status status = rc.GetStatus(s.Metadata.Uid, s.Metadata.Name);
+                    Status status = rc.GetStatus(s.Metadata.Uid);
 
                     return new ObjectSummary(
                         s.Metadata.Name,
@@ -43,6 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         s.Status.CurrentReplicas.GetValueOrDefault(0));
 
                     return new StatefulSetDetail(
+                        s.Metadata.Uid,
                         s.Metadata.Name,
                         s.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

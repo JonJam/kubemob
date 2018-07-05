@@ -8,12 +8,13 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class IngressDetail : ObjectDetailBase
     {
         public IngressDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
         }
     }

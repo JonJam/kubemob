@@ -10,9 +10,9 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         public StorageClassMappingProfile()
         {
             this.CreateMap<k8s.Models.V1StorageClass, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((s) => new ObjectSummary(
+                    s.Metadata.Name,
+                    s.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1StorageClass, StorageClassDetail>()
                 .ConstructUsing((s) =>
@@ -29,6 +29,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     List<string> parameters = s.Parameters.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
 
                     return new StorageClassDetail(
+                        s.Metadata.Uid,
                         s.Metadata.Name,
                         s.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

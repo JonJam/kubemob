@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class JobDetail : ObjectDetailBase
     {
         public JobDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -17,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             int parallelism,
             int completions,
             string status)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Images = images;
             this.Parallelism = parallelism;

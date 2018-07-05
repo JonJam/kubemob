@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class NodeDetail : ObjectDetailBase
     {
         public NodeDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -28,7 +29,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string operatingSystem,
             string architecture,
             IReadOnlyList<Condition> conditions)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Addresses = addresses;
             this.PodCidr = podCidr;

@@ -52,9 +52,11 @@
 
         <Label
             Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+            IsVisible="{Binding Detail.RollingUpdateStrategy, Converter={StaticResource NotEmptyToBoolConverter}}"/>
         <Label
-            Text="{Binding Detail.RollingUpdateStrategy}"/>
+            Text="{Binding Detail.RollingUpdateStrategy}"
+            IsVisible="{Binding Detail.RollingUpdateStrategy, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_Status}"

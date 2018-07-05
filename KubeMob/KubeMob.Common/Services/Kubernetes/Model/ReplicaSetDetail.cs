@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class ReplicaSetDetail : ObjectDetailBase
     {
         public ReplicaSetDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -17,7 +18,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<string> images,
             string pods,
             string relatedSelector)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Selectors = selectors;
             this.Images = images;

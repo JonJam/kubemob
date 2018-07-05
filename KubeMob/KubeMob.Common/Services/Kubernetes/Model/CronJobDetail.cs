@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class CronJobDetail : ObjectDetailBase
     {
         public CronJobDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -19,7 +20,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string concurrencyPolicy,
             string startingDeadlineSeconds,
             int activeJobCount)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Schedule = schedule;
             this.Suspend = suspend;

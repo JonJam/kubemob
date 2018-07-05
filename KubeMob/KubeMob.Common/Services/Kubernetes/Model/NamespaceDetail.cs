@@ -8,13 +8,14 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class NamespaceDetail : ObjectDetailBase
     {
         public NamespaceDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime,
             string status)
-            : base(name, namespaceName, labels, annotations, creationTime) => this.Status = status;
+            : base(uid, name, namespaceName, labels, annotations, creationTime) => this.Status = status;
 
         public string Status
         {

@@ -10,12 +10,15 @@
              common:ViewModelLocator.AutoWireViewModel="False"
              Title="☰">
 
-    <ScrollView>
+    <!--TODO make 20 a resdict value-->
+    <ScrollView
+        Padding="20">
         <StackLayout>
 
             <!-- Cluster -->
             <StackLayout
-                IsVisible="{Binding ShowCluster}">
+                IsVisible="{Binding ShowCluster}"
+                Spacing="10">
                 <views:GroupMenuItem
                     Title="{extensions:Translate Cluster}"/>
 
@@ -49,8 +52,8 @@
 
             </StackLayout>
 
+            <!--TODO Style-->
             <StackLayout
-                Padding="15,10"
                 HorizontalOptions="FillAndExpand">
                 <Label 
                     Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>

@@ -2,10 +2,16 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KubeMob.Common.Views.MenuItem"
-             Padding="15,10">
+             Padding="20,10,0,10"
+             >
+    <!--Margin="20,20,0,20"-->
+    <!--Padding="15,10"-->
+
     <Label
         x:Name="TitleLabel"
-        Margin="10,0,0,0"
-        FontSize="15"
+        Style="{DynamicResource SubtitleStyle}"
+        Margin="0"
         LineBreakMode="TailTruncation"/>
+    <!--Margin="10,0,0,0"
+    FontSize="15"-->
 </ContentView>

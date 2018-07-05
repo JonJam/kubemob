@@ -7,10 +7,11 @@
                   xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                   x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterDetailPage"
                   common:ViewModelLocator.AutoWireViewModel="True"
-                  IsPresented="{Binding ShowMaster, Mode=TwoWay}"
-                  >
+                  IsPresented="{Binding ShowMaster, Mode=TwoWay}">
 
-    <!--TODO Change color of network / clock ??-->
+    <!--TODO iOS - Change color of network / clock ??
+    BarBackgroundColor="{StaticResource KubernetesBlueColor}"
+    BarTextColor="White"-->
 
     <MasterDetailPage.Master>
         <md:ClusterMasterPage 
@@ -19,9 +20,7 @@
     </MasterDetailPage.Master>
 
     <MasterDetailPage.Detail>
-        <base:ExtendedNavigationPage
-            BarBackgroundColor="{StaticResource KubernetesBlueColor}"
-            BarTextColor="White">
+        <base:ExtendedNavigationPage>
             <x:Arguments>
                 <pages:ClusterOverviewPage />
             </x:Arguments>

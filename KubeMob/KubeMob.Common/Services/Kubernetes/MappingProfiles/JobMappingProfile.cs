@@ -15,7 +15,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<V1Job, ObjectSummary>()
                 .ConstructUsing((j, rc) =>
                 {
-                    Status status = rc.GetStatus(j.Metadata.Uid, j.Metadata.Name);
+                    Status status = rc.GetStatus(j.Metadata.Uid);
 
                     return new ObjectSummary(
                         j.Metadata.Name,
@@ -47,6 +47,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         j.Status.Failed.GetValueOrDefault(0));
 
                     return new JobDetail(
+                        j.Metadata.Uid,
                         j.Metadata.Name,
                         j.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

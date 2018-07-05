@@ -10,9 +10,9 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         public ConfigMapMappingProfile()
         {
             this.CreateMap<k8s.Models.V1ConfigMap, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((c) => new ObjectSummary(
+                    c.Metadata.Name,
+                    c.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1ConfigMap, ConfigMapDetail>()
                 .ConstructUsing((c) =>
@@ -29,6 +29,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     List<KeyValuePair<string, string>> data = c.Data?.ToList() ?? new List<KeyValuePair<string, string>>();
 
                     return new ConfigMapDetail(
+                        c.Metadata.Uid,
                         c.Metadata.Name,
                         c.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

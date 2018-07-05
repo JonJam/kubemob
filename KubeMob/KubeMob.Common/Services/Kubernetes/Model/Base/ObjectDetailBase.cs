@@ -7,17 +7,24 @@ namespace KubeMob.Common.Services.Kubernetes.Model.Base
     public abstract class ObjectDetailBase
     {
         protected ObjectDetailBase(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
             IReadOnlyList<string> annotations,
             string creationTime)
         {
+            this.Uid = uid;
             this.Name = name;
             this.NamespaceName = namespaceName;
             this.Labels = labels;
             this.Annotations = annotations;
             this.CreationTime = creationTime;
+        }
+
+        public string Uid
+        {
+            get;
         }
 
         public string Name

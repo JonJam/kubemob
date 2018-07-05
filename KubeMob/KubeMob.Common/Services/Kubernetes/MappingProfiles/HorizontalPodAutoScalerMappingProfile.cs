@@ -10,9 +10,9 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         public HorizontalPodAutoscalerMappingProfile()
         {
             this.CreateMap<k8s.Models.V1HorizontalPodAutoscaler, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((h) => new ObjectSummary(
+                    h.Metadata.Name,
+                    h.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1HorizontalPodAutoscaler, HorizontalPodAutoscalerDetail>()
                 .ConstructUsing((h) =>
@@ -41,6 +41,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         : string.Empty;
 
                     return new HorizontalPodAutoscalerDetail(
+                        h.Metadata.Uid,
                         h.Metadata.Name,
                         h.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

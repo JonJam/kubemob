@@ -11,9 +11,9 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
         public SecretMappingProfile()
         {
             this.CreateMap<k8s.Models.V1Secret, ObjectSummary>()
-                .ConstructUsing((r) => new ObjectSummary(
-                    r.Metadata.Name,
-                    r.Metadata.NamespaceProperty));
+                .ConstructUsing((s) => new ObjectSummary(
+                    s.Metadata.Name,
+                    s.Metadata.NamespaceProperty));
 
             this.CreateMap<k8s.Models.V1Secret, SecretDetail>()
                 .ConstructUsing((s) =>
@@ -30,6 +30,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     List<SecretData> data = s.Data.Select(pair => new SecretData(pair.Key, Encoding.UTF8.GetString(pair.Value))).ToList();
 
                     return new SecretDetail(
+                        s.Metadata.Uid,
                         s.Metadata.Name,
                         s.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

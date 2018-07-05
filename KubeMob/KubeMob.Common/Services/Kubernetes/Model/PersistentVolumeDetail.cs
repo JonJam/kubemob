@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class PersistentVolumeDetail : ObjectDetailBase
     {
         public PersistentVolumeDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -21,7 +22,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string reason,
             string message,
             IReadOnlyList<Capacity> capacity)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Status = status;
             this.Claim = claim;

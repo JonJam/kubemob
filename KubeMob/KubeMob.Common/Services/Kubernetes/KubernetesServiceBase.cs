@@ -457,7 +457,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.FilterPodsForOwner(filter.Other);
+                items = items.FilterPodsForUid(filter.Other);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(items)
@@ -497,11 +497,10 @@ namespace KubeMob.Common.Services.Kubernetes
 
             IEnumerable<V1ReplicaSet> items = replicaSetList.Items;
 
-            // TODO Change OwnerReferences to use UUID not name
             // Related to Deployments.
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(r => r.Metadata.OwnerReferences.Any(o => o.Name == filter.Other) && r.Spec.Replicas.GetValueOrDefault(0) != 0);
+                items = items.Where(r => r.Metadata.OwnerReferences.Any(o => o.Uid == filter.Other) && r.Spec.Replicas.GetValueOrDefault(0) != 0);
             }
 
             return Mapper.Map<IList<ObjectSummary>>(
@@ -714,10 +713,9 @@ namespace KubeMob.Common.Services.Kubernetes
             // Related to Cron Jobs.
             IEnumerable<V1Job> items = jobList.Items;
 
-            // TODO Change OwnerReferences to use UUID not name
             if (!string.IsNullOrWhiteSpace(filter?.Other))
             {
-                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == filter.Other));
+                items = items.Where(p => p.Metadata.OwnerReferences.Any(o => o.Uid == filter.Other));
             }
 
             return Mapper.Map<IList<ObjectSummary>>(
@@ -849,10 +847,9 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<PersistentVolumeClaimDetail>(persistentVolumeClaimDetail);
         }
 
-        public async Task<IList<Event>> GetEventsForObject(string objectName, string namespaceName)
+        public async Task<IList<Event>> GetEventsForObject(string uid, string namespaceName)
         {
-            // TODO Change to uuid ?
-            V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(namespaceName, fieldSelector: $"involvedObject.name={objectName}"));
+            V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(namespaceName, fieldSelector: $"involvedObject.uid={uid}"));
 
             return Mapper.Map<IList<Event>>(events.Items)
                 .OrderBy(e => e.LastSeen)

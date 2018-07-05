@@ -8,6 +8,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     public class HorizontalPodAutoscalerDetail : ObjectDetailBase
     {
         public HorizontalPodAutoscalerDetail(
+            string uid,
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
@@ -21,7 +22,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             int desiredReplicas,
             string currentCpuUtilization,
             string lastScaled)
-            : base(name, namespaceName, labels, annotations, creationTime)
+            : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Target = target;
             this.MinReplicas = minReplicas;

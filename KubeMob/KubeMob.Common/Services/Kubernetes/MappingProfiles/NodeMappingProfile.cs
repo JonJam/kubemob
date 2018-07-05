@@ -10,7 +10,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public NodeMappingProfile()
         {
-            this.CreateMap<k8s.Models.V1Node, ObjectSummary>()
+            this.CreateMap<V1Node, ObjectSummary>()
                 .ConstructUsing((n) =>
                 {
                     Status status = Status.Unknown;
@@ -38,7 +38,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         status);
                 });
 
-            this.CreateMap<k8s.Models.V1NodeCondition, Condition>()
+            this.CreateMap<V1NodeCondition, Condition>()
                 .ConstructUsing((c) =>
                 {
                     string lastHeartbeatTime = c.LastHeartbeatTime.HasValue
@@ -58,7 +58,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         c.Message);
                 });
 
-            this.CreateMap<k8s.Models.V1Node, NodeDetail>()
+            this.CreateMap<V1Node, NodeDetail>()
                 .ConstructUsing((n) =>
                 {
                     List<string> labels = n.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
@@ -75,6 +75,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     List<Condition> conditions = Mapper.Map<List<Condition>>(n.Status.Conditions);
 
                     return new NodeDetail(
+                        n.Metadata.Uid,
                         n.Metadata.Name,
                         n.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

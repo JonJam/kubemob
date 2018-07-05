@@ -105,18 +105,11 @@ namespace KubeMob.Common.ViewModels.Base
                 try
                 {
                     // Starting tasks and waiting when all complete.
-                    Task<T> objectDetailTask = this.GetObjectDetail(objectId.Name, objectId.NamespaceName);
+                    this.Detail = await this.GetObjectDetail(objectId.Name, objectId.NamespaceName);
 
                     // TODO refactor to seperate page.
-                    Task<IList<Event>> eventsTask = this.KubernetesService.GetEventsForObject(objectId.Name, objectId.NamespaceName);
-
-                    await Task.WhenAll(
-                        objectDetailTask,
-                        eventsTask);
-
-                    // Tasks already complete here.
-                    this.Detail = await objectDetailTask;
-                    this.Events = await eventsTask;
+                    this.Events =
+                        await this.KubernetesService.GetEventsForObject(this.Detail.Uid, objectId.NamespaceName);
                 }
                 catch (ClusterNotFoundException)
                 {

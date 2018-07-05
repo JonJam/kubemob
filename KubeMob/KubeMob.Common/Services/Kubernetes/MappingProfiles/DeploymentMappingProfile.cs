@@ -15,7 +15,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<V1Deployment, ObjectSummary>()
                    .ConstructUsing((d, rc) =>
                 {
-                    Status status = rc.GetStatus(d.Metadata.Uid, d.Metadata.Name);
+                    Status status = rc.GetStatus(d.Metadata.Uid);
 
                     return new ObjectSummary(
                         d.Metadata.Name,
@@ -38,10 +38,14 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 
                     int minReadySeconds = d.Spec.MinReadySeconds.GetValueOrDefault(0);
                     string revisionHistoryLimit = d.Spec.RevisionHistoryLimit?.ToString() ?? AppResources.ObjectDetail_NotSet;
-                    string rollingUpdateStrategy = string.Format(
-                        AppResources.DeploymentDetail_RollingUpdateStrategy,
-                        d.Spec.Strategy.RollingUpdate.MaxSurge.Value,
-                        d.Spec.Strategy.RollingUpdate.MaxUnavailable.Value);
+
+                    string rollingUpdateStrategy = d.Spec.Strategy.RollingUpdate != null
+                        ? string.Format(
+                            AppResources.DeploymentDetail_RollingUpdateStrategy,
+                            d.Spec.Strategy.RollingUpdate.MaxSurge.Value,
+                            d.Spec.Strategy.RollingUpdate.MaxUnavailable.Value)
+                        : string.Empty;
+
                     string status = string.Format(
                         AppResources.DeploymentDetail_Status,
                         d.Status.UpdatedReplicas.GetValueOrDefault(0),
@@ -50,6 +54,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         d.Status.UnavailableReplicas.GetValueOrDefault(0));
 
                     return new DeploymentDetail(
+                        d.Metadata.Uid,
                         d.Metadata.Name,
                         d.Metadata.NamespaceProperty,
                         labels.AsReadOnly(),

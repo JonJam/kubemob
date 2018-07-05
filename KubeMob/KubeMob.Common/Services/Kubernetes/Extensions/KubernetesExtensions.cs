@@ -32,19 +32,17 @@ namespace KubeMob.Common.Services.Kubernetes.Extensions
             return string.Join(",", filteredSelectors.Select(kvp => $"{kvp.Key}={kvp.Value}"));
         }
 
-        // TODO Change OwnerReferences to use UUID not name
-        public static IEnumerable<V1Pod> FilterPodsForOwner(this IEnumerable<V1Pod> pods, string ownerName)
-            => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Name == ownerName));
+        public static IEnumerable<V1Pod> FilterPodsForUid(this IEnumerable<V1Pod> pods, string uid)
+            => pods.Where(p => p.Metadata.OwnerReferences.Any(o => o.Uid == uid));
 
         public static Status GetStatus(
             this ResolutionContext rc,
-            string uid,
-            string name)
+            string uid)
         {
             IList<V1Pod> pods = (IList<V1Pod>)rc.Items[KubernetesExtensions.PodsKey];
             IList<V1Event> events = (IList<V1Event>)rc.Items[KubernetesExtensions.EventsKey];
 
-            IEnumerable<V1Pod> relatedPendingPods = pods.FilterPodsForOwner(name).FilterPendingPods();
+            IEnumerable<V1Pod> relatedPendingPods = pods.FilterPodsForUid(uid).FilterPendingPods();
             IEnumerable<V1Event> relatedWarningEvents =
                 events.FilterEventsForInvolvedObject(uid).FilterWarningEvents();
 

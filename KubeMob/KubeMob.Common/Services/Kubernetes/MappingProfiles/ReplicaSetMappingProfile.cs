@@ -14,7 +14,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1ReplicaSet, ObjectSummary>()
                 .ConstructUsing((r, rc) =>
                 {
-                    Status status = rc.GetStatus(r.Metadata.Uid, r.Metadata.Name);
+                    Status status = rc.GetStatus(r.Metadata.Uid);
 
                     return new ObjectSummary(
                         r.Metadata.Name,
@@ -44,6 +44,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 string relatedSelector = r.Spec.Selector.ToRelatedSelector();
 
                 return new ReplicaSetDetail(
+                    r.Metadata.Uid,
                     r.Metadata.Name,
                     r.Metadata.NamespaceProperty,
                     labels.AsReadOnly(),

@@ -185,9 +185,6 @@
     <Compile Update="Views\MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\GroupMenuItem.xaml.cs">
-      <DependentUpon>GroupMenuItem.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\TappableView.xaml.cs">
       <DependentUpon>TappableView.xaml</DependentUpon>
     </Compile>

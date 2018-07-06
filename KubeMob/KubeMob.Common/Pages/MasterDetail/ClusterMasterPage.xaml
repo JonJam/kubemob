@@ -9,6 +9,23 @@
                           x:Class="KubeMob.Common.Pages.MasterDetail.ClusterMasterPage"
              common:ViewModelLocator.AutoWireViewModel="False"
              Title="☰">
+    <base:ExtendedContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="GroupHeaderLabelStyle" BaseResourceKey="TitleStyle" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
+            </Style>
+
+            <Style x:Key="MenuLabelStyle" BaseResourceKey="SubtitleStyle" TargetType="Label">
+                <Setter Property="LineBreakMode" Value="TailTruncation"/>
+                <Setter Property="Margin" Value="20,10,0,10"/>
+            </Style>
+
+            <Style x:Key="SeperatorBoxViewStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DarkGray"/>
+                <Setter Property="HeightRequest" Value="1"/>
+            </Style>
+        </ResourceDictionary>
+    </base:ExtendedContentPage.Resources>
 
     <!--TODO make 20 a resdict value-->
     <ScrollView
@@ -17,73 +34,82 @@
 
             <!-- Cluster -->
             <StackLayout
-                IsVisible="{Binding ShowCluster}"
-                Spacing="10">
-                <views:GroupMenuItem
-                    Title="{extensions:Translate Cluster}"/>
+                IsVisible="{Binding ShowCluster}">
+                <Label
+                    Text="{extensions:Translate Cluster}"
+                    Style="{StaticResource MenuLabelStyle}"/>
 
                 <views:TappableView
                     Command="{Binding NavigateToNamespacesCommand}"
                     IsVisible="{Binding ShowNamespaces}">
-                    <views:MenuItem
-                        Title="{extensions:Translate Namespaces}"/>
+                    <Label
+                        Text="{extensions:Translate Namespaces}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                     Command="{Binding NavigateToNodesCommand}"
                     IsVisible="{Binding ShowNodes}">
-                    <views:MenuItem
-                        Title="{extensions:Translate Nodes}"/>
+                    <Label
+                        Text="{extensions:Translate Namespaces}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                     Command="{Binding NavigateToPersistentVolumesCommand}"
                     IsVisible="{Binding ShowPersistentVolumes}">
-                    <views:MenuItem
-                        Title="{extensions:Translate PersistentVolumes}"/>
+                    <Label
+                        Text="{extensions:Translate PersistentVolumes}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                     Command="{Binding NavigateToStorageClassesCommand}"
                     IsVisible="{Binding ShowStorageClasses}">
-                    <views:MenuItem
-                        Title="{extensions:Translate StorageClasses}"/>
+                    <Label
+                    Text="{extensions:Translate StorageClasses}"
+                    Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
+                <BoxView
+                    Style="{StaticResource SeperatorBoxViewStyle}"/>
             </StackLayout>
 
-            <!--TODO Style-->
-            <StackLayout
-                HorizontalOptions="FillAndExpand">
-                <Label 
-                    Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"/>
+            <!--TODO iOS Style-->
+            <StackLayout>
+                <Label
+                    Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"
+                    Style="{StaticResource GroupHeaderLabelStyle}"/>
                 <Picker
                     x:Name="NamespacePicker"
                     ItemsSource="{Binding Namespaces}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
-                    Margin="10,0,0,0">
-                </Picker>
+                    Margin="20,10,0,10"/>
             </StackLayout>
 
             <!-- Workloads -->
             <StackLayout
                 IsVisible="{Binding ShowWorkloads}">
-                <views:GroupMenuItem
-                Title="{extensions:Translate Workloads}"/>
+                <Label
+                    Text="{extensions:Translate Workloads}"
+                    Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
                 Command="{Binding NavigateToCronJobsCommand}"
                 IsVisible="{Binding ShowCronJobs}">
                     <views:MenuItem
                     Title="{extensions:Translate CronJobs}"/>
+                    <Label
+                        Text="{extensions:Translate CronJobs}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
+                // TODOup to here
                 <views:TappableView
                 Command="{Binding NavigateToDaemonSetsCommand}"
                 IsVisible="{Binding ShowDaemonSets}">
                     <views:MenuItem
-                    Title="{extensions:Translate DaemonSets}"/>
                 </views:TappableView>
 
                 <views:TappableView
@@ -132,8 +158,9 @@
             <!-- Discovery and load balancing -->
             <StackLayout
                 IsVisible="{Binding ShowDiscoveryAndLoadBalancing}">
-                <views:GroupMenuItem
-                Title="{extensions:Translate DiscoveryAndLoadBalancing}"/>
+                <Label
+                    Text="{extensions:Translate DiscoveryAndLoadBalancing}"
+                    Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
                 Command="{Binding NavigateToIngressesCommand}"
@@ -153,8 +180,9 @@
             <!-- Config and storage -->
             <StackLayout
                 IsVisible="{Binding ShowConfigAndStorage}">
-                <views:GroupMenuItem
-                Title="{extensions:Translate ConfigAndStorage}"/>
+                <Label
+                    Text="{extensions:Translate ConfigAndStorage}"
+                    Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
                 Command="{Binding NavigateToConfigMapsCommand}"
@@ -178,10 +206,14 @@
                 </views:TappableView>
             </StackLayout>
 
+            <BoxView
+                Style="{StaticResource SeperatorBoxViewStyle}"/>
+
             <!-- Other -->
             <views:TappableView
                 Command="{Binding NavigateToSettingsCommand}">
-                <views:GroupMenuItem
+                <views:MenuItem
+                    Margin="0,10,0,10"
                     Title="{extensions:Translate Settings}"/>
             </views:TappableView>
         </StackLayout>

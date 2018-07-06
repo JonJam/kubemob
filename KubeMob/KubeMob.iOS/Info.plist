@@ -22,8 +22,6 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>11.2</string>
-	<key>CFBundleDisplayName</key>
-	<string>kubemob</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.jonjam.kubemob</string>
 	<key>CFBundleVersion</key>
@@ -50,5 +48,11 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>KubeMob</string>
+	<key>CFBundleDisplayName</key>
+	<string>Kubemob</string>
+  <key>UIStatusBarStyle</key>
+  <string>UIStatusBarStyleLightContent</string>
+  <key>UIViewControllerBasedStatusBarAppearance</key>
+  <false/>
 </dict>
 </plist>

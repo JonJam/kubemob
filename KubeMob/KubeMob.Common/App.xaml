@@ -119,13 +119,11 @@
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
-
+                          
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
-                                Style="{DynamicResource SubtitleStyle}"
-                                TextColor="{StaticResource MessageColor}"
+                                Style="{StaticResource ErrorMessageLabelStyle}"
                                 VerticalOptions="Center"
-                                HorizontalTextAlignment="Center"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
                         </Grid>
                     </Grid>

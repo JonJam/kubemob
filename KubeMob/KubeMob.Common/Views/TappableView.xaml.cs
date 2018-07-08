@@ -44,7 +44,7 @@ namespace KubeMob.Common.Views
 
         private async void HandleTap(object sender, EventArgs e)
         {
-            this.BackgroundColor = Color.LightGray;
+            this.BackgroundColor = Color.DarkGray;
 
             if (this.Command != null &&
                 this.Command.CanExecute(this.CommandParameter))

@@ -27,7 +27,6 @@
         </ResourceDictionary>
     </base:ExtendedContentPage.Resources>
 
-    <!--TODO make 20 a resdict value-->
     <ScrollView
         Padding="20">
         <StackLayout>
@@ -67,8 +66,8 @@
                     Command="{Binding NavigateToStorageClassesCommand}"
                     IsVisible="{Binding ShowStorageClasses}">
                     <Label
-                    Text="{extensions:Translate StorageClasses}"
-                    Style="{StaticResource MenuLabelStyle}"/>
+                        Text="{extensions:Translate StorageClasses}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <BoxView
@@ -96,64 +95,64 @@
                     Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
-                Command="{Binding NavigateToCronJobsCommand}"
-                IsVisible="{Binding ShowCronJobs}">
+                    Command="{Binding NavigateToCronJobsCommand}"
+                    IsVisible="{Binding ShowCronJobs}">
                     <Label
                         Text="{extensions:Translate CronJobs}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToDaemonSetsCommand}"
-                IsVisible="{Binding ShowDaemonSets}">
+                    Command="{Binding NavigateToDaemonSetsCommand}"
+                    IsVisible="{Binding ShowDaemonSets}">
                     <Label
                         Text="{extensions:Translate DaemonSets}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToDeploymentsCommand}"
-                IsVisible="{Binding ShowDeployments}">
+                    Command="{Binding NavigateToDeploymentsCommand}"
+                    IsVisible="{Binding ShowDeployments}">
                     <Label
                         Text="{extensions:Translate Deployments}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToJobsCommand}"
-                IsVisible="{Binding ShowJobs}">
+                    Command="{Binding NavigateToJobsCommand}"
+                    IsVisible="{Binding ShowJobs}">
                     <Label
                         Text="{extensions:Translate Jobs}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToPodsCommand}"
-                IsVisible="{Binding ShowPods}">
+                    Command="{Binding NavigateToPodsCommand}"
+                    IsVisible="{Binding ShowPods}">
                     <Label
                         Text="{extensions:Translate Pods}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToReplicaSetsCommand}"
-                IsVisible="{Binding ShowReplicaSets}">
+                    Command="{Binding NavigateToReplicaSetsCommand}"
+                    IsVisible="{Binding ShowReplicaSets}">
                     <Label
                         Text="{extensions:Translate ReplicaSets}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToReplicationControllersCommand}"
-                IsVisible="{Binding ShowReplicationControllers}">
+                    Command="{Binding NavigateToReplicationControllersCommand}"
+                    IsVisible="{Binding ShowReplicationControllers}">
                     <Label
                         Text="{extensions:Translate ReplicationControllers}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToStatefulSetsCommand}"
-                IsVisible="{Binding ShowStatefulSets}">
+                    Command="{Binding NavigateToStatefulSetsCommand}"
+                    IsVisible="{Binding ShowStatefulSets}">
                     <Label
                         Text="{extensions:Translate StatefulSets}"
                         Style="{StaticResource MenuLabelStyle}"/>
@@ -168,16 +167,16 @@
                     Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
-                Command="{Binding NavigateToIngressesCommand}"
-                IsVisible="{Binding ShowIngresses}">
+                    Command="{Binding NavigateToIngressesCommand}"
+                    IsVisible="{Binding ShowIngresses}">
                     <Label
                         Text="{extensions:Translate Ingresses}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToServicesCommand}"
-                IsVisible="{Binding ShowServices}">
+                    Command="{Binding NavigateToServicesCommand}"
+                    IsVisible="{Binding ShowServices}">
                     <Label
                         Text="{extensions:Translate Services}"
                         Style="{StaticResource MenuLabelStyle}"/>
@@ -192,24 +191,24 @@
                     Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
-                Command="{Binding NavigateToConfigMapsCommand}"
-                IsVisible="{Binding ShowConfigMaps}">
+                    Command="{Binding NavigateToConfigMapsCommand}"
+                    IsVisible="{Binding ShowConfigMaps}">
                     <Label
                         Text="{extensions:Translate ConfigMaps}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToPersistentVolumeClaimsCommand}"
-                IsVisible="{Binding ShowPersistentVolumeClaims}">
+                    Command="{Binding NavigateToPersistentVolumeClaimsCommand}"
+                    IsVisible="{Binding ShowPersistentVolumeClaims}">
                     <Label
                         Text="{extensions:Translate PersistentVolumeClaims}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
-                Command="{Binding NavigateToSecretsCommand}"
-                IsVisible="{Binding ShowSecrets}">
+                    Command="{Binding NavigateToSecretsCommand}"
+                    IsVisible="{Binding ShowSecrets}">
                     <Label
                         Text="{extensions:Translate Secrets}"
                         Style="{StaticResource MenuLabelStyle}"/>

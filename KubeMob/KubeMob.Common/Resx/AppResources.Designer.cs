@@ -1096,6 +1096,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Object listing.
+        /// </summary>
+        internal static string ObjectListing {
+            get {
+                return ResourceManager.GetString("ObjectListing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The selected object could not be found..
         /// </summary>
         internal static string ObjectNotFoundMessage {
@@ -1339,15 +1348,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resource Listing.
-        /// </summary>
-        internal static string ResourceListingPage_Title {
-            get {
-                return ResourceManager.GetString("ResourceListingPage_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Secrets.
         /// </summary>
         internal static string Secrets {
@@ -1420,20 +1420,29 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resource Listing.
+        ///   Looks up a localized string similar to Account.
         /// </summary>
-        internal static string SettingsPage_ResourceListing {
+        internal static string SettingsPage_Account {
             get {
-                return ResourceManager.GetString("SettingsPage_ResourceListing", resourceCulture);
+                return ResourceManager.GetString("SettingsPage_Account", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Switch Cluster.
+        ///   Looks up a localized string similar to Switch cluster.
         /// </summary>
-        internal static string SettingsPage_SwitchCluster {
+        internal static string SettingsPage_Account_SwitchCluster {
             get {
-                return ResourceManager.GetString("SettingsPage_SwitchCluster", resourceCulture);
+                return ResourceManager.GetString("SettingsPage_Account_SwitchCluster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preferences.
+        /// </summary>
+        internal static string SettingsPage_Preferences {
+            get {
+                return ResourceManager.GetString("SettingsPage_Preferences", resourceCulture);
             }
         }
         

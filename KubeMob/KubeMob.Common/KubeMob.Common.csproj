@@ -135,8 +135,8 @@
     <Compile Update="Pages\Services\ServicesPage.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Settings\ResourceListingPage.xaml.cs">
-      <DependentUpon>ResourceListingPage.xaml</DependentUpon>
+    <Compile Update="Pages\Settings\ObjectListingPage.xaml.cs">
+      <DependentUpon>ObjectListingPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>

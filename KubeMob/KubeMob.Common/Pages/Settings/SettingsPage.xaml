@@ -8,16 +8,23 @@
              Title="{markupExtensions:Translate Settings}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
-    <TableView Intent="Settings">
-        <TableRoot>
-            <TableSection>
+    <!--TODO Style-->
+    <!--TODO Icons??-->
+    <!--TODO iOs Indicator-->
+    <TableView Intent="Menu" BackgroundColor="White" >
+        <TableRoot >
+            <TableSection Title="{markupExtensions:Translate SettingsPage_Account}">
+               <!--TODO sort out this textcolor-->
                 <TextCell
-                    Text="{markupExtensions:Translate SettingsPage_ResourceListing}"
-                    Command="{Binding NavigateToResourceListingCommand}"/>
+                    TextColor="Gray"
+                    Text="{markupExtensions:Translate SettingsPage_Account_SwitchCluster}"
+                    Command="{Binding SwitchClusterCommand}"/>
+            </TableSection>
+            <TableSection Title="{markupExtensions:Translate SettingsPage_Preferences}">
                 <TextCell
-                    Text="{markupExtensions:Translate SettingsPage_SwitchCluster}"
-                    Command="{Binding SwitchClusterCommand}"/>        
-            </TableSection>            
+                    Text="{markupExtensions:Translate ObjectListing}"
+                    Command="{Binding NavigateToObjectListingCommand}"/>
+            </TableSection>
         </TableRoot>
     </TableView>
 </base:ExtendedContentPage>

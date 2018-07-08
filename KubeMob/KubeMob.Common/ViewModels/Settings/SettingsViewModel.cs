@@ -27,14 +27,14 @@ namespace KubeMob.Common.ViewModels.Settings
             this.kubernetesService = kubernetesService;
             this.accountManagers = accountManagers;
 
-            this.NavigateToResourceListingCommand =
-                new Command(async () => await navigationService.NavigateToResourceListingPage());
+            this.NavigateToObjectListingCommand =
+                new Command(async () => await navigationService.NavigateToObjectListingPage());
 
             this.SwitchClusterCommand =
                 new Command(async () => await this.OnSwitchClusterCommandExecute());
         }
 
-        public ICommand NavigateToResourceListingCommand
+        public ICommand NavigateToObjectListingCommand
         {
             get;
         }

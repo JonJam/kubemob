@@ -4,8 +4,8 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          x:Class="KubeMob.Common.Pages.Settings.ResourceListingPage"
-             Title="{markupExtensions:Translate ResourceListingPage_Title}"
+                          x:Class="KubeMob.Common.Pages.Settings.ObjectListingPage"
+             Title="{markupExtensions:Translate ObjectListing}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
     <TableView Intent="Settings">

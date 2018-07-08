@@ -96,7 +96,7 @@ namespace KubeMob.Common.Services.Navigation
 
         Task NavigateToSettingsPage();
 
-        Task NavigateToResourceListingPage();
+        Task NavigateToObjectListingPage();
 
         Task RemoveLastFromBackStack();
 

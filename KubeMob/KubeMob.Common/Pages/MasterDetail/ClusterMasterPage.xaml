@@ -37,7 +37,7 @@
                 IsVisible="{Binding ShowCluster}">
                 <Label
                     Text="{extensions:Translate Cluster}"
-                    Style="{StaticResource MenuLabelStyle}"/>
+                    Style="{StaticResource GroupHeaderLabelStyle}"/>
 
                 <views:TappableView
                     Command="{Binding NavigateToNamespacesCommand}"
@@ -98,60 +98,65 @@
                 <views:TappableView
                 Command="{Binding NavigateToCronJobsCommand}"
                 IsVisible="{Binding ShowCronJobs}">
-                    <views:MenuItem
-                    Title="{extensions:Translate CronJobs}"/>
                     <Label
                         Text="{extensions:Translate CronJobs}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
-                // TODOup to here
                 <views:TappableView
                 Command="{Binding NavigateToDaemonSetsCommand}"
                 IsVisible="{Binding ShowDaemonSets}">
-                    <views:MenuItem
+                    <Label
+                        Text="{extensions:Translate DaemonSets}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToDeploymentsCommand}"
                 IsVisible="{Binding ShowDeployments}">
-                    <views:MenuItem
-                    Title="{extensions:Translate Deployments}"/>
+                    <Label
+                        Text="{extensions:Translate Deployments}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToJobsCommand}"
                 IsVisible="{Binding ShowJobs}">
-                    <views:MenuItem
-                    Title="{extensions:Translate Jobs}"/>
+                    <Label
+                        Text="{extensions:Translate Jobs}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToPodsCommand}"
                 IsVisible="{Binding ShowPods}">
-                    <views:MenuItem
-                    Title="{extensions:Translate Pods}"/>
+                    <Label
+                        Text="{extensions:Translate Pods}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToReplicaSetsCommand}"
                 IsVisible="{Binding ShowReplicaSets}">
-                    <views:MenuItem
-                    Title="{extensions:Translate ReplicaSets}"/>
+                    <Label
+                        Text="{extensions:Translate ReplicaSets}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToReplicationControllersCommand}"
                 IsVisible="{Binding ShowReplicationControllers}">
-                    <views:MenuItem
-                    Title="{extensions:Translate ReplicationControllers}"/>
+                    <Label
+                        Text="{extensions:Translate ReplicationControllers}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToStatefulSetsCommand}"
                 IsVisible="{Binding ShowStatefulSets}">
-                    <views:MenuItem
-                    Title="{extensions:Translate StatefulSets}"/>
+                    <Label
+                        Text="{extensions:Translate StatefulSets}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
             </StackLayout>
 
@@ -165,15 +170,17 @@
                 <views:TappableView
                 Command="{Binding NavigateToIngressesCommand}"
                 IsVisible="{Binding ShowIngresses}">
-                    <views:MenuItem
-                    Title="{extensions:Translate Ingresses}"/>
+                    <Label
+                        Text="{extensions:Translate Ingresses}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToServicesCommand}"
                 IsVisible="{Binding ShowServices}">
-                    <views:MenuItem
-                    Title="{extensions:Translate Services}"/>
+                    <Label
+                        Text="{extensions:Translate Services}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
             </StackLayout>
 
@@ -187,22 +194,25 @@
                 <views:TappableView
                 Command="{Binding NavigateToConfigMapsCommand}"
                 IsVisible="{Binding ShowConfigMaps}">
-                    <views:MenuItem
-                    Title="{extensions:Translate ConfigMaps}"/>
+                    <Label
+                        Text="{extensions:Translate ConfigMaps}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToPersistentVolumeClaimsCommand}"
                 IsVisible="{Binding ShowPersistentVolumeClaims}">
-                    <views:MenuItem
-                    Title="{extensions:Translate PersistentVolumeClaims}"/>
+                    <Label
+                        Text="{extensions:Translate PersistentVolumeClaims}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
                 <views:TappableView
                 Command="{Binding NavigateToSecretsCommand}"
                 IsVisible="{Binding ShowSecrets}">
-                    <views:MenuItem
-                    Title="{extensions:Translate Secrets}"/>
+                    <Label
+                        Text="{extensions:Translate Secrets}"
+                        Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
             </StackLayout>
 
@@ -212,9 +222,10 @@
             <!-- Other -->
             <views:TappableView
                 Command="{Binding NavigateToSettingsCommand}">
-                <views:MenuItem
-                    Margin="0,10,0,10"
-                    Title="{extensions:Translate Settings}"/>
+                <Label
+                    Text="{extensions:Translate Settings}"
+                    Style="{StaticResource MenuLabelStyle}"
+                    Margin="0,10,0,10"/>
             </views:TappableView>
         </StackLayout>
     </ScrollView>

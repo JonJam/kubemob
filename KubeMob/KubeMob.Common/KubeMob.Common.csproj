@@ -182,9 +182,6 @@
     <Compile Update="Views\ErrorMessage.xaml.cs">
       <DependentUpon>ErrorMessage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MenuItem.xaml.cs">
-      <DependentUpon>MenuItem.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\TappableView.xaml.cs">
       <DependentUpon>TappableView.xaml</DependentUpon>
     </Compile>

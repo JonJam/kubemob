@@ -119,15 +119,11 @@
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
-
-                            <!--Create style:     TODO change to use style like this: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/styles/xaml/device-->
-
+                          
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
-                                Style="{DynamicResource SubtitleStyle}"
-                                TextColor="{StaticResource MessageColor}"
+                                Style="{StaticResource ErrorMessageLabelStyle}"
                                 VerticalOptions="Center"
-                                HorizontalTextAlignment="Center"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
                         </Grid>
                     </Grid>

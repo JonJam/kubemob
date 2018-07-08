@@ -14,9 +14,7 @@
                 HorizontalOptions="Center"/>
             <Label        
                 x:Name="MessageLabel"
-                Style="{DynamicResource SubtitleStyle}"
-                TextColor="{StaticResource MessageColor}"
-                HorizontalTextAlignment="Center"/>
+                Style="{DynamicResource ErrorMessageLabelStyle}"/>
         </StackLayout>
     </Grid>
 </ContentView>

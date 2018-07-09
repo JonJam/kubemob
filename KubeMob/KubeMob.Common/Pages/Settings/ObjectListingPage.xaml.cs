@@ -3,9 +3,9 @@ using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Pages.Settings
 {
-    public partial class ResourceListingPage : ExtendedContentPage
+    public partial class ObjectListingPage : ExtendedContentPage
     {
         [Preserve]
-        public ResourceListingPage() => this.InitializeComponent();
+        public ObjectListingPage() => this.InitializeComponent();
     }
 }

@@ -126,7 +126,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<StatefulSetDetailViewModel>();
 
             serviceCollection.AddTransient<SettingsViewModel>();
-            serviceCollection.AddTransient<ResourceListingViewModel>();
+            serviceCollection.AddTransient<ObjectListingViewModel>();
 
             serviceCollection.AddTransient<EventDetailViewModel>();
             serviceCollection.AddTransient<ConditionDetailViewModel>();

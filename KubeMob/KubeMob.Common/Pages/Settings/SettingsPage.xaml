@@ -3,6 +3,7 @@
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Settings.SettingsPage"
              Title="{markupExtensions:Translate Settings}"
@@ -10,14 +11,21 @@
 
     <TableView Intent="Settings">
         <TableRoot>
-            <TableSection>
-                <TextCell
-                    Text="{markupExtensions:Translate SettingsPage_ResourceListing}"
-                    Command="{Binding NavigateToResourceListingCommand}"/>
-                <TextCell
-                    Text="{markupExtensions:Translate SettingsPage_SwitchCluster}"
-                    Command="{Binding SwitchClusterCommand}"/>        
-            </TableSection>            
+            <TableSection
+                Title="{markupExtensions:Translate SettingsPage_Account}">
+                <views:SettingsItemViewCell
+                    Command="{Binding SwitchClusterCommand}"
+                    Icon="swap.png"
+                    Text="{markupExtensions:Translate SettingsPage_Account_SwitchCluster}"/>
+            </TableSection>
+            <TableSection
+                Title="{markupExtensions:Translate SettingsPage_Preferences}">
+                <views:SettingsItemViewCell
+                    Command="{Binding NavigateToObjectListingCommand}"
+                    Indicator="DisclosureIndicator"
+                    Icon="visibility.png"
+                    Text="{markupExtensions:Translate ObjectListing}"/>
+            </TableSection>
         </TableRoot>
     </TableView>
 </base:ExtendedContentPage>

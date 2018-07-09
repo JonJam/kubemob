@@ -324,5 +324,23 @@
   <ItemGroup>
     <BundleResource Include="Resources\settings%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swap%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\swap%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\visibility.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\visibility%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\visibility%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

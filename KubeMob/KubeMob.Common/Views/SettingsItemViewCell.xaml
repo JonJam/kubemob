@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="KubeMob.Common.Views.SettingsItemViewCell">
+    <StackLayout
+        Orientation="Horizontal"
+        Padding="20,0,20,0">
+
+        <ffImageLoading:CachedImage
+            x:Name="IconCachedImage"
+            Style="{StaticResource StatusIconImageStyle}">
+            <ffImageLoading:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource GreyStatusIconColor}"
+                    EnableSolidColor="true"/>
+            </ffImageLoading:CachedImage.Transformations>
+        </ffImageLoading:CachedImage>
+
+        <Label
+            x:Name="TextLabel"
+            Style="{DynamicResource SubtitleStyle}"
+            VerticalOptions="Center"
+            LineBreakMode="TailTruncation"/>
+    </StackLayout>
+</ViewCell>

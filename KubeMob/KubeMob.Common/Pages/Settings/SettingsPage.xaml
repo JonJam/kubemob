@@ -9,36 +9,19 @@
              Title="{markupExtensions:Translate Settings}"
              common:ViewModelLocator.AutoWireViewModel="true">
 
-    <base:ExtendedContentPage.Resources>
-        <ResourceDictionary>
-
-        </ResourceDictionary>
-    </base:ExtendedContentPage.Resources>
-
-    <!--TODO Sort out colors for Android-->
-
-
-    <!--BackgroundColor="White"-->
-
-    <!--TextColor="Gray"-->
-
-    <!--TextColor="Gray"-->
     <TableView Intent="Settings">
-        <TableRoot >
+        <TableRoot>
             <TableSection
                 Title="{markupExtensions:Translate SettingsPage_Account}">
-
-                <!--TODO Implement command for this view cell-->
-                <!--Command="{Binding SwitchClusterCommand}"/>-->
-<views:SettingsItemViewCell
+                <views:SettingsItemViewCell
+                    Command="{Binding SwitchClusterCommand}"
                     Icon="swap.png"
                     Text="{markupExtensions:Translate SettingsPage_Account_SwitchCluster}"/>
             </TableSection>
             <TableSection
                 Title="{markupExtensions:Translate SettingsPage_Preferences}">
-                <!--TODO Implement command for this view cell-->
-                <!--{Binding NavigateToObjectListingCommand}-->
                 <views:SettingsItemViewCell
+                    Command="{Binding NavigateToObjectListingCommand}"
                     Indicator="DisclosureIndicator"
                     Icon="visibility.png"
                     Text="{markupExtensions:Translate ObjectListing}"/>

@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -6,6 +7,12 @@ namespace KubeMob.Common.Views
     [Preserve(AllMembers = true)]
     public partial class SettingsItemViewCell : ViewCell
     {
+        public static readonly BindableProperty CommandProperty = BindableProperty.CreateAttached(
+            nameof(SettingsItemViewCell.Command),
+            typeof(ICommand),
+            typeof(SettingsItemViewCell),
+            null);
+
         public static readonly BindableProperty IndicatorProperty = BindableProperty.CreateAttached(
             nameof(SettingsItemViewCell.IndicatorProperty),
             typeof(string),
@@ -29,6 +36,12 @@ namespace KubeMob.Common.Views
 
         public SettingsItemViewCell() => this.InitializeComponent();
 
+        public ICommand Command
+        {
+            get => (ICommand)this.GetValue(SettingsItemViewCell.CommandProperty);
+            set => this.SetValue(SettingsItemViewCell.CommandProperty, value);
+        }
+
         public string Indicator
         {
             get => (string)this.GetValue(SettingsItemViewCell.IndicatorProperty);
@@ -45,6 +58,17 @@ namespace KubeMob.Common.Views
         {
             get => (string)this.GetValue(SettingsItemViewCell.TextProperty);
             set => this.SetValue(SettingsItemViewCell.TextProperty, value);
+        }
+
+        protected override void OnTapped()
+        {
+            base.OnTapped();
+
+            if (this.Command != null &&
+                this.Command.CanExecute(null))
+            {
+                this.Command.Execute(null);
+            }
         }
 
         private static void OnIndicatorChanged(

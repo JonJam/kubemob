@@ -31,6 +31,8 @@
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
     </Style>
 
+
+<!--TODO Remove below ??-->
     <Style x:Key="ValidationErrorLabelStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
     </Style>

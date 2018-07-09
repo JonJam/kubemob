@@ -135,6 +135,7 @@
             </ControlTemplate>
 
             <ControlTemplate x:Key="ObjectDetailTemplate">
+                <!--TODO Style this-->
                 <ScrollView>
                     <Grid>
                         <Grid
@@ -160,8 +161,8 @@
             </ControlTemplate>
 
             <ControlTemplate x:Key="ObjectDetailCommonPropertiesTemplate">
+                <!--TODO Style this-->
                 <StackLayout>
-                    <!--TODO Create control?-->
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Name}"
                         Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>

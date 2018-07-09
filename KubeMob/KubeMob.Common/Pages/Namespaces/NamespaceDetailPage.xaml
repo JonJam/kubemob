@@ -9,24 +9,35 @@
                           Title="{Binding Name}"
                           common:ViewModelLocator.AutoWireViewModel="true"
                           ControlTemplate="{StaticResource ObjectDetailTemplate}">
-   <!-- <StackLayout>
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-                        Text="{Binding Detail.Name}"/>
 
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-                        IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
-                        Text="{Binding Detail.NamespaceName}"
-                        IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+    <TableView Intent="Data">
+        <TableRoot>
+            <TableSection
+                Title="{markupExtensions:Translate DetailPage_Details}">
+                <TextCell
+                    Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                    Detail="{Binding Detail.Name}"/>
 
+                <!--<TextCell
+                    Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                    Detail="{Binding Detail.NamespaceName}"
+                    IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>-->
+
+                <TextCell
+                    Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                    Detail="{Binding Detail.CreationTime}"/>
+
+                <TextCell
+                    Text="{markupExtensions:Translate DetailPage_Details_Status}"
+                    Detail="{Binding Detail.Status}"/>
+
+            </TableSection>
+        </TableRoot>
+    </TableView>
+
+    <!--TODO enable below-->
+    <!-- 
+ 
         <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
@@ -61,19 +72,7 @@
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
 
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-                        Text="{Binding Detail.CreationTime}"/>
-
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Status}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.Status}"/>
-
+      
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
@@ -93,5 +92,5 @@
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>-->
-    </StackLayout>
+    <!--</StackLayout>-->
 </base:ExtendedContentPage>

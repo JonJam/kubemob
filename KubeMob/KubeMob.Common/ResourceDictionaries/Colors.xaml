@@ -6,5 +6,8 @@
     <Color x:Key="ErrorColor">Red</Color>
     <Color x:Key="KubernetesBlueColor">#326de6</Color>
     <Color x:Key="MessageColor">#888</Color>
+    <Color x:Key="PageBackgroundColor">LightGray</Color>
+
     <x:String x:Key="GreyStatusIconColor">#757575</x:String>
+
 </ResourceDictionary>

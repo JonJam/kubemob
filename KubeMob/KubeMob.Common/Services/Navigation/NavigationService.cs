@@ -154,7 +154,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
 
-        public Task NavigateToResourceListingPage() => NavigationService.InternalNavigate(typeof(ResourceListingPage));
+        public Task NavigateToObjectListingPage() => NavigationService.InternalNavigate(typeof(ObjectListingPage));
 
         public Task NavigateToEventDetailPage(Event eventDetail) => NavigationService.InternalNavigate(typeof(EventDetailPage), eventDetail);
 

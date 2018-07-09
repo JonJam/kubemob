@@ -5,11 +5,11 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels.Settings
 {
     [Preserve(AllMembers = true)]
-    public class ResourceListingViewModel : ViewModelBase
+    public class ObjectListingViewModel : ViewModelBase
     {
         private readonly IKubernetesService kubernetesService;
 
-        public ResourceListingViewModel(IKubernetesService kubernetesService)
+        public ObjectListingViewModel(IKubernetesService kubernetesService)
             => this.kubernetesService = kubernetesService;
 
         public bool ShowNamespaces

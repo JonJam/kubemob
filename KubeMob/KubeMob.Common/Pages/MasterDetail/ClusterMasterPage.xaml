@@ -74,7 +74,6 @@
                     Style="{StaticResource SeperatorBoxViewStyle}"/>
             </StackLayout>
 
-            <!--TODO iOS Style-->
             <StackLayout>
                 <Label
                     Text="{extensions:Translate ClusterMasterPage_NamespaceLabel}"
@@ -84,7 +83,8 @@
                     ItemsSource="{Binding Namespaces}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
-                    Margin="20,10,0,10"/>
+                    Margin="20,10,0,10"
+                    BackgroundColor="{StaticResource PageBackgroundColor}"/>
             </StackLayout>
 
             <!-- Workloads -->

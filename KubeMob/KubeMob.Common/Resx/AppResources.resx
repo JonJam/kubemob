@@ -336,9 +336,6 @@
   <data name="ReplicationControllers" xml:space="preserve">
     <value>Replication Controllers</value>
   </data>
-  <data name="ResourceListingPage_Title" xml:space="preserve">
-    <value>Resource Listing</value>
-  </data>
   <data name="Secrets" xml:space="preserve">
     <value>Secrets</value>
   </data>
@@ -348,11 +345,11 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="SettingsPage_ResourceListing" xml:space="preserve">
-    <value>Resource Listing</value>
+  <data name="ObjectListing" xml:space="preserve">
+    <value>Object listing</value>
   </data>
-  <data name="SettingsPage_SwitchCluster" xml:space="preserve">
-    <value>Switch Cluster</value>
+  <data name="SettingsPage_Account_SwitchCluster" xml:space="preserve">
+    <value>Switch cluster</value>
   </data>
   <data name="StatefulSets" xml:space="preserve">
     <value>Stateful Sets</value>
@@ -614,5 +611,11 @@
   </data>
   <data name="ViewRelatedEndpoints" xml:space="preserve">
     <value>View related endpoints</value>
+  </data>
+  <data name="SettingsPage_Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="SettingsPage_Preferences" xml:space="preserve">
+    <value>Preferences</value>
   </data>
 </root>

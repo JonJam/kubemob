@@ -9,12 +9,64 @@
                           Title="{Binding Name}"
                           common:ViewModelLocator.AutoWireViewModel="true"
                           ControlTemplate="{StaticResource ObjectDetailTemplate}">
-    <StackLayout>
+   <!-- <StackLayout>
         <Label
             Text="{markupExtensions:Translate DetailPage_Details}"
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <ContentView
-            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+        <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+                        Text="{Binding Detail.Name}"/>
+
+        <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                        IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <Label
+                        Text="{Binding Detail.NamespaceName}"
+                        IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <views:ItemsControl
+                        ItemsSource="{Binding Detail.Labels}"
+                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
+
+        <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <views:ItemsControl
+                        ItemsSource="{Binding Detail.Annotations}"
+                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Label
+                                    Text="{Binding .}"
+                                    BackgroundColor="Gray"
+                                    HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
+
+        <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+        <Label
+                        Text="{Binding Detail.CreationTime}"/>
+
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_Status}"
@@ -40,6 +92,6 @@
                     </views:TappableView>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        </views:ItemsControl>-->
     </StackLayout>
 </base:ExtendedContentPage>

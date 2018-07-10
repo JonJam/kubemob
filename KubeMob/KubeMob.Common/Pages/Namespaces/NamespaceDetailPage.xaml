@@ -8,15 +8,43 @@
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
                           Title="{Binding Name}"
                           common:ViewModelLocator.AutoWireViewModel="true">
+    <base:ExtendedContentPage.Resources>
+        <!--TODO Create datatemplateselector
+                        Handle popups
+                    Handle navigation
+                    -->
+        <views:AnnotationDataTemplateSelector x:Key="AnnotationDataTemplateSelector">
+            <views:AnnotationDataTemplateSelector.Basic>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding .}"
+                        TextColor="{StaticResource MessageColor}"                                    
+                        BackgroundColor="{StaticResource PageBackgroundColor}"
+                        HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:AnnotationDataTemplateSelector.Basic>
+            <views:AnnotationDataTemplateSelector.Popup>
+                <DataTemplate>
+                    <Label
+                        Text="{Binding .}"
+                        TextColor="{StaticResource MessageColor}"                                    
+                        BackgroundColor="{StaticResource PageBackgroundColor}"
+                        HorizontalOptions="Start"/>
+                </DataTemplate>
+            </views:AnnotationDataTemplateSelector.Popup>
+        </views:AnnotationDataTemplateSelector>
+    </base:ExtendedContentPage.Resources>
 
     <Grid>
         <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
+            <!-- TODO Check look of this-->
             <views:ErrorMessage
                 Message="{markupExtensions:Translate NoInternetErrorMessage}"
                 IsVisible="{Binding HasNoNetwork}"/>
 
+            <!-- TODO STyle this -->
             <Label        
                 Text="{markupExtensions:Translate ObjectNotFoundMessage}"
                 IsVisible="{Binding ObjectNotFound}"/>
@@ -88,6 +116,18 @@
                                 Margin="0,-5,0,0"/>
                         </StackLayout>
                     </StackLayout>
+
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+                        Style="{DynamicResource TitleStyle}"
+                        Margin="20,5,20,0"/>
+
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Annotations}"
+                        BackgroundColor="White"
+                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+                        ItemTemplate="{StaticResource AnnotationDataTemplateSelector}">
+                    </views:ItemsControl>
                 </StackLayout>
             </ScrollView>
         </Grid>
@@ -118,25 +158,7 @@
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
-
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <views:ItemsControl
-                        ItemsSource="{Binding Detail.Annotations}"
-                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-      
+             
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>

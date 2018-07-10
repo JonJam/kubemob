@@ -7,33 +7,97 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
                           Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true"
-                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
+                          common:ViewModelLocator.AutoWireViewModel="true">
 
-    <TableView Intent="Data">
-        <TableRoot>
-            <TableSection
-                Title="{markupExtensions:Translate DetailPage_Details}">
-                <TextCell
-                    Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                    Detail="{Binding Detail.Name}"/>
+    <Grid>
+        <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
-                <!--<TextCell
-                    Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                    Detail="{Binding Detail.NamespaceName}"
-                    IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>-->
+            <views:ErrorMessage
+                Message="{markupExtensions:Translate NoInternetErrorMessage}"
+                IsVisible="{Binding HasNoNetwork}"/>
 
-                <TextCell
-                    Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                    Detail="{Binding Detail.CreationTime}"/>
+            <Label        
+                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
+                IsVisible="{Binding ObjectNotFound}"/>
 
-                <TextCell
-                    Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                    Detail="{Binding Detail.Status}"/>
+            <ScrollView
+                IsVisible="{Binding DisplayInfo}">
 
-            </TableSection>
-        </TableRoot>
-    </TableView>
+                <StackLayout
+                    Spacing="5">
+
+                    <!--TODO Common control?-->
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details}"
+                        Style="{DynamicResource TitleStyle}"
+                        Margin="20,5,20,0"/>
+
+                    <StackLayout
+                        BackgroundColor="White"
+                        Padding="20,5,20,5"
+                        Spacing="15">
+
+                        <!--TODO Create common control-->
+                        <StackLayout>
+                            <Label
+                                Text="{markupExtensions:Translate DetailPage_Details_Name}"
+                                Style="{DynamicResource ListItemTextStyle}"/>
+                            <Label
+                                Text="{Binding Detail.Name}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                TextColor="{StaticResource MessageColor}"
+                                LineBreakMode="WordWrap"
+                                Margin="0,-5,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout
+                            IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}">
+                            <Label
+                                Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                                Style="{DynamicResource ListItemTextStyle}"/>
+                            <Label
+                                Text="{Binding Detail.NamespaceName}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                TextColor="{StaticResource MessageColor}"
+                                LineBreakMode="WordWrap"
+                                Margin="0,-5,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <Label
+                                Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                                Style="{DynamicResource ListItemTextStyle}"/>
+                            <Label
+                                Text="{Binding Detail.CreationTime}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                TextColor="{StaticResource MessageColor}"
+                                LineBreakMode="WordWrap"
+                                Margin="0,-5,0,0"/>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <Label
+                                Text="{markupExtensions:Translate DetailPage_Details_Status}"
+                                Style="{DynamicResource ListItemTextStyle}"/>
+                            <Label
+                                Text="{Binding Detail.Status}"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                TextColor="{StaticResource MessageColor}"
+                                LineBreakMode="WordWrap"
+                                Margin="0,-5,0,0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"/>
+    </Grid>
+
+
 
     <!--TODO enable below-->
     <!-- 

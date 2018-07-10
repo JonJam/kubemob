@@ -11,7 +11,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model.Base
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
-            IReadOnlyList<string> annotations,
+            IReadOnlyList<MetadataItem> annotations,
             string creationTime)
         {
             this.Uid = uid;
@@ -43,7 +43,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model.Base
         }
 
         // TODO Handle links
-        public IReadOnlyList<string> Annotations
+        public IReadOnlyList<MetadataItem> Annotations
         {
             get;
         }

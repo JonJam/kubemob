@@ -1,10 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using KubeMob.Common.Services.Kubernetes.Model;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.Views
 {
+    [Preserve(AllMembers = true)]
     public class AnnotationDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate Basic
@@ -21,11 +23,21 @@ namespace KubeMob.Common.Views
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            string annotation = item as string;
+            MetadataItem annotation = (MetadataItem)item;
 
+            bool isValueJson = true;
 
+            // TODO Verify this works as expected.
+            try
+            {
+                JToken.Parse(annotation.Value);
+            }
+            catch (JsonReaderException)
+            {
+                isValueJson = false;
+            }
 
-
+            return isValueJson ? this.Popup : this.Basic;
         }
     }
 }

@@ -36,8 +36,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 {
                     List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                           new List<string>();
-                    List<string> annotations = s.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                               new List<string>();
+                    List<MetadataItem> annotations = s.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                     new List<MetadataItem>();
 
                     List<string> labelSelectors = s.Spec.Selector?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                                   new List<string>();

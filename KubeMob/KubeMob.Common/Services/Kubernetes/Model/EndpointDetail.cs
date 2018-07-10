@@ -9,7 +9,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     {
         public EndpointDetail(
             IReadOnlyList<EndpointAddress> addresses)
-            : base(string.Empty, string.Empty, string.Empty, new List<string>(), new List<string>(), string.Empty) => this.Addresses = addresses;
+            : base(string.Empty, string.Empty, string.Empty, new List<string>(), new List<MetadataItem>(), string.Empty) => this.Addresses = addresses;
 
         public IReadOnlyList<EndpointAddress> Addresses
         {

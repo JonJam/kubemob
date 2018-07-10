@@ -84,8 +84,9 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         : string.Empty;
 
                     List<string> labels = p.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
-                    List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                      new List<string>();
+                    List<MetadataItem> annotations = p.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                     new List<MetadataItem>();
+
                     List<Container> containers = Mapper.Map<List<Container>>(p.Spec.Containers);
                     List<Condition> conditions = Mapper.Map<List<Condition>>(p.Status.Conditions);
                     List<ObjectReference> owners = Mapper.Map<List<ObjectReference>>(p.Metadata.OwnerReferences);

@@ -12,7 +12,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string name,
             string namespaceName,
             IReadOnlyList<string> labels,
-            IReadOnlyList<string> annotations,
+            IReadOnlyList<MetadataItem> annotations,
             string creationTime,
             ObjectReference target,
             int minReplicas,

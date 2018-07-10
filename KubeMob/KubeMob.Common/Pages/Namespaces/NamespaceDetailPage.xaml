@@ -9,15 +9,12 @@
                           Title="{Binding Name}"
                           common:ViewModelLocator.AutoWireViewModel="true">
     <base:ExtendedContentPage.Resources>
-        <!--TODO Create datatemplateselector
-                        Handle popups
-                    Handle navigation
-                    -->
         <views:AnnotationDataTemplateSelector x:Key="AnnotationDataTemplateSelector">
             <views:AnnotationDataTemplateSelector.Basic>
                 <DataTemplate>
+                    <!-- TODO Style -->
                     <Label
-                        Text="{Binding .}"
+                        Text="{Binding Summary}"
                         TextColor="{StaticResource MessageColor}"                                    
                         BackgroundColor="{StaticResource PageBackgroundColor}"
                         HorizontalOptions="Start"/>
@@ -25,8 +22,11 @@
             </views:AnnotationDataTemplateSelector.Basic>
             <views:AnnotationDataTemplateSelector.Popup>
                 <DataTemplate>
+                    <!-- TODO Handle popups-->
+                    <!-- TODO Handle navigation -->
+                    <!-- TODO Style -->
                     <Label
-                        Text="{Binding .}"
+                        Text="{Binding Key}"
                         TextColor="{StaticResource MessageColor}"                                    
                         BackgroundColor="{StaticResource PageBackgroundColor}"
                         HorizontalOptions="Start"/>

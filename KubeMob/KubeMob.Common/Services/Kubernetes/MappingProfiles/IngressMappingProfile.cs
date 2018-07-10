@@ -19,8 +19,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                 {
                     List<string> labels = i.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
                                           new List<string>();
-                    List<string> annotations = i.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                               new List<string>();
+                    List<MetadataItem> annotations = i.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                     new List<MetadataItem>();
 
                     string creationTime = i.Metadata.CreationTimestamp.HasValue
                         ? $"{i.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"

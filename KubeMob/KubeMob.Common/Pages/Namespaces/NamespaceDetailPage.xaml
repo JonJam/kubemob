@@ -25,17 +25,23 @@
                     <!-- TODO Handle popups-->
                     <!-- TODO Handle navigation -->
                     <!-- TODO Style -->
-                    <Label
-                        Text="{Binding Key}"
-                        TextColor="{StaticResource MessageColor}"                                    
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        HorizontalOptions="Start"/>
+
+                    <!--Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayAnnotationCommand}"-->
+                    <!--CommandParameter="{Binding .}">-->
+                    <views:TappableView>
+                        <Label
+                            Text="{Binding Key}"
+                            TextColor="{StaticResource KubernetesBlueColor}"
+                            BackgroundColor="{StaticResource PageBackgroundColor}"
+                            HorizontalOptions="Start"/>
+                    </views:TappableView>
                 </DataTemplate>
             </views:AnnotationDataTemplateSelector.Popup>
         </views:AnnotationDataTemplateSelector>
     </base:ExtendedContentPage.Resources>
 
-    <Grid>
+    <Grid
+        x:Key="Root">
         <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
 

@@ -34,8 +34,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1Service, ServiceDetail>()
                 .ConstructUsing((s) =>
                 {
-                    List<string> labels = s.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
+                    List<MetadataItem> labels = s.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
                     List<MetadataItem> annotations = s.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
                                                      new List<MetadataItem>();
 

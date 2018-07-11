@@ -42,8 +42,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1PersistentVolume, PersistentVolumeDetail>()
                 .ConstructUsing((p) =>
                 {
-                    List<string> labels = p.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
+                    List<MetadataItem> labels = p.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
                     List<MetadataItem> annotations = p.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
                                                      new List<MetadataItem>();
 

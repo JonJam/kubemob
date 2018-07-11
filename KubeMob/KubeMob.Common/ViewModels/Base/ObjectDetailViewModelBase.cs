@@ -38,7 +38,7 @@ namespace KubeMob.Common.ViewModels.Base
             this.IsBusy = true;
 
             this.NavigateToEventDetailCommand = new Command(async (o) => await this.OnNavigateToEventDetailCommandExecute(o));
-            this.DisplayAnnotationCommand = new Command(async (o) => await this.OnDisplayAnnotationCommandExecute(o));
+            this.DisplayMetadataItemCommand = new Command(async (o) => await this.OnDisplayMetadataItemCommandExecute(o));
         }
 
         public ICommand NavigateToEventDetailCommand
@@ -46,7 +46,7 @@ namespace KubeMob.Common.ViewModels.Base
             get;
         }
 
-        public ICommand DisplayAnnotationCommand
+        public ICommand DisplayMetadataItemCommand
         {
             get;
         }
@@ -148,7 +148,7 @@ namespace KubeMob.Common.ViewModels.Base
             }
         }
 
-        private Task OnDisplayAnnotationCommandExecute(object obj)
+        private Task OnDisplayMetadataItemCommandExecute(object obj)
         {
             MetadataItem item = (MetadataItem)obj;
 

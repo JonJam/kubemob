@@ -7,7 +7,7 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.Views
 {
     [Preserve(AllMembers = true)]
-    public class AnnotationDataTemplateSelector : DataTemplateSelector
+    public class MetadataItemDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate Basic
         {

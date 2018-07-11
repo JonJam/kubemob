@@ -26,8 +26,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<V1Job, JobDetail>()
                 .ConstructUsing((j) =>
                 {
-                    List<string> labels = j.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
+                    List<MetadataItem> labels = j.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
                     List<MetadataItem> annotations = j.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
                                                      new List<MetadataItem>();
 

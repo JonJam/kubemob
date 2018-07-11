@@ -17,8 +17,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1beta1Ingress, IngressDetail>()
                 .ConstructUsing((i) =>
                 {
-                    List<string> labels = i.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
+                    List<MetadataItem> labels = i.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
                     List<MetadataItem> annotations = i.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
                                                      new List<MetadataItem>();
 

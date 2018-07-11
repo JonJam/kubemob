@@ -10,7 +10,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model.Base
             string uid,
             string name,
             string namespaceName,
-            IReadOnlyList<string> labels,
+            IReadOnlyList<MetadataItem> labels,
             IReadOnlyList<MetadataItem> annotations,
             string creationTime)
         {
@@ -37,7 +37,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model.Base
             get;
         }
 
-        public IReadOnlyList<string> Labels
+        public IReadOnlyList<MetadataItem> Labels
         {
             get;
         }

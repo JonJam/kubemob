@@ -25,7 +25,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1ReplicationController, ReplicationControllerDetail>()
                 .ConstructUsing((r) =>
             {
-                List<string> labels = r.Metadata.Labels.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList();
+                List<MetadataItem> labels = r.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                            new List<MetadataItem>();
                 List<MetadataItem> annotations = r.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
                                                  new List<MetadataItem>();
 

@@ -19,8 +19,8 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<V1beta1CronJob, CronJobDetail>()
                 .ConstructUsing((c) =>
                 {
-                    List<string> labels = c.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
+                    List<MetadataItem> labels = c.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
                     List<MetadataItem> annotations = c.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
                                                      new List<MetadataItem>();
 

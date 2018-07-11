@@ -9,8 +9,8 @@
                           Title="{Binding Name}"
                           common:ViewModelLocator.AutoWireViewModel="true">
     <base:ExtendedContentPage.Resources>
-        <views:AnnotationDataTemplateSelector x:Key="AnnotationDataTemplateSelector">
-            <views:AnnotationDataTemplateSelector.Basic>
+        <views:MetadataItemDataTemplateSelector x:Key="MetadataItemDataTemplateSelector">
+            <views:MetadataItemDataTemplateSelector.Basic>
                 <DataTemplate>
                     <!--TODO Create common style for frame-->
                     <Frame
@@ -25,8 +25,8 @@
                             HorizontalOptions="Start"/>
                     </Frame>
                 </DataTemplate>
-            </views:AnnotationDataTemplateSelector.Basic>
-            <views:AnnotationDataTemplateSelector.Popup>
+            </views:MetadataItemDataTemplateSelector.Basic>
+            <views:MetadataItemDataTemplateSelector.Popup>
                 <DataTemplate>
                     <!-- TODO Handle navigation -->
                     <Frame
@@ -36,17 +36,17 @@
                         HasShadow="False">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayAnnotationCommand}"
+                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
                                 CommandParameter="{Binding .}"/>
                         </Frame.GestureRecognizers>
                         <Label
-                                Text="{Binding Key}"
-                                TextColor="{StaticResource KubernetesBlueColor}"
-                                HorizontalOptions="Start"/>
+                            Text="{Binding Key}"
+                            TextColor="{StaticResource KubernetesBlueColor}"
+                            HorizontalOptions="Start"/>
                     </Frame>
                 </DataTemplate>
-            </views:AnnotationDataTemplateSelector.Popup>
-        </views:AnnotationDataTemplateSelector>
+            </views:MetadataItemDataTemplateSelector.Popup>
+        </views:MetadataItemDataTemplateSelector>
     </base:ExtendedContentPage.Resources>
 
     <Grid
@@ -134,6 +134,20 @@
                     </StackLayout>
 
                     <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+                        Style="{DynamicResource TitleStyle}"
+                        Margin="20,5,20,0"
+                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+                    <!-- TODO Common style -->
+                    <views:ItemsControl
+                        ItemsSource="{Binding Detail.Labels}"
+                        BackgroundColor="White"
+                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
+                        ItemTemplate="{StaticResource MetadataItemDataTemplateSelector}"
+                        Padding="20,5,20,5"/>
+
+                    <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
                         Style="{DynamicResource TitleStyle}"
                         Margin="20,5,20,0"
@@ -143,9 +157,8 @@
                         ItemsSource="{Binding Detail.Annotations}"
                         BackgroundColor="White"
                         IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
-                        ItemTemplate="{StaticResource AnnotationDataTemplateSelector}"
-                        Padding="20,5,20,5">
-                    </views:ItemsControl>
+                        ItemTemplate="{StaticResource MetadataItemDataTemplateSelector}"
+                        Padding="20,5,20,5"/>
                 </StackLayout>
             </ScrollView>
         </Grid>
@@ -158,25 +171,7 @@
 
 
     <!--TODO enable below-->
-    <!-- 
- 
-        <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <views:ItemsControl
-                        ItemsSource="{Binding Detail.Labels}"
-                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-             
+    <!--       
         <Label
             Text="{markupExtensions:Translate DetailPage_Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>

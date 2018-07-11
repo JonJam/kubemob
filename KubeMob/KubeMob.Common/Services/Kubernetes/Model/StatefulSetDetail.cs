@@ -11,7 +11,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string uid,
             string name,
             string namespaceName,
-            IReadOnlyList<string> labels,
+            IReadOnlyList<MetadataItem> labels,
             IReadOnlyList<MetadataItem> annotations,
             string creationTime,
             IReadOnlyList<string> images,

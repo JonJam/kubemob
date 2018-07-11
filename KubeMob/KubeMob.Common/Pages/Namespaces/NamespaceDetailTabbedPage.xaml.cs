@@ -1,5 +1,7 @@
 using KubeMob.Common.Pages.Base;
+using KubeMob.Common.ViewModels.Base;
 using KubeMob.Common.ViewModels.Events;
+using KubeMob.Common.ViewModels.Namespaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -8,26 +10,19 @@ namespace KubeMob.Common.Pages.Namespaces
     public partial class NamespaceDetailTabbedPage : TabbedPage
     {
         [Preserve]
-        public NamespaceDetailTabbedPage()
-        {
+        public NamespaceDetailTabbedPage() => this.InitializeComponent();
 
-            this.InitializeComponent();
-        }
-
-        protected override void OnCurrentPageChanged()
+        protected override async void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();
 
-            // TODO On first load of page this is called.
-
             var page = this.CurrentPage;
 
-            var vm = page.BindingContext;
-
-            // TODO call initialize on VM.
-            //if (vm is EventsViewModel e)
+            //if (page.BindingContext is NamespaceDetailViewModel vm)
             //{
-            //    e.Initialize(e.);
+            //    var objectId = ((NamespaceDetailTabbedViewModel)this.BindingContext).ObjectId;
+            //    //await vm.Initialize(objectId);
+            //    var a = 1;
             //}
         }
     }

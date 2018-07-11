@@ -30,7 +30,7 @@ namespace KubeMob.Common.ViewModels.Jobs
         private Task OnViewRelatedPodsCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: this.Detail.Uid);
 
             return this.NavigationService.NavigateToPodsPage(filter);

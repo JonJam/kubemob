@@ -28,7 +28,7 @@ namespace KubeMob.Common.ViewModels.StorageClasses
 
         private Task OnViewRelatedPersistentVolumesCommand()
         {
-            Filter filter = new Filter(other: this.Name);
+            Filter filter = new Filter(other: this.Detail.Name);
 
             return this.NavigationService.NavigateToPersistentVolumesPage(filter);
         }

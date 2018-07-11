@@ -60,15 +60,15 @@ namespace KubeMob.Common.ViewModels.Pods
             switch (owner.Kind)
             {
                 case "DaemonSet":
-                    return this.NavigationService.NavigateToDaemonSetDetailPage(owner.Name, this.NamespaceName);
+                    return this.NavigationService.NavigateToDaemonSetDetailPage(owner.Name, this.Detail.NamespaceName);
                 case "StatefulSet":
-                    return this.NavigationService.NavigateToStatefulSetDetailPage(owner.Name, this.NamespaceName);
+                    return this.NavigationService.NavigateToStatefulSetDetailPage(owner.Name, this.Detail.NamespaceName);
                 case "ReplicaSet":
-                    return this.NavigationService.NavigateToReplicaSetDetailPage(owner.Name, this.NamespaceName);
+                    return this.NavigationService.NavigateToReplicaSetDetailPage(owner.Name, this.Detail.NamespaceName);
                 case "ReplicationController":
-                    return this.NavigationService.NavigateToReplicationControllerDetailPage(owner.Name, this.NamespaceName);
+                    return this.NavigationService.NavigateToReplicationControllerDetailPage(owner.Name, this.Detail.NamespaceName);
                 case "Job":
-                    return this.NavigationService.NavigateToJobDetailPage(owner.Name, this.NamespaceName);
+                    return this.NavigationService.NavigateToJobDetailPage(owner.Name, this.Detail.NamespaceName);
                 default:
                     throw new NotImplementedException();
             }
@@ -77,7 +77,7 @@ namespace KubeMob.Common.ViewModels.Pods
         private Task OnViewRelatedPersistentVolumeClaimsCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: string.Join(",", this.Detail.PersistentVolumeClaims));
 
             return this.NavigationService.NavigateToPersistentVolumeClaimsPage(filter);

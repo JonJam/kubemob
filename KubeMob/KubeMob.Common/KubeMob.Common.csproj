@@ -46,8 +46,14 @@
     <Compile Update="Pages\Endpoints\EndpointDetailPage.xaml.cs">
       <DependentUpon>EndpointDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Events\EventsPage.xaml.cs">
+      <DependentUpon>EventsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailPage.xaml.cs">
       <DependentUpon>HorizontalPodAutoscalerDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Namespaces\NamespaceDetailTabbedPage.xaml.cs">
+      <DependentUpon>NamespaceDetailTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumeDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeDetailPage.xaml</DependentUpon>

@@ -6,8 +6,8 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
-                          Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true">
+                          Title="Detail"
+                          x:Name="TestTest">
     <base:ExtendedContentPage.Resources>
         <views:MetadataItemDataTemplateSelector x:Key="MetadataItemDataTemplateSelector">
             <views:MetadataItemDataTemplateSelector.Basic>
@@ -34,11 +34,12 @@
                         Padding="5"
                         CornerRadius="5"
                         HasShadow="False">
-                        <Frame.GestureRecognizers>
+                        <!--TODO Fix this-->
+                        <!--<Frame.GestureRecognizers>
                             <TapGestureRecognizer
-                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
+                                Command="{Binding Source={x:Reference TestTest}, Path=BindingContext.DisplayMetadataItemCommand}"
                                 CommandParameter="{Binding .}"/>
-                        </Frame.GestureRecognizers>
+                        </Frame.GestureRecognizers>-->
                         <Label
                             Text="{Binding Key}"
                             TextColor="{StaticResource KubernetesBlueColor}"
@@ -49,8 +50,7 @@
         </views:MetadataItemDataTemplateSelector>
     </base:ExtendedContentPage.Resources>
 
-    <Grid
-        x:Name="Root">
+    <Grid>
         <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
 

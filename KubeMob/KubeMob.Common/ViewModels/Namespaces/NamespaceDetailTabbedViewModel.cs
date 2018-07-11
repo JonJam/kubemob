@@ -9,9 +9,9 @@ using Xamarin.Forms.Internals;
 namespace KubeMob.Common.ViewModels.Namespaces
 {
     [Preserve(AllMembers = true)]
-    public class NamespaceDetailViewModel : ObjectDetailViewModelBase<NamespaceDetail>
+    public class NamespaceDetailTabbedViewModel : ObjectDetailViewModelBase<NamespaceDetail>
     {
-        public NamespaceDetailViewModel(
+        public NamespaceDetailTabbedViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService,
             INavigationService navigationService)

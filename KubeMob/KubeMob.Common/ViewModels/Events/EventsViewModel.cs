@@ -1,45 +1,113 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using KubeMob.Common.Exceptions;
+using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Events
 {
     [Preserve(AllMembers = true)]
-    public class EventsViewModel : ObjectListViewModelBase
+    public class EventsViewModel : ViewModelBase
     {
-        public EventsViewModel(
+        // TODO see if can re-use ObjectListViewModelBase somehow
+        private readonly IPopupService popupService;
+
+        private IList<Event> events = new List<Event>();
+
+        protected EventsViewModel(
             INavigationService navigationService,
             IKubernetesService kubernetesService,
             IPopupService popupService)
-            : base(navigationService, kubernetesService, popupService)
         {
+            this.NavigationService = navigationService;
+            this.KubernetesService = kubernetesService;
+            this.popupService = popupService;
+
+            this.EventSelectedCommand = new Command(async (o) => await this.OnEventSelectedExecute(o));
+
+            // Defaulting this to true in order that we do not display an empty message on first
+            // navigating to this page.
+            this.IsBusy = true;
         }
 
-        //this.Detail.Uid, objectId.NamespaceName
-        protected override Task<IList<Event>> GetObjectSummaries(Filter filter) => this.KubernetesService.GetEventsForObject(filter);
-
-        protected override Task OnObjectSummarySelectedExecute(object obj)
+        public ICommand EventSelectedCommand
         {
-            ObjectSummary selected = (ObjectSummary)obj;
+            get;
+        }
 
-            throw new NotImplementedException();
+        public IList<Event> Events
+        {
+            get => this.events;
+            private set
+            {
+                if (this.SetProperty(ref this.events, value))
+                {
+                    this.NotifyPropertyChanged(() => this.HasEvents);
+                }
+            }
+        }
 
-            //return this.NavigationService.NavigateToHorizontalPodAutoscalerDetailPage(selected.Name, selected.NamespaceName);
+        public bool HasEvents => this.Events.Count > 0;
 
+        public bool DisplayEvents => !this.HasNoNetwork;
 
-            //private async Task OnNavigateToEventDetailCommandExecute(object obj)
-            //{
-            //    if (obj is Event eventDetail)
-            //    {
-            //        await this.NavigationService.NavigateToEventDetailPage(eventDetail);
-            //    }
-            //}
+        protected INavigationService NavigationService
+        {
+            get;
+        }
+
+        protected IKubernetesService KubernetesService
+        {
+            get;
+        }
+
+        public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
+        {
+            Filter filter = (Filter)navigationData;
+
+            try
+            {
+                this.Events = await this.KubernetesService.GetEventsForObject(filter);
+            }
+            catch (ClusterNotFoundException)
+            {
+                await this.popupService.DisplayAlert(
+                    AppResources.ClusterNotFound_Title,
+                    AppResources.ClusterNotFound_Message,
+                    AppResources.OkAlertText);
+            }
+            catch (AccountInvalidException)
+            {
+                await this.popupService.DisplayAlert(
+                    AppResources.AccountInvalid_Title,
+                    AppResources.AccountInvalid_Message,
+                    AppResources.OkAlertText);
+            }
+        });
+
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(this.HasNoNetwork))
+            {
+                this.NotifyPropertyChanged(() => this.DisplayEvents);
+            }
+        }
+
+        private async Task OnEventSelectedExecute(object obj)
+        {
+            if (obj is Event eventDetail)
+            {
+                await this.NavigationService.NavigateToEventDetailPage(eventDetail);
+            }
         }
     }
 }

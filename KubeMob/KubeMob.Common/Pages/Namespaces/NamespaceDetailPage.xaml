@@ -102,45 +102,45 @@
                         Padding="20,5,20,5">
                         <!-- TODO Sort out duplication of template selector -->
                         <views:ItemsControl.ItemTemplate>
-                        <views:MetadataItemDataTemplateSelector>
-                            <views:MetadataItemDataTemplateSelector.Basic>
-                                <DataTemplate>
-                                    <!--TODO Create common style for frame-->
-                                    <Frame
+                            <views:MetadataItemDataTemplateSelector>
+                                <views:MetadataItemDataTemplateSelector.Basic>
+                                    <DataTemplate>
+                                        <!--TODO Create common style for frame-->
+                                        <Frame
                         BackgroundColor="{StaticResource PageBackgroundColor}"
                         Padding="5"
                         CornerRadius="5"
                         HasShadow="False">
-                                        <Label
+                                            <Label
                             Text="{Binding Summary}"
                             TextColor="{StaticResource MessageColor}"                                    
                             BackgroundColor="{StaticResource PageBackgroundColor}"
                             HorizontalOptions="Start"/>
-                                    </Frame>
-                                </DataTemplate>
-                            </views:MetadataItemDataTemplateSelector.Basic>
-                            <views:MetadataItemDataTemplateSelector.Popup>
-                                <DataTemplate>
-                                    <!-- TODO Handle navigation -->
-                                    <Frame
+                                        </Frame>
+                                    </DataTemplate>
+                                </views:MetadataItemDataTemplateSelector.Basic>
+                                <views:MetadataItemDataTemplateSelector.Popup>
+                                    <DataTemplate>
+                                        <!-- TODO Handle navigation -->
+                                        <Frame
                         BackgroundColor="{StaticResource PageBackgroundColor}"
                         Padding="5"
                         CornerRadius="5"
                         HasShadow="False">
-                                        <!--TODO Fix this-->
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer
+                                            <!--TODO Fix this-->
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer
                                 Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
                                 CommandParameter="{Binding .}"/>
-                                        </Frame.GestureRecognizers>
-                                        <Label
+                                            </Frame.GestureRecognizers>
+                                            <Label
                             Text="{Binding Key}"
                             TextColor="{StaticResource KubernetesBlueColor}"
                             HorizontalOptions="Start"/>
-                                    </Frame>
-                                </DataTemplate>
-                            </views:MetadataItemDataTemplateSelector.Popup>
-                        </views:MetadataItemDataTemplateSelector>
+                                        </Frame>
+                                    </DataTemplate>
+                                </views:MetadataItemDataTemplateSelector.Popup>
+                            </views:MetadataItemDataTemplateSelector>
                         </views:ItemsControl.ItemTemplate>
                     </views:ItemsControl>
 
@@ -205,29 +205,4 @@
             IsRunning="{Binding IsBusy}"  
             IsVisible="{Binding IsBusy}"/>
     </Grid>
-
-
-
-    <!--TODO enable below-->
-    <!--       
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Events}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Events"
-            ItemsSource="{Binding Events}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:TappableView
-                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
-                        CommandParameter="{Binding .}">
-                        <Label
-                            Text="{Binding Message}"
-                            LineBreakMode="TailTruncation"/>
-                    </views:TappableView>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>-->
-    <!--</StackLayout>-->
 </base:ExtendedContentPage>

@@ -18,6 +18,7 @@ namespace KubeMob.Common.Pages.Namespaces
 
             var page = this.CurrentPage;
 
+            // TODO Wire up to events viewmodel and handle already being loaded.
             //if (page.BindingContext is NamespaceDetailViewModel vm)
             //{
             //    var objectId = ((NamespaceDetailTabbedViewModel)this.BindingContext).ObjectId;

@@ -4,8 +4,58 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Events.EventsPage"
-                          Title="Events"
+                          Title="{markupExtensions:Translate Events}"
                           common:ViewModelLocator.AutoWireViewModel="true">
+
+    <!--TODO mostly copied from object list template. Reduce copy/paste ??-->
+    <Grid
+        CompressedLayout.IsHeadless="true">
+        <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            CompressedLayout.IsHeadless="true">
+
+            <views:ErrorMessage
+                Message="{markupExtensions:Translate NoInternetErrorMessage}"
+                IsVisible="{Binding HasNoNetwork}"/>
+
+            <Grid
+                IsVisible="{Binding DisplayEvents}"
+                CompressedLayout.IsHeadless="true">
+
+                <views:ExtendedListView
+                    ItemsSource="{Binding Events}"
+                    IsVisible="{Binding HasEvents}"
+                    ItemTappedCommand="{Binding EventSelectedCommand}"
+                    SeparatorVisibility="Default"
+                    HasUnevenRows="False"
+                    BackgroundColor="White"
+                    SeparatorColor="DarkGray">
+                    <views:ExtendedListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell
+                                StyleId="DisclosureIndicator">
+                                <!--TODO Sort out this template i.e. Icons, what to display-->
+                                <Label
+                                    Text="{Binding Message}"
+                                    LineBreakMode="TailTruncation"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </views:ExtendedListView.ItemTemplate>
+                </views:ExtendedListView>
+
+                <Label
+                    Text="{markupExtensions:Translate EmptyMessage}"
+                    Style="{StaticResource ErrorMessageLabelStyle}"
+                    VerticalOptions="Center"
+                    IsVisible="{Binding HasEvents, Converter={StaticResource InverseBoolConverter}}"/>
+            </Grid>
+        </Grid>
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"/>
+    </Grid>
 
 </base:ExtendedContentPage>

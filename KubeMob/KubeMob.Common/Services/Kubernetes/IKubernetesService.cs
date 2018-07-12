@@ -216,7 +216,7 @@ namespace KubeMob.Common.Services.Kubernetes
             string statefulSetName,
             string statefulSetNamespace);
 
-        Task<IList<Event>> GetEventsForObject(string uid, string namespaceName);
+        Task<IList<Event>> GetEventsForObject(Filter filter);
 
         Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter);
 

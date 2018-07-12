@@ -100,7 +100,7 @@
                         BackgroundColor="White"
                         IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
                         Padding="20,5,20,5">
-                        <!-- TODO Sort out duplication-->
+                        <!-- TODO Sort out duplication of template selector -->
                         <views:ItemsControl.ItemTemplate>
                         <views:MetadataItemDataTemplateSelector>
                             <views:MetadataItemDataTemplateSelector.Basic>

@@ -3,7 +3,7 @@ using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.ViewModels
+namespace KubeMob.Common.ViewModels.Events
 {
     [Preserve(AllMembers = true)]
     public class EventDetailViewModel : ViewModelBase

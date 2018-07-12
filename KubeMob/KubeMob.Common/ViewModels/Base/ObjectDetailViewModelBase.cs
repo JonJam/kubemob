@@ -18,9 +18,8 @@ namespace KubeMob.Common.ViewModels.Base
         where T : ObjectDetailBase
     {
         private readonly IPopupService popupService;
-        
+
         private T detail;
-        //private IList<Event> events;
         private bool objectNotFound;
 
         protected ObjectDetailViewModelBase(
@@ -36,14 +35,8 @@ namespace KubeMob.Common.ViewModels.Base
             // navigating to this page.
             this.IsBusy = true;
 
-            //this.NavigateToEventDetailCommand = new Command(async (o) => await this.OnNavigateToEventDetailCommandExecute(o));
             this.DisplayMetadataItemCommand = new Command(async (o) => await this.OnDisplayMetadataItemCommandExecute(o));
         }
-
-        //public ICommand NavigateToEventDetailCommand
-        //{
-        //    get;
-        //}
 
         public ICommand DisplayMetadataItemCommand
         {
@@ -55,12 +48,6 @@ namespace KubeMob.Common.ViewModels.Base
             get => this.detail;
             private set => this.SetProperty(ref this.detail, value);
         }
-
-        //public IList<Event> Events
-        //{
-        //    get => this.events;
-        //    private set => this.SetProperty(ref this.events, value);
-        //}
 
         public bool DisplayInfo => !this.ObjectNotFound && !this.HasNoNetwork;
 
@@ -96,10 +83,6 @@ namespace KubeMob.Common.ViewModels.Base
                 {
                     // Starting tasks and waiting when all complete.
                     this.Detail = await this.GetObjectDetail(objectId.Name, objectId.NamespaceName);
-
-                    //// TODO refactor to seperate page.
-                    //this.Events =
-                    //    await this.KubernetesService.GetEventsForObject(this.Detail.Uid, objectId.NamespaceName);
                 }
                 catch (ClusterNotFoundException)
                 {
@@ -123,15 +106,7 @@ namespace KubeMob.Common.ViewModels.Base
         }
 
         protected abstract Task<T> GetObjectDetail(string name, string namespaceName);
-
-        //private async Task OnNavigateToEventDetailCommandExecute(object obj)
-        //{
-        //    if (obj is Event eventDetail)
-        //    {
-        //        await this.NavigationService.NavigateToEventDetailPage(eventDetail);
-        //    }
-        //}
-
+        
         private Task OnDisplayMetadataItemCommandExecute(object obj)
         {
             MetadataItem item = (MetadataItem)obj;

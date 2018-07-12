@@ -3,15 +3,18 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:namespaces="clr-namespace:KubeMob.Common.Pages.Namespaces;assembly=KubeMob.Common"
             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+            xmlns:events="clr-namespace:KubeMob.Common.Pages.Events;assembly=KubeMob.Common"
             x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailTabbedPage"
             Title="{Binding ObjectId.Name}"
             common:ViewModelLocator.AutoWireViewModel="true">
 
+    <!--TODO icon for page-->
     <namespaces:NamespaceDetailPage
         x:Name="DetailPage"
         BindingContext="{Binding DetailVm}"/>
 
-    <!--<events:EventsPage/>-->
+    <!--TODO icon for page-->
+    <events:EventsPage/>
 
     <!--TODO enable below-->
     <!--       

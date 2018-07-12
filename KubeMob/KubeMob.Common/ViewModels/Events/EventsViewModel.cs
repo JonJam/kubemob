@@ -21,7 +21,8 @@ namespace KubeMob.Common.ViewModels.Events
         {
         }
 
-        protected override Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter) => throw new NotImplementedException();//this.KubernetesService.GetHorizontalPodAutoscalerSummaries(filter);
+        //this.Detail.Uid, objectId.NamespaceName
+        protected override Task<IList<Event>> GetObjectSummaries(Filter filter) => this.KubernetesService.GetEventsForObject(filter);
 
         protected override Task OnObjectSummarySelectedExecute(object obj)
         {
@@ -30,6 +31,15 @@ namespace KubeMob.Common.ViewModels.Events
             throw new NotImplementedException();
 
             //return this.NavigationService.NavigateToHorizontalPodAutoscalerDetailPage(selected.Name, selected.NamespaceName);
+
+
+            //private async Task OnNavigateToEventDetailCommandExecute(object obj)
+            //{
+            //    if (obj is Event eventDetail)
+            //    {
+            //        await this.NavigationService.NavigateToEventDetailPage(eventDetail);
+            //    }
+            //}
         }
     }
 }

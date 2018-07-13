@@ -157,8 +157,6 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToObjectListingPage() => NavigationService.InternalNavigate(typeof(ObjectListingPage));
 
-        public Task NavigateToEventDetailPage(Event eventDetail) => NavigationService.InternalNavigate(typeof(EventDetailPage), eventDetail);
-
         public Task NavigateToConditionDetailPage(Kubernetes.Model.Condition conditionDetail) => NavigationService.InternalNavigate(typeof(ConditionDetailPage), conditionDetail);
 
         public Task NavigateToHorizontalPodAutoscalersPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(HorizontalPodAutoscalersPage), filter);

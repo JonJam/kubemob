@@ -106,9 +106,6 @@
     <Compile Update="Pages\PersistentVolumeClaims\PersistentVolumeClaimDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeClaimDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Events\EventDetailPage.xaml.cs">
-      <DependentUpon>EventDetailPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Pages\Pods\PodDetailPage.xaml.cs">
       <DependentUpon>PodDetailPage.xaml</DependentUpon>
     </Compile>

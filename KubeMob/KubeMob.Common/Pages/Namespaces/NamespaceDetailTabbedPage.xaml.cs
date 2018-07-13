@@ -16,7 +16,7 @@ namespace KubeMob.Common.Pages.Namespaces
             base.OnCurrentPageChanged();
 
             Page page = this.CurrentPage;
-            
+
             if (page.BindingContext is EventsViewModel vm)
             {
                 NamespaceDetailViewModel detailViewModel = (NamespaceDetailViewModel)this.DetailPage.BindingContext;

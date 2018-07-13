@@ -26,15 +26,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1Event, Event>()
                 .ConstructUsing((e) =>
                 {
-                    string firstSeen = $"{e.FirstTimestamp.Value.ToUniversalTime():s} UTC";
                     string lastSeen = $"{e.LastTimestamp.Value.ToUniversalTime():s} UTC";
 
                     return new Event(
                         e.Message,
-                        e.Source.Component,
-                        e.InvolvedObject.FieldPath,
-                        e.Count.GetValueOrDefault(0),
-                        firstSeen,
                         e.LastTimestamp.Value,
                         lastSeen);
                 });

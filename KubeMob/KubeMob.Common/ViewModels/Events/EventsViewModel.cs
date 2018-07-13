@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes;
@@ -8,7 +7,6 @@ using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
-using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Events
@@ -32,16 +30,9 @@ namespace KubeMob.Common.ViewModels.Events
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
 
-            this.EventSelectedCommand = new Command(async (o) => await this.OnEventSelectedExecute(o));
-
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
             this.IsBusy = true;
-        }
-
-        public ICommand EventSelectedCommand
-        {
-            get;
         }
 
         public IList<Event> Events
@@ -83,6 +74,9 @@ namespace KubeMob.Common.ViewModels.Events
 
                 try
                 {
+                    // TODO remove
+                    filter = new Filter("default", other: "1cb5dd43-7dc5-11e8-846d-b23588d0472e");
+
                     this.Events = await this.KubernetesService.GetEventsForObject(filter);
                 }
                 catch (ClusterNotFoundException)
@@ -113,14 +107,6 @@ namespace KubeMob.Common.ViewModels.Events
             if (propertyName == nameof(this.HasNoNetwork))
             {
                 this.NotifyPropertyChanged(() => this.DisplayEvents);
-            }
-        }
-
-        private async Task OnEventSelectedExecute(object obj)
-        {
-            if (obj is Event eventDetail)
-            {
-                await this.NavigationService.NavigateToEventDetailPage(eventDetail);
             }
         }
     }

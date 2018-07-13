@@ -5,6 +5,8 @@
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Events.EventsPage"
                           Title="{markupExtensions:Translate Events}"
                           common:ViewModelLocator.AutoWireViewModel="true">
@@ -27,19 +29,38 @@
                 <views:ExtendedListView
                     ItemsSource="{Binding Events}"
                     IsVisible="{Binding HasEvents}"
-                    ItemTappedCommand="{Binding EventSelectedCommand}"
                     SeparatorVisibility="Default"
-                    HasUnevenRows="False"
+                    HasUnevenRows="True"
                     BackgroundColor="White"
                     SeparatorColor="DarkGray">
                     <views:ExtendedListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell
-                                StyleId="DisclosureIndicator">
-                                <!--TODO Sort out this template i.e. Icons, what to display-->
-                                <Label
-                                    Text="{Binding Message}"
-                                    LineBreakMode="TailTruncation"/>
+                            <ViewCell>
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    Padding="20,0,20,0">
+                                    <!--TODO Sort out this icon-->
+                                    <!--<forms:CachedImage
+                                            Source="success.png"
+                                            Style="{StaticResource StatusIconImageStyle}">
+                                        <forms:CachedImage.Transformations>
+                                            <transformations:TintTransformation
+                                                    HexColor="#008000"
+                                                    EnableSolidColor="true"/>
+                                        </forms:CachedImage.Transformations>
+                                    </forms:CachedImage>-->
+                                    <StackLayout>
+                                        <Label
+                                            Text="{Binding LastSeen}"
+                                            Style="{DynamicResource ListItemTextStyle}"/>
+                                        <Label
+                                            Text="{Binding Message}"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            TextColor="{StaticResource MessageColor}"
+                                            LineBreakMode="WordWrap"
+                                            Margin="0,-5,0,0"/>
+                                    </StackLayout>
+                                </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </views:ExtendedListView.ItemTemplate>

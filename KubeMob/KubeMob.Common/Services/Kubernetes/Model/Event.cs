@@ -8,43 +8,15 @@ namespace KubeMob.Common.Services.Kubernetes.Model
     {
         public Event(
             string message,
-            string source,
-            string subObject,
-            int count,
-            string firstSeen,
             DateTime lastSeenDateTime,
             string lastSeen)
         {
             this.Message = message;
-            this.Source = source;
-            this.SubObject = subObject;
-            this.Count = count;
-            this.FirstSeen = firstSeen;
             this.LastSeenDateTime = lastSeenDateTime;
             this.LastSeen = lastSeen;
         }
 
         public string Message
-        {
-            get;
-        }
-
-        public string Source
-        {
-            get;
-        }
-
-        public string SubObject
-        {
-            get;
-        }
-
-        public int Count
-        {
-            get;
-        }
-
-        public string FirstSeen
         {
             get;
         }

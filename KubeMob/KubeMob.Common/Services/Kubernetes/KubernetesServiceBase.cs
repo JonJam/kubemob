@@ -852,7 +852,7 @@ namespace KubeMob.Common.Services.Kubernetes
             V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(filter.Namespace, fieldSelector: $"involvedObject.uid={filter.Other}"));
 
             return Mapper.Map<IList<Event>>(events.Items)
-                .OrderBy(e => e.LastSeen)
+                .OrderByDescending(e => e.LastSeenDateTime)
                 .ToList();
         }
 

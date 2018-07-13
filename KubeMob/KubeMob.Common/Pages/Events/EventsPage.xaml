@@ -4,79 +4,8 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
-                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Events.EventsPage"
                           Title="{markupExtensions:Translate Events}"
-                          common:ViewModelLocator.AutoWireViewModel="true">
-
-    <!--TODO mostly copied from object list template. Reduce copy/paste ??-->
-    <Grid
-        CompressedLayout.IsHeadless="true">
-        <Grid
-            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
-            CompressedLayout.IsHeadless="true">
-
-            <views:ErrorMessage
-                Message="{markupExtensions:Translate NoInternetErrorMessage}"
-                IsVisible="{Binding HasNoNetwork}"/>
-
-            <Grid
-                IsVisible="{Binding DisplayEvents}"
-                CompressedLayout.IsHeadless="true">
-
-                <views:ExtendedListView
-                    ItemsSource="{Binding Events}"
-                    IsVisible="{Binding HasEvents}"
-                    SeparatorVisibility="Default"
-                    HasUnevenRows="True"
-                    BackgroundColor="White"
-                    SeparatorColor="DarkGray">
-                    <views:ExtendedListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout
-                                    Orientation="Horizontal"
-                                    Padding="20,0,20,0">
-                                    <!--TODO Sort out this icon-->
-                                    <!--<forms:CachedImage
-                                            Source="success.png"
-                                            Style="{StaticResource StatusIconImageStyle}">
-                                        <forms:CachedImage.Transformations>
-                                            <transformations:TintTransformation
-                                                    HexColor="#008000"
-                                                    EnableSolidColor="true"/>
-                                        </forms:CachedImage.Transformations>
-                                    </forms:CachedImage>-->
-                                    <StackLayout>
-                                        <Label
-                                            Text="{Binding LastSeen}"
-                                            Style="{DynamicResource ListItemTextStyle}"/>
-                                        <Label
-                                            Text="{Binding Message}"
-                                            Style="{DynamicResource ListItemDetailTextStyle}"
-                                            TextColor="{StaticResource MessageColor}"
-                                            LineBreakMode="WordWrap"
-                                            Margin="0,-5,0,0"/>
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </views:ExtendedListView.ItemTemplate>
-                </views:ExtendedListView>
-
-                <Label
-                    Text="{markupExtensions:Translate EmptyMessage}"
-                    Style="{StaticResource ErrorMessageLabelStyle}"
-                    VerticalOptions="Center"
-                    IsVisible="{Binding HasEvents, Converter={StaticResource InverseBoolConverter}}"/>
-            </Grid>
-        </Grid>
-
-        <ActivityIndicator
-            IsRunning="{Binding IsBusy}"  
-            IsVisible="{Binding IsBusy}"/>
-    </Grid>
-
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectListTemplate}">
 </base:ExtendedContentPage>

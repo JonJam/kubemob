@@ -23,15 +23,16 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     o.Name,
                     o.Kind));
 
-            this.CreateMap<k8s.Models.V1Event, Event>()
+            this.CreateMap<k8s.Models.V1Event, ObjectSummary>()
                 .ConstructUsing((e) =>
                 {
                     string lastSeen = $"{e.LastTimestamp.Value.ToUniversalTime():s} UTC";
 
-                    return new Event(
+                    return new ObjectSummary(
+                        lastSeen,
+                        string.Empty,
                         e.Message,
-                        e.LastTimestamp.Value,
-                        lastSeen);
+                        Status.None);
                 });
         }
     }

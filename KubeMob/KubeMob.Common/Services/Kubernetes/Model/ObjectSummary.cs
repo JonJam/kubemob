@@ -16,13 +16,28 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string name,
             string namespaceName,
             Status status)
+            : this(name, namespaceName, string.Empty, status)
+        {
+        }
+
+        public ObjectSummary(
+            string name,
+            string namespaceName,
+            string description,
+            Status status)
         {
             this.Name = name;
             this.NamespaceName = namespaceName;
+            this.Description = description;
             this.Status = status;
         }
 
         public string Name
+        {
+            get;
+        }
+
+        public string Description
         {
             get;
         }

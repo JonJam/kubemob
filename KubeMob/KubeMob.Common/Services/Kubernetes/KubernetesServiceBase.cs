@@ -847,13 +847,11 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<PersistentVolumeClaimDetail>(persistentVolumeClaimDetail);
         }
 
-        public async Task<IList<Event>> GetEventsForObject(Filter filter)
+        public async Task<IList<ObjectSummary>> GetEventsForObject(Filter filter)
         {
             V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(filter.Namespace, fieldSelector: $"involvedObject.uid={filter.Other}"));
 
-            return Mapper.Map<IList<Event>>(events.Items)
-                .OrderByDescending(e => e.LastSeenDateTime)
-                .ToList();
+            return Mapper.Map<IList<ObjectSummary>>(events.Items.OrderByDescending(e => e.LastTimestamp));
         }
 
         public async Task<IList<ObjectSummary>> GetHorizontalPodAutoscalerSummaries(Filter filter)

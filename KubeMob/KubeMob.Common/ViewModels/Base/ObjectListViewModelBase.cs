@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,7 +30,9 @@ namespace KubeMob.Common.ViewModels.Base
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
 
-            this.ObjectSummarySelectedCommand = new Command(async (o) => await this.OnObjectSummarySelectedExecute(o));
+            this.ObjectSummarySelectedCommand = new Command(
+                async (o) => await this.OnObjectSummarySelectedExecute(o),
+                this.OnObjectSummarySelectedCanExecute);
 
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
@@ -120,5 +123,7 @@ namespace KubeMob.Common.ViewModels.Base
         protected abstract Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter);
 
         protected abstract Task OnObjectSummarySelectedExecute(object obj);
+
+        protected virtual bool OnObjectSummarySelectedCanExecute(object obj) => true;
     }
 }

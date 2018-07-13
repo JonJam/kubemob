@@ -39,16 +39,17 @@
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
                                 ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
                                 SeparatorVisibility="Default"
-                                HasUnevenRows="False"
+                                HasUnevenRows="True"
                                 BackgroundColor="White"
                                 SeparatorColor="DarkGray">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
+                                        <!--TODO Sort out disclosureindicator for events page-->
                                         <ViewCell
                                             StyleId="DisclosureIndicator">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Padding="20,0,20,0">
+                                                Padding="20,10,20,10">
                                                 <ffImageLoading:CachedImage
                                                     Source="success.png"
                                                     Style="{StaticResource StatusIconImageStyle}"
@@ -109,11 +110,19 @@
                                                     Style="{StaticResource StatusIconImageStyle}"
                                                     IsVisible="{Binding IsStatusError}"/>
 
-                                                <Label
-                                                    Text="{Binding Name}"
-                                                    Style="{DynamicResource SubtitleStyle}"
-                                                    VerticalOptions="Center"
-                                                    LineBreakMode="TailTruncation"/>
+                                                <StackLayout
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        Text="{Binding Name}"
+                                                        Style="{DynamicResource ListItemTextStyle}"
+                                                        LineBreakMode="TailTruncation"/>
+                                                    <Label
+                                                        Text="{Binding Description}"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        TextColor="{StaticResource MessageColor}"
+                                                        LineBreakMode="WordWrap"
+                                                        Margin="0,-5,0,0"/>
+                                                </StackLayout>
                                             </StackLayout>
                                         </ViewCell>
                                     </DataTemplate>

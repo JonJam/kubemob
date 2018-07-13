@@ -7,10 +7,5 @@ namespace KubeMob.Common.Pages.Events
     {
         [Preserve]
         public EventsPage() => this.InitializeComponent();
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
     }
 }

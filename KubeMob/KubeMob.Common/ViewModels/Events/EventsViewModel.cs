@@ -21,7 +21,9 @@ namespace KubeMob.Common.ViewModels.Events
 
         private IList<Event> events = new List<Event>();
 
-        protected EventsViewModel(
+        private bool isLoaded = false;
+
+        public EventsViewModel(
             INavigationService navigationService,
             IKubernetesService kubernetesService,
             IPopupService popupService)
@@ -68,29 +70,41 @@ namespace KubeMob.Common.ViewModels.Events
             get;
         }
 
-        public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
+        public override async Task Initialize(object navigationData)
         {
-            Filter filter = (Filter)navigationData;
+            if (this.isLoaded)
+            {
+                return;
+            }
 
-            try
+            await this.PerformNetworkOperation(async () =>
             {
-                this.Events = await this.KubernetesService.GetEventsForObject(filter);
-            }
-            catch (ClusterNotFoundException)
-            {
-                await this.popupService.DisplayAlert(
-                    AppResources.ClusterNotFound_Title,
-                    AppResources.ClusterNotFound_Message,
-                    AppResources.OkAlertText);
-            }
-            catch (AccountInvalidException)
-            {
-                await this.popupService.DisplayAlert(
-                    AppResources.AccountInvalid_Title,
-                    AppResources.AccountInvalid_Message,
-                    AppResources.OkAlertText);
-            }
-        });
+                Filter filter = (Filter)navigationData;
+
+                try
+                {
+                    this.Events = await this.KubernetesService.GetEventsForObject(filter);
+                }
+                catch (ClusterNotFoundException)
+                {
+                    await this.popupService.DisplayAlert(
+                        AppResources.ClusterNotFound_Title,
+                        AppResources.ClusterNotFound_Message,
+                        AppResources.OkAlertText);
+                }
+                catch (AccountInvalidException)
+                {
+                    await this.popupService.DisplayAlert(
+                        AppResources.AccountInvalid_Title,
+                        AppResources.AccountInvalid_Message,
+                        AppResources.OkAlertText);
+                }
+                finally
+                {
+                    this.isLoaded = true;
+                }
+            });
+        }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {

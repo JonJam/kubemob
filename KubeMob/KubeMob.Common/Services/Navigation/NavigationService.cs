@@ -7,6 +7,7 @@ using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.Endpoints;
+using KubeMob.Common.Pages.Events;
 using KubeMob.Common.Pages.HorizontalPodAutoscalers;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;

@@ -10,6 +10,7 @@
                           Title="{markupExtensions:Translate DetailPage_Details}"
                           x:Name="Root">
 
+    <!--TODO Test on iOS-->
     <base:ExtendedContentPage.IconImage>
         <OnPlatform x:TypeArguments="ffImageLoading:CachedImage">
             <On Platform="iOS">

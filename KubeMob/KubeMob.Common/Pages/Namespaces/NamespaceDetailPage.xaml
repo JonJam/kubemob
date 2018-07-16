@@ -9,12 +9,11 @@
                           xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
-                          x:Name="Root"
-                          Icon="{Binding Source={x:Reference Test}, Path=Source}"
-                         >
+                          x:Name="Root">
 
-    <!--TODO Test if this works-->
-    <ffImageLoading:CachedImage
+    <!--TODO Set icon-->
+    <!--Icon="{Binding Source={x:Reference Test}, Path=Source}"-->
+    <!--<ffImageLoading:CachedImage
         x:Name="Test"
         Source="details.png"
         IsVisible="False">
@@ -23,7 +22,7 @@
                 HexColor="{StaticResource KubernetesBlueColor}"
                 EnableSolidColor="true"/>
         </ffImageLoading:CachedImage.Transformations>
-    </ffImageLoading:CachedImage>
+    </ffImageLoading:CachedImage>-->
 
     <Grid>
         <Grid

@@ -189,7 +189,7 @@
     <Compile Update="Views\TappableView.xaml.cs">
       <DependentUpon>TappableView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SettingsItemViewCell.xaml.cs">
+    <Compile Update="ViewCells\SettingsItemViewCell.xaml.cs">
       <DependentUpon>SettingsItemViewCell.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -229,7 +229,7 @@
     <EmbeddedResource Update="Views\TappableView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SettingsItemViewCell.xaml">
+    <EmbeddedResource Update="ViewCells\SettingsItemViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

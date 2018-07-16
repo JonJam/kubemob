@@ -1,26 +1,29 @@
+using KubeMob.Common.ViewCells;
 using KubeMob.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(ViewCell), typeof(DisclosureIndicatorViewCellRenderer))]
+[assembly: ExportRenderer(typeof(AccessoryViewCell), typeof(AccessoryViewCellRenderer))]
 namespace KubeMob.iOS.Renderers
 {
     /// <summary>
     /// Based off <see cref="https://montemagno.com/adding-a-disclosure-indicator-accessory-to/"/>
     /// </summary>
     [Preserve(AllMembers = true)]
-    public class DisclosureIndicatorViewCellRenderer : ViewCellRenderer
+    public class AccessoryViewCellRenderer : ViewCellRenderer
     {
         public override UITableViewCell GetCell(
             Cell item,
             UITableViewCell reusableCell,
             UITableView tv)
         {
+            AccessoryViewCell viewCell = (AccessoryViewCell)item;
+
             UITableViewCell cell = base.GetCell(item, reusableCell, tv);
 
-            switch (item.StyleId)
+            switch (viewCell.Accessory)
             {
                 case nameof(UITableViewCellAccessory.Checkmark):
                     cell.Accessory = UITableViewCellAccessory.Checkmark;

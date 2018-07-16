@@ -6,6 +6,7 @@
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:viewCells="clr-namespace:KubeMob.Common.ViewCells;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -45,8 +46,8 @@
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
                                         <!--TODO Sort out disclosureindicator for events page-->
-                                        <ViewCell
-                                            StyleId="DisclosureIndicator">
+                                        <viewCells:AccessoryViewCell
+                                            Accessory="DisclosureIndicator">
                                             <StackLayout
                                                 Orientation="Horizontal"
                                                 Padding="20,10,20,10">
@@ -124,7 +125,7 @@
                                                         Margin="0,-5,0,0"/>
                                                 </StackLayout>
                                             </StackLayout>
-                                        </ViewCell>
+                                        </viewCells:AccessoryViewCell>
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>

@@ -113,6 +113,7 @@
                                                         Text="{Binding Description}"
                                                         Style="{DynamicResource ListItemDetailTextStyle}"
                                                         TextColor="{StaticResource MessageColor}"
+                                                        IsVisible="{Binding Description, Converter={StaticResource NotEmptyToBoolConverter}}"
                                                         LineBreakMode="WordWrap"
                                                         Margin="0,-5,0,0"/>
                                                 </StackLayout>

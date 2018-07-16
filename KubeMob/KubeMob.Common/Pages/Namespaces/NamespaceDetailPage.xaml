@@ -10,16 +10,19 @@
                           Title="{markupExtensions:Translate DetailPage_Details}"
                           x:Name="Root">
 
-    <!--TODO test this-->
     <base:ExtendedContentPage.IconImage>
-        <ffImageLoading:CachedImage
-            Source="details.png">
-            <ffImageLoading:CachedImage.Transformations>
-                <transformations:TintTransformation
-                HexColor="{StaticResource KubernetesBlueColor}"
-                EnableSolidColor="true"/>
-            </ffImageLoading:CachedImage.Transformations>
-        </ffImageLoading:CachedImage>
+        <OnPlatform x:TypeArguments="ffImageLoading:CachedImage">
+            <On Platform="iOS">
+                <ffImageLoading:CachedImage
+                    Source="details.png">
+                    <ffImageLoading:CachedImage.Transformations>
+                        <transformations:TintTransformation
+                            HexColor="{StaticResource KubernetesBlueRawColor}"
+                            EnableSolidColor="true"/>
+                    </ffImageLoading:CachedImage.Transformations>
+                </ffImageLoading:CachedImage>
+            </On>
+        </OnPlatform>
     </base:ExtendedContentPage.IconImage>
 
     <Grid>

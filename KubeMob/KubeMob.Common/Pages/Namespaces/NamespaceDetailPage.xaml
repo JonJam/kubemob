@@ -5,9 +5,25 @@
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
-                          x:Name="Root">
+                          x:Name="Root"
+                          Icon="{Binding Source={x:Reference Test}, Path=Source}"
+                         >
+
+    <!--TODO Test if this works-->
+    <ffImageLoading:CachedImage
+        x:Name="Test"
+        Source="details.png"
+        IsVisible="False">
+        <ffImageLoading:CachedImage.Transformations>
+            <transformations:TintTransformation
+                HexColor="{StaticResource KubernetesBlueColor}"
+                EnableSolidColor="true"/>
+        </ffImageLoading:CachedImage.Transformations>
+    </ffImageLoading:CachedImage>
 
     <Grid>
         <Grid
@@ -127,7 +143,6 @@
                         Padding="5"
                         CornerRadius="5"
                         HasShadow="False">
-                                            <!--TODO Fix this-->
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer
                                 Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
@@ -181,7 +196,6 @@
                         Padding="5"
                         CornerRadius="5"
                         HasShadow="False">
-                                            <!--TODO Fix this-->
                                             <Frame.GestureRecognizers>
                                                 <TapGestureRecognizer
                                 Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"

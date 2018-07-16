@@ -44,7 +44,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     string creationTime = n.Metadata.CreationTimestamp.HasValue
                         ? $"{n.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
-                    
+
                     // Note for a namespace n.Metadata.NamespaceProperty is null.
                     return new NamespaceDetail(
                         n.Metadata.Uid,

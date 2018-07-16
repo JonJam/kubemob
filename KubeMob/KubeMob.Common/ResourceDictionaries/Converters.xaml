@@ -7,5 +7,6 @@
     <converters:ItemTappedEventArgsConverter x:Key="ItemTappedEventArgsConverter"/>
     <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
     <converters:NotEmptyToBoolConverter x:Key="NotEmptyToBoolConverter"/>
+    <converters:CommandToAccessoryConverter x:Key="CommandToAccessoryConverter"/>
 
 </ResourceDictionary>

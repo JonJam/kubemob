@@ -50,7 +50,7 @@ namespace KubeMob.Common.Services.Kubernetes.Extensions
 
             if (relatedWarningEvents.Any())
             {
-                status = Status.Warning;
+                status = Status.Error;
             }
             else if (relatedPendingPods.Any())
             {

@@ -39,15 +39,13 @@
                                 ItemsSource="{TemplateBinding BindingContext.ObjectSummaries}"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
                                 ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
-                                SeparatorVisibility="Default"
+                                SeparatorVisibility="None"
                                 HasUnevenRows="True"
-                                BackgroundColor="White"
-                                SeparatorColor="DarkGray">
+                                BackgroundColor="White">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <!--TODO Sort out disclosureindicator for events page-->
                                         <viewCells:AccessoryViewCell
-                                            Accessory="DisclosureIndicator">
+                                            Accessory="{TemplateBinding BindingContext.ObjectSummarySelectedCommand, Converter={StaticResource CommandToAccessoryConverter}}">
                                             <StackLayout
                                                 Orientation="Horizontal"
                                                 Padding="20,10,20,10">
@@ -96,15 +94,9 @@
                                                 </ffImageLoading:CachedImage>
 
                                                 <ffImageLoading:CachedImage
-                                                    Source="remove_circle.png"
+                                                    Source="warning.png"
                                                     Style="{StaticResource StatusIconImageStyle}"
-                                                    IsVisible="{Binding IsStatusWarning}">
-                                                    <ffImageLoading:CachedImage.Transformations>
-                                                        <transformations:TintTransformation
-                                                            HexColor="#ffad20"
-                                                            EnableSolidColor="true"/>
-                                                    </ffImageLoading:CachedImage.Transformations>
-                                                </ffImageLoading:CachedImage>
+                                                    IsVisible="{Binding IsStatusWarning}"/>
 
                                                 <ffImageLoading:CachedImage
                                                     Source="error.png"

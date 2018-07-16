@@ -26,13 +26,24 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1Event, ObjectSummary>()
                 .ConstructUsing((e) =>
                 {
+                    Status status = Status.None;
+
+                    switch (e.Type)
+                    {
+                        case "Warning":
+                            status = Status.Warning;
+                            break;
+                        default:
+                            break;
+                    }
+
                     string lastSeen = $"{e.LastTimestamp.Value.ToUniversalTime():s} UTC";
 
                     return new ObjectSummary(
                         lastSeen,
                         string.Empty,
                         e.Message,
-                        Status.None);
+                        status);
                 });
         }
     }

@@ -298,15 +298,6 @@
     <BundleResource Include="Resources\help%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\remove_circle%402s.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\remove_circle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\remove_circle%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\update%402x.png" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +332,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\visibility%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\warning%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\warning%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

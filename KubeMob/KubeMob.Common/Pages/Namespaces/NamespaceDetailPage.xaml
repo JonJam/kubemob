@@ -26,19 +26,17 @@
         </OnPlatform>
     </base:ExtendedContentPage.IconImage>
 
+    <!--TODO Move to app.xaml-->
     <Grid>
         <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
-
-            <!-- TODO Check look of this-->
 
             <views:ErrorMessage
                 Message="{markupExtensions:Translate NoInternetErrorMessage}"
                 IsVisible="{Binding HasNoNetwork}"/>
 
-            <!-- TODO STyle this -->
-            <Label        
-                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
+            <views:ErrorMessage
+                Message="{markupExtensions:Translate ObjectNotFoundMessage}"
                 IsVisible="{Binding ObjectNotFound}"/>
 
             <ScrollView
@@ -47,24 +45,19 @@
                 <StackLayout
                     Spacing="5">
 
-                    <!--TODO Common control?-->
+                    <!--TODO add contentpresenter here-->
 
                     <StackLayout
-                        BackgroundColor="White"
-                        Padding="20,5,20,5"
-                        Spacing="15">
+                        Style="{StaticResource DetailSectionStackLayoutStyle}">
 
-                        <!--TODO Create common control-->
+                        <!--TODO Create common control ??-->
                         <StackLayout>
                             <Label
                                 Text="{markupExtensions:Translate DetailPage_Details_Name}"
                                 Style="{DynamicResource ListItemTextStyle}"/>
                             <Label
                                 Text="{Binding Detail.Name}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
+                                Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                         </StackLayout>
 
                         <StackLayout
@@ -74,10 +67,7 @@
                                 Style="{DynamicResource ListItemTextStyle}"/>
                             <Label
                                 Text="{Binding Detail.NamespaceName}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
+                                Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                         </StackLayout>
 
                         <StackLayout>
@@ -86,10 +76,7 @@
                                 Style="{DynamicResource ListItemTextStyle}"/>
                             <Label
                                 Text="{Binding Detail.CreationTime}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
+                                Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                         </StackLayout>
 
                         <StackLayout>
@@ -98,17 +85,13 @@
                                 Style="{DynamicResource ListItemTextStyle}"/>
                             <Label
                                 Text="{Binding Detail.Status}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
+                                Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                         </StackLayout>
                     </StackLayout>
 
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        Style="{DynamicResource TitleStyle}"
-                        Margin="20,5,20,0"
+                        Style="{StaticResource DetailSectionTitleLabelStyle}"
                         IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
                     <!-- TODO Common style -->
@@ -162,8 +145,7 @@
 
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        Style="{DynamicResource TitleStyle}"
-                        Margin="20,5,20,0"
+                        Style="{StaticResource DetailSectionTitleLabelStyle}"
                         IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
                     <views:ItemsControl

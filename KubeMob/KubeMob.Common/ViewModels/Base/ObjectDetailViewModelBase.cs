@@ -105,8 +105,18 @@ namespace KubeMob.Common.ViewModels.Base
             });
         }
 
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(this.HasNoNetwork))
+            {
+                this.NotifyPropertyChanged(() => this.DisplayInfo);
+            }
+        }
+
         protected abstract Task<T> GetObjectDetail(string name, string namespaceName);
-        
+
         private Task OnDisplayMetadataItemCommandExecute(object obj)
         {
             MetadataItem item = (MetadataItem)obj;

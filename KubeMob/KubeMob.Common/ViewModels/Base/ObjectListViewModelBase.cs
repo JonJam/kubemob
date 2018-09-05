@@ -21,6 +21,8 @@ namespace KubeMob.Common.ViewModels.Base
         private IList<ObjectSummary> objectSummaries = new List<ObjectSummary>();
         private bool objectTypeNotSupported;
 
+        private bool isInitialized;
+
         protected ObjectListViewModelBase(
             INavigationService navigationService,
             IKubernetesService kubernetesService,
@@ -82,33 +84,45 @@ namespace KubeMob.Common.ViewModels.Base
             get;
         }
 
-        public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
+        public override Task Initialize(object navigationData)
         {
-            Filter filter = (Filter)navigationData;
+            if (this.isInitialized)
+            {
+                return Task.CompletedTask;
+            }
 
-            try
+            return this.PerformNetworkOperation(async () =>
             {
-                this.ObjectSummaries = await this.GetObjectSummaries(filter);
-            }
-            catch (ClusterNotFoundException)
-            {
-                await this.popupService.DisplayAlert(
-                    AppResources.ClusterNotFound_Title,
-                    AppResources.ClusterNotFound_Message,
-                    AppResources.OkAlertText);
-            }
-            catch (AccountInvalidException)
-            {
-                await this.popupService.DisplayAlert(
-                    AppResources.AccountInvalid_Title,
-                    AppResources.AccountInvalid_Message,
-                    AppResources.OkAlertText);
-            }
-            catch (ObjectNotFoundException)
-            {
-                this.ObjectTypeNotSupported = true;
-            }
-        });
+                Filter filter = (Filter)navigationData;
+
+                try
+                {
+                    this.ObjectSummaries = await this.GetObjectSummaries(filter);
+                }
+                catch (ClusterNotFoundException)
+                {
+                    await this.popupService.DisplayAlert(
+                        AppResources.ClusterNotFound_Title,
+                        AppResources.ClusterNotFound_Message,
+                        AppResources.OkAlertText);
+                }
+                catch (AccountInvalidException)
+                {
+                    await this.popupService.DisplayAlert(
+                        AppResources.AccountInvalid_Title,
+                        AppResources.AccountInvalid_Message,
+                        AppResources.OkAlertText);
+                }
+                catch (ObjectNotFoundException)
+                {
+                    this.ObjectTypeNotSupported = true;
+                }
+                finally
+                {
+                    this.isInitialized = true;
+                }
+            });
+        }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {

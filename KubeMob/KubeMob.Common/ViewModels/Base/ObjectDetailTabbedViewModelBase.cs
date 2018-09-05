@@ -12,6 +12,9 @@ namespace KubeMob.Common.ViewModels.Base
     {
         private ObjectId objectId;
 
+        // Injecting DetailViewModel into TabbedViewModel in order that initialisation is performed prior to
+        // navigating to tabbed page. Otherwise we would end up navigating to Tabbed Page and then initialising
+        // the detail page.
         protected ObjectDetailTabbedViewModelBase(
             T1 detailVm) => this.DetailVm = detailVm;
 

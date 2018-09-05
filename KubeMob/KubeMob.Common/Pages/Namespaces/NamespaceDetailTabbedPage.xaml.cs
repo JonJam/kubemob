@@ -13,16 +13,17 @@ namespace KubeMob.Common.Pages.Namespaces
 
         protected override async void OnCurrentPageChanged()
         {
-            // TODO WORKING HERE.
-            //TODO disable tab navigation if failed to get detail / loading detail tab.
-            // TODO EventVM being initialized multiple times
             base.OnCurrentPageChanged();
 
             Page page = this.CurrentPage;
 
-            if (page.BindingContext is EventsViewModel vm)
+            NamespaceDetailViewModel detailViewModel = (NamespaceDetailViewModel)this.DetailPage.BindingContext;
+
+            if (page.BindingContext is EventsViewModel vm &&
+                detailViewModel.Detail != null)
             {
-                NamespaceDetailViewModel detailViewModel = (NamespaceDetailViewModel)this.DetailPage.BindingContext;
+                // detailViewModel.Detail will be null if an error occurs which will have already been handled, so
+                // do nothing. Otherwise try load events.
                 Filter filter = new Filter(detailViewModel.Detail.NamespaceName, other: detailViewModel.Detail.Uid);
 
                 await vm.Initialize(filter);

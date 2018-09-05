@@ -10,20 +10,15 @@
                           Title="{markupExtensions:Translate DetailPage_Details}"
                           x:Name="Root">
 
-    <!--TODO Test on iOS-->
     <base:ExtendedContentPage.IconImage>
-        <OnPlatform x:TypeArguments="ffImageLoading:CachedImage">
-            <On Platform="iOS">
-                <ffImageLoading:CachedImage
-                    Source="details.png">
-                    <ffImageLoading:CachedImage.Transformations>
-                        <transformations:TintTransformation
-                            HexColor="{StaticResource KubernetesBlueRawColor}"
-                            EnableSolidColor="true"/>
-                    </ffImageLoading:CachedImage.Transformations>
-                </ffImageLoading:CachedImage>
-            </On>
-        </OnPlatform>
+        <ffImageLoading:CachedImage
+            Source="details.png">
+            <ffImageLoading:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource KubernetesBlueRawColor}"
+                    EnableSolidColor="true"/>
+            </ffImageLoading:CachedImage.Transformations>
+        </ffImageLoading:CachedImage>
     </base:ExtendedContentPage.IconImage>
 
     <!--TODO Move to app.xaml-->

@@ -157,13 +157,15 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Management.Fluent">
-      <Version>1.10.0</Version>
+      <Version>1.15.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory">
-      <Version>3.19.3</Version>
+      <Version>3.19.8</Version>
     </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp">
-      <Version>7.1.0.5212</Version>
+      <Version>7.5.0.6605</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="StyleCop.Analyzers">
       <Version>1.0.2</Version>
@@ -183,9 +185,9 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.3.840</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
     <PackageReference Include="Xamarin.TestCloud.Agent">
-      <Version>0.21.5</Version>
+      <Version>0.21.6</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

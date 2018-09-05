@@ -13,7 +13,9 @@ namespace KubeMob.Common.Pages.Namespaces
 
         protected override async void OnCurrentPageChanged()
         {
+            // TODO WORKING HERE.
             //TODO disable tab navigation if failed to get detail / loading detail tab.
+            // TODO EventVM being initialized multiple times
             base.OnCurrentPageChanged();
 
             Page page = this.CurrentPage;

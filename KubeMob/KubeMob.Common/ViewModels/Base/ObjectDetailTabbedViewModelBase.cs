@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using KubeMob.Common.Services.Kubernetes.Model.Base;
 using KubeMob.Common.Services.Navigation;
-using KubeMob.Common.Services.Popup;
 using Xamarin.Forms.Internals;
 
 namespace KubeMob.Common.ViewModels.Base

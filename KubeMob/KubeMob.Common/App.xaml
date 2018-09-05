@@ -137,6 +137,7 @@
                 </Grid>
             </ControlTemplate>
 
+            <!-- TODO Remove below templates after move all to tabbed pages ?? -->
             <ControlTemplate x:Key="ObjectDetailTemplate">
                 <!--TODO Style this-->
                 <ScrollView>

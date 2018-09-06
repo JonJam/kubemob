@@ -26,43 +26,22 @@
         <StackLayout
             Style="{StaticResource DetailSectionStackLayoutStyle}">
 
-            <!--TODO Create common control ??-->
-            <StackLayout>
-                <Label
-                    Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                    Style="{DynamicResource ListItemTextStyle}"/>
-                <Label
-                    Text="{Binding Detail.Name}"
-                    Style="{StaticResource DetailPropertyValueLabelStyle}"/>
-            </StackLayout>
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Name}"
+                Value="{Binding Detail.Name}"/>
 
-            <StackLayout
-                IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}">
-                <Label
-                    Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                    Style="{DynamicResource ListItemTextStyle}"/>
-                <Label
-                    Text="{Binding Detail.NamespaceName}"
-                    Style="{StaticResource DetailPropertyValueLabelStyle}"/>
-            </StackLayout>
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                Value="{Binding Detail.NamespaceName}"
+                IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-            <StackLayout>
-                <Label
-                    Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                    Style="{DynamicResource ListItemTextStyle}"/>
-                <Label
-                    Text="{Binding Detail.CreationTime}"
-                    Style="{StaticResource DetailPropertyValueLabelStyle}"/>
-            </StackLayout>
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                Value="{Binding Detail.CreationTime}"/>
 
-            <StackLayout>
-                <Label
-                    Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                    Style="{DynamicResource ListItemTextStyle}"/>
-                <Label
-                    Text="{Binding Detail.Status}"
-                    Style="{StaticResource DetailPropertyValueLabelStyle}"/>
-            </StackLayout>
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Status}"
+                Value="{Binding Detail.Status}"/>
         </StackLayout>
 
         <Label

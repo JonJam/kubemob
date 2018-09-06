@@ -186,6 +186,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\DetailProperty.xaml.cs">
+      <DependentUpon>DetailProperty.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ErrorMessage.xaml.cs">
       <DependentUpon>ErrorMessage.xaml</DependentUpon>
     </Compile>

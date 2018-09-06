@@ -7,17 +7,20 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.1.1" />
-    <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.10.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.15.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.1.0.5212" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.5.0.6605">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Essentials" Version="0.6.0-preview" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.3.840" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.3.840" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.3.840" />
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.482510" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,8 +49,14 @@
     <Compile Update="Pages\Endpoints\EndpointDetailPage.xaml.cs">
       <DependentUpon>EndpointDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Events\EventsPage.xaml.cs">
+      <DependentUpon>EventsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailPage.xaml.cs">
       <DependentUpon>HorizontalPodAutoscalerDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Namespaces\NamespaceDetailTabbedPage.xaml.cs">
+      <DependentUpon>NamespaceDetailTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumeDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeDetailPage.xaml</DependentUpon>
@@ -99,9 +108,6 @@
     </Compile>
     <Compile Update="Pages\PersistentVolumeClaims\PersistentVolumeClaimDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeClaimDetailPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\EventDetailPage.xaml.cs">
-      <DependentUpon>EventDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Pods\PodDetailPage.xaml.cs">
       <DependentUpon>PodDetailPage.xaml</DependentUpon>
@@ -180,13 +186,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\DetailProperty.xaml.cs">
+      <DependentUpon>DetailProperty.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MetadataItemsControl.xaml.cs">
+      <DependentUpon>MetadataItemsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ErrorMessage.xaml.cs">
       <DependentUpon>ErrorMessage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\TappableView.xaml.cs">
       <DependentUpon>TappableView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SettingsItemViewCell.xaml.cs">
+    <Compile Update="ViewCells\SettingsItemViewCell.xaml.cs">
       <DependentUpon>SettingsItemViewCell.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -226,7 +238,7 @@
     <EmbeddedResource Update="Views\TappableView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SettingsItemViewCell.xaml">
+    <EmbeddedResource Update="ViewCells\SettingsItemViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

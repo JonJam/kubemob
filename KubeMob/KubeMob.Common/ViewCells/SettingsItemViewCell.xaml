@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             x:Class="KubeMob.Common.Views.SettingsItemViewCell">
+<viewcells:AccessoryViewCell
+    xmlns:viewcells="clr-namespace:KubeMob.Common.ViewCells"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    x:Class="KubeMob.Common.ViewCells.SettingsItemViewCell">
     <StackLayout
         Orientation="Horizontal"
         Padding="20,0,20,0">
@@ -24,4 +26,4 @@
             VerticalOptions="Center"
             LineBreakMode="TailTruncation"/>
     </StackLayout>
-</ViewCell>
+</viewcells:AccessoryViewCell>

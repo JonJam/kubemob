@@ -2,23 +2,16 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Views
+namespace KubeMob.Common.ViewCells
 {
     [Preserve(AllMembers = true)]
-    public partial class SettingsItemViewCell : ViewCell
+    public partial class SettingsItemViewCell : AccessoryViewCell
     {
         public static readonly BindableProperty CommandProperty = BindableProperty.CreateAttached(
             nameof(SettingsItemViewCell.Command),
             typeof(ICommand),
             typeof(SettingsItemViewCell),
             null);
-
-        public static readonly BindableProperty IndicatorProperty = BindableProperty.CreateAttached(
-            nameof(SettingsItemViewCell.IndicatorProperty),
-            typeof(string),
-            typeof(SettingsItemViewCell),
-            null,
-            propertyChanged: SettingsItemViewCell.OnIndicatorChanged);
 
         public static readonly BindableProperty IconProperty = BindableProperty.CreateAttached(
             nameof(SettingsItemViewCell.IconProperty),
@@ -42,12 +35,6 @@ namespace KubeMob.Common.Views
             set => this.SetValue(SettingsItemViewCell.CommandProperty, value);
         }
 
-        public string Indicator
-        {
-            get => (string)this.GetValue(SettingsItemViewCell.IndicatorProperty);
-            set => this.SetValue(SettingsItemViewCell.IndicatorProperty, value);
-        }
-
         public string Icon
         {
             get => (string)this.GetValue(SettingsItemViewCell.IconProperty);
@@ -69,16 +56,6 @@ namespace KubeMob.Common.Views
             {
                 this.Command.Execute(null);
             }
-        }
-
-        private static void OnIndicatorChanged(
-            BindableObject bindable,
-            object oldValue,
-            object newValue)
-        {
-            SettingsItemViewCell item = (SettingsItemViewCell)bindable;
-
-            item.StyleId = newValue as string;
         }
 
         private static void OnIconChanged(

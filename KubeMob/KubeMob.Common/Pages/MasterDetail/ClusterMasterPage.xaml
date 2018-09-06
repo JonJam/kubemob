@@ -84,6 +84,7 @@
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
                     Margin="20,10,0,10"
+                    
                     BackgroundColor="{StaticResource PageBackgroundColor}"/>
             </StackLayout>
 

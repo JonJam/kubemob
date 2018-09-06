@@ -26,9 +26,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                             break;
                     }
 
+                    // Note for a namespace n.Metadata.NamespaceProperty is null.
                     return new ObjectSummary(
                         n.Metadata.Name,
-                        n.Metadata.NamespaceProperty,
+                        n.Metadata.Name,
                         status);
                 });
 
@@ -44,10 +45,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         ? $"{n.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
+                    // Note for a namespace n.Metadata.NamespaceProperty is null.
                     return new NamespaceDetail(
                         n.Metadata.Uid,
                         n.Metadata.Name,
-                        n.Metadata.NamespaceProperty,
+                        n.Metadata.Name,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
                         creationTime,

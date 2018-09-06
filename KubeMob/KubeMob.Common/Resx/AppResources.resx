@@ -462,7 +462,7 @@
   <data name="EventDetailPage_SubObject" xml:space="preserve">
     <value>Sub-object</value>
   </data>
-  <data name="DetailPage_Events" xml:space="preserve">
+  <data name="Events" xml:space="preserve">
     <value>Events</value>
   </data>
   <data name="EventDetailPage_Title" xml:space="preserve">

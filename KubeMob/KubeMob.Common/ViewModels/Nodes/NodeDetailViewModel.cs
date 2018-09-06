@@ -37,7 +37,7 @@ namespace KubeMob.Common.ViewModels.Nodes
 
         private Task OnViewRelatedPodsCommandExecute()
         {
-            Filter filter = new Filter(fieldSelector: $"spec.nodeName={this.Name}");
+            Filter filter = new Filter(fieldSelector: $"spec.nodeName={this.Detail.Name}");
 
             return this.NavigationService.NavigateToPodsPage(filter);
         }

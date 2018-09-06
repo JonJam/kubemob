@@ -1,195 +1,66 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
-                          Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true">
-    <base:ExtendedContentPage.Resources>
-        <views:MetadataItemDataTemplateSelector x:Key="MetadataItemDataTemplateSelector">
-            <views:MetadataItemDataTemplateSelector.Basic>
-                <DataTemplate>
-                    <!--TODO Create common style for frame-->
-                    <Frame
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        Padding="5"
-                        CornerRadius="5"
-                        HasShadow="False">
-                        <Label
-                            Text="{Binding Summary}"
-                            TextColor="{StaticResource MessageColor}"                                    
-                            BackgroundColor="{StaticResource PageBackgroundColor}"
-                            HorizontalOptions="Start"/>
-                    </Frame>
-                </DataTemplate>
-            </views:MetadataItemDataTemplateSelector.Basic>
-            <views:MetadataItemDataTemplateSelector.Popup>
-                <DataTemplate>
-                    <!-- TODO Handle navigation -->
-                    <Frame
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        Padding="5"
-                        CornerRadius="5"
-                        HasShadow="False">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
-                                CommandParameter="{Binding .}"/>
-                        </Frame.GestureRecognizers>
-                        <Label
-                            Text="{Binding Key}"
-                            TextColor="{StaticResource KubernetesBlueColor}"
-                            HorizontalOptions="Start"/>
-                    </Frame>
-                </DataTemplate>
-            </views:MetadataItemDataTemplateSelector.Popup>
-        </views:MetadataItemDataTemplateSelector>
-    </base:ExtendedContentPage.Resources>
+                          Title="{markupExtensions:Translate DetailPage_Details}"
+                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
 
-    <Grid
-        x:Name="Root">
-        <Grid
-            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+    <base:ExtendedContentPage.IconImage>
+        <ffImageLoading:CachedImage
+            Source="details.png">
+            <ffImageLoading:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource KubernetesBlueRawColor}"
+                    EnableSolidColor="true"/>
+            </ffImageLoading:CachedImage.Transformations>
+        </ffImageLoading:CachedImage>
+    </base:ExtendedContentPage.IconImage>
 
-            <!-- TODO Check look of this-->
-            
-            <views:ErrorMessage
-                Message="{markupExtensions:Translate NoInternetErrorMessage}"
-                IsVisible="{Binding HasNoNetwork}"/>
+    <StackLayout>
+        <StackLayout
+            Style="{StaticResource DetailSectionStackLayoutStyle}">
 
-            <!-- TODO STyle this -->
-            <Label        
-                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
-                IsVisible="{Binding ObjectNotFound}"/>
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Name}"
+                Value="{Binding Detail.Name}"/>
 
-            <ScrollView
-                IsVisible="{Binding DisplayInfo}">
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                Value="{Binding Detail.NamespaceName}"
+                IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-                <StackLayout
-                    Spacing="5">
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                Value="{Binding Detail.CreationTime}"/>
 
-                    <!--TODO Common control?-->
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details}"
-                        Style="{DynamicResource TitleStyle}"
-                        Margin="20,5,20,0"/>
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Status}"
+                Value="{Binding Detail.Status}"/>
+        </StackLayout>
 
-                    <StackLayout
-                        BackgroundColor="White"
-                        Padding="20,5,20,5"
-                        Spacing="15">
-
-                        <!--TODO Create common control-->
-                        <StackLayout>
-                            <Label
-                                Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                                Style="{DynamicResource ListItemTextStyle}"/>
-                            <Label
-                                Text="{Binding Detail.Name}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
-                        </StackLayout>
-
-                        <StackLayout
-                            IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}">
-                            <Label
-                                Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                                Style="{DynamicResource ListItemTextStyle}"/>
-                            <Label
-                                Text="{Binding Detail.NamespaceName}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
-                        </StackLayout>
-
-                        <StackLayout>
-                            <Label
-                                Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                                Style="{DynamicResource ListItemTextStyle}"/>
-                            <Label
-                                Text="{Binding Detail.CreationTime}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
-                        </StackLayout>
-
-                        <StackLayout>
-                            <Label
-                                Text="{markupExtensions:Translate DetailPage_Details_Status}"
-                                Style="{DynamicResource ListItemTextStyle}"/>
-                            <Label
-                                Text="{Binding Detail.Status}"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                TextColor="{StaticResource MessageColor}"
-                                LineBreakMode="WordWrap"
-                                Margin="0,-5,0,0"/>
-                        </StackLayout>
-                    </StackLayout>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        Style="{DynamicResource TitleStyle}"
-                        Margin="20,5,20,0"
-                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-                    <!-- TODO Common style -->
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Labels}"
-                        BackgroundColor="White"
-                        IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
-                        ItemTemplate="{StaticResource MetadataItemDataTemplateSelector}"
-                        Padding="20,5,20,5"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        Style="{DynamicResource TitleStyle}"
-                        Margin="20,5,20,0"
-                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-                    <views:ItemsControl
-                        ItemsSource="{Binding Detail.Annotations}"
-                        BackgroundColor="White"
-                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
-                        ItemTemplate="{StaticResource MetadataItemDataTemplateSelector}"
-                        Padding="20,5,20,5"/>
-                </StackLayout>
-            </ScrollView>
-        </Grid>
-
-        <ActivityIndicator
-            IsRunning="{Binding IsBusy}"  
-            IsVisible="{Binding IsBusy}"/>
-    </Grid>
-
-
-
-    <!--TODO enable below-->
-    <!--       
         <Label
-            Text="{markupExtensions:Translate DetailPage_Events}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Events"
-            ItemsSource="{Binding Events}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:TappableView
-                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
-                        CommandParameter="{Binding .}">
-                        <Label
-                            Text="{Binding Message}"
-                            LineBreakMode="TailTruncation"/>
-                    </views:TappableView>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>-->
-    <!--</StackLayout>-->
+            Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Labels}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Annotations}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
+    </StackLayout>
 </base:ExtendedContentPage>

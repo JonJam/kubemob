@@ -23,20 +23,27 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                     o.Name,
                     o.Kind));
 
-            this.CreateMap<k8s.Models.V1Event, Event>()
+            this.CreateMap<k8s.Models.V1Event, ObjectSummary>()
                 .ConstructUsing((e) =>
                 {
-                    string firstSeen = $"{e.FirstTimestamp.Value.ToUniversalTime():s} UTC";
+                    Status status = Status.None;
+
+                    switch (e.Type)
+                    {
+                        case "Warning":
+                            status = Status.Warning;
+                            break;
+                        default:
+                            break;
+                    }
+
                     string lastSeen = $"{e.LastTimestamp.Value.ToUniversalTime():s} UTC";
 
-                    return new Event(
+                    return new ObjectSummary(
+                        lastSeen,
+                        string.Empty,
                         e.Message,
-                        e.Source.Component,
-                        e.InvolvedObject.FieldPath,
-                        e.Count.GetValueOrDefault(0),
-                        firstSeen,
-                        e.LastTimestamp.Value,
-                        lastSeen);
+                        status);
                 });
         }
     }

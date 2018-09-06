@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -20,6 +21,8 @@ namespace KubeMob.Common.ViewModels.Base
         private IList<ObjectSummary> objectSummaries = new List<ObjectSummary>();
         private bool objectTypeNotSupported;
 
+        private bool isInitialized;
+
         protected ObjectListViewModelBase(
             INavigationService navigationService,
             IKubernetesService kubernetesService,
@@ -29,7 +32,9 @@ namespace KubeMob.Common.ViewModels.Base
             this.KubernetesService = kubernetesService;
             this.popupService = popupService;
 
-            this.ObjectSummarySelectedCommand = new Command(async (o) => await this.OnObjectSummarySelectedExecute(o));
+            this.ObjectSummarySelectedCommand = new Command(
+                async (o) => await this.OnObjectSummarySelectedExecute(o),
+                this.OnObjectSummarySelectedCanExecute);
 
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
@@ -79,33 +84,45 @@ namespace KubeMob.Common.ViewModels.Base
             get;
         }
 
-        public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
+        public override Task Initialize(object navigationData)
         {
-            Filter filter = (Filter)navigationData;
+            if (this.isInitialized)
+            {
+                return Task.CompletedTask;
+            }
 
-            try
+            return this.PerformNetworkOperation(async () =>
             {
-                this.ObjectSummaries = await this.GetObjectSummaries(filter);
-            }
-            catch (ClusterNotFoundException)
-            {
-                await this.popupService.DisplayAlert(
-                    AppResources.ClusterNotFound_Title,
-                    AppResources.ClusterNotFound_Message,
-                    AppResources.OkAlertText);
-            }
-            catch (AccountInvalidException)
-            {
-                await this.popupService.DisplayAlert(
-                    AppResources.AccountInvalid_Title,
-                    AppResources.AccountInvalid_Message,
-                    AppResources.OkAlertText);
-            }
-            catch (ObjectNotFoundException)
-            {
-                this.ObjectTypeNotSupported = true;
-            }
-        });
+                Filter filter = (Filter)navigationData;
+
+                try
+                {
+                    this.ObjectSummaries = await this.GetObjectSummaries(filter);
+                }
+                catch (ClusterNotFoundException)
+                {
+                    await this.popupService.DisplayAlert(
+                        AppResources.ClusterNotFound_Title,
+                        AppResources.ClusterNotFound_Message,
+                        AppResources.OkAlertText);
+                }
+                catch (AccountInvalidException)
+                {
+                    await this.popupService.DisplayAlert(
+                        AppResources.AccountInvalid_Title,
+                        AppResources.AccountInvalid_Message,
+                        AppResources.OkAlertText);
+                }
+                catch (ObjectNotFoundException)
+                {
+                    this.ObjectTypeNotSupported = true;
+                }
+                finally
+                {
+                    this.isInitialized = true;
+                }
+            });
+        }
 
         protected override void OnPropertyChanged(string propertyName = null)
         {
@@ -120,5 +137,7 @@ namespace KubeMob.Common.ViewModels.Base
         protected abstract Task<IList<ObjectSummary>> GetObjectSummaries(Filter filter);
 
         protected abstract Task OnObjectSummarySelectedExecute(object obj);
+
+        protected virtual bool OnObjectSummarySelectedCanExecute(object obj) => true;
     }
 }

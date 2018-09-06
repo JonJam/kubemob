@@ -170,7 +170,6 @@
 
             <!-- TODO Remove below templates after move all to tabbed pages ?? -->
             <ControlTemplate x:Key="ObjectDetailTemplate">
-                <!--TODO Style this-->
                 <ScrollView>
                     <Grid>
                         <Grid
@@ -196,7 +195,6 @@
             </ControlTemplate>
 
             <ControlTemplate x:Key="ObjectDetailCommonPropertiesTemplate">
-                <!--TODO Style this-->
                 <StackLayout>
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Name}"
@@ -212,7 +210,6 @@
                         Text="{TemplateBinding BindingContext.Detail.NamespaceName}"
                         IsVisible="{TemplateBinding BindingContext.Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-                    <!--TODO Create control?-->
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"

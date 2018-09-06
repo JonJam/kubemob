@@ -8,7 +8,6 @@
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.Namespaces.NamespaceDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
-                          x:Name="Root"
                           ControlTemplate="{StaticResource NewObjectDetailTemplate}">
 
     <base:ExtendedContentPage.IconImage>
@@ -49,105 +48,19 @@
             Style="{StaticResource DetailSectionTitleLabelStyle}"
             IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-        <!-- TODO Common style -->
-        <views:ItemsControl
+        <views:MetadataItemsControl
             ItemsSource="{Binding Detail.Labels}"
-            BackgroundColor="White"
             IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
-            Padding="20,5,20,5">
-            <!-- TODO Sort out duplication of template selector -->
-            <views:ItemsControl.ItemTemplate>
-                <views:MetadataItemDataTemplateSelector>
-                    <views:MetadataItemDataTemplateSelector.Basic>
-                        <DataTemplate>
-                            <!--TODO Create common style for frame-->
-                            <Frame
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        Padding="5"
-                        CornerRadius="5"
-                        HasShadow="False">
-                                <Label
-                            Text="{Binding Summary}"
-                            TextColor="{StaticResource MessageColor}"                                    
-                            BackgroundColor="{StaticResource PageBackgroundColor}"
-                            HorizontalOptions="Start"/>
-                            </Frame>
-                        </DataTemplate>
-                    </views:MetadataItemDataTemplateSelector.Basic>
-                    <views:MetadataItemDataTemplateSelector.Popup>
-                        <DataTemplate>
-                            <!-- TODO Handle navigation -->
-                            <Frame
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        Padding="5"
-                        CornerRadius="5"
-                        HasShadow="False">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
-                                CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <Label
-                            Text="{Binding Key}"
-                            TextColor="{StaticResource KubernetesBlueColor}"
-                            HorizontalOptions="Start"/>
-                            </Frame>
-                        </DataTemplate>
-                    </views:MetadataItemDataTemplateSelector.Popup>
-                </views:MetadataItemDataTemplateSelector>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
 
         <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        Style="{StaticResource DetailSectionTitleLabelStyle}"
-                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-        <views:ItemsControl
-                        ItemsSource="{Binding Detail.Annotations}"
-                        BackgroundColor="White"
-                        IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
-                        Padding="20,5,20,5">
-            <views:ItemsControl.ItemTemplate>
-                <views:MetadataItemDataTemplateSelector>
-                    <views:MetadataItemDataTemplateSelector.Basic>
-                        <DataTemplate>
-                            <!--TODO Create common style for frame-->
-                            <Frame
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        Padding="5"
-                        CornerRadius="5"
-                        HasShadow="False">
-                                <Label
-                            Text="{Binding Summary}"
-                            TextColor="{StaticResource MessageColor}"                                    
-                            BackgroundColor="{StaticResource PageBackgroundColor}"
-                            HorizontalOptions="Start"/>
-                            </Frame>
-                        </DataTemplate>
-                    </views:MetadataItemDataTemplateSelector.Basic>
-                    <views:MetadataItemDataTemplateSelector.Popup>
-                        <DataTemplate>
-                            <!-- TODO Handle navigation -->
-                            <Frame
-                        BackgroundColor="{StaticResource PageBackgroundColor}"
-                        Padding="5"
-                        CornerRadius="5"
-                        HasShadow="False">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.DisplayMetadataItemCommand}"
-                                CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <Label
-                            Text="{Binding Key}"
-                            TextColor="{StaticResource KubernetesBlueColor}"
-                            HorizontalOptions="Start"/>
-                            </Frame>
-                        </DataTemplate>
-                    </views:MetadataItemDataTemplateSelector.Popup>
-                </views:MetadataItemDataTemplateSelector>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Annotations}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
     </StackLayout>
 </base:ExtendedContentPage>

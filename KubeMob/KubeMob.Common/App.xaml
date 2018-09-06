@@ -122,13 +122,44 @@
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
-                          
+
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
                                 Style="{StaticResource ErrorMessageLabelStyle}"
                                 VerticalOptions="Center"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>
                         </Grid>
+                    </Grid>
+
+                    <ActivityIndicator
+                        IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                        IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="NewObjectDetailTemplate">
+                <Grid
+                    CompressedLayout.IsHeadless="true">
+                    <Grid
+                        IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
+
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate NoInternetErrorMessage}"
+                            IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate ObjectNotFoundMessage}"
+                            IsVisible="{TemplateBinding BindingContext.ObjectNotFound}"/>
+
+                        <ScrollView
+                            IsVisible="{TemplateBinding BindingContext.DisplayInfo}">
+
+                            <StackLayout
+                                Spacing="5"
+                                CompressedLayout.IsHeadless="true">
+                                <ContentPresenter/>
+                            </StackLayout>
+                        </ScrollView>
                     </Grid>
 
                     <ActivityIndicator

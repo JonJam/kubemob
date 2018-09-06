@@ -763,15 +763,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Events.
-        /// </summary>
-        internal static string DetailPage_Events {
-            get {
-                return ResourceManager.GetString("DetailPage_Events", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Message.
         /// </summary>
         internal static string DetailPage_Message {
@@ -867,6 +858,15 @@ namespace KubeMob.Common.Resx {
         internal static string EventDetailPage_Title {
             get {
                 return ResourceManager.GetString("EventDetailPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Events.
+        /// </summary>
+        internal static string Events {
+            get {
+                return ResourceManager.GetString("Events", resourceCulture);
             }
         }
         

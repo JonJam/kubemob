@@ -39,7 +39,7 @@ namespace KubeMob.Common.ViewModels.DaemonSets
         private Task OnViewRelatedServicesCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: this.Detail.RelatedSelector);
 
             return this.NavigationService.NavigateToServicesPage(filter);
@@ -48,7 +48,7 @@ namespace KubeMob.Common.ViewModels.DaemonSets
         private Task OnViewRelatedPodsCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: this.Detail.Uid);
 
             return this.NavigationService.NavigateToPodsPage(filter);

@@ -18,6 +18,7 @@ using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.DaemonSets;
 using KubeMob.Common.ViewModels.Deployments;
 using KubeMob.Common.ViewModels.Endpoints;
+using KubeMob.Common.ViewModels.Events;
 using KubeMob.Common.ViewModels.HorizontalPodAutoscalers;
 using KubeMob.Common.ViewModels.Ingresses;
 using KubeMob.Common.ViewModels.Jobs;
@@ -128,10 +129,10 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<SettingsViewModel>();
             serviceCollection.AddTransient<ObjectListingViewModel>();
 
-            serviceCollection.AddTransient<EventDetailViewModel>();
             serviceCollection.AddTransient<ConditionDetailViewModel>();
 
             serviceCollection.AddTransient<NamespacesViewModel>();
+            serviceCollection.AddTransient<NamespaceDetailTabbedViewModel>();
             serviceCollection.AddTransient<NamespaceDetailViewModel>();
 
             serviceCollection.AddTransient<NodesViewModel>();
@@ -147,6 +148,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<HorizontalPodAutoscalerDetailViewModel>();
 
             serviceCollection.AddTransient<EndpointDetailViewModel>();
+
+            serviceCollection.AddTransient<EventsViewModel>();
         }
 
         private static void ConfigureXamPlugins(IServiceCollection serviceCollection) => serviceCollection.AddSingleton(CrossSettings.Current);

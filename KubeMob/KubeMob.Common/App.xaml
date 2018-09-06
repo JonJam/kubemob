@@ -6,6 +6,7 @@
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:viewCells="clr-namespace:KubeMob.Common.ViewCells;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -38,17 +39,16 @@
                                 ItemsSource="{TemplateBinding BindingContext.ObjectSummaries}"
                                 IsVisible="{TemplateBinding BindingContext.HasObjectSummaries}"
                                 ItemTappedCommand="{TemplateBinding BindingContext.ObjectSummarySelectedCommand}"
-                                SeparatorVisibility="Default"
-                                HasUnevenRows="False"
-                                BackgroundColor="White"
-                                SeparatorColor="DarkGray">
+                                SeparatorVisibility="None"
+                                HasUnevenRows="True"
+                                BackgroundColor="White">
                                 <views:ExtendedListView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell
-                                            StyleId="DisclosureIndicator">
+                                        <viewCells:AccessoryViewCell
+                                            Accessory="{TemplateBinding BindingContext.ObjectSummarySelectedCommand, Converter={StaticResource CommandToAccessoryConverter}}">
                                             <StackLayout
                                                 Orientation="Horizontal"
-                                                Padding="20,0,20,0">
+                                                Padding="20,10,20,10">
                                                 <ffImageLoading:CachedImage
                                                     Source="success.png"
                                                     Style="{StaticResource StatusIconImageStyle}"
@@ -94,32 +94,35 @@
                                                 </ffImageLoading:CachedImage>
 
                                                 <ffImageLoading:CachedImage
-                                                    Source="remove_circle.png"
+                                                    Source="warning.png"
                                                     Style="{StaticResource StatusIconImageStyle}"
-                                                    IsVisible="{Binding IsStatusWarning}">
-                                                    <ffImageLoading:CachedImage.Transformations>
-                                                        <transformations:TintTransformation
-                                                            HexColor="#ffad20"
-                                                            EnableSolidColor="true"/>
-                                                    </ffImageLoading:CachedImage.Transformations>
-                                                </ffImageLoading:CachedImage>
+                                                    IsVisible="{Binding IsStatusWarning}"/>
 
                                                 <ffImageLoading:CachedImage
                                                     Source="error.png"
                                                     Style="{StaticResource StatusIconImageStyle}"
                                                     IsVisible="{Binding IsStatusError}"/>
 
-                                                <Label
-                                                    Text="{Binding Name}"
-                                                    Style="{DynamicResource SubtitleStyle}"
-                                                    VerticalOptions="Center"
-                                                    LineBreakMode="TailTruncation"/>
+                                                <StackLayout
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        Text="{Binding Name}"
+                                                        Style="{DynamicResource ListItemTextStyle}"
+                                                        LineBreakMode="TailTruncation"/>
+                                                    <Label
+                                                        Text="{Binding Description}"
+                                                        Style="{DynamicResource ListItemDetailTextStyle}"
+                                                        TextColor="{StaticResource MessageColor}"
+                                                        IsVisible="{Binding Description, Converter={StaticResource NotEmptyToBoolConverter}}"
+                                                        LineBreakMode="WordWrap"
+                                                        Margin="0,-5,0,0"/>
+                                                </StackLayout>
                                             </StackLayout>
-                                        </ViewCell>
+                                        </viewCells:AccessoryViewCell>
                                     </DataTemplate>
                                 </views:ExtendedListView.ItemTemplate>
                             </views:ExtendedListView>
-                          
+
                             <Label
                                 Text="{markupExtensions:Translate EmptyMessage}"
                                 Style="{StaticResource ErrorMessageLabelStyle}"
@@ -134,6 +137,38 @@
                 </Grid>
             </ControlTemplate>
 
+            <ControlTemplate x:Key="NewObjectDetailTemplate">
+                <Grid
+                    CompressedLayout.IsHeadless="true">
+                    <Grid
+                        IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
+
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate NoInternetErrorMessage}"
+                            IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
+
+                        <views:ErrorMessage
+                            Message="{markupExtensions:Translate ObjectNotFoundMessage}"
+                            IsVisible="{TemplateBinding BindingContext.ObjectNotFound}"/>
+
+                        <ScrollView
+                            IsVisible="{TemplateBinding BindingContext.DisplayInfo}">
+
+                            <StackLayout
+                                Spacing="5"
+                                CompressedLayout.IsHeadless="true">
+                                <ContentPresenter/>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+
+                    <ActivityIndicator
+                        IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                        IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
+                </Grid>
+            </ControlTemplate>
+
+            <!-- TODO Remove below templates after move all to tabbed pages ?? -->
             <ControlTemplate x:Key="ObjectDetailTemplate">
                 <ScrollView>
                     <Grid>
@@ -161,7 +196,6 @@
 
             <ControlTemplate x:Key="ObjectDetailCommonPropertiesTemplate">
                 <StackLayout>
-                    <!--TODO Create control?-->
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Name}"
                         Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
@@ -176,7 +210,6 @@
                         Text="{TemplateBinding BindingContext.Detail.NamespaceName}"
                         IsVisible="{TemplateBinding BindingContext.Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-                    <!--TODO Create control?-->
                     <Label
                         Text="{markupExtensions:Translate DetailPage_Details_Labels}"
                         Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"

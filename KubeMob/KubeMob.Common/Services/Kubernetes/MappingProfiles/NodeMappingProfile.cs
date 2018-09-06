@@ -61,10 +61,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<V1Node, NodeDetail>()
                 .ConstructUsing((n) =>
                 {
-                    List<string> labels = n.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
-                    List<string> annotations = n.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                               new List<string>();
+                    List<MetadataItem> labels = n.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
+                    List<MetadataItem> annotations = n.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                     new List<MetadataItem>();
 
                     string creationTime = n.Metadata.CreationTimestamp.HasValue
                         ? $"{n.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"

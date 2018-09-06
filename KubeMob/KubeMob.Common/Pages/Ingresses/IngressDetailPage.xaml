@@ -18,7 +18,7 @@
             ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
 
         <Label
-            Text="{markupExtensions:Translate DetailPage_Events}"             
+            Text="{markupExtensions:Translate Events}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
             x:Name="Events"

@@ -38,10 +38,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1PersistentVolumeClaim, PersistentVolumeClaimDetail>()
                 .ConstructUsing((p) =>
                 {
-                    List<string> labels = p.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
-                    List<string> annotations = p.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                               new List<string>();
+                    List<MetadataItem> labels = p.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
+                    List<MetadataItem> annotations = p.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                     new List<MetadataItem>();
 
                     string creationTime = p.Metadata.CreationTimestamp.HasValue
                         ? $"{p.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"

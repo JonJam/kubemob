@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.Events.EventsPage"
+                          Title="{markupExtensions:Translate Events}"
+                          common:ViewModelLocator.AutoWireViewModel="true"
+                          ControlTemplate="{StaticResource ObjectListTemplate}">
+
+    <base:ExtendedContentPage.IconImage>
+        <ffImageLoading:CachedImage
+            Source="event_note.png">
+            <ffImageLoading:CachedImage.Transformations>
+                <transformations:TintTransformation
+                            HexColor="{StaticResource KubernetesBlueRawColor}"
+                            EnableSolidColor="true"/>
+            </ffImageLoading:CachedImage.Transformations>
+        </ffImageLoading:CachedImage>
+    </base:ExtendedContentPage.IconImage>
+
+</base:ExtendedContentPage>

@@ -38,7 +38,7 @@ namespace KubeMob.Common.ViewModels.Deployments
         private Task OnViewRelatedReplicaSetsCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: this.Detail.Uid);
 
             return this.NavigationService.NavigateToReplicaSetsPage(filter);
@@ -47,8 +47,8 @@ namespace KubeMob.Common.ViewModels.Deployments
         private Task OnViewHorizontalPodAutoscalersCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
-                other: this.Name);
+                this.Detail.NamespaceName,
+                other: this.Detail.Name);
 
             return this.NavigationService.NavigateToHorizontalPodAutoscalersPage(filter);
         }

@@ -50,7 +50,7 @@
                     Command="{Binding NavigateToNodesCommand}"
                     IsVisible="{Binding ShowNodes}">
                     <Label
-                        Text="{extensions:Translate Namespaces}"
+                        Text="{extensions:Translate Nodes}"
                         Style="{StaticResource MenuLabelStyle}"/>
                 </views:TappableView>
 
@@ -84,6 +84,7 @@
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedNamespace, Mode=TwoWay}"
                     Margin="20,10,0,10"
+                    
                     BackgroundColor="{StaticResource PageBackgroundColor}"/>
             </StackLayout>
 

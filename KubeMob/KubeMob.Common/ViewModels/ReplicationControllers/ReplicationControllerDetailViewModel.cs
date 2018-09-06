@@ -44,7 +44,7 @@ namespace KubeMob.Common.ViewModels.ReplicationControllers
         private Task OnViewRelatedPodsCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: this.Detail.Uid);
 
             return this.NavigationService.NavigateToPodsPage(filter);
@@ -53,7 +53,7 @@ namespace KubeMob.Common.ViewModels.ReplicationControllers
         private Task OnViewRelatedServicesCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 other: this.Detail.RelatedSelector);
 
             return this.NavigationService.NavigateToServicesPage(filter);
@@ -62,8 +62,8 @@ namespace KubeMob.Common.ViewModels.ReplicationControllers
         private Task OnViewHorizontalPodAutoscalersCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
-                other: this.Name);
+                this.Detail.NamespaceName,
+                other: this.Detail.Name);
 
             return this.NavigationService.NavigateToHorizontalPodAutoscalersPage(filter);
         }

@@ -35,12 +35,12 @@ namespace KubeMob.Common.ViewModels.Services
 
         protected override Task<ServiceDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetServiceDetail(name, namespaceName);
 
-        private Task OnViewRelatedEndpointsCommandExecute() => this.NavigationService.NavigateToEndpointDetailPage(this.Name, this.NamespaceName);
+        private Task OnViewRelatedEndpointsCommandExecute() => this.NavigationService.NavigateToEndpointDetailPage(this.Detail.Name, this.Detail.NamespaceName);
 
         private Task OnViewRelatedPodsCommandExecute()
         {
             Filter filter = new Filter(
-                this.NamespaceName,
+                this.Detail.NamespaceName,
                 labelSelector: this.Detail.Selector);
 
             return this.NavigationService.NavigateToPodsPage(filter);

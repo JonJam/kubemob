@@ -7,6 +7,7 @@ using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.Endpoints;
+using KubeMob.Common.Pages.Events;
 using KubeMob.Common.Pages.HorizontalPodAutoscalers;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
@@ -86,7 +87,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToNamespacesPage() => NavigationService.InternalNavigate(typeof(NamespacesPage));
 
-        public Task NavigateToNamespaceDetailPage(string name) => NavigationService.InternalNavigate(typeof(NamespaceDetailPage), new ObjectId(name));
+        public Task NavigateToNamespaceDetailPage(string name) => NavigationService.InternalNavigate(typeof(NamespaceDetailTabbedPage), new ObjectId(name));
 
         public Task NavigateToNodesPage() => NavigationService.InternalNavigate(typeof(NodesPage));
 
@@ -155,8 +156,6 @@ namespace KubeMob.Common.Services.Navigation
         public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
 
         public Task NavigateToObjectListingPage() => NavigationService.InternalNavigate(typeof(ObjectListingPage));
-
-        public Task NavigateToEventDetailPage(Event eventDetail) => NavigationService.InternalNavigate(typeof(EventDetailPage), eventDetail);
 
         public Task NavigateToConditionDetailPage(Kubernetes.Model.Condition conditionDetail) => NavigationService.InternalNavigate(typeof(ConditionDetailPage), conditionDetail);
 

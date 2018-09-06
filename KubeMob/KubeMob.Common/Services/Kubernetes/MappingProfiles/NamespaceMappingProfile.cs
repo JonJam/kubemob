@@ -26,28 +26,30 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                             break;
                     }
 
+                    // Note for a namespace n.Metadata.NamespaceProperty is null.
                     return new ObjectSummary(
                         n.Metadata.Name,
-                        n.Metadata.NamespaceProperty,
+                        n.Metadata.Name,
                         status);
                 });
 
             this.CreateMap<k8s.Models.V1Namespace, NamespaceDetail>()
                 .ConstructUsing((n) =>
                 {
-                    List<string> labels = n.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
-                    List<string> annotations = n.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                               new List<string>();
+                    List<MetadataItem> labels = n.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                new List<MetadataItem>();
+                    List<MetadataItem> annotations = n.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                               new List<MetadataItem>();
 
                     string creationTime = n.Metadata.CreationTimestamp.HasValue
                         ? $"{n.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"
                         : string.Empty;
 
+                    // Note for a namespace n.Metadata.NamespaceProperty is null.
                     return new NamespaceDetail(
                         n.Metadata.Uid,
                         n.Metadata.Name,
-                        n.Metadata.NamespaceProperty,
+                        n.Metadata.Name,
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
                         creationTime,

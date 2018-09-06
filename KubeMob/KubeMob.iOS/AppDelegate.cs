@@ -1,3 +1,4 @@
+using System;
 using Foundation;
 using KubeMob.Common;
 using UIKit;
@@ -31,6 +32,8 @@ namespace KubeMob.iOS
 #endif
 
             return base.FinishedLaunching(uiApplication, launchOptions);
+
+            DateTimeOffset.FromUnixTimeSeconds(Int32.Parse("1"));
         }
     }
 }

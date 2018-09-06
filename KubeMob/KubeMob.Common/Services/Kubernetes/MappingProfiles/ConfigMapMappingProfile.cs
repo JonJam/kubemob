@@ -17,10 +17,10 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
             this.CreateMap<k8s.Models.V1ConfigMap, ConfigMapDetail>()
                 .ConstructUsing((c) =>
                 {
-                    List<string> labels = c.Metadata.Labels?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                          new List<string>();
-                    List<string> annotations = c.Metadata.Annotations?.Select(kvp => $"{kvp.Key}: {kvp.Value}").ToList() ??
-                                               new List<string>();
+                    List<MetadataItem> labels = c.Metadata.Labels?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                          new List<MetadataItem>();
+                    List<MetadataItem> annotations = c.Metadata.Annotations?.Select(kvp => new MetadataItem(kvp.Key, kvp.Value)).ToList() ??
+                                                     new List<MetadataItem>();
 
                     string creationTime = c.Metadata.CreationTimestamp.HasValue
                         ? $"{c.Metadata.CreationTimestamp.Value.ToUniversalTime():s} UTC"

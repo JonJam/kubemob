@@ -5,7 +5,6 @@
                           xmlns:effects="clr-namespace:KubeMob.Common.Effects;assembly=KubeMob.Common"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
-                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.AddEditAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
@@ -45,12 +44,20 @@
 
             <Label
                 Text="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Label}"/>
-            <views:NoHelpEntry
+            <Entry
                 x:Name="TenantIdEntry"
                 Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Placeholder}"
                 Text="{Binding TenantId.Value, Mode=TwoWay}"
                 IsEnabled="{Binding IsEditing, Converter={StaticResource InverseBoolConverter}}"
-                Keyboard="Text">
+                IsTextPredictionEnabled="false">
+                <Entry.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>CapitalizeNone</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Entry.Keyboard>
+
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
                         EventName="TextChanged"  
@@ -61,7 +68,7 @@
                         </behaviors:EffectBehavior.Effect>
                     </behaviors:EffectBehavior>
                 </Entry.Behaviors>
-            </views:NoHelpEntry>
+            </Entry>
             <Label
                 Text="{Binding TenantId.FirstError}"
                 Style="{StaticResource ValidationErrorLabelStyle}"
@@ -69,11 +76,19 @@
 
             <Label
                 Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Label}"/>
-            <views:NoHelpEntry
+            <Entry
                 x:Name="ClientIdEntry"
                 Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Placeholder}"
                 Text="{Binding ClientId.Value, Mode=TwoWay}"
-                Keyboard="Text">
+                IsTextPredictionEnabled="false">
+                <Entry.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>CapitalizeNone</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Entry.Keyboard>
+
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
                         EventName="TextChanged"  
@@ -84,7 +99,7 @@
                         </behaviors:EffectBehavior.Effect>
                     </behaviors:EffectBehavior>
                 </Entry.Behaviors>
-            </views:NoHelpEntry>
+            </Entry>
             <Label
                 Text="{Binding ClientId.FirstError}"
                 Style="{StaticResource ValidationErrorLabelStyle}"
@@ -92,12 +107,20 @@
 
             <Label
                 Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Label}"/>
-            <views:NoHelpEntry
+            <Entry
                 x:Name="ClientSecretEntry"
                 Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Placeholder}"
                 Text="{Binding ClientSecret.Value, Mode=TwoWay}"
                 IsPassword="True"
-                Keyboard="Text">
+                IsTextPredictionEnabled="false">
+                <Entry.Keyboard>
+                    <Keyboard x:FactoryMethod="Create">
+                        <x:Arguments>
+                            <KeyboardFlags>CapitalizeNone</KeyboardFlags>
+                        </x:Arguments>
+                    </Keyboard>
+                </Entry.Keyboard>
+
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior  
                     EventName="TextChanged"  
@@ -108,7 +131,7 @@
                         </behaviors:EffectBehavior.Effect>
                     </behaviors:EffectBehavior>
                 </Entry.Behaviors>
-            </views:NoHelpEntry>
+            </Entry>
             <Label
                 Text="{Binding ClientSecret.FirstError}"
                 Style="{StaticResource ValidationErrorLabelStyle}"

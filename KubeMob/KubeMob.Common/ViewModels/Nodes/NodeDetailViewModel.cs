@@ -13,6 +13,7 @@ namespace KubeMob.Common.ViewModels.Nodes
     [Preserve(AllMembers = true)]
     public class NodeDetailViewModel : ObjectDetailViewModelBase<NodeDetail>
     {
+        // TODO Refactor the Commands.
         public NodeDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService,

@@ -24,13 +24,42 @@
 
     <!--TODO Add content-->
 
-    <!--<StackLayout>
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <ContentView
-            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+    <StackLayout>
+        <StackLayout
+            Style="{StaticResource DetailSectionStackLayoutStyle}">
 
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Name}"
+                Value="{Binding Detail.Name}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                Value="{Binding Detail.CreationTime}"/>
+
+        </StackLayout>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Labels}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Annotations}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
+    </StackLayout>
+
+    <!--<StackLayout>
         <Label
             Text="{markupExtensions:Translate NodeDetailPage_Details_Addresses}"
             Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>

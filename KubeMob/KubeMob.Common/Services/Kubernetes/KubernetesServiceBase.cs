@@ -22,7 +22,7 @@ namespace KubeMob.Common.Services.Kubernetes
     [Preserve(AllMembers = true)]
     public abstract class KubernetesServiceBase : IKubernetesService
     {
-        private const string AllNamespace = "all";
+        public const string AllNamespace = "all";
         private const string DefaultNamespace = "default";
 
         private static readonly List<Namespace> InitialNamespaces = new List<Namespace>()

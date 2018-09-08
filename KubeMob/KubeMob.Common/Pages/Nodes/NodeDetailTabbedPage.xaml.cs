@@ -1,7 +1,10 @@
+using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
+using KubeMob.Common.ViewModels.Conditions;
 using KubeMob.Common.ViewModels.Events;
 using KubeMob.Common.ViewModels.Namespaces;
 using KubeMob.Common.ViewModels.Nodes;
+using KubeMob.Common.ViewModels.Pods;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -20,18 +23,27 @@ namespace KubeMob.Common.Pages.Nodes
 
             NodeDetailViewModel detailViewModel = (NodeDetailViewModel)this.DetailPage.BindingContext;
 
-            if (page.BindingContext is EventsViewModel vm &&
+            // detailViewModel.Detail will be null if an error occurs which will have already been handled, so
+            // do nothing. Otherwise try load events.
+            if (page.BindingContext is EventsViewModel eventsViewModel &&
                 detailViewModel.Detail != null)
             {
-                // detailViewModel.Detail will be null if an error occurs which will have already been handled, so
-                // do nothing. Otherwise try load events.
                 Filter filter = new Filter(detailViewModel.Detail.NamespaceName, other: detailViewModel.Detail.Uid);
 
-                await vm.Initialize(filter);
+                await eventsViewModel.Initialize(filter);
             }
+            else if (page.BindingContext is PodsViewModel podsViewModel &&
+                     detailViewModel.Detail != null)
+            {
+                Filter filter = new Filter(KubernetesServiceBase.AllNamespace, $"spec.nodeName={detailViewModel.Detail.Name}");
 
-
-            //TODO handle other tabs.
+                await podsViewModel.Initialize(filter);
+            }
+            else if (page.BindingContext is ConditionsViewModel conditionsViewModel &&
+                     detailViewModel.Detail != null)
+            {
+                await conditionsViewModel.Initialize(detailViewModel.Detail.Conditions);
+            }
         }
     }
 }

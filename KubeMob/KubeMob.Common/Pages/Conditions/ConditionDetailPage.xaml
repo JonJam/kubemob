@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.Conditions.ConditionDetailPage"
+                          Title="{markupExtensions:Translate ConditionDetailPage_Title}"
+                          common:ViewModelLocator.AutoWireViewModel="true">
+    <ScrollView>
+        <StackLayout
+            Spacing="5"
+            CompressedLayout.IsHeadless="true">
+            <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+
+                <views:DetailProperty
+                    Label="{markupExtensions:Translate DetailPage_Details_Type}"
+                    Value="{Binding Detail.Type}"/>
+
+                <views:DetailProperty
+                    Label="{markupExtensions:Translate DetailPage_Details_Status}"
+                    Value="{Binding Detail.Status}"/>
+
+                <views:DetailProperty
+                    Label="{markupExtensions:Translate ConditionDetailPage_LastHeartbeatTime}"
+                    Value="{Binding Detail.LastHeartbeatTime}"/>
+
+                <views:DetailProperty
+                    Label="{markupExtensions:Translate ConditionDetailPage_LastTransitionTime}"
+                    Value="{Binding Detail.LastTransitionTime}"/>
+
+                <views:DetailProperty
+                    Label="{markupExtensions:Translate DetailPage_Reason}"
+                    Value="{Binding Detail.Reason}"/>
+
+                <views:DetailProperty
+                    Label="{markupExtensions:Translate DetailPage_Message}"
+                    Value="{Binding Detail.Message}"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</base:ExtendedContentPage>

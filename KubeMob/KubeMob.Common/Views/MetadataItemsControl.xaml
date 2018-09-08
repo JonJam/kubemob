@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Views.MetadataItemsControl"
-                Style="{StaticResource ItemsControlStyle}">
+            Style="{StaticResource ItemsControlStyle}"
+            Padding="{StaticResource ItemsControlPadding}">
+    <!-- For some reason setting Padding via Style doesnt work as expected -->
 
     <views:ItemsControl.ItemTemplate>
         <views:MetadataItemDataTemplateSelector>

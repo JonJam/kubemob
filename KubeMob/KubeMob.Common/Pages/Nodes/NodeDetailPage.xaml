@@ -104,7 +104,8 @@
 
         <views:ItemsControl
             ItemsSource="{Binding Detail.Addresses}"
-            Style="{StaticResource ItemsControlStyle}">
+            Style="{StaticResource ItemsControlStyle}"
+            Padding="{StaticResource ItemsControlPadding}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Frame
@@ -142,7 +143,7 @@
     <!--<StackLayout>
 
         <Label
-            Text="{markupExtensions:Translate DetailPage_Conditions}"             
+            Text="{markupExtensions:Translate Conditions}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
             x:Name="Conditions"
@@ -160,10 +161,6 @@
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedPods}"
-            Command="{Binding ViewRelatedPodsCommand}"/>
        
     </StackLayout>-->
 </base:ExtendedContentPage>

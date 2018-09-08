@@ -11,6 +11,8 @@
         <resourceDictionaries:Colors />
     </ResourceDictionary.MergedDictionaries>
 
+    <Thickness x:Key="ItemsControlPadding" Bottom="5" Left="20" Right="20" Top="5"></Thickness>
+
     <Style TargetType="base:ExtendedContentPage" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
     </Style>
@@ -48,9 +50,8 @@
         <Setter Property="Margin" Value="0,-5,0,0"/>
     </Style>
 
-    <Style x:Key="ItemsControlStyle" TargetType="views:ItemsControl">
+    <Style x:Key="ItemsControlStyle" TargetType="views:ItemsControl" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="White"/>
-        <Setter Property="Padding" Value="20,5,20,5"/>
     </Style>
 
     <Style x:Key="FrameStyle" TargetType="Frame">

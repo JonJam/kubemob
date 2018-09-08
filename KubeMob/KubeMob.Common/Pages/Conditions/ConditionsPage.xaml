@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          xmlns:viewCells="clr-namespace:KubeMob.Common.ViewCells;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.Conditions.ConditionsPage"
+                          Title="{markupExtensions:Translate Conditions}"
+                          common:ViewModelLocator.AutoWireViewModel="true">
+
+    <base:ExtendedContentPage.IconImage>
+        <ffImageLoading:CachedImage
+            Source="link.png">
+            <ffImageLoading:CachedImage.Transformations>
+                <transformations:TintTransformation
+                            HexColor="{StaticResource KubernetesBlueRawColor}"
+                            EnableSolidColor="true"/>
+            </ffImageLoading:CachedImage.Transformations>
+        </ffImageLoading:CachedImage>
+    </base:ExtendedContentPage.IconImage>
+
+    <Grid
+        CompressedLayout.IsHeadless="true">
+
+        <views:ExtendedListView
+            ItemsSource="{Binding Conditions}"
+            IsVisible="{Binding HasConditions}"
+            ItemTappedCommand="{Binding ConditionSelectedCommand}"
+            SeparatorVisibility="None"
+            HasUnevenRows="True"
+            BackgroundColor="White">
+            <views:ExtendedListView.ItemTemplate>
+                <DataTemplate>
+                    <viewCells:AccessoryViewCell
+                        Accessory="{Binding ConditionSelectedCommand, Converter={StaticResource CommandToAccessoryConverter}}">
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Padding="20,10,20,10">
+                            <StackLayout
+                                VerticalOptions="Center">
+                                <Label
+                                    Text="{Binding LastHeartbeatTime}"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    LineBreakMode="TailTruncation"/>
+                                <Label
+                                    Text="{Binding Message}"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    TextColor="{StaticResource MessageColor}"
+                                    IsVisible="{Binding Description, Converter={StaticResource NotEmptyToBoolConverter}}"
+                                    LineBreakMode="WordWrap"
+                                    Margin="0,-5,0,0"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </viewCells:AccessoryViewCell>
+                </DataTemplate>
+            </views:ExtendedListView.ItemTemplate>
+        </views:ExtendedListView>
+
+        <Label
+            Text="{markupExtensions:Translate EmptyMessage}"
+            Style="{StaticResource ErrorMessageLabelStyle}"
+            VerticalOptions="Center"
+            IsVisible="{Binding HasConditions, Converter={StaticResource InverseBoolConverter}}"/>
+    </Grid>
+</base:ExtendedContentPage>

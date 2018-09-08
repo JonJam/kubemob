@@ -439,6 +439,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Conditions.
+        /// </summary>
+        internal static string Conditions {
+            get {
+                return ResourceManager.GetString("Conditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Config and Storage.
         /// </summary>
         internal static string ConfigAndStorage {
@@ -624,15 +633,6 @@ namespace KubeMob.Common.Resx {
         internal static string DetailPage_Capacity_ResourceName {
             get {
                 return ResourceManager.GetString("DetailPage_Capacity_ResourceName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Conditions.
-        /// </summary>
-        internal static string DetailPage_Conditions {
-            get {
-                return ResourceManager.GetString("DetailPage_Conditions", resourceCulture);
             }
         }
         
@@ -997,7 +997,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to KubeProxyVersion.
+        ///   Looks up a localized string similar to Kube-Proxy Version.
         /// </summary>
         internal static string NodeDetailPage_Details_KubeProxyVersion {
             get {

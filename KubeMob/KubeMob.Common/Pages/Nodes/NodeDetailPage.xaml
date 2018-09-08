@@ -22,8 +22,6 @@
         </forms:CachedImage>
     </base:ExtendedContentPage.IconImage>
 
-    <!--TODO Add content-->
-
     <StackLayout>
         <StackLayout
             Style="{StaticResource DetailSectionStackLayoutStyle}">
@@ -138,29 +136,4 @@
             IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
             PopupCommand="{Binding DisplayMetadataItemCommand}"/>
     </StackLayout>
-    
-
-    <!--<StackLayout>
-
-        <Label
-            Text="{markupExtensions:Translate Conditions}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Conditions"
-            ItemsSource="{Binding Detail.Conditions}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:TappableView
-                        Command="{Binding Source={x:Reference Conditions}, Path=BindingContext.NavigateToConditionDetailCommand}"
-                        CommandParameter="{Binding .}">
-                        <Label
-                            Text="{Binding Type}"
-                            LineBreakMode="TailTruncation"/>
-                    </views:TappableView>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-       
-    </StackLayout>-->
 </base:ExtendedContentPage>

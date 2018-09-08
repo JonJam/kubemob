@@ -22,7 +22,7 @@ namespace KubeMob.Common.ViewModels.Conditions
             this.navigationService = navigationService;
 
             this.ConditionSelectedCommand = new Command(
-                async (o) => await this.OnObjectSummarySelectedExecute(o));
+                async (o) => await this.OnConditionSelectedExecute(o));
         }
 
         public ICommand ConditionSelectedCommand
@@ -51,12 +51,6 @@ namespace KubeMob.Common.ViewModels.Conditions
             return Task.CompletedTask;
         }
 
-        private async Task OnObjectSummarySelectedExecute(object obj)
-        {
-            if (obj is Condition conditionDetail)
-            {
-                await this.navigationService.NavigateToConditionDetailPage(conditionDetail);
-            }
-        }
+        private async Task OnConditionSelectedExecute(object obj) => await this.navigationService.NavigateToConditionDetailPage((Condition)obj);
     }
 }

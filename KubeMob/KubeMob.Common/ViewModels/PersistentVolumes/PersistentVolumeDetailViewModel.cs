@@ -13,6 +13,7 @@ namespace KubeMob.Common.ViewModels.PersistentVolumes
     [Preserve(AllMembers = true)]
     public class PersistentVolumeDetailViewModel : ObjectDetailViewModelBase<PersistentVolumeDetail>
     {
+        // TODO Refactor commands.
         public PersistentVolumeDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService,

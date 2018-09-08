@@ -13,6 +13,7 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.Services.Settings;
 using KubeMob.Common.ViewModels;
+using KubeMob.Common.ViewModels.Conditions;
 using KubeMob.Common.ViewModels.ConfigMaps;
 using KubeMob.Common.ViewModels.CronJobs;
 using KubeMob.Common.ViewModels.DaemonSets;
@@ -129,6 +130,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<SettingsViewModel>();
             serviceCollection.AddTransient<ObjectListingViewModel>();
 
+            serviceCollection.AddTransient<ConditionsViewModel>();
             serviceCollection.AddTransient<ConditionDetailViewModel>();
 
             serviceCollection.AddTransient<NamespacesViewModel>();
@@ -136,6 +138,7 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<NamespaceDetailViewModel>();
 
             serviceCollection.AddTransient<NodesViewModel>();
+            serviceCollection.AddTransient<NodeDetailTabbedViewModel>();
             serviceCollection.AddTransient<NodeDetailViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumesViewModel>();

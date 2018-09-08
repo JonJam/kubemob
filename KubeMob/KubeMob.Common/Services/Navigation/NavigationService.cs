@@ -2,12 +2,12 @@ using System;
 using System.Threading.Tasks;
 using KubeMob.Common.Pages;
 using KubeMob.Common.Pages.Base;
+using KubeMob.Common.Pages.Conditions;
 using KubeMob.Common.Pages.ConfigMaps;
 using KubeMob.Common.Pages.CronJobs;
 using KubeMob.Common.Pages.DaemonSets;
 using KubeMob.Common.Pages.Deployments;
 using KubeMob.Common.Pages.Endpoints;
-using KubeMob.Common.Pages.Events;
 using KubeMob.Common.Pages.HorizontalPodAutoscalers;
 using KubeMob.Common.Pages.Ingresses;
 using KubeMob.Common.Pages.Jobs;
@@ -91,7 +91,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToNodesPage() => NavigationService.InternalNavigate(typeof(NodesPage));
 
-        public Task NavigateToNodeDetailPage(string name) => NavigationService.InternalNavigate(typeof(NodeDetailPage), new ObjectId(name));
+        public Task NavigateToNodeDetailPage(string name) => NavigationService.InternalNavigate(typeof(NodeDetailTabbedPage), new ObjectId(name));
 
         public Task NavigateToPersistentVolumesPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(PersistentVolumesPage), filter);
 

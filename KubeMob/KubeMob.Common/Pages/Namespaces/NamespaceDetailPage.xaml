@@ -30,11 +30,6 @@
                 Value="{Binding Detail.Name}"/>
 
             <views:DetailProperty
-                Label="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                Value="{Binding Detail.NamespaceName}"
-                IsVisible="{Binding Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-            <views:DetailProperty
                 Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
                 Value="{Binding Detail.CreationTime}"/>
 

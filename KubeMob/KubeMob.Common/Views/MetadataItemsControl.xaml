@@ -3,19 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Views.MetadataItemsControl"
-            BackgroundColor="White"
-            Padding="20,5,20,5">
-
-    <views:ItemsControl.Resources>
-        <ResourceDictionary>
-            <Style x:Key="FrameStyle" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
-                <Setter Property="Padding" Value="5"/>
-                <Setter Property="CornerRadius" Value="5"/>
-                <Setter Property="HasShadow" Value="False"/>
-            </Style>
-        </ResourceDictionary>
-    </views:ItemsControl.Resources>
+            Style="{StaticResource ItemsControlStyle}"
+            Padding="{StaticResource ItemsControlPadding}">
+    <!-- For some reason setting Padding via Style doesnt work as expected -->
 
     <views:ItemsControl.ItemTemplate>
         <views:MetadataItemDataTemplateSelector>
@@ -25,9 +15,7 @@
                         Style="{StaticResource FrameStyle}">
                         <Label
                             Text="{Binding Summary}"
-                            TextColor="{StaticResource MessageColor}"                                    
-                            BackgroundColor="{StaticResource PageBackgroundColor}"
-                            HorizontalOptions="Start"/>
+                            Style="{StaticResource NonInterativeLabelStyle}"/>
                     </Frame>
                 </DataTemplate>
             </views:MetadataItemDataTemplateSelector.Basic>
@@ -43,8 +31,7 @@
                         </Frame.GestureRecognizers>
                         <Label
                             Text="{Binding Key}"
-                            TextColor="{StaticResource KubernetesBlueColor}"
-                            HorizontalOptions="Start"/>
+                            Style="{StaticResource InterativeLabelStyle}"/>
                     </Frame>
                 </DataTemplate>
             </views:MetadataItemDataTemplateSelector.Popup>

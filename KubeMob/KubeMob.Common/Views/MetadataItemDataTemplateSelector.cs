@@ -30,7 +30,7 @@ namespace KubeMob.Common.Views
             // TODO Verify this works as expected.
             try
             {
-                JToken.Parse(annotation.Value);
+                JObject.Parse(annotation.Value);
             }
             catch (JsonReaderException)
             {

@@ -113,7 +113,7 @@
         </views:ItemsControl>
 
         <Label
-            Text="{markupExtensions:Translate DetailPage_Conditions}"             
+            Text="{markupExtensions:Translate Conditions}"             
             Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
         <views:ItemsControl
             x:Name="Conditions"

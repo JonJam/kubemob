@@ -4,11 +4,14 @@
                     xmlns:resourceDictionaries="clr-namespace:KubeMob.Common.ResourceDictionaries;assembly=KubeMob.Common"
                     xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                     xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                    xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
                     x:Class="KubeMob.Common.ResourceDictionaries.Styles">
 
     <ResourceDictionary.MergedDictionaries>
         <resourceDictionaries:Colors />
     </ResourceDictionary.MergedDictionaries>
+
+    <Thickness x:Key="ItemsControlPadding" Bottom="5" Left="20" Right="20" Top="5"></Thickness>
 
     <Style TargetType="base:ExtendedContentPage" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
@@ -45,6 +48,28 @@
         <Setter Property="TextColor" Value="{StaticResource MessageColor}"/>
         <Setter Property="LineBreakMode" Value="WordWrap"/>
         <Setter Property="Margin" Value="0,-5,0,0"/>
+    </Style>
+
+    <Style x:Key="ItemsControlStyle" TargetType="views:ItemsControl" ApplyToDerivedTypes="True">
+        <Setter Property="BackgroundColor" Value="White"/>
+    </Style>
+
+    <Style x:Key="FrameStyle" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="HasShadow" Value="False"/>
+    </Style>
+
+    <Style x:Key="NonInterativeLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource MessageColor}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+    </Style>
+
+    <Style x:Key="InterativeLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource KubernetesBlueColor}"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
     </Style>
 
 

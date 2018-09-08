@@ -40,10 +40,13 @@
     <Compile Update="Pages\Base\ExtendedContentPage.xaml.cs">
       <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Conditions\ConditionsPage.xaml.cs">
+      <DependentUpon>ConditionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\ConfigMaps\ConfigMapDetailPage.xaml.cs">
       <DependentUpon>ConfigMapDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\ConditionDetailPage.xaml.cs">
+    <Compile Update="Pages\Conditions\ConditionDetailPage.xaml.cs">
       <DependentUpon>ConditionDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Endpoints\EndpointDetailPage.xaml.cs">
@@ -57,6 +60,9 @@
     </Compile>
     <Compile Update="Pages\Namespaces\NamespaceDetailTabbedPage.xaml.cs">
       <DependentUpon>NamespaceDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Nodes\NodeDetailTabbedPage.xaml.cs">
+      <DependentUpon>NodeDetailTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumeDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeDetailPage.xaml</DependentUpon>

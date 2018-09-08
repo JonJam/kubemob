@@ -27,7 +27,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.Status = status;
             this.Claim = claim;
             this.ReclaimPolicy = reclaimPolicy;
-            this.AccessModes = accessModes;
+            this.AccessModes = string.Join(", ", accessModes);
             this.StorageClass = storageClass;
             this.Reason = reason;
             this.Message = message;
@@ -49,7 +49,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> AccessModes
+        public string AccessModes
         {
             get;
         }

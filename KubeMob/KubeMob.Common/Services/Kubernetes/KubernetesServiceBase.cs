@@ -849,7 +849,17 @@ namespace KubeMob.Common.Services.Kubernetes
 
         public async Task<IList<ObjectSummary>> GetEventsForObject(Filter filter)
         {
-            V1EventList events = await this.PerformClientOperation((c) => c.ListNamespacedEventAsync(filter.Namespace, fieldSelector: $"involvedObject.uid={filter.Other}"));
+            V1EventList events;
+
+            if (!string.IsNullOrWhiteSpace(filter.Namespace))
+            {
+                events = await this.PerformClientOperation((c) =>
+                    c.ListNamespacedEventAsync(filter.Namespace, fieldSelector: $"involvedObject.uid={filter.Other}"));
+            }
+            else
+            {
+                events = await this.PerformClientOperation((c) => c.ListEventForAllNamespacesAsync(fieldSelector: $"involvedObject.uid={filter.Other}"));
+            }
 
             return Mapper.Map<IList<ObjectSummary>>(events.Items.OrderByDescending(e => e.LastTimestamp));
         }

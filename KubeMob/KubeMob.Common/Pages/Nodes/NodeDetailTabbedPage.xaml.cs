@@ -1,6 +1,7 @@
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.ViewModels.Events;
 using KubeMob.Common.ViewModels.Namespaces;
+using KubeMob.Common.ViewModels.Nodes;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -13,22 +14,24 @@ namespace KubeMob.Common.Pages.Nodes
 
         protected override async void OnCurrentPageChanged()
         {
-            // TODO handle other tabs.
-            //base.OnCurrentPageChanged();
+            base.OnCurrentPageChanged();
 
-            //Page page = this.CurrentPage;
+            Page page = this.CurrentPage;
 
-            //NamespaceDetailViewModel detailViewModel = (NamespaceDetailViewModel)this.DetailPage.BindingContext;
+            NodeDetailViewModel detailViewModel = (NodeDetailViewModel)this.DetailPage.BindingContext;
 
-            //if (page.BindingContext is EventsViewModel vm &&
-            //    detailViewModel.Detail != null)
-            //{
-            //    // detailViewModel.Detail will be null if an error occurs which will have already been handled, so
-            //    // do nothing. Otherwise try load events.
-            //    Filter filter = new Filter(detailViewModel.Detail.NamespaceName, other: detailViewModel.Detail.Uid);
+            if (page.BindingContext is EventsViewModel vm &&
+                detailViewModel.Detail != null)
+            {
+                // detailViewModel.Detail will be null if an error occurs which will have already been handled, so
+                // do nothing. Otherwise try load events.
+                Filter filter = new Filter(detailViewModel.Detail.NamespaceName, other: detailViewModel.Detail.Uid);
 
-            //    await vm.Initialize(filter);
-            //}
+                await vm.Initialize(filter);
+            }
+
+
+            //TODO handle other tabs.
         }
     }
 }

@@ -17,5 +17,5 @@
 
     <!--TODO Add other tabs-->
 
-    <!--<events:EventsPage/>-->
+    <events:EventsPage/>
 </TabbedPage>

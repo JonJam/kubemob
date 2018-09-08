@@ -1051,6 +1051,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System Info.
+        /// </summary>
+        internal static string NodeDetailPage_Details_SystemInfo {
+            get {
+                return ResourceManager.GetString("NodeDetailPage_Details_SystemInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to System UUID.
         /// </summary>
         internal static string NodeDetailPage_Details_SystemUuid {

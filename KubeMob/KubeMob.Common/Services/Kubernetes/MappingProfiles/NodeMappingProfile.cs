@@ -74,6 +74,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
 
                     List<Condition> conditions = Mapper.Map<List<Condition>>(n.Status.Conditions);
 
+                    // Note: NamespaceProperty is null.
                     return new NodeDetail(
                         n.Metadata.Uid,
                         n.Metadata.Name,

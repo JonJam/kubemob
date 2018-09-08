@@ -618,4 +618,7 @@
   <data name="SettingsPage_Preferences" xml:space="preserve">
     <value>Preferences</value>
   </data>
+  <data name="NodeDetailPage_Details_SystemInfo" xml:space="preserve">
+    <value>System Info</value>
+  </data>
 </root>

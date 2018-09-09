@@ -331,6 +331,15 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        internal static string CloseAlertText {
+            get {
+                return ResourceManager.GetString("CloseAlertText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cluster.
         /// </summary>
         internal static string Cluster {

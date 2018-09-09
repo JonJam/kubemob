@@ -147,6 +147,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<StorageClassesViewModel>();
             serviceCollection.AddTransient<StorageClassDetailViewModel>();
+            serviceCollection.AddTransient<StorageClassDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<HorizontalPodAutoscalersViewModel>();
             serviceCollection.AddTransient<HorizontalPodAutoscalerDetailViewModel>();

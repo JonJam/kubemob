@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
-                          xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                           xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.PersistentVolumes.PersistentVolumeDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
                           ControlTemplate="{StaticResource NewObjectDetailTemplate}">
@@ -21,8 +20,6 @@
             </forms:CachedImage.Transformations>
         </forms:CachedImage>
     </base:ExtendedContentPage.IconImage>
-
-    <!--TODO Add all content-->
 
     <StackLayout>
         <StackLayout
@@ -60,12 +57,17 @@
                 Label="{markupExtensions:Translate DetailPage_Details_AccessModes}"
                 Value="{Binding Detail.AccessModes}"/>
 
-            <!--<Label
+            <Label
                 Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
-                Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-            <Button
+                Style="{DynamicResource ListItemTextStyle}"/>
+            <Label
                 Text="{Binding Detail.StorageClass}"
-                Command="{Binding NavigateToStorageClassCommand}"/>-->
+                Style="{StaticResource InterativeLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NavigateToStorageClassCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
 
             <views:DetailProperty
                 Label="{markupExtensions:Translate DetailPage_Reason}"
@@ -76,9 +78,6 @@
                 Label="{markupExtensions:Translate DetailPage_Message}"
                 Value="{Binding Detail.Message}"
                 IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-            <!--<ContentView
-                ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>-->
         </StackLayout>
 
         <Label
@@ -100,6 +99,8 @@
             ItemsSource="{Binding Detail.Annotations}"
             IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
             PopupCommand="{Binding DisplayMetadataItemCommand}"/>
-    </StackLayout>
 
+        <ContentView
+            ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>
+    </StackLayout>
 </base:ExtendedContentPage>

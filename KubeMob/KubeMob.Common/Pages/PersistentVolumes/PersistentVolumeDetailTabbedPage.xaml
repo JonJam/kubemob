@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:conditions="clr-namespace:KubeMob.Common.Pages.Conditions;assembly=KubeMob.Common"
-            xmlns:events="clr-namespace:KubeMob.Common.Pages.Events;assembly=KubeMob.Common"
-            xmlns:nodes="clr-namespace:KubeMob.Common.Pages.Nodes;assembly=KubeMob.Common"
-            xmlns:pods="clr-namespace:KubeMob.Common.Pages.Pods;assembly=KubeMob.Common"
+            xmlns:persistentVolumes="clr-namespace:KubeMob.Common.Pages.PersistentVolumes;assembly=KubeMob.Common"
             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            xmlns:persistentVolumes="clr-namespace:KubeMob.Common.Pages.PersistentVolumes;assembly=KubeMob.Common"
             x:Class="KubeMob.Common.Pages.PersistentVolumes.PersistentVolumeDetailTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
             Title="{Binding ObjectId.Name}"
@@ -16,11 +12,4 @@
     <persistentVolumes:PersistentVolumeDetailPage
         x:Name="DetailPage"
         BindingContext="{Binding DetailVm}"/>
-
-    <!--TODO enable tabs-->
-    <!--<conditions:ConditionsPage/>
-    
-    <pods:PodsPage/>
-
-    <events:EventsPage/>-->
 </TabbedPage>

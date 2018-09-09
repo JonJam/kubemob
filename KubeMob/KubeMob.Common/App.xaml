@@ -168,6 +168,55 @@
                 </Grid>
             </ControlTemplate>
 
+            <ControlTemplate x:Key="ObjectDetailCapacityTemplate">
+                <StackLayout>
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Capacity}"
+                        Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+
+                    <StackLayout
+                        Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Text="{markupExtensions:Translate DetailPage_Capacity_ResourceName}"
+                                Style="{DynamicResource ListItemTextStyle}"/>
+                            <Label
+                                Grid.Column="1"
+                                Text="{markupExtensions:Translate DetailPage_Capacity_Quantity}"
+                                Style="{DynamicResource ListItemTextStyle}"/>
+                        </Grid>
+
+                        <views:ItemsControl
+                            ItemsSource="{TemplateBinding BindingContext.Detail.Capacity}"
+                            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
+                            <views:ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding ResourceName}"
+                                            Style="{StaticResource DetailPropertyValueLabelStyle}"/>
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding Quantity}"
+                                            Style="{StaticResource DetailPropertyValueLabelStyle}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </views:ItemsControl.ItemTemplate>
+                        </views:ItemsControl>
+                    </StackLayout>
+                </StackLayout>
+            </ControlTemplate>
+
             <!-- TODO Remove below templates after move all to tabbed pages ?? -->
             <ControlTemplate x:Key="ObjectDetailTemplate">
                 <ScrollView>
@@ -264,46 +313,6 @@
                                 <Label
                                     Text="{Binding .}"
                                     HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-                </StackLayout>
-            </ControlTemplate>
-
-            <ControlTemplate x:Key="ObjectDetailCapacityTemplate">
-                <StackLayout>
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Capacity}"             
-                        Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Column="0"
-                            Text="{markupExtensions:Translate DetailPage_Capacity_ResourceName}"/>
-                        <Label
-                            Grid.Column="1"
-                            Text="{markupExtensions:Translate DetailPage_Capacity_Quantity}"/>
-                    </Grid>
-                    <views:ItemsControl
-                        ItemsSource="{TemplateBinding BindingContext.Detail.Capacity}"
-                        PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label
-                                        Grid.Column="0"
-                                        Text="{Binding ResourceName}"/>
-                                    <Label
-                                        Grid.Column="1"
-                                        Text="{Binding Quantity}"/>
-                                </Grid>
                             </DataTemplate>
                         </views:ItemsControl.ItemTemplate>
                     </views:ItemsControl>

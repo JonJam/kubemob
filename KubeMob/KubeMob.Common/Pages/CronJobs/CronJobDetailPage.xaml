@@ -8,7 +8,7 @@
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           x:Class="KubeMob.Common.Pages.CronJobs.CronJobDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
-                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">>
+                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
 
     <base:ExtendedContentPage.IconImage>
         <forms:CachedImage
@@ -20,7 +20,6 @@
             </forms:CachedImage.Transformations>
         </forms:CachedImage>
     </base:ExtendedContentPage.IconImage>
-
 
     <StackLayout>
         <StackLayout

@@ -115,6 +115,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<DaemonSetsViewModel>();
             serviceCollection.AddTransient<DaemonSetDetailViewModel>();
+            serviceCollection.AddTransient<DaemonSetDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<JobsViewModel>();
             serviceCollection.AddTransient<JobDetailViewModel>();

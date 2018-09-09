@@ -19,12 +19,12 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string relatedSelector)
             : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
-            this.Images = images;
+            this.Images = string.Join(", ", images);
             this.Pods = pods;
             this.RelatedSelector = relatedSelector;
         }
 
-        public IReadOnlyList<string> Images
+        public string Images
         {
             get;
         }

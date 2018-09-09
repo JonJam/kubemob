@@ -1,65 +1,104 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.PersistentVolumes.PersistentVolumeDetailPage"
-                          Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true"
-                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
+                          Title="{markupExtensions:Translate DetailPage_Details}"
+                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
+
+    <base:ExtendedContentPage.IconImage>
+        <forms:CachedImage
+            Source="details.png">
+            <forms:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource KubernetesBlueRawColor}"
+                    EnableSolidColor="true"/>
+            </forms:CachedImage.Transformations>
+        </forms:CachedImage>
+    </base:ExtendedContentPage.IconImage>
+
     <StackLayout>
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <ContentView
-            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+        <StackLayout
+            Style="{StaticResource DetailSectionStackLayoutStyle}">
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Name}"
+                Value="{Binding Detail.Name}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                Value="{Binding Detail.CreationTime}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Status}"
+                Value="{Binding Detail.Status}"/>
+
+            <Label
+                Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Claim}"
+                Style="{DynamicResource ListItemTextStyle}"/>
+            <Label
+                Text="{Binding Detail.Claim.Summary}"
+                Style="{StaticResource InterativeLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NavigateToPersistentVolumeClaimCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_ReclaimPolicy}"
+                Value="{Binding Detail.ReclaimPolicy}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_AccessModes}"
+                Value="{Binding Detail.AccessModes}"/>
+
+            <Label
+                Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
+                Style="{DynamicResource ListItemTextStyle}"/>
+            <Label
+                Text="{Binding Detail.StorageClass}"
+                Style="{StaticResource InterativeLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NavigateToStorageClassCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Reason}"
+                Value="{Binding Detail.Reason}"
+                IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Message}"
+                Value="{Binding Detail.Message}"
+                IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        </StackLayout>
 
         <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Status}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.Status}"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Labels}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
 
         <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_Claim}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Button
-            Text="{Binding Detail.Claim.Summary}"
-            Command="{Binding NavigateToPersistentVolumeClaimCommand}"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_ReclaimPolicy}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.ReclaimPolicy}"/>
-
-        <ContentView
-            ControlTemplate="{StaticResource ObjectDetailAccessModesTemplate}"/>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_StorageClass}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Button
-            Text="{Binding Detail.StorageClass}"
-            Command="{Binding NavigateToStorageClassCommand}"/>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Reason}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-            IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
-            Text="{Binding Detail.Reason}"
-            IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Message}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-            IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
-            Text="{Binding Detail.Message}"
-            IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Annotations}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
 
         <ContentView
             ControlTemplate="{StaticResource ObjectDetailCapacityTemplate}"/>

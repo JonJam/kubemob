@@ -143,6 +143,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<PersistentVolumesViewModel>();
             serviceCollection.AddTransient<PersistentVolumeDetailViewModel>();
+            serviceCollection.AddTransient<PersistentVolumeDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<StorageClassesViewModel>();
             serviceCollection.AddTransient<StorageClassDetailViewModel>();

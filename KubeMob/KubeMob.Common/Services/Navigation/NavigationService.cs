@@ -135,7 +135,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToDaemonSetsPage() => NavigationService.InternalNavigate(typeof(DaemonSetsPage));
 
-        public Task NavigateToDaemonSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DaemonSetDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToDaemonSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(DaemonSetDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToJobsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(JobsPage), filter);
 

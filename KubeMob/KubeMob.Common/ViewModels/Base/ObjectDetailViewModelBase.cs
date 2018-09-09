@@ -124,7 +124,7 @@ namespace KubeMob.Common.ViewModels.Base
             return this.popupService.DisplayAlert(
                 item.Key,
                 item.Value,
-                AppResources.OkAlertText);
+                AppResources.CloseAlertText);
         }
     }
 }

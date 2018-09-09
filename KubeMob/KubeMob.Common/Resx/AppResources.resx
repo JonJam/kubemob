@@ -621,4 +621,7 @@
   <data name="NodeDetailPage_Details_SystemInfo" xml:space="preserve">
     <value>System Info</value>
   </data>
+  <data name="CloseAlertText" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>

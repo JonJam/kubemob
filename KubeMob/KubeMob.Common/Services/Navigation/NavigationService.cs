@@ -131,7 +131,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToCronJobsPage() => NavigationService.InternalNavigate(typeof(CronJobsPage));
 
-        public Task NavigateToCronJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(CronJobDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToCronJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(CronJobDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToDaemonSetsPage() => NavigationService.InternalNavigate(typeof(DaemonSetsPage));
 

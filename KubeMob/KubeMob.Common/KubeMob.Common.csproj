@@ -49,6 +49,9 @@
     <Compile Update="Pages\Conditions\ConditionDetailPage.xaml.cs">
       <DependentUpon>ConditionDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\CronJobs\CronJObDetailTabbedPage.xaml.cs">
+      <DependentUpon>CronJobDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Endpoints\EndpointDetailPage.xaml.cs">
       <DependentUpon>EndpointDetailPage.xaml</DependentUpon>
     </Compile>

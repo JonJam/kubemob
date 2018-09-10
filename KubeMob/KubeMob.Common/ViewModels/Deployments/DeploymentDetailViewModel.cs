@@ -13,6 +13,7 @@ namespace KubeMob.Common.ViewModels.Deployments
     [Preserve(AllMembers = true)]
     public class DeploymentDetailViewModel : ObjectDetailViewModelBase<DeploymentDetail>
     {
+        // TODO Commands
         public DeploymentDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService,

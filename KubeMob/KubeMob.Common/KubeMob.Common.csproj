@@ -55,6 +55,9 @@
     <Compile Update="Pages\DaemonSets\DaemonSetDetailTabbedPage.xaml.cs">
       <DependentUpon>DaemonSetDetailTabbedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Deployments\DeploymentDetailTabbedPage.xaml.cs">
+      <DependentUpon>DeploymentDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Endpoints\EndpointDetailPage.xaml.cs">
       <DependentUpon>EndpointDetailPage.xaml</DependentUpon>
     </Compile>

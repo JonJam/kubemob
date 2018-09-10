@@ -93,6 +93,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<DeploymentsViewModel>();
             serviceCollection.AddTransient<DeploymentDetailViewModel>();
+            serviceCollection.AddTransient<DeploymentDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<ReplicaSetsViewModel>();
             serviceCollection.AddTransient<ReplicaSetDetailViewModel>();

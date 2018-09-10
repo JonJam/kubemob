@@ -50,10 +50,36 @@
                 Label="{markupExtensions:Translate DeploymentDetailPage_Details_RevisionHistoryLimit}"
                 Value="{Binding Detail.RevisionHistoryLimit}"/>
 
-            <!--TODO add more here-->
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
+                Value="{Binding Detail.RollingUpdateStrategy}"
+                IsVisible="{Binding Detail.RollingUpdateStrategy, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Status}"
+                Value="{Binding Detail.Status}"/>
 
         </StackLayout>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+
+        <views:ItemsControl
+            ItemsSource="{Binding Detail.Selectors}"
+            Style="{StaticResource ItemsControlStyle}"
+            Padding="{StaticResource ItemsControlPadding}">
+            <views:ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Style="{StaticResource FrameStyle}">
+                        <Label
+                            Text="{Binding .}"
+                            Style="{StaticResource NonInterativeLabelStyle}"/>
+                    </Frame>
+                </DataTemplate>
+            </views:ItemsControl.ItemTemplate>
+        </views:ItemsControl>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_Labels}"
@@ -75,64 +101,4 @@
             IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
             PopupCommand="{Binding DisplayMetadataItemCommand}"/>
     </StackLayout>
-
-    <!--<StackLayout>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.Selectors}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        Text="{Binding .}"
-                        BackgroundColor="Gray"
-                        HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Label
-            Text="{markupExtensions:Translate DeploymentDetailPage_Details_RollingUpdateStrategy}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-            IsVisible="{Binding Detail.RollingUpdateStrategy, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
-            Text="{Binding Detail.RollingUpdateStrategy}"
-            IsVisible="{Binding Detail.RollingUpdateStrategy, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Status}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.Status}"/>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedReplicaSets}"
-            Command="{Binding ViewRelatedReplicaSetsCommand}"/>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedHorizontalPodAutoscalers}"
-            Command="{Binding ViewRelatedHorizontalPodAutoscalersCommand}"/>
-
-        <Label
-            Text="{markupExtensions:Translate Events}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Events"
-            ItemsSource="{Binding Events}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:TappableView
-                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
-                        CommandParameter="{Binding .}">
-                        <Label
-                            Text="{Binding Message}"
-                            LineBreakMode="TailTruncation"/>
-                    </views:TappableView>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-    </StackLayout>-->
 </base:ExtendedContentPage>

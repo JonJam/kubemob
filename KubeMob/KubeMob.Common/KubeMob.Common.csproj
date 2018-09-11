@@ -64,6 +64,9 @@
     <Compile Update="Pages\Events\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailTabbedPage.xaml.cs">
+      <DependentUpon>HorizontalPodAutoscalerDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailPage.xaml.cs">
       <DependentUpon>HorizontalPodAutoscalerDetailPage.xaml</DependentUpon>
     </Compile>

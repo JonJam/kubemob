@@ -4,69 +4,101 @@
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.HorizontalPodAutoscalers.HorizontalPodAutoscalerDetailPage"
-                          Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true"
-                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
+                          Title="{markupExtensions:Translate DetailPage_Details}"
+                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
+
+    <base:ExtendedContentPage.IconImage>
+        <forms:CachedImage
+            Source="details.png">
+            <forms:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource KubernetesBlueRawColor}"
+                    EnableSolidColor="true"/>
+            </forms:CachedImage.Transformations>
+        </forms:CachedImage>
+    </base:ExtendedContentPage.IconImage>
+
     <StackLayout>
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <ContentView
-            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+        <StackLayout
+            Style="{StaticResource DetailSectionStackLayoutStyle}">
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Name}"
+                Value="{Binding Detail.Name}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                Value="{Binding Detail.NamespaceName}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                Value="{Binding Detail.CreationTime}"/>
+
+            <Label
+                Text="{markupExtensions:Translate HorizontalPodAutoscalerDetailPage_Details_Target}"
+                Style="{DynamicResource ListItemTextStyle}"/>
+            <Label
+                Text="{Binding Detail.Target.Summary}"
+                Style="{StaticResource InterativeLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NavigateToTargetCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_MinReplicas}"
+                Value="{Binding Detail.MinReplicas}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_MaxReplicas}"
+                Value="{Binding Detail.MaxReplicas}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_TargetCpuUtilization}"
+                Value="{Binding Detail.TargetCpuUtilization}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_CurrentReplicas}"
+                Value="{Binding Detail.CurrentReplicas}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_DesiredReplicas}"
+                Value="{Binding Detail.DesiredReplicas}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_CurrentCpuUtilization}"
+                Value="{Binding Detail.CurrentCpuUtilization}"
+                IsVisible="{Binding Detail.CurrentCpuUtilization, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate PersistentVolumeDetailPage_Details_LastScaled}"
+                Value="{Binding Detail.LastScaled}"
+                IsVisible="{Binding Detail.LastScaled, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+        </StackLayout>
 
         <Label
-            Text="{markupExtensions:Translate HorizontalPodAutoscalerDetailPage_Details_Target}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Button
-            Text="{Binding Detail.Target.Summary}"
-            Command="{Binding NavigateToTargetCommand}"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Labels}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
 
         <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_MinReplicas}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.MinReplicas}"/>
+            Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_MaxReplicas}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.MaxReplicas}"/>
-
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_TargetCpuUtilization}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.TargetCpuUtilization}"/>
-
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_CurrentReplicas}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.CurrentReplicas}"/>
-
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_DesiredReplicas}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.DesiredReplicas}"/>
-
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_CurrentCpuUtilization}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-            IsVisible="{Binding Detail.CurrentCpuUtilization, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
-            Text="{Binding Detail.CurrentCpuUtilization}"
-            IsVisible="{Binding Detail.CurrentCpuUtilization, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-        <Label
-            Text="{markupExtensions:Translate PersistentVolumeDetailPage_Details_LastScaled}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-            IsVisible="{Binding Detail.LastScaled, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-        <Label
-            Text="{Binding Detail.LastScaled}"
-            IsVisible="{Binding Detail.LastScaled, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Annotations}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
     </StackLayout>
 </base:ExtendedContentPage>

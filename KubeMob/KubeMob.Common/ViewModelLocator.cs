@@ -120,6 +120,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<JobsViewModel>();
             serviceCollection.AddTransient<JobDetailViewModel>();
+            serviceCollection.AddTransient<JobDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
             serviceCollection.AddTransient<ReplicationControllerDetailViewModel>();

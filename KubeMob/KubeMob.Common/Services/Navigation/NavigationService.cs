@@ -139,7 +139,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToJobsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(JobsPage), filter);
 
-        public Task NavigateToJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(JobDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToJobDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(JobDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToReplicationControllersPage() => NavigationService.InternalNavigate(typeof(ReplicationControllersPage));
 

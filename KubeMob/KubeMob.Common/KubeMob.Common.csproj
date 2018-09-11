@@ -70,6 +70,9 @@
     <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalerDetailPage.xaml.cs">
       <DependentUpon>HorizontalPodAutoscalerDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Jobs\JobDetailTabbedPage.xaml.cs">
+      <DependentUpon>JobDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Namespaces\NamespaceDetailTabbedPage.xaml.cs">
       <DependentUpon>NamespaceDetailTabbedPage.xaml</DependentUpon>
     </Compile>

@@ -20,7 +20,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string status)
             : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
-            this.Images = images;
+            this.Images = string.Join(", ", images);
             this.Parallelism = parallelism;
             this.Completions = completions;
             this.Status = status;
@@ -31,7 +31,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> Images
+        public string Images
         {
             get;
         }

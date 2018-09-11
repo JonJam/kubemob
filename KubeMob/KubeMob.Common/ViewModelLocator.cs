@@ -90,6 +90,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<PodsViewModel>();
             serviceCollection.AddTransient<PodDetailViewModel>();
+            serviceCollection.AddTransient<PodDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<DeploymentsViewModel>();
             serviceCollection.AddTransient<DeploymentDetailViewModel>();

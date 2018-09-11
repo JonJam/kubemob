@@ -15,18 +15,27 @@ namespace KubeMob.Common.ViewModels.Pods
     [Preserve(AllMembers = true)]
     public class PodDetailViewModel : ObjectDetailViewModelBase<PodDetail>
     {
+        // TODO Remove commands.
         public PodDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService,
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
         {
+            this.NavigateToNodeDetailCommand =
+                new Command(async (o) => await this.OnNavigateToNodeDetailCommandExecute(o));
+
             this.NavigateToConditionDetailCommand =
                 new Command(async (o) => await this.OnNavigateToConditionDetailCommandExecute(o));
 
             this.NavigateToOwnerCommand = new Command(async (o) => await this.OnNavigateToOwnerCommandExecute(o));
 
             this.ViewRelatedPersistentVolumeClaimsCommand = new Command(async () => await this.OnViewRelatedPersistentVolumeClaimsCommandExecute());
+        }
+
+        public ICommand NavigateToNodeDetailCommand
+        {
+            get;
         }
 
         public ICommand NavigateToConditionDetailCommand
@@ -45,6 +54,9 @@ namespace KubeMob.Common.ViewModels.Pods
         }
 
         protected override Task<PodDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetPodDetail(name, namespaceName);
+
+        private Task OnNavigateToNodeDetailCommandExecute(object obj)
+            => this.NavigationService.NavigateToNodeDetailPage(this.Detail.NodeName);
 
         private async Task OnNavigateToConditionDetailCommandExecute(object obj)
         {

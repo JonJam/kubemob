@@ -10,9 +10,7 @@ namespace KubeMob.Common.ViewModels.Conditions
     {
         private Condition detail;
 
-        public ConditionDetailViewModel()
-        {
-        }
+        public ConditionDetailViewModel() => this.IsBusy = true;
 
         public Condition Detail
         {
@@ -23,6 +21,8 @@ namespace KubeMob.Common.ViewModels.Conditions
         public override Task Initialize(object navigationData)
         {
             this.Detail = (Condition)navigationData;
+
+            this.IsBusy = false;
 
             return Task.CompletedTask;
         }

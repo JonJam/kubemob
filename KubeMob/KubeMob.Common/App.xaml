@@ -137,6 +137,7 @@
                 </Grid>
             </ControlTemplate>
 
+            <!--TODO Rename-->
             <ControlTemplate x:Key="NewObjectDetailTemplate">
                 <Grid
                     CompressedLayout.IsHeadless="true">
@@ -168,6 +169,7 @@
                 </Grid>
             </ControlTemplate>
 
+            <!--TODO Move ?-->
             <ControlTemplate x:Key="ObjectDetailCapacityTemplate">
                 <StackLayout>
                     <Label

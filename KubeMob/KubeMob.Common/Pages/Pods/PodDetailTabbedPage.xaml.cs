@@ -1,18 +1,17 @@
-using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.ViewModels.Conditions;
 using KubeMob.Common.ViewModels.Events;
-using KubeMob.Common.ViewModels.Nodes;
+using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace KubeMob.Common.Pages.Nodes
+namespace KubeMob.Common.Pages.Pods
 {
-    public partial class NodeDetailTabbedPage : TabbedPage
+    public partial class PodDetailTabbedPage : TabbedPage
     {
         [Preserve]
-        public NodeDetailTabbedPage() => this.InitializeComponent();
+        public PodDetailTabbedPage() => this.InitializeComponent();
 
         protected override async void OnCurrentPageChanged()
         {
@@ -20,7 +19,7 @@ namespace KubeMob.Common.Pages.Nodes
 
             Page page = this.CurrentPage;
 
-            NodeDetailViewModel detailViewModel = (NodeDetailViewModel)this.DetailPage.BindingContext;
+            PodDetailViewModel detailViewModel = (PodDetailViewModel)this.DetailPage.BindingContext;
 
             // detailViewModel.Detail will be null if an error occurs which will have already been handled, so
             // do nothing. Otherwise try load events.
@@ -31,12 +30,14 @@ namespace KubeMob.Common.Pages.Nodes
 
                 await eventsViewModel.Initialize(filter);
             }
-            else if (page.BindingContext is PodsViewModel podsViewModel &&
-                     detailViewModel.Detail != null)
+            else if (page.BindingContext is PersistentVolumeClaimsViewModel persistentVolumeClaimsViewModel &&
+                detailViewModel.Detail != null)
             {
-                Filter filter = new Filter(KubernetesServiceBase.AllNamespace, $"spec.nodeName={detailViewModel.Detail.Name}");
+                Filter filter = new Filter(
+                    detailViewModel.Detail.NamespaceName,
+                    other: string.Join(",", detailViewModel.Detail.PersistentVolumeClaims));
 
-                await podsViewModel.Initialize(filter);
+                await persistentVolumeClaimsViewModel.Initialize(filter);
             }
             else if (page.BindingContext is ConditionsViewModel conditionsViewModel &&
                      detailViewModel.Detail != null)

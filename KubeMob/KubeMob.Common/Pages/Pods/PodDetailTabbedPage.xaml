@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:conditions="clr-namespace:KubeMob.Common.Pages.Conditions;assembly=KubeMob.Common"
+            xmlns:events="clr-namespace:KubeMob.Common.Pages.Events;assembly=KubeMob.Common"
+            xmlns:persistentVolumeClaims="clr-namespace:KubeMob.Common.Pages.PersistentVolumeClaims;assembly=KubeMob.Common"
+            xmlns:pods="clr-namespace:KubeMob.Common.Pages.Pods;assembly=KubeMob.Common"
+            xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            x:Class="KubeMob.Common.Pages.Pods.PodDetailTabbedPage"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            Title="{Binding ObjectId.Name}"
+            common:ViewModelLocator.AutoWireViewModel="true">
+
+    <pods:PodDetailPage
+        x:Name="DetailPage"
+        BindingContext="{Binding DetailVm}"/>
+
+    <conditions:ConditionsPage/>
+
+    <events:EventsPage/>
+
+    <persistentVolumeClaims:PersistentVolumeClaimsPage/>
+</TabbedPage>

@@ -8,7 +8,6 @@ using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
-using Condition = KubeMob.Common.Services.Kubernetes.Model.Condition;
 
 namespace KubeMob.Common.ViewModels.Pods
 {
@@ -21,15 +20,13 @@ namespace KubeMob.Common.ViewModels.Pods
             INavigationService navigationService)
             : base(kubernetesService, popupService, navigationService)
         {
-            this.NavigateToConditionDetailCommand =
-                new Command(async (o) => await this.OnNavigateToConditionDetailCommandExecute(o));
+            this.NavigateToNodeDetailCommand =
+                new Command(async (o) => await this.OnNavigateToNodeDetailCommandExecute(o));
 
             this.NavigateToOwnerCommand = new Command(async (o) => await this.OnNavigateToOwnerCommandExecute(o));
-
-            this.ViewRelatedPersistentVolumeClaimsCommand = new Command(async () => await this.OnViewRelatedPersistentVolumeClaimsCommandExecute());
         }
 
-        public ICommand NavigateToConditionDetailCommand
+        public ICommand NavigateToNodeDetailCommand
         {
             get;
         }
@@ -39,23 +36,14 @@ namespace KubeMob.Common.ViewModels.Pods
             get;
         }
 
-        public ICommand ViewRelatedPersistentVolumeClaimsCommand
-        {
-            get;
-        }
-
         protected override Task<PodDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetPodDetail(name, namespaceName);
 
-        private async Task OnNavigateToConditionDetailCommandExecute(object obj)
-        {
-            Condition conditionDetail = (Condition)obj;
-
-            await this.NavigationService.NavigateToConditionDetailPage(conditionDetail);
-        }
+        private Task OnNavigateToNodeDetailCommandExecute(object obj)
+            => this.NavigationService.NavigateToNodeDetailPage(this.Detail.NodeName);
 
         private Task OnNavigateToOwnerCommandExecute(object obj)
         {
-            ObjectReference owner = (ObjectReference)obj;
+            ObjectReference owner = this.Detail.Owner;
 
             switch (owner.Kind)
             {
@@ -72,15 +60,6 @@ namespace KubeMob.Common.ViewModels.Pods
                 default:
                     throw new NotImplementedException();
             }
-        }
-
-        private Task OnViewRelatedPersistentVolumeClaimsCommandExecute()
-        {
-            Filter filter = new Filter(
-                this.Detail.NamespaceName,
-                other: string.Join(",", this.Detail.PersistentVolumeClaims));
-
-            return this.NavigationService.NavigateToPersistentVolumeClaimsPage(filter);
         }
     }
 }

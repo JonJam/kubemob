@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using KubeMob.Common.Services.Kubernetes.Model.Base;
 using Xamarin.Forms.Internals;
 
@@ -30,8 +32,16 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             this.PodIpAddress = podIpAddress;
             this.Containers = containers;
             this.Conditions = conditions;
-            this.Owners = owners;
             this.PersistentVolumeClaims = persistentVolumeClaims;
+
+            // I have yet to see a Pod which has more than one owner, to simplify UI just
+            // grabbing the first one.
+            if (owners.Count > 1)
+            {
+                throw new ArgumentException("Owners count is greater than 1.");
+            }
+
+            this.Owner = owners.First();
         }
 
         public string Status
@@ -64,7 +74,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<ObjectReference> Owners
+        public ObjectReference Owner
         {
             get;
         }

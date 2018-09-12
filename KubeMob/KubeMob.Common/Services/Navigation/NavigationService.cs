@@ -103,7 +103,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToStorageClassDetailPage(string name) => NavigationService.InternalNavigate(typeof(StorageClassDetailTabbedPage), new ObjectId(name));
 
-        public Task NavigateToPodDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(PodDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToPodDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(PodDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToDeploymentsPage() => NavigationService.InternalNavigate(typeof(DeploymentsPage));
 

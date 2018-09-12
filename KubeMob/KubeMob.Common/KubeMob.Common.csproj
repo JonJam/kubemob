@@ -88,6 +88,9 @@
     <Compile Update="Pages\HorizontalPodAutoscalers\HorizontalPodAutoscalersPage.xaml.cs">
       <DependentUpon>HorizontalPodAutoscalersPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Pods\PodDetailTabbedPage.xaml.cs">
+      <DependentUpon>PodDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\StorageClasses\StorageClassDetailTabbedPage.xaml.cs">
       <DependentUpon>StorageClassDetailTabbedPage.xaml</DependentUpon>
     </Compile>

@@ -1,8 +1,6 @@
 using KubeMob.Common.Services.Kubernetes.Model;
-using KubeMob.Common.ViewModels.Conditions;
 using KubeMob.Common.ViewModels.Events;
 using KubeMob.Common.ViewModels.HorizontalPodAutoscalers;
-using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using KubeMob.Common.ViewModels.ReplicaSets;
 using KubeMob.Common.ViewModels.Services;
@@ -16,7 +14,6 @@ namespace KubeMob.Common.Pages.ReplicaSets
         [Preserve]
         public ReplicaSetDetailTabbedPage() => this.InitializeComponent();
 
-        // TODO Tabs
         protected override async void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();

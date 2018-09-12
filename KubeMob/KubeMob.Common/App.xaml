@@ -219,6 +219,30 @@
                 </StackLayout>
             </ControlTemplate>
 
+            <ControlTemplate x:Key="ObjectDetailSelectorsTemplate">
+                <StackLayout>
+                    <Label
+                        Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
+                        Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+
+                    <views:ItemsControl
+                        ItemsSource="{TemplateBinding BindingContext.Detail.Selectors}"
+                        Style="{StaticResource ItemsControlStyle}"
+                        Padding="{StaticResource ItemsControlPadding}">
+                        <views:ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                Style="{StaticResource FrameStyle}">
+                                    <Label
+                                    Text="{Binding .}"
+                                    Style="{StaticResource NonInterativeLabelStyle}"/>
+                                </Frame>
+                            </DataTemplate>
+                        </views:ItemsControl.ItemTemplate>
+                    </views:ItemsControl>
+                </StackLayout>
+            </ControlTemplate>
+
             <!-- TODO Remove below templates after move all to tabbed pages ?? -->
             <ControlTemplate x:Key="ObjectDetailTemplate">
                 <ScrollView>

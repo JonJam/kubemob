@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.ReplicaSets.ReplicaSetDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
                           ControlTemplate="{StaticResource NewObjectDetailTemplate}">
@@ -47,26 +46,8 @@
                 Value="{Binding Detail.Pods}"/>
         </StackLayout>
 
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-            Style="{StaticResource DetailSectionTitleLabelStyle}"/>
-
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.Selectors}"
-            Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Frame
-                        Style="{StaticResource FrameStyle}">
-                        <Label
-                            Text="{Binding .}"
-                            Style="{StaticResource NonInterativeLabelStyle}"/>
-                    </Frame>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
+        <ContentView ControlTemplate="{StaticResource ObjectDetailSelectorsTemplate}"/>
+        
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_Labels}"
             Style="{StaticResource DetailSectionTitleLabelStyle}"

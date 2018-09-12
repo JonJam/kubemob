@@ -14,13 +14,13 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<MetadataItem> labels,
             IReadOnlyList<MetadataItem> annotations,
             string creationTime,
-            IReadOnlyList<string> images,
+            string images,
             int parallelism,
             int completions,
             string status)
             : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
-            this.Images = string.Join(", ", images);
+            this.Images = images;
             this.Parallelism = parallelism;
             this.Completions = completions;
             this.Status = status;

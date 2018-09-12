@@ -15,7 +15,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<MetadataItem> annotations,
             string creationTime,
             IReadOnlyList<string> selectors,
-            IReadOnlyList<string> images,
+            string images,
             string pods,
             string relatedSelector)
             : base(uid, name, namespaceName, labels, annotations, creationTime)
@@ -31,7 +31,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> Images
+        public string Images
         {
             get;
         }

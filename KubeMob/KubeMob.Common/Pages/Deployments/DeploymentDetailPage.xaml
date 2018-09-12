@@ -60,25 +60,7 @@
 
         </StackLayout>
 
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-            Style="{StaticResource DetailSectionTitleLabelStyle}"/>
-
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.Selectors}"
-            Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Frame
-                        Style="{StaticResource FrameStyle}">
-                        <Label
-                            Text="{Binding .}"
-                            Style="{StaticResource NonInterativeLabelStyle}"/>
-                    </Frame>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
+        <ContentView ControlTemplate="{StaticResource ObjectDetailSelectorsTemplate}"/>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_Labels}"

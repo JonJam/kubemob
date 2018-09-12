@@ -49,7 +49,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         labels.AsReadOnly(),
                         annotations.AsReadOnly(),
                         creationTime,
-                        images.AsReadOnly(),
+                        string.Join(", ", images),
                         pods);
                 });
         }

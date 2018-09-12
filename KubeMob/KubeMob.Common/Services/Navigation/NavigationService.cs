@@ -151,7 +151,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
 
-        public Task NavigateToStatefulSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(StatefulSetDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToStatefulSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(StatefulSetDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToSettingsPage() => NavigationService.InternalNavigate(typeof(SettingsPage));
 

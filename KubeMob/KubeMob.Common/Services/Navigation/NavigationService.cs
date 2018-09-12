@@ -111,7 +111,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToReplicaSetsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(ReplicaSetsPage), filter);
 
-        public Task NavigateToReplicaSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ReplicaSetDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToReplicaSetDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ReplicaSetDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToServicesPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(ServicesPage), filter);
 

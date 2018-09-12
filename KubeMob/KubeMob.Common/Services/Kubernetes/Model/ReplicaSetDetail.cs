@@ -21,7 +21,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Selectors = selectors;
-            this.Images = images;
+            this.Images = string.Join(", ", images);
             this.Pods = pods;
             this.RelatedSelector = relatedSelector;
         }
@@ -31,7 +31,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> Images
+        public string Images
         {
             get;
         }

@@ -126,6 +126,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<ReplicationControllersViewModel>();
             serviceCollection.AddTransient<ReplicationControllerDetailViewModel>();
+            serviceCollection.AddTransient<ReplicationControllerDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<PersistentVolumeClaimsViewModel>();
             serviceCollection.AddTransient<PersistentVolumeClaimDetailViewModel>();

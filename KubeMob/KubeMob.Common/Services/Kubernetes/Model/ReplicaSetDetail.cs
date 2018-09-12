@@ -15,13 +15,13 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             IReadOnlyList<MetadataItem> annotations,
             string creationTime,
             IReadOnlyList<string> selectors,
-            IReadOnlyList<string> images,
+            string images,
             string pods,
             string relatedSelector)
             : base(uid, name, namespaceName, labels, annotations, creationTime)
         {
             this.Selectors = selectors;
-            this.Images = string.Join(", ", images);
+            this.Images = images;
             this.Pods = pods;
             this.RelatedSelector = relatedSelector;
         }

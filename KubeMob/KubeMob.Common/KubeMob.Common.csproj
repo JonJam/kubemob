@@ -94,6 +94,9 @@
     <Compile Update="Pages\ReplicaSets\ReplicaSetDetailTabbedPage.xaml.cs">
       <DependentUpon>ReplicaSetDetailTabbedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ReplicationControllers\ReplicationControllerDetailTabbedPage.xaml.cs">
+      <DependentUpon>ReplicationControllerDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\StorageClasses\StorageClassDetailTabbedPage.xaml.cs">
       <DependentUpon>StorageClassDetailTabbedPage.xaml</DependentUpon>
     </Compile>

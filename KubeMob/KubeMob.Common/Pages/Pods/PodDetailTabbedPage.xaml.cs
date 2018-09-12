@@ -1,6 +1,7 @@
 using KubeMob.Common.Services.Kubernetes.Model;
+using KubeMob.Common.ViewModels.Conditions;
 using KubeMob.Common.ViewModels.Events;
-using KubeMob.Common.ViewModels.Jobs;
+using KubeMob.Common.ViewModels.PersistentVolumeClaims;
 using KubeMob.Common.ViewModels.Pods;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -9,7 +10,6 @@ namespace KubeMob.Common.Pages.Pods
 {
     public partial class PodDetailTabbedPage : TabbedPage
     {
-        // TODO Tabs
         [Preserve]
         public PodDetailTabbedPage() => this.InitializeComponent();
 
@@ -30,15 +30,20 @@ namespace KubeMob.Common.Pages.Pods
 
                 await eventsViewModel.Initialize(filter);
             }
-            //else if (page.BindingContext is PodsViewModel podsViewModel &&
-            //    detailViewModel.Detail != null)
-            //{
-            //    Filter filter = new Filter(
-            //        detailViewModel.Detail.NamespaceName,
-            //        other: detailViewModel.Detail.Uid);
+            else if (page.BindingContext is PersistentVolumeClaimsViewModel persistentVolumeClaimsViewModel &&
+                detailViewModel.Detail != null)
+            {
+                Filter filter = new Filter(
+                    detailViewModel.Detail.NamespaceName,
+                    other: string.Join(",", detailViewModel.Detail.PersistentVolumeClaims));
 
-            //    await podsViewModel.Initialize(filter);
-            //}
+                await persistentVolumeClaimsViewModel.Initialize(filter);
+            }
+            else if (page.BindingContext is ConditionsViewModel conditionsViewModel &&
+                     detailViewModel.Detail != null)
+            {
+                await conditionsViewModel.Initialize(detailViewModel.Detail.Conditions);
+            }
         }
     }
 }

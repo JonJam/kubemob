@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
-                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
-                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Pods.PodDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
                           ControlTemplate="{StaticResource NewObjectDetailTemplate}">
@@ -21,8 +20,6 @@
             </forms:CachedImage.Transformations>
         </forms:CachedImage>
     </base:ExtendedContentPage.IconImage>
-
-<!--TODO Add content-->
 
     <StackLayout>
         <StackLayout
@@ -64,6 +61,17 @@
                 Label="{markupExtensions:Translate PodDetailPage_Details_IpAddress}"
                 Value="{Binding Detail.PodIpAddress}"/>
 
+            <Label
+                Text="{markupExtensions:Translate PodDetailPage_CreatedBy}"
+                Style="{DynamicResource ListItemTextStyle}"/>
+            <Label
+                Text="{Binding Detail.Owner.Name}"
+                Style="{StaticResource InterativeLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding NavigateToOwnerCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
         </StackLayout>
 
         <Label
@@ -85,51 +93,44 @@
             ItemsSource="{Binding Detail.Annotations}"
             IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
             PopupCommand="{Binding DisplayMetadataItemCommand}"/>
-    </StackLayout>
-
-    <!--TODO Add content below-->
-    <!--<StackLayout>
 
         <Label
             Text="{markupExtensions:Translate PodDetailPage_Containers}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
+            Style="{StaticResource DetailSectionTitleLabelStyle}"/>
         <views:ItemsControl
-            ItemsSource="{Binding Detail.Containers}">
+            ItemsSource="{Binding Detail.Containers}"
+            Style="{StaticResource ItemsControlStyle}"
+            Padding="{StaticResource ItemsControlPadding}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Label
-                            Text="{Binding Name}"/>
+                            Text="{Binding Name}"
+                            Style="{DynamicResource TitleStyle}"/>
 
-                        <Label
-                            Text="{markupExtensions:Translate PodDetailPage_Containers_Image}"
-                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-                        <Label
-                            Text="{Binding Image}"/>
+                        <views:DetailProperty
+                            Label="{markupExtensions:Translate PodDetailPage_Containers_Image}"
+                            Value="{Binding Image}"/>
 
                         <Label
                             Text="{markupExtensions:Translate PodDetailPage_Containers_EnvironmentVariables}"
-                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                            Style="{DynamicResource ListItemTextStyle}"
                             IsVisible="{Binding EnvironmentVariables, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                         <views:ItemsControl
                             ItemsSource="{Binding EnvironmentVariables}"
                             IsVisible="{Binding EnvironmentVariables, Converter={StaticResource NotEmptyToBoolConverter}}">
                             <views:ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout>
-                                        <Label
-                                            Text="{Binding Name}"/>
-                                        <Label
-                                            Text="{Binding Value}"
-                                            IsVisible="{Binding Value, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-                                    </StackLayout>
+                                    <Label
+                                        Text="{Binding Name}"
+                                        Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                                 </DataTemplate>
                             </views:ItemsControl.ItemTemplate>
                         </views:ItemsControl>
 
                         <Label
                             Text="{markupExtensions:Translate PodDetailPage_Containers_Commands}"
-                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                            Style="{DynamicResource ListItemTextStyle}"
                             IsVisible="{Binding Commands, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                         <views:ItemsControl
                             ItemsSource="{Binding Commands}"
@@ -137,14 +138,15 @@
                             <views:ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label
-                                        Text="{Binding .}"/>
+                                        Text="{Binding .}"
+                                        Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                                 </DataTemplate>
                             </views:ItemsControl.ItemTemplate>
                         </views:ItemsControl>
 
                         <Label
                             Text="{markupExtensions:Translate PodDetailPage_Containers_Args}"
-                            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
+                            Style="{DynamicResource ListItemTextStyle}"
                             IsVisible="{Binding Arguments, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                         <views:ItemsControl
                             ItemsSource="{Binding Arguments}"
@@ -152,7 +154,8 @@
                             <views:ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label
-                                        Text="{Binding .}"/>
+                                        Text="{Binding .}"
+                                        Style="{StaticResource DetailPropertyValueLabelStyle}"/>
                                 </DataTemplate>
                             </views:ItemsControl.ItemTemplate>
                         </views:ItemsControl>
@@ -160,45 +163,5 @@
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
-
-        <Label
-            Text="{markupExtensions:Translate Conditions}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Conditions"
-            ItemsSource="{Binding Detail.Conditions}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:TappableView
-                        Command="{Binding Source={x:Reference Conditions}, Path=BindingContext.NavigateToConditionDetailCommand}"
-                        CommandParameter="{Binding .}">
-                        <Label
-                            Text="{Binding Type}"
-                            LineBreakMode="TailTruncation"/>
-                    </views:TappableView>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Label
-            Text="{markupExtensions:Translate PodDetailPage_CreatedBy}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Owners"
-            ItemsSource="{Binding Detail.Owners}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button
-                        Text="{Binding Summary}"
-                        Command="{Binding Source={x:Reference Owners}, Path=BindingContext.NavigateToOwnerCommand}"
-                        CommandParameter="{Binding .}"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedPersistentVolumeClaims}"
-            Command="{Binding ViewRelatedPersistentVolumeClaimsCommand}"/>
-    </StackLayout>-->
+    </StackLayout>
 </base:ExtendedContentPage>

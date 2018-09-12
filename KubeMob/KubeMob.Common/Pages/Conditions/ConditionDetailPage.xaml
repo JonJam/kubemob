@@ -8,37 +8,50 @@
                           x:Class="KubeMob.Common.Pages.Conditions.ConditionDetailPage"
                           Title="{markupExtensions:Translate ConditionDetailPage_Title}"
                           common:ViewModelLocator.AutoWireViewModel="true">
-    <ScrollView>
-        <StackLayout
-            Spacing="5"
-            CompressedLayout.IsHeadless="true">
+    <Grid
+        CompressedLayout.IsHeadless="true">
+        <ScrollView
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
             <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Spacing="5"
+                CompressedLayout.IsHeadless="true">
+                <StackLayout
+                    Style="{StaticResource DetailSectionStackLayoutStyle}">
 
-                <views:DetailProperty
-                    Label="{markupExtensions:Translate DetailPage_Details_Type}"
-                    Value="{Binding Detail.Type}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate DetailPage_Details_Type}"
+                        Value="{Binding Detail.Type}"/>
 
-                <views:DetailProperty
-                    Label="{markupExtensions:Translate DetailPage_Details_Status}"
-                    Value="{Binding Detail.Status}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate DetailPage_Details_Status}"
+                        Value="{Binding Detail.Status}"/>
 
-                <views:DetailProperty
-                    Label="{markupExtensions:Translate ConditionDetailPage_LastHeartbeatTime}"
-                    Value="{Binding Detail.LastHeartbeatTime}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate ConditionDetailPage_LastHeartbeatTime}"
+                        Value="{Binding Detail.LastHeartbeatTime}"
+                        IsVisible="{Binding Detail.LastHeartbeatTime, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-                <views:DetailProperty
-                    Label="{markupExtensions:Translate ConditionDetailPage_LastTransitionTime}"
-                    Value="{Binding Detail.LastTransitionTime}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate ConditionDetailPage_LastTransitionTime}"
+                        Value="{Binding Detail.LastTransitionTime}"/>
 
-                <views:DetailProperty
-                    Label="{markupExtensions:Translate DetailPage_Reason}"
-                    Value="{Binding Detail.Reason}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate DetailPage_Reason}"
+                        Value="{Binding Detail.Reason}"
+                        IsVisible="{Binding Detail.Reason, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
-                <views:DetailProperty
-                    Label="{markupExtensions:Translate DetailPage_Message}"
-                    Value="{Binding Detail.Message}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate DetailPage_Message}"
+                        Value="{Binding Detail.Message}"
+                        IsVisible="{Binding Detail.Message, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-    </ScrollView>
+        </ScrollView>
+
+        <!-- Although we aren't making any network calls to get data on this page, on first navigation it displays empty values
+        for the properties briefly before the Detail property is set. Using IsBusy to ensure don't display empty UI.-->
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"  
+            IsVisible="{Binding IsBusy}"/>
+    </Grid>
 </base:ExtendedContentPage>

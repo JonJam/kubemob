@@ -2,7 +2,6 @@ using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.ViewModels.Conditions;
 using KubeMob.Common.ViewModels.Events;
-using KubeMob.Common.ViewModels.Namespaces;
 using KubeMob.Common.ViewModels.Nodes;
 using KubeMob.Common.ViewModels.Pods;
 using Xamarin.Forms;

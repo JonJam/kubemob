@@ -5,83 +5,87 @@
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.ReplicaSets.ReplicaSetDetailPage"
-                          Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true"
-                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
+                          Title="{markupExtensions:Translate DetailPage_Details}"
+                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
+
+    <base:ExtendedContentPage.IconImage>
+        <forms:CachedImage
+            Source="details.png">
+            <forms:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource KubernetesBlueRawColor}"
+                    EnableSolidColor="true"/>
+            </forms:CachedImage.Transformations>
+        </forms:CachedImage>
+    </base:ExtendedContentPage.IconImage>
 
     <StackLayout>
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details}"
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <ContentView
-            ControlTemplate="{StaticResource ObjectDetailCommonPropertiesTemplate}"/>
+        <StackLayout
+            Style="{StaticResource DetailSectionStackLayoutStyle}">
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Name}"
+                Value="{Binding Detail.Name}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Namespace}"
+                Value="{Binding Detail.NamespaceName}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_CreationTime}"
+                Value="{Binding Detail.CreationTime}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Images}"
+                Value="{Binding Detail.Images}"/>
+
+            <views:DetailProperty
+                Label="{markupExtensions:Translate DetailPage_Details_Pods}"
+                Value="{Binding Detail.Pods}"/>
+        </StackLayout>
 
         <Label
             Text="{markupExtensions:Translate DetailPage_Details_Selectors}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
+            Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+
         <views:ItemsControl
-            ItemsSource="{Binding Detail.Selectors}">
+            ItemsSource="{Binding Detail.Selectors}"
+            Style="{StaticResource ItemsControlStyle}"
+            Padding="{StaticResource ItemsControlPadding}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Label
-                        Text="{Binding .}"
-                        BackgroundColor="Gray"
-                        HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Images}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <views:ItemsControl
-            ItemsSource="{Binding Detail.Images}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Label
-                        Text="{Binding .}"
-                        HorizontalOptions="Start"/>
-                </DataTemplate>
-            </views:ItemsControl.ItemTemplate>
-        </views:ItemsControl>
-
-        <Label
-            Text="{markupExtensions:Translate DetailPage_Details_Pods}"
-            Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-        <Label
-            Text="{Binding Detail.Pods}"/>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedPods}"
-            Command="{Binding ViewRelatedPodsCommand}"/>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedServices}"
-            Command="{Binding ViewRelatedServicesCommand}"/>
-
-        <Button
-            Text="{markupExtensions:Translate ViewRelatedHorizontalPodAutoscalers}"
-            Command="{Binding ViewRelatedHorizontalPodAutoscalersCommand}"/>
-
-        <Label
-            Text="{markupExtensions:Translate Events}"             
-            Style="{StaticResource ObjectDetailsSectionLabelStyle}"/>
-        <views:ItemsControl
-            x:Name="Events"
-            ItemsSource="{Binding Events}"
-            PlaceholderText="{markupExtensions:Translate EmptyMessage}">
-            <views:ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <views:TappableView
-                        Command="{Binding Source={x:Reference Events}, Path=BindingContext.NavigateToEventDetailCommand}"
-                        CommandParameter="{Binding .}">
+                    <Frame
+                        Style="{StaticResource FrameStyle}">
                         <Label
-                            Text="{Binding Message}"
-                            LineBreakMode="TailTruncation"/>
-                    </views:TappableView>
+                            Text="{Binding .}"
+                            Style="{StaticResource NonInterativeLabelStyle}"/>
+                    </Frame>
                 </DataTemplate>
             </views:ItemsControl.ItemTemplate>
         </views:ItemsControl>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Labels}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Labels}"
+            IsVisible="{Binding Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
+
+        <Label
+            Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
+            Style="{StaticResource DetailSectionTitleLabelStyle}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
+
+        <views:MetadataItemsControl
+            ItemsSource="{Binding Detail.Annotations}"
+            IsVisible="{Binding Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"
+            PopupCommand="{Binding DisplayMetadataItemCommand}"/>
+
     </StackLayout>
 </base:ExtendedContentPage>

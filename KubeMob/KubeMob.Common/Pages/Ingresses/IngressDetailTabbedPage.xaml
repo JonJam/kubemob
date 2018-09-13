@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:events="clr-namespace:KubeMob.Common.Pages.Events;assembly=KubeMob.Common"
+            xmlns:horizontalPodAutoscalers="clr-namespace:KubeMob.Common.Pages.HorizontalPodAutoscalers;assembly=KubeMob.Common"
+            xmlns:pods="clr-namespace:KubeMob.Common.Pages.Pods;assembly=KubeMob.Common"
+            xmlns:replicationControllers="clr-namespace:KubeMob.Common.Pages.ReplicationControllers;assembly=KubeMob.Common"
+            xmlns:services="clr-namespace:KubeMob.Common.Pages.Services;assembly=KubeMob.Common"
+            xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:ingresses="clr-namespace:KubeMob.Common.Pages.Ingresses;assembly=KubeMob.Common"
+            x:Class="KubeMob.Common.Pages.Ingresses.IngressDetailTabbedPage"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            Title="{Binding ObjectId.Name}"
+            common:ViewModelLocator.AutoWireViewModel="true">
+
+    <ingresses:IngressDetailPage
+        x:Name="DetailPage"
+        BindingContext="{Binding DetailVm}"/>
+
+    <events:EventsPage/>
+</TabbedPage>

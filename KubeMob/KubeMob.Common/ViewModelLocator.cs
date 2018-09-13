@@ -105,6 +105,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<IngressesViewModel>();
             serviceCollection.AddTransient<IngressDetailViewModel>();
+            serviceCollection.AddTransient<IngressDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<ConfigMapsViewModel>();
             serviceCollection.AddTransient<ConfigMapDetailViewModel>();

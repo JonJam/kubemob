@@ -5,9 +5,22 @@
                           xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                          xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Endpoints.EndpointDetailPage"
                           Title="{Binding Name}"
                           common:ViewModelLocator.AutoWireViewModel="true">
+
+    <base:ExtendedContentPage.IconImage>
+        <forms:CachedImage
+            Source="link.png">
+            <forms:CachedImage.Transformations>
+                <transformations:TintTransformation
+                    HexColor="{StaticResource KubernetesBlueRawColor}"
+                    EnableSolidColor="true"/>
+            </forms:CachedImage.Transformations>
+        </forms:CachedImage>
+    </base:ExtendedContentPage.IconImage>
 
     <Grid
         CompressedLayout.IsHeadless="true">

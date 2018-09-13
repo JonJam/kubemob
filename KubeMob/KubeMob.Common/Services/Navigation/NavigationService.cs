@@ -115,7 +115,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToServicesPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(ServicesPage), filter);
 
-        public Task NavigateToServiceDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ServiceDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToServiceDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ServiceDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToIngressesPage() => NavigationService.InternalNavigate(typeof(IngressesPage));
 

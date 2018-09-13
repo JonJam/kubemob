@@ -7,6 +7,7 @@ using KubeMob.Common.Services.AccountManagement;
 using KubeMob.Common.Services.AccountManagement.Azure;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.MappingProfiles;
+using KubeMob.Common.Services.Launcher;
 using KubeMob.Common.Services.Localization;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
@@ -102,6 +103,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<ServicesViewModel>();
             serviceCollection.AddTransient<ServiceDetailViewModel>();
+            serviceCollection.AddTransient<ServiceDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<IngressesViewModel>();
             serviceCollection.AddTransient<IngressDetailViewModel>();
@@ -174,6 +176,7 @@ namespace KubeMob.Common
             serviceCollection.AddSingleton<IAzureAccountManager, AzureAccountManager>();
             serviceCollection.AddSingleton<IAccountManager, AzureAccountManager>();
 
+            serviceCollection.AddSingleton<ILauncher, Launcher>();
             serviceCollection.AddSingleton<IPubSubService, PubSubService>();
             serviceCollection.AddSingleton<INavigationService, NavigationService>();
             serviceCollection.AddSingleton<IPopupService, PopupService>();

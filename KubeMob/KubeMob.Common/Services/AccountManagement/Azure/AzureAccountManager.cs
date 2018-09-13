@@ -8,6 +8,7 @@ using KubeMob.Common.Exceptions;
 using KubeMob.Common.Resx;
 using KubeMob.Common.Services.AccountManagement.Azure.Model;
 using KubeMob.Common.Services.AccountManagement.Model;
+using KubeMob.Common.Services.Launcher;
 using KubeMob.Common.Services.Settings;
 using Microsoft.Azure.Management.ContainerService.Fluent;
 using Microsoft.Azure.Management.Fluent;
@@ -46,11 +47,15 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             "https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-create-service-principal-portal");
 
         private readonly IAppSettings appSettings;
+        private readonly ILauncher launcher;
 
         [Preserve]
-        public AzureAccountManager(IAppSettings appSettings)
+        public AzureAccountManager(
+            IAppSettings appSettings,
+            ILauncher launcher)
         {
             this.appSettings = appSettings;
+            this.launcher = launcher;
 
             this.Environments = new List<CloudEnvironment>()
             {
@@ -80,7 +85,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
             get;
         }
 
-        public void LaunchHelp() => Device.OpenUri(AzureAccountManager.AzureHelpLink);
+        public void LaunchHelp() => this.launcher.LaunchBrowser(AzureAccountManager.AzureHelpLink);
 
         public void SetSelectedCluster(Cluster cluster) => this.appSettings.SelectedCluster = cluster;
 

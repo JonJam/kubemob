@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
+using KubeMob.Common.Services.Launcher;
 using KubeMob.Common.Services.Navigation;
 using KubeMob.Common.Services.Popup;
 using KubeMob.Common.ViewModels.Base;
@@ -13,37 +15,34 @@ namespace KubeMob.Common.ViewModels.Services
     [Preserve(AllMembers = true)]
     public class ServiceDetailViewModel : ObjectDetailViewModelBase<ServiceDetail>
     {
+        private readonly ILauncher launcher;
+
         public ServiceDetailViewModel(
             IKubernetesService kubernetesService,
             IPopupService popupService,
-            INavigationService navigationService)
+            INavigationService navigationService,
+            ILauncher launcher)
             : base(kubernetesService, popupService, navigationService)
         {
-            this.ViewRelatedEndpointsCommand = new Command(async () => await this.OnViewRelatedEndpointsCommandExecute());
-            this.ViewRelatedPodsCommand = new Command(async () => await this.OnViewRelatedPodsCommandExecute());
+            this.launcher = launcher;
+
+            this.LaunchExternalEndpointCommand = new Command(this.LaunchExternalEndpointCommandExecute);
         }
 
-        public ICommand ViewRelatedEndpointsCommand
-        {
-            get;
-        }
-
-        public ICommand ViewRelatedPodsCommand
+        public ICommand LaunchExternalEndpointCommand
         {
             get;
         }
 
         protected override Task<ServiceDetail> GetObjectDetail(string name, string namespaceName) => this.KubernetesService.GetServiceDetail(name, namespaceName);
 
-        private Task OnViewRelatedEndpointsCommandExecute() => this.NavigationService.NavigateToEndpointDetailPage(this.Detail.Name, this.Detail.NamespaceName);
-
-        private Task OnViewRelatedPodsCommandExecute()
+        private void LaunchExternalEndpointCommandExecute(object obj)
         {
-            Filter filter = new Filter(
-                this.Detail.NamespaceName,
-                labelSelector: this.Detail.Selector);
+            string ip = (string)obj;
 
-            return this.NavigationService.NavigateToPodsPage(filter);
+            string protocol = ip.EndsWith(":443") ? "https" : "http";
+
+            this.launcher.LaunchBrowser(new Uri($"{protocol}://{ip}"));
         }
     }
 }

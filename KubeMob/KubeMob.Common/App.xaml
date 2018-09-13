@@ -219,6 +219,15 @@
                 </StackLayout>
             </ControlTemplate>
 
+            <DataTemplate x:Key="SelectorDataTemplate">
+                <Frame
+                    Style="{StaticResource FrameStyle}">
+                    <Label
+                        Text="{Binding .}"
+                        Style="{StaticResource NonInterativeLabelStyle}"/>
+                </Frame>
+            </DataTemplate>
+
             <ControlTemplate x:Key="ObjectDetailSelectorsTemplate">
                 <StackLayout>
                     <Label
@@ -228,18 +237,8 @@
                     <views:ItemsControl
                         ItemsSource="{TemplateBinding BindingContext.Detail.Selectors}"
                         Style="{StaticResource ItemsControlStyle}"
-                        Padding="{StaticResource ItemsControlPadding}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Frame
-                                Style="{StaticResource FrameStyle}">
-                                    <Label
-                                    Text="{Binding .}"
-                                    Style="{StaticResource NonInterativeLabelStyle}"/>
-                                </Frame>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
+                        Padding="{StaticResource ItemsControlPadding}"
+                        ItemTemplate="{StaticResource SelectorDataTemplate}"/>
                 </StackLayout>
             </ControlTemplate>
 

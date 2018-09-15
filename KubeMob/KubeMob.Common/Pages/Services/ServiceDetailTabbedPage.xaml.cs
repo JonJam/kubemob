@@ -43,7 +43,6 @@ namespace KubeMob.Common.Pages.Services
             else if (page.BindingContext is EndpointsViewModel endpointsViewModel &&
                      detailViewModel.Detail != null)
             {
-                //ObjectId objectId = new ObjectId(detailViewModel.Detail.Name, detailViewModel.Detail.NamespaceName);
                 Filter filter = new Filter(detailViewModel.Detail.NamespaceName, other: detailViewModel.Detail.Name);
 
                 await endpointsViewModel.Initialize(filter);

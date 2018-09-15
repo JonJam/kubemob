@@ -112,6 +112,9 @@
     <Compile Update="Pages\ReplicationControllers\ReplicationControllerDetailTabbedPage.xaml.cs">
       <DependentUpon>ReplicationControllerDetailTabbedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Secrets\SecretDetailTabbedPage.xaml.cs">
+      <DependentUpon>SecretDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Services\ServiceDetailTabbedPage.xaml.cs">
       <DependentUpon>ServiceDetailTabbedPage.xaml</DependentUpon>
     </Compile>

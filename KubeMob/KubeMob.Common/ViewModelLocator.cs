@@ -115,7 +115,8 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<SecretsViewModel>();
             serviceCollection.AddTransient<SecretDetailViewModel>();
-
+            serviceCollection.AddTransient<SecretDetailTabbedViewModel>();
+            
             serviceCollection.AddTransient<CronJobsViewModel>();
             serviceCollection.AddTransient<CronJobDetailViewModel>();
             serviceCollection.AddTransient<CronJobDetailTabbedViewModel>();

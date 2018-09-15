@@ -147,7 +147,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToPersistentVolumeClaimsPage(Filter filter = null) => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimsPage), filter);
 
-        public Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(PersistentVolumeClaimDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToStatefulSetsPage() => NavigationService.InternalNavigate(typeof(StatefulSetsPage));
 

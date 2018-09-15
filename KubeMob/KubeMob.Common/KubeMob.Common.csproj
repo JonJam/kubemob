@@ -91,6 +91,9 @@
     <Compile Update="Pages\Nodes\NodeDetailTabbedPage.xaml.cs">
       <DependentUpon>NodeDetailTabbedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\PersistentVolumeClaims\PersistentVolumeClaimDetailTabbedPage.xaml.cs">
+      <DependentUpon>PersistentVolumeClaimDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\PersistentVolumes\PersistentVolumeDetailTabbedPage.xaml.cs">
       <DependentUpon>PersistentVolumeDetailTabbedPage.xaml</DependentUpon>
     </Compile>

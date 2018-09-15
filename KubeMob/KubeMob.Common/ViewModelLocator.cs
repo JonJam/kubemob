@@ -111,6 +111,7 @@ namespace KubeMob.Common
 
             serviceCollection.AddTransient<ConfigMapsViewModel>();
             serviceCollection.AddTransient<ConfigMapDetailViewModel>();
+            serviceCollection.AddTransient<ConfigMapDetailTabbedViewModel>();
 
             serviceCollection.AddTransient<SecretsViewModel>();
             serviceCollection.AddTransient<SecretDetailViewModel>();

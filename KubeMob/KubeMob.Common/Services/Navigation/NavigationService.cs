@@ -127,7 +127,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToSecretsPage() => NavigationService.InternalNavigate(typeof(SecretsPage));
 
-        public Task NavigateToSecretDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(SecretDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToSecretDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(SecretDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToCronJobsPage() => NavigationService.InternalNavigate(typeof(CronJobsPage));
 

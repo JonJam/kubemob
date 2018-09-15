@@ -66,7 +66,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         p.Status.Phase,
                         claim,
                         p.Spec.PersistentVolumeReclaimPolicy,
-                        p.Spec.AccessModes.ToList().AsReadOnly(),
+                        string.Join(", ", p.Spec.AccessModes),
                         p.Spec.StorageClassName,
                         p.Status.Reason,
                         p.Status.Message,

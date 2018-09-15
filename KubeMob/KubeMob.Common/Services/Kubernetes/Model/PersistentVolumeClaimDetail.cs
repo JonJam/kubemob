@@ -16,7 +16,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             string creationTime,
             string status,
             string volumeName,
-            IReadOnlyList<string> accessModes,
+            string accessModes,
             string storageClass,
             IReadOnlyList<Capacity> capacity)
             : base(uid, name, namespaceName, labels, annotations, creationTime)
@@ -39,7 +39,7 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        public IReadOnlyList<string> AccessModes
+        public string AccessModes
         {
             get;
         }

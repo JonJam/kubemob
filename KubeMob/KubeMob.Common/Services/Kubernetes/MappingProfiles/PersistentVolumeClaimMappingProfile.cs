@@ -59,7 +59,7 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
                         creationTime,
                         p.Status.Phase,
                         p.Spec.VolumeName,
-                        p.Spec.AccessModes.ToList().AsReadOnly(),
+                        string.Join(", ", p.Spec.AccessModes),
                         p.Spec.StorageClassName,
                         capacity.AsReadOnly());
                 });

@@ -8,12 +8,12 @@
                           xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                           xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Endpoints.EndpointDetailPage"
-                          Title="{Binding Name}"
-                          common:ViewModelLocator.AutoWireViewModel="true">
+                          Title="{markupExtensions:Translate DetailPage_Details}"
+                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
 
     <base:ExtendedContentPage.IconImage>
         <forms:CachedImage
-            Source="link.png">
+            Source="details.png">
             <forms:CachedImage.Transformations>
                 <transformations:TintTransformation
                     HexColor="{StaticResource KubernetesBlueRawColor}"
@@ -22,56 +22,33 @@
         </forms:CachedImage>
     </base:ExtendedContentPage.IconImage>
 
-    <Grid
-        CompressedLayout.IsHeadless="true">
-        <Grid
-            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
-            CompressedLayout.IsHeadless="true">
+    <views:ItemsControl
+                 ItemsSource="{Binding Detail.Addresses}"
+                 IsVisible="{Binding Detail.Addresses, Converter={StaticResource NotEmptyToBoolConverter}}"
+                Style="{StaticResource ItemsControlStyle}"
+                Padding="{StaticResource ItemsControlPadding}">
+        <views:ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <StackLayout
+                    CompressedLayout.IsHeadless="true">
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate EndpointDetailPage_Host}"
+                        Value="{Binding Host}"/>
 
-            <views:ErrorMessage
-                Message="{markupExtensions:Translate NoInternetErrorMessage}"
-                IsVisible="{Binding HasNoNetwork}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate EndpointDetailPage_Ports}"
+                        Value="{Binding Ports}"/>
 
-            <Label        
-                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
-                IsVisible="{Binding ObjectNotFound}"/>
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate EndpointDetailPage_Node}"
+                        Value="{Binding Node}"/>
 
-            <Grid
-                IsVisible="{Binding ObjectNotFound, Converter={StaticResource InverseBoolConverter}}"
-                CompressedLayout.IsHeadless="true">
+                    <views:DetailProperty
+                        Label="{markupExtensions:Translate EndpointDetailPage_Ready}"
+                        Value="{Binding IsReady}"/>
+                </StackLayout>
+            </DataTemplate>
+        </views:ItemsControl.ItemTemplate>
+    </views:ItemsControl>
 
-                <views:ExtendedListView
-                    ItemsSource="{Binding Detail.Addresses}"
-                    IsVisible="{Binding Detail.Addresses, Converter={StaticResource NotEmptyToBoolConverter}}"
-                    SeparatorVisibility="None"
-                    HasUnevenRows="True">
-                    <views:ExtendedListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout
-                                    CompressedLayout.IsHeadless="true">
-                                    <Label        
-                                        Text="{Binding Host}"/>
-                                    <Label        
-                                        Text="{Binding Ports}"/>
-                                    <Label        
-                                        Text="{Binding Node}"/>
-                                    <Label        
-                                        Text="{Binding IsReady}"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </views:ExtendedListView.ItemTemplate>
-                </views:ExtendedListView>
-
-                <Label
-                    Text="{markupExtensions:Translate EmptyMessage}"
-                    IsVisible="{Binding Detail.Addresses, Converter={StaticResource NotEmptyToBoolConverter}, ConverterParameter=true}"/>
-            </Grid>
-        </Grid>
-
-        <ActivityIndicator
-                    IsRunning="{Binding IsBusy}"  
-                    IsVisible="{Binding IsBusy}"/>
-    </Grid>
 </base:ExtendedContentPage>

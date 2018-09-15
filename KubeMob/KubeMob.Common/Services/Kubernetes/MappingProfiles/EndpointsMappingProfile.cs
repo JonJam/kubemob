@@ -10,6 +10,11 @@ namespace KubeMob.Common.Services.Kubernetes.MappingProfiles
     {
         public EndpointsMappingProfile()
         {
+            this.CreateMap<k8s.Models.V1Endpoints, ObjectSummary>()
+                .ConstructUsing((c) => new ObjectSummary(
+                    c.Metadata.Name,
+                    c.Metadata.NamespaceProperty));
+
             this.CreateMap<k8s.Models.V1Endpoints, EndpointDetail>()
                 .ConstructUsing((e) =>
                 {

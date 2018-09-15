@@ -808,6 +808,42 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host.
+        /// </summary>
+        internal static string EndpointDetailPage_Host {
+            get {
+                return ResourceManager.GetString("EndpointDetailPage_Host", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Node.
+        /// </summary>
+        internal static string EndpointDetailPage_Node {
+            get {
+                return ResourceManager.GetString("EndpointDetailPage_Node", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ports.
+        /// </summary>
+        internal static string EndpointDetailPage_Ports {
+            get {
+                return ResourceManager.GetString("EndpointDetailPage_Ports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        internal static string EndpointDetailPage_Ready {
+            get {
+                return ResourceManager.GetString("EndpointDetailPage_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Endpoints.
         /// </summary>
         internal static string Endpoints {

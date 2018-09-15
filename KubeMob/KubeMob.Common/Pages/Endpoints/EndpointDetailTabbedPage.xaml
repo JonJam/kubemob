@@ -2,23 +2,14 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:endpoints="clr-namespace:KubeMob.Common.Pages.Endpoints;assembly=KubeMob.Common"
-            xmlns:events="clr-namespace:KubeMob.Common.Pages.Events;assembly=KubeMob.Common"
-            xmlns:pods="clr-namespace:KubeMob.Common.Pages.Pods;assembly=KubeMob.Common"
-            xmlns:services="clr-namespace:KubeMob.Common.Pages.Services;assembly=KubeMob.Common"
             xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            x:Class="KubeMob.Common.Pages.Services.ServiceDetailTabbedPage"
+            x:Class="KubeMob.Common.Pages.Endpoints.EndpointDetailTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
             Title="{Binding ObjectId.Name}"
             common:ViewModelLocator.AutoWireViewModel="true">
 
-    <services:ServiceDetailPage
+    <endpoints:EndpointDetailPage
         x:Name="DetailPage"
         BindingContext="{Binding DetailVm}"/>
-
-    <endpoints:EndpointsPage/>
-
-    <pods:PodsPage/>
-
-    <events:EventsPage/>
 </TabbedPage>

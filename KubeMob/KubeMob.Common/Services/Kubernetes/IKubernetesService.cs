@@ -224,6 +224,9 @@ namespace KubeMob.Common.Services.Kubernetes
             string horizontalPodAutoscalerName,
             string horizontalPodAutoscalerNamespace);
 
+        Task<IList<ObjectSummary>> GetEndpointSummaries(
+            Filter filter);
+
         Task<EndpointDetail> GetEndpointDetail(
             string endpointName,
             string endpointNamespace);

@@ -40,12 +40,12 @@ namespace KubeMob.Common.Pages.Services
 
                 await podsViewModel.Initialize(filter);
             }
-            else if (page.BindingContext is EndpointDetailViewModel endpointDetailViewModel &&
+            else if (page.BindingContext is EndpointsViewModel endpointsViewModel &&
                      detailViewModel.Detail != null)
             {
-                ObjectId objectId = new ObjectId(detailViewModel.Detail.Name, detailViewModel.Detail.NamespaceName);
+                Filter filter = new Filter(detailViewModel.Detail.NamespaceName, other: detailViewModel.Detail.Name);
 
-                await endpointDetailViewModel.Initialize(objectId);
+                await endpointsViewModel.Initialize(filter);
             }
         }
     }

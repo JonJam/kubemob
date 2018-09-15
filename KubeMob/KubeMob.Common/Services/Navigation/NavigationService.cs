@@ -123,7 +123,7 @@ namespace KubeMob.Common.Services.Navigation
 
         public Task NavigateToConfigMapsPage() => NavigationService.InternalNavigate(typeof(ConfigMapsPage));
 
-        public Task NavigateToConfigMapDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ConfigMapDetailPage), new ObjectId(name, namespaceName));
+        public Task NavigateToConfigMapDetailPage(string name, string namespaceName) => NavigationService.InternalNavigate(typeof(ConfigMapDetailTabbedPage), new ObjectId(name, namespaceName));
 
         public Task NavigateToSecretsPage() => NavigationService.InternalNavigate(typeof(SecretsPage));
 

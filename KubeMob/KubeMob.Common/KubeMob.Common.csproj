@@ -49,6 +49,12 @@
     <Compile Update="Pages\Conditions\ConditionDetailPage.xaml.cs">
       <DependentUpon>ConditionDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\ConfigMaps\ConfigMapDetailTabbedPage.xaml.cs">
+      <DependentUpon>ConfigMapDetailTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ConfigMaps\ConfigMapDetao;TabbedPage.xaml.cs">
+      <DependentUpon>ConfigMapDetao%3bTabbedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\CronJobs\CronJObDetailTabbedPage.xaml.cs">
       <DependentUpon>CronJobDetailTabbedPage.xaml</DependentUpon>
     </Compile>

@@ -164,6 +164,8 @@ namespace KubeMob.Common
             serviceCollection.AddTransient<HorizontalPodAutoscalerDetailViewModel>();
             serviceCollection.AddTransient<HorizontalPodAutoscalerDetailTabbedViewModel>();
 
+            serviceCollection.AddTransient<EndpointDetailTabbedViewModel>();
+            serviceCollection.AddTransient<EndpointsViewModel>();
             serviceCollection.AddTransient<EndpointDetailViewModel>();
 
             serviceCollection.AddTransient<EventsViewModel>();

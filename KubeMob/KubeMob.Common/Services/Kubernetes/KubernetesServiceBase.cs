@@ -895,13 +895,24 @@ namespace KubeMob.Common.Services.Kubernetes
             return Mapper.Map<HorizontalPodAutoscalerDetail>(horizontalPodAutoscaler);
         }
 
+        public async Task<IList<ObjectSummary>> GetEndpointSummaries(
+            Filter filter)
+        {
+            V1EndpointsList endpointsList = await this.PerformClientOperation((c) => c.ListNamespacedEndpointsAsync(filter.Namespace, fieldSelector: $"metadata.name={filter.Other}"));
+
+            return Mapper.Map<IList<ObjectSummary>>(endpointsList.Items)
+                .OrderBy(p => p.Name)
+                .ToList()
+                .AsReadOnly();
+        }
+
         public async Task<EndpointDetail> GetEndpointDetail(
             string endpointName,
             string endpointNamespace)
         {
-            V1EndpointsList endpointsList = await this.PerformClientOperation((c) => c.ListNamespacedEndpointsAsync(endpointNamespace, fieldSelector: $"metadata.name={endpointName}"));
+            V1Endpoints endpointsList = await this.PerformClientOperation((c) => c.ReadNamespacedEndpointsAsync(endpointName, endpointNamespace));
 
-            return Mapper.Map<EndpointDetail>(endpointsList.Items.FirstOrDefault());
+            return Mapper.Map<EndpointDetail>(endpointsList);
         }
 
         protected abstract IKubernetes ConfigureClientForPlatform(k8s.Kubernetes client);

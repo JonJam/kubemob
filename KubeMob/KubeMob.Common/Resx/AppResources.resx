@@ -624,4 +624,16 @@
   <data name="CloseAlertText" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="EndpointDetailPage_Host" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="EndpointDetailPage_Node" xml:space="preserve">
+    <value>Node</value>
+  </data>
+  <data name="EndpointDetailPage_Ports" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="EndpointDetailPage_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
 </root>

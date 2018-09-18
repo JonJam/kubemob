@@ -853,60 +853,6 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Count.
-        /// </summary>
-        internal static string EventDetailPage_Count {
-            get {
-                return ResourceManager.GetString("EventDetailPage_Count", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to First seen.
-        /// </summary>
-        internal static string EventDetailPage_FirstSeen {
-            get {
-                return ResourceManager.GetString("EventDetailPage_FirstSeen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Last seen.
-        /// </summary>
-        internal static string EventDetailPage_LastSeen {
-            get {
-                return ResourceManager.GetString("EventDetailPage_LastSeen", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Source.
-        /// </summary>
-        internal static string EventDetailPage_Source {
-            get {
-                return ResourceManager.GetString("EventDetailPage_Source", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sub-object.
-        /// </summary>
-        internal static string EventDetailPage_SubObject {
-            get {
-                return ResourceManager.GetString("EventDetailPage_SubObject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Event detail.
-        /// </summary>
-        internal static string EventDetailPage_Title {
-            get {
-                return ResourceManager.GetString("EventDetailPage_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Events.
         /// </summary>
         internal static string Events {

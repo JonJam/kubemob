@@ -78,12 +78,4 @@
         <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
     </Style>
 
-    <Style x:Key="ObjectDetailsPropertyNameLabelStyle" TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold" />
-    </Style>
-
-    <Style x:Key="ObjectDetailsSectionLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="18" />
-    </Style>
-
 </ResourceDictionary>

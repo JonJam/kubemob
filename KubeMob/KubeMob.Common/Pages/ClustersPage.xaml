@@ -40,14 +40,15 @@
     <Grid
         CompressedLayout.IsHeadless="true">
 
-        <StackLayout
+        <Grid
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
             CompressedLayout.IsHeadless="true">
 
-            <StackLayout
+            <Grid
                 IsVisible="{Binding HasClusterGroups}"
                 CompressedLayout.IsHeadless="true">
 
+                <!--TODO STyle-->
                 <views:ExtendedListView
                     x:Name="Clusters"
                     ItemsSource="{Binding ClusterGroups}"
@@ -84,6 +85,7 @@
                     </views:ExtendedListView.GroupHeaderTemplate>
                 </views:ExtendedListView>
 
+                <!--TODO Style-->
                 <views:ExtendedListView
                     x:Name="Accounts"
                     ItemsSource="{Binding ClusterGroups}"
@@ -112,12 +114,14 @@
                         </DataTemplate>
                     </views:ExtendedListView.ItemTemplate>
                 </views:ExtendedListView>
-            </StackLayout>
+            </Grid>
 
             <Label
                 Text="{markupExtensions:Translate EmptyMessage}"
+                Style="{StaticResource ErrorMessageLabelStyle}"
+                VerticalOptions="Center"
                 IsVisible="{Binding HasClusterGroups, Converter={StaticResource InverseBoolConverter}}"/>
-        </StackLayout>
+        </Grid>
 
         <ActivityIndicator
             IsRunning="{Binding IsBusy}"  

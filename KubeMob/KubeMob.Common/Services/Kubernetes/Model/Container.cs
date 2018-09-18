@@ -30,7 +30,6 @@ namespace KubeMob.Common.Services.Kubernetes.Model
             get;
         }
 
-        // TODO Handle links
         public IReadOnlyList<EnvironmentVariable> EnvironmentVariables
         {
             get;

@@ -42,7 +42,6 @@ namespace KubeMob.Common.Services.Kubernetes.Model.Base
             get;
         }
 
-        // TODO Handle links
         public IReadOnlyList<MetadataItem> Annotations
         {
             get;

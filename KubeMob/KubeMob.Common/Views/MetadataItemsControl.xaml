@@ -21,7 +21,6 @@
             </views:MetadataItemDataTemplateSelector.Basic>
             <views:MetadataItemDataTemplateSelector.Popup>
                 <DataTemplate>
-                    <!-- TODO Handle navigation -->
                     <Frame
                         Style="{StaticResource FrameStyle}">
                         <Frame.GestureRecognizers>

@@ -6,6 +6,8 @@
              xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewCells="clr-namespace:KubeMob.Common.ViewCells;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Pages.ClustersPage"
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate ClustersPage_Title}">
@@ -61,8 +63,26 @@
                     HasUnevenRows="True">
                     <views:ExtendedListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell 
-                                Text="{Binding Name}" />
+                            <viewCells:AccessoryViewCell
+                                Accessory="DisclosureIndicator">
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    Padding="20,10,20,10">
+                                    <!--TODO Change to aks logo-->
+                                    <forms:CachedImage
+                                        Source="azure_logo.png"
+                                        Style="{StaticResource StatusIconImageStyle}">
+                                    </forms:CachedImage>
+
+                                    <StackLayout
+                                        VerticalOptions="Center">
+                                        <Label
+                                            Text="{Binding Name}"
+                                            Style="{DynamicResource ListItemTextStyle}"
+                                            LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </viewCells:AccessoryViewCell>
                         </DataTemplate>
                     </views:ExtendedListView.ItemTemplate>
                     <views:ExtendedListView.GroupHeaderTemplate>
@@ -70,8 +90,11 @@
                             <ViewCell>
                                 <StackLayout
                                     CompressedLayout.IsHeadless="true">
+                                    <!--TODO Update this-->
                                     <Label 
-                                        Text="{Binding Title}"/>
+                                        Text="{Binding Title}"
+                                        Style="{DynamicResource TitleStyle}"
+                                        LineBreakMode="TailTruncation"/>
                                     <Label
                                         Text="{Binding ErrorMessage}"
                                         TextColor="{StaticResource ErrorColor}"

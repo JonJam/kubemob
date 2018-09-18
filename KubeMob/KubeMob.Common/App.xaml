@@ -132,13 +132,12 @@
                     </Grid>
 
                     <ActivityIndicator
-                        IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                        IsRunning="{TemplateBinding BindingContext.IsBusy}"
                         IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
                 </Grid>
             </ControlTemplate>
 
-            <!--TODO Rename-->
-            <ControlTemplate x:Key="NewObjectDetailTemplate">
+            <ControlTemplate x:Key="ObjectDetailTemplate">
                 <Grid
                     CompressedLayout.IsHeadless="true">
                     <Grid
@@ -164,12 +163,11 @@
                     </Grid>
 
                     <ActivityIndicator
-                        IsRunning="{TemplateBinding BindingContext.IsBusy}"  
+                        IsRunning="{TemplateBinding BindingContext.IsBusy}"
                         IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
                 </Grid>
             </ControlTemplate>
 
-            <!--TODO Move ?-->
             <ControlTemplate x:Key="ObjectDetailCapacityTemplate">
                 <StackLayout>
                     <Label
@@ -239,108 +237,6 @@
                         Style="{StaticResource ItemsControlStyle}"
                         Padding="{StaticResource ItemsControlPadding}"
                         ItemTemplate="{StaticResource SelectorDataTemplate}"/>
-                </StackLayout>
-            </ControlTemplate>
-
-            <!-- TODO Remove below templates after move all to tabbed pages ?? -->
-            <ControlTemplate x:Key="ObjectDetailTemplate">
-                <ScrollView>
-                    <Grid>
-                        <Grid
-                            IsVisible="{TemplateBinding BindingContext.IsBusy, Converter={StaticResource InverseBoolConverter}}">
-
-                            <views:ErrorMessage
-                                Message="{markupExtensions:Translate NoInternetErrorMessage}"
-                                IsVisible="{TemplateBinding BindingContext.HasNoNetwork}"/>
-
-                            <Label        
-                                Text="{markupExtensions:Translate ObjectNotFoundMessage}"
-                                IsVisible="{TemplateBinding BindingContext.ObjectNotFound}"/>
-
-                            <ContentPresenter
-                                IsVisible="{TemplateBinding BindingContext.DisplayInfo}"/>
-                        </Grid>
-
-                        <ActivityIndicator
-                            IsRunning="{TemplateBinding BindingContext.IsBusy}"  
-                            IsVisible="{TemplateBinding BindingContext.IsBusy}"/>
-                    </Grid>
-                </ScrollView>
-            </ControlTemplate>
-
-            <ControlTemplate x:Key="ObjectDetailCommonPropertiesTemplate">
-                <StackLayout>
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Name}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-                    <Label
-                        Text="{TemplateBinding BindingContext.Detail.Name}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Namespace}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-                        IsVisible="{TemplateBinding BindingContext.Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-                    <Label
-                        Text="{TemplateBinding BindingContext.Detail.NamespaceName}"
-                        IsVisible="{TemplateBinding BindingContext.Detail.NamespaceName, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Labels}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-                        IsVisible="{TemplateBinding BindingContext.Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-                    <views:ItemsControl
-                        ItemsSource="{TemplateBinding BindingContext.Detail.Labels}"
-                        IsVisible="{TemplateBinding BindingContext.Detail.Labels, Converter={StaticResource NotEmptyToBoolConverter}}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_Annotations}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"
-                        IsVisible="{TemplateBinding BindingContext.Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}"/>
-                    <views:ItemsControl
-                        ItemsSource="{TemplateBinding BindingContext.Detail.Annotations}"
-                        IsVisible="{TemplateBinding BindingContext.Detail.Annotations, Converter={StaticResource NotEmptyToBoolConverter}}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    BackgroundColor="Gray"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
-
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_CreationTime}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-                    <Label
-                        Text="{TemplateBinding BindingContext.Detail.CreationTime}"/>
-                </StackLayout>
-            </ControlTemplate>
-
-            <ControlTemplate x:Key="ObjectDetailAccessModesTemplate">
-                <StackLayout>
-                    <Label
-                        Text="{markupExtensions:Translate DetailPage_Details_AccessModes}"
-                        Style="{StaticResource ObjectDetailsPropertyNameLabelStyle}"/>
-                    <views:ItemsControl
-                        ItemsSource="{TemplateBinding BindingContext.Detail.AccessModes}">
-                        <views:ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Label
-                                    Text="{Binding .}"
-                                    HorizontalOptions="Start"/>
-                            </DataTemplate>
-                        </views:ItemsControl.ItemTemplate>
-                    </views:ItemsControl>
                 </StackLayout>
             </ControlTemplate>
         </ResourceDictionary>

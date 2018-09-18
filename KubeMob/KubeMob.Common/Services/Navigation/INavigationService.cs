@@ -83,7 +83,7 @@ namespace KubeMob.Common.Services.Navigation
         Task NavigateToPersistentVolumeClaimsPage(Filter filter = null);
 
         Task NavigateToPersistentVolumeClaimDetailPage(string name, string namespaceName);
-        
+
         Task NavigateToConditionDetailPage(Condition conditionDetail);
 
         Task NavigateToHorizontalPodAutoscalersPage(Filter filter = null);

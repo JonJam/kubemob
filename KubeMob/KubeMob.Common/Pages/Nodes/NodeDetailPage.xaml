@@ -9,7 +9,7 @@
                           xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
                           x:Class="KubeMob.Common.Pages.Nodes.NodeDetailPage"
                           Title="{markupExtensions:Translate DetailPage_Details}"
-                          ControlTemplate="{StaticResource NewObjectDetailTemplate}">
+                          ControlTemplate="{StaticResource ObjectDetailTemplate}">
 
     <base:ExtendedContentPage.IconImage>
         <forms:CachedImage

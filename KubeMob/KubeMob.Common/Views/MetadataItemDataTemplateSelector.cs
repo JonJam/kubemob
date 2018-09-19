@@ -27,7 +27,6 @@ namespace KubeMob.Common.Views
 
             bool isValueJson = true;
 
-            // TODO Verify this works as expected.
             try
             {
                 JObject.Parse(annotation.Value);

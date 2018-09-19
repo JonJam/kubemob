@@ -18,7 +18,7 @@ using KubernetesExtensions = KubeMob.Common.Services.Kubernetes.Extensions.Kuber
 
 namespace KubeMob.Common.Services.Kubernetes
 {
-    // TODO Change IList to IReadonlyList
+    // TODO Support paging on methods that return lists
     [Preserve(AllMembers = true)]
     public abstract class KubernetesServiceBase : IKubernetesService
     {
@@ -462,8 +462,7 @@ namespace KubeMob.Common.Services.Kubernetes
 
             return Mapper.Map<IList<ObjectSummary>>(items)
                 .OrderBy(p => p.Name)
-                .ToList()
-                .AsReadOnly();
+                .ToList();
         }
 
         public async Task<PodDetail> GetPodDetail(

@@ -370,5 +370,14 @@
   <ItemGroup>
     <BundleResource Include="Resources\link%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\azure_container_service.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\azure_container_service%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\azure_container_service%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

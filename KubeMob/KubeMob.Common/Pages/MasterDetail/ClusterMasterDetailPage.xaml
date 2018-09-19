@@ -17,17 +17,6 @@
 
     <MasterDetailPage.Detail>
         <base:ExtendedNavigationPage>
-            <base:ExtendedNavigationPage.BarBackgroundColor>
-                <OnPlatform x:TypeArguments="Color">
-                    <On Platform="iOS" Value="{StaticResource KubernetesBlueColor}"/>
-                </OnPlatform>
-            </base:ExtendedNavigationPage.BarBackgroundColor>
-            <base:ExtendedNavigationPage.BarTextColor>
-                <OnPlatform x:TypeArguments="Color">
-                    <On Platform="iOS" Value="White"/>
-                </OnPlatform>
-            </base:ExtendedNavigationPage.BarTextColor>
-
             <x:Arguments>
                 <pages:ClusterOverviewPage />
             </x:Arguments>

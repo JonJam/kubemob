@@ -204,7 +204,7 @@ namespace KubeMob.Common.Services.AccountManagement.Azure
                                                      web.Status == WebExceptionStatus.NameResolutionFailure)
                 {
                     // No internet
-                    group.ErrorMessage = AppResources.NoInternetErrorMessage;
+                    throw new NoNetworkException(e.Message, e);
                 }
 
                 groups.Add(group);

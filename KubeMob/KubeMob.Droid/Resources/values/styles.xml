@@ -22,6 +22,11 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+
+    <!--TODO Sort this out
+https://stackoverflow.com/questions/46561664/change-color-of-context-action-menu-background-for-list-view-in-xamarin-forms-an
+-->
+    <item name="android:actionModeBackground">@color/kubernetesBlue</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">

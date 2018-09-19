@@ -43,14 +43,11 @@
         CompressedLayout.IsHeadless="true">
 
         <Grid
-            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
-            CompressedLayout.IsHeadless="true">
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
 
             <Grid
-                IsVisible="{Binding HasClusterGroups}"
-                CompressedLayout.IsHeadless="true">
+                IsVisible="{Binding HasClusterGroups}">
 
-                <!--TODO STyle-->
                 <views:ExtendedListView
                     x:Name="Clusters"
                     ItemsSource="{Binding ClusterGroups}"
@@ -68,9 +65,8 @@
                                 <StackLayout
                                     Orientation="Horizontal"
                                     Padding="20,10,20,10">
-                                    <!--TODO Change to aks logo-->
                                     <forms:CachedImage
-                                        Source="azure_logo.png"
+                                        Source="azure_container_service.png"
                                         Style="{StaticResource StatusIconImageStyle}">
                                     </forms:CachedImage>
 
@@ -89,26 +85,37 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout
-                                    CompressedLayout.IsHeadless="true">
-                                    <!--TODO Update this-->
-                                    <Label 
-                                        Text="{Binding Title}"
-                                        Style="{DynamicResource TitleStyle}"
-                                        LineBreakMode="TailTruncation"/>
-                                    <Label
-                                        Text="{Binding ErrorMessage}"
-                                        TextColor="{StaticResource ErrorColor}"
-                                        IsVisible="{Binding HasErrorMessage}" />
-                                    <Label
-                                        Text="{markupExtensions:Translate EmptyMessage}"
-                                        IsVisible="{Binding IsEmpty}" />
+                                    Orientation="Horizontal"
+                                    Padding="20,10,20,10">
+                                    <forms:CachedImage
+                                        Source="azure_logo.png"
+                                        Style="{StaticResource StatusIconImageStyle}">
+                                    </forms:CachedImage>
+
+                                    <StackLayout
+                                        VerticalOptions="Center">
+                                        <Label 
+                                            Text="{Binding Title}"
+                                            Style="{DynamicResource TitleStyle}"
+                                            LineBreakMode="TailTruncation"/>
+                                        <Label
+                                            Text="{Binding ErrorMessage}"
+                                            Style="{StaticResource ErrorMessageLabelStyle}"
+                                            TextColor="{StaticResource ErrorColor}"
+                                            Margin="-20,20,0,0"
+                                            IsVisible="{Binding HasErrorMessage}" />
+                                        <Label
+                                            Text="{markupExtensions:Translate EmptyMessage}"
+                                            Style="{StaticResource ErrorMessageLabelStyle}"
+                                            Margin="-20,20,0,0"
+                                            IsVisible="{Binding IsEmpty}" />
+                                    </StackLayout>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </views:ExtendedListView.GroupHeaderTemplate>
                 </views:ExtendedListView>
 
-                <!--TODO Style-->
                 <views:ExtendedListView
                     x:Name="Accounts"
                     ItemsSource="{Binding ClusterGroups}"
@@ -117,7 +124,8 @@
                     SeparatorVisibility="None">
                     <views:ExtendedListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
+                            <viewCells:AccessoryViewCell
+                                Accessory="DisclosureIndicator">
                                 <ViewCell.ContextActions>
                                     <MenuItem
                                         Command="{Binding BindingContext.EditAccountCommand, Source={x:Reference Accounts}}"
@@ -131,9 +139,24 @@
                                         Text="{markupExtensions:Translate ClustersPage_Accounts_Delete_MenuItemText}"
                                         IsDestructive="True" />
                                 </ViewCell.ContextActions>
-                                <Label 
-                                    Text="{Binding Title}"/>
-                            </ViewCell>
+
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    Padding="20,10,20,10">
+                                    <forms:CachedImage
+                                        Source="azure_logo.png"
+                                        Style="{StaticResource StatusIconImageStyle}">
+                                    </forms:CachedImage>
+
+                                    <StackLayout
+                                        VerticalOptions="Center">
+                                        <Label 
+                                            Text="{Binding Title}"
+                                            Style="{DynamicResource TitleStyle}"
+                                            LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </viewCells:AccessoryViewCell>
                         </DataTemplate>
                     </views:ExtendedListView.ItemTemplate>
                 </views:ExtendedListView>

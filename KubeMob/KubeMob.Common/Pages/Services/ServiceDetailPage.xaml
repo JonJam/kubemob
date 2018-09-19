@@ -99,7 +99,7 @@
         <views:ItemsControl
             ItemsSource="{Binding Detail.LabelSelector}"
             Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}"
+            Padding="{StaticResource PagePadding}"
             ItemTemplate="{StaticResource SelectorDataTemplate}"
             IsVisible="{Binding Detail.LabelSelector, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 

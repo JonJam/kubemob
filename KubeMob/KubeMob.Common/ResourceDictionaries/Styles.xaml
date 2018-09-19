@@ -11,7 +11,7 @@
         <resourceDictionaries:Colors />
     </ResourceDictionary.MergedDictionaries>
 
-    <Thickness x:Key="ItemsControlPadding" Bottom="5" Left="20" Right="20" Top="5"></Thickness>
+    <Thickness x:Key="PagePadding" Bottom="5" Left="20" Right="20" Top="5"></Thickness>
 
     <Style TargetType="base:ExtendedContentPage" ApplyToDerivedTypes="True">
         <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
@@ -36,12 +36,12 @@
 
     <Style x:Key="DetailSectionStackLayoutStyle" TargetType="StackLayout">
         <Setter Property="BackgroundColor" Value="White"/>
-        <Setter Property="Padding" Value="20,5,20,5"/>
+        <Setter Property="Padding" Value="{StaticResource PagePadding}"/>
         <Setter Property="Spacing" Value="15"/>
     </Style>
 
     <Style x:Key="DetailSectionTitleLabelStyle" BaseResourceKey="TitleStyle" TargetType="Label">
-        <Setter Property="Margin" Value="20,5,20,5"/>
+        <Setter Property="Margin" Value="{StaticResource PagePadding}"/>
     </Style>
 
     <Style x:Key="DetailPropertyValueLabelStyle" BaseResourceKey="ListItemDetailTextStyle" TargetType="Label">

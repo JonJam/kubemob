@@ -45,7 +45,7 @@
         <views:ItemsControl
             ItemsSource="{Binding Detail.Parameters}"
             Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}">
+            Padding="{StaticResource PagePadding}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Frame

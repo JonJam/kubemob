@@ -23,6 +23,7 @@
 
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
 
+    <!-- Styling Action bar background color for context menu -->
     <item name="android:actionModeBackground">@color/kubernetesBlue</item>
   </style>
 

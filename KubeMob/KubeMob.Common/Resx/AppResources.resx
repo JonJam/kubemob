@@ -172,7 +172,7 @@
     <value>Enter a tenant ID</value>
   </data>
   <data name="AddEditAzureAccountPage_Title" xml:space="preserve">
-    <value>Microsoft Azure account</value>
+    <value>Microsoft Azure</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>kubemob</value>

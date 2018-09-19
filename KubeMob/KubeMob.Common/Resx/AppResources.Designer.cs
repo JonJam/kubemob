@@ -223,7 +223,7 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Microsoft Azure account.
+        ///   Looks up a localized string similar to Microsoft Azure.
         /// </summary>
         internal static string AddEditAzureAccountPage_Title {
             get {

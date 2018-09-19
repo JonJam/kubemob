@@ -10,6 +10,14 @@
              common:ViewModelLocator.AutoWireViewModel="true"
              Title="{markupExtensions:Translate AddEditAzureAccountPage_Title}">
 
+    <base:ExtendedContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ValidationErrorLabelStyle" BaseResourceKey="CaptionStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
+            </Style>
+        </ResourceDictionary>
+    </base:ExtendedContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             x:Name="Information"
@@ -18,22 +26,25 @@
             Command="{Binding ViewInformationCommand}" />
     </ContentPage.ToolbarItems>
 
-    <Grid
-        CompressedLayout.IsHeadless="true">
+    <ScrollView>
+       <Grid>
 
         <StackLayout
-            CompressedLayout.IsHeadless="true"
+            Padding="{StaticResource PagePadding}"
             IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}">
+
             <Label 
-            Text="{markupExtensions:Translate AddEditAzureAccountPage_Help}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_Help}"
+                Style="{DynamicResource CaptionStyle}"/>
 
             <Label
                 Text="{Binding TopLevelErrorMessage}"
                 Style="{StaticResource ValidationErrorLabelStyle}"
-                IsVisible="{Binding HasTopLevelErrorMessage}"></Label>
+                IsVisible="{Binding HasTopLevelErrorMessage}"/>
 
             <Label
-                Text="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Label}"
+                Style="{DynamicResource SubtitleStyle}"/>
             <Picker
                 x:Name="EnvironmentEntry"
                 Title="{markupExtensions:Translate AddEditAzureAccountPage_Environment_Title}"
@@ -43,7 +54,8 @@
                 IsEnabled="{Binding IsEditing, Converter={StaticResource InverseBoolConverter}}"/>
 
             <Label
-                Text="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Label}"
+                Style="{DynamicResource SubtitleStyle}"/>
             <Entry
                 x:Name="TenantIdEntry"
                 Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_TenantId_Placeholder}"
@@ -72,10 +84,11 @@
             <Label
                 Text="{Binding TenantId.FirstError}"
                 Style="{StaticResource ValidationErrorLabelStyle}"
-                IsVisible="{Binding TenantId.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
+                IsVisible="{Binding TenantId.IsValid, Converter={StaticResource InverseBoolConverter}}"/>
 
             <Label
-                Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Label}"
+                Style="{DynamicResource SubtitleStyle}"/>
             <Entry
                 x:Name="ClientIdEntry"
                 Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_ClientId_Placeholder}"
@@ -103,10 +116,11 @@
             <Label
                 Text="{Binding ClientId.FirstError}"
                 Style="{StaticResource ValidationErrorLabelStyle}"
-                IsVisible="{Binding ClientId.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
+                IsVisible="{Binding ClientId.IsValid, Converter={StaticResource InverseBoolConverter}}"/>
 
             <Label
-                Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Label}"/>
+                Text="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Label}"
+                Style="{DynamicResource SubtitleStyle}"/>
             <Entry
                 x:Name="ClientSecretEntry"
                 Placeholder="{markupExtensions:Translate AddEditAzureAccountPage_ClientSecret_Placeholder}"
@@ -135,16 +149,19 @@
             <Label
                 Text="{Binding ClientSecret.FirstError}"
                 Style="{StaticResource ValidationErrorLabelStyle}"
-                IsVisible="{Binding ClientSecret.IsValid, Converter={StaticResource InverseBoolConverter}}"></Label>
+                IsVisible="{Binding ClientSecret.IsValid, Converter={StaticResource InverseBoolConverter}}"/>
 
             <Button
                 x:Name="Save"
                 Text="{markupExtensions:Translate AddEditAzureAccountPage_SaveButton}"
-                Command="{Binding SaveCommand}"></Button>
+                Command="{Binding SaveCommand}"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Margin="0,20,0,0"/>
         </StackLayout>
 
         <ActivityIndicator
             IsRunning="{Binding IsBusy}"  
             IsVisible="{Binding IsBusy}"/>
-    </Grid>
+       </Grid>
+    </ScrollView>
 </base:ExtendedContentPage>

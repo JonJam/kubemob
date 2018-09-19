@@ -15,8 +15,7 @@
         <Button 
             Text="{markupExtensions:Translate AddAccountPage_AddAzureAccount_Btn}"
             Command="{Binding AddAzureAccountCommand}"
-            BackgroundColor="{StaticResource KubernetesBlueColor}"
-            TextColor="White">
+            Style="{StaticResource PrimaryButtonStyle}">
         </Button>
     </StackLayout>
 </base:ExtendedContentPage>

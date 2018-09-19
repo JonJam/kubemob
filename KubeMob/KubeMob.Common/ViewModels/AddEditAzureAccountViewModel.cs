@@ -165,8 +165,16 @@ namespace KubeMob.Common.ViewModels
             }
         });
 
-        private bool Validate() => this.ClientId.Validate() &&
-                                   this.ClientSecret.Validate() &&
-                                   this.TenantId.Validate();
+        private bool Validate()
+        {
+            // Writing like this to ensure validation done for all properties in order
+            // to display validation messages if need to. If combined these into statement,
+            // then if first was false than the remaining wouldn't be evaluated.
+            bool clientIdValid = this.ClientId.Validate();
+            bool clientSecretValid = this.ClientSecret.Validate();
+            bool tenantIdValid = this.TenantId.Validate();
+
+            return clientIdValid && clientSecretValid && tenantIdValid;
+        }
     }
 }

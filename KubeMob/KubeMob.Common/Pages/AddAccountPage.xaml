@@ -13,7 +13,7 @@
         Padding="{StaticResource PagePadding}">
 
         <Button 
-            Text="{markupExtensions:Translate AddAccountPage_AddAzureAccount_Btn}"
+            Text="{markupExtensions:Translate Azure}"
             Command="{Binding AddAzureAccountCommand}"
             Style="{StaticResource PrimaryButtonStyle}">
         </Button>

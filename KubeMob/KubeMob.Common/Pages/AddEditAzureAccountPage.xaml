@@ -8,7 +8,7 @@
                           xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
                           x:Class="KubeMob.Common.Pages.AddEditAzureAccountPage"
              common:ViewModelLocator.AutoWireViewModel="true"
-             Title="{markupExtensions:Translate AddEditAzureAccountPage_Title}">
+             Title="{markupExtensions:Translate Azure}">
 
     <base:ExtendedContentPage.Resources>
         <ResourceDictionary>

@@ -100,7 +100,7 @@
         <views:ItemsControl
             ItemsSource="{Binding Detail.Containers}"
             Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}">
+            Padding="{StaticResource PagePadding}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>

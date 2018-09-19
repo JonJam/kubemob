@@ -103,7 +103,7 @@
         <views:ItemsControl
             ItemsSource="{Binding Detail.Addresses}"
             Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}">
+            Padding="{StaticResource PagePadding}">
             <views:ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Frame

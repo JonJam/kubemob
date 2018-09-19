@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
@@ -9,12 +9,14 @@
              Title="{markupExtensions:Translate AddAccountPage_Title}">
 
     <StackLayout
-        CompressedLayout.IsHeadless="true">
+        CompressedLayout.IsHeadless="true"
+        Padding="{StaticResource PagePadding}">
+
         <Button 
-            x:Name="AddAzureAccount"
             Text="{markupExtensions:Translate AddAccountPage_AddAzureAccount_Btn}"
-            Image="azure_logo.png"
-            Command="{Binding AddAzureAccountCommand}">
+            Command="{Binding AddAzureAccountCommand}"
+            BackgroundColor="{StaticResource KubernetesBlueColor}"
+            TextColor="White">
         </Button>
     </StackLayout>
 </base:ExtendedContentPage>

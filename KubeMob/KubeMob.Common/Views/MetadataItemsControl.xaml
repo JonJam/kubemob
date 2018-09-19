@@ -4,7 +4,7 @@
              xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
              x:Class="KubeMob.Common.Views.MetadataItemsControl"
             Style="{StaticResource ItemsControlStyle}"
-            Padding="{StaticResource ItemsControlPadding}">
+            Padding="{StaticResource PagePadding}">
     <!-- For some reason setting Padding via Style doesnt work as expected -->
 
     <views:ItemsControl.ItemTemplate>

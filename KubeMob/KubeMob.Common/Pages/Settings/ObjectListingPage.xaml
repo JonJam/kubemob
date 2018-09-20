@@ -15,6 +15,7 @@
                 <SwitchCell Text="{markupExtensions:Translate Nodes}" On="{Binding ShowNodes, Mode=TwoWay}"/>
                 <SwitchCell Text="{markupExtensions:Translate PersistentVolumes}" On="{Binding ShowPersistentVolumes, Mode=TwoWay}"/>
                 <SwitchCell Text="{markupExtensions:Translate StorageClasses}" On="{Binding ShowStorageClasses, Mode=TwoWay}"/>
+                <SwitchCell Text="{markupExtensions:Translate Roles}" On="{Binding ShowRoles, Mode=TwoWay}"/>
             </TableSection>
 
             <TableSection Title="{markupExtensions:Translate Workloads}">

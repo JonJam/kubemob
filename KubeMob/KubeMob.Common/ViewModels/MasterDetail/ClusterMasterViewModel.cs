@@ -53,6 +53,12 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             await this.navigationService.NavigateToPersistentVolumesPage();
         });
 
+        public ICommand NavigateToRolesCommand => new Command(async () =>
+        {
+            this.toggleShowMasterCommand.Execute(null);
+            await this.navigationService.NavigateToRolesPage();
+        });
+
         public ICommand NavigateToStorageClassesCommand => new Command(async () =>
         {
             this.toggleShowMasterCommand.Execute(null);
@@ -180,7 +186,8 @@ namespace KubeMob.Common.ViewModels.MasterDetail
         public bool ShowCluster => this.ShowNamespaces ||
                                      this.ShowNodes ||
                                      this.ShowPersistentVolumes ||
-                                     this.ShowStorageClasses;
+                                     this.ShowStorageClasses ||
+                                     this.ShowRoles;
 
         public bool ShowNamespaces => this.kubernetesService.ShowNamespaces;
 
@@ -189,6 +196,8 @@ namespace KubeMob.Common.ViewModels.MasterDetail
         public bool ShowPersistentVolumes => this.kubernetesService.ShowPersistentVolumes;
 
         public bool ShowStorageClasses => this.kubernetesService.ShowStorageClasses;
+
+        public bool ShowRoles => this.kubernetesService.ShowRoles;
 
         public bool ShowWorkloads => this.ShowCronJobs ||
                                      this.ShowDaemonSets ||
@@ -263,6 +272,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                 case nameof(this.ShowNodes):
                 case nameof(this.ShowPersistentVolumes):
                 case nameof(this.ShowStorageClasses):
+                case nameof(this.ShowRoles):
                     this.NotifyPropertyChanged(() => this.ShowCluster);
                     break;
                 default:

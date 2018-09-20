@@ -39,6 +39,12 @@ namespace KubeMob.Common.Services.Settings
             set;
         }
 
+        bool ShowRoles
+        {
+            get;
+            set;
+        }
+
         bool ShowCronJobs
         {
             get;

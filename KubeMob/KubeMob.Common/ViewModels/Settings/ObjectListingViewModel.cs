@@ -60,6 +60,18 @@ namespace KubeMob.Common.ViewModels.Settings
             }
         }
 
+        public bool ShowRoles
+        {
+            get => this.kubernetesService.ShowRoles;
+            set
+            {
+                if (this.kubernetesService.ShowRoles != value)
+                {
+                    this.kubernetesService.ShowRoles = value;
+                }
+            }
+        }
+
         public bool ShowCronJobs
         {
             get => this.kubernetesService.ShowCronJobs;

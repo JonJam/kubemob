@@ -30,6 +30,12 @@ namespace KubeMob.Common.Services.Kubernetes
             set;
         }
 
+        bool ShowRoles
+        {
+            get;
+            set;
+        }
+
         bool ShowCronJobs
         {
             get;
@@ -134,6 +140,8 @@ namespace KubeMob.Common.Services.Kubernetes
 
         Task<StorageClassDetail> GetStorageClassDetail(
             string storageClassName);
+
+        Task<IList<ObjectSummary>> GetRolesSummaries();
 
         Task<IList<ObjectSummary>> GetDeploymentSummaries();
 

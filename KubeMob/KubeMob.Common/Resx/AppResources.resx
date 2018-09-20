@@ -615,4 +615,7 @@
   <data name="EndpointDetailPage_Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
 </root>

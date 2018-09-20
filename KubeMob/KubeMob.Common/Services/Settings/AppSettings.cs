@@ -80,6 +80,14 @@ namespace KubeMob.Common.Services.Settings
                 value);
         }
 
+        public bool ShowRoles
+        {
+            get => this.settings.GetValueOrDefault(nameof(this.ShowRoles), true);
+            set => this.settings.AddOrUpdateValue(
+                nameof(this.ShowRoles),
+                value);
+        }
+
         public bool ShowCronJobs
         {
             get => this.settings.GetValueOrDefault(nameof(this.ShowCronJobs), true);

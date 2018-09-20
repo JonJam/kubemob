@@ -63,6 +63,14 @@
                 </views:TappableView>
 
                 <views:TappableView
+                    Command="{Binding NavigateToRolesCommand}"
+                    IsVisible="{Binding ShowRoles}">
+                    <Label
+                        Text="{extensions:Translate Roles}"
+                        Style="{StaticResource MenuLabelStyle}"/>
+                </views:TappableView>
+
+                <views:TappableView
                     Command="{Binding NavigateToStorageClassesCommand}"
                     IsVisible="{Binding ShowStorageClasses}">
                     <Label

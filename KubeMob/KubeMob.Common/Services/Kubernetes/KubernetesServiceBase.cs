@@ -101,6 +101,19 @@ namespace KubeMob.Common.Services.Kubernetes
             }
         }
 
+        public bool ShowRoles
+        {
+            get => this.appSettings.ShowRoles;
+            set
+            {
+                this.appSettings.ShowRoles = value;
+
+                this.pubSubService.PublishResourceListingSettingChanged<IKubernetesService>(
+                    this,
+                    nameof(this.ShowRoles));
+            }
+        }
+
         public bool ShowCronJobs
         {
             get => this.appSettings.ShowCronJobs;
@@ -401,6 +414,15 @@ namespace KubeMob.Common.Services.Kubernetes
             V1StorageClass storageClassDetail = await this.PerformClientOperation((c) => c.ReadStorageClassAsync(storageClassName));
 
             return Mapper.Map<StorageClassDetail>(storageClassDetail);
+        }
+
+        public async Task<IList<ObjectSummary>> GetRolesSummaries()
+        {
+            V1RoleList roles = await this.PerformClientOperation((c) => c.ListRoleForAllNamespacesAsync());
+
+            return Mapper.Map<IList<ObjectSummary>>(roles.Items)
+                .OrderBy(d => d.Name)
+                .ToList();
         }
 
         public async Task<IList<ObjectSummary>> GetDeploymentSummaries()

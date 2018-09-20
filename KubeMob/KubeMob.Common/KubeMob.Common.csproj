@@ -82,8 +82,8 @@
     <Compile Update="Pages\Ingresses\IngressDetailTabbedPage.xaml.cs">
       <DependentUpon>IngressDetailTabbedPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Jobs\JobDetailTabbedPage.xaml.cs">
-      <DependentUpon>JobDetailTabbedPage.xaml</DependentUpon>
+    <Compile Update="Pages\Roles\RolesPage.xaml.cs">
+      <DependentUpon>RolesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\Namespaces\NamespaceDetailTabbedPage.xaml.cs">
       <DependentUpon>NamespaceDetailTabbedPage.xaml</DependentUpon>
@@ -162,9 +162,6 @@
     </Compile>
     <Compile Update="Pages\ConfigMaps\ConfigMapsPage.xaml.cs">
       <DependentUpon>ConfigMapsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Jobs\JobDetailPage.xaml.cs">
-      <DependentUpon>JobDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\PersistentVolumeClaims\PersistentVolumeClaimDetailPage.xaml.cs">
       <DependentUpon>PersistentVolumeClaimDetailPage.xaml</DependentUpon>

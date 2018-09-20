@@ -26,6 +26,7 @@ namespace KubeMob.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::KubeMob.Droid.Resource.String.library_name;
 			global::Microsoft.IdentityModel.Clients.ActiveDirectory.Resource.Id.agentWebView = global::KubeMob.Droid.Resource.Id.agentWebView;
 			global::Microsoft.IdentityModel.Clients.ActiveDirectory.Resource.Layout.WebAuthenticationBroker = global::KubeMob.Droid.Resource.Layout.WebAuthenticationBroker;
 			global::Microsoft.IdentityModel.Clients.ActiveDirectory.Resource.String.ApplicationName = global::KubeMob.Droid.Resource.String.ApplicationName;
@@ -4098,6 +4099,9 @@ namespace KubeMob.Droid
 			
 			// aapt resource value: 0x7f090035
 			public const int character_counter_pattern = 2131296309;
+			
+			// aapt resource value: 0x7f09003d
+			public const int library_name = 2131296317;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;

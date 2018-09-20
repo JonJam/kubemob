@@ -55,7 +55,7 @@
                                                     IsVisible="{Binding IsStatusSuccess}">
                                                     <ffImageLoading:CachedImage.Transformations>
                                                         <transformations:TintTransformation
-                                                            HexColor="#008000"
+                                                            HexColor="{StaticResource GreenStatusIconColor}"
                                                             EnableSolidColor="true"/>
                                                     </ffImageLoading:CachedImage.Transformations>
                                                 </ffImageLoading:CachedImage>

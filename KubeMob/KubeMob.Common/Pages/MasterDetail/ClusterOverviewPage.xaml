@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:ExtendedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:base="clr-namespace:KubeMob.Common.Pages.Base;assembly=KubeMob.Common"
+                          xmlns:common="clr-namespace:KubeMob.Common;assembly=KubeMob.Common"
+                          xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+                          xmlns:markupExtensions="clr-namespace:KubeMob.Common.MarkupExtensions;assembly=KubeMob.Common"
+                          xmlns:views="clr-namespace:KubeMob.Common.Views;assembly=KubeMob.Common"
+                          x:Class="KubeMob.Common.Pages.MasterDetail.ClusterOverviewPage"
+                          Title="{markupExtensions:Translate Overview}">
+
+    <base:ExtendedContentPage.Resources>
+        <Style TargetType="forms:ChartView">
+            <Setter Property="HeightRequest" Value="100" />
+        </Style>
+    </base:ExtendedContentPage.Resources>
+
+    <!--// TODO  error handling -test -->
+    <!--// TODO Toggle display (empty message)-->
+
+    <Grid
+        CompressedLayout.IsHeadless="true">
+        <Grid
+            IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+            CompressedLayout.IsHeadless="true">
+
+            <views:ErrorMessage
+                Message="{markupExtensions:Translate NoInternetErrorMessage}"
+                IsVisible="{Binding HasNoNetwork}"/>
+
+            <ScrollView
+                IsVisible="{Binding HasNoNetwork, Converter={StaticResource InverseBoolConverter}}">
+                <StackLayout>
+                    <Label
+                Text="{markupExtensions:Translate CronJobs}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding CronJobs}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate DaemonSets}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding DaemonSets}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate Deployments}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding Deployments}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate Jobs}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding Jobs}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate Pods}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding Pods}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate ReplicaSets}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding ReplicaSets}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate ReplicationControllers}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding ReplicationControllers}"/>
+                    </StackLayout>
+
+                    <Label
+                Text="{markupExtensions:Translate StatefulSets}"
+                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                    <StackLayout
+                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                        <forms:ChartView
+                    Chart="{Binding StatefulSets}"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <!--<Label
+                    Text="{markupExtensions:Translate EmptyMessage}"
+                    Style="{StaticResource ErrorMessageLabelStyle}"
+                    VerticalOptions="Center"
+                    IsVisible="{TemplateBinding BindingContext.HasObjectSummaries, Converter={StaticResource InverseBoolConverter}}"/>-->
+
+        </Grid>
+
+        <ActivityIndicator
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</base:ExtendedContentPage>

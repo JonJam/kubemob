@@ -18,7 +18,8 @@
     <MasterDetailPage.Detail>
         <base:ExtendedNavigationPage>
             <x:Arguments>
-                <pages:ClusterOverviewPage />
+                <md:ClusterOverviewPage
+                    BindingContext="{Binding ClusterOverviewViewModel}"/>
             </x:Arguments>
         </base:ExtendedNavigationPage>
     </MasterDetailPage.Detail>

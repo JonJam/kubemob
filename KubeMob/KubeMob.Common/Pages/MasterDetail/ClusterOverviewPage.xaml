@@ -33,74 +33,90 @@
                 <StackLayout>
                     <Label
                 Text="{markupExtensions:Translate CronJobs}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding CronJobs, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding CronJobs, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding CronJobs}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate DaemonSets}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding DaemonSets, Converter={StaticResource NotEmptyToBoolConverter}}"/>
 
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding DaemonSets, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding DaemonSets}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate Deployments}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding Deployments, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding Deployments, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding Deployments}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate Jobs}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding Jobs, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding Jobs, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding Jobs}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate Pods}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding Pods, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding Pods, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding Pods}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate ReplicaSets}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding ReplicaSets, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding ReplicaSets, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding ReplicaSets}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate ReplicationControllers}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding ReplicationControllers, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding ReplicationControllers, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding ReplicationControllers}"/>
                     </StackLayout>
 
                     <Label
                 Text="{markupExtensions:Translate StatefulSets}"
-                Style="{StaticResource DetailSectionTitleLabelStyle}"/>
+                Style="{StaticResource DetailSectionTitleLabelStyle}"
+                        IsVisible="{Binding StatefulSets, Converter={StaticResource NotEmptyToBoolConverter}}"/>
                     <StackLayout
-                Style="{StaticResource DetailSectionStackLayoutStyle}">
+                Style="{StaticResource DetailSectionStackLayoutStyle}"
+                        IsVisible="{Binding StatefulSets, Converter={StaticResource NotEmptyToBoolConverter}}">
                         <forms:ChartView
                     Chart="{Binding StatefulSets}"/>
                     </StackLayout>

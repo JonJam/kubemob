@@ -7,6 +7,7 @@ namespace KubeMob.Common.Services.PubSub
     public class PubSubService : IPubSubService
     {
         private const string ResourceListingSettingChangeMessage = "ResourceListingSettingChanged";
+        private const string NamespaceChangeMessage = "NamespaceChanged";
 
         [Preserve]
         public PubSubService()
@@ -18,6 +19,11 @@ namespace KubeMob.Common.Services.PubSub
             Action<TSender, string> ca)
             where TSender : class => MessagingCenter.Subscribe(sender, PubSubService.ResourceListingSettingChangeMessage, ca);
 
+        public void SubscribeToNamespaceChanged<TSender>(
+            object sender,
+            Action<TSender> ca)
+            where TSender : class => MessagingCenter.Subscribe(sender, PubSubService.NamespaceChangeMessage, ca);
+
         public void PublishResourceListingSettingChanged<TSender>(
             TSender sender,
             string resourceName)
@@ -25,5 +31,11 @@ namespace KubeMob.Common.Services.PubSub
                 sender,
                 PubSubService.ResourceListingSettingChangeMessage,
                 resourceName);
+
+        public void PublishNamespaceChanged<TSender>(
+            TSender sender)
+            where TSender : class => MessagingCenter.Send(
+            sender,
+            PubSubService.NamespaceChangeMessage);
     }
 }

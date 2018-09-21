@@ -367,6 +367,51 @@ namespace KubeMob.Common.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed.
+        /// </summary>
+        internal static string ClusterOverviewViewModel_Failed {
+            get {
+                return ResourceManager.GetString("ClusterOverviewViewModel_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        internal static string ClusterOverviewViewModel_Pending {
+            get {
+                return ResourceManager.GetString("ClusterOverviewViewModel_Pending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running.
+        /// </summary>
+        internal static string ClusterOverviewViewModel_Running {
+            get {
+                return ResourceManager.GetString("ClusterOverviewViewModel_Running", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Succeeded.
+        /// </summary>
+        internal static string ClusterOverviewViewModel_Succeeded {
+            get {
+                return ResourceManager.GetString("ClusterOverviewViewModel_Succeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspended.
+        /// </summary>
+        internal static string ClusterOverviewViewModel_Suspended {
+            get {
+                return ResourceManager.GetString("ClusterOverviewViewModel_Suspended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string ClustersPage_Accounts_Delete_MenuItemText {

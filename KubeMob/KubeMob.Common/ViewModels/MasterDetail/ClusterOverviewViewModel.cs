@@ -6,14 +6,19 @@ using KubeMob.Common.Resx;
 using KubeMob.Common.Services.Kubernetes;
 using KubeMob.Common.Services.Kubernetes.Model;
 using KubeMob.Common.Services.Popup;
+using KubeMob.Common.Services.PubSub;
 using KubeMob.Common.ViewModels.Base;
 using Microcharts;
 using SkiaSharp;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Entry = Microcharts.Entry;
 
 namespace KubeMob.Common.ViewModels.MasterDetail
 {
+    /// <summary>
+    /// Due to the limtations of the graph library using, have to specify UI controls and styling in here.
+    /// </summary>
     [Preserve(AllMembers = true)]
     public class ClusterOverviewViewModel : ViewModelBase
     {
@@ -31,7 +36,8 @@ namespace KubeMob.Common.ViewModels.MasterDetail
 
         public ClusterOverviewViewModel(
             IKubernetesService kubernetesService,
-            IPopupService popupService)
+            IPopupService popupService,
+            IPubSubService pubSubService)
         {
             this.kubernetesService = kubernetesService;
             this.popupService = popupService;
@@ -39,132 +45,190 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             // Defaulting this to true in order that we do not display an empty message on first
             // navigating to this page.
             this.IsBusy = true;
+
+            pubSubService.SubscribeToResourceListingSettingChanged<IKubernetesService>(
+                this,
+                this.HandleResourceListingSettingChanged);
+
+            pubSubService.SubscribeToNamespaceChanged<IKubernetesService>(
+                this,
+                this.HandleNamespaceChanged);
         }
 
         public Chart CronJobs
         {
             get => this.cronJobs;
-            private set => this.SetProperty(ref this.cronJobs, value);
+            private set
+            {
+                if (this.SetProperty(ref this.cronJobs, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart DaemonSets
         {
             get => this.daemonSets;
-            private set => this.SetProperty(ref this.daemonSets, value);
+            private set
+            {
+                if (this.SetProperty(ref this.daemonSets, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart Deployments
         {
             get => this.deployments;
-            private set => this.SetProperty(ref this.deployments, value);
+            private set
+            {
+                if (this.SetProperty(ref this.deployments, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart Jobs
         {
             get => this.jobs;
-            private set => this.SetProperty(ref this.jobs, value);
+            private set
+            {
+                if (this.SetProperty(ref this.jobs, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart Pods
         {
             get => this.pods;
-            private set => this.SetProperty(ref this.pods, value);
+            private set
+            {
+                if (this.SetProperty(ref this.pods, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart ReplicaSets
         {
             get => this.replicaSets;
-            private set => this.SetProperty(ref this.replicaSets, value);
+            private set
+            {
+                if (this.SetProperty(ref this.replicaSets, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart ReplicationControllers
         {
             get => this.replicationControllers;
-            private set => this.SetProperty(ref this.replicationControllers, value);
+            private set
+            {
+                if (this.SetProperty(ref this.replicationControllers, value))
+                {
+                    this.NotifyPropertyChanged(() => this.NoCharts);
+                }
+            }
         }
 
         public Chart StatefulSets
         {
             get => this.statefulSets;
-            private set => this.SetProperty(ref this.statefulSets, value);
-        }
-
-        // TODO Shpw/hide -> empty or toggle
-
-        // TODO Handle namespace change or toggle in settings
-
-        public override Task Initialize(object navigationData)
-        {
-            return this.PerformNetworkOperation(async () =>
+            private set
             {
-                try
+                if (this.SetProperty(ref this.statefulSets, value))
                 {
-                    List<Task> tasks = new List<Task>();
-
-                    if (this.kubernetesService.ShowCronJobs)
-                    {
-                        tasks.Add(this.CreateCronJobsGraph());
-                    }
-
-                    if (this.kubernetesService.ShowDaemonSets)
-                    {
-                        tasks.Add(this.CreateDaemonSetsGraph());
-                    }
-
-                    if (this.kubernetesService.ShowDeployments)
-                    {
-                        tasks.Add(this.CreateDeploymentsGraph());
-                    }
-
-                    if (this.kubernetesService.ShowJobs)
-                    {
-                        tasks.Add(this.CreateJobsGraph());
-                    }
-
-                    if (this.kubernetesService.ShowPods)
-                    {
-                        tasks.Add(this.CreatePodsGraph());
-                    }
-
-                    if (this.kubernetesService.ShowReplicaSets)
-                    {
-                        tasks.Add(this.CreateReplicaSetsGraph());
-                    }
-
-                    if (this.kubernetesService.ShowReplicationControllers)
-                    {
-                        tasks.Add(this.CreateReplicationControllersGraph());
-                    }
-
-                    if (this.kubernetesService.ShowStatefulSets)
-                    {
-                        tasks.Add(this.CreateStatefulSetsGraph());
-                    }
-                    
-                    await Task.WhenAll(tasks);
+                    this.NotifyPropertyChanged(() => this.NoCharts);
                 }
-                catch (ClusterNotFoundException)
-                {
-                    await this.popupService.DisplayAlert(
-                        AppResources.ClusterNotFound_Title,
-                        AppResources.ClusterNotFound_Message,
-                        AppResources.OkAlertText);
-                }
-                catch (AccountInvalidException)
-                {
-                    await this.popupService.DisplayAlert(
-                        AppResources.AccountInvalid_Title,
-                        AppResources.AccountInvalid_Message,
-                        AppResources.OkAlertText);
-                }
-            });
+            }
         }
+
+        public bool NoCharts => this.CronJobs == null &&
+                                this.DaemonSets == null &&
+                                this.Deployments == null &&
+                                this.Jobs == null &&
+                                this.Pods == null &&
+                                this.ReplicaSets == null &&
+                                this.ReplicationControllers == null &&
+                                this.StatefulSets == null;
+
+        public override Task Initialize(object navigationData) => this.PerformNetworkOperation(async () =>
+                                                                            {
+                                                                                try
+                                                                                {
+                                                                                    List<Task> tasks = new List<Task>();
+
+                                                                                    if (this.kubernetesService.ShowCronJobs)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateCronJobsGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowDaemonSets)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateDaemonSetsGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowDeployments)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateDeploymentsGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowJobs)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateJobsGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowPods)
+                                                                                    {
+                                                                                        tasks.Add(this.CreatePodsGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowReplicaSets)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateReplicaSetsGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowReplicationControllers)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateReplicationControllersGraph());
+                                                                                    }
+
+                                                                                    if (this.kubernetesService.ShowStatefulSets)
+                                                                                    {
+                                                                                        tasks.Add(this.CreateStatefulSetsGraph());
+                                                                                    }
+
+                                                                                    await Task.WhenAll(tasks);
+                                                                                }
+                                                                                catch (ClusterNotFoundException)
+                                                                                {
+                                                                                    await this.popupService.DisplayAlert(
+                                                                                        AppResources.ClusterNotFound_Title,
+                                                                                        AppResources.ClusterNotFound_Message,
+                                                                                        AppResources.OkAlertText);
+                                                                                }
+                                                                                catch (AccountInvalidException)
+                                                                                {
+                                                                                    await this.popupService.DisplayAlert(
+                                                                                        AppResources.AccountInvalid_Title,
+                                                                                        AppResources.AccountInvalid_Message,
+                                                                                        AppResources.OkAlertText);
+                                                                                }
+                                                                            });
 
         private async Task CreateCronJobsGraph()
         {
             IList<ObjectSummary> cronJobSummaries = await this.kubernetesService.GetCronJobSummaries();
 
-            this.CronJobs = this.CreateChart(cronJobSummaries, "Suspended");
+            this.CronJobs = this.CreateChart(cronJobSummaries, AppResources.ClusterOverviewViewModel_Suspended);
         }
 
         private async Task CreateDaemonSetsGraph()
@@ -183,12 +247,12 @@ namespace KubeMob.Common.ViewModels.MasterDetail
 
         private async Task CreateJobsGraph()
         {
-            IList<ObjectSummary> jobs = await this.kubernetesService.GetJobSummaries(null);
+            IList<ObjectSummary> jobSummaries = await this.kubernetesService.GetJobSummaries(null);
 
             // Looking at the Kubernetes Dashboard source code, there is a Running state that
             // should be treated different to Succeeded. However this is mismatch with how the status icons work
             // which doesn't handle Running specically; keep consistency and using status icon approach.
-            this.Jobs = this.CreateChart(jobs, successText: "Succeeded");
+            this.Jobs = this.CreateChart(jobSummaries, successText: AppResources.ClusterOverviewViewModel_Succeeded);
         }
 
         private async Task CreatePodsGraph()
@@ -221,14 +285,29 @@ namespace KubeMob.Common.ViewModels.MasterDetail
 
         private Chart CreateChart(
             IList<ObjectSummary> summaries,
-            string errorText = "Failed",
-            string successText = "Running")
+            string errorText = null,
+            string successText = null)
         {
+            if (errorText == null)
+            {
+                errorText = AppResources.ClusterOverviewViewModel_Failed;
+            }
+
+            if (successText == null)
+            {
+                successText = AppResources.ClusterOverviewViewModel_Running;
+            }
+
+            if (!summaries.Any())
+            {
+                // If there are no summaries, then return null so graph is not displayed.
+                return null;
+            }
+
             int success = summaries.Count(c => c.IsStatusSuccess);
             int pending = summaries.Count(c => c.IsStatusPending);
             int error = summaries.Count(c => c.IsStatusError);
 
-            // TODO Sort out text and colours.
             List<Entry> entries = new List<Entry>();
 
             if (success > 0)
@@ -237,7 +316,7 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                 {
                     Label = successText,
                     ValueLabel = $"{success}",
-                    Color = SKColor.Parse("#008000")
+                    Color = SKColor.Parse((string)Application.Current.Resources["GreenStatusIconColor"])
                 });
             }
 
@@ -245,9 +324,9 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             {
                 entries.Add(new Entry(pending)
                 {
-                    Label = "Pending",
+                    Label = AppResources.ClusterOverviewViewModel_Pending,
                     ValueLabel = $"{pending}",
-                    Color = SKColor.Parse("#757575")
+                    Color = SKColor.Parse((string)Application.Current.Resources["GreyStatusIconColor"])
                 });
             }
 
@@ -257,11 +336,33 @@ namespace KubeMob.Common.ViewModels.MasterDetail
                 {
                     Label = errorText,
                     ValueLabel = $"{error}",
-                    Color = SKColor.Parse("#e51c23")
+                    Color = SKColor.Parse((string)Application.Current.Resources["RedStatusIconColor"])
                 });
             }
 
-            return new DonutChart() { Entries = entries };
+            return new DonutChart { Entries = entries };
         }
+
+        private async void HandleResourceListingSettingChanged(
+            IKubernetesService sender,
+            string settingName)
+        {
+            switch (settingName)
+            {
+                case nameof(sender.ShowCronJobs):
+                case nameof(sender.ShowDaemonSets):
+                case nameof(sender.ShowDeployments):
+                case nameof(sender.ShowJobs):
+                case nameof(sender.ShowPods):
+                case nameof(sender.ShowReplicaSets):
+                case nameof(sender.ShowReplicationControllers):
+                case nameof(sender.ShowStatefulSets):
+                    await this.Initialize(null);
+                    break;
+            }
+        }
+
+        private async void HandleNamespaceChanged(
+            IKubernetesService sender) => await this.Initialize(null);
     }
 }

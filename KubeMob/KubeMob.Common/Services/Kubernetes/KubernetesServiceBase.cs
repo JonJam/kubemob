@@ -336,8 +336,12 @@ namespace KubeMob.Common.Services.Kubernetes
             }
         }
 
-        // TODO Notify of change ?? Will only probably need to on overview.
-        public void SetSelectedNamespace(Namespace ns) => this.appSettings.SelectedNamespace = ns.Name;
+        public void SetSelectedNamespace(Namespace ns)
+        {
+            this.appSettings.SelectedNamespace = ns.Name;
+
+            this.pubSubService.PublishNamespaceChanged<IKubernetesService>(this);
+        }
 
         public async Task<IList<ObjectSummary>> GetNamespaceSummaries()
         {

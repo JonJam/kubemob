@@ -12,7 +12,12 @@ namespace KubeMob.Common.ViewModels.MasterDetail
         private bool showMaster;
 
         public ClusterMasterDetailViewModel(
-            ClusterMasterViewModel masterViewModel) => this.MasterViewModel = masterViewModel;
+            ClusterMasterViewModel masterViewModel,
+            ClusterOverviewViewModel clusterOverviewViewModel)
+        {
+            this.MasterViewModel = masterViewModel;
+            this.ClusterOverviewViewModel = clusterOverviewViewModel;
+        }
 
         public bool ShowMaster
         {
@@ -25,8 +30,19 @@ namespace KubeMob.Common.ViewModels.MasterDetail
             get;
         }
 
+        public ClusterOverviewViewModel ClusterOverviewViewModel
+        {
+            get;
+        }
+
         private ICommand ToggleShowMasterCommand => new Command(() => this.ShowMaster = !this.showMaster);
 
-        public override Task Initialize(object navigationData) => this.MasterViewModel.Initialize(this.ToggleShowMasterCommand);
+        public override Task Initialize(object navigationData)
+        {
+            Task masterViewModelTask = this.MasterViewModel.Initialize(this.ToggleShowMasterCommand);
+            Task clusterOverviewViewModelTask = this.ClusterOverviewViewModel.Initialize(null);
+
+            return Task.WhenAll(masterViewModelTask, clusterOverviewViewModelTask);
+        }
     }
 }

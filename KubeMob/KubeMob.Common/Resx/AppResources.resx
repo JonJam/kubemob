@@ -618,4 +618,22 @@
   <data name="Roles" xml:space="preserve">
     <value>Roles</value>
   </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="ClusterOverviewViewModel_Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="ClusterOverviewViewModel_Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="ClusterOverviewViewModel_Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="ClusterOverviewViewModel_Succeeded" xml:space="preserve">
+    <value>Succeeded</value>
+  </data>
+  <data name="ClusterOverviewViewModel_Suspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
 </root>

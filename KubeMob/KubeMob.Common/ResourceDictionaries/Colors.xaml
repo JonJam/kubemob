@@ -5,8 +5,11 @@
 
     <x:String x:Key="KubernetesBlueRawColor">#326de6</x:String>
     <x:String x:Key="GreyStatusIconColor">#757575</x:String>
+    <x:String x:Key="GreenStatusIconColor">#008000</x:String>
+    <x:String x:Key="RedStatusIconColor">#e51c23</x:String>
 
-    <Color x:Key="ErrorColor">Red</Color>
+    <Color x:Key="ErrorColor">#e51c23</Color>
+    <Color x:Key="GreenColor">#008000</Color>
     <Color x:Key="KubernetesBlueColor">#326de6</Color>
     <Color x:Key="MessageColor">#888</Color>
     <Color x:Key="PageBackgroundColor">#f0eff4</Color>

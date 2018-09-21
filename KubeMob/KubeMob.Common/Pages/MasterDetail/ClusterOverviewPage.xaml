@@ -15,8 +15,6 @@
         </Style>
     </base:ExtendedContentPage.Resources>
 
-    <!--// TODO  error handling -test -->
-
     <Grid
         CompressedLayout.IsHeadless="true">
         <Grid

@@ -27,6 +27,7 @@ Below are a number of resources detailing guidance and best practises related to
 
 ### UI
 - [Reusable Effect Behavior](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/reusable/effect-behavior)
+- [Event to Command Behavior](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm#ui-interaction-using-commands-and-behaviors)
 - [Items Control](https://docs.microsoft.com/en-us/xamarin/cross-platform/desktop/controls/wpf#itemscontrol)
 - [Wrap layout](https://github.com/xamarinhq/xamu-infrastructure/blob/master/src/XamU.Infrastructure/Layout/WrapLayout.cs)
 
